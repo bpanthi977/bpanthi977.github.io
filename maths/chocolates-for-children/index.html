@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>bpanthi977  | Distributing chocolates to children</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.48" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.e08a958ae3e530145318b6373195c765.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Distributing chocolates to children" />
+<meta property="og:description" content="Exploring a frequently arising problem in combinatorics and probability" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/maths/chocolates-for-children/" /><meta property="article:published_time" content="2018-09-25T14:06:03&#43;05:45"/>
+<meta property="article:modified_time" content="2018-09-25T14:06:03&#43;05:45"/>
+<meta itemprop="name" content="Distributing chocolates to children">
+<meta itemprop="description" content="Exploring a frequently arising problem in combinatorics and probability">
+
+
+<meta itemprop="datePublished" content="2018-09-25T14:06:03&#43;05:45" />
+<meta itemprop="dateModified" content="2018-09-25T14:06:03&#43;05:45" />
+<meta itemprop="wordCount" content="707">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Distributing chocolates to children"/>
+<meta name="twitter:description" content="Exploring a frequently arising problem in combinatorics and probability"/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  
+  
+  <header class="cover bg-top" style="background-image: url('http://example.org/sht');">
+    <div class="pb3-m pb6-l bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://example.org/" class="f3 fw2 hover-white no-underline white-90 dib">
+      bpanthi977
+    </a>
+    <div class="flex-l items-center">
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/maths/" title="Maths page">
+              Maths
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">Distributing chocolates to children</h1>
+        
+          <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4" id="page-description">
+            Exploring a frequently arising problem in combinatorics and probability
+          </h2>
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        MATHS
+      </p>
+      <h1 class="f1 athelas mb1">Distributing chocolates to children</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2018-09-25T14:06:03&#43;05:45">September 25, 2018</time>
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h1 id="in-how-many-ways-can-you-distribute-n-chocolates-to-m-children">In how many ways can you distribute <code>n</code> chocolates to <code>m</code> children?</h1>
+
+<h2 id="simplifying-the-condition">Simplifying the condition</h2>
+
+<p>If we consider all chocolates to be different/unique (and of course children are also unique :) ), then the first chocolate can go to any one of the n children and the next one too can go to any one of the n children and so on. This gives <code>$ n * n * n *n ...(m\ times) = n^m$</code> possibilities.</p>
+
+<h2 id="but">But</h2>
+
+<p>here the chocolates aren't different from each other. So the first chocolate going to first child and second going to second one is the same as first chocolate going to second child and the second one going to the first one. These cases must be counted only once. So we are concerned only with how many chocolates each child gets in the end. This means the possible distributions are less than <code>$n^m$</code> . But exactly how much is it? is an interesting mathematical problem that I ask you to try yourself for a while 😒 .</p>
+
+<h2 id="stars-and-sticks">Stars and Sticks</h2>
+
+<p>This problem becomes trivial, when it is converted to a permutation problem concerned with arranging children and chocolates. Let's consider a case of 4 children and 7 chocolates. Denoting children by <code>|</code> and chocolates by <code>*</code> a possible arrangement is:
+<p style="text-align: center;"><code>*|**||****</code></p>
+If each child gets chocolates to the left of it then here the first child gets one chocolate, second one gets 2, third one gets nothing <a name="disappointed"> 😞</a> while the fourth one gets four 😃 . Now the problem is just this : In how many ways can we arrange n stars and m sticks ?</p>
+
+<p>There are (4-1)+7 = 10 places/position. So the sticks can be placed in
+<code>$$ {{10}\choose {3}} = \frac {10!} {(10-3)! * 3!} = 120 $$</code>
+ways. After placing the sticks we can just fill in the position with chocolates in only one way. So this is the total number of way to distribute 7 chocolates to 4 children. Now of course, we could have filled in chocolates first and then the sticks. It gives the same result as
+<code>$$ {{10}\choose {7}} = \frac {10!} {(10-7)! * 7!} = 120 $$</code></p>
+
+<h2 id="general-result">General Result</h2>
+
+<p>So for the case of <code>n</code> chocolates and <code>m</code> children, the result is :
+<code>$$ {{n+m-1}\choose{n}} = \frac {n+m-1} {(m-1)! n!} = {{n+m-1}\choose{m-1}} $$</code></p>
+
+<h1 id="other-applications">Other applications</h1>
+
+<p>Now this technique is useful for various problems, other than amusing children with chocolates. Lets try another problem:</p>
+
+<h3 id="particles-in-boxes">Particles in boxes</h3>
+
+<p>If we are to put <code>n</code> identical particles in <code>m</code> non-identical boxes. Then the number of ways we can do this is same as the number of ways we can distribute n chocolates to m children.
+<code>$$ {{n+m-1}\choose{n}} = \frac {n+m-1} {(m-1)! n!} $$</code></p>
+
+<h3 id="in-how-many-ways-can-you-express-a-number-as-a-sum-of-n-nonnegative-numbers-considering-order">In how many ways can you express a number as a sum of <code>n</code> non-negative numbers (considering order)</h3>
+
+<p>For example, the number 4 can be expressed as sum of 3 numbers in following four ways:</p>
+
+<ul>
+<li>0+0+4, 0+4+0, 4+0+0,</li>
+<li>0+1+3, 0+3+1, 1+0+3, 1+3+0, 3+0+1, 3+1+0</li>
+<li>0+2+2, 2+0+2, 2+2+0,</li>
+<li>1+1+2, 1+2+1, 2+1+1</li>
+</ul>
+
+<p>This is similar to distributing 4 chocolates to 3 children and equals <code>$ {{6}\choose{4}} = 15 $</code>.
+But if we are to disregard order then there are just 4 possible ways. Generalizing to number N with n partitions is not this <a href="https://en.m.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind">simple</a>.</p>
+
+<h1 id="oh-and-remember">Oh, and remember</h1>
+
+<p>making children <a href="#disappointed">sad</a> isn't nice. So, if we want each child to get at least one chocolate then we have to add some constraints to our <a href="https://en.m.wikipedia.org/wiki/Stars_and_bars_(combinatorics)">stars and bars</a> technique: There must be at least one stars on either side of each bar.
+<p align="center"><code>|***|*</code><br>
+<code>*|****|</code><br>
+<code>*|**|**</code></p></p>
+
+<p>In the first case, the first child gets nothing, in second on the last one gets nothing and only in the third one do all children get at least one chocolate. So, now the sticks can only be placed in between the stars. Imagine having one seat between each stars, then we have to place 2 bars in any two seats among 4 seats. This can be done in <code>$ {{4}\choose{2}} = 6 $</code> ways. So in general if we need to <code>distribute n chocolates to m children such that each child gets at least one chocolate</code> then there are</p>
+
+<p><code>$$ {{n-1}\choose{m-1}} = \frac {n-1} {(m-1)!(n-m)!} $$</code> ways to do that.</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
+    <div class="flex justify-between">
+	<a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://example.org/" >
+	    &copy; 2018 bpanthi977
+	</a>
+	<div>
+
+
+
+
+
+
+
+
+</div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+	<script type="text/x-mathjax-config">
+	 MathJax.Hub.Config({
+	     tex2jax: {
+		 inlineMath: [['$','$'], ['\\(','\\)']],
+		 displayMath: [['$$','$$']],
+		 processEscapes: true,
+		 processEnvironments: true,
+		 skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+		 TeX: { equationNumbers: { autoNumber: "AMS" },
+			extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	     }
+	 });
+	</script>
+    </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>
