@@ -39,7 +39,7 @@
 
 <meta itemprop="datePublished" content="2018-09-25T14:06:03&#43;05:45" />
 <meta itemprop="dateModified" content="2018-09-25T14:06:03&#43;05:45" />
-<meta itemprop="wordCount" content="706">
+<meta itemprop="wordCount" content="741">
 
 
 
@@ -147,7 +147,7 @@ if (!doNotTrack) {
 
 <p>This problem becomes trivial, when it is converted to a permutation problem concerned with arranging children and chocolates. Let's consider a case of 4 children and 7 chocolates. Denoting children by <code>|</code> and chocolates by <code>*</code> a possible arrangement is:
 <p style="text-align: center;"><code>*|**||****</code></p>
-If each child gets chocolates to the left of it then here the first child gets one chocolate, second one gets 2, third one gets nothing <a name="disappointed"> 😞</a> while the fourth one gets four 😃 . Now the problem is just this : In how many ways can we arrange n stars and m sticks ?</p>
+If each child gets chocolates to the left of it then here the first child gets one chocolate, second one gets 2, third one gets nothing <a name="disappointed"> 😞</a> while the fourth one gets four 😃 . Since, each distribution can be represented in this pattern of stars &amp; sticks, and each stars-sticks pattern represents a possible distribution, the number of possible distributions is equal to number of possible star-sticks patterns. So, now the problem is just this : In how many ways can we arrange n stars and m sticks ?</p>
 
 <p>There are (4-1)+7 = 10 places/position. So the sticks can be placed in
 <code>$$ {{10}\choose {3}} = \frac {10!} {(10-3)! * 3!} = 120 $$</code>
