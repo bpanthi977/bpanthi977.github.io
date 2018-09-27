@@ -17,7 +17,7 @@
       <pubDate>Tue, 25 Sep 2018 14:06:03 +0545</pubDate>
       
       <guid>http://bpanthi.com.np/maths/chocolates-for-children/</guid>
-      <description>In how many ways can you distribute n chocolates to m children? Simplifying the condition If we consider all chocolates to be different/unique (and of course children are also unique :) ), then the first chocolate can go to any one of the n children and the next one too can go to any one of the n children and so on. This gives $ m * m * m *m.</description>
+      <description>In how many ways can you distribute n chocolates to m children? Simplifying the condition If we consider all chocolates to be different/unique (and of course children are also unique :) ), then the first chocolate can go to any one of the m children and the next one too can go to any one of the m children and so on. This gives $ m * m * m *m.</description>
     </item>
     
   </channel>
