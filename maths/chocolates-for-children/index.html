@@ -39,7 +39,7 @@
 
 <meta itemprop="datePublished" content="2018-09-25T14:06:03&#43;05:45" />
 <meta itemprop="dateModified" content="2018-09-25T14:06:03&#43;05:45" />
-<meta itemprop="wordCount" content="741">
+<meta itemprop="wordCount" content="792">
 
 
 
@@ -83,6 +83,12 @@ if (!doNotTrack) {
           <li class="list f5 f4-ns fw4 dib pr3">
             <a class="hover-white no-underline white-90" href="/maths/" title="Maths page">
               Maths
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/physics/" title="Physics page">
+              Physics
             </a>
           </li>
           
@@ -145,9 +151,11 @@ if (!doNotTrack) {
 
 <h2 id="stars-and-sticks">Stars and Sticks</h2>
 
-<p>This problem becomes trivial, when it is converted to a permutation problem concerned with arranging children and chocolates. Let's consider a case of 4 children and 7 chocolates. Denoting children by <code>|</code> and chocolates by <code>*</code> a possible arrangement is:
-<p style="text-align: center;"><code>*|**||****</code></p>
-If each child gets chocolates to the left of it then here the first child gets one chocolate, second one gets 2, third one gets nothing <a name="disappointed"> 😞</a> while the fourth one gets four 😃 . Since, each distribution can be represented in this pattern of stars &amp; sticks, and each stars-sticks pattern represents a possible distribution, the number of possible distributions is equal to number of possible star-sticks patterns. So, now the problem is just this : In how many ways can we arrange n stars and m sticks ?</p>
+<p>This problem becomes trivial, when it is converted to a permutation problem concerned with arranging children and chocolates. Let's consider a case of 4 children and 7 chocolates. Denoting children by <code>|</code> and chocolates by <code>*</code>a possible arrangement is:
+<p style="text-align: center;"><code>*|**||****|</code></p>
+If each child gets chocolates to the left of it then here the first child gets one chocolate, second one gets 2, third one gets nothing <a name="disappointed"> 😞</a> while the fourth one gets four 😃 . The single stick at the rightmost end is compulsory because all chocolates have to be distributed. Since a fixed stick doesn't change the number of combinations/arrangements, we can remove the rightmost stick and say that the remaining stars are given to the last child. i.e. an equivalent arrangement is :
+<p style="text-align:centre;"><code>*|**||****</code></p>&quot;
+Since, each distribution can be represented in this pattern of stars &amp; sticks, and each stars-sticks pattern represents a possible distribution, the number of possible distributions is equal to number of possible star-sticks patterns. So, now the problem is just this : In how many ways can we arrange <code>n</code> stars and <code>m-1</code> sticks ?</p>
 
 <p>There are (4-1)+7 = 10 places/position. So the sticks can be placed in
 <code>$$ {{10}\choose {3}} = \frac {10!} {(10-3)! * 3!} = 120 $$</code>

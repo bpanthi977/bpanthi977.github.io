@@ -30,6 +30,18 @@
   </url>
   
   <url>
+    <loc>http://bpanthi.com.np/physics/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://bpanthi.com.np/physics/diffraction-pattern/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://bpanthi.com.np/tags/</loc>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
