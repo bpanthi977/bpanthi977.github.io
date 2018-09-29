@@ -29,22 +29,24 @@
     
 
     <meta property="og:title" content="Single Slit Diffraction" />
-<meta property="og:description" content="An explantion to the single slit diffraction pattern" />
+<meta property="og:description" content="An insightful explanation" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://bpanthi.com.np/physics/diffraction-pattern/" />
+<meta property="og:url" content="http://bpanthi.com.np/physics/diffraction-pattern/" /><meta property="article:published_time" content="2018-09-28T10:49:46&#43;05:45"/>
+<meta property="article:modified_time" content="2018-09-28T10:49:46&#43;05:45"/>
 <meta itemprop="name" content="Single Slit Diffraction">
-<meta itemprop="description" content="An explantion to the single slit diffraction pattern">
+<meta itemprop="description" content="An insightful explanation">
 
 
-
-<meta itemprop="wordCount" content="0">
+<meta itemprop="datePublished" content="2018-09-28T10:49:46&#43;05:45" />
+<meta itemprop="dateModified" content="2018-09-28T10:49:46&#43;05:45" />
+<meta itemprop="wordCount" content="1249">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Single Slit Diffraction"/>
-<meta name="twitter:description" content="An explantion to the single slit diffraction pattern"/>
+<meta name="twitter:description" content="An insightful explanation"/>
 
       
 <script type="application/javascript">
@@ -67,8 +69,10 @@ if (!doNotTrack) {
    
   
 
-  <header>
-    <div class="bg-black-80">
+  
+  
+  <header class="cover bg-top" style="background-image: url('http://bpanthi.com.np/images/diffraction/slit-n5.svg');">
+    <div class="pb3-m pb6-l bg-black-60">
       <nav class="pv3 ph3 ph4-ns" role="navigation">
   <div class="flex-l justify-between items-center center">
     <a href="http://bpanthi.com.np" class="f3 fw2 hover-white no-underline white-90 dib">
@@ -77,6 +81,12 @@ if (!doNotTrack) {
     <div class="flex-l items-center">
       
         <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="About page">
+              About
+            </a>
+          </li>
           
           <li class="list f5 f4-ns fw4 dib pr3">
             <a class="hover-white no-underline white-90" href="/maths/" title="Maths page">
@@ -118,6 +128,14 @@ if (!doNotTrack) {
   </div>
 </nav>
 
+      <div class="tc-l pv6 ph3 ph4-ns">
+        <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">Single Slit Diffraction</h1>
+        
+          <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4" id="page-description">
+            An insightful explanation
+          </h2>
+        
+      </div>
     </div>
   </header>
 
@@ -134,10 +152,255 @@ if (!doNotTrack) {
       </p>
       <h1 class="f1 athelas mb1">Single Slit Diffraction</h1>
       
-      <time class="f6 mv4 dib tracked" datetime="0001-01-01T00:00:00Z">January 1, 0001</time>
+      <time class="f6 mv4 dib tracked" datetime="2018-09-28T10:49:46&#43;05:45">September 28, 2018</time>
     </header>
 
-    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><ul class="pa0">
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<p>Continuing from our discussion of Single slit diffraction, (which we will do in the future 😅 ) we know that to find the actual/complete diffraction pattern we need to consider each point in the slit as a source of light and find the resultant amplitude (actually resultant electric field displacement) at the concerned point on the screen. This involves some interesting maths and logic. But before finding that infinte sum, lets look at a simplified finite case.</p>
+
+
+<figure>
+    
+        <img src="/images/diffraction/slit-n5.svg" alt="Figure 1" />
+    
+    
+    <figcaption>
+        <p>
+        Figure 1
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>Here, we have shown only five points. Let each ray to inclined at <code>θ</code> angle and the slit width be <code>d</code>. Suppose the electric displacement be <a name="amplitude"><a href="#a-footnote"><code>a</code></a></a>, wavelength of light be <code>λ</code> and the angular velocity be <code>ω</code>.
+As shown in the figure, after points <code>0′, 1′, 2′, 3′ &amp; 4′</code> all the rays travel same distance upto the screen placed at infinity. Thus their resultant at the screen is same as their resultant  at those points (i.e. the sum of the displacements at those points). At the starting points <code>0, 1, 2, 3 &amp; 4</code> on the slit each ray can be represented by :
+<code>$$y = a \sin(\omega t) $$</code>
+but since the path from original poisition to the primed (<code>′</code>) position is different for different rays, and since they start at same phase, they are out of phase when they reach the primed positions. The path difference between cosecutive rays is <code>$\frac d 4 sin\theta = d′ \sin\theta$</code></p>
+
+<p>So corresponding phase diff is:
+<code>$$\Delta \beta = d′ \sin\theta  . \frac {2\pi} {\lambda}$$</code>
+Thus now the rays can be represented at primed position as:
+<code>$$\begin{align}
+y_0 &amp;= a \sin(\omega t) \\
+y_1 &amp;= a \sin(\omega t + \Delta \beta) \\
+y_2 &amp;= a \sin(\omega t + 2 \Delta \beta) \\
+y_3 &amp;= a \sin(\omega t + 3 \Delta \beta) \\
+y_4 &amp;= a \sin(\omega t + 4 \Delta \beta) 
+\end{align}$$</code>
+And the resultant is
+<code>$$y = \sum_{i=0}^{i=4} {y_i}$$</code></p>
+
+<p>Now, we just need to find the sum. Of course if we had actual data like, <code>θ = 30°, a = 10 A°, λ = 642nm, ...</code> we could just put the values and get the result 😃 . But here we have to do this with all variables. Also, if there were 2 or 3 terms only we could have expanded the <code>$sin(\omega t + \Delta \beta)$</code> terms and got the sum (like in the case of Young&rsquo;s double slit experiment&rsquo;s expressions). But, in this case we have to later expand/generalize this to infinte terms as the segment size goes to zero. So, we use a tool called phasor.
+    I hope you are familiar with it. If you aren&rsquo;t don&rsquo;t worry, the main thing about phasors is that they represent expressions of the form <code>$y = a \sin(\omega t)$</code> graphically. And their sums, for e.g. <code>(1)</code> can also be represented graphically as :</p>
+
+<p>(Here β = NΔβ where N = number of segments)
+
+<figure>
+    
+        <img src="/images/diffraction/phasor-n5.png" alt="Figure 2: Phasor diagram" />
+    
+    
+    <figcaption>
+        <p>
+        Figure 2: Phasor diagram
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+</p>
+
+<p>Now you can use a scale to find the length of the resultant segment (show in dashed line). Just kidding 😄 . Of course, we might find a formula for the length of a diagonal joining <code>N</code>th sides (here 5th side) of regular polygon whose each external angle is <code>Δβ</code> and sum of those side is <code>Na</code>. Buts lets go to the real suff.</p>
+
+
+<figure>
+    
+        <img src="/images/diffraction/increasing-slits.gif" alt="(Moving) Figure 3: Phasor diagrams as number of imagined sections increase" />
+    
+    
+    <figcaption>
+        <p>
+        (Moving) Figure 3: Phasor diagrams as number of imagined sections increase
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>Dividing the slit into very small equal segments of width <code>$\Delta d = \frac d N $</code>. We get phase difference of <code>$\Delta \beta = \Delta d \sin\theta $</code> between rays of each segment. So, as <code>$ N \rightarrow \infty  Δd \rightarrow 0 \text{ and } a → 0$</code>. The <code>(N + 1)</code> sides of the polygon tends to a circular arc. As shown below :</p>
+
+
+<figure>
+    
+        <img src="/images/diffraction/phasor-limit-circular-arc.svg" alt="Figure 4: Actual model" />
+    
+    
+    <figcaption>
+        <p>
+        Figure 4: Actual model
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>After all these conceptual talk, lets proceed to some small calculations.
+By geometry we can say,
+<code>$$\begin{align}
+\frac {A} 2          &amp;= r sin(\frac \beta 2)  &amp; [\text{from triangle made by radius, half cord and normal}] \\
+Also, \\
+r \beta              &amp;= A_0                                   &amp; [\text{by defination of circular measure}]\\
+\therefore \frac A 2 &amp;= \frac {A_0} \beta \sin(\frac {\beta } 2) \\ 
+                 A   &amp;= A_0 \frac {\sin(\frac {\beta} 2)} {\frac {\beta} 2} \\
+                     &amp;= A_0 \frac {\sin(\frac {d \sin\theta} 2)} {\frac {d \sinθ} 2} \\
+\end{align}$$</code></p>
+
+<p>Finally we know the amplitude/electric field displacement at the screen. Plotting this looks like:</p>
+
+
+<figure>
+    
+        <img src="/images/diffraction/plot-AvsBeta.svg" alt="Figure 5: Amplitude ratio vs β curve" />
+    
+    
+    <figcaption>
+        <p>
+        Figure 5: Amplitude ratio vs β curve
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>Now, the intensity can be calculated as :
+<code>$$\begin{align}
+&amp;\text{We know, }                                       &amp;I    &amp;\propto A^2 \\
+&amp;\text{So, intensity at the centre, θ=0 }               &amp;I_0  &amp;\propto A_0^2 &amp;  \\
+&amp;\therefore                                             &amp;I    &amp;= I_0 \frac {A^2} {A_0^2} \\ 
+&amp;                                                       &amp;I    &amp;= \frac {\sin²{\frac {β} {2}}} {(\frac β 2)^2} \\
+\end{align}$$</code></p>
+
+<p>We can find the maxima and minima by differentiating intensity with respect to β and equating to zero, we get :
+<code>$$\begin{align}
+&amp;1) &amp; \sin{\frac β 2} &amp;= 0  \\
+&amp;   &amp; \implies β      &amp;= 0 , 2π, 4π, 6π, ... \\
+&amp;2) &amp; \frac β 2       &amp;= \tan(\frac β 2) \\
+\end{align}
+$$</code>
+The first set of values represent maxima, β = 0 is central maxima, β = 2π is 1st secondary maxima, and so on. A quick search at <a href="https://www.wolframalpha.com/input/?i=solve+x%2F2+%3D+tan(x%2F2)">wolframalpha</a> solves the second equation with following values</p>
+
+<table>
+<thead>
+<tr>
+<th>β =</th>
+<th>remark</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>Maxima</td>
+</tr>
+
+<tr>
+<td>±8.9868     ~ 3π (-4.6%)</td>
+<td>1st Minima</td>
+</tr>
+
+<tr>
+<td>±15.4505    ~ 5π (-1.6%)</td>
+<td>2nd Minima</td>
+</tr>
+
+<tr>
+<td>±21.8082    ~ 7π (-0.8%)</td>
+<td>3rd Minima</td>
+</tr>
+</tbody>
+</table>
+
+<p>These values for minima, get nearer to odd multiples of π for higher order minimas.</p>
+
+<p>I would like to conclude this with the following graph 😌</p>
+
+
+<figure>
+    
+        <img src="/images/diffraction/plot-IvsBeta.svg" alt="Figure 6: Intensity vs β curve" />
+    
+    
+    <figcaption>
+        <p>
+        Figure 6: Intensity vs β curve
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<h1 id="footnotes">Footnotes</h1>
+
+<p><a name="a-footnote"></p>
+
+<h3 id="a-amplitude"><a href="#amplitude">a</a></h3>
+
+<p></a>
+Each section consists of many rays, while taking a single ray passing through that slit, the amplitude of the rays is representative of all the rays. By this I mean that the amplitude is taken such that the intensity or the energy passing through that whole section due to many rays, is equal to the  the intensity of the single ray.</p>
+
+<h3 id="not-odd-half-integer-wavelength">Not odd half-integer wavelength ?</h3>
+
+<p>Some of you might be wondering, when the path difference between topmost ray and bottom most ray was integer multiple of wavelength <code>nλ</code>, then minima occured as all the displacements got cancled out (which we observed (will observe in the future) by dividing the slit to <code>2N</code> parts). Then by similar logic, when the path difference is odd half-integer multiple of wavelength <code>(n+1)λ/2</code> we divide the slit to <code>n+1</code> section, then shouldn&rsquo;t all the rays from <code>n</code> sections destructively superimpose (cancle out) and the rays from remaining section give rise to bright maxima?</p>
+
+<p>No, because although the rays from the remaining section superimpose constructively, the section itself is smaller. Actually there needs a balance between the constructive superimposition (😄 i made this term up) and the section size.</p>
+
+
+<figure>
+    
+        <img src="/images/diffraction/increasing-beta.gif" alt="(Moving) Figure 7: Phasor diagram when ray angle θ increase causing β to change" />
+    
+    
+    <figcaption>
+        <p>
+        (Moving) Figure 7: Phasor diagram when ray angle θ increase causing β to change
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>In this figure, the dashed line indicates the resultant (or say the intensity) and as we can see, the radius is always decreasing with increasing β and when one circle completes the 1st minima occurs but the 1st secondary maxima doesn&rsquo;t occur when the arc completes another half round. Because interestingly the diagonal (at β=540°) is shorter than the cord (at β=515°=8.98) because the radius is always decreasing.</p>
+
+<h3 id="are-my-diagrams-and-graphs-nice">Are my diagrams and graphs nice 😄 ?</h3>
+
+<ul>
+<li>Figure 1 &amp; 4 were drawn using LibreOffice Draw.</li>
+<li>Figure 2, 3 &amp; 7 were produced programatically using a century-line script I wrote: <a href="https://github.com/bpanthi977/diagrams-animations/blob/master/diffraction/diagrams.lisp">diagram.lisp</a></li>
+<li>Figure 5 &amp; 6 were graphed using LibreOffice Calc</li>
+</ul>
+<ul class="pa0">
   
 </ul>
 <div class="mt6">
