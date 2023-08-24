@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Digital Garden Setup</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2023-08-23 Wed&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">My Digital Garden Setup</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org16f3cc6">1. Graph</a>
+<ul>
+<li><a href="#org678c34e">1.1. Open the org-roam.db and export graph to json</a></li>
+<li><a href="#org8a1a55a">1.2. Use D3.js to render the graph</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<ul class="org-ul">
+<li><a href="digital_garden.html#ID-A594DB9B-E530-442A-8254-BA4731BD777B">Digital Garden</a></li>
+</ul>
+
+<div id="outline-container-org16f3cc6" class="outline-2">
+<h2 id="org16f3cc6"><span class="section-number-2">1.</span> Graph</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Adapted from <a href="https://hugocisneros.com/blog/my-org-roam-notes-workflow/">https://hugocisneros.com/blog/my-org-roam-notes-workflow/</a>
+</p>
+</div>
+
+<div id="outline-container-org678c34e" class="outline-3">
+<h3 id="org678c34e"><span class="section-number-3">1.1.</span> Open the org-roam.db and export graph to json</h3>
+<div class="outline-text-3" id="text-1-1">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> networkx <span class="org-keyword">as</span> nx
+<span class="org-keyword">import</span> pathlib
+<span class="org-keyword">import</span> sqlite3
+
+
+<span class="org-keyword">def</span> <span class="org-function-name">to_rellink</span>(inp: <span class="org-builtin">str</span>) <span class="org-operator">-&gt;</span> <span class="org-builtin">str</span>:
+    <span class="org-keyword">return</span> pathlib.Path(inp).stem
+
+
+<span class="org-keyword">def</span> <span class="org-function-name">build_graph</span>() <span class="org-operator">-&gt;</span> nx.DiGraph:
+    <span class="org-doc">"""Build a graph from the org-roam database."""</span>
+    <span class="org-variable-name">graph</span> <span class="org-operator">=</span> nx.DiGraph()
+    <span class="org-variable-name">home</span> <span class="org-operator">=</span> pathlib.Path.home()
+    <span class="org-variable-name">conn</span> <span class="org-operator">=</span> sqlite3.connect(home <span class="org-operator">/</span> <span class="org-string">"org/dbs/darwin/"</span> <span class="org-operator">/</span> <span class="org-string">"org-roam.db"</span>)
+
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Query all nodes first</span>
+    <span class="org-variable-name">nodes</span> <span class="org-operator">=</span> conn.execute(<span class="org-string">"SELECT file, id, title FROM nodes WHERE level = 0 and  file not like '%.gpg%' and properties not like '%private%' and properties not like '%PRIVATE%' and properties not like '%personal%' and properties not like '%PERSONAL%';"</span>) 
+    <span class="org-comment-delimiter"># </span><span class="org-comment">A double JOIN to get all nodes that are connected by a link</span>
+    <span class="org-variable-name">links</span> <span class="org-operator">=</span> conn.execute(<span class="org-string">"SELECT n1.id, nodes.id FROM ((nodes AS n1) "</span>
+                         <span class="org-string">"JOIN links ON n1.id = links.source) "</span>
+                         <span class="org-string">"JOIN (nodes AS n2) ON links.dest = nodes.id "</span>
+                         <span class="org-string">"WHERE links.type = '\"id\"';"</span>)
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Populate the graph</span>
+    graph.add_nodes_from((n[1], {
+        <span class="org-string">"label"</span>: n[2].strip(<span class="org-string">"\""</span>),
+        <span class="org-string">"tooltip"</span>: n[2].strip(<span class="org-string">"\""</span>),
+        <span class="org-string">"lnk"</span>: to_rellink(n[0]).lower(),
+        <span class="org-string">"id"</span>: n[1].strip(<span class="org-string">"\""</span>)
+    }) <span class="org-keyword">for</span> n <span class="org-keyword">in</span>  nodes)
+    graph.add_edges_from(n <span class="org-keyword">for</span> n <span class="org-keyword">in</span> links <span class="org-keyword">if</span> n[0] <span class="org-keyword">in</span> graph.nodes <span class="org-keyword">and</span> n[1] <span class="org-keyword">in</span> graph.nodes)
+    conn.close()
+    <span class="org-keyword">return</span> graph
+</pre>
+</div></details>
+
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> itertools
+<span class="org-keyword">import</span> json
+<span class="org-keyword">import</span> sys
+
+<span class="org-keyword">import</span> networkx <span class="org-keyword">as</span> nx
+<span class="org-keyword">import</span> networkx.algorithms.link_analysis.pagerank_alg <span class="org-keyword">as</span> pag
+<span class="org-keyword">import</span> networkx.algorithms.community <span class="org-keyword">as</span> com
+<span class="org-keyword">from</span> networkx.drawing.nx_pydot <span class="org-keyword">import</span> read_dot
+<span class="org-keyword">from</span> networkx.readwrite <span class="org-keyword">import</span> json_graph
+
+<span class="org-variable-name">N_COM</span> <span class="org-operator">=</span> 7  <span class="org-comment-delimiter"># </span><span class="org-comment">Desired number of communities</span>
+<span class="org-variable-name">N_MISSING</span> <span class="org-operator">=</span> 50  <span class="org-comment-delimiter"># </span><span class="org-comment">Number of predicted missing links</span>
+<span class="org-variable-name">MAX_NODES</span> <span class="org-operator">=</span> 2000  <span class="org-comment-delimiter"># </span><span class="org-comment">Number of nodes in the final graph </span>
+
+<span class="org-keyword">def</span> <span class="org-function-name">compute_centrality</span>(dot_graph: nx.DiGraph) <span class="org-operator">-&gt;</span> <span class="org-constant">None</span>:
+    <span class="org-doc">"""Add a `centrality` attribute to each node with its PageRank score.</span>
+<span class="org-doc">    """</span>
+    <span class="org-variable-name">simp_graph</span> <span class="org-operator">=</span> nx.Graph(dot_graph)
+    <span class="org-variable-name">central</span> <span class="org-operator">=</span> pag.pagerank(simp_graph)
+    <span class="org-variable-name">min_cent</span> <span class="org-operator">=</span> <span class="org-builtin">min</span>(central.values())
+    <span class="org-variable-name">central</span> <span class="org-operator">=</span> {i: central[i] <span class="org-operator">-</span> min_cent <span class="org-keyword">for</span> i <span class="org-keyword">in</span> central}
+    <span class="org-variable-name">max_cent</span> <span class="org-operator">=</span> <span class="org-builtin">max</span>(central.values())
+    <span class="org-variable-name">central</span> <span class="org-operator">=</span> {i: central[i] <span class="org-operator">/</span> max_cent <span class="org-keyword">for</span> i <span class="org-keyword">in</span> central}
+    nx.set_node_attributes(dot_graph, central, <span class="org-string">"centrality"</span>)
+    <span class="org-variable-name">sorted_cent</span> <span class="org-operator">=</span> <span class="org-builtin">sorted</span>(dot_graph, key<span class="org-operator">=</span><span class="org-keyword">lambda</span> x: dot_graph.nodes[x][<span class="org-string">"centrality"</span>])
+    <span class="org-keyword">for</span> n <span class="org-keyword">in</span> sorted_cent[:<span class="org-operator">-</span>MAX_NODES]:
+        dot_graph.remove_node(n)
+
+
+<span class="org-keyword">def</span> <span class="org-function-name">compute_communities</span>(dot_graph: nx.DiGraph, n_com: <span class="org-builtin">int</span>) <span class="org-operator">-&gt;</span> <span class="org-constant">None</span>:
+    <span class="org-doc">"""Add a `communityLabel` attribute to each node according to their</span>
+<span class="org-doc">    computed community.</span>
+<span class="org-doc">    """</span>
+    <span class="org-variable-name">simp_graph</span> <span class="org-operator">=</span> nx.Graph(dot_graph)
+    <span class="org-variable-name">communities</span> <span class="org-operator">=</span> com.girvan_newman(simp_graph)
+    <span class="org-variable-name">labels</span> <span class="org-operator">=</span> [<span class="org-builtin">tuple</span>(<span class="org-builtin">sorted</span>(c) <span class="org-keyword">for</span> c <span class="org-keyword">in</span> unities) <span class="org-keyword">for</span> unities <span class="org-keyword">in</span>
+              itertools.islice(communities, n_com <span class="org-operator">-</span> 1, n_com)][0]
+    <span class="org-variable-name">label_dict</span> <span class="org-operator">=</span> {l_key: i <span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span>(<span class="org-builtin">len</span>(labels)) <span class="org-keyword">for</span> l_key <span class="org-keyword">in</span> labels[i]}
+    nx.set_node_attributes(dot_graph, label_dict, <span class="org-string">"communityLabel"</span>)
+
+<span class="org-keyword">def</span> <span class="org-function-name">read_and_dump</span>():
+    sys.stderr.write(<span class="org-string">"Reading graph..."</span>)
+    <span class="org-variable-name">DOT_GRAPH</span> <span class="org-operator">=</span> build_graph()
+    compute_centrality(DOT_GRAPH)
+    compute_communities(DOT_GRAPH, N_COM)
+    sys.stderr.write(<span class="org-string">"Done</span><span class="org-constant">\n</span><span class="org-string">"</span>) 
+    <span class="org-variable-name">JS_GRAPH</span> <span class="org-operator">=</span> json_graph.node_link_data(DOT_GRAPH)
+    <span class="org-comment-delimiter">#</span><span class="org-comment">sys.stdout.write(json.dumps(JS_GRAPH))</span>
+    <span class="org-keyword">return</span> json.dumps(JS_GRAPH)
+
+read_and_dump()
+</pre>
+</div></details>
+
+<p>
+<a href="./blog/node-graph.json">./blog/node-graph.json</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8a1a55a" class="outline-3">
+<h3 id="org8a1a55a"><span class="section-number-3">1.2.</span> Use D3.js to render the graph</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+In addition to the code from <a href="https://hugocisneros.com/blog/my-org-roam-notes-workflow/">https://hugocisneros.com/blog/my-org-roam-notes-workflow/</a>, I added zoom, pan and changed some physics parameters
+</p>
+
+<p>
+Further resources to add zoom, pan: 
+</p>
+<ul class="org-ul">
+<li><a href="https://www.d3indepth.com/zoom-and-pan/">https://www.d3indepth.com/zoom-and-pan/</a></li>
+<li><a href="https://observablehq.com/@d3/zoom">https://observablehq.com/@d3/zoom</a></li>
+<li><a href="https://d3js.org/d3-zoom#zoom_transform">https://d3js.org/d3-zoom#zoom_transform</a></li>
+</ul>
+
+<p>
+Physics 
+</p>
+<ul class="org-ul">
+<li><a href="https://github.com/org-roam/org-roam-ui">https://github.com/org-roam/org-roam-ui</a></li>
+</ul>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-js"><span class="org-keyword">let</span> <span class="org-variable-name">graph_name</span> = <span class="org-string">"../node-graph.json"</span>;
+
+<span class="org-keyword">function</span> <span class="org-function-name">handleHover</span>() {
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Make nodes interactive to hovering</span>
+  handleMouseOver = (d, i) =&gt; {
+    nde = d3.select(d.currentTarget);
+    <span class="org-comment-delimiter">// </span><span class="org-comment">gray color and increased size</span>
+    nde.attr(<span class="org-string">"fill"</span>, <span class="org-string">"#999"</span>)
+      .attr(<span class="org-string">"r"</span>, nde.attr(<span class="org-string">"r"</span>) * 1.4);
+
+    <span class="org-comment-delimiter">// </span><span class="org-comment">display text element</span>
+    d3.selectAll(<span class="org-string">"text"</span>)
+      .filter(<span class="org-string">'#'</span> + CSS.escape(d.currentTarget.id))
+      .style(<span class="org-string">"font-size"</span>, (view.fontZoomSize / transform.k) + <span class="org-string">'px'</span>)
+      .style(<span class="org-string">"display"</span>, <span class="org-string">"block"</span>)
+
+
+    d3.selectAll(<span class="org-string">"line"</span>)
+      .filter((l, _) =&gt;
+        l.source.index == i.index ||
+          l.target.index == i.index)
+      .attr(<span class="org-string">"stroke-width"</span>, 8);
+  };
+
+  handleMouseOut = (d, _) =&gt; {
+    nde = d3.select(d.currentTarget);
+    nde.attr(<span class="org-string">"fill"</span>, nodeColor)
+      .attr(<span class="org-string">"r"</span>, nde.attr(<span class="org-string">"r"</span>) / 1.4);
+
+    <span class="org-comment-delimiter">// </span><span class="org-comment">revert to normal thickness for all lines except the connecting lines</span>
+    d3.selectAll(<span class="org-string">"line"</span>)
+      .attr(<span class="org-string">"stroke-width"</span>, 1);
+
+    <span class="org-keyword">const</span> <span class="org-variable-name">el</span> = d3.selectAll(<span class="org-string">"text"</span>)
+          .filter(<span class="org-string">'#'</span> + CSS.escape(d.currentTarget.id))
+          .style(<span class="org-string">"font-size"</span>, view.fontSize)
+    <span class="org-keyword">if</span> (transform.k &lt; view.labelsToggle) {
+      el.style(<span class="org-string">"display"</span>, <span class="org-string">"none"</span>)
+    }
+
+  };
+
+  <span class="org-keyword">return</span> { handleMouseOver, handleMouseOut }
+}
+
+<span class="org-keyword">let</span> <span class="org-variable-name">transform</span> = d3.zoomIdentity;
+<span class="org-keyword">function</span> <span class="org-function-name">drag</span>(<span class="org-variable-name">simulation</span>) {
+  <span class="org-keyword">function</span> <span class="org-function-name">dragsubject</span>(<span class="org-variable-name">event</span>) {
+    <span class="org-keyword">const</span> <span class="org-variable-name">node</span> = simulation.find(transform.invertX(event.x), transform.invertY(event.y));
+    node.x = transform.applyX(node.x);
+    node.y = transform.applyY(node.y);
+    <span class="org-keyword">return</span> node;
+  }
+
+  <span class="org-keyword">function</span> <span class="org-function-name">dragstarted</span>(<span class="org-variable-name">event</span>) {
+    <span class="org-keyword">if</span> (!event.active) simulation.alphaTarget(0.7).restart();
+    event.subject.fx = transform.invertX(event.subject.x);
+    event.subject.fy = transform.invertY(event.subject.y);
+  }
+
+  <span class="org-keyword">function</span> <span class="org-function-name">dragged</span>(<span class="org-variable-name">event</span>) {
+    event.subject.fx = transform.invertX(event.x);
+    event.subject.fy = transform.invertY(event.y);
+  }
+
+  <span class="org-keyword">function</span> <span class="org-function-name">dragended</span>(<span class="org-variable-name">event</span>) {
+    <span class="org-keyword">if</span> (!event.active) simulation.alphaTarget(0);
+    event.subject.fx = <span class="org-constant">null</span>;
+    event.subject.fy = <span class="org-constant">null</span>;
+  }
+
+  <span class="org-keyword">return</span> d3.drag()
+    .subject(dragsubject)
+    .on(<span class="org-string">"start"</span>, dragstarted)
+    .on(<span class="org-string">"drag"</span>, dragged)
+    .on(<span class="org-string">"end"</span>, dragended);
+};
+
+
+<span class="org-keyword">function</span> <span class="org-function-name">handleZoom</span>(<span class="org-variable-name">svg</span>, <span class="org-variable-name">els</span>) {
+  <span class="org-keyword">const</span> <span class="org-variable-name">zoomed</span> = (e) =&gt; {
+    els.forEach(el =&gt; el.attr(<span class="org-string">'transform'</span>, e.transform))
+    transform = e.transform;
+    <span class="org-keyword">if</span> (transform.k &gt; view.labelsToggle) {
+      d3.selectAll(<span class="org-string">"text"</span>).style(<span class="org-string">"display"</span>, <span class="org-string">"block"</span>);
+    } <span class="org-keyword">else</span> {
+      d3.selectAll(<span class="org-string">"text"</span>).style(<span class="org-string">"display"</span>, <span class="org-string">"none"</span>);
+    }
+  }
+
+  <span class="org-keyword">const</span> <span class="org-variable-name">zoom</span> = d3.zoom()
+        .on(<span class="org-string">'zoom'</span>, zoomed)
+
+  svg.call(zoom)
+
+  <span class="org-keyword">const</span> <span class="org-variable-name">initial</span> = <span class="org-keyword">new</span> <span class="org-type">d3.ZoomTransform</span>(0.15, 800, 460)
+  svg.call(zoom.transform, initial);
+}
+
+<span class="org-keyword">const</span> <span class="org-variable-name">physics</span> = {
+  gravity: 0.05,
+  alpha: 0.7,
+  velocityDecay: 0.25,
+  linkForce: 0.2,
+  charge: -1000,
+  collisionStrength: 1.5
+}
+
+<span class="org-keyword">const</span> <span class="org-variable-name">view</span> = {
+  height: 1100,
+  width: 1600,
+  fontSize: <span class="org-string">"25px"</span>,
+  fontZoomSize: 50,
+  labelsToggle: 0.5 <span class="org-comment-delimiter">// </span><span class="org-comment">at 0.5x zoom</span>
+}
+
+<span class="org-keyword">function</span> <span class="org-function-name">draw_graph</span>(<span class="org-variable-name">graph_name</span>) {
+  <span class="org-keyword">return</span> d3.json(graph_name).then(<span class="org-keyword">function</span> (<span class="org-variable-name">data</span>) {
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Radius function for nodes. Node radius are function of centrality</span>
+    scale = 1;
+    radius = d =&gt; {
+      <span class="org-keyword">if</span> (!d.radius) {
+        d.radius = 2 * (11 + 24 * Math.pow(d.centrality, 4 / 5));
+      }
+      <span class="org-keyword">return</span> d.radius;
+    };
+    color = <span class="org-string">"#ffffff"</span>;
+
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Number of colors is the number of clusters (given by communityLabel)</span>
+    num_colors = Math.max(...data.nodes.map(d =&gt; d.communityLabel)) + 1;
+
+    angleArr = [...Array(num_colors).keys()].map(x =&gt; 2 * Math.PI * x / num_colors);
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Cluster centers around an circle</span>
+    centersx = angleArr.map(x =&gt; Math.cos(Math.PI + x));
+    centersy = angleArr.map(x =&gt; Math.sin(Math.PI + x));
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Color palette</span>
+    nodeColors = [
+      <span class="org-string">'#C98914'</span>,
+      <span class="org-string">'#C55F1A'</span>,
+      <span class="org-string">'#4189AD'</span>,
+      <span class="org-string">'#007500'</span>,
+      <span class="org-string">'#968674'</span>,
+      <span class="org-string">'#5E998A'</span>,
+      <span class="org-string">"#363ea9"</span>,
+    ];
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Color function just maps cluster to color palette</span>
+    nodeColor = d =&gt; {
+      <span class="org-keyword">return</span> nodeColors[d.communityLabel % nodeColors.length];
+    };
+
+
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Graph data</span>
+    <span class="org-keyword">const</span> <span class="org-variable-name">links</span> = data.links.map(d =&gt; Object.create(d));
+    <span class="org-keyword">const</span> <span class="org-variable-name">nodes</span> = data.nodes.map(d =&gt; Object.create(d));
+
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Force simulation for the graph</span>
+    simulation = d3.forceSimulation(nodes)
+      .alpha(physics.alpha)
+      .velocityDecay(physics.velocityDecay)
+      .force(<span class="org-string">"link"</span>, d3.forceLink(links).id(d =&gt; d.id).strength(physics.linkForce))
+      .force(<span class="org-string">"charge"</span>, d3.forceManyBody()
+             .strength(physics.charge))
+      .force(<span class="org-string">'collision'</span>,
+             d3.forceCollide().radius(d =&gt; radius(d) * 1.2).strength(physics.collisionStrength))
+      .force(<span class="org-string">'x'</span>, d3.forceX()
+             .strength(physics.gravity))
+      .force(<span class="org-string">'y'</span>, d3.forceY()
+             .strength(physics.gravity))
+
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Create all the graph elements</span>
+    <span class="org-keyword">const</span> <span class="org-variable-name">svg</span> = d3.select(<span class="org-string">"svg#note-graph"</span>)
+          .attr(<span class="org-string">'max-width'</span>, <span class="org-string">'60%'</span>)
+          .attr(<span class="org-string">"viewBox"</span>, [0, 0, view.width, view.height])
+
+    <span class="org-keyword">const</span> <span class="org-variable-name">link</span> = svg.append(<span class="org-string">"g"</span>)
+          .attr(<span class="org-string">"stroke"</span>, <span class="org-string">"#000"</span>)
+          .attr(<span class="org-string">"stroke-opacity"</span>, 1)
+          .selectAll(<span class="org-string">"line"</span>)
+          .data(links)
+          .join(<span class="org-string">"line"</span>)
+          .attr(<span class="org-string">"stroke-width"</span>, 1);
+
+    <span class="org-keyword">const</span> { handleMouseOver, handleMouseOut } = handleHover()
+
+    <span class="org-keyword">const</span> <span class="org-variable-name">node</span> = svg.append(<span class="org-string">"g"</span>)
+          .selectAll(<span class="org-string">"circle"</span>)
+          .data(nodes)
+          .join(<span class="org-string">"a"</span>)
+          .attr(<span class="org-string">"xlink:href"</span>, d =&gt; {
+            <span class="org-keyword">return</span> <span class="org-string">"/braindump/"</span> + d.lnk + <span class="org-string">'.html'</span>;
+          })
+          .attr(<span class="org-string">"id"</span>, d =&gt; <span class="org-string">"circle_"</span> + d.lnk)
+          .append(<span class="org-string">"circle"</span>)
+          .attr(<span class="org-string">"id"</span>, d =&gt; d.id.toLowerCase())
+          .attr(<span class="org-string">"r"</span>, radius)
+          .attr(<span class="org-string">"fill"</span>, nodeColor)
+          .attr(<span class="org-string">"stroke"</span>, <span class="org-string">"#000"</span>)
+          .attr(<span class="org-string">"stroke-width"</span>, 1)
+          .on(<span class="org-string">"mouseover"</span>, handleMouseOver)
+          .on(<span class="org-string">"mouseout"</span>, handleMouseOut)
+          .on(<span class="org-string">'zoom'</span>, handleZoom)
+          .call(drag(simulation))
+
+    node.append(<span class="org-string">"title"</span>)
+      .text(d =&gt; d.label.replace(<span class="org-string">/"/</span>g, <span class="org-string">''</span>));
+
+
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Nodes have a label that is visible on hover</span>
+    <span class="org-comment-delimiter">// </span><span class="org-comment">They have two layers a rectangle "background" and the text on top</span>
+    <span class="org-keyword">const</span> <span class="org-variable-name">label</span> = svg.append(<span class="org-string">"g"</span>)
+          .selectAll(<span class="org-string">"text"</span>)
+          .data(nodes)
+          .join(<span class="org-string">"g"</span>);
+    <span class="org-keyword">const</span> <span class="org-variable-name">label_background</span> = label.append(<span class="org-string">"text"</span>)
+          .style(<span class="org-string">"font-size"</span>, view.fontSize)
+          .text(<span class="org-keyword">function</span> (<span class="org-variable-name">d</span>) { <span class="org-keyword">return</span> <span class="org-string">"  "</span> + d.label.replace(<span class="org-string">/"/</span>g, <span class="org-string">''</span>) + <span class="org-string">"  "</span>; })
+          .attr(<span class="org-string">"dy"</span>, -25)
+          .attr(<span class="org-string">"id"</span>, d =&gt; d.id.toLowerCase())
+          .attr(<span class="org-string">"class"</span>, <span class="org-string">"node_label"</span>)
+          .style(<span class="org-string">"display"</span>, <span class="org-string">"none"</span>)
+          .style(<span class="org-string">"pointer-events"</span>, <span class="org-string">"none"</span>)
+          .style(<span class="org-string">"alignment-baseline"</span>, <span class="org-string">"middle"</span>)
+          .attr(<span class="org-string">"filter"</span>, <span class="org-string">"url(#solid)"</span>);
+
+    <span class="org-keyword">const</span> <span class="org-variable-name">label_text</span> = label.append(<span class="org-string">"text"</span>)
+          .style(<span class="org-string">"fill"</span>, <span class="org-string">"#222"</span>)
+          .style(<span class="org-string">"font-size"</span>, view.fontSize)
+          .text(<span class="org-keyword">function</span> (<span class="org-variable-name">d</span>) { <span class="org-keyword">return</span> <span class="org-string">"  "</span> + d.label.replace(<span class="org-string">/"/</span>g, <span class="org-string">''</span>) + <span class="org-string">"  "</span>; })
+          .attr(<span class="org-string">"dy"</span>, -25)
+          .attr(<span class="org-string">"id"</span>, d =&gt; d.id.toLowerCase())
+          .attr(<span class="org-string">"class"</span>, <span class="org-string">"node_label"</span>)
+          .style(<span class="org-string">"display"</span>, <span class="org-string">"none"</span>)
+          .style(<span class="org-string">"pointer-events"</span>, <span class="org-string">"none"</span>)
+          .style(<span class="org-string">"alignment-baseline"</span>, <span class="org-string">"middle"</span>);
+
+    handleZoom(svg, [node, link, label]);
+
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Run the simulation</span>
+    simulation.on(<span class="org-string">"tick"</span>, () =&gt; {
+      link.attr(<span class="org-string">"x1"</span>, d =&gt; d.source.x)
+        .attr(<span class="org-string">"y1"</span>, d =&gt; d.source.y)
+        .attr(<span class="org-string">"x2"</span>, d =&gt; d.target.x)
+        .attr(<span class="org-string">"y2"</span>, d =&gt; d.target.y);
+
+      node.attr(<span class="org-string">"cx"</span>, d =&gt; d.x)
+        .attr(<span class="org-string">"cy"</span>, d =&gt; d.y);
+
+      label_text.attr(<span class="org-string">"x"</span>, d =&gt; d.x)
+        .attr(<span class="org-string">"y"</span>, d =&gt; d.y);
+
+      label_background.attr(<span class="org-string">"x"</span>, d =&gt; d.x)
+        .attr(<span class="org-string">"y"</span>, d =&gt; d.y);
+    });
+  });
+}
+</pre>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: My Digital Garden Setup">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

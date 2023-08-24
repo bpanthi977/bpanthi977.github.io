@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Intellectual Property</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-05-21 Sat&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Intellectual Property</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgdf09122">1. Copyright</a>
+<ul>
+<li><a href="#org7410b31">1.1. Copyright covers</a></li>
+<li><a href="#orgf259bf6">1.2. Reproduction Right</a></li>
+<li><a href="#org93f71c4">1.3. Right of Copyright Holder</a></li>
+<li><a href="#org2e7ae76">1.4. Public Performance Right</a></li>
+</ul>
+</li>
+<li><a href="#org1d096d1">2. First Sale Rule</a></li>
+<li><a href="#org29584a2">3. Fair Use</a></li>
+<li><a href="#orge5744ab">4. Patent</a>
+<ul>
+<li><a href="#org9e70dc4">4.1. Requirements</a></li>
+<li><a href="#org413b2b9">4.2. Types</a></li>
+</ul>
+</li>
+<li><a href="#org238610a">5. Trademarks</a>
+<ul>
+<li><a href="#org7be22be">5.1. Requirements</a></li>
+<li><a href="#org54f1827">5.2. Distinctiveness</a></li>
+</ul>
+</li>
+<li><a href="#orgc5bf1ed">6. Intellectual Property Laws</a></li>
+</ul>
+</div>
+</div>
+<p>
+From Crash Course
+</p>
+<ul class="org-ul">
+<li>Information wants to be free. (Because it is easy to share &amp; obtain)</li>
+<li>Information wants to be expensive. (Because it has advantages)</li>
+</ul>
+
+<p>
+A joke: (Episode 7) 
+</p>
+<blockquote>
+<p>
+We don't know who invented fire hydrant because its patent was destroyed in a fire. 
+</p>
+</blockquote>
+
+<p>
+<b>Definition of Intellectual Property</b>:
+</p>
+<ul class="org-ul">
+<li>Nonphysical property that stems from, is identified as, and whose value is based on an idea or some ideas.</li>
+</ul>
+
+<p>
+Note that: 
+</p>
+<ul class="org-ul">
+<li>Only the concrete, tangible, or physical embodiments of the idea are protected by IP Laws.</li>
+<li>It is  limited in time. Copyright in US i valid for life of author + 70 years.</li>
+<li>It is limited to fair use exception for certain personal or publicly beneficial use.</li>
+</ul>
+
+<p>
+<b>IP Includes</b>:
+</p>
+<ul class="org-ul">
+<li>Copyrights</li>
+<li>Patents</li>
+<li>Trademarks</li>
+</ul>
+
+<div id="outline-container-orgdf09122" class="outline-2">
+<h2 id="orgdf09122"><span class="section-number-2">1.</span> Copyright</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Right of Copy</li>
+</ul>
+</div>
+<div id="outline-container-org7410b31" class="outline-3">
+<h3 id="org7410b31"><span class="section-number-3">1.1.</span> Copyright covers</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>Oringal work of authorship
+<ul class="org-ul">
+<li>literary (novesl, blogs, progaram codes, tweets)</li>
+<li>musical</li>
+<li>sound recording</li>
+<li>dramatic</li>
+<li><b>pantomimes</b> and choreographic work</li>
+<li>pictorial, graphic &amp; sculptural</li>
+<li>motion picture</li>
+<li>architectural works</li>
+</ul></li>
+</ul>
+
+<p>
+Copyright covers expression of ideas (in tangible medium) not just the idea. Can't copyright facts.
+</p>
+<ul class="org-ul">
+<li>Works created by federal government are not copyrightable (in US)</li>
+<li>Work made for hire =&gt; Employer is the copyright order</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf259bf6" class="outline-3">
+<h3 id="orgf259bf6"><span class="section-number-3">1.2.</span> Reproduction Right</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>Right to copy (i.e. produce a copy of original content)</li>
+<li>Temporary copies aren't fixed or tangible</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org93f71c4" class="outline-3">
+<h3 id="org93f71c4"><span class="section-number-3">1.3.</span> Right of Copyright Holder</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>Adaptation Right: Authorize translation, create motion-picture adaptation, &#x2026;</li>
+<li>Distribution Right: Right to distribute copies, phonovecords by sale, centals, &#x2026; ??</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2e7ae76" class="outline-3">
+<h3 id="org2e7ae76"><span class="section-number-3">1.4.</span> Public Performance Right</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Songwriters, composers, and music publishers have the exclusive right to play their music publicly and to authorize others to do so under the copyright law.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1d096d1" class="outline-2">
+<h2 id="org1d096d1"><span class="section-number-2">2.</span> First Sale Rule</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+After the copyright owner sells you a copy of their work, you can sell that copy to others. This allows libraries to lend you books. 
+</p>
+
+<p>
+Sell = Distribute ≠ Reproduce 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org29584a2" class="outline-2">
+<h2 id="org29584a2"><span class="section-number-2">3.</span> Fair Use</h2>
+<div class="outline-text-2" id="text-3">
+<blockquote>
+<p>
+Avoid the rigid application of the copyright statue when, on occasions, it would stifle the very creativity which that law is designed to foster.
+</p>
+</blockquote>
+
+<p>
+Factors: 
+</p>
+<ul class="org-ul">
+<li>Purpose of orignal work</li>
+<li>Nautre of wok. More original work have stornger copyright</li>
+<li>How much you copy?
+<ul class="org-ul">
+<li>Quantitative substansability</li>
+<li>qualitative</li>
+</ul></li>
+<li>Monetary</li>
+</ul>
+
+<blockquote>
+<p>
+Take not from others to such an extent and in such manner that you would be resentful if they so took from you. 
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orge5744ab" class="outline-2">
+<h2 id="orge5744ab"><span class="section-number-2">4.</span> Patent</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Government grant exclusive rights <span class="underline">in exchange</span>  for clear and detailed disclosure of inventions.
+</p>
+<ul class="org-ul">
+<li>limited monopoly for inventors</li>
+</ul>
+</div>
+
+<div id="outline-container-org9e70dc4" class="outline-3">
+<h3 id="org9e70dc4"><span class="section-number-3">4.1.</span> Requirements</h3>
+<div class="outline-text-3" id="text-4-1">
+<ol class="org-ol">
+<li>Patentable 
+<ul class="org-ul">
+<li>invention of human not product of nature</li>
+</ul></li>
+<li>Useful</li>
+<li>New/Novel</li>
+<li>Innovation must be non-obvious</li>
+<li>Enablement 
+<ul class="org-ul">
+<li>patent document should be clear enough to recreate the invention</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org413b2b9" class="outline-3">
+<h3 id="org413b2b9"><span class="section-number-3">4.2.</span> Types</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li>Design Patent</li>
+<li>Utility</li>
+<li>Plant (new variety of plant (genetically modified or grafted, &#x2026; )</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org238610a" class="outline-2">
+<h2 id="org238610a"><span class="section-number-2">5.</span> Trademarks</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li>service marks</li>
+<li>trade dress or product packing is protected if it is nonfunctional and distinctive</li>
+</ul>
+
+<p>
+Trademarks are symbols 
+</p>
+<ul class="org-ul">
+<li>words, logos, designs, aromas, sounds, colours, personal names, containers</li>
+</ul>
+</div>
+
+<div id="outline-container-org7be22be" class="outline-3">
+<h3 id="org7be22be"><span class="section-number-3">5.1.</span> Requirements</h3>
+<div class="outline-text-3" id="text-5-1">
+<ul class="org-ul">
+<li>has to be a symbol or a device</li>
+<li>has to be used in interstate commerce</li>
+<li>has to identify makr owners goods. i.e. it has to be distinctive</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org54f1827" class="outline-3">
+<h3 id="org54f1827"><span class="section-number-3">5.2.</span> Distinctiveness</h3>
+<div class="outline-text-3" id="text-5-2">
+<ul class="org-ul">
+<li>Generic</li>
+<li>Descriptive</li>
+<li>Suggestive</li>
+<li>Arbitrary</li>
+<li>Fanciful</li>
+</ul>
+
+<p>
+Fanciful, arbitrary and suggestive makrs recieve automatic protection upon use because they are considered to be inherently distinctive 
+</p>
+
+<ul class="org-ul">
+<li>&reg;  = Registered with trademark &amp; patent office</li>
+<li>TM = Explicitly asserting trademark</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc5bf1ed" class="outline-2">
+<h2 id="orgc5bf1ed"><span class="section-number-2">6.</span> Intellectual Property Laws</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Treatise setup a baseline of protection that the countries must provide. 
+</p>
+
+<p>
+National Treatment:
+</p>
+<blockquote>
+<p>
+Each copuntry has to give foreigners IP protection that is no less favourable than protection granted to its own people. 
+</p>
+</blockquote>
+
+<ul class="org-ul">
+<li>World Intellectual Property Organisation (WIPO); made in Berne convention</li>
+<li>TRIPS convention -&gt; WTO enforces its laws</li>
+<li>Paris aggrement: allows unified patent application in inventors country that will be respected by/in other ocuntires</li>
+</ul>
+
+
+
+<hr />
+<h3>References</h3>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=RQOJgEA5e1k&amp;list=PL8dPuuaLjXtMwV2btpcij8S3YohW9gUGN">https://www.youtube.com/watch?v=RQOJgEA5e1k&amp;list=PL8dPuuaLjXtMwV2btpcij8S3YohW9gUGN</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Intellectual Property">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

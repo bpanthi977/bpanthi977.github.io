@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Avoiding Microservice Megadisasters</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="../js/counters.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">Avoiding Microservice Megadisasters</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org6cf1f7c">1. Nine and a half minutes</a></li>
+<li><a href="#org2106ee1">2. No stacktrace</a></li>
+<li><a href="#orgac48ae5">3. 99.99% Uptime x 200 Request = 0</a></li>
+<li><a href="#org0f6a191">4. What is a service</a></li>
+<li><a href="#org41fef66">5. Bounded Context</a></li>
+<li><a href="#org4d1660c">6. Duplicate Data</a></li>
+<li><a href="#orgfb20a7f">7. Service Dependency Inversion</a>
+<ul>
+<li><a href="#org3326fe0">7.1. Localizaion</a></li>
+<li><a href="#org54002b9">7.2. Content</a></li>
+</ul>
+</li>
+<li><a href="#orgf7746ad">8. Jimmy's Law</a></li>
+<li><a href="#orgc38460e">9. Inverse Conway Maneuver</a></li>
+</ul>
+</div>
+</div>
+<p>
+by Jimmy Bogard
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=gfh-VCTwMw8">https://www.youtube.com/watch?v=gfh-VCTwMw8</a>
+</p>
+
+<div id="outline-container-org6cf1f7c" class="outline-2">
+<h2 id="org6cf1f7c"><span class="section-number-2">1.</span> Nine and a half minutes</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+After converting the system to microservice architecture we had a pre-production go live.
+</p>
+
+<p>
+After 18 months, and hundreds of developers on the task. They flip the switch, went to the website and <span class="underline">nothing showed</span> up.
+</p>
+
+<p>
+Which was rather embarrassing for quite a lot of people so I said ok that's odd we expected to have some response because we've been running this application on our laptops for so long why is it failing now.
+</p>
+
+
+<p>
+Then we updated all the time out settings to a maximum infinity timeout. After waiting <span class="underline">nine and a half minutes</span>, the website finally loaded. This is just a simple page showing a list of products for one of the catalogs.
+</p>
+
+
+<p>
+What happend was a single API request calling many other services and _completely saturating their network traffic with all the API calls going on.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2106ee1" class="outline-2">
+<h2 id="org2106ee1"><span class="section-number-2">2.</span> No stacktrace</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+With a normal application like a normal monolith, if something goes wrong there's an exception or crash it's really easy to figure out what went wrong because you have a stactrace.
+</p>
+
+<p>
+Single stack trace that tells you everything that's executing at once.
+</p>
+
+<p>
+With this kind of architecture where everything is an API call there's no one stack trace I instead have to go through tools like Wireshark or other network monitoring tools to figure out okay.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgac48ae5" class="outline-2">
+<h2 id="orgac48ae5"><span class="section-number-2">3.</span> 99.99% Uptime x 200 Request = 0</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+We looked to see if they had any resiliency built-in things like the service brake or the circuit breaker pattern. Of course not, if any one of those API calls failed the entire quest failed.
+</p>
+
+<p>
+If you look at 99.9 percent uptime times 200 calls through my probabilities class that I took in college we find that that site has a zero percent chance of ever being up so this architecture was doomed.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0f6a191" class="outline-2">
+<h2 id="org0f6a191"><span class="section-number-2">4.</span> What is a service</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+The original service oriented architecture definition of a service is that, a service is software that is
+</p>
+<ul class="org-ul">
+<li>owned and built and run by our organization</li>
+<li>it's responsible for holding processing and distributing particular kinds of information within the scope of a system</li>
+<li>can be built deployed and run <span class="underline">independently</span></li>
+</ul>
+
+<p>
+Another is:
+</p>
+<ul class="org-ul">
+<li>it communicates with other consumers presenting information using conventions or contract assurances</li>
+<li>protect yourself against unwanted access and information loss</li>
+<li>handles failure conditions so that failure conditions cannot lead to information corruption</li>
+</ul>
+
+<p>
+<b>If you can kind of sum all these from pieces up in one word its <span class="underline">autonomy</span></b>
+</p>
+
+<p>
+A micro service is small and focused on doing one thing well and it's autonomous.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org41fef66" class="outline-2">
+<h2 id="org41fef66"><span class="section-number-2">5.</span> Bounded Context</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Domain-Driven Design (DDD)
+</p>
+
+<p>
+If you're going to read the DDD book, start at the part that talks about <b>bounding context</b> and kind of ignore the rest because all that stuff about entities and aggregates and stuff like that is really just not that important.
+</p>
+
+
+<p>
+Domain-driven design says I have a particular model and that model may not make sense in different contexts. So a bounded context says this is the boundary in which this particular model can be applied inside that context we have a logical unified model.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4d1660c" class="outline-2">
+<h2 id="org4d1660c"><span class="section-number-2">6.</span> Duplicate Data</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+We can't have a system in which we don't duplicate data and in fact if you look at the real world the real world duplicates data constantly.
+</p>
+
+<p>
+If you look at you're just looking at a website that is duplicating some data in the server and showing it in the browser via HTML. So immediately I have stale duplicated data, yet we're able to function just fine as a as a society knowing that I have information showing on my screen that maybe a little bit old.
+</p>
+
+<p>
+Duplication of data is good well one way to go about that is to recognize that we live in a world of data duplication and in fact their original business was built on data duplication because it used to be a mail-order catalog business and that's millions of copies at the exact same duplicated data they pushed out to hundreds of millions of homes all over the world so they've already duplicated data and built a business around it so why is it any different now.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfb20a7f" class="outline-2">
+<h2 id="orgfb20a7f"><span class="section-number-2">7.</span> Service Dependency Inversion</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+In our original picture <span class="underline">we had one service depending on a lot of other ones</span>. And it is depending on those other ones is not wrong. It is wrong though that my uptime is completely dependent on the uptime of all those other services
+</p>
+
+<p>
+We wanted to flip these individual arrows around. So instead of a single request from the outside world calling a multiple to myriad of internal sources, we flipped all those arrows so that each of those other boxes would be pushing information somehow into our search.
+</p>
+
+<p>
+So that when an external request came in I only ever had to go to a local database that was specifically built for the purpose of search.
+</p>
+</div>
+
+
+<div id="outline-container-org3326fe0" class="outline-3">
+<h3 id="org3326fe0"><span class="section-number-3">7.1.</span> Localizaion</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+Localization this one was a bit tricky because even though the information rarely changed there was a lot of it.
+</p>
+
+<p>
+Once a day they would put out a file on a shared drive there was just a flat file dump of their database that said here's all the SKUs and all the translations of every single product detail information so we said right we'll use that then we'll go get that file once a day and just do a kind of bulk insert and shove that into our document database and call it a day now.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org54002b9" class="outline-3">
+<h3 id="org54002b9"><span class="section-number-3">7.2.</span> Content</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+Content changed fairly frequently and those changes actually needed to make it out to production pretty quickly.
+</p>
+
+<p>
+We put some triggers inside the database for us. So when individual table changed we would get a message generated to feed into our search service. We would then take that message and then update our local document database.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf7746ad" class="outline-2">
+<h2 id="orgf7746ad"><span class="section-number-2">8.</span> Jimmy's Law</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+After we fixed the problem, I went back later and talked to some of the teams. They said, everything was great but the problem was they still had the similar HR structure they used to have before.
+</p>
+
+<p>
+So even though each of these teams was able to build their own application independently they were still run by crap managers. And because <span class="underline">the only way _you could get promoted in this company was again to _manage more and more people. This meant that the product teams had to keep growing</span> and the products themselves had to keep growing because that fit into the motivations of the individual managers.
+</p>
+
+<p>
+This was because of the motivations, the external motivations placed on each of these different managers. So there's not a lot of different ways you can fix this.
+</p>
+
+<p>
+<a href="conway_s_law.html#ID-5F88DE23-A765-4772-B680-9E3E1D447BD6">Conway's Law</a>: system will produce a design whose structures a copy of the organization's communication structure.
+</p>
+
+<p>
+I see this absolutely all the time that the systems we build more or less match these the human systems that exist in the company. I don't think it's a bad thing but you have to make sure that the motivations of the teams can allow this to be set up for success.
+</p>
+
+<p>
+I have a corollary to this as <span class="underline">Jimmy's law</span> which is:
+</p>
+<blockquote>
+<p>
+A broken differential organization driven by meeting unhealthy goals and metrics will produce broken and dysfunctional systems.
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgc38460e" class="outline-2">
+<h2 id="orgc38460e"><span class="section-number-2">9.</span> Inverse Conway Maneuver</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+So if you have this crappy organisation and you want to build systems for it you're going to build crappy systems because Conway's law is the law.
+</p>
+
+<p>
+So what you need to do is perform what's known as the <span class="underline">inverse Conway maneuver</span> which is to <b>design any organization you want and then the rest of the architecture will follow kicking and screaming.</b>
+</p>
+
+<p>
+Now this this is daunting right because it says basically in order for you to build good systems you may have to reorganize your company and who else who's done that before you!
+</p>
+
+<p>
+just a company of one step does that count okay so this building a building
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Avoiding Microservice Megadisasters">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

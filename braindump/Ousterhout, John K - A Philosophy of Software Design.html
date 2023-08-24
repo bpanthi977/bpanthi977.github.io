@@ -1,0 +1,839 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>A Philosophy of Software Design</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="../js/counters.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">A Philosophy of Software Design</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge3c641e">1. 1 Introduction</a></li>
+<li><a href="#orga2b1689">2. 2 The Nature of Complexity</a>
+<ul>
+<li><a href="#org2deb868">2.1. 2.1 Complexity defined</a></li>
+<li><a href="#org557f72d">2.2. 2.2 Symptoms of complexity</a></li>
+<li><a href="#org40308b9">2.3. 2.3 Causes of complexity</a></li>
+</ul>
+</li>
+<li><a href="#orge24592e">3. 3 Working Code Isn’t Enough</a>
+<ul>
+<li><a href="#org933c991">3.1. 3.2 Strategic programming</a></li>
+</ul>
+</li>
+<li><a href="#orge5c897f">4. 4 Modules Should Be Deep</a>
+<ul>
+<li><a href="#orge93e328">4.1. 4.4 Deep modules</a></li>
+</ul>
+</li>
+<li><a href="#orgbf96bec">5. 5 Information Hiding (and Leakage)</a>
+<ul>
+<li><a href="#orga274c2c">5.1. 5.1 Information hiding</a></li>
+<li><a href="#orgfc05cc6">5.2. 5.3 Temporal decomposition</a></li>
+</ul>
+</li>
+<li><a href="#org3ce491d">6. 6 General-Purpose Modules are Deeper</a>
+<ul>
+<li><a href="#orgabcc4b7">6.1. 6.1 Make classes somewhat general-purpose</a></li>
+<li><a href="#orgab10614">6.2. 6.4 Generality leads to better information hiding</a></li>
+</ul>
+</li>
+<li><a href="#org34bfabc">7. 7 Different Layer, Different Abstraction</a>
+<ul>
+<li><a href="#org8bc2261">7.1. 7.1 Pass-through methods</a></li>
+<li><a href="#org38940c1">7.2. 7.4 Interface versus implementation</a></li>
+<li><a href="#orgc8b31b2">7.3. 7.5 Pass-through variables</a></li>
+</ul>
+</li>
+<li><a href="#orgf983317">8. 8 Pull Complexity Downwards</a></li>
+<li><a href="#org3f3e468">9. 9 Better Together Or Better Apart?</a>
+<ul>
+<li><a href="#orga1358a1">9.1. 9.8 Splitting and joining methods</a></li>
+</ul>
+</li>
+<li><a href="#orge25d751">10. 10 Define Errors Out Of Existence</a>
+<ul>
+<li><a href="#orgc311e03">10.1. 10.2 Too many exceptions</a></li>
+<li><a href="#orgd2a9a6f">10.2. 10.3 Define errors out of existence</a></li>
+<li><a href="#org981052e">10.3. 10.6 Mask exceptions</a></li>
+<li><a href="#org3bcdff5">10.4. 10.7 Exception aggregation</a></li>
+<li><a href="#org1d9fbff">10.5. 10.8 Just crash?</a></li>
+<li><a href="#orgf617904">10.6. 10.9 Design special cases out of existence</a></li>
+</ul>
+</li>
+<li><a href="#org79119fc">11. 12 Why Write Comments? The Four Excuses</a>
+<ul>
+<li><a href="#org56cbfb0">11.1. 12.5 Benefits of well-written comments</a></li>
+</ul>
+</li>
+<li><a href="#orgb91b14f">12. 13 Comments Should Describe Things that Aren’t Obvious from the Code</a>
+<ul>
+<li><a href="#org6c4654d">12.1. 13.5 Interface documentation</a></li>
+</ul>
+</li>
+<li><a href="#org226d039">13. 14 Choosing Names</a>
+<ul>
+<li><a href="#org3f107a1">13.1. 14.3 Names should be precise</a></li>
+<li><a href="#orge5a9380">13.2. 14.4 Use names consistently</a></li>
+</ul>
+</li>
+<li><a href="#org61dd6a3">14. 16 Modifying Existing Code</a>
+<ul>
+<li><a href="#orgcde23d6">14.1. 16.1 Stay strategic</a></li>
+<li><a href="#org0f0aa5f">14.2. 16.3 Comments belong in the code, not the commit log</a></li>
+<li><a href="#orga134ba5">14.3. 16.4 Maintaining comments: avoid duplication</a></li>
+</ul>
+</li>
+<li><a href="#org0e44dca">15. 18 Code Should be Obvious</a></li>
+<li><a href="#org2a5fd6a">16. 19 Software Trends</a>
+<ul>
+<li><a href="#org9dfa76e">16.1. 19.4 Test-driven development</a></li>
+</ul>
+</li>
+<li><a href="#org7c39efa">17. 20 Designing for Performance</a>
+<ul>
+<li><a href="#orgbe1603e">17.1. 20.3 Design around the critical path</a></li>
+</ul>
+</li>
+<li><a href="#org66a3242">18. Conclusion</a></li>
+</ul>
+</div>
+</div>
+<p>
+Summary: Complexity is source of all problems in writing software. The objective of software design should be to reduce complexity.
+</p>
+
+<p>
+Design it twice: This prinicple is sometimes hard for really smart people to embrace. While growing up they find that their first idea is sufficient but as they get older they solve more difficult problem and now their first idea won't be sufficient. They have to accept it. 
+</p>
+<div id="outline-container-orge3c641e" class="outline-2">
+<h2 id="orge3c641e"><span class="section-number-2">1.</span> 1 Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::6:0">link</a>
+the greatest limitation in writing software is our ability to understand the systems we are creating.
+</p>
+
+<p>
+Over time, complexity accumulates, and it becomes harder and harder for programmers to keep all of the relevant factors in their minds as they modify the system.
+</p>
+
+<p>
+There are two general approaches to fighting complexity, both of which will be discussed in this book. The first approach is to eliminate complexity by making code simpler and more obvious.
+</p>
+
+<p>
+The second approach to complexity is to encapsulate it
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga2b1689" class="outline-2">
+<h2 id="orga2b1689"><span class="section-number-2">2.</span> 2 The Nature of Complexity</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::7:0">link</a>
+</p>
+</div>
+<div id="outline-container-org2deb868" class="outline-3">
+<h3 id="org2deb868"><span class="section-number-3">2.1.</span> 2.1 Complexity defined</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::7:0">link</a>
+Complexity is anything related to the structure of a software system that makes it hard to understand and modify the system. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org557f72d" class="outline-3">
+<h3 id="org557f72d"><span class="section-number-3">2.2.</span> 2.2 Symptoms of complexity</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::7:0">link</a>
+Symptoms of complexity
+</p>
+
+<p>
+Change amplification
+</p>
+
+<p>
+Cognitive load
+</p>
+
+<p>
+Unknown unknowns:
+</p>
+</div>
+</div>
+
+<div id="outline-container-org40308b9" class="outline-3">
+<h3 id="org40308b9"><span class="section-number-3">2.3.</span> 2.3 Causes of complexity</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::7:0">link</a>
+Complexity is caused by two things: dependencies and obscurity.
+</p>
+
+<p>
+Obscurity occurs when important information is not obvious. A simple example is a variable name that is so generic that it doesn’t carry much useful information (e.g., time). Or, the documentation for a variable might not specify its units,
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge24592e" class="outline-2">
+<h2 id="orge24592e"><span class="section-number-2">3.</span> 3 Working Code Isn’t Enough</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::8:0">link</a>
+</p>
+</div>
+<div id="outline-container-org933c991" class="outline-3">
+<h3 id="org933c991"><span class="section-number-3">3.1.</span> 3.2 Strategic programming</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::8:0">link</a>
+The first step towards becoming a good software designer is to realize that working code isn’t enough. It’s not acceptable to introduce unnecessary complexities in order to finish your current task faster. The most important thing is the long-term structure of the system.
+</p>
+
+<p>
+our primary goal must be to produce a great design, which also happens to work. This is strategic programming.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge5c897f" class="outline-2">
+<h2 id="orge5c897f"><span class="section-number-2">4.</span> 4 Modules Should Be Deep</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::9:0">link</a>
+Modules Should Be Deep
+</p>
+</div>
+
+<div id="outline-container-orge93e328" class="outline-3">
+<h3 id="orge93e328"><span class="section-number-3">4.1.</span> 4.4 Deep modules</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::9:0">link</a>
+The best modules are those that provide powerful functionality yet have simple interfaces. 
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbf96bec" class="outline-2">
+<h2 id="orgbf96bec"><span class="section-number-2">5.</span> 5 Information Hiding (and Leakage)</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::10:0">link</a>
+</p>
+</div>
+<div id="outline-container-orga274c2c" class="outline-3">
+<h3 id="orga274c2c"><span class="section-number-3">5.1.</span> 5.1 Information hiding</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::10:0">link</a>
+The most important technique for achieving deep modules is information hiding.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfc05cc6" class="outline-3">
+<h3 id="orgfc05cc6"><span class="section-number-3">5.2.</span> 5.3 Temporal decomposition</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::10:0">link</a>
+One common cause of information leakage is a design style I call temporal decomposition. In temporal decomposition, the structure of a system corresponds to the time order in which operations will occur.
+</p>
+
+<p>
+When designing modules, focus on the knowledge that’s needed to perform each task, not the order in which tasks occur.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3ce491d" class="outline-2">
+<h2 id="org3ce491d"><span class="section-number-2">6.</span> 6 General-Purpose Modules are Deeper</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::11:0">link</a>
+</p>
+</div>
+<div id="outline-container-orgabcc4b7" class="outline-3">
+<h3 id="orgabcc4b7"><span class="section-number-3">6.1.</span> 6.1 Make classes somewhat general-purpose</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::11:0">link</a>
+the sweet spot is to implement new modules in a somewhat general-purpose fashion. The phrase “somewhat general-purpose” means that the module’s functionality should reflect your current needs, but its interface should not.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgab10614" class="outline-3">
+<h3 id="orgab10614"><span class="section-number-3">6.2.</span> 6.4 Generality leads to better information hiding</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::11:0">link</a>
+ Generality leads to better information hiding
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org34bfabc" class="outline-2">
+<h2 id="org34bfabc"><span class="section-number-2">7.</span> 7 Different Layer, Different Abstraction</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::12:0">link</a>
+If a system contains adjacent layers with similar abstractions, this is a red flag that suggests a problem with the class decomposition
+</p>
+</div>
+
+<div id="outline-container-org8bc2261" class="outline-3">
+<h3 id="org8bc2261"><span class="section-number-3">7.1.</span> 7.1 Pass-through methods</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::12:0">link</a>
+When adjacent layers have similar abstractions, the problem often manifests itself in the form of pass-through methods. A pass-through method is one that does little except invoke another method, whose signature is similar or identical to that of the calling method.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org38940c1" class="outline-3">
+<h3 id="org38940c1"><span class="section-number-3">7.2.</span> 7.4 Interface versus implementation</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::12:0">link</a>
+Another application of the “different layer, different abstraction” rule is that the interface of a class should normally be different from its implementation: the representations used internally should be different from the abstractions that appear in the interface. If the two have similar abstractions, then the class probably isn’t very deep.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc8b31b2" class="outline-3">
+<h3 id="orgc8b31b2"><span class="section-number-3">7.3.</span> 7.5 Pass-through variables</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::12:0">link</a>
+Eliminating pass-through variables can be challenging. One approach is to see if there is already an object shared between the topmost and bottommost methods.
+</p>
+
+<p>
+Another approach is to store the information in a global variable, 
+</p>
+
+<p>
+The solution I use most often is to introduce a context object
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf983317" class="outline-2">
+<h2 id="orgf983317"><span class="section-number-2">8.</span> 8 Pull Complexity Downwards</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+<a href="~/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::13:0">link</a>
+ it is more important for a module to have a simple interface than a simple implementation
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3f3e468" class="outline-2">
+<h2 id="org3f3e468"><span class="section-number-2">9.</span> 9 Better Together Or Better Apart?</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::14:0">link</a>
+</p>
+</div>
+<div id="outline-container-orga1358a1" class="outline-3">
+<h3 id="orga1358a1"><span class="section-number-3">9.1.</span> 9.8 Splitting and joining methods</h3>
+<div class="outline-text-3" id="text-9-1">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::14:0">link</a>
+When designing methods, the most important goal is to provide clean and simple abstractions. Each method should do one thing and do it completely. The method should have a clean and simple interface, so that users don’t need to have much information in their heads in order to use it correctly. The method should be deep: its interface should be much simpler than its implementation. If a method has all of these properties, then it probably doesn’t matter whether it is long or not.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge25d751" class="outline-2">
+<h2 id="orge25d751"><span class="section-number-2">10.</span> 10 Define Errors Out Of Existence</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::15:0">link</a>
+reduce the number of places where exceptions must be handled
+</p>
+</div>
+
+<div id="outline-container-orgc311e03" class="outline-3">
+<h3 id="orgc311e03"><span class="section-number-3">10.1.</span> 10.2 Too many exceptions</h3>
+<div class="outline-text-3" id="text-10-1">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::15:0">link</a>
+The exceptions thrown by a class are part of its interface; classes with lots of exceptions have complex interfaces, and they are shallower than classes with fewer exceptions. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd2a9a6f" class="outline-3">
+<h3 id="orgd2a9a6f"><span class="section-number-3">10.2.</span> 10.3 Define errors out of existence</h3>
+<div class="outline-text-3" id="text-10-2">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::15:0">link</a>
+The best way to eliminate exception handling complexity is to define your APIs so that there are no exceptions to handle: define errors out of existence. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org981052e" class="outline-3">
+<h3 id="org981052e"><span class="section-number-3">10.3.</span> 10.6 Mask exceptions</h3>
+<div class="outline-text-3" id="text-10-3">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::15:0">link</a>
+The second technique for reducing the number of places where exceptions must be handled is exception masking. With this approach, an exceptional condition is detected and handled at a low level in the system, so that higher levels of software need not be aware of the condition
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3bcdff5" class="outline-3">
+<h3 id="org3bcdff5"><span class="section-number-3">10.4.</span> 10.7 Exception aggregation</h3>
+<div class="outline-text-3" id="text-10-4">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::15:0">link</a>
+The third technique for reducing complexity related to exceptions is exception aggregation. The idea behind exception aggregation is to handle many exceptions with a single piece of code; rather than writing distinct handlers for many individual exceptions, handle them all in one place with a single handler.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1d9fbff" class="outline-3">
+<h3 id="org1d9fbff"><span class="section-number-3">10.5.</span> 10.8 Just crash?</h3>
+<div class="outline-text-3" id="text-10-5">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::15:0">link</a>
+The fourth technique for reducing complexity related to exception handling is to crash the application. In most applications there will be certain errors that it’s not worth trying to handle.
+</p>
+
+<p>
+One example is “out of memory” errors that occur during storage allocation.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf617904" class="outline-3">
+<h3 id="orgf617904"><span class="section-number-3">10.6.</span> 10.9 Design special cases out of existence</h3>
+<div class="outline-text-3" id="text-10-6">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::15:0">link</a>
+For the same reason that it makes sense to define errors out of existence, it also makes sense to define other special cases out of existence. Special cases can result in code that is riddled with if statements, which make the code hard to understand and lead to bugs. Thus, special cases should be eliminated wherever possible. 
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org79119fc" class="outline-2">
+<h2 id="org79119fc"><span class="section-number-2">11.</span> 12 Why Write Comments? The Four Excuses</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::17:0">link</a>
+</p>
+</div>
+<div id="outline-container-org56cbfb0" class="outline-3">
+<h3 id="org56cbfb0"><span class="section-number-3">11.1.</span> 12.5 Benefits of well-written comments</h3>
+<div class="outline-text-3" id="text-11-1">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::17:0">link</a>
+Documentation can reduce cognitive load by providing developers with the information they need to make changes and by making it easy for developers to ignore information that is irrelevant.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb91b14f" class="outline-2">
+<h2 id="orgb91b14f"><span class="section-number-2">12.</span> 13 Comments Should Describe Things that Aren’t Obvious from the Code</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::18:0">link</a>
+he guiding principle for comments is that comments should describe things that aren’t obvious from the code.
+</p>
+
+<p>
+One of the most important reasons for comments is abstractions, which include a lot of information that isn’t obvious from the code. The idea of an abstraction is to provide a simple way of thinking about something, but code is so detailed that it can be hard to see the abstraction just from reading the code. Comments can provide a simpler, higher-level view 
+</p>
+</div>
+
+<div id="outline-container-org6c4654d" class="outline-3">
+<h3 id="org6c4654d"><span class="section-number-3">12.1.</span> 13.5 Interface documentation</h3>
+<div class="outline-text-3" id="text-12-1">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::18:0">link</a>
+ Code isn’t suitable for describing abstractions; it’s too low level and it includes implementation details that shouldn’t be visible in the abstraction. The only way to describe an abstraction is with comments. If you want code that presents good abstractions, you must document those abstractions with comments.
+</p>
+
+<p>
+If interface comments must also describe the implementation, then the class or method is shallow. This means that the act of writing comments can provide clues about the quality of a design;
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org226d039" class="outline-2">
+<h2 id="org226d039"><span class="section-number-2">13.</span> 14 Choosing Names</h2>
+<div class="outline-text-2" id="text-13">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::19:0">link</a>
+ Good names are a form of documentation: they make code easier to understand.
+</p>
+</div>
+
+<div id="outline-container-org3f107a1" class="outline-3">
+<h3 id="org3f107a1"><span class="section-number-3">13.1.</span> 14.3 Names should be precise</h3>
+<div class="outline-text-3" id="text-13-1">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::19:0">link</a>
+Good names have two properties: precision and consistency.
+</p>
+
+<p>
+The most common problem with names is that they are too generic or vague; as a result, it’s hard for readers to tell what the name refers to; the reader may assume that the name refers to something different from reality, as in the block bug
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge5a9380" class="outline-3">
+<h3 id="orge5a9380"><span class="section-number-3">13.2.</span> 14.4 Use names consistently</h3>
+<div class="outline-text-3" id="text-13-2">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::19:0">link</a>
+Consistent naming reduces cognitive load in much the same way as reusing a common class: once the reader has seen the name in one context, they can reuse their knowledge and instantly make assumptions when they see the name in a different context.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org61dd6a3" class="outline-2">
+<h2 id="org61dd6a3"><span class="section-number-2">14.</span> 16 Modifying Existing Code</h2>
+<div class="outline-text-2" id="text-14">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::21:0">link</a>
+</p>
+</div>
+<div id="outline-container-orgcde23d6" class="outline-3">
+<h3 id="orgcde23d6"><span class="section-number-3">14.1.</span> 16.1 Stay strategic</h3>
+<div class="outline-text-3" id="text-14-1">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::21:0">link</a>
+Ideally, when you have finished with each change, the system will have the structure it would have had if you had designed it from the start with that change in mind.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0f0aa5f" class="outline-3">
+<h3 id="org0f0aa5f"><span class="section-number-3">14.2.</span> 16.3 Comments belong in the code, not the commit log</h3>
+<div class="outline-text-3" id="text-14-2">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::21:0">link</a>
+Comments belong in the code, not the commit log
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga134ba5" class="outline-3">
+<h3 id="orga134ba5"><span class="section-number-3">14.3.</span> 16.4 Maintaining comments: avoid duplication</h3>
+<div class="outline-text-3" id="text-14-3">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::21:0">link</a>
+Maintaining comments: avoid duplication
+</p>
+
+<p>
+If documentation is duplicated, it is more difficult for developers to find and update all of the relevant copies. Instead, try to document each design decision exactly once. If there are multiple places in the code that are affected by a particular decision, don’t repeat the documentation at each of these points. Instead, find the most obvious single place to put the documentation. 
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0e44dca" class="outline-2">
+<h2 id="org0e44dca"><span class="section-number-2">15.</span> 18 Code Should be Obvious</h2>
+<div class="outline-text-2" id="text-15">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::23:0">link</a>
+Obscurity occurs when important information about a system is not obvious to new developers. The solution to the obscurity problem is to write code in a way that makes it obvious;
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2a5fd6a" class="outline-2">
+<h2 id="org2a5fd6a"><span class="section-number-2">16.</span> 19 Software Trends</h2>
+<div class="outline-text-2" id="text-16">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::24:0">link</a>
+</p>
+</div>
+<div id="outline-container-org9dfa76e" class="outline-3">
+<h3 id="org9dfa76e"><span class="section-number-3">16.1.</span> 19.4 Test-driven development</h3>
+<div class="outline-text-3" id="text-16-1">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::24:0">link</a>
+Although I am a strong advocate of unit testing, I am not a fan of test-driven development. The problem with test-driven development is that it focuses attention on getting specific features working, rather than finding the best design. This is tactical programming pure and simple, with all of its disadvantages. Test-driven development is too incremental: at any point in time, it’s tempting to just hack in the next feature to make the next test pass. There’s no obvious time to do design, so it’s easy to end up with a mess.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7c39efa" class="outline-2">
+<h2 id="org7c39efa"><span class="section-number-2">17.</span> 20 Designing for Performance</h2>
+<div class="outline-text-2" id="text-17">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::25:0">link</a>
+</p>
+</div>
+<div id="outline-container-orgbe1603e" class="outline-3">
+<h3 id="orgbe1603e"><span class="section-number-3">17.1.</span> 20.3 Design around the critical path</h3>
+<div class="outline-text-3" id="text-17-1">
+<p>
+<a href="/home/bpanthi/Documents/synced/Main/Programming/Ousterhout, John K - A Philosophy of Software Design.azw3::25:0">link</a>
+Design around the critical path
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org66a3242" class="outline-2">
+<h2 id="org66a3242"><span class="section-number-2">18.</span> Conclusion</h2>
+<div class="outline-text-2" id="text-18">
+<p>
+This book is about one thing: complexity. Dealing with complexity is the most important challenge in software design. It is what makes systems hard to build and maintain, and it often makes them slow as well. Over the course of the book I have tried to describe the root causes that lead to complexity, such as dependencies and obscurity. I have discussed red flags that can help you identify unnecessary complexity, such as information leakage, unneeded error conditions, or names that are too generic. I have presented some general ideas you can use to create simpler software systems, such as striving for classes that are deep and generic, defining errors out of existence, and separating interface documentation from implementation documentation. And, finally, I have discussed the investment mindset needed to produce simple designs.
+</p>
+
+<p>
+The downside of all these suggestions is that they create extra work in the early stages of a project. Furthermore, if you aren’t used to thinking about design issues, then you will slow down even more while you learn good design techniques. If the only thing that matters to you is making your current code work as soon as possible, then thinking about design will seem like drudge work that is getting in the way of your real goal.
+</p>
+
+<p>
+On the other hand, if good design is an important goal for you, then the ideas in this book should make programming more fun. Design is a fascinating puzzle: how can a particular problem be solved with the simplest possible structure? It’s fun to explore different approaches, and it’s a great feeling to discover a solution that is both simple and powerful. A clean, simple, and obvious design is a beautiful thing.
+</p>
+
+<p>
+Furthermore, the investments you make in good design will pay off quickly. The modules you defined carefully at the beginning of a project will save you time later as you reuse them over and over. The clear documentation that you wrote six months ago will save you time when you return to the code to add a new feature. The time you spent honing your design skills will also pay for itself: as your skills and experience grow, you will find that you can produce good designs more and more quickly. Good design doesn’t really take much longer than quick-and-dirty design, once you know how.
+</p>
+
+<p>
+The reward for being a good designer is that you get to spend a larger fraction of your time in the design phase, which is fun. Poor designers spend most of their time chasing bugs in complicated and brittle code. If you improve your design skills, not only will you produce higher quality software more quickly, but the software development process will be more enjoyable.
+</p>
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="programming.html#ID-F3E66B76-D993-42FD-AD0F-E9BC424B47C9">Programming</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: A Philosophy of Software Design">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

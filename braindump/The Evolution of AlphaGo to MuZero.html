@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Evolution of AlphaGo to MuZero</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="../js/counters.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">The Evolution of AlphaGo to MuZero</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge918bc0">1. DeepMind’s MuZero algorithm reaches superhuman ability in 57 different Atari games. This article will explain the context leading up to it!</a>
+<ul>
+<li><a href="#org4efbf17">1.1. AlphaGo</a></li>
+<li><a href="#org2b5416a">1.2. AlphaGo Zero</a></li>
+<li><a href="#orgccd5fd5">1.3. AlphaZero</a></li>
+<li><a href="#org9175bc4">1.4. MuZero</a></li>
+<li><a href="#org28f1262">1.5. Paper Links</a></li>
+</ul>
+</li>
+<li><a href="#org898422c">2. Youtube Video</a>
+<ul>
+<li><a href="#org85c8672">2.1. Alpha Go</a>
+<ul>
+<li><a href="#orgd0cd2ef">2.1.1. The self play policy network is not used during actual gameplay</a></li>
+<li><a href="#org026fcac">2.1.2. Q + u(P)</a></li>
+<li><a href="#org02f932d">2.1.3. After reaching to leaf node, the rollout Policy network is used to play the game to the end to find the reward</a></li>
+</ul>
+</li>
+<li><a href="#orgbf1a44c">2.2. Input State Representation</a></li>
+<li><a href="#org9b4ed30">2.3. AlphaGo Zero</a>
+<ul>
+<li><a href="#org04074d4">2.3.1. Combine the value and policy networks</a></li>
+<li><a href="#org1aa00b1">2.3.2. ResNet - dual resnet out performs dual - convolutional network</a></li>
+<li><a href="#org1f58877">2.3.3. More general input states</a></li>
+</ul>
+</li>
+<li><a href="#org8ada3e7">2.4. AlphaZero - Not much changes to AlphaGo Zero</a></li>
+<li><a href="#orgc996244">2.5. MuZero</a>
+<ul>
+<li><a href="#orgb384613">2.5.1. Loss function</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge918bc0" class="outline-2">
+<h2 id="orge918bc0"><span class="section-number-2">1.</span> DeepMind’s MuZero algorithm reaches superhuman ability in 57 different Atari games. This article will explain the context leading up to it!</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Reinforcement Learning agents that can play Atari games are interesting because, in addition to a visually complex state space, agents playing Atari games don’t have a perfect simulator they can use for planning as in Chess, Shogi, and Go.
+</p>
+
+<p>
+Reinforcement Learning problems are framed within Markov Decision Processes (MDPs)
+</p>
+
+<p>
+DeepMind’s AlphaGo, AlphaGo Zero, and AlphaZero exploit having a perfect model of (action, state) → next state to do lookahead planning in the form of Monte Carlo Tree Search (MCTS).
+</p>
+
+<p>
+MCTS is a perfect complement to using Deep Neural Networks for policy mappings and value estimation because it averages out the errors from these function approximations. MCTS provides a huge boost for AlphaZero in Chess, Shogi, and Go where you can do perfect planning because you have a perfect model of the environment.
+</p>
+
+<p>
+MuZero comes with a way of salvaging MCTS planning by learning a dynamics model 
+</p>
+</div>
+<div id="outline-container-org4efbf17" class="outline-3">
+<h3 id="org4efbf17"><span class="section-number-3">1.1.</span> AlphaGo</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+AlphaGo is the first paper in the series, showing that Deep Neural Networks could play the game of <a href="go.html#ID-0B2EB862-26D1-4ED2-BF63-52B19F9D4A65">Go</a> by predicting a policy (mapping from state to action) and value estimate (probability of winning from a given state). 
+</p>
+
+<p>
+AlphaGo uses 4 Deep Convolutional Neural Networks, 3 policy networks and a value network. 2 of the policy networks are trained with supervised learning on expert moves
+</p>
+
+<p>
+Supervised learning describes loss functions consisting of some kind of L(y’, y). In this case, the y’ is the action the policy network predicted from a given state, and the y is the action the expert human player had taken in that state.
+</p>
+
+<p>
+The rollout policy is a smaller neural network that takes in a smaller input state representation as well. 
+</p>
+
+<p>
+However the rollout policy network’s inference time (time to make a prediction of action given state) is 2 microseconds compared to 3 milliseconds with the larger network, making it useful for Monte Carlo Tree Search simulations.
+</p>
+
+<p>
+The SL policy network is used to initialize the 3rd policy network which is trained with self-play and policy gradients. 
+</p>
+
+<p>
+Policy gradients describe the idea of optimizing the policy directly with respect to the resulting rewards, compared to other RL algorithms that learn a value function and then make the policy greedy with respect to the value function.
+</p>
+
+<p>
+The self-play dataset is then used to train a value network to predict the winner of a game from a given state.
+</p>
+
+<p>
+The final workhorse of AlphaGo is the combination of policy and value networks in MCTS,
+</p>
+
+<p>
+The idea of MCTS is to perform lookahead search to get a better estimate of which immediate action to take. This is done by starting from a root node (the current state of the board), expanding that node by selecting an action and repeating this with subsequent states that result from the state, action transitions. MCTS chooses which edge of the tree to follow based on this Q + u(P) term which is a weighted combination of the value network’s estimate of the state, the original probability density the policy network had given to this state, and a negative weighting of how many times the node has been visited, since this is repeated over and over again. Unique to AlphaGo is the use of a rollout policy simulation to average the contribution of the value network. The rollout policy simulates until the episode and wether that resulted in a win or a loss is blended with the value function estimate of that state with an extra parameter, lambda.
+</p>
+</div>
+</div>
+<div id="outline-container-org2b5416a" class="outline-3">
+<h3 id="org2b5416a"><span class="section-number-3">1.2.</span> AlphaGo Zero</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+AlphaGo Zero significantly improves the AlphaGo algorithm by making it more general and starting from “Zero” human knowledge.
+</p>
+
+<p>
+and combines the value and policy network into a single neural network. This neural network is scaled up as well to utilize a ResNet compared to a simpler convolutional network in AlphaGo.
+</p>
+
+<p>
+The MCTS trains the policy network by using it as supervision to update the policy network. This is a clever idea since MCTS produces a better action distribution through lookahead search than the policy network’s instant mapping from state to action.
+</p>
+</div>
+</div>
+<div id="outline-container-orgccd5fd5" class="outline-3">
+<h3 id="orgccd5fd5"><span class="section-number-3">1.3.</span> AlphaZero</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+AlphaZero is the first step towards generalizing the AlphaGo family outside of Go, looking at changes needed to play Chess and Shogi as well. This requires formulating input state and output action representations for the residual neural network.
+</p>
+
+<p>
+AlphaGo Zero uses a more general representation, simply passing in the previous 8 locations of stones for both players and a binary feature plane telling the agent which player it is controlling, depicted below:
+</p>
+
+<p>
+AlphaZero also makes some more subtle changes to the algorithm such as the way the self-play champion is crowned and the eliminations of data augmentation from Go board games such as reflections and rotations
+</p>
+</div>
+</div>
+<div id="outline-container-org9175bc4" class="outline-3">
+<h3 id="org9175bc4"><span class="section-number-3">1.4.</span> MuZero</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+This leads us to the current state-of-the-art in this series, MuZero. MuZero presents a very powerful generalization to the algorithm that allows it to learn without a perfect simulator. 
+</p>
+
+<p>
+Diagram A shows the pipeline of using a representation function h to map raw observations into a hidden state s0 that is used for tree-based planning. In MuZero, the combined value / policy network reasons in this hidden state space, so rather than mapping raw observations to actions or value estimates, it takes these hidden states as inputs. The dynamics function g learns to map from hidden state and action to a future hidden states.
+</p>
+
+<p>
+Each of the three neural networks are trained in a joint optimization of the difference between the value network and the actual return, the difference between the intermediate reward experienced and predicted by the dynamics model and the difference between the MCTS action distribution and policy mapping.
+</p>
+
+<p>
+The representation function h comes into play in this joint optimization equation through back-propagation through time
+</p>
+
+<p>
+Let’s say you are taking the difference between the MCTS action distribution pi(s1) and the policy distribution p(s1). The output of p(s1) is a result of p(g(s0, a1)), which is a result of p(g(h(raw<sub>input</sub>), a1)). This is how backprop through time sends update signals all the way back into the hidden representation function as well.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org28f1262" class="outline-3">
+<h3 id="org28f1262"><span class="section-number-3">1.5.</span> Paper Links</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+AlphaGo:<a href="https://www.nature.com/articles/nature16961">https://www.nature.com/articles/nature16961</a>
+</p>
+
+<p>
+AlphaZero: <a href="https://arxiv.org/abs/1712.01815">https://arxiv.org/abs/1712.01815</a>
+</p>
+
+<p>
+MuZero: <a href="https://arxiv.org/abs/1911.08265">https://arxiv.org/abs/1911.08265</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org898422c" class="outline-2">
+<h2 id="org898422c"><span class="section-number-2">2.</span> Youtube Video</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<a href="https://www.youtube.com/watch?v=A0HX8BgckFI">https://www.youtube.com/watch?v=A0HX8BgckFI</a>
+</p>
+</div>
+
+<div id="outline-container-org85c8672" class="outline-3">
+<h3 id="org85c8672"><span class="section-number-3">2.1.</span> Alpha Go</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+4 networks:
+</p>
+<ul class="org-ul">
+<li>2 SL Policy</li>
+<li>1 Self play Policy network</li>
+<li>1 value network trained on the self play policy network</li>
+</ul>
+</div>
+
+<div id="outline-container-orgd0cd2ef" class="outline-4">
+<h4 id="orgd0cd2ef"><span class="section-number-4">2.1.1.</span> The self play policy network is not used during actual gameplay</h4>
+<div class="outline-text-4" id="text-2-1-1">
+</div>
+</div>
+
+<div id="outline-container-org026fcac" class="outline-4">
+<h4 id="org026fcac"><span class="section-number-4">2.1.2.</span> Q + u(P)</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<p>
+Select the max value of Q + u(P) which is combination of : 
+</p>
+<ul class="org-ul">
+<li>probability that the SL network assigns to the state,action</li>
+<li>the value network assigns to the state</li>
+<li>weighted negatively by how many times the state has been traversed</li>
+</ul>
+
+
+<div id="org739e13b" class="figure">
+<p><img src="./data/The Evolution of AlphaGo to MuZero/mpv-screenshotRSQeF3.png" alt="mpv-screenshotRSQeF3.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org02f932d" class="outline-4">
+<h4 id="org02f932d"><span class="section-number-4">2.1.3.</span> After reaching to leaf node, the rollout Policy network is used to play the game to the end to find the reward</h4>
+<div class="outline-text-4" id="text-2-1-3">
+<p>
+because rollout (P<sub>pi</sub>)  takes 2microseconds compared to the 3 milliseconds for the full network P<sub>sigma</sub>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbf1a44c" class="outline-3">
+<h3 id="orgbf1a44c"><span class="section-number-3">2.2.</span> Input State Representation</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Feature plane is the N by N grid that form the N by N by m tensor fed into the convolutional neural network 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9b4ed30" class="outline-3">
+<h3 id="org9b4ed30"><span class="section-number-3">2.3.</span> AlphaGo Zero</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Use the MCTS action distribution to train policy network 
+</p>
+</div>
+
+<div id="outline-container-org04074d4" class="outline-4">
+<h4 id="org04074d4"><span class="section-number-4">2.3.1.</span> Combine the value and policy networks</h4>
+<div class="outline-text-4" id="text-2-3-1">
+
+<div id="orgaa438ee" class="figure">
+<p><img src="./data/The Evolution of AlphaGo to MuZero/mpv-screenshotkdxVmK.png" alt="mpv-screenshotkdxVmK.png" />
+</p>
+</div>
+
+<p>
+loss function:  (z is return)
+</p>
+<ul class="org-ul">
+<li>(z - v)<sup>2</sup> difference of value estimates at each state to final reward squared</li>
+<li>\(\pi^{T} \log p\) updates the action distribution for the policy network to better align with the action distribution from MCTS</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1aa00b1" class="outline-4">
+<h4 id="org1aa00b1"><span class="section-number-4">2.3.2.</span> ResNet - dual resnet out performs dual - convolutional network</h4>
+<div class="outline-text-4" id="text-2-3-2">
+</div>
+</div>
+
+<div id="outline-container-org1f58877" class="outline-4">
+<h4 id="org1f58877"><span class="section-number-4">2.3.3.</span> More general input states</h4>
+<div class="outline-text-4" id="text-2-3-3">
+<p>
+Player 1 stones and Player 2 stones as 2 feature planes. and those feature planes are concatenated to last 8 positions. 
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8ada3e7" class="outline-3">
+<h3 id="org8ada3e7"><span class="section-number-3">2.4.</span> AlphaZero - Not much changes to AlphaGo Zero</h3>
+<div class="outline-text-3" id="text-2-4">
+
+<div id="org9a384a8" class="figure">
+<p><img src="./data/The Evolution of AlphaGo to MuZero/mpv-screenshotkjnWxw.png" alt="mpv-screenshotkjnWxw.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc996244" class="outline-3">
+<h3 id="orgc996244"><span class="section-number-3">2.5.</span> MuZero</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+In an dynamic environment where the state transition function can't be accurate. 
+MuZero works by reasoning (say using MCTS) in an abstract space instead of the original space. 
+In other words, MuZero's transition function doesn't try predict the actual space but rather only the abstract space (which doesn't represent the actual space in pixel perfect way)
+</p>
+</div>
+
+<div id="outline-container-orgb384613" class="outline-4">
+<h4 id="orgb384613"><span class="section-number-4">2.5.1.</span> Loss function</h4>
+<div class="outline-text-4" id="text-2-5-1">
+<p>
+<img src="./data/The Evolution of AlphaGo to MuZero/mpv-screenshotWVCaQD.png" alt="mpv-screenshotWVCaQD.png" />
+In the joint optimization loss function, the h function, g function and policy network are tied together. This is how the network learns h and g. 
+</p>
+
+
+
+<hr />
+<h3>References</h3>
+
+<ul class="org-ul">
+<li><a href="https://towardsdatascience.com/the-evolution-of-alphago-to-muzero-c2c37306bf9">https://towardsdatascience.com/the-evolution-of-alphago-to-muzero-c2c37306bf9</a></li>
+</ul>
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="machine_learning.html#ID-5b3ac5b3-f28b-4f5f-bdea-c25b5002c622">Machine Learning</a></li>
+<li><a href="adversarial_attack.html#ID-63BC9412-703C-4D17-8EB3-AA89F5B3FB82">Adversarial Attack</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: The Evolution of AlphaGo to MuZero">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

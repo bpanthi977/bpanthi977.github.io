@@ -1,0 +1,1238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>How to Build a Mind</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: 2020-11-11 Wed</p>
+</div>
+<div id="content" class="content">
+<h1 class="title">How to Build a Mind</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb549f64">1. Why should we build AI? - to learn about mind</a>
+<ul>
+<li><a href="#org35c5a6c">1.1. Not for cool application but to <b>learn about mind</b></a></li>
+<li><a href="#org9898be1">1.2. Why Artificial Intelligence? - Only computer science has the right toolsp</a></li>
+<li><a href="#orgb82b65a">1.3. Minds are information processing systems - and <b>CS</b> is science of Information Processing</a></li>
+<li><a href="#orgb9477ee">1.4. AI gives perspective for understanding ourself - For Enlightenment</a></li>
+</ul>
+</li>
+<li><a href="#org77f23ad">2. How can we build AI?</a>
+<ul>
+<li><a href="#org613fa6e">2.1. Are minds computation? - Yes</a></li>
+<li><a href="#org9237563">2.2. Computationalism - Universe is a pattern generator - Universe can compute</a></li>
+<li><a href="#orgbacd7c6">2.3. Mind are less than Turing machines - because finite tape, finite steps,</a></li>
+<li><a href="#orga8f6c81">2.4. But note that Effectively Computable function ≄ Efficiently computable functions</a></li>
+</ul>
+</li>
+<li><a href="#orgf5448b8">3. When is Al going to succeed (if ever)?</a>
+<ul>
+<li><a href="#orgec65f84">3.1. How Difficult is AI?</a></li>
+<li><a href="#orgb624413">3.2. AI history</a></li>
+</ul>
+</li>
+<li><a href="#org25b987b">4. What are the ingredients for AI? - Cognitive Systems</a>
+<ul>
+<li><a href="#orgf3a2742">4.1. Universal Mental Represenatation</a></li>
+<li><a href="#org2cd8d47">4.2. Mental Represenation have structure</a></li>
+<li><a href="#org0fdf17a">4.3. Action Selection and Executive Control</a></li>
+<li><a href="#org7a8d763">4.4. Motivational System - Demands</a></li>
+<li><a href="#orgc10f8bc">4.5. Emotional in Cognitive System - Modulation and Affect</a></li>
+<li><a href="#org5f6e84c">4.6. Incremental Progress or Big Jump? - Incremental Progress</a></li>
+</ul>
+</li>
+<li><a href="#org1d9c95a">5. What should you do - to get into AI</a>
+<ul>
+<li><a href="#orgd5aafed">5.1. Open Problems</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+Notes from <a href="How to Build a Mind - Artificial Intelligence Reloaded [30c3]-nlutwZ0rUUs.mp4">How to Build a Mind - 30c3</a> by Joscha Bach
+0:01:08 Overview 
+</p>
+
+<div id="outline-container-orgb549f64" class="outline-2">
+<h2 id="orgb549f64"><span class="section-number-2">1.</span> Why should we build AI? - to learn about mind</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org35c5a6c" class="outline-3">
+<h3 id="org35c5a6c"><span class="section-number-3">1.1.</span> Not for cool application but to <b>learn about mind</b></h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+This has to be given in framework of AI.  
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9898be1" class="outline-3">
+<h3 id="org9898be1"><span class="section-number-3">1.2.</span> Why Artificial Intelligence? - Only computer science has the right toolsp</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Goal: Understanding the mind by building a
+testable theory
+</p>
+
+<p>
+Similar to physics: theory that can be formally
+expressed and simulated
+</p>
+
+<p>
+Of course, computer science alone cannot do it!
+</p>
+</div>
+
+<div id="outline-container-orgb00a766" class="outline-4">
+<h4 id="orgb00a766"><span class="section-number-4">1.2.1.</span> Phisophy of mind doesn't have tools to create testable theory</h4>
+<div class="outline-text-4" id="text-1-2-1">
+</div>
+</div>
+
+<div id="outline-container-orgf5d82c1" class="outline-4">
+<h4 id="orgf5d82c1"><span class="section-number-4">1.2.2.</span> Neuroscience looks at an possible implementation - Looking at wrong level</h4>
+<div class="outline-text-4" id="text-1-2-2">
+</div>
+</div>
+<div id="outline-container-orgf04e10d" class="outline-4">
+<h4 id="orgf04e10d"><span class="section-number-4">1.2.3.</span> Psychology ??</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+Unfortunately psychology had an accident aong the way. 
+Hemholtz, Vagner?, &#x2026; did good experiments but at same time <b>Psychoanalysis</b> came along
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orged85f88"></a>Psychoanalysis is a not a natural science its a <b>Hermetic Science</b><br />
+<div class="outline-text-5" id="text-1-2-3-1">
+<p>
+We can't disprove it scientifically. 
+</p>
+</div>
+</li>
+
+<li><a id="org0c0b55e"></a>Then psychologists wanted it to become natural science<br />
+<div class="outline-text-5" id="text-1-2-3-2">
+<p>
+0:05:34 So, psychology became the study of human behaviours and thus looking at mental behviour is somehow unscientific. 
+0:05:38 Some (Skinner) beleived there's no Mental Representation 
+</p>
+</div>
+</li>
+
+<li><a id="orga5024ae"></a>Psychology is all about experiments (nowadays)<br />
+<div class="outline-text-5" id="text-1-2-3-3">
+</div>
+
+<ol class="org-ol">
+<li><a id="orge93df6d"></a>This is not how Physics works, because you need to have lots of theories to understand a complex system<br />
+<div class="outline-text-6" id="text-1-2-3-3-1">
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgb82b65a" class="outline-3">
+<h3 id="orgb82b65a"><span class="section-number-3">1.3.</span> Minds are information processing systems - and <b>CS</b> is science of Information Processing</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+(not chemical, biological, social, ecological, &#x2026;)
+and Computer science is the science of information
+</p>
+</div>
+<div id="outline-container-orgc5d02cf" class="outline-4">
+<h4 id="orgc5d02cf"><span class="section-number-4">1.3.1.</span> Is AI Not Dangerous?</h4>
+<div class="outline-text-4" id="text-1-3-1">
+
+<div id="org8a39a49" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshotXloFpX.png" alt="mpv-screenshotXloFpX.png" />
+</p>
+</div>
+</div>
+<ol class="org-ol">
+<li><a id="org68828da"></a>Intelligence is not evil or bad; Motivation determines that<br />
+<div class="outline-text-5" id="text-1-3-1-1">
+<p>
+Having a mind is not a reason to do anything.
+</p>
+
+<p>
+Being motivated is: and We are hardwired by evolutionary process (social, striving for power, &#x2026;)  
+</p>
+</div>
+</li>
+
+<li><a id="org349951d"></a>AI can have arbitary motivational systems<br />
+<div class="outline-text-5" id="text-1-3-1-2">
+</div>
+</li>
+
+<li><a id="org462def0"></a>Its going to be Organizational AI: Universities, Governments, &#x2026;<br />
+<div class="outline-text-5" id="text-1-3-1-3">
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgb9477ee" class="outline-3">
+<h3 id="orgb9477ee"><span class="section-number-3">1.4.</span> AI gives perspective for understanding ourself - For Enlightenment</h3>
+<div class="outline-text-3" id="text-1-4">
+</div>
+</div>
+</div>
+
+<div id="outline-container-org77f23ad" class="outline-2">
+<h2 id="org77f23ad"><span class="section-number-2">2.</span> How can we build AI?</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org613fa6e" class="outline-3">
+<h3 id="org613fa6e"><span class="section-number-3">2.1.</span> Are minds computation? - Yes</h3>
+<div class="outline-text-3" id="text-2-1">
+</div>
+<div id="outline-container-org8ef55db" class="outline-4">
+<h4 id="org8ef55db"><span class="section-number-4">2.1.1.</span> Mind and Matter - Rene Descartes - Res Cognitans vs Res Extensa</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+Rene Descartes 
+Thinking Substance vs Located Substance
+For Decartes - Mind must be independent. 
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org32eaae8"></a>Idealist - mind is primary<br /></li>
+
+<li><a id="org1416e15"></a>Materialist - matter is primary<br /></li>
+
+<li><a id="orgf58b8e1"></a>Dualism - both exist in parallel<br /></li>
+
+<li><a id="org8c569e7"></a>Crypto Dualism - Present View<br />
+<div class="outline-text-5" id="text-2-1-1-4">
+<p>
+Rooted in Christian Religion which surmizes that there is real domain (metaphysical domain where we really are) and there is a physical world (which is not real, its like World Like Wordcraft). In chirstianity this goes a step further that there is someone (God) with root rights and he created this world. But there's another one (the Devil) with root rights. 
+</p>
+
+<p>
+Not much found in China or Japan. There isn't skepticism of AI. 
+</p>
+
+<p>
+Domain of the mind
+  souls, phenomenal experience,
+  values, normativity, spirituality
+</p>
+
+<p>
+Domain of the physical world
+  mechanical: things, bodies 
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org039ed8c"></a>God and Devil both have root rights. <span class="underline">Devil is the hacker.</span><br />
+<div class="outline-text-6" id="text-2-1-1-4-1">
+</div>
+</li>
+<li><a id="orgf31acff"></a>We are now atheist. So we are now NPC (Non Player Characters)<br />
+<div class="outline-text-6" id="text-2-1-1-4-2">
+</div>
+</li>
+<li><a id="orgfb2d1fe"></a>Leibniz - Describing mind based in Physicalism is bound to fail<br />
+<div class="outline-text-6" id="text-2-1-1-4-3">
+<blockquote>
+<p>
+Mechanist Explanations
+</p>
+
+<p>
+Gottfried Wilhelm Leibniz, 1714:
+Perception, and what depends on it, is inexplicable in a mechanical way,
+that is, using figures and motions.
+</p>
+
+<p>
+Suppose there would be a machine, so arranged as to bring forth
+thoughts, experiences and perceptions; it would then certainly be
+possible to imagine it to be proportionally enlarged, in such a way as to
+allow entering it, like into a mill. This presupposed, one will not find
+anything upon its examination besides individual parts, pushing each
+other—and never anything by which a perception could be explained.
+</p>
+</blockquote>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org4e64e2a" class="outline-4">
+<h4 id="org4e64e2a"><span class="section-number-4">2.1.2.</span> Turing Machine</h4>
+<div class="outline-text-4" id="text-2-1-2">
+</div>
+<ol class="org-ol">
+<li><a id="org528c644"></a>Turing showed it can perform arbitary computation. Are there things it cannot do?<br />
+<div class="outline-text-5" id="text-2-1-2-1">
+
+<div id="org3e86494" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshoteh3o8Q.png" alt="mpv-screenshoteh3o8Q.png" />
+</p>
+</div>
+</div>
+</li>
+
+<li><a id="orge42a88c"></a>John R. Searle - Mind can only arise from intrinsic power of biological neurons<br />
+<div class="outline-text-5" id="text-2-1-2-2">
+</div>
+<ol class="org-ol">
+<li><a id="org94b782e"></a>Cat, Mouse and Cheese - Turing Machine :rofl<br />
+<div class="outline-text-6" id="text-2-1-2-2-1">
+
+<div id="orgc9e31e1" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshotOuOLRX.png" alt="mpv-screenshotOuOLRX.png" />
+</p>
+</div>
+</div>
+</li>
+
+<li><a id="org01fe0e4"></a>Intiution don't work much - This is where Searle is wrong<br />
+<div class="outline-text-6" id="text-2-1-2-2-2">
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<div id="outline-container-orga5da745" class="outline-4">
+<h4 id="orga5da745"><span class="section-number-4">2.1.3.</span> Lambda Calculus - Alternate to Turing Machine</h4>
+<div class="outline-text-4" id="text-2-1-3">
+<p>
+Turing machines give an intuition of linearity, how will there be concurrency, &#x2026;. 
+</p>
+
+<p>
+0:20:45 - It became lambda because of typesetting problem :rofl: 
+</p>
+
+<p>
+ <img src="./data/30c3 - How to build a mind/mpv-screenshot3klLY7.png" alt="mpv-screenshot3klLY7.png" />
+cut argument and paste it in place of bound variable inside expression. 
+So, lambda calulus is more of a - cut and paste thingy. 
+</p>
+
+
+<div id="orge476845" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshotL8FR2f.png" alt="mpv-screenshotL8FR2f.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org631691d" class="outline-4">
+<h4 id="org631691d"><span class="section-number-4">2.1.4.</span> Church-Turing Thesis</h4>
+<div class="outline-text-4" id="text-2-1-4">
+<ul class="org-ul">
+<li>Turing machines can compute Lambda calculus</li>
+<li>Lambda calculus can compute Turing machines</li>
+</ul>
+<p>
+— equally powerful!
+</p>
+
+<p>
+We have found other methods of computation:
+</p>
+<ul class="org-ul">
+<li>Mathematical proofs</li>
+<li>Partial Recursive function</li>
+<li>POS machine - a variation of Turing Machine</li>
+</ul>
+
+<p>
+Church-Turing Thesis:
+All definitions of computation have the same power
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgffea9af" class="outline-4">
+<h4 id="orgffea9af"><span class="section-number-4">2.1.5.</span> Brains are turing computational too!</h4>
+<div class="outline-text-4" id="text-2-1-5">
+<p>
+Principle of Neural Information Processing are computational -
+</p>
+<ul class="org-ul">
+<li>Compartment models</li>
+<li>Integrate and Fire model - Simplification</li>
+<li>Artificial Neural Network (Weights, Bias, Transition function) - Crude Simplification</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3634470" class="outline-4">
+<h4 id="org3634470"><span class="section-number-4">2.1.6.</span> Weak Computationalism - Minds are computer programs</h4>
+<div class="outline-text-4" id="text-2-1-6">
+<ul class="org-ul">
+<li>Minds are computer programs (realized in neural hardware configuration and individual neural states)</li>
+
+<li><span class="underline">Mental content is represented in these programs</span> - <a href="program_as_data.html#ID-18067aa6-8051-4942-b84f-e3805ffe84e7">Program as Data</a></li>
+<li><a href="../../Notes/org/20201111212313-perception.html">Perception</a> encodes information given at the system boundary of the mind as mental content</li>
+<li><a href="../../Notes/org/20201111212351-thinking.html">Thinking</a>, feeling, dreaming, &#x2026; are aspects of operations  over mental content</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5f5d477" class="outline-4">
+<h4 id="org5f5d477"><span class="section-number-4">2.1.7.</span> Strong Computationalism - Universe is a computer</h4>
+<div class="outline-text-4" id="text-2-1-7">
+<p>
+All the universe can do to us is:
+</p>
+<ul class="org-ul">
+<li>present information</li>
+<li>produce regularities in this information (i.e. compute)</li>
+</ul>
+<p>
+<b>No conceptual difference between reality and a computer program</b>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9237563" class="outline-3">
+<h3 id="org9237563"><span class="section-number-3">2.2.</span> Computationalism - Universe is a pattern generator - Universe can compute</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<div id="outline-container-orgcb58460" class="outline-4">
+<h4 id="orgcb58460"><span class="section-number-4">2.2.1.</span> <a href="../../Notes/org/20201111212803-computationalism.html">Computationalism</a> is a new kind of Monism (Not Idealism or Materialism)</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+Neither mind is primary nor is physical world, computation is primary. 
+</p>
+<ul class="org-ul">
+<li>Only information is primary</li>
+<li>Mind and matter are constructions (encodings) over information</li>
+<li>All regularity in perceived information can be captured in computational models</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3118810" class="outline-4">
+<h4 id="org3118810"><span class="section-number-4">2.2.2.</span> Criticism of Computationalism</h4>
+<div class="outline-text-4" id="text-2-2-2">
+
+<div id="org8946617" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshot1qrpm3.png" alt="mpv-screenshot1qrpm3.png" />
+</p>
+</div>
+
+<p>
+Roger Penrose:
+</p>
+
+<ul class="org-ul">
+<li>The brain uses quantum processes to produce consciousness</li>
+</ul>
+<p>
+— minds are more than computers
+</p>
+
+<p>
+“The quality of understanding and feeling possessed by
+human beings is not something that can be simulated
+computationally.”
+</p>
+
+<p>
+0:27:41 <b>But quantum process are computational too!</b>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbacd7c6" class="outline-3">
+<h3 id="orgbacd7c6"><span class="section-number-3">2.3.</span> Mind are less than Turing machines - because finite tape, finite steps,</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+0:29:17 for finite state and time - Lambda calculus can calculate more than turing machines
+</p>
+</div>
+</div>
+<div id="outline-container-orga8f6c81" class="outline-3">
+<h3 id="orga8f6c81"><span class="section-number-3">2.4.</span> But note that Effectively Computable function ≄ Efficiently computable functions</h3>
+<div class="outline-text-3" id="text-2-4">
+<ul class="org-ul">
+<li>Some problem computers can't solve - halting problem</li>
+<li>Some problem unsolvable in practice (for deterministic turing machine)- NP hard problems</li>
+</ul>
+</div>
+<div id="outline-container-org991f6b2" class="outline-4">
+<h4 id="org991f6b2"><span class="section-number-4">2.4.1.</span> <a href="../../Notes/org/20201111222845-non_decidable_problems.html">Non-decidable problems</a> - But humans can't solve them either</h4>
+<div class="outline-text-4" id="text-2-4-1">
+<blockquote>
+<p>
+Test question: can you solve undecidable problems?
+</p>
+
+<p>
+If you choose one of the following answers
+randomly, what is the probability that your
+answer is correct?
+</p>
+<ul class="org-ul">
+<li>50%</li>
+<li>25%</li>
+<li>100%</li>
+<li><del>all of the above</del> 25%</li>
+</ul>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf5448b8" class="outline-2">
+<h2 id="orgf5448b8"><span class="section-number-2">3.</span> When is Al going to succeed (if ever)?</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgec65f84" class="outline-3">
+<h3 id="orgec65f84"><span class="section-number-3">3.1.</span> How Difficult is AI?</h3>
+<div class="outline-text-3" id="text-3-1">
+</div>
+<div id="outline-container-org1a5eff5" class="outline-4">
+<h4 id="org1a5eff5"><span class="section-number-4">3.1.1.</span> Cortical Column</h4>
+<div class="outline-text-4" id="text-3-1-1">
+
+<div id="org4fdb313" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshotq6OdhE.png" alt="mpv-screenshotq6OdhE.png" />
+</p>
+</div>
+
+<blockquote>
+<p>
+How Difficult is AI?
+</p>
+
+<p>
+~100 Bn neurons
+</p>
+
+<p>
+Cells in the cortex are organized into ca. 2 million complex, regular circuits (columns)
+</p>
+
+<ul class="org-ul">
+<li>Brain has a distinct architecture</li>
+<li>Upper bound of complexity of constructing a brain is given by human</li>
+</ul>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org48d5d18" class="outline-4">
+<h4 id="org48d5d18"><span class="section-number-4">3.1.2.</span> Human genome fits in CD rom - ~700MB</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<p>
+0:32:03
+</p>
+
+<p>
+0:32:05 Computation complexity of complete human being is less than Microsoft Windows (<b>If Physics and Chemistry are given</b>)
+0:32:24 Its the Upper bound because neurons are just a part of it 
+0:32:29 Its not easy to reverse engineer - <b>its just not hopeless</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd0e40c0" class="outline-4">
+<h4 id="orgd0e40c0"><span class="section-number-4">3.1.3.</span> Without specification we don't know how hard the problem is or how long it takes</h4>
+<div class="outline-text-4" id="text-3-1-3">
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb624413" class="outline-3">
+<h3 id="orgb624413"><span class="section-number-3">3.2.</span> AI history</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+The Way to Artificial Intelligence
+</p>
+
+<ul class="org-ul">
+<li>Logic, Automata: Peirce, Boole, Tarski, &#x2026;</li>
+<li>Computability: Turing, Church, Post, Gödel</li>
+<li>Computers: Babbage, Zuse, von Neumann, ..</li>
+<li>Information Theory: Shannon</li>
+<li>Programming Languages: McCarthy, Rochester, ..</li>
+<li>Cybernetics: Wiener, Ashby, &#x2026; - Idea of system made up of entities and relations between them and within them there is feedback and dynamic system emerge. Unfortunately its being killed by second order cybernetics and turned into humanity and died.  0:34:25 But the idea stuck around and most of them went to AI</li>
+<li>Symbol Systems: Newell, Simon, &#x2026;</li>
+<li>Neural Networks: McClelland, Pitts, &#x2026;</li>
+<li>Autonomous, situated Agents: Minsky, Brooks, .. - Self directed, goal directed system</li>
+</ul>
+</div>
+
+<div id="outline-container-orge02c20d" class="outline-4">
+<h4 id="orge02c20d"><span class="section-number-4">3.2.1.</span> Started with ~1950 Alan Turing's Paper - Computing Machinery and Intelligence (READ THIS PAPER)</h4>
+<div class="outline-text-4" id="text-3-2-1">
+
+<div id="org280c8cf" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshot8jpORk.png" alt="mpv-screenshot8jpORk.png" />
+</p>
+</div>
+
+<p>
+0:36:17 Marvin Minsky coined AI at Darthmouth Conference - 1956 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge7d352d" class="outline-4">
+<h4 id="orge7d352d"><span class="section-number-4">3.2.2.</span> AI eras</h4>
+<div class="outline-text-4" id="text-3-2-2">
+
+<div id="org8c9d246" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshotXLwJKs.png" alt="mpv-screenshotXLwJKs.png" />
+</p>
+</div>
+
+<p>
+Marvin Minksy wrote against neural networks  - they won - so for most of the time there was no progress in that part for about a decade 
+</p>
+<ul class="org-ul">
+<li>0:37:31 Expert systems gave diminishing returns</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org89b8228" class="outline-4">
+<h4 id="org89b8228"><span class="section-number-4">3.2.3.</span> Nowadays the idea is of Cognitive Systems</h4>
+</div>
+</div>
+</div>
+<div id="outline-container-org25b987b" class="outline-2">
+<h2 id="org25b987b"><span class="section-number-2">4.</span> What are the ingredients for AI? - Cognitive Systems</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+aka AGI
+aka Bilogically inspired Cognitive Architecture
+aka Cognitive Artificial Intelligence 
+</p>
+
+<ul class="org-ul">
+<li>Uses Information Processing as dominant paradigm to understand the mind.</li>
+</ul>
+
+<p>
+Methods should focus on components and performances necessary for intelligence: 
+</p>
+<ul class="org-ul">
+<li>Whole, testable architecture - Not individual modules</li>
+<li>Universal Representations:
+Grounded neuro-symbolic representations (integrate both symbolic and <span class="underline">distributed aspects</span> , associative)</li>
+<li>(Semi-) Universal Problem Solving: - Semi because humans are also not good at solving all problems 
+Learning, Planning, Reasoning, Analogies, Action Control, Reflection &#x2026;</li>
+<li>Universal Motivation: - something to direct the system to sth interesting 
+Polythematic, adaptive goal identification</li>
+<li>Emotion and affect</li>
+</ul>
+</div>
+
+<div id="outline-container-orgf3a2742" class="outline-3">
+<h3 id="orgf3a2742"><span class="section-number-3">4.1.</span> Universal Mental Represenatation</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+We need universal mental represenation  
+</p>
+<ul class="org-ul">
+<li>we should be able to do operations on them for problem solving</li>
+<li>0:39:55 they can be mapped to perceptual input</li>
+<li>0:40:05 they need to translated to motor programs to perform actions</li>
+<li><p>
+0:40:12 feedback between action and input is the <b>Environment</b>
+</p>
+
+
+<div id="org05ef2cc" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshotEw1oLa.png" alt="mpv-screenshotEw1oLa.png" />
+</p>
+</div>
+
+
+<div id="orge89c59b" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshot0tYoHu.png" alt="mpv-screenshot0tYoHu.png" />
+</p>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2cd8d47" class="outline-3">
+<h3 id="org2cd8d47"><span class="section-number-3">4.2.</span> Mental Represenation have structure</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li>model of current situation - Situation Model</li>
+<li>model of past  - Protocol memory</li>
+</ul>
+
+<p>
+0:40:40 Protocol Memory - Memory of Past 
+</p>
+
+
+<div id="org45352d4" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshot5Zq00B.png" alt="mpv-screenshot5Zq00B.png" />
+</p>
+</div>
+
+<p>
+A part of protocol memory is Self model 
+</p>
+
+
+<div id="org415665b" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshotCb6IZt.png" alt="mpv-screenshotCb6IZt.png" />
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Frame - Context</li>
+<li>Frame extends to the future - expectional horizon</li>
+</ul>
+
+
+<div id="org95590c9" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshotkcewtc.png" alt="mpv-screenshotkcewtc.png" />
+</p>
+</div>
+
+<p>
+0:42:02 Generalize:
+</p>
+<ul class="org-ul">
+<li>longterm memory</li>
+<li>World model</li>
+<li>Mental stage - the future</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0fdf17a" class="outline-3">
+<h3 id="org0fdf17a"><span class="section-number-3">4.3.</span> Action Selection and Executive Control</h3>
+<div class="outline-text-3" id="text-4-3">
+
+<div id="org9395dc7" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshot1dfPhe.png" alt="mpv-screenshot1dfPhe.png" />
+</p>
+</div>
+<ul class="org-ul">
+<li>Actional Selection - mediates between perception and action</li>
+<li>Motivation system - the mechanism that controls action selection
+<ul class="org-ul">
+<li>based on motives of the system</li>
+<li>motives are based on demands 0:42:22</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7a8d763" class="outline-3">
+<h3 id="org7a8d763"><span class="section-number-3">4.4.</span> Motivational System - Demands</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+We are not born with our goals. 
+A set of demands in the system produces the goals. 
+Urges/drives (demands) -&gt; Motive Selection -&gt; Intention 
+</p>
+
+
+<div id="org2a963a2" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshotjZjz1E.png" alt="mpv-screenshotjZjz1E.png" />
+</p>
+</div>
+</div>
+<div id="outline-container-orga32d291" class="outline-4">
+<h4 id="orga32d291"><span class="section-number-4">4.4.1.</span> Physiological Demand</h4>
+<div class="outline-text-4" id="text-4-4-1">
+<ul class="org-ul">
+<li>Food</li>
+<li>Water</li>
+<li>Integrity</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgec24381" class="outline-4">
+<h4 id="orgec24381"><span class="section-number-4">4.4.2.</span> Social Demand</h4>
+<div class="outline-text-4" id="text-4-4-2">
+<p>
+they structure our social interaction
+</p>
+<ul class="org-ul">
+<li>Affiliation</li>
+<li>Internal Legitimacy</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orgdc78dca"></a>Internalized Social Demand - Honor - Confromance to social norms even when nobody is looking<br />
+<div class="outline-text-5" id="text-4-4-2-1">
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org409c23f" class="outline-4">
+<h4 id="org409c23f"><span class="section-number-4">4.4.3.</span> Cognitive Demand - , Reduce Uncertainity</h4>
+<div class="outline-text-4" id="text-4-4-3">
+</div>
+<ol class="org-ol">
+<li><a id="org0dfe4a7"></a>Competence Acquisition - Demand to Learn<br /></li>
+<li><a id="org93e16a1"></a>Reducing uncertanity<br />
+<div class="outline-text-5" id="text-4-4-3-2">
+<p>
+For mathematicians they find pleasure in solving uncertanity and they find other uncertainity. So for them, <span class="underline">mathematics is the source of unending pleasure.</span>
+</p>
+</div>
+</li>
+
+<li><a id="orgc6e22ae"></a>Aesthetic Demands<br />
+<div class="outline-text-5" id="text-4-4-3-3">
+<p>
+0:45:33 Abstract Aesthetics - Relates to finding better represenatation, finding structure    
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgc10f8bc" class="outline-3">
+<h3 id="orgc10f8bc"><span class="section-number-3">4.5.</span> Emotional in Cognitive System - Modulation and Affect</h3>
+<div class="outline-text-3" id="text-4-5">
+<p>
+How is it possible for a system to feel something? 
+</p>
+</div>
+<div id="outline-container-orga2d3536" class="outline-4">
+<h4 id="orga2d3536"><span class="section-number-4">4.5.1.</span> Emotion is a configuration of system in several dimension</h4>
+<div class="outline-text-4" id="text-4-5-1">
+<ul class="org-ul">
+<li>state of arousal</li>
+<li>direction of attention (inwards for outwards)</li>
+<li>resolution level</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org5a32712" class="outline-4">
+<h4 id="org5a32712"><span class="section-number-4">4.5.2.</span> Difference in perception is Feeling</h4>
+<div class="outline-text-4" id="text-4-5-2">
+<p>
+these dimensions regulate/modulate our congnition. so we experience, understand something differently  
+</p>
+
+
+<div id="orga3c2776" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshotlDEwcb.png" alt="mpv-screenshotlDEwcb.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org49aa6b1" class="outline-4">
+<h4 id="org49aa6b1"><span class="section-number-4">4.5.3.</span> Affect - configuration of cognitive system</h4>
+<div class="outline-text-4" id="text-4-5-3">
+<p>
+Emotion in Computation Models
+</p>
+
+<ul class="org-ul">
+<li>Affect can be seen as a configuration of a cognitive system</li>
+<li>Modulators of cognition:
+<ul class="org-ul">
+<li>arousal, selection threshold, securing threshold, resolution level</li>
+<li>estimate of competence and certainty</li>
+<li>pleasure/distress signals - valence</li>
+</ul></li>
+
+<li>Affective state is emergent property of modulation</li>
+
+<li>0:47:37 Directed affects (higher-level emotions) (jealosy, pride,&#x2026;) emerge by association of demand with appetive or aversive  objects/situations</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5f6e84c" class="outline-3">
+<h3 id="org5f6e84c"><span class="section-number-3">4.6.</span> Incremental Progress or Big Jump? - Incremental Progress</h3>
+<div class="outline-text-3" id="text-4-6">
+<p>
+Things to do <a href="#org25b987b">What are the ingredients for AI? - Cognitive Systems</a>! 
+</p>
+<ul class="org-ul">
+<li>100s of PhD thesis</li>
+<li>entirely doable</li>
+<li>but its going to take a very long time</li>
+</ul>
+
+<p>
+0:49:22 We are going to realize we are full of shit. :rofl:
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1d9c95a" class="outline-2">
+<h2 id="org1d9c95a"><span class="section-number-2">5.</span> What should you do - to get into AI</h2>
+<div class="outline-text-2" id="text-5">
+
+<div id="org2c26789" class="figure">
+<p><img src="./data/30c3 - How to build a mind/mpv-screenshotLETA7o.png" alt="mpv-screenshotLETA7o.png" />
+</p>
+</div>
+
+<p>
+Get acquainted with basic methodology:
+</p>
+<ul class="org-ul">
+<li>Software development</li>
+<li>Things we have done so far - Machine learning, Probabilistic approaches, Kalman filtering</li>
+<li>Modes of Representation - Semantic networks, description logics, &#x2026;</li>
+<li>Graph theory, Hyper graphs, Factor graphs</li>
+<li>Cognitive architecture - building computation model to simulate psychological phenomena and test them</li>
+</ul>
+
+<p>
+Do not stop there!
+</p>
+<ul class="org-ul">
+<li>Philsophy of mind</li>
+<li>Neuroscience</li>
+<li>Developmental psychology</li>
+</ul>
+
+<p>
+0:50:19 Graph Theory! Hyper Graphs! 
+0:50:46 <b>Study Cognitive Science</b> 
+</p>
+</div>
+
+<div id="outline-container-orgd5aafed" class="outline-3">
+<h3 id="orgd5aafed"><span class="section-number-3">5.1.</span> Open Problems</h3>
+<div class="outline-text-3" id="text-5-1">
+</div>
+<div id="outline-container-org96a3f0b" class="outline-4">
+<h4 id="org96a3f0b"><span class="section-number-4">5.1.1.</span> Representations</h4>
+<div class="outline-text-4" id="text-5-1-1">
+<ul class="org-ul">
+<li>abstract and perceptual,</li>
+<li>how to work with ambiguious</li>
+<li>superpositional</li>
+<li>inheritance and polymorphism,</li>
+<li>any-time construction (using constraints)</li>
+<li><p>
+including temporal relations, loops, etc 
+</p>
+
+<p>
+0:51:28 Constraints for Partial Represenatation ?? 
+</p></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgaeed5be" class="outline-4">
+<h4 id="orgaeed5be"><span class="section-number-4">5.1.2.</span> Preception</h4>
+<div class="outline-text-4" id="text-5-1-2">
+<ul class="org-ul">
+<li>bottom-up - cue driven - driven by environment - what we see</li>
+<li>top-down: theory/concept driven - driven by what we expect to see</li>
+<li>works on sensory input and memory</li>
+<li>any-time characteristics =&gt; works on <a id="org39d99f3">partial representation</a>??</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgab2bdaf" class="outline-4">
+<h4 id="orgab2bdaf"><span class="section-number-4">5.1.3.</span> Categorization</h4>
+<div class="outline-text-4" id="text-5-1-3">
+<ul class="org-ul">
+<li>Saliency (Similarity and Dissimilarity)- driven</li>
+<li>Goal - driven</li>
+<li>Social (from input from others)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5bf83f6" class="outline-4">
+<h4 id="org5bf83f6"><span class="section-number-4">5.1.4.</span> Universal Problem Solver</h4>
+<div class="outline-text-4" id="text-5-1-4">
+<p>
+We want to have general solutions 
+</p>
+</div>
+</div>
+<div id="outline-container-org9977ec8" class="outline-4">
+<h4 id="org9977ec8"><span class="section-number-4">5.1.5.</span> Language!</h4>
+<div class="outline-text-4" id="text-5-1-5">
+<p>
+organizing mental represenatation (which are probably Fuzzy distributed hypergraphs) into discrete strings of symbols 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7de1891" class="outline-4">
+<h4 id="org7de1891"><span class="section-number-4">5.1.6.</span> Sociality - Interpreting others</h4>
+<div class="outline-text-4" id="text-5-1-6">
+<ul class="org-ul">
+<li>theory of mind</li>
+<li>Personhood and Self concept</li>
+<li>personality properties</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb19195a" class="outline-4">
+<h4 id="orgb19195a"><span class="section-number-4">5.1.7.</span> Integration</h4>
+<div class="outline-text-4" id="text-5-1-7">
+<ul class="org-ul">
+<li>how to integrate analytical and associative operations work together</li>
+<li>Attention management</li>
+<li>complete system insetad of isolated modules</li>
+<li>0:54:12 Developmental trajectory - start with kids and grow to be more adult like</li>
+<li>persistence -  system should be stable</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge57cc85" class="outline-4">
+<h4 id="orge57cc85"><span class="section-number-4">5.1.8.</span> Benchmark Problems - Find a benchmark for mind!</h4>
+<div class="outline-text-4" id="text-5-1-8">
+<ul class="org-ul">
+<li>Must enforce universal problem solving, representation, perception</li>
+<li>Must support incremental development</li>
+<li>Focus on child performance first</li>
+<li>Allow for comparison between approaches</li>
+<li>Inspire a productive research community</li>
+<li>Attract funding</li>
+</ul>
+
+
+
+
+
+
+
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a></li>
+<li><a href="joscha_bach.html#ID-1d6a0a05-e48a-44ac-aaa7-1783e4bc7664">Joscha Bach</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: How to Build a Mind">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

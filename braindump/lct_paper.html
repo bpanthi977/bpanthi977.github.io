@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LCT Paper</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="../js/counters.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">LCT Paper</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd3875d6">1. Meta</a>
+<ul>
+<li><a href="#orgc1aa264">1.1. Research Gap:</a></li>
+<li><a href="#orgf351840">1.2. Research Objective:</a></li>
+<li><a href="#orgf3c7cc9">1.3. Tools and Techniques:</a></li>
+</ul>
+</li>
+<li><a href="#org4a2ff75">2. Abstract</a></li>
+<li><a href="#org9aa2ff9">3. Introduction</a></li>
+<li><a href="#org0258036">4. Methodology</a>
+<ul>
+<li><a href="#org3a6becb">4.1. Independent variables and relation with carbon emissions</a>
+<ul>
+<li><a href="#orgb86562e">4.1.1. CASE 1 (Bajracharja)</a></li>
+<li><a href="#orgc78cdeb">4.1.2. <span class="todo TODO">TODO</span> <code>[1/1]</code> CASE 2 (IGES)</a></li>
+<li><a href="#orgdb29695">4.1.3. CASE 3 (Speculation)</a></li>
+</ul>
+</li>
+<li><a href="#orgb94515d">4.2. Estimation of carbon emissions</a></li>
+<li><a href="#org2ee2ee3">4.3. Modeling BAU scenario</a></li>
+<li><a href="#orgae917fc">4.4. Modeling the alternative scenarios</a></li>
+</ul>
+</li>
+<li><a href="#org25e6319">5. Measures</a>
+<ul>
+<li><a href="#orga5dd05e">5.1. Avoid</a>
+<ul>
+<li><a href="#org1f240cd">5.1.1. <span class="todo TODO">TODO</span> Transit Oriented Development (TOD)</a></li>
+</ul>
+</li>
+<li><a href="#org45422cc">5.2. Shift</a>
+<ul>
+<li><a href="#org5068073">5.2.1. Public Transit</a></li>
+<li><a href="#org407e7c1">5.2.2. <span class="todo TODO">TODO</span> <code>[0/2]</code> Bicycle Lanes, Compact Streets</a></li>
+</ul>
+</li>
+<li><a href="#org6f7d3f9">5.3. <span class="todo TODO">TODO</span> Sth about freight transport</a></li>
+<li><a href="#orgd6abc98">5.4. Improve</a>
+<ul>
+<li><a href="#org7b6a1fe">5.4.1. Electric Vehicles</a></li>
+<li><a href="#org945f918">5.4.2. <span class="todo TODO">TODO</span> <code>[0/1]</code> Ridesharing</a></li>
+<li><a href="#org4754933">5.4.3. <span class="todo TODO">TODO</span> <code>[1/1]</code> Advanced Transport Information System / Intelligent Transport System (ITS)</a></li>
+<li><a href="#org210e56a">5.4.4. <span class="todo TODO">TODO</span> Emission Standards</a></li>
+<li><a href="#org3d2c06e">5.4.5. Biofuel Blending</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org198675c">6. Result and Analysis</a>
+<ul>
+<li><a href="#org32fe07c">6.1. Individual Anlaysis</a></li>
+<li><a href="#org8e264c5">6.2. <span class="todo TODO">TODO</span> <code>[0/1]</code> Low Carbon Pathway</a></li>
+</ul>
+</li>
+<li><a href="#orga11539f">7. Conclusion</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd3875d6" class="outline-2">
+<h2 id="orgd3875d6"><span class="section-number-2">1.</span> Meta</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgc1aa264" class="outline-3">
+<h3 id="orgc1aa264"><span class="section-number-3">1.1.</span> Research Gap:</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Lack of extensive research on suitability of various low carbon transport measures in context of Nepal.
+</p>
+</div>
+</div>
+<div id="outline-container-orgf351840" class="outline-3">
+<h3 id="orgf351840"><span class="section-number-3">1.2.</span> Research Objective:</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Provide a paper useful for guiding / showing possibilities for policy formation and infrastructure development for Nepal. And try to approximate, benefits on adopting such measures. 
+</p>
+</div>
+</div>
+<div id="outline-container-orgf3c7cc9" class="outline-3">
+<h3 id="orgf3c7cc9"><span class="section-number-3">1.3.</span> Tools and Techniques:</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Mathematical model based on data to estimate effect of adopted measures. Reviewing and comparing Low Carbon Transport strategies of other countries while keeping in mind the geographic, economic, and technological similarities/dissimilarities with Nepal, and the social context too as far as possible.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4a2ff75" class="outline-2">
+<h2 id="org4a2ff75"><span class="section-number-2">2.</span> Abstract</h2>
+</div>
+
+<div id="outline-container-org9aa2ff9" class="outline-2">
+<h2 id="org9aa2ff9"><span class="section-number-2">3.</span> Introduction</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Literature review, history, background, need, and such 
+</p>
+<ul class="org-ul">
+<li>Background on Nepal’s transport policies so far</li>
+<li>International background on sustainable and Low carbon transport</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0258036" class="outline-2">
+<h2 id="org0258036"><span class="section-number-2">4.</span> Methodology</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org3a6becb" class="outline-3">
+<h3 id="org3a6becb"><span class="section-number-3">4.1.</span> Independent variables and relation with carbon emissions</h3>
+<div class="outline-text-3" id="text-4-1">
+</div>
+<div id="outline-container-orgb86562e" class="outline-4">
+<h4 id="orgb86562e"><span class="section-number-4">4.1.1.</span> CASE 1 (Bajracharja)</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<p>
+take vehicle population (according to type) as independet variable
+then by a sequence of relations calculate carbon emissions 
+</p>
+
+<ol class="org-ol">
+<li>Vehicle Number (N) = N<sub>i</sub>(t)</li>
+<li>yearly distance travelled (D)  = N * VKT (average vechicle yearly distance travelled); VKT<sub>i</sub>(a;t<sub>0</sub>)</li>
+<li>fuel consumption (F) = D * I (fuel intensity l/km) ; FI<sub>i</sub></li>
+<li>emissions (E) = F * EC (Emission coefficients for fuels gm/l)</li>
+</ol>
+
+<p>
+Critique: 
+</p>
+<ol class="org-ol">
+<li>current N can be obtained from data
+<ol class="org-ol">
+<li>But the main data is vehicles issued so to find vehicles that are actually on road some assumptions regarding vehicle lifecyle must be done</li>
+<li>extrapolating this variable for future is again challenging.
+<ol class="org-ol">
+<li>One way would be to extrapolate total vehicle count, and then apply modal share according to BAU or alternative scenarios</li>
+<li>Other way can be to extrapolate different vehicle population according to GDP, agriculture/economic production, population, &#x2026; but this would cause 
+problem to model the effects of alternative scenario (because alternative scenarios won't be affecting the independent GDP, populations,&#x2026; variables)</li>
+</ol></li>
+</ol></li>
+<li>VKT data is an rough estimations,
+<ol class="org-ol">
+<li>VKT depends on vehicles age</li>
+<li>Also, to the change in attitude due to proliferation of public transport in alternative scenarios would change VKT but modeling the change in VKT might prove difficult (if not hopeless)</li>
+</ol></li>
+<li>Fuel Consumption depends on terrain, vehicle age and other parameter but in my opinion we might as well take FI as constant
+<ol class="org-ol">
+<li>Using FI also enables us to model improvements in technology and alternative fuel's effects.</li>
+</ol></li>
+<li>Emission maybe taken constants in BAU and appropriate changes can be done for alternative scenarios</li>
+</ol>
+
+<p>
+Feasibility:
+</p>
+<ol class="org-ol">
+<li>modal share can be modelled</li>
+<li>technological improvements in FI, EC can be modelled</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgc78cdeb" class="outline-4">
+<h4 id="orgc78cdeb"><span class="section-number-4">4.1.2.</span> <span class="todo TODO">TODO</span> <code>[1/1]</code> CASE 2 (IGES)</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<p>
+take GDP and Population as independent variable 
+</p>
+
+<ol class="org-ol">
+<li>{I} = GDP (or GCP Gross City Product when analysing a single city) and Popultion (set of independent variables)</li>
+<li>Travel demand = f ({I}) i.e. travel demand (passenger-km) is regressed with {I} and an equation is obtained
+<ul class="org-ul">
+<li>The past travel demand is calculated (obtained from other papers) using the procedure in <a href="#orgb86562e">CASE 1  (Bajracharja)</a> .
+Travel demand<sub>i</sub> (t) = Vechicle Count<sub>i</sub> (t)  * VKT<sub>i</sub> * vehicle occupancy rate<sub>i</sub> (t)</li>
+</ul></li>
+<li>Travel demand is split into Road and Rail Demand.</li>
+<li>Then modal share is used to calculate travel demand from specific mode</li>
+<li>Then Vehicle demand (km)  = Passenger-km demand of respective vehicle divided by vehilce occupancy</li>
+<li>Fuel Consumption (F) = VD (km) * FI (l/km)</li>
+<li>Emissions (E) = F * EC (Emission coefficients for fuels gm/l)</li>
+</ol>
+
+<p>
+Critique:
+</p>
+<ol class="org-ol">
+<li>Population might be independent but GDP depends on transport facilities. and the scenarios we adopt might lead to different GDP. However, the extend of this problem is unknown to me as it might be a philosophical/meta disagreement only I have. A possible counter idea might be to think that we check the feasibility/output of the scenarios when the GDP turns out (or we want/expect/prepare) to be what assumed.
+<ol class="org-ol">
+<li>Future estimates of GDP and Population can be relaible take from other institutions as it is of concern to many organization and policy development.</li>
+</ol></li>
+<li>This regression is not jusitfiable. Sure there must/is some correlation but all the varaiblity in transport demand is not addressed by {I}.
+<ol class="org-ol">
+<li>However it seems more justifiable than to take vehicle registration trend.</li>
+</ol></li>
+<li class="on"><code>[X]</code> How exactly is it done? On what basis? 
+<ul class="org-ul">
+<li>Finding : Nth important.</li>
+<li>I don't think its necessary to split road and rail. Rail can be considered as a type of vehicle mode.</li>
+</ul></li>
+<li>For BAU, older trend can be taken and for alternative scenarios, values that we target to achieve can be taken.</li>
+<li>Average value might be difficult to find.</li>
+<li>The effect of vehicle age is neglected. But can also be taken into consideration by monitoring changes in vehicle count (obtained from 5) each year and assigning newer FI to newer vehicles. (An eqn is given by IGES (nth special you can develop your own eqn))</li>
+<li>Similar procedure to 6 can be adopted.
+<ol class="org-ol">
+<li>(6) and (7) are good to consider changes in FI and EC from technological changes</li>
+</ol></li>
+</ol>
+
+<p>
+Feasibility:
+</p>
+<ol class="org-ol">
+<li>Modal share can be modelled</li>
+<li>FI, EC can be modelled</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgdb29695" class="outline-4">
+<h4 id="orgdb29695"><span class="section-number-4">4.1.3.</span> CASE 3 (Speculation)</h4>
+<div class="outline-text-4" id="text-4-1-3">
+<ol class="org-ol">
+<li>Collect a set of independent parameters which affect Travel demand,</li>
+<li>collect old data, then run a machine learning training, if the neural network doesn't seem to overfit the data, use it instead of the multilinear regression suggested/used by <a href="#orgc78cdeb">CASE 2 (IGES)</a> in their paper.</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb94515d" class="outline-3">
+<h3 id="orgb94515d"><span class="section-number-3">4.2.</span> Estimation of carbon emissions</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Depends on estimation of fuel usage which in turn depends on vehicle-km travel. 
+</p>
+</div>
+</div>
+<div id="outline-container-org2ee2ee3" class="outline-3">
+<h3 id="org2ee2ee3"><span class="section-number-3">4.3.</span> Modeling BAU scenario</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+BAU scenarios are easier to model beacuse of the reason opposite to that which say alternatives are difficult to model.
+</p>
+</div>
+</div>
+<div id="outline-container-orgae917fc" class="outline-3">
+<h3 id="orgae917fc"><span class="section-number-3">4.4.</span> Modeling the alternative scenarios</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+Feasibility (Following things can be modelled properly):
+</p>
+<ol class="org-ol">
+<li>FI, EC can be modelled easily.</li>
+</ol>
+
+<p>
+Concerns:
+</p>
+<ol class="org-ol">
+<li>modelling of Modal share (in <a href="#orgb86562e">CASE 1</a> and <a href="#orgc78cdeb">CASE 2</a>) is  done by assuming a modal share and the effect is observed. But changes in modal share due to adoption of newer technology, policy or such other things isn't obtained directly. Either some other assumptions have to be made. Or scenarios will only represent what if condition (e.g. if adoption light rail result to increase in public transport by this much then the carbon emissions will be reduced by this much)</li>
+<li>How will vehicle ownership be modelled? 
+<ul class="org-ul">
+<li>By estimating population and then assigning a vehicle to some % of them.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org25e6319" class="outline-2">
+<h2 id="org25e6319"><span class="section-number-2">5.</span> Measures</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Intro, Classification and types of measures, challenges and opportunities in each of following
+</p>
+</div>
+<div id="outline-container-orga5dd05e" class="outline-3">
+<h3 id="orga5dd05e"><span class="section-number-3">5.1.</span> Avoid</h3>
+<div class="outline-text-3" id="text-5-1">
+</div>
+<div id="outline-container-org1f240cd" class="outline-4">
+<h4 id="org1f240cd"><span class="section-number-4">5.1.1.</span> <span class="todo TODO">TODO</span> Transit Oriented Development (TOD)</h4>
+<div class="outline-text-4" id="text-5-1-1">
+<ul class="org-ul">
+<li>will require a parameter for urban sprawl in model</li>
+<li>If we are talking about KTM valley then its too late to think about TOD.</li>
+<li class="off"><code>[&#xa0;]</code> The effects of TOD are difficult to model. (I think)
+<ul class="org-ul">
+<li>Because how exactly will TOD change travel demand or vehicle ownership? exactly can't be know.</li>
+<li class="off"><code>[&#xa0;]</code> However, the changes observed in other places can be used to somewhat okishly estimate changes in vehicle demand and ownership.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org45422cc" class="outline-3">
+<h3 id="org45422cc"><span class="section-number-3">5.2.</span> Shift</h3>
+<div class="outline-text-3" id="text-5-2">
+</div>
+<div id="outline-container-org5068073" class="outline-4">
+<h4 id="org5068073"><span class="section-number-4">5.2.1.</span> Public Transit</h4>
+<div class="outline-text-4" id="text-5-2-1">
+<ul class="org-ul">
+<li>Modal share estimate?</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org4dbac1a"></a><span class="todo TODO">TODO</span> BRT<br />
+<div class="outline-text-5" id="text-5-2-1-1">
+<ul class="org-ul">
+<li>They might be good as a low cost solution. However I have to be clear on few things:
+<ul class="org-ul">
+<li>They require dedicated lanes. This will require some thought.</li>
+<li>In comparison to light rail (mono rail) they are less energy efficient.</li>
+</ul></li>
+<li>An youtube <a href="https://www.youtube.com/watch?v=sGUk-GypkNs">video</a> complained about them. 😂
+<ul class="org-ul">
+<li>An commenter : `The question is that BRT when done right is a light rail with busses. If done wrong (and it often does), you've repainted the normal bus a different color. When Light Rail is done right, it provides the same advantages as a medium-sized subway system at a fraction of the cost. If done wrong, you get a standard tramway (wich, however, is still superior to BRT).'</li>
+</ul></li>
+<li>Trolley system were stopped in KTM. Why? I know trolley bus ≠ BRT.</li>
+</ul>
+</div>
+</li>
+<li><a id="org7035fe5"></a>Metro<br />
+<div class="outline-text-5" id="text-5-2-1-2">
+<ul class="org-ul">
+<li>Pulchowk Campus Survey Depart</li>
+</ul>
+</div>
+</li>
+<li><a id="orgebcb524"></a><span class="todo TODO">TODO</span> Light Rail<br />
+<div class="outline-text-5" id="text-5-2-1-3">
+<ul class="org-ul">
+<li>It will be good. But I don't know much about them. Baised Feel.</li>
+<li><a href="https://www.youtube.com/watch?v=ELy9fOX8vtc&amp;t=260s">How Hong Kong Built the World's Best Transit (Youtube)</a></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org407e7c1" class="outline-4">
+<h4 id="org407e7c1"><span class="section-number-4">5.2.2.</span> <span class="todo TODO">TODO</span> <code>[0/2]</code> Bicycle Lanes, Compact Streets</h4>
+<div class="outline-text-4" id="text-5-2-2">
+<dl class="org-dl">
+<dt>Compact Streets</dt><dd>(Cycling friendly streets) (i.e. Managing Multimodal transport)</dd>
+<dt class="off"><code>[&#xa0;]</code> (no term)</dt><dd>How to suggest integration of extra lanes.
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Feasibility in valley? Cost, trouble, hindrances.</li>
+<li class="off"><code>[&#xa0;]</code> Feasibility in other cities.</li>
+<li><a href="https://www.youtube.com/watch?v=p36skNda3KE">Bike lanes are not good enough (Youtube)</a>
+<ul class="org-ul">
+<li>43% of Dutch people bike daily!!!</li>
+</ul></li>
+</ul></dd>
+<dt class="off"><code>[&#xa0;]</code> (no term)</dt><dd>How to model their benefit?
+<ul class="org-ul">
+<li>Read some paper you might get some idea.</li>
+</ul></dd>
+</dl>
+</div>
+</div>
+</div>
+<div id="outline-container-org6f7d3f9" class="outline-3">
+<h3 id="org6f7d3f9"><span class="section-number-3">5.3.</span> <span class="todo TODO">TODO</span> Sth about freight transport</h3>
+</div>
+<div id="outline-container-orgd6abc98" class="outline-3">
+<h3 id="orgd6abc98"><span class="section-number-3">5.4.</span> Improve</h3>
+<div class="outline-text-3" id="text-5-4">
+</div>
+<div id="outline-container-org7b6a1fe" class="outline-4">
+<h4 id="org7b6a1fe"><span class="section-number-4">5.4.1.</span> Electric Vehicles</h4>
+<div class="outline-text-4" id="text-5-4-1">
+<ul class="org-ul">
+<li>They are inevitable.</li>
+<li><del>You may also explore about car pooling (idk the exact term). In one interview Elon Musk agreed that people will own autonomous (self driving) electric cars and then when they are in work or when it's not need. They could earn from it by sending it to a pool of publicly usable vehilces (like taxi of sorts)</del></li>
+<li>Modelling the effect of EVs can be done by assuming a penetration ratio (i.e what % of people will choose EVs instead of older model vehicles)</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org7d212c2"></a><span class="todo TODO">TODO</span> Feebate Policy<br />
+<div class="outline-text-5" id="text-5-4-1-1">
+<p>
+Feebate policy is an instrument to accelerate adoption of EVs. Instead of assuming a penetration ratio, try to <b>model the effect of feebate policy.</b>
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org945f918" class="outline-4">
+<h4 id="org945f918"><span class="section-number-4">5.4.2.</span> <span class="todo TODO">TODO</span> <code>[0/1]</code> Ridesharing</h4>
+<div class="outline-text-4" id="text-5-4-2">
+<ul class="org-ul">
+<li>Ridesharing potential (i.e. no of travels from public vehicle that could potentially be done by ridesharing option) can be calculated and then the reduction of burden in public transport infrastructure may be estimated.</li>
+<li class="off"><code>[&#xa0;]</code> Concerns
+<ul class="org-ul">
+<li>Adoption of this commute style. This doesn't seem to be major problem as people seem to have started liking existing ridesharing options.</li>
+<li class="off"><code>[&#xa0;]</code> Public Safety!! (Search about this)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4754933" class="outline-4">
+<h4 id="org4754933"><span class="section-number-4">5.4.3.</span> <span class="todo TODO">TODO</span> <code>[1/1]</code> Advanced Transport Information System / Intelligent Transport System (ITS)</h4>
+<div class="outline-text-4" id="text-5-4-3">
+<ul class="org-ul">
+<li>Sth that gives location of public buses.</li>
+<li>Makes booking of all kind of transport facilities convenient.</li>
+<li>Traffic Routing, &#x2026;</li>
+<li class="on"><code>[X]</code> How to measure its effect on carbon emission?
+<ul class="org-ul">
+<li>No way.</li>
+<li>A possible way would be to review the effect of ITS measures in other countries and find (maybe) the increased adoption of public tranport. The resulting change in modal share can be used to estimate its effect.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org210e56a" class="outline-4">
+<h4 id="org210e56a"><span class="section-number-4">5.4.4.</span> <span class="todo TODO">TODO</span> Emission Standards</h4>
+<div class="outline-text-4" id="text-5-4-4">
+<ul class="org-ul">
+<li>Is changes in emission standard necessary?</li>
+<li>What are the curretn emission standards in Nepal? Compare and anlayze wrt other countries/EU standard.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3d2c06e" class="outline-4">
+<h4 id="org3d2c06e"><span class="section-number-4">5.4.5.</span> Biofuel Blending</h4>
+</div>
+</div>
+</div>
+<div id="outline-container-org198675c" class="outline-2">
+<h2 id="org198675c"><span class="section-number-2">6.</span> Result and Analysis</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org32fe07c" class="outline-3">
+<h3 id="org32fe07c"><span class="section-number-3">6.1.</span> Individual Anlaysis</h3>
+<div class="outline-text-3" id="text-6-1">
+<ul class="org-ul">
+<li>Present the result of BAU scenario</li>
+<li>Present effect of each measure in terms of reduction in carbon emission as a pecentage of BAU scenario</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8e264c5" class="outline-3">
+<h3 id="org8e264c5"><span class="section-number-3">6.2.</span> <span class="todo TODO">TODO</span> <code>[0/1]</code> Low Carbon Pathway</h3>
+<div class="outline-text-3" id="text-6-2">
+<ul class="org-ul">
+<li>Suggest a set of measures, and present the effect of such combined measures.</li>
+<li class="off"><code>[&#xa0;]</code> The choice and degree of choose measures should be based on rational reasoning as far as possible. <b>HOW?</b></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orga11539f" class="outline-2">
+<h2 id="orga11539f"><span class="section-number-2">7.</span> Conclusion</h2>
+<div class="outline-text-2" id="text-7">
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="lct.html#ID-0378ae17-866e-4500-ad52-07e733a4839f">LCT</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: LCT Paper">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AlphaFold</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: December  1, 2020</p>
+</div>
+<div id="content" class="content">
+<h1 class="title">AlphaFold</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org4f2691b">1. Nature Article</a></li>
+<li><a href="#org681def4">2. Deepmind Blog Post</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4f2691b" class="outline-2">
+<h2 id="org4f2691b"><span class="section-number-2">1.</span> Nature Article</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+“It’s a game changer,” says Andrei Lupas, an evolutionary biologist at the Max Planck Institute for Developmental Biology in Tübingen, Germany, who assessed the performance of different teams in CASP. AlphaFold has already helped him find the structure of a protein that has vexed his lab for a decade, and he expects it will alter how he works and the questions he tackles. “This will change medicine. It will change research. It will change bioengineering. It will change everything,” Lupas adds
+</p>
+
+<p>
+Proteins are the building blocks of life, responsible for most of what happens inside cells. How a protein works and what it does is determined by its 3D shape — ‘structure is function’ is an axiom of molecular biology. Proteins tend to adopt their shape without help, guided only by the laws of physics.
+</p>
+
+<p>
+The first complete structures of proteins were determined, starting in the 1950s, using a technique in which X-ray beams are fired at crystallized proteins and the diffracted light translated into a protein’s atomic coordinates
+</p>
+
+<p>
+Early attempts to use computers to predict protein structures in the 1980s and 1990s performed poorly, say researchers
+</p>
+
+<p>
+Moult started CASP to bring more rigour to these efforts. The event challenges teams to predict the structures of proteins that have been solved using experimental methods, but for which the structures have not been made public. 
+</p>
+
+<p>
+DeepMind’s 2018 performance at CASP13 startled many scientists in the field, which has long been the bastion of small academic groups. But its approach was broadly similar to those of other teams that were applying AI, says Jinbo Xu, a computational biologist at the University of Chicago, Illinois.
+</p>
+
+<p>
+The first iteration of AlphaFold applied the AI method known as deep learning to structural and genetic data to predict the distance between pairs of amino acids in a protein. In a second step that does not invoke AI, AlphaFold uses this information to come up with a ‘consensus’ model of what the protein should look like, says John Jumper at DeepMind, who is leading the project.
+</p>
+
+<p>
+The team tried to build on that approach but eventually hit the wall.
+</p>
+
+<p>
+developed an AI network that incorporated additional information about the physical and geometric constraints that determine how a protein folds.
+</p>
+
+<p>
+They also set it a more difficult, task: instead of predicting relationships between amino acids, the network predicts the final structure of a target protein sequence. “It’s a more complex system by quite a bit,” Jumper says.
+</p>
+
+<p>
+Target proteins or portions of proteins called domains — about 100 in total — are released on a regular basis and teams have several weeks to submit their structure predictions
+</p>
+
+<p>
+Some predictions were better than others, but nearly two-thirds were comparable in quality to experimental structures. In some cases, says Moult, it was not clear whether the discrepancy between AlphaFold’s predictions and the experimental result was a prediction error or an artefact of the experiment.
+</p>
+
+<p>
+About half of the teams mentioned ‘deep learning’ in the abstract summarizing their approach,
+</p>
+
+<p>
+“I think it’s fair to say this will be very disruptive to the protein-structure-prediction field.  I suspect many will leave the field as the core problem has arguably been solved, ” he says. “It’s a breakthrough of the first order, certainly one of the most significant scientific results of my lifetime.”
+</p>
+
+<p>
+An AlphaFold prediction helped to determine the structure of a bacterial protein that Lupas’s lab has been trying to crack for years. Lupas’s team had previously collected raw X-ray diffraction data, but transforming these Rorschach-like patterns into a structure requires some information about the shape of the protein. Tricks for getting this information, as well as other prediction tools, had failed. “The model from group 427 gave us our structure in half an hour, after we had spent a decade trying everything,” Lupas says
+</p>
+
+<p>
+AlphaFold’s performance also marks a turning point for DeepMind. The company is best known for wielding AI to master games such Go, but its long-term goal is to develop programs capable of achieving broad, human-like intelligence. Tackling grand scientific challenges, such as protein-structure prediction, is one of the most important applications its AI can make, Hassabis says. “I do think it’s the most significant thing we’ve done, in terms of real-world impact.”
+</p>
+</div>
+</div>
+
+<div id="outline-container-org681def4" class="outline-2">
+<h2 id="org681def4"><span class="section-number-2">2.</span> Deepmind Blog Post</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Proteins are essential to life, supporting practically all its functions. They are large complex molecules, made up of chains of amino acids, and what a protein does largely depends on its unique 3D structure. Figuring out what shapes proteins fold into is known as the “protein folding problem”, and has stood as a grand challenge in biology for the past 50 years.
+</p>
+
+<p>
+Professor John MoultCo-Founder and Chair of CASP, University of Maryland
+</p>
+
+<p>
+nuclear magnetic resonance and X-ray crystallography.
+</p>
+
+<p>
+newer methods like cryo-electron microscopy
+</p>
+
+<p>
+depend on extensive trial and error, which can take years of painstaking and laborious work per structure, and require the use of multi-million dollar specialised equipment.
+</p>
+
+<p>
+In his acceptance speech for the 1972 Nobel Prize in Chemistry, Christian Anfinsen famously postulated that, in theory, a protein’s amino acid sequence should fully determine its structure. This hypothesis sparked a five decade quest to be able to computationally predict a protein’s 3D structure based solely on its 1D amino acid sequence as a complementary alternative to these expensive and time consuming experimental methods.
+</p>
+
+<p>
+A major challenge, however, is that the number of ways a protein could theoretically fold before settling into its final 3D structure is astronomical.
+</p>
+
+<p>
+In 1969 Cyrus Levinthal noted that it would take longer than the age of the known universe to enumerate all possible configurations of a typical protein by brute force calculation – Levinthal estimated 10<sup>300</sup> possible conformations for a typical protein. Yet in nature, proteins fold spontaneously, some within milliseconds – a dichotomy sometimes referred to as Levinthal’s paradox.
+</p>
+
+<p>
+The main metric used by CASP to measure the accuracy of predictions is the Global Distance Test (GDT) which ranges from 0-100. In simple terms, GDT can be approximately thought of as the percentage of amino acid residues (beads in the protein chain) within a threshold distance from the correct position. According to Professor Moult, a score of around 90 GDT is informally considered to be competitive with results obtained from experimental methods.
+</p>
+
+<p>
+Our methods may prove especially helpful for important classes of proteins, such as membrane proteins, that are very difficult to crystallise and therefore challenging to experimentally determine
+</p>
+
+<p>
+This computational work represents a stunning advance on the protein-folding problem, a 50-year-old grand challenge in biology. It has occurred decades before many people in the field would have predicted. It will be exciting to see the many ways in which it will fundamentally change biological research.
+</p>
+
+<p>
+Professor Venki RamakrishnanNobel Laureate and President of the Royal Society
+</p>
+
+<p>
+A folded protein can be thought of as a “spatial graph”, where residues are the nodes and edges connect the residues in close proximity. This graph is important for understanding the physical interactions within proteins, as well as their evolutionary history. For the latest version of AlphaFold, used at CASP14, we created an attention-based neural network system, trained end-to-end, that attempts to interpret the structure of this graph, while reasoning over the implicit graph that it’s building. It uses evolutionarily related sequences, multiple sequence alignment (MSA), and a representation of amino acid residue pairs to refine this graph.
+</p>
+
+<p>
+Additionally, AlphaFold can predict which parts of each predicted protein structure are reliable using an internal confidence measure.
+</p>
+
+<p>
+It uses approximately 128 TPUv3 cores (roughly  equivalent to ~100-200 GPUs) run over a few weeks, which is a relatively modest amount of compute in the context of most large state-of-the-art models used in machine learning today.
+</p>
+
+<p>
+An overview of the main neural network model architecture. The model operates over evolutionarily related protein sequences as well as amino acid residue pairs, iteratively passing information between both representations to generate a structure. 
+</p>
+
+<p>
+AlphaFold is a once in a generation advance, predicting protein structures with incredible speed and precision. This leap forward demonstrates how computational methods are poised to transform research in biology and hold much promise for accelerating the drug discovery process. 
+</p>
+
+<p>
+Arthur D. LevinsonPhD, Founder &amp; CEO Calico, Former Chairman &amp; CEO, Genentech
+</p>
+
+<p>
+As well as accelerating understanding of known diseases, we’re excited about the potential for these techniques to explore the hundreds of millions of proteins we don’t currently have models for – a vast terrain of unknown biology. Since DNA specifies the amino acid sequences that comprise protein structures, the genomics revolution has made it possible to read protein sequences from the natural world at massive scale – with 180 million protein sequences and counting in the Universal Protein database (UniProt). In contrast, given the experimental work needed to go from sequence to structure, only around 170,000 protein structures are in the Protein Data Bank (PDB).
+</p>
+
+<p>
+Just as 50 years ago Anfinsen laid out a challenge far beyond science’s reach at the time, there are many aspects of our universe that remain unknown. The progress announced today gives us further confidence that AI will become one of humanity’s most useful tools in expanding the frontiers of scientific knowledge, and we’re looking forward to the many years of hard work and discovery ahead!
+</p>
+
+
+<hr />
+<h3>References</h3>
+
+<ul class="org-ul">
+<li><a href="https://www.nature.com/articles/d41586-020-03348-4">https://www.nature.com/articles/d41586-020-03348-4</a></li>
+<li><a href="https://deepmind.com/blog/article/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology">https://deepmind.com/blog/article/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: AlphaFold">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

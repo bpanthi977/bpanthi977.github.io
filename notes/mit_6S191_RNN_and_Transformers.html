@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-08-24 Thu 12:18 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RNN and Transformers</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="/js/counters.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">RNN and Transformers</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgbb660bd">1. Sequential Modeling</a></li>
+<li><a href="#org60d5aeb">2. Sequence Modelling: Design Criteria</a>
+<ul>
+<li><a href="#org5b7b190">2.1. Example Task: Predict the Next Word</a></li>
+</ul>
+</li>
+<li><a href="#orgc5694fb">3. Recurrence and RNNs</a></li>
+<li><a href="#org3d74192">4. Learning Algorithm: Back propagation through time (BPTT)</a>
+<ul>
+<li><a href="#orgf47f028">4.1. Exploding Gradients and Vanishing Gradients</a>
+<ul>
+<li><a href="#org4b7daca">4.1.1. Exploding Gradient</a></li>
+<li><a href="#org852779d">4.1.2. Vanishing Gradient</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org7c98423">5. Gated Cells</a></li>
+<li><a href="#org3385530">6. Limitations &amp; Desired Capabilities of RNN</a></li>
+<li><a href="#org19141d2">7. Attention Is All You Need: Transformers</a>
+<ul>
+<li><a href="#org42687d8">7.1. Idenitfying parts to attend to is similar to <span class="underline">Search problem</span></a></li>
+<li><a href="#org83af2ad">7.2. Self-Attention in Sequence Modelling</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+<a href="https://www.youtube.com/watch?v=QvkQ1B3FBqA&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=3">Lecture 2: Deep Sequence Modeling</a>: In which we get introduced to sequential modeling, and how recurrence (&amp; RNN) help in sequential modelling. 
+</p>
+
+<div id="outline-container-orgbb660bd" class="outline-2">
+<h2 id="orgbb660bd"><span class="section-number-2">1.</span> Sequential Modeling</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<img src="../img/mit_6s191/squential_model_application-20230314091644.png" alt="squential_model_application-20230314091644.png" />
+@ 0:04:06
+</p>
+
+<p>
+Example of Sequence Modeling tasks: 
+</p>
+<ul class="org-ul">
+<li>Sequential Input -&gt; One Output : Sentiment Classification</li>
+<li>One Input -&gt; Sequential Output: Image Captioning</li>
+<li>Sequential Input -&gt; Sequential Output: Machine Translation</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org60d5aeb" class="outline-2">
+<h2 id="org60d5aeb"><span class="section-number-2">2.</span> Sequence Modelling: Design Criteria</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+@ 0:20:29
+To model sequences, we need to: 
+</p>
+<ul class="org-ul">
+<li>Handle <b>variable-length</b> sequences</li>
+<li>Track <b>long-term</b> dependencies</li>
+<li>Maintain infromation about <b>order</b></li>
+<li><b>Share parameters</b> across the sequence</li>
+</ul>
+
+<p>
+@ 0:20:41 RNN Meet these sequence modeling design criteria 
+</p>
+</div>
+
+<div id="outline-container-org5b7b190" class="outline-3">
+<h3 id="org5b7b190"><span class="section-number-3">2.1.</span> Example Task: Predict the Next Word</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+First we need to address <b>Embedding</b>: i.e. How to represent language to a Neural Network? (@ 0:23:10)
+</p>
+<ul class="org-ul">
+<li>One-hot embedding</li>
+<li>Learned Embedding (0:25:50 Representation Learning)</li>
+</ul>
+
+
+<div id="org6c79573" class="figure">
+<p><img src="../img/mit_6s191/encoding_language_for_nn-20230316093655.png" alt="encoding_language_for_nn-20230316093655.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Encoding Language for NN</p>
+</div>
+
+<p>
+Now observe that this problem demands all the <b>Design Criteria</b> for sequential modelling: 
+</p>
+<ul class="org-ul">
+<li>0:26:30 Variable-Length : Sentences are not of fixed size</li>
+<li>0:26:38 Long-term dependencies: An Idea in the beginning of a text influences the meaning till the end.</li>
+<li>0:27:07 Sequence Order: Order of words in a sentence matter.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc5694fb" class="outline-2">
+<h2 id="orgc5694fb"><span class="section-number-2">3.</span> Recurrence and RNNs</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+@ 0:08:32
+</p>
+
+<p>
+Consider a single feed forward network, it takes input and gives output at a single timestep. Lets call this the <b>recurrent cell</b> and use it as building block to accept sequence of input (i.e. input/output at timestep)
+</p>
+<ul class="org-ul">
+<li>We can pass inputs from multiple timesteps, but what we need is to <b>connect the current input to input from previous timesteps</b></li>
+<li>This means we need to <b>propagate prior computation/information</b> through time: via. <b>Recurrence Relation</b> (@ 0:08:06)</li>
+<li>We do this through, Internal Memory or State: \(h_t\)</li>
+</ul>
+
+
+<div id="orgea65f32" class="figure">
+<p><img src="../img/mit_6s191/recurrent_nn-20230314092546.png" alt="recurrent_nn-20230314092546.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Recurrent NN</p>
+</div>
+
+<p>
+@ 0:10:56
+</p>
+<ul class="org-ul">
+<li>In RNN, we apply a recurrence relation at every time step to process a sequence</li>
+<li>RNNs have a state, \(h\), that is updated at each time step as a sequence is processed</li>
+<li>\(h_t = f_W(x_t, h_{t-1})\) where the weight \(W\) is same across timesteps but the input \(x_t\) and the memory \(h_t\) change</li>
+</ul>
+
+
+<div id="org6e45e10" class="figure">
+<p><img src="../img/mit_6s191/rnn_computation_graph_across_time-20230314093011.png" alt="rnn_computation_graph_across_time-20230314093011.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span>RNN: Computation Graph Across Time @ 0:15:16</p>
+</div>
+<ul class="org-ul">
+<li>\(y_t = f(W_{hy}, h_t)\) why not x<sub>t</sub> ?</li>
+<li>\(h_t = f(W_{hh}, h_{t-1}, W_{hx}, x_t)\)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3d74192" class="outline-2">
+<h2 id="org3d74192"><span class="section-number-2">4.</span> Learning Algorithm: Back propagation through time (BPTT)</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Loss function: @ 0:16:28
+</p>
+<ul class="org-ul">
+<li>Sum the loss function at individual timestep to get the total loss</li>
+</ul>
+
+
+
+
+<div id="org7f36142" class="figure">
+<p><img src="../img/mit_6s191/bptt-20230316094048.png" alt="bptt-20230316094048.png" />
+</p>
+<p><span class="figure-number">Figure 4: </span>BPTT @ 0:29:34</p>
+</div>
+</div>
+
+<div id="outline-container-orgf47f028" class="outline-3">
+<h3 id="orgf47f028"><span class="section-number-3">4.1.</span> Exploding Gradients and Vanishing Gradients</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+@ 0:30:21
+Computing gradients wrt \(h_0\) involves many factors of \(W_{hh}\) &amp; repeated gradient computation.
+</p>
+</div>
+
+<div id="outline-container-org4b7daca" class="outline-4">
+<h4 id="org4b7daca"><span class="section-number-4">4.1.1.</span> Exploding Gradient</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<p>
+If the gradients are &gt; 1 then, repeated gradient computation causes graident to explode. Exploding gradient problem can be solved by: 
+</p>
+<ul class="org-ul">
+<li>Gradient Clipping (i.e. don't allow the gradients to increase beyond certain threshold)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org852779d" class="outline-4">
+<h4 id="org852779d"><span class="section-number-4">4.1.2.</span> Vanishing Gradient</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<p>
+However if the gradients are &lt; 1, then as gradients are backpropagated the gradients decrease to near zero (vanishing gradient). Vanishing Gradient cause the model to focus on short term dependencies and ignore long term dependencies. It can solved by: 
+</p>
+<ul class="org-ul">
+<li>Activation Function: ReLU (@ 0:32:35)</li>
+<li>Weight Initialization: Initialize weights to identity function, biases to zero to prevent rapid shrinking (@ 0:32:50)</li>
+<li>Network Architecture: Gated Cells (@ 0:33:05) [BPTT with partially uninterrupted gradient flow]</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7c98423" class="outline-2">
+<h2 id="org7c98423"><span class="section-number-2">5.</span> Gated Cells</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+@ 0:33:41
+Instead of using simple feed forward network as <b>recurrent cell</b>, Gated Cells give better performance and improved training.
+</p>
+
+
+<div id="org1ba2e4a" class="figure">
+<p><img src="../img/mit_6s191/gated_cell-20230316094902.png" alt="gated_cell-20230316094902.png" />
+</p>
+<p><span class="figure-number">Figure 5: </span>Gated Cell</p>
+</div>
+
+<p>
+LSTMs have the following property: (@ 0:35:24)
+</p>
+
+<ol class="org-ol">
+<li>Maintain a <b>cell state</b></li>
+<li>Use gates to control the flow of information
+<ul class="org-ul">
+<li><b>Forget</b> gate gets rid of irrelevant information</li>
+<li><b>Store</b> relevant information from current input</li>
+<li><b>Selectively update</b> cell state</li>
+<li>Output gate returns a <b>filtered</b> version of the cell state</li>
+</ul></li>
+<li>Backpropagation through time with <b>partially uninterrupted gradient flow</b> (This handles the vanishing gradient problem)</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org3385530" class="outline-2">
+<h2 id="org3385530"><span class="section-number-2">6.</span> Limitations &amp; Desired Capabilities of RNN</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+RNN as presented above have the following limitations: @ 0:39:20
+</p>
+<ul class="org-ul">
+<li><b>Encoding Bottleneck</b>: RNN need to take long sequence of information and condense it into a fixed representation</li>
+<li>Slow, no parallelization</li>
+<li>Not long memory: ~10, 100 length sequences are ok with LSTM, but not ~1000</li>
+</ul>
+
+
+<div id="orgd3080e4" class="figure">
+<p><img src="../img/mit_6s191/desired_capabilities_of_rnn-20230316100804.png" alt="desired_capabilities_of_rnn-20230316100804.png" />
+</p>
+<p><span class="figure-number">Figure 6: </span>Desired Capabilities of RNN @ 0:41:48</p>
+</div>
+
+<p>
+In contrast to those limitations, what we want is: 
+</p>
+<ul class="org-ul">
+<li>Continuous Stream</li>
+<li>Parallelization</li>
+<li>Long Memory</li>
+</ul>
+
+<p>
+<span class="underline">Idea 1: Feed everything into dense network</span>: (@ 0:42:52)
+</p>
+<ul class="org-ul">
+<li>Recurrence is eliminated, but</li>
+<li>Not scalable</li>
+<li>No order</li>
+<li>No long memory</li>
+</ul>
+
+<p>
+<span class="underline">Idea 2: Identify and Attend to what's important</span> (@ 0:42:58)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org19141d2" class="outline-2">
+<h2 id="org19141d2"><span class="section-number-2">7.</span> Attention Is All You Need: Transformers</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+@ 0:43:28
+</p>
+<ul class="org-ul">
+<li>Identify parts to attend to</li>
+<li>Extract features with high attention</li>
+</ul>
+
+<p>
+Attention has been used in: 
+</p>
+<ul class="org-ul">
+<li>AlphaFold2: Uses Self-Attention</li>
+<li>BERT, GPT-3</li>
+<li>Vision Transformers in Computer Vision</li>
+</ul>
+</div>
+
+<div id="outline-container-org42687d8" class="outline-3">
+<h3 id="org42687d8"><span class="section-number-3">7.1.</span> Idenitfying parts to attend to is similar to <span class="underline">Search problem</span></h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+@ 0:44:54
+</p>
+
+<ul class="org-ul">
+<li>Enter a Query (\(Q\)) for search</li>
+<li>Extract key information \(K_i\) for each search result</li>
+<li>Compute how similar is the key to the query: Attention Mask</li>
+<li>Extract required information from the search i.e. Value \(V\)</li>
+</ul>
+
+
+<div id="orgd8a6b51" class="figure">
+<p><img src="../img/mit_6s191/attention_as_search-20230316105659.png" alt="attention_as_search-20230316105659.png" />
+</p>
+<p><span class="figure-number">Figure 7: </span>Attention as Search</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org83af2ad" class="outline-3">
+<h3 id="org83af2ad"><span class="section-number-3">7.2.</span> Self-Attention in Sequence Modelling</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+Goal: Identify and attend to most important features in input
+</p>
+
+<ol class="org-ol">
+<li><p>
+We want to elimintate recurrence because that what gave rise to the limitations. So, we need to <b>encode position information</b>
+</p>
+
+<div id="orgf100f28" class="figure">
+<p><img src="../img/mit_6s191/position_aware_encoding-20230316113706.png" alt="position_aware_encoding-20230316113706.png" />
+</p>
+<p><span class="figure-number">Figure 8: </span>Position-Aware Encoding (@ 0:48:32)</p>
+</div></li>
+
+<li>Extract, <b>query, key, value</b> for search 
+<ul class="org-ul">
+<li>Multiply the positional encoding with three matrices to get query, key and value encoding for each word</li>
+</ul></li>
+
+<li>Compute <b>attention weighting</b> (A matix of post-softmax attention scores)
+<ul class="org-ul">
+<li><p>
+Compute pairwise similarity between each query and key =&gt; Dot Product (0:51:01)
+</p>
+
+<p>
+Attention Score = \(\frac {Q . K^T} {scaling}\) 
+</p></li>
+<li>Apply softmax to the attention score to get value in \([0, 1]\)</li>
+</ul></li>
+<li>Extract <b>features with high attention</b>: Multiply attention weighting with Value.</li>
+</ol>
+
+
+<div id="org749e21c" class="figure">
+<p><img src="../img/mit_6s191/self_attention_head-20230316114501.png" alt="self_attention_head-20230316114501.png" />
+</p>
+<p><span class="figure-number">Figure 9: </span>Self-Attention Head</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: RNN and Transformers">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

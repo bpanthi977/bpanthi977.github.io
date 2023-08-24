@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Quality Control</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="../js/counters.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">Quality Control</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org0906129">1. IQ, EQ, MQ, SQ</a></li>
+<li><a href="#org609e512">2. Examples</a></li>
+<li><a href="#orgc022189">3. 3C Relation</a></li>
+<li><a href="#org2f296a1">4. Quality Assurance Plan</a>
+<ul>
+<li><a href="#org8e115b3">4.1. Hierarchy of Failures</a></li>
+<li><a href="#orgbe3064d">4.2. Average vs Multiplicative</a></li>
+</ul>
+</li>
+<li><a href="#orga74b30d">5. Document special event</a></li>
+<li><a href="#org7daa2cd">6. Saftey Measures</a>
+<ul>
+<li><a href="#org86ee4d4">6.1. Boards, Ribbons</a></li>
+<li><a href="#org2341d0d">6.2. Check Cement quality</a>
+<ul>
+<li><a href="#orgfe5d8de">6.2.1. Manufacture date</a></li>
+<li><a href="#orga25f89c">6.2.2. Lab test</a></li>
+<li><a href="#org7e994ff">6.2.3. Thumb rules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgf35667e">7. Crushing &amp; Screening Plant (BBDMP)</a></li>
+<li><a href="#org1581eaa">8. Rebar Chararcteristics</a></li>
+<li><a href="#org1f0ebd5">9. Formworks</a></li>
+<li><a href="#orgffb44e2">10. Real data (USEFUL) 7 days to 28 days strength ratio</a></li>
+<li><a href="#org46b78a6">11. Curing</a></li>
+<li><a href="#org20039ca">12. Single cube failure is not failure</a></li>
+<li><a href="#org58f5131">13. Aggregate Crusher</a></li>
+</ul>
+</div>
+</div>
+<p>
+Civil Engineering Technical Workshop - Quality Assurance and Quality Control of RCC Structure 
+</p>
+
+<div id="outline-container-org0906129" class="outline-2">
+<h2 id="org0906129"><span class="section-number-2">1.</span> IQ, EQ, MQ, SQ</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Intelligence</li>
+<li>Emotional</li>
+<li>Moral</li>
+<li>Spiritual Quotient</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org609e512" class="outline-2">
+<h2 id="org609e512"><span class="section-number-2">2.</span> Examples</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+[v:13:13]
+</p>
+
+<p>
+Irrigation Strucutre, Banke (BS 2030) made using brick masonry is just fine but the RCC Irrigation Structure, Kailali (BS 2070) has failed due to lack of QA and Quality Control. 
+</p>
+
+<p>
+[v:14:00]
+Learing by doing &lt;= previously 
+Doing by learning &lt;= nowadays 
+</p>
+
+<p>
+Knowledge =&gt; Skill =&gt; Attitude (Willingness &amp; Sharing)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc022189" class="outline-2">
+<h2 id="orgc022189"><span class="section-number-2">3.</span> 3C Relation</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Client -&gt; Consultant -&gt; Contractor 
+Clients feel superior but Consultant are giving service 
+Contractor sometimes get in difficulty due to design where consultant has to help 
+If the project fails Client are in most loss. 
+So everyone should feel at same level. 
+</p>
+
+
+
+<div id="orgc7ad4e8" class="figure">
+<p><img src="./data/quality_control/20201008083337-3c_relation.png" alt="20201008083337-3c_relation.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>3C Relation</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2f296a1" class="outline-2">
+<h2 id="org2f296a1"><span class="section-number-2">4.</span> Quality Assurance Plan</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+[v:28:31]
+</p>
+<ul class="org-ul">
+<li>Quality Assurance (QA) 
+<ul class="org-ul">
+<li>process oriented; focuses on defect prevention</li>
+<li>Management Tool</li>
+</ul></li>
+<li>Quality Control (QC)
+<ul class="org-ul">
+<li>product oriented; focuses on defect identification</li>
+<li>Controlling tool</li>
+</ul></li>
+</ul>
+
+<p>
+[v:40:46]
+</p>
+
+<div id="orgef3aa6f" class="figure">
+<p><img src="./data/quality_control/20201008183617-.png" alt="20201008183617-.png" />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8e115b3" class="outline-3">
+<h3 id="org8e115b3"><span class="section-number-3">4.1.</span> Hierarchy of Failures</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Supervision -&gt; Detailings -&gt; Design 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbe3064d" class="outline-3">
+<h3 id="orgbe3064d"><span class="section-number-3">4.2.</span> Average vs Multiplicative</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+If every step is 95% then average is 95% but quality is multiplication and in 7 steps it results to 70% quality. 
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga74b30d" class="outline-2">
+<h2 id="orga74b30d"><span class="section-number-2">5.</span> Document special event</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Document special event like
+</p>
+<ul class="org-ul">
+<li>the soil characteristics is different than expected</li>
+<li>contractor had to do extra work due to unforseen circumstance</li>
+<li>floods, &#x2026;</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7daa2cd" class="outline-2">
+<h2 id="org7daa2cd"><span class="section-number-2">6.</span> Saftey Measures</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Simple measures save from big troubles.
+</p>
+</div>
+<div id="outline-container-org86ee4d4" class="outline-3">
+<h3 id="org86ee4d4"><span class="section-number-3">6.1.</span> Boards, Ribbons</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+e.g. A simple `caution danger' ribbon saved the contractor from having to pay compensation when an woman jumped and died in the pit. 
+</p>
+
+
+
+<div id="org7fe2351" class="figure">
+<p><img src="./data/quality_control/20201008090446-.png" alt="20201008090446-.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2341d0d" class="outline-3">
+<h3 id="org2341d0d"><span class="section-number-3">6.2.</span> Check Cement quality</h3>
+<div class="outline-text-3" id="text-6-2">
+</div>
+<div id="outline-container-orgfe5d8de" class="outline-4">
+<h4 id="orgfe5d8de"><span class="section-number-4">6.2.1.</span> Manufacture date</h4>
+<div class="outline-text-4" id="text-6-2-1">
+<ul class="org-ul">
+<li>manufacture date must be printed on the cement bag</li>
+</ul>
+
+
+<div id="org30dc3b3" class="figure">
+<p><img src="./data/quality_control/20201008183902-.png" alt="20201008183902-.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga25f89c" class="outline-4">
+<h4 id="orga25f89c"><span class="section-number-4">6.2.2.</span> Lab test</h4>
+<div class="outline-text-4" id="text-6-2-2">
+
+<div id="orgfecbf33" class="figure">
+<p><img src="./data/quality_control/20201008183539-.png" alt="20201008183539-.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7e994ff" class="outline-4">
+<h4 id="org7e994ff"><span class="section-number-4">6.2.3.</span> Thumb rules</h4>
+<div class="outline-text-4" id="text-6-2-3">
+<p>
+when lab test can't be done in rural plaes 
+</p>
+<ul class="org-ul">
+<li>OPC - NS 572:2076 (43 &amp; 53 Grade)</li>
+<li>PPC - NS 385:2054 (33 Grade)</li>
+</ul>
+
+<div id="orgccfe768" class="figure">
+<p><img src="./data/quality_control/20201008091733-thumb_rules_when_in_remote_places.png" alt="20201008091733-thumb_rules_when_in_remote_places.png" />
+</p>
+<p><span class="figure-number">Figure 5: </span>Thumb rules when in remote places</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf35667e" class="outline-2">
+<h2 id="orgf35667e"><span class="section-number-2">7.</span> Crushing &amp; Screening Plant (BBDMP)</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+[v:1:04:34]
+</p>
+
+
+<div id="org1bdfed3" class="figure">
+<p><img src="./data/quality_control/20201008183937-.png" alt="20201008183937-.png" />
+</p>
+</div>
+
+
+<div id="org491f5eb" class="figure">
+<p><img src="./data/quality_control/20201008184130-better_aggregate_had_high_impact_on_strength_of_concrete.png" alt="20201008184130-better_aggregate_had_high_impact_on_strength_of_concrete.png" />
+</p>
+<p><span class="figure-number">Figure 6: </span>better aggregate had high impact on strength of concrete</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1581eaa" class="outline-2">
+<h2 id="org1581eaa"><span class="section-number-2">8.</span> Rebar Chararcteristics</h2>
+<div class="outline-text-2" id="text-8">
+
+<div id="org7046d0b" class="figure">
+<p><img src="./data/quality_control/20201008092434-.png" alt="20201008092434-.png" />
+</p>
+</div>
+
+<p>
+TMT fail bhairanxa 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1f0ebd5" class="outline-2">
+<h2 id="org1f0ebd5"><span class="section-number-2">9.</span> Formworks</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+[v:1:17:00]
+IS 14687:1999 
+</p>
+
+<div id="orgaa81e26" class="figure">
+<p><img src="./data/quality_control/20201008093703-upper_failed_lower_good.png" alt="20201008093703-upper_failed_lower_good.png" />
+</p>
+<p><span class="figure-number">Figure 8: </span>Upper - Failed; Lower - Good</p>
+</div>
+
+
+
+<div id="orgbeda79f" class="figure">
+<p><img src="./data/quality_control/20201008094006-.png" alt="20201008094006-.png" />
+</p>
+<p><span class="figure-number">Figure 9: </span>Rusted rebars must be cleaned</p>
+</div>
+
+
+
+<div id="org47ba15e" class="figure">
+<p><img src="./data/quality_control/20201008094352-cover_blocks.png" alt="20201008094352-cover_blocks.png" />
+</p>
+<p><span class="figure-number">Figure 10: </span>Cover block or stones</p>
+</div>
+
+
+
+<div id="org353a8e8" class="figure">
+<p><img src="./data/quality_control/20201008094529-beam_size_must_be_less_than_column_size.png" alt="20201008094529-beam_size_must_be_less_than_column_size.png" />
+</p>
+<p><span class="figure-number">Figure 11: </span>Beam size must be less than column size</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgffb44e2" class="outline-2">
+<h2 id="orgffb44e2"><span class="section-number-2">10.</span> Real data (USEFUL) 7 days to 28 days strength ratio</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+For Concrete test 
+[v:1:33:31]
+</p>
+<p>
+<img src="./data/quality_control/20201008101931-concrete_strength_ratio.png" alt="20201008101931-concrete_strength_ratio.png" />
+for higher grade concrete requirement of M50 in 28 days requires 80% of 50 = 40 MPa strength at 7 days. not 3/4 of 50 = 37.5 MPa 
+</p>
+
+
+
+
+
+<div id="orgcb5d60b" class="figure">
+<p><img src="./data/quality_control/20201008115658-.png" alt="20201008115658-.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org46b78a6" class="outline-2">
+<h2 id="org46b78a6"><span class="section-number-2">11.</span> Curing</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+<img src="./data/quality_control/20201008183254-importance_of_curing.png" alt="20201008183254-importance_of_curing.png" />
+Curing is extremely important 
+Water during first 1,2,3 days is like अमृत 
+and during first 7 days is like milk 
+and upto 12-15 days  is like water 
+then after that its like air (no use)
+</p>
+</div>
+</div>
+<div id="outline-container-org20039ca" class="outline-2">
+<h2 id="org20039ca"><span class="section-number-2">12.</span> Single cube failure is not failure</h2>
+<div class="outline-text-2" id="text-12">
+
+<div id="org623e3a2" class="figure">
+<p><img src="./data/quality_control/20201008183453-is_456.png" alt="20201008183453-is_456.png" />
+</p>
+<p><span class="figure-number">Figure 13: </span>IS 456</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org58f5131" class="outline-2">
+<h2 id="org58f5131"><span class="section-number-2">13.</span> Aggregate Crusher</h2>
+<div class="outline-text-2" id="text-13">
+<ul class="org-ul">
+<li>jaw crusher</li>
+<li>cone crusher</li>
+<li>impact crusher</li>
+</ul>
+
+<p>
+use garera flakiness index control garera concrete ko strength high garna sakinxa. 
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Quality Control">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

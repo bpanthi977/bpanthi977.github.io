@@ -1,0 +1,1067 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-08-24 Thu 12:18 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mandelbrot Set Plotting in Common Lisp</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="/js/counters.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">Mandelbrot Set Plotting in Common Lisp</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge972e08">1. Definition</a></li>
+<li><a href="#orgbe151fe">2. Check if a complex <code>c</code> is in Mandelbrot set</a></li>
+<li><a href="#org663e30b">3. Plotting the set</a></li>
+<li><a href="#orgee0fe87">4. Optimization</a></li>
+<li><a href="#org8d888d4">5. Parallel Computation</a></li>
+<li><a href="#org1538f2b">6. Decoupling Drawing and Computing</a></li>
+<li><a href="#org9105ec9">7. Lets add translation and scaling!</a></li>
+<li><a href="#org18bb11c">8. OpenGL</a></li>
+<li><a href="#org0d50166">9. Finally Result</a></li>
+<li><a href="#org9df4a90">10. Final Code</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge972e08" class="outline-2">
+<h2 id="orge972e08"><span class="section-number-2">1.</span> Definition</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+From <a href="https://en.wikipedia.org/wiki/Mandelbrot_set">Wikipedia</a>:
+</p>
+
+<p>
+The Mandelbrot set is the set of complex numbers \(c\) for which the function \(f_c(z)= z^2+c\) doesn't diverge when iterated from \(z=0\). 
+</p>
+
+<p>
+i.e. to check if the number c = 3+2i belongs to the Mandelbrot set, we iterate as follows:
+</p>
+<ul class="org-ul">
+<li>\(f_c(0) = c\)</li>
+<li>\(f_c(f_c(0)) = c^2+c\)</li>
+<li>\(f_c(f_c(f_c(0))) = (c^2+c)^{2} + c\)</li>
+<li>&#x2026;</li>
+</ul>
+
+<p>
+And if the final result is inifinty then \(c\) doesn't blong to Mandelbrot set. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbe151fe" class="outline-2">
+<h2 id="orgbe151fe"><span class="section-number-2">2.</span> Check if a complex <code>c</code> is in Mandelbrot set</h2>
+<div class="outline-text-2" id="text-2">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">iterate</span> (c iterations limit)
+  (<span class="org-keyword">let</span> ((f c))
+    (<span class="org-keyword">dotimes</span> (iters iterations nil)
+      (setf f (+ (expt f 2) c))
+      (<span class="org-keyword">when</span> (&gt; (abs f) limit)
+        (<span class="org-keyword">return-from</span> iterate iters)))))
+</pre>
+</div></details>
+
+<pre class="example">
+ITERATE
+</pre>
+
+
+<p>
+This function iterates for maximum of <code>iterations</code> times and if the result of iterating with <code>c</code> exceed <code>limit</code> (which signifies divergence to infinity) then it returns the number of iterations it took for it to diverge. Otherwise it return <code>NIL</code> which means <code>c</code> belongs to Mandelbrot set. 
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(print (iterate (complex 0 0) 10 50))
+(print (iterate (complex 1 1) 10 50))
+</pre>
+</div></details>
+
+<pre class="example">
+
+NIL 
+2 
+</pre>
+
+
+<p>
+So, 0+0i lies in mandelbrot set, while 1+1i takes 2 iterations of the value to exceed 50 (which we will consider as not being in Mandelbrot set)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org663e30b" class="outline-2">
+<h2 id="org663e30b"><span class="section-number-2">3.</span> Plotting the set</h2>
+<div class="outline-text-2" id="text-3">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">divergence-iters</span> (c)
+  (iterate (* 2e-3 (- c #C(800 350)))
+           30
+           5))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">main</span> ()
+  (sdl:with-init ()
+    (sdl:window 1200 700 <span class="org-builtin">:resizable</span> t <span class="org-builtin">:title-caption</span> <span class="org-string">"Mandelbrot Set"</span>)
+    (setf sdl:*default-color* sdl:*black*)
+    (sdl:initialise-default-font)
+    (sdl:with-events ()
+      (<span class="org-builtin">:quit-event</span> () t)
+      (<span class="org-builtin">:idle</span>
+       ()
+       <span class="org-comment-delimiter">;; </span><span class="org-comment">Clear screen</span>
+       (sdl:clear-display sdl:*white*)
+       <span class="org-comment-delimiter">;; </span><span class="org-comment">drawing</span>
+       (<span class="org-keyword">loop</span> for x from 0 to 1200 do
+             (<span class="org-keyword">loop</span> for y from 0 to 700
+                   for value =  (divergence-iters (complex x y)) do
+                     (<span class="org-keyword">when</span> value 
+                       (sdl:draw-pixel-* x y <span class="org-builtin">:color</span>
+                                         (sdl:color <span class="org-builtin">:g</span> 0 <span class="org-builtin">:b</span> 0 <span class="org-builtin">:r</span> (max 0 (min 255 (* 20 (abs value)))))))))
+
+       (sdl:update-display)))))
+</pre>
+</div></details>
+
+<pre class="example">
+MAIN
+</pre>
+
+
+<p>
+Here i subtracted 800 + 350i from position x+yi to center the plot and scaled it with 2e-3 so that we would be looking at something interesting rather than all black or red portion of the plot. 
+</p>
+
+
+<div id="org41150cd" class="figure">
+<p><img src="../img/mandelbrot/mandelbrot.png" alt="mandelbrot.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>first-mandelbrot</p>
+</div>
+
+<p>
+See!! we did it! This was so easy.
+Lets look at how fast our code runs.
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">timing</span> (function)
+  <span class="org-doc">"Runs the given `</span><span class="org-doc"><span class="org-constant">function</span></span><span class="org-doc">' and returns the seconds it took to run it"</span>
+  (<span class="org-keyword">let</span> ((t1 (get-internal-real-time)))
+    (funcall function)
+    (/ (- (get-internal-real-time) t1)
+       internal-time-units-per-second)))
+</pre>
+</div></details>
+<p>
+This function will time any function, so I will extract the drawing loop from <code>main</code> function into <code>draw</code> function and print timing. 
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">draw</span> ()
+  (<span class="org-keyword">loop</span> for x from 0 to 1200 do
+    (<span class="org-keyword">loop</span> for y from 0 to 700
+          for value =  (divergence-iters (complex x y)) do
+            (<span class="org-keyword">when</span> value 
+              (sdl:draw-pixel-* x y <span class="org-builtin">:color</span>
+                                (sdl:color <span class="org-builtin">:g</span> 0 <span class="org-builtin">:b</span> 0 <span class="org-builtin">:r</span> (max 0 (min 255 (* 20 (abs value))))))))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">main</span> ()
+  (sdl:with-init ()
+    (sdl:window 1200 700 <span class="org-builtin">:resizable</span> t <span class="org-builtin">:title-caption</span> <span class="org-string">"Mandelbrot Set"</span>)
+    (setf sdl:*default-color* sdl:*black*)
+    (sdl:initialise-default-font)
+    (sdl:with-events ()
+      (<span class="org-builtin">:quit-event</span> () t)
+      (<span class="org-builtin">:idle</span>
+       ()
+       <span class="org-comment-delimiter">;; </span><span class="org-comment">Clear screen</span>
+       (sdl:clear-display sdl:*white*)
+       <span class="org-comment-delimiter">;; </span><span class="org-comment">drawing</span>
+       (format t <span class="org-string">"~&amp; Total  :~,3f sec"</span> (timing #'draw))
+       <span class="org-comment-delimiter">;; </span><span class="org-comment">updating display</span>
+       (sdl:update-display)))))
+</pre>
+</div></details>
+
+<pre class="example">
+MAIN
+</pre>
+
+
+<pre class="example" id="org7877721">
+Total  :2.050 sec
+Total  :1.960 sec
+Total  :1.990 sec
+Total  :1.960 sec
+Total  :1.970 sec
+Total  :1.970 sec
+Total  :1.970 sec
+</pre>
+
+<p>
+It tooks about 2 second for each draw. We can do better. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgee0fe87" class="outline-2">
+<h2 id="orgee0fe87"><span class="section-number-2">4.</span> Optimization</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Lets add type declaration to <code>iterate</code> function and ensure that it gets passed values with correct type. 
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">iterate</span> (c iterations limit)
+  (<span class="org-keyword">declare</span> (optimize (speed 3) (safety 0) (debug 0)))
+  (<span class="org-keyword">declare</span> ((complex single-float) c)
+           (fixnum iterations)
+           (single-float limit))
+  (<span class="org-keyword">let</span> ((f c))
+    (<span class="org-keyword">declare</span> ((complex single-float) f))
+    (<span class="org-keyword">dotimes</span> (iters iterations nil)
+      (setf f (+ (expt f 2) c))
+      (<span class="org-keyword">when</span> (&gt; (abs f) limit)
+        (<span class="org-keyword">return-from</span> iterate iters)))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">divergence-iters</span> (c)
+  (iterate (* 2e-3 (- c #C(800.0 350.0)))
+           30
+           5.0))
+</pre>
+</div></details>
+
+<pre class="example">
+DIVERGENCE-ITERS
+</pre>
+
+
+<pre class="example" id="orgc42f36e">
+Total  :0.550 sec
+Total  :0.460 sec
+Total  :0.460 sec
+Total  :0.470 sec
+Total  :0.460 sec
+Total  :0.460 sec
+</pre>
+
+<p>
+Simply adding type declarations decreased the runtime by 4 times. This is one of the things I like about Common Lisp. You can quickly iterate with ideas then make it run faster later with not much effort. 
+</p>
+
+<p>
+Lets see if we can go little more further. 
+</p>
+
+<p>
+Note that these timing are for 30 iterations and with limit value of 5.0. When we zoom into the plot we will need to increase the iterations and these timing would change accordingly. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8d888d4" class="outline-2">
+<h2 id="org8d888d4"><span class="section-number-2">5.</span> Parallel Computation</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+lparallel library can be used to run the computations in parallel. 
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defparameter</span> <span class="org-variable-name">lparallel:*kernel*</span> (lparallel:make-kernel 8))
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*width*</span> 1200)
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*height*</span> 700)
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*regions*</span> (<span class="org-keyword">let</span> ((stepx (/ *width* 2))
+                              (stepy (/ *height* 4)))
+                          (<span class="org-keyword">loop</span> for x0 from 0 to (- *width* stepx) by stepx
+                                with regions = nil do 
+                                  (<span class="org-keyword">loop</span> for y0 from 0 to (- *height* stepy) by stepy
+                                        do (push (mapcar (<span class="org-keyword">lambda</span> (i) (truncate i))
+                                                         (list x0 (+ x0 stepx)
+                                                               y0 (+ y0 stepy)))
+                                                 regions))
+                                finally (<span class="org-keyword">return</span> regions))))
+</pre>
+</div></details>
+
+<pre class="example">
+*REGIONS*
+</pre>
+
+
+<p>
+My laptop has 8 cores, so I made 8 computation kernels and divided the screen into 8 regions (as shown in table below). 
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">`((<span class="org-string">"X0"</span> <span class="org-string">"X1"</span> <span class="org-string">"Y1"</span> <span class="org-string">"Y2"</span>)
+  ,@(reverse *regions*))
+</pre>
+</div></details>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">X0</td>
+<td class="org-right">X1</td>
+<td class="org-right">Y1</td>
+<td class="org-right">Y2</td>
+</tr>
+
+<tr>
+<td class="org-right">0</td>
+<td class="org-right">600</td>
+<td class="org-right">0</td>
+<td class="org-right">175</td>
+</tr>
+
+<tr>
+<td class="org-right">0</td>
+<td class="org-right">600</td>
+<td class="org-right">175</td>
+<td class="org-right">350</td>
+</tr>
+
+<tr>
+<td class="org-right">0</td>
+<td class="org-right">600</td>
+<td class="org-right">350</td>
+<td class="org-right">525</td>
+</tr>
+
+<tr>
+<td class="org-right">0</td>
+<td class="org-right">600</td>
+<td class="org-right">525</td>
+<td class="org-right">700</td>
+</tr>
+
+<tr>
+<td class="org-right">600</td>
+<td class="org-right">1200</td>
+<td class="org-right">0</td>
+<td class="org-right">175</td>
+</tr>
+
+<tr>
+<td class="org-right">600</td>
+<td class="org-right">1200</td>
+<td class="org-right">175</td>
+<td class="org-right">350</td>
+</tr>
+
+<tr>
+<td class="org-right">600</td>
+<td class="org-right">1200</td>
+<td class="org-right">350</td>
+<td class="org-right">525</td>
+</tr>
+
+<tr>
+<td class="org-right">600</td>
+<td class="org-right">1200</td>
+<td class="org-right">525</td>
+<td class="org-right">700</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Now I have to distribute the computation/draw part into 8 pieces. For that I modify the <code>draw</code> function as:
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">draw%</span> (x0 x1 y0 y1) 
+  (<span class="org-keyword">loop</span> for x from x0 below x1 do
+    (<span class="org-keyword">loop</span> for y from y0 below y1 
+          for value =  (divergence-iters (complex x y)) do
+            (<span class="org-keyword">when</span> value 
+              (sdl:draw-pixel-* x y <span class="org-builtin">:color</span>
+                                (sdl:color <span class="org-builtin">:g</span> 0 <span class="org-builtin">:b</span> 0 <span class="org-builtin">:r</span> (max 0 (min 255 (* 20 (abs value))))))))))
+
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">draw</span> ()
+  (lparallel:pmap nil 
+                  (<span class="org-keyword">lambda</span> (region)
+                    (apply #'draw% region))
+                  *regions*))
+</pre>
+</div></details>
+
+<pre class="example">
+DRAW
+</pre>
+
+
+<p>
+Instead of <code>map</code>-ing over the <code>*regions*</code> we just <code>lparallel:pmap</code>. It simple as that to do parallel processing. 
+So lets see the results!
+</p>
+
+<pre class="example" id="orgd5cae09">
+Total  :0.560 sec
+Total  :0.460 sec
+Total  :0.470 sec
+Total  :0.460 sec
+Total  :0.450 sec
+</pre>
+
+<p>
+Huh!! Why no change?? This is because with just <code>30</code> iteration for each pixel, the overhead of drawing and parallizing is significant that that of computing. But all is not in vain. We will get the benefit of this when we need increase iterations while zooming into the plot. (There might be other mathematical techinques for computing mandelbrot set faster when zoomed in, but I didn't search)
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">divergence-iters</span> (c)
+    (iterate (* 2e-3 (- c #C(800.0 350.0)))
+             3000
+             5.0))
+</pre>
+</div></details>
+
+<pre class="example">
+DIVERGENCE-ITERS
+</pre>
+
+
+<pre class="example" id="org030e307">
+Total  :13.800 sec
+Total  :13.590 sec
+Total  :13.620 sec
+</pre>
+<p>
+Still no benefit!! Lets try decoupling drawing and computing and see if drawing pixels is the bottleneck.
+</p>
+</div>
+</div>
+<div id="outline-container-org1538f2b" class="outline-2">
+<h2 id="org1538f2b"><span class="section-number-2">6.</span> Decoupling Drawing and Computing</h2>
+<div class="outline-text-2" id="text-6">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">deftype</span> <span class="org-type">color</span> ()
+  '(unsigned-byte 8))
+
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*buffer*</span> (make-array (list *height* *width* 3)
+                                   <span class="org-builtin">:element-type</span> 'color))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">compute%</span> (x0 x1 y0 y1) 
+  (<span class="org-keyword">loop</span> for x from x0 below x1 do
+    (<span class="org-keyword">loop</span> for y from y0 below y1 
+          for value =  (divergence-iters (complex x y)) do
+            (<span class="org-keyword">if</span> value 
+                <span class="org-comment-delimiter">;; </span><span class="org-comment">when not in set, color the pixel</span>
+                (setf (aref *buffer* y x 0) (max 0 (min 255 (* 20 (abs value))))
+                      (aref *buffer* y x 1) 0
+                      (aref *buffer* y x 2) 0)
+                <span class="org-comment-delimiter">;; </span><span class="org-comment">when in set, just set to white color</span>
+                (setf (aref *buffer* y x 0) 0
+                      (aref *buffer* y x 1) 0
+                      (aref *buffer* y x 2) 0)))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">compute</span> ()
+  (lparallel:pmap nil 
+                  (<span class="org-keyword">lambda</span> (region)
+                    (apply #'compute% region))
+                  *regions*))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">draw</span> ()
+  (<span class="org-keyword">loop</span> for x from 0 below *width* do
+    (<span class="org-keyword">loop</span> for y from 0 below *height* do
+      (sdl:draw-pixel-* x y <span class="org-builtin">:color</span> (sdl:color <span class="org-builtin">:r</span> (aref *buffer* y x 0)
+                                              <span class="org-builtin">:g</span> (aref *buffer* y x 1)
+                                              <span class="org-builtin">:b</span> (aref *buffer* y x 2))))))
+</pre>
+</div></details>
+
+<pre class="example">
+DRAW
+</pre>
+
+
+<p>
+I have now created <code>*buffer*</code> variable to hold the pixel colors. Then separated the computation and drawing part. 
+Let modify <code>main</code> function to use this setup. 
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">main</span> ()
+  (sdl:with-init ()
+    (sdl:window 1200 700 <span class="org-builtin">:resizable</span> t <span class="org-builtin">:title-caption</span> <span class="org-string">"Mandelbrot Set"</span>)
+    (setf sdl:*default-color* sdl:*black*)
+    (sdl:initialise-default-font)
+    (sdl:with-events ()
+      (<span class="org-builtin">:quit-event</span> () t)
+      (<span class="org-builtin">:idle</span>
+       ()
+       <span class="org-comment-delimiter">;; </span><span class="org-comment">Clear screen</span>
+       (sdl:clear-display sdl:*white*)
+       <span class="org-comment-delimiter">;; </span><span class="org-comment">drawing</span>
+       (format t <span class="org-string">"~&amp; Computation  :~,3f sec"</span> (timing #'compute))
+       (format t <span class="org-string">"~&amp; Drawing      :~,3f sec"</span> (timing #'draw))
+       <span class="org-comment-delimiter">;; </span><span class="org-comment">updating display</span>
+       (sdl:update-display)))))
+</pre>
+</div></details>
+
+<pre class="example">
+MAIN
+</pre>
+
+<pre class="example" id="org9ff68be">
+Computation  :3.480 sec
+ Drawing      :0.340 sec
+ Computation  :3.070 sec
+ Drawing      :0.360 sec
+ Computation  :3.030 sec
+ Drawing      :0.350 sec
+ Computation  :3.360 sec
+ Drawing      :0.350 sec
+ Computation  :3.310 sec
+ Drawing      :0.350 sec
+ Computation  :3.500 sec
+ Drawing      :0.350 sec
+</pre>
+
+<p>
+From 13 seconds to around 3.3 seconds! Its good. Seems like drawing a pixel is a blocking activity or something like that (I din't dig into it further). So, performing all computation in different cores then drawing all at onces is better. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9105ec9" class="outline-2">
+<h2 id="org9105ec9"><span class="section-number-2">7.</span> Lets add translation and scaling!</h2>
+<div class="outline-text-2" id="text-7">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*scale*</span> 3e-3)
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*translation*</span> (complex 0 0))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">divergence-iters</span> (c)
+  (iterate c
+           30
+           50.0))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">transform</span> (x y)
+  (<span class="org-keyword">declare</span> (optimize (speed 3) (safety 0) (debug 0)))
+  (<span class="org-keyword">declare</span> (fixnum x y)
+           ((complex fixnum) *translation*)
+           (single-float *scale*))
+  (+ *translation* (complex (* *scale* (<span class="org-keyword">the</span> fixnum (- x 800)))
+                            (* *scale* (<span class="org-keyword">the</span> fixnum (- y 350))))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">compute%</span> (x0 x1 y0 y1) 
+  (<span class="org-keyword">loop</span> for x from x0 below x1 do
+    (<span class="org-keyword">loop</span> for y from y0 below y1 
+          for value =  (divergence-iters (transform x y)) do
+            (<span class="org-keyword">if</span> value 
+                <span class="org-comment-delimiter">;; </span><span class="org-comment">when not in set, color the pixel</span>
+                (setf (aref *buffer* y x 0) (max 0 (min 255 (* 20 (abs value))))
+                      (aref *buffer* y x 1) 0
+                      (aref *buffer* y x 2) 0)
+                <span class="org-comment-delimiter">;; </span><span class="org-comment">when in set, just set to white color</span>
+                (setf (aref *buffer* y x 0) 0
+                      (aref *buffer* y x 1) 0
+                      (aref *buffer* y x 2) 0)))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">main</span> ()
+  (sdl:with-init ()
+    (sdl:window 1200 700 <span class="org-builtin">:resizable</span> t <span class="org-builtin">:title-caption</span> <span class="org-string">"Mandelbrot Set"</span>)
+    (setf sdl:*default-color* sdl:*black*)
+    (sdl:initialise-default-font)
+    (sdl:enable-key-repeat 100 10)
+    (sdl:with-events ()
+      (<span class="org-builtin">:quit-event</span> () t)
+      (<span class="org-builtin">:key-down-event</span>
+       (<span class="org-builtin">:key</span> key)
+       (<span class="org-keyword">case</span> key
+         (<span class="org-builtin">:sdl-key-q</span> (sdl:push-quit-event))
+         (<span class="org-builtin">:sdl-key-l</span>
+          (setf *scale* (* *scale* 1.2)))
+         (<span class="org-builtin">:sdl-key-k</span>
+          (setf *scale* (/ *scale* 1.2)))
+         (<span class="org-builtin">:sdl-key-a</span>
+          (incf *translation* (* *scale* #C(-20 0))))
+         (<span class="org-builtin">:sdl-key-d</span>
+          (incf *translation* (* *scale* #C(20 0))))
+         (<span class="org-builtin">:sdl-key-w</span>
+          (incf *translation* (* *scale* #C(0 -20))))
+         (<span class="org-builtin">:sdl-key-s</span>
+          (incf *translation* (* *scale* #C(0 -20))))))
+      (<span class="org-builtin">:idle</span>
+       ()
+       <span class="org-comment-delimiter">;; </span><span class="org-comment">Clear screen</span>
+       (sdl:clear-display sdl:*white*)
+       <span class="org-comment-delimiter">;; </span><span class="org-comment">drawing</span>
+       (format t <span class="org-string">"~&amp;Calculate : ~,3f sec"</span> (timing #'compute))
+       (format t <span class="org-string">"~&amp;Draw      : ~,3f sec"</span> (timing #'draw))
+       (sdl:update-display)))))
+</pre>
+</div></details>
+
+<pre class="example">
+MAIN
+</pre>
+
+
+<p>
+<code>*scale*</code> and <code>*translation*</code> hold the current transformation, <code>compute%</code> uses <code>transform</code> function to transform x,y to desired complex number and finally <code>main</code> is update to respond to certain key-presses for translation and scaling.
+</p>
+
+<pre class="example" id="orgbc06b3c">
+Calculate : 0.250 sec
+Draw      : 0.430 sec
+Calculate : 0.050 sec
+Draw      : 0.350 sec
+Calculate : 0.050 sec
+Draw      : 0.360 sec
+Calculate : 0.050 sec
+Draw      : 0.370 sec
+Calculate : 0.050 sec
+Draw      : 0.370 sec
+</pre>
+
+<p>
+This is all good! But I am still not happy with the 350ms it takes to draw each frame. 
+We will have to directly access the surface buffer to write pixel colors in bulk. But lispbuilder-sdl doesn't directly provide this feature (or at least I don't know that), rather lispbuilder-sdl requires us to use opengl. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org18bb11c" class="outline-2">
+<h2 id="org18bb11c"><span class="section-number-2">8.</span> OpenGL</h2>
+<div class="outline-text-2" id="text-8">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*buffer-base*</span> (make-array (* *height* *width* 3) <span class="org-builtin">:element-type</span> 'color))
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*buffer*</span> (make-array (list *height* *width* 3)
+                                   <span class="org-builtin">:element-type</span> 'color
+                                   <span class="org-builtin">:displaced-to</span> *buffer-base*))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">draw</span> ()
+  (gl:draw-pixels *width* *height*
+                  <span class="org-builtin">:rgb</span>
+                  <span class="org-builtin">:unsigned-byte</span>
+                  *buffer-base*))
+</pre>
+</div></details>
+
+<pre class="example">
+DRAW
+</pre>
+
+
+<p>
+cl-opengl's <code>draw-pixels</code> takes five arguments width and height of the data, format of pixel data (we have rgb), and type of data (unsigned-bytes). Also note that it expects a simple-vector i.e. a one-dimensional array. But our <code>*buffer*</code> was a multidimensional array. Here the displaced-array feature of Common Lisp comes to rescue. I created a 1d array (<code>*buffer-base*</code>) of size <code>width * height * 3</code> then defined <code>*buffer*</code> as a 3d array displaced to that array. This way we won't have to change the code we wrote before. 
+</p>
+
+<p>
+Finally, we change <code>main</code> and tell sdl to allow us to use opengl. 
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">main</span> ()
+  (sdl:with-init ()
+    (sdl:window 1200 700 <span class="org-builtin">:resizable</span> t <span class="org-builtin">:title-caption</span> <span class="org-string">"Mandelbrot Set"</span> <span class="org-builtin">:opengl</span> t)
+    ...))
+</pre>
+</div></details>
+</div>
+</div>
+
+<div id="outline-container-org0d50166" class="outline-2">
+<h2 id="org0d50166"><span class="section-number-2">9.</span> Finally Result</h2>
+<div class="outline-text-2" id="text-9">
+<ul class="org-ul">
+<li>See my <a href="https://github.com/bpanthi977/random-code-collection/blob/main/maths/mandelbrot.lisp">GitHub</a> for the full code.</li>
+<li>See <a href="https://www.youtube.com/watch?v=MfndnvMAyhE">this screen recording</a> for the result. (The code that appears in the video is not this final version, so it has slightly different function names somewhere, otherwise its all the same)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9df4a90" class="outline-2">
+<h2 id="org9df4a90"><span class="section-number-2">10.</span> Final Code</h2>
+<div class="outline-text-2" id="text-10">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(ql:quickload <span class="org-builtin">:lispbuilder-sdl</span>)
+(ql:quickload <span class="org-builtin">:cl-opengl</span>)
+(ql:quickload <span class="org-builtin">:lparallel</span>)
+
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*width*</span> 1200)
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*height*</span> 700)
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*scale*</span> 3e-3)
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*translation*</span> (complex 0 0))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">initialize 8 lparallel kernels </span>
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">lparallel:*kernel*</span> (lparallel:make-kernel 8))
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*regions*</span> (<span class="org-keyword">let</span> ((stepx (/ *width* 2))
+                              (stepy (/ *height* 4)))
+                          (<span class="org-keyword">loop</span> for x0 from 0 to (- *width* stepx) by stepx
+                                with regions = nil do 
+                                  (<span class="org-keyword">loop</span> for y0 from 0 to (- *height* stepy) by stepy
+                                        do (push (mapcar (<span class="org-keyword">lambda</span> (i) (truncate i))
+                                                         (list x0 (+ x0 stepx)
+                                                               y0 (+ y0 stepy)))
+                                                 regions))
+                                finally (<span class="org-keyword">return</span> regions))))
+
+(<span class="org-keyword">deftype</span> <span class="org-type">color</span> ()
+  '(unsigned-byte 8))
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*buffer-base*</span> (make-array (* *height* *width* 3) <span class="org-builtin">:element-type</span> 'color))
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*buffer*</span> (make-array (list *height* *width* 3)
+                                   <span class="org-builtin">:element-type</span> 'color
+                                   <span class="org-builtin">:displaced-to</span> *buffer-base*))
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Mandelbrot Set Computations </span>
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">iterate</span> (c iterations limit)
+  (<span class="org-keyword">declare</span> (optimize (speed 3) (safety 0) (debug 0)))
+  (<span class="org-keyword">declare</span> ((complex single-float) c)
+           (fixnum iterations))
+  (<span class="org-keyword">let</span> ((f c))
+    (<span class="org-keyword">declare</span> ((complex single-float) f)
+             (single-float limit))
+    (<span class="org-keyword">dotimes</span> (iters iterations f)
+      (setf f (+ (expt f 2) c))
+      (<span class="org-keyword">when</span> (&gt; (abs f) limit)
+        (<span class="org-keyword">return-from</span> iterate iters)))
+    nil))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">divergence-iters</span> (c)
+  <span class="org-doc">"Number of iterations it took for `</span><span class="org-doc"><span class="org-constant">c</span></span><span class="org-doc">' to diverge. NIL for `</span><span class="org-doc"><span class="org-constant">c</span></span><span class="org-doc">' that belongs to madelbrot set"</span>
+  (iterate c
+           30
+           50.0))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">transform</span> (x y)
+  (<span class="org-keyword">declare</span> (optimize (speed 3) (safety 0) (debug 0)))
+  (<span class="org-keyword">declare</span> (fixnum x y)
+           ((complex fixnum) *translation*)
+           (single-float *scale*))
+  (+ *translation* (complex (* *scale* (<span class="org-keyword">the</span> fixnum (- x 800)))
+                            (* *scale* (<span class="org-keyword">the</span> fixnum (- y 350))))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">compute%</span> (x0 x1 y0 y1) 
+  (<span class="org-keyword">loop</span> for x from x0 below x1 do
+    (<span class="org-keyword">loop</span> for y from y0 below y1 
+          for value =  (divergence-iters (transform x y)) do
+            (<span class="org-keyword">if</span> value 
+                <span class="org-comment-delimiter">;; </span><span class="org-comment">when not in set, color the pixel</span>
+                (setf (aref *buffer* y x 0) (max 0 (min 255 (* 20 (abs value))))
+                      (aref *buffer* y x 1) 0
+                      (aref *buffer* y x 2) 0)
+                <span class="org-comment-delimiter">;; </span><span class="org-comment">when in set, just set to white color</span>
+                (setf (aref *buffer* y x 0) 0
+                      (aref *buffer* y x 1) 0
+                      (aref *buffer* y x 2) 0)))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">compute</span> ()
+  (lparallel:pmap nil 
+                  (<span class="org-keyword">lambda</span> (region)
+                    (apply #'compute% region))
+                  *regions*))
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Drawing </span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">draw</span> ()
+  (gl:draw-pixels *width* *height*
+                  <span class="org-builtin">:rgb</span>
+                  <span class="org-builtin">:unsigned-byte</span>
+                  *buffer-base*))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">timing</span> (function)
+  (<span class="org-keyword">let</span> ((t1 (get-internal-real-time)))
+    (funcall function)
+    (/ (- (get-internal-real-time) t1)
+       internal-time-units-per-second)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">main</span> ()
+  (sdl:with-init ()
+    (sdl:window 1200 700 <span class="org-builtin">:resizable</span> t <span class="org-builtin">:title-caption</span> <span class="org-string">"Mandelbrot Set"</span> <span class="org-builtin">:opengl</span> t)
+    (setf sdl:*default-color* sdl:*black*)
+    (sdl:initialise-default-font)
+    (sdl:enable-key-repeat 100 10)
+    (sdl:with-events ()
+      (<span class="org-builtin">:quit-event</span> () t)
+      (<span class="org-builtin">:key-down-event</span>
+       (<span class="org-builtin">:key</span> key)
+       (<span class="org-keyword">case</span> key
+         (<span class="org-builtin">:sdl-key-q</span> (sdl:push-quit-event))
+         (<span class="org-builtin">:sdl-key-l</span>
+          (setf *scale* (* *scale* 1.2)))
+         (<span class="org-builtin">:sdl-key-k</span>
+          (setf *scale* (/ *scale* 1.2)))
+         (<span class="org-builtin">:sdl-key-a</span>
+          (incf *translation* (* *scale* #C(-20 0))))
+         (<span class="org-builtin">:sdl-key-d</span>
+          (incf *translation* (* *scale* #C(20 0))))
+         (<span class="org-builtin">:sdl-key-w</span>
+          (incf *translation* (* *scale* #C(0 -20))))
+         (<span class="org-builtin">:sdl-key-s</span>
+          (incf *translation* (* *scale* #C(0 -20))))))
+
+      (<span class="org-builtin">:idle</span>
+       ()
+       <span class="org-comment-delimiter">;; </span><span class="org-comment">Clear screen</span>
+       (sdl:clear-display sdl:*white*)
+       <span class="org-comment-delimiter">;; </span><span class="org-comment">drawing</span>
+       (format t <span class="org-string">"~&amp;Calculate : ~,3f sec"</span> (timing #'compute))
+       (format t <span class="org-string">"~&amp;Draw      : ~,3f sec"</span> (timing #'draw))
+       (sdl:update-display)))))
+</pre>
+</div></details>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Mandelbrot Set Plotting in Common Lisp">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

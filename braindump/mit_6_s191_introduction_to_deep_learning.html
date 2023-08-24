@@ -1,0 +1,1845 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MIT 6.S191: Introduction to Deep Learning</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="../js/counters.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">MIT 6.S191: Introduction to Deep Learning</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org2956c94">1. Introduction to Deep Learning</a>
+<ul>
+<li><a href="#orga6301de">1.1. What is Deep Learning</a></li>
+<li><a href="#org9f698cb">1.2. Why is it popular now?</a></li>
+<li><a href="#org90fe433">1.3. Training Deep Neural Networks</a></li>
+</ul>
+</li>
+<li><a href="#orgeacdb0b">2. RNN and Transformers (MIT 6.S191 2022)</a>
+<ul>
+<li><a href="#orgbc79074">2.1. Sequential Modelling</a></li>
+<li><a href="#org763dd64">2.2. Sequence Modelling: Design Criteria</a></li>
+<li><a href="#orgab13bcf">2.3. Recurrence and RNNs</a></li>
+<li><a href="#org4cdb366">2.4. Learning Algorithm: Back propagation through time (BPTT)</a></li>
+<li><a href="#org58065ad">2.5. Gated Cells</a></li>
+<li><a href="#org90c34c7">2.6. Limitations &amp; Desired Capabilities of RNN</a></li>
+<li><a href="#orgf9d9f2e">2.7. Attention Is All You Need: Transformers</a></li>
+<li><a href="#org5b5f283">2.8. Lab Tasks</a></li>
+</ul>
+</li>
+<li><a href="#orge195555">3. Convolutional Neural Networks</a>
+<ul>
+<li><a href="#org717a712">3.1. Feature Detection</a></li>
+<li><a href="#org2d5223a">3.2. Filters detect Features</a></li>
+<li><a href="#orgea678fa">3.3. Convolutional Neural Networks (CNNs)</a></li>
+<li><a href="#org9bef465">3.4. Object Detection</a></li>
+<li><a href="#orgf8833b4">3.5. Semantic Segmentation: Fully Convolutional Networks</a></li>
+<li><a href="#orgd26b2c5">3.6. Continuous Control</a></li>
+</ul>
+</li>
+<li><a href="#orgb21432a">4. Deep Generative Modeling</a>
+<ul>
+<li><a href="#org39a9b27">4.1. Uses of Generative Models</a></li>
+<li><a href="#orgcd58256">4.2. Latent Variable</a></li>
+<li><a href="#orga7a94bf">4.3. Autoencoders</a></li>
+<li><a href="#org6dca61e">4.4. Variational AutoEncoder</a></li>
+<li><a href="#org9688899">4.5. Generative Adversarial Networks (GANs)</a></li>
+<li><a href="#orgf9c12ea">4.6. Distribution Transformer</a></li>
+</ul>
+</li>
+<li><a href="#orgcd6cd55">5. Deep Reinforcement Learning</a>
+<ul>
+<li><a href="#orgeef9fda">5.1. Introduction</a></li>
+<li><a href="#orgc881620">5.2. Learning Algorithms</a></li>
+<li><a href="#orgbe83399">5.3. Deep Q Networks (DQN)</a></li>
+<li><a href="#org86976d9">5.4. Policy Gradient Methods</a></li>
+<li><a href="#org15c2efc">5.5. Applications</a></li>
+</ul>
+</li>
+<li><a href="#org201dd97">6. Deep Learning New Frontiers</a>
+<ul>
+<li><a href="#org780df95">6.1. Universal Approximation Theorem</a></li>
+<li><a href="#org261f22a">6.2. AI `Hype`: Historical Perspective</a></li>
+<li><a href="#org19d7d0c">6.3. Limitations</a></li>
+<li><a href="#orgee08854">6.4. Frontiers</a></li>
+</ul>
+</li>
+<li><a href="#org1a65fc1">7. Notes</a></li>
+</ul>
+</div>
+</div>
+<p>
+Notes from 6.S191 2022 <a href="https://www.youtube.com/playlist?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI">https://www.youtube.com/playlist?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI</a>
+</p>
+
+<p>
+Lectures by: 
+</p>
+<ul class="org-ul">
+<li>Alexander Amini</li>
+<li>Ava Soleimany</li>
+</ul>
+
+
+<div id="outline-container-org2956c94" class="outline-2">
+<h2 id="org2956c94"><span class="section-number-2">1.</span> Introduction to Deep Learning</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<a href="https://www.youtube.com/watch?v=7sB052Pz0sQ&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=3">Lecture 1: Introduction to Deep Learning</a>: In which we explore what Deep Learning is, why it is popular. How are Deep NNs are trained, and some cautions on overfitting. 
+</p>
+</div>
+
+<div id="outline-container-orga6301de" class="outline-3">
+<h3 id="orga6301de"><span class="section-number-3">1.1.</span> What is Deep Learning</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+@ 00:06:36
+</p>
+
+
+<div id="org5a0df2a" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/ai_ml_dl-20230314084339.png" alt="ai_ml_dl-20230314084339.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>AI - ML - DL</p>
+</div>
+
+<ul class="org-ul">
+<li><a href="artificial_intelligence.html#ID-2674491f-a645-4499-996e-af04db2be74d">Artificial Intelligence</a>: Any technique that enables computers to mimic human behaviour</li>
+<li><a href="machine_learning.html#ID-5b3ac5b3-f28b-4f5f-bdea-c25b5002c622">Machine Learning</a>: Ability to learn without explicitly being programmed</li>
+<li><a href="deep_learning.html#ID-44E268ED-3283-4A3D-B91F-FFE997A9F6D1">Deep Learning</a>: <b>Extract patters from data using neural networks</b></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9f698cb" class="outline-3">
+<h3 id="org9f698cb"><span class="section-number-3">1.2.</span> Why is it popular now?</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+@ 00:12:15
+</p>
+
+<ul class="org-ul">
+<li><a href="big_data.html#ID-6EEA1C2A-A3D5-40A1-9BBC-6F9E5AAE8847">Big Data</a></li>
+<li>Faster Hardware</li>
+<li>Software
+<ul class="org-ul">
+<li>Improved techniques</li>
+<li>New Models</li>
+<li>Toolboxes (TensorFlow, PyTorch)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org90fe433" class="outline-3">
+<h3 id="org90fe433"><span class="section-number-3">1.3.</span> Training Deep Neural Networks</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<ol class="org-ol">
+<li><a id="org18fefd7"></a>Optimization Algorithms:<br />
+<div class="outline-text-4" id="text-1-3-1">
+<ol class="org-ol">
+<li>SGD</li>
+<li>Adam</li>
+<li>Adadelta</li>
+<li>Adagrad</li>
+<li>RMSProp</li>
+</ol>
+</div>
+</li>
+
+<li><a id="org8158bd7"></a>Learning Rate<br />
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+@ 00:39:35
+</p>
+<ul class="org-ul">
+<li>Low learning rate: Slow convergence, and may get stuck at local minima</li>
+<li>Large learning rate: May diverge</li>
+</ul>
+
+<p>
+How to find Learning Rate?
+</p>
+<ol class="org-ol">
+<li>Try different learning rates and check which works better</li>
+<li>Adaptive Learning Rate</li>
+</ol>
+</div>
+</li>
+
+<li><a id="org595710d"></a>Mini Batches<br />
+<div class="outline-text-4" id="text-1-3-3">
+<ul class="org-ul">
+<li>Actual Loss is summation over all dataset. This is expensive to compute.</li>
+<li>And, Using only one example will be noisy</li>
+<li>So, compute loss from a subset of the dataset with say \(B\) samples. This is called mini-batching.</li>
+</ul>
+
+<p>
+This allows:
+</p>
+<ul class="org-ul">
+<li>Smoother convergence</li>
+<li>Larger learning rate</li>
+<li>Parallization of computing gradient</li>
+</ul>
+</div>
+</li>
+
+<li><a id="org83c8970"></a>Overfitting<br />
+<div class="outline-text-4" id="text-1-3-4">
+<p>
+@ 00:44:57
+Overfitting results good performance in Training data but the model doesn't generalize well and performs poorly in test dataset. Or, when there is distributional shift in data.
+</p>
+
+
+<div id="org022725b" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/overfitting-20230314085657.png" alt="overfitting-20230314085657.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Overfitting</p>
+</div>
+</div>
+
+<ol class="org-ol">
+<li><a id="org77967d3"></a>Regularization<br />
+<div class="outline-text-5" id="text-1-3-4-1">
+<p>
+Regularization is a technique that constrains our optimization problem to discourage complex models. This improves <a href="generalization.html#ID-CB4D2B35-1847-4F17-A2A3-0539330253DE">generalization</a> of model on unseen data
+</p>
+
+<p>
+Techniques for Regulaization
+</p>
+<ol class="org-ol">
+<li>Dropout: randomly set neurons on hidden layers to 0</li>
+<li>Early Stopping: Stop training before we have a chance to overfit</li>
+</ol>
+
+
+<div id="org0ae42d2" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/early_stopping_regularization-20230314090047.png" alt="early_stopping_regularization-20230314090047.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span>Early Stopping (Regularization)</p>
+</div>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgeacdb0b" class="outline-2">
+<h2 id="orgeacdb0b"><span class="section-number-2">2.</span> RNN and Transformers (MIT 6.S191 2022)</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<a href="https://www.youtube.com/watch?v=QvkQ1B3FBqA&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=3">Lecture 2: Deep Sequence Modeling</a>: In which we get introduced to sequential modeling, how recurrence (&amp; RNN) help in sequential modelling. 
+</p>
+</div>
+
+<div id="outline-container-orgbc79074" class="outline-3">
+<h3 id="orgbc79074"><span class="section-number-3">2.1.</span> Sequential Modelling</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+<img src="data/mit_6_s191_introduction_to_deep_learning/squential_model_application-20230314091644.png" alt="squential_model_application-20230314091644.png" />
+@ 0:04:06
+</p>
+
+<p>
+Example of <a href="sequential_modelling.html#ID-6936E548-C4F7-4B06-94E8-40BAC1B3060D">Sequence Modeling</a> tasks: 
+</p>
+<ul class="org-ul">
+<li>Sequential Input -&gt; One Output : Sentiment Classification</li>
+<li>One Input -&gt; Sequential Output: Image Captioning</li>
+<li>Sequential Input -&gt; Sequential Output: Machine Translation</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org763dd64" class="outline-3">
+<h3 id="org763dd64"><span class="section-number-3">2.2.</span> Sequence Modelling: Design Criteria</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+@ 0:20:29
+To model sequences, we need to: 
+</p>
+<ul class="org-ul">
+<li>Handle <b>variable-length</b> sequences</li>
+<li>Track <b>long-term</b> dependencies</li>
+<li>Maintain infromation about <b>order</b></li>
+<li><b>Share parameters</b> across the sequence</li>
+</ul>
+
+<p>
+@ 0:20:41 RNN Meet these sequence modeling design criteria 
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgedab62a"></a>Example Task: Predict the Next Word<br />
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+First we need to address <b>Embedding</b>: i.e. How to represent language to a Neural Network? (@ 0:23:10)
+</p>
+<ul class="org-ul">
+<li>One-hot embedding</li>
+<li>Learned Embedding (0:25:50 Representation Learning)</li>
+</ul>
+
+
+<div id="orge3b3716" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/encoding_language_for_nn-20230316093655.png" alt="encoding_language_for_nn-20230316093655.png" />
+</p>
+<p><span class="figure-number">Figure 4: </span>Encoding Language for NN</p>
+</div>
+
+<p>
+Now observe that this problem demands all the <b>Design Criteria</b> for sequential modelling: 
+</p>
+<ul class="org-ul">
+<li>0:26:30 Variable-Length : Sentences are not of fixed size</li>
+<li>0:26:38 Long-term dependencies: An Idea in the beginning of a text influences the meaning till the end.</li>
+<li>0:27:07 Sequence Order: Order of words in a sentence matter.</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgab13bcf" class="outline-3">
+<h3 id="orgab13bcf"><span class="section-number-3">2.3.</span> Recurrence and RNNs</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+@ 0:08:32
+</p>
+
+<p>
+Consider a single feed forward network, it takes input and gives output at a single timestep. Lets call this the <b>recurrent cell</b> and use it as building block to accept sequence of input (i.e. input/output at timestep)
+</p>
+<ul class="org-ul">
+<li>We can pass inputs from multiple timesteps, but what we need is to <b>connect the current input to input from previous timesteps</b></li>
+<li>This means we need to <b>propagate prior computation/information</b> through time: via. <b>Recurrence Relation</b> (@ 0:08:06)</li>
+<li>We do this through, Internal Memory or State: \(h_t\)</li>
+</ul>
+
+
+<div id="org62bcc45" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/recurrent_nn-20230314092546.png" alt="recurrent_nn-20230314092546.png" />
+</p>
+<p><span class="figure-number">Figure 5: </span>Recurrent NN</p>
+</div>
+
+<p>
+@ 0:10:56
+</p>
+<ul class="org-ul">
+<li>In RNN, we apply a recurrence relation at every time step to process a sequence</li>
+<li>RNNs have a state, \(h\), that is updated at each time step as a sequence is processed</li>
+<li>\(h_t = f_W(x_t, h_{t-1})\) where the weight \(W\) is same across timesteps but the input \(x_t\) and the memory \(h_t\) change</li>
+</ul>
+
+
+<div id="org794f18c" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/rnn_computation_graph_across_time-20230314093011.png" alt="rnn_computation_graph_across_time-20230314093011.png" />
+</p>
+<p><span class="figure-number">Figure 6: </span>RNN: Computation Graph Across Time @ 0:15:16</p>
+</div>
+<ul class="org-ul">
+<li>\(y_t = f(W_{hy}, h_t)\) why not x<sub>t</sub> ?</li>
+<li>\(h_t = f(W_{hh}, h_{t-1}, W_{hx}, x_t)\)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4cdb366" class="outline-3">
+<h3 id="org4cdb366"><span class="section-number-3">2.4.</span> Learning Algorithm: Back propagation through time (BPTT)</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+Loss function: @ 0:16:28
+</p>
+<ul class="org-ul">
+<li>Sum the loss function at individual timestep to get the total loss</li>
+</ul>
+
+
+
+<div id="orgcce3688" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/bptt-20230316094048.png" alt="bptt-20230316094048.png" />
+</p>
+<p><span class="figure-number">Figure 7: </span>BPTT @ 0:29:34</p>
+</div>
+</div>
+
+<ol class="org-ol">
+<li><a id="org8b358db"></a>Exploding Gradients and Vanishing Gradients<br />
+<div class="outline-text-4" id="text-2-4-1">
+<p>
+@ 0:30:21
+Computing gradients wrt \(h_0\) involves many factors of \(W_{hh}\) &amp; repeated gradient computation.
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgc7d4126"></a>Exploding Gradient<br />
+<div class="outline-text-5" id="text-2-4-1-1">
+<p>
+If the gradients are &gt; 1 then, repeated gradient computation causes graident to explode. <a href="exploding_gradient.html#ID-A7455B39-FAB4-4922-8F84-5F51F43E02DA">Exploding gradient</a> problem can be solved by: 
+</p>
+<ul class="org-ul">
+<li>Gradient Clipping (i.e. don't allow the gradients to increase beyond certain threshold)</li>
+</ul>
+</div>
+</li>
+
+<li><a id="org101a4ca"></a>Vanishing Gradient<br />
+<div class="outline-text-5" id="text-2-4-1-2">
+<p>
+However if the gradients are &lt; 1, then as gradients are backpropagated the gradients decrease to near zero (vanishing gradient). <a href="vanishing_gradient.html#ID-2880697B-C48B-40C2-B25D-CEA991940A8A">Vanishing Gradient</a> cause the model to focus on short term dependencies and ignore long term dependencies. It can solved by:
+</p>
+
+<ul class="org-ul">
+<li>Activation Function: ReLU (@ 0:32:35)</li>
+<li>Weight Initialization: Initialize weights to identity function, biases to zero to prevent rapid shrinking (@ 0:32:50)</li>
+<li>Network Architecture: Gated Cells (@ 0:33:05) [BPTT with partially uninterrupted gradient flow]</li>
+</ul>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org58065ad" class="outline-3">
+<h3 id="org58065ad"><span class="section-number-3">2.5.</span> Gated Cells</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+@ 0:33:41
+Instead of using simple feed forward network as <b>recurrent cell</b>, Gated Cells give better performance and improved training.
+</p>
+
+
+<div id="orgfd86259" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/gated_cell-20230316094902.png" alt="gated_cell-20230316094902.png" />
+</p>
+<p><span class="figure-number">Figure 8: </span>Gated Cell</p>
+</div>
+
+<p>
+LSTMs have the following property: (@ 0:35:24)
+</p>
+
+<ol class="org-ol">
+<li>Maintain a <b>cell state</b></li>
+<li>Use gates to control the flow of information
+<ul class="org-ul">
+<li><b>Forget</b> gate gets rid of irrelevant information</li>
+<li><b>Store</b> relevant information from current input</li>
+<li><b>Selectively update</b> cell state</li>
+<li>Output gate returns a <b>filtered</b> version of the cell state</li>
+</ul></li>
+<li>Backpropagation through time with <b>partially uninterrupted gradient flow</b> (This handles the vanishing gradient problem)</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org90c34c7" class="outline-3">
+<h3 id="org90c34c7"><span class="section-number-3">2.6.</span> Limitations &amp; Desired Capabilities of RNN</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+RNN as presented above have the following limitations: @ 0:39:20
+</p>
+<ul class="org-ul">
+<li><b>Encoding Bottleneck</b>: RNN need to take long sequence of information and condense it into a fixed representation</li>
+<li>Slow, no parallelization</li>
+<li>Not long memory: ~10, 100 length sequences are ok with LSTM, but not ~1000</li>
+</ul>
+
+
+<div id="org6e15d49" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/desired_capabilities_of_rnn-20230316100804.png" alt="desired_capabilities_of_rnn-20230316100804.png" />
+</p>
+<p><span class="figure-number">Figure 9: </span>Desired Capabilities of RNN @ 0:41:48</p>
+</div>
+
+<p>
+In contrast to those limitations, what we want is: 
+</p>
+<ul class="org-ul">
+<li>Continuous Stream</li>
+<li>Parallelization</li>
+<li>Long Memory</li>
+</ul>
+
+<p>
+<span class="underline">Idea 1: Feed everything into dense network</span>: (@ 0:42:52)
+</p>
+<ul class="org-ul">
+<li>Recurrence is eliminated, but</li>
+<li>Not scalable</li>
+<li>No order</li>
+<li>No long memory</li>
+</ul>
+
+<p>
+<span class="underline">Idea 2: Identify and Attend to what's important</span> (@ 0:42:58)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf9d9f2e" class="outline-3">
+<h3 id="orgf9d9f2e"><span class="section-number-3">2.7.</span> Attention Is All You Need: Transformers</h3>
+<div class="outline-text-3" id="text-2-7">
+<p>
+@ 0:43:28
+</p>
+<ul class="org-ul">
+<li>Identify parts to attend to</li>
+<li>Extract features with high attention</li>
+</ul>
+
+<p>
+Attention has been used in: 
+</p>
+<ul class="org-ul">
+<li>AlphaFold2: Uses Self-Attention</li>
+<li>BERT, GPT-3</li>
+<li>Vision Transformers in Computer Vision</li>
+</ul>
+</div>
+
+<ol class="org-ol">
+<li><a id="org0d74bda"></a>Idenitfying parts to attend to is similar to <span class="underline">Search problem</span><br />
+<div class="outline-text-4" id="text-2-7-1">
+<p>
+@ 0:44:54
+</p>
+
+<ul class="org-ul">
+<li>Enter a Query (\(Q\)) for search</li>
+<li>Extract key information \(K_i\) for each search result</li>
+<li>Compute how similar is the key to the query: Attention Mask</li>
+<li>Extract required information from the search i.e. Value \(V\)</li>
+</ul>
+
+
+<div id="org827aeb0" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/attention_as_search-20230316105659.png" alt="attention_as_search-20230316105659.png" />
+</p>
+<p><span class="figure-number">Figure 10: </span>Attention as Search</p>
+</div>
+</div>
+</li>
+
+<li><a id="org92b2e70"></a>Self-Attention in Sequence Modelling<br />
+<div class="outline-text-4" id="text-2-7-2">
+<p>
+Goal: Identify and attend to most important features in input
+</p>
+
+<ol class="org-ol">
+<li><p>
+We want to elimintate recurrence because that what gave rise to the limitations. So, we need to <b>encode position information</b>
+</p>
+
+<div id="org3fe9927" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/position_aware_encoding-20230316113706.png" alt="position_aware_encoding-20230316113706.png" />
+</p>
+<p><span class="figure-number">Figure 11: </span>Position-Aware Encoding (@ 0:48:32)</p>
+</div></li>
+
+<li>Extract, <b>query, key, value</b> for search 
+<ul class="org-ul">
+<li>Multiply the positional encoding with three matrices to get query, key and value encoding for each word</li>
+</ul></li>
+
+<li>Compute <b>attention weighting</b> (A matix of post-softmax attention scores)
+<ul class="org-ul">
+<li><p>
+Compute pairwise similarity between each query and key =&gt; Dot Product (0:51:01)
+</p>
+
+<p>
+Attention Score = \(\frac {Q . K^T} {scaling}\) 
+</p></li>
+<li>Apply softmax to the attention score to get value in \([0, 1]\)</li>
+</ul></li>
+<li>Extract <b>features with high attention</b>: Multiply attention weighting with Value.</li>
+</ol>
+
+
+<div id="org033ff5b" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/self_attention_head-20230316114501.png" alt="self_attention_head-20230316114501.png" />
+</p>
+<p><span class="figure-number">Figure 12: </span>Self-Attention Head</p>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+
+<div id="outline-container-org5b5f283" class="outline-3">
+<h3 id="org5b5f283"><span class="section-number-3">2.8.</span> Lab Tasks</h3>
+<div class="outline-text-3" id="text-2-8">
+<ul class="org-ul">
+<li>0:37:38 Use RNN to generate brand new <a href="irish_folk_songs.html#ID-6288DCF7-CF71-4861-82DF-2A6039ED4F1E">irish folk songs</a> that have never been heard before.</li>
+<li>0:38:13 Sentiment Classification</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orge195555" class="outline-2">
+<h2 id="orge195555"><span class="section-number-2">3.</span> Convolutional Neural Networks</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<a href="https://www.youtube.com/watch?v=uapdILWYTzE&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=5">Lecture 3: Convolutional Neural Networks</a>: In which we learn about CNNs, how filters detect features, and how deep stacking of these filters can be used to do many computer vision tasks.
+</p>
+
+<p>
+We use vision to recognize what is there, where it is and also use it to predict future motion &amp; intent. So, the task of Compute Vision is more than simply detecting stuffs. 
+</p>
+</div>
+
+<div id="outline-container-org717a712" class="outline-3">
+<h3 id="org717a712"><span class="section-number-3">3.1.</span> Feature Detection</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+For computers image is input as matrix of numbers. And image classfication is done by High Level Feature Detection (0:08:45)
+</p>
+
+<p>
+0:09:53 Feature detection could be done manually:
+</p>
+<ul class="org-ul">
+<li>Use Domain Knowledge, then</li>
+<li>Define features then</li>
+<li>Detect features to classify</li>
+</ul>
+
+<p>
+But its not easy. Defining features may be easy but problems in detection are: 0:11:00
+</p>
+<ul class="org-ul">
+<li>Viewpoint variation</li>
+<li>Illumination</li>
+<li>Scale variation</li>
+<li>Deformation</li>
+<li>Occlusion</li>
+<li>Background clutter</li>
+<li>Intra-class variation</li>
+</ul>
+
+
+<div id="org38ffb53" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/difficulty_in_feature_detection-20230316132313.png" alt="difficulty_in_feature_detection-20230316132313.png" />
+</p>
+<p><span class="figure-number">Figure 13: </span>Difficulty in Feature Detection</p>
+</div>
+
+
+<p>
+Instead Use Neural Network for Feature Detection. 
+</p>
+
+<ol class="org-ol">
+<li>Fully Connected Layers:
+<ul class="org-ul">
+<li>Loses spatial information becuase image is flattened</li>
+<li>Requires high number of parameters</li>
+</ul></li>
+
+<li>Convolutional Filter (0:16:50)
+<ul class="org-ul">
+<li>Preserves Spatial Information</li>
+<li>Lesser number of parameters</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org2d5223a" class="outline-3">
+<h3 id="org2d5223a"><span class="section-number-3">3.2.</span> Filters detect Features</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+0:20:00
+</p>
+
+<div id="orgd5461fc" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/filters_detect_features-20230316132940.png" alt="filters_detect_features-20230316132940.png" />
+</p>
+<p><span class="figure-number">Figure 14: </span>Example of Filters detecting features for X shape</p>
+</div>
+
+<p>
+0:23:21 Filters are applied to input through Convolution Operation.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgea678fa" class="outline-3">
+<h3 id="orgea678fa"><span class="section-number-3">3.3.</span> Convolutional Neural Networks (CNNs)</h3>
+<div class="outline-text-3" id="text-3-3">
+
+<div id="org58cc17c" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/cnn_spatial_arrangement_of_output_volumne-20230316133419.png" alt="cnn_spatial_arrangement_of_output_volumne-20230316133419.png" />
+</p>
+<p><span class="figure-number">Figure 15: </span>CNN: Spatial Arrangement of Output Volume</p>
+</div>
+
+<p>
+In convolutional neural network, we apply (convolute) filters to the input image. 
+</p>
+<ul class="org-ul">
+<li>Each filter we apply outputs a 2d result</li>
+<li>So, after applying multiple filters to an input image we get an Output Volume. The height and width of the output may be smaller (downsampled) or same or higher.</li>
+<li>The output volume can be further convoluted to extract higher level features from lower level features.</li>
+</ul>
+
+<p>
+For classification:   
+</p>
+<ul class="org-ul">
+<li>We finally feed the feature volume to a Fully connected network</li>
+<li>then to softmax for classification</li>
+</ul>
+
+<p>
+<img src="data/mit_6_s191_introduction_to_deep_learning/cnns_structure-20230316133725.png" alt="cnns_structure-20230316133725.png" />
+In CNNs the input is passed usually through
+</p>
+<ul class="org-ul">
+<li>Convolution Layer (containing Convolution &amp; A bias)</li>
+<li>Non-linearity (e.g. ReLU)</li>
+<li>Pooling (e.g. Max-Pooling) (0:32:53)</li>
+</ul>
+
+<p>
+Usually as you we do pooling (down sampling), we increase the number of features. But recently (in e.g. <a href="patches_are_all_you_need.html#ID-A0683583-8F59-4751-9641-9127AE8CF019">Patches Are All You Need?</a>) isotropic model have shown to be give good results. Isotropic model use the same height and width throughout the network. (i.e. they don't downsample)
+</p>
+
+<p>
+We can keep the first part of the network (the feature learning) and swap out the second part depending upon task: (0:36:10)
+</p>
+<ul class="org-ul">
+<li>Classification</li>
+<li>Object Detection</li>
+<li>Segmentation</li>
+<li>Probabilistic Control</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9bef465" class="outline-3">
+<h3 id="org9bef465"><span class="section-number-3">3.4.</span> Object Detection</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+@ 0:38:51
+Object detection is the problem of finding a bounding box were the detected object is. There may be multiple objects of different types of various sizes. So this is a difficult problem. 
+</p>
+
+<p>
+Native Method would be to: 
+</p>
+<ul class="org-ul">
+<li>Sample lots of different sizes and positions of boxes</li>
+<li>Clip the image to the box, and send to classification network</li>
+</ul>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgb83be13"></a>Object Detection with R-CNNs<br />
+<div class="outline-text-4" id="text-3-4-1">
+<p>
+0:41:39
+Find regions that we think have objects. Use CNN to classify. So, a model proposes regions for object classification, and then we pass the region to object classification network.
+</p>
+
+
+<div id="org843d44b" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/r_cnns-20230316134458.png" alt="r_cnns-20230316134458.png" />
+</p>
+<p><span class="figure-number">Figure 16: </span>R-CNNs</p>
+</div>
+
+<p>
+Demerits:
+</p>
+<ul class="org-ul">
+<li>Brittle</li>
+<li>Region Extraction network is detached from classification network</li>
+</ul>
+</div>
+</li>
+
+<li><a id="org6d9b340"></a>Faster R-CNN<br />
+<div class="outline-text-4" id="text-3-4-2">
+<p>
+0:42:01
+</p>
+
+
+<div id="org2fd1300" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/faster_r_cnn-20230316134851.png" alt="faster_r_cnn-20230316134851.png" />
+</p>
+<p><span class="figure-number">Figure 17: </span>Faster R-CNN</p>
+</div>
+
+<ul class="org-ul">
+<li>Learns the Region Proposal Network along with feature extraction and classification</li>
+<li>Feeds the image to feature extraction only once</li>
+<li>Grab all the regions, process then independently 
+<ul class="org-ul">
+<li>Pass the region through feature detection head again (?)</li>
+<li>Pass to classification network</li>
+</ul></li>
+<li>Faster than R-CNN</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgf8833b4" class="outline-3">
+<h3 id="orgf8833b4"><span class="section-number-3">3.5.</span> Semantic Segmentation: Fully Convolutional Networks</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+0:43:29
+</p>
+
+<p>
+Semantic Segmentation is like one classification per pixel. Fully Convolutional Networks tackle this problem by using downsampling operation in first half and upsampling operation in second half of the network. 
+</p>
+
+
+<div id="orgb834b1f" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/semantic_segmentation-20230316135344.png" alt="semantic_segmentation-20230316135344.png" />
+</p>
+<p><span class="figure-number">Figure 18: </span>Semantic Segmentation</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd26b2c5" class="outline-3">
+<h3 id="orgd26b2c5"><span class="section-number-3">3.6.</span> Continuous Control</h3>
+<div class="outline-text-3" id="text-3-6">
+<p>
+0:45:15
+</p>
+
+<p>
+Navigation from Vision is a Continuous control task: A model that decides the steering angle from input image. 
+Here the output is a continuous probability distribution. This is different from classification and segmentation task.
+</p>
+
+
+<div id="org096eabf" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/navigation_from_vision-20230316135436.png" alt="navigation_from_vision-20230316135436.png" />
+</p>
+<p><span class="figure-number">Figure 19: </span>Navigation from Vision</p>
+</div>
+
+
+<p>
+<img src="data/mit_6_s191_introduction_to_deep_learning/end_to_end_framework_for_autonomous_navigation-20230316140513.png" alt="end_to_end_framework_for_autonomous_navigation-20230316140513.png" />
+In the above model, continuous control is done as follows: 
+</p>
+<ul class="org-ul">
+<li>The top part of model doesn't see the route, and outputs a probabilistic control output</li>
+<li>The bottom part sees the route, and outputs a path to take given the route</li>
+</ul>
+
+<p>
+The loss function here is interesting because in reality we won't take multiple paths but a single one at a given intersection. However, after seeing a bunch of intersections the model will learn the different paths that can be taken.  (0:46:26)
+</p>
+
+<p>
+\(L = - \log(P(\theta | I, M))\) 
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb21432a" class="outline-2">
+<h2 id="orgb21432a"><span class="section-number-2">4.</span> Deep Generative Modeling</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=6">Lecture 4: Deep Generative Modeling</a>
+</p>
+
+<p>
+Generative Modeling is Unsupervised Learning Problem where we have to find an underlying structure of the data. 
+</p>
+
+<p>
+Goal: Take as input training samples from some distribution and learn a model that represents that distribution @ 0:03:24
+</p>
+
+<p>
+There are two class of problems:
+</p>
+<ul class="org-ul">
+<li>Density Estimation: Finding the underlying distribution of data (i.e. the probability density function)</li>
+<li>Sample Generation: Sampling an sample from that distribution</li>
+</ul>
+
+<p>
+Neural Networks are good for this task because @ 0:04:34
+</p>
+<ul class="org-ul">
+<li>the data distribution is high dimensional</li>
+<li>and the distribution is complex</li>
+</ul>
+
+<p>
+Some classes of Generative models are (0:07:30): 
+</p>
+<ul class="org-ul">
+<li>Autoencoders and Variational Autoencoders (VAEs)</li>
+<li>Generative Adversarial Networks (GANs)</li>
+</ul>
+<p>
+Both of these are latent variable models.
+</p>
+</div>
+
+<div id="outline-container-org39a9b27" class="outline-3">
+<h3 id="org39a9b27"><span class="section-number-3">4.1.</span> Uses of Generative Models</h3>
+<div class="outline-text-3" id="text-4-1">
+</div>
+<ol class="org-ol">
+<li><a id="org8a5e2ff"></a>Debiasing<br />
+<div class="outline-text-4" id="text-4-1-1">
+<p>
+0:05:44
+</p>
+
+<p>
+We can uncover underlying features in a dataset and create more fair and representative dataset.
+</p>
+
+
+<div id="orga7857dd" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/debiasing-20230316142121.png" alt="debiasing-20230316142121.png" />
+</p>
+<p><span class="figure-number">Figure 20: </span>Debiasing</p>
+</div>
+</div>
+</li>
+<li><a id="org53bf1bb"></a>Outlier Detection<br />
+<div class="outline-text-4" id="text-4-1-2">
+<p>
+0:06:42
+</p>
+
+<p>
+We can detect rare events in data which are nonetheless important for model to handle. E.g. for autonomous driving detect outliers like a deer walking and make model more capable of handling those scenarios is very important.
+</p>
+
+
+<div id="orgbbec804" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/outlier_detection-20230316142354.png" alt="outlier_detection-20230316142354.png" />
+</p>
+<p><span class="figure-number">Figure 21: </span>Outlier Detection</p>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgcd58256" class="outline-3">
+<h3 id="orgcd58256"><span class="section-number-3">4.2.</span> Latent Variable</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+0:07:50
+</p>
+
+<p>
+Latent Variables are variables that we cannot observe but they influence our observation. 
+As an analogy, take Plato's Allegory of Cave. The shadows are what we observe (the observed variables), but the actual object that cast the shadows are like the latent variables. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga7a94bf" class="outline-3">
+<h3 id="orga7a94bf"><span class="section-number-3">4.3.</span> Autoencoders</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+0:09:14
+</p>
+
+<ul class="org-ul">
+<li>Autoencoders build some encoding of an input and try to reconstruct the input.</li>
+<li>It is an unsupervised approach for learning a lower-dimensional feature representation from unlabeled training data</li>
+</ul>
+
+
+<div id="org711dee2" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/autoencoders-20230316145850.png" alt="autoencoders-20230316145850.png" />
+</p>
+<p><span class="figure-number">Figure 22: </span>AutoEncoders</p>
+</div>
+
+<p>
+Reconstruction is an powerful technique in Unsupervised Learning. 0:12:40
+</p>
+</div>
+</div>
+<div id="outline-container-org6dca61e" class="outline-3">
+<h3 id="org6dca61e"><span class="section-number-3">4.4.</span> Variational AutoEncoder</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+0:14:08
+</p>
+
+<p>
+With autoencoder, the same latent variable \(z\) gives the same output \(\hat{x}\) because the decoding is deterministic. VAEs introduce stochasticity so that new samples can be generated. 0:15:09
+</p>
+
+<p>
+This is done by breaking down the latent space \(z\) to a mean vector (\(\mu\)) and standard deviation vector (\(\sigma\)). The encoder outputs \(\mu\) and \(\sigma\) from which \(z\) can be sampled. 
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org6957844"></a>VAE Loss<br />
+<div class="outline-text-4" id="text-4-4-1">
+<p>
+0:17:30
+</p>
+
+<div id="org3051fa7" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/vae_optimization-20230316153957.png" alt="vae_optimization-20230316153957.png" />
+</p>
+<p><span class="figure-number">Figure 23: </span>VAE optimization</p>
+</div>
+
+<p>
+Loss function \(L(\phi, \theta, x)\) is reconstruction loss + regularization term. 
+</p>
+
+<ul class="org-ul">
+<li>Encoder computes: \(q_{\phi}(z|x)\) i.e. the distribution of latent representation given the input image</li>
+<li>Decoder computes: \(p_{\theta}(x|z)\) i.e. the distribution of images given the latent representation</li>
+<li>Reconstruction loss: log-likelihood (?), \(||x-\hat{x}||^2\) (0:18:24)</li>
+</ul>
+</div>
+</li>
+
+<li><a id="org67b4e61"></a>Regularization Loss<br />
+<div class="outline-text-4" id="text-4-4-2">
+<p>
+Regularization loss: \(D(q_{\phi}(z|x)\ ||\ p(z))\) is divergence in the two probability distribution. 
+</p>
+<ul class="org-ul">
+<li>\(q_{\phi}(z|x)\) is inferred latent distribution</li>
+<li>\(p(z)\) is a prior distribution on the latent space</li>
+<li>A common choice for the prior is a <b>Normal Gaussain</b> distribution
+<ul class="org-ul">
+<li>Encourages encodings to distribute evenly around the center of the latent space</li>
+<li>Penalize the network when it tries to "cheat" by clustering points in specific regions (i.e. by memorizing the data)</li>
+</ul></li>
+</ul>
+
+<p>
+We use Regularization function so that: 0:22:31
+</p>
+<ul class="org-ul">
+<li>Latent space is <b>continuous</b></li>
+<li>Latent space is <b>Completeness</b>: Sampling from latent space must give meaningful content</li>
+</ul>
+
+<p>
+If regularization is not enforced: 0:24:45 
+</p>
+<ul class="org-ul">
+<li>variance can be small and</li>
+<li>means may be distributed far apart so that there is no meaningful content in between</li>
+</ul>
+
+<p>
+However, greater Regularization can adversely effect the reconstruction. So, a balance is needed. 
+</p>
+</div>
+</li>
+
+<li><a id="orgf1dd0d6"></a>Optimization<br />
+<div class="outline-text-4" id="text-4-4-3">
+<p>
+0:26:55
+Backpropagation cannot be done through Sampling operation. So, we have to use a clever idea: <b>Reparametrize the sampling layer</b> \(z \sim N(\mu, \sigma^2)\) as \(z = \mu + \sigma \times \epsilon\) where \(\epsilon\) is sampled stochastically. 
+</p>
+
+
+<div id="org9c941e7" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/reparametization_of_sampling_layer-20230316155303.png" alt="reparametization_of_sampling_layer-20230316155303.png" />
+</p>
+<p><span class="figure-number">Figure 24: </span>Reparametization of Sampling Layer</p>
+</div>
+</div>
+</li>
+<li><a id="orgf89e573"></a>Disentanglement &beta;-VAEs<br />
+<div class="outline-text-4" id="text-4-4-4">
+<p>
+0:30:44
+</p>
+
+<p>
+We want latent variables that are uncorrelated with each other. &beta;-VAEs achieve this by enforcing diagonal prior on the latent variables to encourage independence. 
+</p>
+
+
+<div id="orgcd816fa" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/beta_vaes-20230316155613.png" alt="beta_vaes-20230316155613.png" />
+</p>
+<p><span class="figure-number">Figure 25: </span>&beta;-VAEs</p>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org9688899" class="outline-3">
+<h3 id="org9688899"><span class="section-number-3">4.5.</span> Generative Adversarial Networks (GANs)</h3>
+<div class="outline-text-3" id="text-4-5">
+<p>
+0:35:07
+</p>
+
+<p>
+Idea: We don't want to explicitly model density, and instead just sample to generate new instances.
+</p>
+
+
+<div id="orgc6d76c2" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/gans-20230316160043.png" alt="gans-20230316160043.png" />
+</p>
+<p><span class="figure-number">Figure 26: </span>GANs</p>
+</div>
+
+<ul class="org-ul">
+<li>Generator generates data from noise</li>
+<li>Discriminator tries to separate between real and fake data</li>
+</ul>
+
+<p>
+GANs avoid the problem of latent space regularization in AutoEncoders, because in some way the random noise \(z\) is itself the latent space, and it being within our control is both continuous and complete. If it wasn't complete the generator won't perform good on some input. 
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="orge2b37b4"></a>Training GANs<br />
+<div class="outline-text-4" id="text-4-5-1">
+<p>
+0:39:43
+</p>
+<ul class="org-ul">
+<li>Loss function is Adversial Objective</li>
+<li><p>
+Discriminator (\(D\)) tries to maximize how well it can discriminate between fake \(G(z)\) data, and real data (\(x\))
+</p>
+
+<p>
+\(\arg\max_D E_{z,x}[\log D(G(z)) + \log(1-D(x))]\)
+</p></li>
+
+<li>Generator (\(G\)) tries to fool the discriminator \(D\): 
+\(\arg \min_G E_{z,x} [\log D(G(z))]\)</li>
+</ul>
+
+<p>
+So, the overall objective is: 
+</p>
+
+<p>
+\(\arg \min_G \max_D E_{z,x} [ \log D(G(z)) + \log(1 - D(x))]\)
+</p>
+
+<p>
+0:43:06 GANs are distribution transformers. The generator maps data from gaussain noise to a target distribution. 
+0:43:27 We can interpolate in noise distribution to interpolate in target distribution. 
+</p>
+</div>
+</li>
+<li><a id="orgc674b9d"></a>Progressive Growing<br />
+<div class="outline-text-4" id="text-4-5-2">
+<p>
+0:44:51
+</p>
+
+<p>
+<img src="data/mit_6_s191_introduction_to_deep_learning/progressive_growing-20230316161414.png" alt="progressive_growing-20230316161414.png" />
+Add more layers as training progresses 
+</p>
+<ul class="org-ul">
+<li>Speeds up training</li>
+<li>More stable training</li>
+</ul>
+</div>
+</li>
+<li><a id="orga9ead8d"></a>StyleGAN(2): progressive growing + style transfer<br />
+<div class="outline-text-4" id="text-4-5-3">
+<p>
+0:45:30
+</p>
+</div>
+</li>
+<li><a id="org3193d9e"></a>Conditional GANs<br />
+<div class="outline-text-4" id="text-4-5-4">
+<p>
+0:47:18
+</p>
+
+
+<div id="orgae48433" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/paired_translation-20230316161742.png" alt="paired_translation-20230316161742.png" />
+</p>
+<p><span class="figure-number">Figure 27: </span>Paired Translation an example of Conditional GANs</p>
+</div>
+</div>
+</li>
+<li><a id="org5354c84"></a>CycleGAN: domain transformation<br />
+<div class="outline-text-4" id="text-4-5-5">
+<p>
+0:50:21 
+</p>
+
+<p>
+CycleGAN emphasize the idea of GANs being <a href="#orgf9c12ea">distribution transformers</a>. 
+</p>
+
+<div id="org5d27876" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/cyclegan-20230316161848.png" alt="cyclegan-20230316161848.png" />
+</p>
+<p><span class="figure-number">Figure 28: </span>CycleGAN: Transformation from one distribution to another distribution.</p>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+
+<div id="outline-container-orgf9c12ea" class="outline-3">
+<h3 id="orgf9c12ea"><span class="section-number-3">4.6.</span> Distribution Transformer</h3>
+<div class="outline-text-3" id="text-4-6">
+<p>
+0:51:32
+</p>
+
+
+<div id="org3d540ee" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/distribution_transformers-20230316161917.png" alt="distribution_transformers-20230316161917.png" />
+</p>
+<p><span class="figure-number">Figure 29: </span>Distribution Transformers</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgcd6cd55" class="outline-2">
+<h2 id="orgcd6cd55"><span class="section-number-2">5.</span> Deep Reinforcement Learning</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+<a href="https://www.youtube.com/watch?v=-WbN61qtTGQ&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=7">Lecture 5: Deep Reinforcement Learning</a>: In which we learn how we can marry reinforcement learning with recent advancements in deep learning. 
+</p>
+
+<p>
+Paradigm till now was that we train on fixed dataset, but in RL our algorithm is placed in a dynamic environment and the "dataset" is not fixed. 
+</p>
+
+
+<div id="org60d504e" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/classes_of_learning_problems-20230316190947.png" alt="classes_of_learning_problems-20230316190947.png" />
+</p>
+<p><span class="figure-number">Figure 30: </span>Classes of Learning Problems</p>
+</div>
+</div>
+
+<div id="outline-container-orgeef9fda" class="outline-3">
+<h3 id="orgeef9fda"><span class="section-number-3">5.1.</span> Introduction</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+0:07:49
+</p>
+
+<ul class="org-ul">
+<li>Agent: The one who takes actions</li>
+<li>Environment: the world in which the agent takes actions</li>
+<li>Action: a move the agent can make in the environment</li>
+<li>Action Space: the set of possible actions</li>
+<li>Observations/State: a situation the agent can observe in the environment</li>
+<li>Reward: feedback taht measures the success or failure of the agent's action 
+<ul class="org-ul">
+<li>0:10:26 Total Reward i.e. Return: \(R_t = \sum_{i=t}^{\inf} r_i\)</li>
+<li>0:12:14 Total Discounted Reward: \(R_t = \sum_{i=0}^{\inf} \gamma^i r_{i+t}\)</li>
+</ul></li>
+<li>Q-Function: Expected return from taking an action \(a_t\) in state \(s_t\) 
+\(Q(s_t, a_t) = E[R_t|s_t,a_t]\)</li>
+</ul>
+
+
+<p>
+Goal of RL is to find a <b>policy \(\pi(s)\)</b> that takes the best action to take at state \(s_t\). 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc881620" class="outline-3">
+<h3 id="orgc881620"><span class="section-number-3">5.2.</span> Learning Algorithms</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+0:17:54
+</p>
+<ul class="org-ul">
+<li>Value Learning: Find the Q-Function \(a = \arg \max_a Q(s,a)\)</li>
+<li>Policy Learing: Find the policy \(a \sim \pi(s)\)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgbe83399" class="outline-3">
+<h3 id="orgbe83399"><span class="section-number-3">5.3.</span> Deep Q Networks (DQN)</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+0:24:56 Two ways to model the Q-Function:
+</p>
+
+<ol class="org-ol">
+<li>Input: Action + State; Output: Expected Return</li>
+<li>Input: State         ; Outptu: Expected Return for all action</li>
+</ol>
+
+<p>
+Loss function is Q-Loss 
+\(L = E[|| ( r + \gamma \max_{a'} Q(s', a') ) - Q(s,a) ||^2]\) 
+</p>
+
+
+
+<div id="orgfa4ed77" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/dqn_atari_network-20230316192409.png" alt="dqn_atari_network-20230316192409.png" />
+</p>
+<p><span class="figure-number">Figure 31: </span>DQN Atari Network</p>
+</div>
+
+<p>
+0:32:58 Downsides: 
+</p>
+<ul class="org-ul">
+<li><b>Complexity</b>: Cannot handle continuous action spaces, or when action space is discrete but large</li>
+<li><b>Flexibility</b>: Policy is deterministic so Q-Learning cannot learn stochastic policies</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org86976d9" class="outline-3">
+<h3 id="org86976d9"><span class="section-number-3">5.4.</span> Policy Gradient Methods</h3>
+<div class="outline-text-3" id="text-5-4">
+<p>
+0:35:08
+</p>
+<ul class="org-ul">
+<li>Sometimes optimal policy is stochastic</li>
+<li>Policy Gradient methods can handle continuous action space (e.g. network can output a mean \(\mu\) and variance \(\sigma^2\))</li>
+</ul>
+
+<p>
+0:43:49
+</p>
+
+<p>
+Loss function is \(L = -\log P (a_t | s_t) R_t\)
+</p>
+
+<p>
+The basic Training Algorithm for Reinforcement Learning is
+</p>
+<ol class="org-ol">
+<li>Initialize the agent</li>
+<li>Run a policy until termination.</li>
+<li>Record all states, actions, rewards</li>
+<li>Decrease probability of actions that resulted in low reward</li>
+<li>Increase probability of actions that resulted in high reward</li>
+</ol>
+
+<p>
+Step 4 and 5 are the curx of RL algorithm. But step 2 is also difficult unless there is a simulation. Because in real life we cannot run experiments until failure. 
+</p>
+
+
+<div id="org48c0060" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/car_off_the_cliff_before_it_learns_that_s_bad-20230316193210.png" alt="car_off_the_cliff_before_it_learns_that_s_bad-20230316193210.png" />
+</p>
+<p><span class="figure-number">Figure 32: </span>Car Runs off the Cliff before it learns that's bad (0:48:24)</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org15c2efc" class="outline-3">
+<h3 id="org15c2efc"><span class="section-number-3">5.5.</span> Applications</h3>
+<div class="outline-text-3" id="text-5-5">
+<p>
+0:53:32
+</p>
+
+<ul class="org-ul">
+<li>AlphaGo: Go</li>
+<li>AlphaZero: Go, Chess, Shogi</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org201dd97" class="outline-2">
+<h2 id="org201dd97"><span class="section-number-2">6.</span> Deep Learning New Frontiers</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+<a href="https://www.youtube.com/watch?v=wySXLRTxAGQ&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=8">Lecture 6: Deep Learning: Limitations &amp; New Frontiers</a>
+</p>
+</div>
+
+<div id="outline-container-org780df95" class="outline-3">
+<h3 id="org780df95"><span class="section-number-3">6.1.</span> Universal Approximation Theorem</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+0:10:07
+</p>
+
+<p>
+A feedforward network with a single layer is sufficient to approximate, to an arbitrary precision, any continuous function.
+</p>
+
+<p>
+<img src="data/mit_6_s191_introduction_to_deep_learning/universal_approximation_theorem-20230316223922.png" alt="universal_approximation_theorem-20230316223922.png" />
+But, 
+</p>
+<ul class="org-ul">
+<li>number of hidden units may be infeasibly large</li>
+<li>the resulting model may not generalize</li>
+<li>no method to find weights is provided by this theorem</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org261f22a" class="outline-3">
+<h3 id="org261f22a"><span class="section-number-3">6.2.</span> AI `Hype`: Historical Perspective</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+0:13:15
+</p>
+
+
+<div id="org5194179" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/ai_history-20230316224159.png" alt="ai_history-20230316224159.png" />
+</p>
+<p><span class="figure-number">Figure 33: </span>AI History</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org19d7d0c" class="outline-3">
+<h3 id="org19d7d0c"><span class="section-number-3">6.3.</span> Limitations</h3>
+<div class="outline-text-3" id="text-6-3">
+</div>
+<ol class="org-ol">
+<li><a id="orgb88aa11"></a>Generalization<br />
+<div class="outline-text-4" id="text-6-3-1">
+<p>
+0:15:08
+</p>
+
+<p>
+Understanding Deep Neural Networks requires rethinking Generalization
+</p>
+
+<p>
+In Zhang+ ICLR 2017 Paper,
+</p>
+<ul class="org-ul">
+<li>they assign random labels to image classification training set</li>
+<li>as the degree of randomization increased, the test accuracy decreased</li>
+<li>but the training accuracy didn't</li>
+</ul>
+
+<p>
+This implies, the NN was able to fit the random data. 
+</p>
+
+
+<div id="orgd929d9c" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/deep_nn_can_fit_to_random_data-20230316224457.png" alt="deep_nn_can_fit_to_random_data-20230316224457.png" />
+</p>
+<p><span class="figure-number">Figure 34: </span>Deep NN can fit to random data</p>
+</div>
+</div>
+</li>
+
+<li><a id="orgba842f0"></a>Aleatoric Uncertainty<br />
+<div class="outline-text-4" id="text-6-3-2">
+<p>
+0:27:30 
+Uncertainty inherent in the data.
+</p>
+
+<p>
+E.g. for a NN trained to classify dog vs cat. If we show image with both cat and dog, it should output P(cat) = 1 and P(dog) = 1 but it can't because it is constrained (P(cat) + P(dog) = 1)
+</p>
+</div>
+</li>
+
+<li><a id="org41eca95"></a>Epistemic Uncertainty<br />
+<div class="outline-text-4" id="text-6-3-3">
+<p>
+Network's confidence in its perdiction. Aka. model uncertainty. 
+</p>
+</div>
+</li>
+
+<li><a id="orgfe61235"></a>Perturbations: Adversarial Examples<br />
+<div class="outline-text-4" id="text-6-3-4">
+<p>
+0:30:23
+</p>
+<p>
+<img src="data/mit_6_s191_introduction_to_deep_learning/temple_noise_ostrich-20230316225651.png" alt="temple_noise_ostrich-20230316225651.png" />
+To generate adversarial examples, fix the label (\(y\)) and weight (\(W\)), and perturb the input (\(x\)) to increase the loss. 
+</p>
+
+<p>
+\(x \leftarrow x + \eta \frac {\partial L(W,x,y)} {\partial x}\)
+</p>
+</div>
+</li>
+
+<li><a id="orge1902b3"></a>Other Limitations<br />
+<div class="outline-text-4" id="text-6-3-5">
+<p>
+0:35:05
+</p>
+
+<ul class="org-ul">
+<li>Very <b>data hungry</b> (eg, often millions of examples)</li>
+<li><b>Computationally intensive</b> to train and deploy (tractably requires GPUs)</li>
+<li>Easily fooled by <b>adversarial examples</b></li>
+<li>Can be subject to <b>algorithmic bias</b></li>
+<li>Poor at representing <b>uncertainty</b> (how do you know what the model knows?)</li>
+<li><b>Uninterpretable</b> black boxes, difficult to trust</li>
+<li>Difficult to <b>encode structure</b> and prior knowledge during learning</li>
+<li><b>Finicky to optimize</b>: non-convex, choice of architecture, learning parameters</li>
+<li>Often require <b>expert knowledge</b> to design, fine tune architectures</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgee08854" class="outline-3">
+<h3 id="orgee08854"><span class="section-number-3">6.4.</span> Frontiers</h3>
+<div class="outline-text-3" id="text-6-4">
+</div>
+<ol class="org-ol">
+<li><a id="orgf7d8fed"></a>Graph Convolution Networks<br />
+<div class="outline-text-4" id="text-6-4-1">
+<p>
+0:38:13
+</p>
+
+
+<div id="orgb032530" class="figure">
+<p><img src="data/mit_6_s191_introduction_to_deep_learning/applications_of_graph_neural_network-20230316230723.png" alt="applications_of_graph_neural_network-20230316230723.png" />
+</p>
+<p><span class="figure-number">Figure 35: </span>Applications of Graph Neural Network</p>
+</div>
+</div>
+</li>
+
+<li><a id="org2412777"></a>Automated Machine Learning &amp; Learning to Learn<br />
+<div class="outline-text-4" id="text-6-4-2">
+<p>
+0:45:43
+</p>
+<ul class="org-ul">
+<li>AutoML</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org1a65fc1" class="outline-2">
+<h2 id="org1a65fc1"><span class="section-number-2">7.</span> Notes</h2>
+<div class="outline-text-2" id="text-7">
+<ul class="org-ul">
+<li>&beta;-VAEs paper?</li>
+</ul>
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">[2023-03-16 Thu 15:57]</span></span>
+</p>
+<ul class="org-ul">
+<li><p>
+crop the images:
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">crop-mit-image</span> ()
+  <span class="org-doc">"Keep the point at the image and execute this fuction to crop out only the presentation from the screenshot"</span> 
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">let</span> ((file (org-element-property <span class="org-builtin">:path</span> (org-element-context))))
+    (shell-comand (format <span class="org-string">"convert -crop 970x560+0+80 +repage ./%s ./%s"</span> file file))))
+</pre>
+</div></details></li>
+</ul>
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="vista_synthesizing_photorealistic_environments_for_training_autonomous_vehicles.html#ID-ADD40DB7-282F-4CE6-A698-9C002EE28771">VISTA: Synthesizing photorealistic environments for training autonomous vehicles</a></li>
+<li><a href="generative_adversarial_networks.html#ID-CBDD2357-5CAA-4ED2-A3B7-E76F1943E2FF">CycleGAN: domain transformation</a></li>
+<li><a href="vanishing_gradient.html#ID-2880697B-C48B-40C2-B25D-CEA991940A8A">Vanishing Gradient</a></li>
+<li><a href="lstm.html#ID-5A05C89D-F75E-4B28-B8A7-3A68D1B6C5CA">LSTM</a></li>
+<li><a href="logseq/bak/Recurrent neural network/2023-07-29T06_09_21.082Z.android.html#ID-62e97a52-1804-4948-91e4-bede2027d3d5">Recurrent neural network</a></li>
+<li><a href="transformer_architecture.html#ID-F41C46C0-E4D5-4DEF-9D54-A9078268D4B4">Transformer Architecture</a></li>
+<li><a href="sequential_modelling.html#ID-6936E548-C4F7-4B06-94E8-40BAC1B3060D">Sequence Modeling</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: MIT 6.S191: Introduction to Deep Learning">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

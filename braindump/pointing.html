@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pointing</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: 2020-11-23</p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Pointing</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgbb6cee0">1. Pointing</a>
+<ul>
+<li><a href="#orgfd7bb1f">1.1. Britannica</a></li>
+<li><a href="#org2d1f37a">1.2. https://sullivanengineeringllc.com/2017/11/26/what-is-pointing/&#xa0;&#xa0;&#xa0;<span class="tag"><span class="NICE">NICE</span></span></a></li>
+</ul>
+</li>
+<li><a href="#org86397ae">2. Mortar Used for Pointing</a>
+<ul>
+<li><a href="#org3308dc0">2.1. Cause of mortar deterioration</a></li>
+</ul>
+</li>
+<li><a href="#org289b295">3. Types of Pointing</a>
+<ul>
+<li><a href="#org2b1029f">3.1. Flush Pointing</a></li>
+<li><a href="#org96292de">3.2. Rubbed, Keyed or Grooved Pointing</a></li>
+<li><a href="#orge049fad">3.3. V-Grooved Pointing</a></li>
+<li><a href="#orgcfc997d">3.4. Recessed Pointing / Raked Joint</a></li>
+<li><a href="#org4a6ff7e">3.5. Weathered Pointing / Weather Struck Pointing</a></li>
+<li><a href="#orgc1c7f0d">3.6. Weather Struck and Cut pointing</a></li>
+<li><a href="#org02a0587">3.7. Beaded Pointing</a></li>
+<li><a href="#orgf93b0b9">3.8. <span class="todo TODO">TODO</span> Struck Pointing</a></li>
+<li><a href="#orgfdcb17f">3.9. <span class="todo TODO">TODO</span> Tuck Pointing</a></li>
+</ul>
+</li>
+<li><a href="#org1e0bbfe">4. Tool</a></li>
+<li><a href="#orga04604c">5. Process</a>
+<ul>
+<li><a href="#orgf7bdbb6">5.1. Cleaning/Raking</a></li>
+<li><a href="#org056e03d">5.2. Prepare mix</a></li>
+<li><a href="#org6b7b476">5.3. Maybe Dampen the bricks</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgbb6cee0" class="outline-2">
+<h2 id="orgbb6cee0"><span class="section-number-2">1.</span> Pointing</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>mortar damage bhayepaxi repair garna, fill up cracks, or for aesthetic purpose.</li>
+<li>Chimneys, paving slabs or repairing cracks (<a href="https://www.youtube.com/watch?v=jPcp0iLoJtM">https://www.youtube.com/watch?v=jPcp0iLoJtM</a>)</li>
+<li>In exposed masonry, joints are considered to be the weakest and most vulnerable spots from which rainwater or dampness can enter.</li>
+<li>Protecting joints from adverse effect of atmosphere.</li>
+<li>Give better appearance</li>
+<li>Economy to plaster.</li>
+<li>Preventing entry of water in to wall through joints.</li>
+</ul>
+
+
+
+<p>
+Pointing is applying a small amount of mortar into the face joint between bricks (either newly laid or in old brickwork). In new brickwork, pointing can apply harder mortar to increase weather protection on exposed faces. In old brickwork, pointing is often used to repair mortar joints which have been eroded by exposure to the elements. (<a href="https://www.diydata.com/techniques/brickwork/pointing/pointing.php">Source</a>)
+</p>
+
+<p>
+Pointing is a technique of strengthening and repairs of brick masonry, block masonry or stone masonry mortar joints. In case when old mortar joints crack and disintegrate, then the defective mortar is removed by hand or power tool and replaced with <b>fresh mortar</b>. 
+</p>
+</div>
+<div id="outline-container-orgfd7bb1f" class="outline-3">
+<h3 id="orgfd7bb1f"><span class="section-number-3">1.1.</span> Britannica</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Pointing, in building maintenance, the technique of repairing mortar joints between bricks or other masonry elements. When aging mortar joints crack and disintegrate, the defective mortar is removed by hand or power tool and replaced with fresh mortar, preferably of the same composition as the original. Often an entire wall, or even a whole structure, is pointed because defective points cannot easily be detected, and adjacent joints may also be in need of repair. The mortar is packed tightly in thin layers and tooled to a smooth, concave, finished surface. Tuck-pointing is a refinement of pointing, by which sharply defined points are formed for decorative purposes.
+</p>
+</div>
+</div>
+<div id="outline-container-org2d1f37a" class="outline-3">
+<h3 id="org2d1f37a"><span class="section-number-3">1.2.</span> <a href="https://sullivanengineeringllc.com/2017/11/26/what-is-pointing/">https://sullivanengineeringllc.com/2017/11/26/what-is-pointing/</a>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="NICE">NICE</span></span></h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+The construction term pointing refers to the finishing of mortar joints in masonry, be it stone or brick. Mortar often does not have as long a lifespan as the brick it holds together, and over the years must be periodically removed and replaced. Repointing is the process of removing deteriorated mortar from the joints of a masonry wall and replacing it with new mortar.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org86397ae" class="outline-2">
+<h2 id="org86397ae"><span class="section-number-2">2.</span> Mortar Used for Pointing</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>Lime mortar or Cement mortar</li>
+<li>Lime mortar equal part of fat lime and fine sand and then grinding the mixture thoroughly, in mortar mill. (or Lime mortar of 1:2 ( 1 fat lime : 2 sand or surkhi) <a href="https://theconstructor.org/building/pointing-brickwork-construction/11290/">From</a>)</li>
+<li>Cement mortar : cement and sand 1:2 or 1:3 or (1:4 (<a href="https://www.youtube.com/watch?v=jPcp0iLoJtM">https://www.youtube.com/watch?v=jPcp0iLoJtM</a>))</li>
+</ul>
+
+<p>
+Pointing is the process of raking and applying rich mortar
+with desired finishing in the joints of masonry.
+• It is preferable when the joint has not completed final
+setting time (in plastic state). It is easy to rake and apply
+mortar in this condition.
+</p>
+
+
+<p>
+The mortar used in pointing should be richer than masonry mortar.
+</p>
+</div>
+
+
+<div id="outline-container-org3308dc0" class="outline-3">
+<h3 id="org3308dc0"><span class="section-number-3">2.1.</span> Cause of mortar deterioration</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>weathering -&gt; wter infiltration</li>
+<li>water infiltration+ wind &amp; pollution -&gt; deterioration -&gt; increased water infiltration</li>
+<li>crack due to uneven settlement in building's foundation</li>
+</ul>
+
+<p>
+Mortar joints in exposed masonry are susceptible to weathering, which leads to water infiltration. This water infiltration, along with wind and pollution, causes the mortar to erode, and allows increase water infiltration. Mortar can also crack due to uneven settlement in a building’s foundation. As a structure settles into the ground over time, stress is transferred into the structure itself. This stress causes mortar joints to crack and peel, which again leads to further moisture entering the deteriorated mortar joints.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org289b295" class="outline-2">
+<h2 id="org289b295"><span class="section-number-2">3.</span> Types of Pointing</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/6oF5QGPd1pY" title="nil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
+</p>
+
+<div id="org44d6bed" class="figure">
+<p><img src="./data/pointing/20201123114322-all_types.png" alt="20201123114322-all_types.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>all types</p>
+</div>
+</div>
+
+
+<div id="outline-container-org2b1029f" class="outline-3">
+<h3 id="org2b1029f"><span class="section-number-3">3.1.</span> Flush Pointing</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<div id="org8eb8c73" class="figure">
+<p><img src="./data/pointing/20201123104153-flush_pointing.png" alt="20201123104153-flush_pointing.png" />
+</p>
+</div>
+
+<p>
+For a ‘flush’ joint profile no further working need be done. Because flush joints are formed without compacting the surface of the mortar they are less resistant to water penetration than profiles formed by tooling. For other joint profiles the mortar is left to stiffen slightly and then tooled. The time taken for the mortar to reach the correct consistency varies considerably and checking should start after approximately 10 minutes.
+</p>
+</div>
+</div>
+<div id="outline-container-org96292de" class="outline-3">
+<h3 id="org96292de"><span class="section-number-3">3.2.</span> Rubbed, Keyed or Grooved Pointing</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+the mortar is pressed into joints by trowel and well finished off with the face of masonry surface. After that, the joint is pressed by back by small - diameter steel lengthwise (6 mm dia) It will form a curved arc groove into a mortar joint. The vertical joint also finishes similar manner. 
+</p>
+
+<p>
+Concave pointing is formed by making the mortar flush with the face brick then struck with a brick jointer. The jointer keeps the mortar flush to the bed on the masonry units while slightly concaving the middle of the joint. Since it’s easy to achieve and offers a high level of weather protection, this joint is commonly used.
+</p>
+
+
+
+<div id="orgc667f6f" class="figure">
+<p><img src="./data/pointing/20201123105628-keyed_pointing.png" alt="20201123105628-keyed_pointing.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Keyed Pointing</p>
+</div>
+
+
+
+<div id="org3960dc6" class="figure">
+<p><img src="./data/pointing/20201123112512-self_made_pointing_tool.png" alt="20201123112512-self_made_pointing_tool.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span>Self made pointing tool</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orge049fad" class="outline-3">
+<h3 id="orge049fad"><span class="section-number-3">3.3.</span> V-Grooved Pointing</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Similar to keyed pointing work. The mortar filled and pressed into a joined. 
+After that, the V shaped groove is formed in the joint by use of V shaped tool. 
+</p>
+
+
+<p>
+q<img src="./data/pointing/20201123125507-v_grooved.png" alt="20201123125507-v_grooved.png" />
+</p>
+
+
+<p>
+<img src="./data/pointing/20201123125615-bird_beak.png" alt="20201123125615-bird_beak.png" />
+Bird Beak: Although today it’s mainly applied during period restoration, it can work on more modern buildings though is best avoided if the brickwork is unprotected and/or faces regular winds. Damaging rainwater will collect in the bottom.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcfc997d" class="outline-3">
+<h3 id="orgcfc997d"><span class="section-number-3">3.4.</span> Recessed Pointing / Raked Joint</h3>
+<div class="outline-text-3" id="text-3-4">
+<ul class="org-ul">
+<li></li>
+
+<li>Pressed pointing face is kept vertical</li>
+<li></li>
+
+<li></li>
+</ul>
+
+
+<div id="org34814a5" class="figure">
+<p><img src="./data/pointing/20201123113712-recessed_pointing.png" alt="20201123113712-recessed_pointing.png" />
+</p>
+<p><span class="figure-number">Figure 4: </span>Recessed Pointing</p>
+</div>
+
+<p>
+Recessed joints impede the flow of rainwater down the surface of the brickwork, which tends to get wetter than it does with other profiles. For this reason recessed joints are not recommended unless the bricks are eminently frost-resistant. 
+</p>
+
+<p>
+They are not recommended in locations liable to severe exposure to wind-driven rain for brickwork in which resistance to water penetration is important.
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-org4a6ff7e" class="outline-3">
+<h3 id="org4a6ff7e"><span class="section-number-3">3.5.</span> Weathered Pointing / Weather Struck Pointing</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+. Weathered pointing is a modification of flush pointing. The face of the pointing is kept inclined, with its upper edge pressed inside the face by about 10 mm. Weathered pointing throws off rain water and is considered fairly durable; however, it’s fairly difficult to achieve. (<a href="https://sullivanengineeringllc.com/2017/11/26/what-is-pointing/">Source</a>)
+</p>
+
+<p>
+The mortar pressed into a joint and whil the mortar is still fresh the top of the horzontal joints is neatly pressed back by 3-6mm with the pointing tool. They look like sloping from the top of the joint to bottomo of joint . 
+</p>
+
+
+
+<div id="orgddf28a8" class="figure">
+<p><img src="./data/pointing/20201123104339-weathered_pointing.png" alt="20201123104339-weathered_pointing.png" />
+</p>
+<p><span class="figure-number">Figure 5: </span>weathered pointing</p>
+</div>
+
+
+
+
+<div id="org2e15a65" class="figure">
+<p><img src="./data/pointing/20201123120835-weathered.png" alt="20201123120835-weathered.png" />
+</p>
+<p><span class="figure-number">Figure 6: </span>weathered</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc1c7f0d" class="outline-3">
+<h3 id="orgc1c7f0d"><span class="section-number-3">3.6.</span> Weather Struck and Cut pointing</h3>
+<div class="outline-text-3" id="text-3-6">
+
+<div id="org79d7342" class="figure">
+<p><img src="./data/pointing/20201123125337-weater_struck_and_cut.png" alt="20201123125337-weater_struck_and_cut.png" />
+</p>
+<p><span class="figure-number">Figure 7: </span>weater struck and cut</p>
+</div>
+
+<p>
+The inset (top) edge in Weather Struck and Cut joints is created as it is in regular Weather Struck, but the forward (bottom) edge is projected about 2mm beyond the brick surface.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org02a0587" class="outline-3">
+<h3 id="org02a0587"><span class="section-number-3">3.7.</span> Beaded Pointing</h3>
+<div class="outline-text-3" id="text-3-7">
+
+<div id="org5530e14" class="figure">
+<p><img src="./data/pointing/20201123105807-beaded_pointing.png" alt="20201123105807-beaded_pointing.png" />
+</p>
+<p><span class="figure-number">Figure 8: </span>Beaded Pointing</p>
+</div>
+
+
+<p>
+Mortar pressed into a masonry joint and concave grooves are formed into a joint by using a stell tool having a concave shape. It gives an exvellent appearance to the mortar joint but is <b>liable to get damaged quickly</b>. So not used much. 
+</p>
+
+<p>
+Beaded pointing is used almost exclusively in historical restorations. Beaded joints can be much more noticeable, making the mortar joints part of the structure’s visual aesthetic.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgf93b0b9" class="outline-3">
+<h3 id="orgf93b0b9"><span class="section-number-3">3.8.</span> <span class="todo TODO">TODO</span> Struck Pointing</h3>
+<div class="outline-text-3" id="text-3-8">
+<p>
+the top edge of the joint is pressed inside around 10 mm compared to the bottom corner. It will form slope from top to bottom so that rain wall will drain off quickly. 
+</p>
+
+
+
+
+<div id="org3774c1d" class="figure">
+<p><img src="./data/pointing/20201123125538-struck.png" alt="20201123125538-struck.png" />
+</p>
+<p><span class="figure-number">Figure 9: </span>Struck</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfdcb17f" class="outline-3">
+<h3 id="orgfdcb17f"><span class="section-number-3">3.9.</span> <span class="todo TODO">TODO</span> Tuck Pointing</h3>
+<div class="outline-text-3" id="text-3-9">
+<ul class="org-ul">
+<li>The mortar joint is filled and pressed to the level surface of masonry</li>
+<li>While mortar is still fresh grooves are cut in the mortar joint (slot of size 5mm width and 3 mm depth). It is then filled with white cemenet putty, kept projecting beyond the face of the joint by 3mm.</li>
+<li>In case these projections are done in a mortar then it is called as bastard pointing or half tuck pointing.</li>
+</ul>
+
+
+<div id="org1a56f6b" class="figure">
+<p><img src="./data/pointing/20201123113410-tuck_pointing.png" alt="20201123113410-tuck_pointing.png" />
+</p>
+<p><span class="figure-number">Figure 10: </span>Tuck Pointing</p>
+</div>
+
+<p>
+Why projection? and why the name 
+</p>
+
+<p>
+In this case mortar is pressed in the raked joint first and finishing flush with the face.
+</p>
+
+<p>
+While the pressed mortar is green, groove or narrow channel is cut in the center of groove which is having 5mm width and 3mm depth. This groove is then filled with white cement putty, kept projecting beyond the face of the joint by 3 mm. if projection is done in mortar, it is called bastard pointing or half tuck pointing.
+</p>
+
+
+<div id="orgea12e72" class="figure">
+<p><img src="./data/pointing/20201123114027-tucked_pointing.png" alt="20201123114027-tucked_pointing.png" />
+</p>
+<p><span class="figure-number">Figure 11: </span>Tucked Pointing</p>
+</div>
+
+
+
+<div id="org9edeaa8" class="figure">
+<p><img src="./data/pointing/Picture2.png" alt="Picture2.png" />
+</p>
+<p><span class="figure-number">Figure 12: </span>Tuck Pointing - Mortar flushed to joints, mortar cut to form raised ruler outside  - Bastard Tuck</p>
+</div>
+
+
+
+
+
+<p>
+*
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org1e0bbfe" class="outline-2">
+<h2 id="org1e0bbfe"><span class="section-number-2">4.</span> Tool</h2>
+<div class="outline-text-2" id="text-4">
+
+<div id="orgf933592" class="figure">
+<p><img src="./data/pointing/20201123110933-pointing_trowel_https_www_youtube_com_watch_v_jpcp0ilojtm.png" alt="20201123110933-pointing_trowel_https_www_youtube_com_watch_v_jpcp0ilojtm.png" />
+</p>
+<p><span class="figure-number">Figure 13: </span>Pointing Trowel (<a href="https://www.youtube.com/watch?v=jPcp0iLoJtM">https://www.youtube.com/watch?v=jPcp0iLoJtM</a>)</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga04604c" class="outline-2">
+<h2 id="orga04604c"><span class="section-number-2">5.</span> Process</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-orgf7bdbb6" class="outline-3">
+<h3 id="orgf7bdbb6"><span class="section-number-3">5.1.</span> Cleaning/Raking</h3>
+<div class="outline-text-3" id="text-5-1">
+
+<div id="orgd3bc1ed" class="figure">
+<p><img src="./data/pointing/20201123111559-clean.png" alt="20201123111559-clean.png" />
+</p>
+<p><span class="figure-number">Figure 14: </span>clean</p>
+</div>
+<ul class="org-ul">
+<li>For freshly laid brick: All the joints in masonry are raked down to a depth of 20mm while the mortar is still soft. The joints and surface are cleaned and then thoroughly wetted. It is preferable when the joint has not completed final setting time (in plastic state). It is easy to rake and apply mortar in this condition.</li>
+
+<li>Griding requirement Depends on the depth of key</li>
+<li>If there is moss, then scraping would be necessary</li>
+</ul>
+
+<p>
+The existing masonry joints are cut out to a uniform depth of approximately ¾”, or until sound mortar is reached. The joints and surface are cleaned of debris, and thoroughly wetted
+</p>
+
+
+<div id="org721186e" class="figure">
+<p><img src="./data/pointing/Picture1.png" alt="Picture1.png" />
+</p>
+</div>
+
+
+<div id="org0dbbc28" class="figure">
+<p><img src="./data/pointing/20201123111634-15_to_18_mm.png" alt="20201123111634-15_to_18_mm.png" />
+</p>
+<p><span class="figure-number">Figure 15: </span>15 to 18 mm</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org056e03d" class="outline-3">
+<h3 id="org056e03d"><span class="section-number-3">5.2.</span> Prepare mix</h3>
+</div>
+<div id="outline-container-org6b7b476" class="outline-3">
+<h3 id="org6b7b476"><span class="section-number-3">5.3.</span> Maybe Dampen the bricks</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+qq
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Pointing">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Fantastic Masculinity of Newt Scamander</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="../js/counters.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">The Fantastic Masculinity of Newt Scamander</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org7ab363a">1. Masculanity we expect</a></li>
+<li><a href="#orge533ed3">2. Characteristics</a>
+<ul>
+<li><a href="#org1668100">2.1. Social Anxiety is not an obstacle</a></li>
+</ul>
+</li>
+<li><a href="#org78cecd7">3. The ending</a></li>
+</ul>
+</div>
+</div>
+<p>
+<a href="https://www.youtube.com/watch?v=C4kuR1gyOeQ">https://www.youtube.com/watch?v=C4kuR1gyOeQ</a>
+</p>
+
+<p>
+<span class="underline">Fantastic Beasts and Where to Find Them</span>
+</p>
+
+<p>
+Newt Scamander, protagonist of this Harry Potter spin-off, is an <b>unconventional male hero</b>. He performs a <b>refreshingly atypical form of masculinity</b> especially for the lead in a fantasy adventure story.
+</p>
+
+<div id="outline-container-org7ab363a" class="outline-2">
+<h2 id="org7ab363a"><span class="section-number-2">1.</span> Masculanity we expect</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>We expect leading men who are, or learn to be, <b>autonomous, brazen, and physically strong</b>.</li>
+<li>Or at least men who are <b>witty, boisterous, and charismatic</b>.</li>
+<li>Preferably all of the above.</li>
+<li>It's practically required for male heroes to <b>hide their vulnerability</b>.</li>
+<li>We're accustomed to seeing men who are <b>quick to violence</b> and slow to diplomacy.</li>
+</ul>
+
+<p>
+But his version of manhood doesn't stem from physical strength or combat skills or feats of daring-do, or even from some preordained mystic destiny like so many other male heroes.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge533ed3" class="outline-2">
+<h2 id="orge533ed3"><span class="section-number-2">2.</span> Characteristics</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>His is a <b>quiet, vulnerable, yet confident form of manhood</b>.</li>
+<li>Newt Scamander is <b>not the "chosen one."</b></li>
+<li>He is <b>not plagued with self-doubt</b> about his abilities or his place in the magical world.</li>
+<li><b>Newts truly special gift is not his magic. It's his empathy</b>.</li>
+<li>And the story doesn't frme his social anxiety as an obstacle.</li>
+
+<li>This type of quiet <b>sensitive masculinity</b> is so out of the ordinary for a leading man that I wasn't terribly surprised to see a number of movie reviewers turned off by his character.</li>
+<li>Newt's character is largely defined by his <b>extraordinary ability to connect with magical creatures</b> and by his relative inability to connect with other human beings.</li>
+<li>This is also <b>not an "animal good, human bad" story</b>. Even though he's painfully shy and socially awkward <b>Newt's empathetic worldview extends to people</b>, especially to those discriminated against or marginalized.</li>
+<li>He's strongly opposed to segregation, discriminatory laws, capital punishment, and other violence committed in the name of justice.</li>
+<li>He's sincere, nurturing, emotional, and sensitive.</li>
+
+<li>But <b>Newt is not Harry Potter</b>. He's a Hufflepuff. The House characterized by friendship, hard work, and humility. Hufflepuffs are said to be more down-to-earth and less competitive than the other three wizarding houses. Harry Potter, on the other hand, was sorted into Gryffindor, the House known for daring, nerve, chivalry, and prone to a fair bit of showing off. As such, Harry fits neatly into the pantheon of traditional Hollywood heroes.</li>
+</ul>
+</div>
+
+<div id="outline-container-org1668100" class="outline-3">
+<h3 id="org1668100"><span class="section-number-3">2.1.</span> Social Anxiety is not an obstacle</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>Characters like this tend to fall into a few specific archetypes.
+<ul class="org-ul">
+<li>There's the <span class="underline">Tormented Genius</span>: a brilliant but insufferable character who's intelligent to the point of instability or mental illness which is often framed as "the price" he must pay for his extraordinary talent.</li>
+<li>There's the <span class="underline">Mad Scientist</span>: a whimsical or bumbling character whose weird eccentricities are perhaps endearing to a degree&#x2026;</li>
+<li>And then there's the <span class="underline">Sherlock Holmes</span> archetype: a character possessing such a superhuman IQ that it leads to callousness and the <b>inability or perhaps unwillingness to feel sympathy for other people</b>.</li>
+</ul></li>
+
+<li>Critically, <b>Fantastic Beasts doesn't frame Newt's social anxiety as an obstacle</b> he must ultimately overcome in order to be a true hero. The narrative doesn't require him to "toughen up" or learn to be more outgoing.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org78cecd7" class="outline-2">
+<h2 id="org78cecd7"><span class="section-number-2">3.</span> The ending</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The ending of Fantastic Beasts is rather anticlimactic compared to most other action fantasy movies and even compared to most other films in the Harry Potter universe. <span class="underline">Rather than besting his foe in an epic magical duel, Newt approaches the conflict with an eye for de-escalation</span>. Of course, in the end the malevolent force is vanquished, but it's not done by Newt's hand. Even more surprising, <span class="underline">this triumph of over evil isn't shown to be a cause for celebration</span>. It is instead framed as a melancholy event. Melancholy because <b>our heroes failed to save the monster</b>.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: The Fantastic Masculinity of Newt Scamander">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

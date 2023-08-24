@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Emacs</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="../js/counters.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">Emacs</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb58aa4f">1. Notes</a></li>
+<li><a href="#org4ed7891">2. Tips</a>
+<ul>
+<li><a href="#org2985bf8">2.1. Counsel Ripgrep</a></li>
+<li><a href="#orgff281f5">2.2. EmacsClient for MacOS</a></li>
+<li><a href="#orgd5abc04">2.3. Change face for some mode only</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb58aa4f" class="outline-2">
+<h2 id="orgb58aa4f"><span class="section-number-2">1.</span> Notes</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li><b>leuven</b>  theme is nice for light mode (especially org-mode)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4ed7891" class="outline-2">
+<h2 id="org4ed7891"><span class="section-number-2">2.</span> Tips</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org2985bf8" class="outline-3">
+<h3 id="org2985bf8"><span class="section-number-3">2.1.</span> Counsel Ripgrep</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+<a href="https://emacsbliss.com/">https://emacsbliss.com/</a>
+</p>
+<blockquote>
+<p>
+counsel-rg by default looks for a directory with .git and starts a search from there.
+</p>
+
+<p>
+To limit the scope to current directory and its sub directories, not where .git is, use prefix argument before running counsel-rg then select which directory you want to run rg on. 
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgff281f5" class="outline-3">
+<h3 id="orgff281f5"><span class="section-number-3">2.2.</span> EmacsClient for MacOS</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Create an application applescript with the following code: 
+</p>
+
+<p>
+Based on: 
+<a href="https://github.com/ferlatte/emacs-daemon-osx/blob/master/emacs-client.applescript">https://github.com/ferlatte/emacs-daemon-osx/blob/master/emacs-client.applescript</a>
+</p>
+
+<p>
+Changes
+</p>
+<ul class="org-ul">
+<li>Pass first parameter to emacsclient. So that we can open file from finder.</li>
+<li>" &#x2013;eval '(select-frame-set-input-focus (selected-frame))'" to bring focus to new frame</li>
+<li>" &gt; /dev/null 2&gt;&amp;1 &amp;" : Applescript waits for emacsclient to end for the script to complete. This redirects stdout and stderr to /dev/null and run the process in background so that the script doesn't need to wait</li>
+</ul>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-applescript"><span class="org-comment-delimiter">-- </span><span class="org-comment">Adapted From https://github.com/brianm/emacs-client-mac</span>
+<span class="org-comment-delimiter">--</span>
+<span class="org-keyword">on</span> <span class="org-keyword">run</span> argv
+        <span class="org-keyword">set</span> arg <span class="org-keyword">to</span> <span class="org-function-name">item</span> 1 of argv
+        try
+                <span class="org-keyword">set</span> filePath <span class="org-keyword">to</span> <span class="org-function-name">POSIX</span> path of arg
+        <span class="org-keyword">on</span> <span class="org-function-name">error</span>
+                <span class="org-keyword">set</span> filePath <span class="org-keyword">to</span> <span class="org-string">""</span>
+        <span class="org-keyword">end</span> try
+
+        <span class="org-keyword">tell</span> <span class="org-keyword">application</span> <span class="org-string">"Terminal"</span>
+                try
+                        <span class="org-comment-delimiter">-- </span><span class="org-comment">we look for &lt;= 2 because Emacs --daemon seems to always</span>
+                        <span class="org-comment-delimiter">-- </span><span class="org-comment">have an entry in visibile-frame-list even if there isn't</span>
+                        <span class="org-keyword">set</span> frameVisible <span class="org-keyword">to</span> <span class="org-function-name">do</span> shell script <span class="org-string">"/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -e '(&lt;= 2 (length (visible-frame-list)))'"</span>
+                        <span class="org-keyword">if</span> frameVisible <span class="org-keyword">is</span> <span class="org-keyword">not</span> <span class="org-string">"t"</span> <span class="org-keyword">then</span>
+                                <span class="org-comment-delimiter">-- </span><span class="org-comment">there is a not a visible frame, launch one</span>
+                                do shell script <span class="org-string">"/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n "</span> &amp; filePath &amp; <span class="org-string">" --eval '(select-frame-set-input-focus (selected-frame))'"</span> &amp; <span class="org-string">" &gt; /dev/null 2&gt;&amp;1 &amp;"</span>
+                        <span class="org-keyword">else</span>
+                                do shell script <span class="org-string">"/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -n "</span> &amp; filePath &amp; <span class="org-string">" --eval '(select-frame-set-input-focus (selected-frame))'"</span> &amp; <span class="org-string">" &gt; /dev/null 2&gt;&amp;1 &amp;"</span>
+                        <span class="org-keyword">end</span> <span class="org-keyword">if</span>
+                <span class="org-keyword">on</span> <span class="org-function-name">error</span>
+                        <span class="org-comment-delimiter">-- </span><span class="org-comment">FIXME: instead, open an alertbox, since we intend to run Emacs</span>
+                        <span class="org-comment-delimiter">-- </span><span class="org-comment">from launchd.</span>
+                        <span class="org-comment-delimiter">-- </span><span class="org-comment">daemon is not running, start the daemon and open a frame     </span>
+                        do shell script <span class="org-string">"/Applications/Emacs.app/Contents/MacOS/Emacs --daemon"</span>
+                        do shell script <span class="org-string">"/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n "</span> &amp; filePath &amp; <span class="org-string">" --eval '(select-frame-set-input-focus (selected-frame))'"</span> &amp; <span class="org-string">" &gt; /dev/null 2&gt;&amp;1 &amp;"</span>
+
+                <span class="org-keyword">end</span> try
+        <span class="org-keyword">end</span> <span class="org-keyword">tell</span>
+
+<span class="org-keyword">end</span> run
+</pre>
+</div></details>
+</div>
+</div>
+
+<div id="outline-container-orgd5abc04" class="outline-3">
+<h3 id="orgd5abc04"><span class="section-number-3">2.3.</span> Change face for some mode only</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+See example at <a href="file:///Users/bpanthi977/.emacs.d/modules/org-config.el#org8716589">org-config.el</a>
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">a more noticable bold face for org mode in dark themes (spacemacs-dark)</span>
+(face-remap-add-relative 'bold '(<span class="org-builtin">:weight</span> bold <span class="org-builtin">:foreground</span> <span class="org-string">"green3"</span>))
+</pre>
+</div></details>
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="org_mode.html#ID-83feb6b0-a900-46a4-9e3d-2ccb8d00e8d6">Org Mode</a></li>
+<li><a href="paredit.html#ID-83e56d5d-c48b-4e2d-9834-4dafd315334a">Paredit</a></li>
+<li><a href="lifestyle_software.html#ID-5859FF4B-3320-4A36-B330-D81526275944">Lifestyle Software</a></li>
+<li><a href="tools.html#ID-6dc5435d-8a2f-49f2-8365-7ea00a855145">Tools</a></li>
+<li><a href="notes.html#ID-15b81538-4cf6-41a7-b54e-e62e8f1c2dbf">Org Export settings and #+Option 's</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Emacs">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

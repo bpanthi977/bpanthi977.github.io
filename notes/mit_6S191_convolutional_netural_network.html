@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-08-24 Thu 12:18 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Convolutional Neural Networks</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="/js/counters.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">Convolutional Neural Networks</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org4cd3709">1. Feature Detection</a></li>
+<li><a href="#orgd9dbc92">2. Filters detect Features</a></li>
+<li><a href="#orgfc7261c">3. Convolutional Neural Networks (CNNs)</a></li>
+<li><a href="#org25d846b">4. Object Detection</a>
+<ul>
+<li><a href="#orge8a0aa4">4.1. Object Detection with R-CNNs</a></li>
+<li><a href="#orge5dd7fd">4.2. Faster R-CNN</a></li>
+</ul>
+</li>
+<li><a href="#orgdbda2ac">5. Semantic Segmentation: Fully Convolutional Networks</a></li>
+<li><a href="#orgebb2fa9">6. Continuous Control</a></li>
+</ul>
+</div>
+</div>
+<p>
+<a href="https://www.youtube.com/watch?v=uapdILWYTzE&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=5">Lecture 3: Convolutional Neural Networks</a>: In which we learn about CNNs, how filters detect features, and how deep stacking of these filters can be used to do many computer vision tasks.
+</p>
+
+<p>
+We use vision to recognize what is there, where it is and also use it to predict future motion &amp; intent. So, the task of Compute Vision is more than simply detecting stuffs. 
+</p>
+
+<div id="outline-container-org4cd3709" class="outline-2">
+<h2 id="org4cd3709"><span class="section-number-2">1.</span> Feature Detection</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+For computers image is input as matrix of numbers. And image classfication is done by High Level Feature Detection (0:08:45)
+</p>
+
+<p>
+0:09:53 Feature detection could be done manually:
+</p>
+<ul class="org-ul">
+<li>Use Domain Knowledge, then</li>
+<li>Define features then</li>
+<li>Detect features to classify</li>
+</ul>
+
+<p>
+But its not easy. Defining features may be easy but problems in detection are: 0:11:00
+</p>
+<ul class="org-ul">
+<li>Viewpoint variation</li>
+<li>Illumination</li>
+<li>Scale variation</li>
+<li>Deformation</li>
+<li>Occlusion</li>
+<li>Background clutter</li>
+<li>Intra-class variation</li>
+</ul>
+
+
+<div id="org59d2702" class="figure">
+<p><img src="../img/mit_6s191/difficulty_in_feature_detection-20230316132313.png" alt="difficulty_in_feature_detection-20230316132313.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Difficulty in Feature Detection</p>
+</div>
+
+
+<p>
+Instead Use Neural Network for Feature Detection. 
+</p>
+
+<ol class="org-ol">
+<li>Fully Connected Layers:
+<ul class="org-ul">
+<li>Loses spatial information becuase image is flattened</li>
+<li>Requires high number of parameters</li>
+</ul></li>
+
+<li>Convolutional Filter (0:16:50)
+<ul class="org-ul">
+<li>Preserves Spatial Information</li>
+<li>Lesser number of parameters</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgd9dbc92" class="outline-2">
+<h2 id="orgd9dbc92"><span class="section-number-2">2.</span> Filters detect Features</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+0:20:00
+</p>
+
+<div id="org5a532af" class="figure">
+<p><img src="../img/mit_6s191/filters_detect_features-20230316132940.png" alt="filters_detect_features-20230316132940.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Example of Filters detecting features for X shape</p>
+</div>
+
+<p>
+0:23:21 Filters are applied to input through Convolution Operation.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfc7261c" class="outline-2">
+<h2 id="orgfc7261c"><span class="section-number-2">3.</span> Convolutional Neural Networks (CNNs)</h2>
+<div class="outline-text-2" id="text-3">
+
+<div id="org4ae422f" class="figure">
+<p><img src="../img/mit_6s191/cnn_spatial_arrangement_of_output_volumne-20230316133419.png" alt="cnn_spatial_arrangement_of_output_volumne-20230316133419.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span>CNN: Spatial Arrangement of Output Volume</p>
+</div>
+
+<p>
+In convolutional neural network, we apply (convolute) filters to the input image. 
+</p>
+<ul class="org-ul">
+<li>Each filter we apply outputs a 2d result</li>
+<li>So, after applying multiple filters to an input image we get an Output Volume. The height and width of the output may be smaller (downsampled) or same or higher.</li>
+<li>The output volume can be further convoluted to extract higher level features from lower level features.</li>
+</ul>
+
+<p>
+For classification:   
+</p>
+<ul class="org-ul">
+<li>We finally feed the feature volume to a Fully connected network</li>
+<li>then to softmax for classification</li>
+</ul>
+
+<p>
+<img src="../img/mit_6s191/cnns_structure-20230316133725.png" alt="cnns_structure-20230316133725.png" />
+In CNNs the input is passed usually through
+</p>
+<ul class="org-ul">
+<li>Convolution Layer (containing Convolution &amp; A bias)</li>
+<li>Non-linearity (e.g. ReLU)</li>
+<li>Pooling (e.g. Max-Pooling) (0:32:53)</li>
+</ul>
+
+<p>
+Usually as you we do pooling (down sampling), we increase the number of features. But recently (in e.g. Patches Are All You Need?) isotropic model have shown to be give good results. Isotropic model use the same height and width throughout the network. (i.e. they don't downsample)
+</p>
+
+<p>
+We can keep the first part of the network (the feature learning) and swap out the second part depending upon task: (0:36:10)
+</p>
+<ul class="org-ul">
+<li>Classification</li>
+<li>Object Detection</li>
+<li>Segmentation</li>
+<li>Probabilistic Control</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org25d846b" class="outline-2">
+<h2 id="org25d846b"><span class="section-number-2">4.</span> Object Detection</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+@ 0:38:51
+Object detection is the problem of finding a bounding box were the detected object is. There may be multiple objects of different types of various sizes. So this is a difficult problem. 
+</p>
+
+<p>
+Native Method would be to: 
+</p>
+<ul class="org-ul">
+<li>Sample lots of different sizes and positions of boxes</li>
+<li>Clip the image to the box, and send to classification network</li>
+</ul>
+</div>
+
+<div id="outline-container-orge8a0aa4" class="outline-3">
+<h3 id="orge8a0aa4"><span class="section-number-3">4.1.</span> Object Detection with R-CNNs</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+0:41:39
+Find regions that we think have objects. Use CNN to classify. So, a model proposes regions for object classification, and then we pass the region to object classification network.
+</p>
+
+
+<div id="org1b5c88e" class="figure">
+<p><img src="../img/mit_6s191/r_cnns-20230316134458.png" alt="r_cnns-20230316134458.png" />
+</p>
+<p><span class="figure-number">Figure 4: </span>R-CNNs</p>
+</div>
+
+<p>
+Demerits:
+</p>
+<ul class="org-ul">
+<li>Brittle</li>
+<li>Region Extraction network is detached from classification network</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge5dd7fd" class="outline-3">
+<h3 id="orge5dd7fd"><span class="section-number-3">4.2.</span> Faster R-CNN</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+0:42:01
+</p>
+
+
+<div id="org8b7b746" class="figure">
+<p><img src="../img/mit_6s191/faster_r_cnn-20230316134851.png" alt="faster_r_cnn-20230316134851.png" />
+</p>
+<p><span class="figure-number">Figure 5: </span>Faster R-CNN</p>
+</div>
+
+<ul class="org-ul">
+<li>Learns the Region Proposal Network along with feature extraction and classification</li>
+<li>Feeds the image to feature extraction only once</li>
+<li>Grab all the regions, process then independently 
+<ul class="org-ul">
+<li>Pass the region through feature detection head again (?)</li>
+<li>Pass to classification network</li>
+</ul></li>
+<li>Faster than R-CNN</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdbda2ac" class="outline-2">
+<h2 id="orgdbda2ac"><span class="section-number-2">5.</span> Semantic Segmentation: Fully Convolutional Networks</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+0:43:29
+</p>
+
+<p>
+Semantic Segmentation is like one classification per pixel. Fully Convolutional Networks tackle this problem by using downsampling operation in first half and upsampling operation in second half of the network. 
+</p>
+
+
+<div id="org2a7686f" class="figure">
+<p><img src="../img/mit_6s191/semantic_segmentation-20230316135344.png" alt="semantic_segmentation-20230316135344.png" />
+</p>
+<p><span class="figure-number">Figure 6: </span>Semantic Segmentation</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgebb2fa9" class="outline-2">
+<h2 id="orgebb2fa9"><span class="section-number-2">6.</span> Continuous Control</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+0:45:15
+</p>
+
+<p>
+Navigation from Vision is a Continuous control task: A model that decides the steering angle from input image. 
+Here the output is a continuous probability distribution. This is different from classification and segmentation task.
+</p>
+
+
+<div id="orgf6d3968" class="figure">
+<p><img src="../img/mit_6s191/navigation_from_vision-20230316135436.png" alt="navigation_from_vision-20230316135436.png" />
+</p>
+<p><span class="figure-number">Figure 7: </span>Navigation from Vision</p>
+</div>
+
+
+<p>
+<img src="../img/mit_6s191/end_to_end_framework_for_autonomous_navigation-20230316140513.png" alt="end_to_end_framework_for_autonomous_navigation-20230316140513.png" />
+In the above model, continuous control is done as follows: 
+</p>
+<ul class="org-ul">
+<li>The top part of model doesn't see the route, and outputs a probabilistic control output</li>
+<li>The bottom part sees the route, and outputs a path to take given the route</li>
+</ul>
+
+<p>
+The loss function here is interesting because in reality we won't take multiple paths but a single one at a given intersection. However, after seeing a bunch of intersections the model will learn the different paths that can be taken.  (0:46:26)
+</p>
+
+<p>
+\(L = - \log(P(\theta | I, M))\) 
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Convolutional Neural Networks">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

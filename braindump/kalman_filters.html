@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kalman Filters</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: 2020-11-22</p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Kalman Filters</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd1444b2">1. When are they used?</a>
+<ul>
+<li><a href="#org59493b1">1.1. An Example : Internal Temperature of Rocket Engine from External Temperature</a></li>
+</ul>
+</li>
+<li><a href="#org47a51ca">2. Kalman Filters - Optimal State Estimator</a>
+<ul>
+<li><a href="#org441d255">2.1. Equations</a></li>
+<li><a href="#org05e3a20">2.2. If error covariance in measurement is zero:</a></li>
+<li><a href="#orge79c02b">2.3. If predicted state estimate variance is zero:</a></li>
+</ul>
+</li>
+<li><a href="#orgf470e78">3. Nonlinear state estimators</a></li>
+<li><a href="#org549d1cb">4. Extended Kalman Filters (EKFs)</a></li>
+<li><a href="#org73a8ddc">5. Unscented Kalman Filters</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org035837b">5.0.1. Particle Filters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd1444b2" class="outline-2">
+<h2 id="orgd1444b2"><span class="section-number-2">1.</span> When are they used?</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/4OerJmPpkRg" title="nil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
+</p>
+
+
+<ul class="org-ul">
+<li>when we can't measured the desired value directly.</li>
+<li>when we have to estimate from multiple measurements.</li>
+</ul>
+</div>
+
+<div id="outline-container-org59493b1" class="outline-3">
+<h3 id="org59493b1"><span class="section-number-3">1.1.</span> An Example : Internal Temperature of Rocket Engine from External Temperature</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Say we have as input:
+</p>
+<ul class="org-ul">
+<li>Fuel flow</li>
+<li>and External Temperature from sensors</li>
+</ul>
+
+<p>
+If we have mathematical model of the system, then if your model and system would be exact then the measurements would match the estimated temperature. So, we use <b>state estimator</b>. 
+</p>
+
+
+<div id="org3a48b40" class="figure">
+<p><img src="./data/kalman_filters/mpv-screenshotn1iVIi.png" alt="mpv-screenshotn1iVIi.png" />
+</p>
+</div>
+
+<p>
+A feedback control system to minimize error between estimated temperature and measured temperature. 
+<img src="./data/kalman_filters/mpv-screenshotn02goo.png" alt="mpv-screenshotn02goo.png" />
+</p>
+
+<p>
+Use \(W_{fuel}\) to estimate \(\hat{T}_{ext}\) and minimize error between that and measured \(T_{ext}\) . So that estimated  \(\hat{T}_{in}\) is correct.
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org47a51ca" class="outline-2">
+<h2 id="org47a51ca"><span class="section-number-2">2.</span> Kalman Filters - Optimal State Estimator</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ul3u2yLPwU0" title="nil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
+</p>
+
+<p>
+\(y_k\) is position (measured from GPS)
+\(u_k\) is velocity 
+</p>
+
+<p>
+\(v_k\) is error in measurement 
+and \(w_k\) is process noise (error due to wind effects, velocity fluctuations)
+</p>
+
+
+<div id="org56c2a26" class="figure">
+<p><img src="./data/kalman_filters/mpv-screenshotukyrKM.png" alt="mpv-screenshotukyrKM.png" />
+</p>
+</div>
+
+<p>
+with time the estimate of car's position and measurement differ. Combining thes two pieces of information is done by Kalman Filter. 
+<img src="./data/kalman_filters/mpv-screenshotXkC0F1.png" alt="mpv-screenshotXkC0F1.png" />
+</p>
+
+<p>
+Multiply the probability density of the two esitmates to get the optimal state estimate. This estimate would have probability distribution with less variance. 
+</p>
+</div>
+
+<div id="outline-container-org441d255" class="outline-3">
+<h3 id="org441d255"><span class="section-number-3">2.1.</span> Equations</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/VFXf1lIZ3p8" title="nil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
+</p>
+
+
+<div id="org920bdc9" class="figure">
+<p><img src="./data/kalman_filters/mpv-screenshotGNHPug.png" alt="mpv-screenshotGNHPug.png" />
+</p>
+</div>
+
+<p>
+\(P_k^{-}\) is error covariance matrix
+</p>
+
+<p>
+The Kalman gain \(K_k\) is calculated such that it minimizes the prosteri error covariance \(P_k\) 
+</p>
+
+<p>
+\(R\) is measurement covariance 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org05e3a20" class="outline-3">
+<h3 id="org05e3a20"><span class="section-number-3">2.2.</span> If error covariance in measurement is zero:</h3>
+<div class="outline-text-3" id="text-2-2">
+
+<div id="org5ed82ce" class="figure">
+<p><img src="./data/kalman_filters/mpv-screenshotgaiV7y.png" alt="mpv-screenshotgaiV7y.png" />
+</p>
+</div>
+
+<p>
+the state estimate is from measurement 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge79c02b" class="outline-3">
+<h3 id="orge79c02b"><span class="section-number-3">2.3.</span> If predicted state estimate variance is zero:</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Then  predicted state estimate is used as state estimate. 
+<img src="./data/kalman_filters/mpv-screenshotQzql9y.png" alt="mpv-screenshotQzql9y.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf470e78" class="outline-2">
+<h2 id="orgf470e78"><span class="section-number-2">3.</span> Nonlinear state estimators</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Vefia3JMeHE" title="nil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
+</p>
+
+<p>
+In real life either the state transition function (\(f\)) or the measurement function (\(g\)) may be nonlinear.
+</p>
+
+<p>
+\(x_k = f(x_{k-1}, u_k) + w_k\)
+\(y_k = g(x_k) + v_k\)
+</p>
+
+<p>
+Kalman filter assumes gaussian distribution and after linear transformation then the result is also gaussian. But if \(f\) is nonlinear then the result is not gaussian. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org549d1cb" class="outline-2">
+<h2 id="org549d1cb"><span class="section-number-2">4.</span> Extended Kalman Filters (EKFs)</h2>
+<div class="outline-text-2" id="text-4">
+
+<div id="org5e982f4" class="figure">
+<p><img src="./data/kalman_filters/mpv-screenshotPiWIb5.png" alt="mpv-screenshotPiWIb5.png" />
+</p>
+</div>
+
+
+<p>
+Drawbacks to Using Extended Kalman Filters (EKFs):
+</p>
+
+<ul class="org-ul">
+<li>It is difficult to calculate the Jacobians (if they need to be found analytically)</li>
+<li>There is a high computational cost (if the Jacobians can be found numerically)</li>
+<li>EKF only works on systems that have a differentiable model</li>
+<li>EKF is not optimal if the system is highly nonlinear</li>
+</ul>
+
+
+
+<div id="orgc0d652a" class="figure">
+<p><img src="./data/kalman_filters/mpv-screenshotU4Otzp.png" alt="mpv-screenshotU4Otzp.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org73a8ddc" class="outline-2">
+<h2 id="org73a8ddc"><span class="section-number-2">5.</span> Unscented Kalman Filters</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+
+<div id="outline-container-org035837b" class="outline-4">
+<h4 id="org035837b"><span class="section-number-4">5.0.1.</span> Particle Filters</h4>
+<div class="outline-text-4" id="text-5-0-1">
+
+<div id="org7829d72" class="figure">
+<p><img src="./data/kalman_filters/mpv-screenshotQ6nHMO.png" alt="mpv-screenshotQ6nHMO.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Kalman Filters">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

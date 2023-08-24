@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Coupled Pendulum</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: 2020-10-18</p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Coupled Pendulum</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orga258f1a">1. Simulation</a>
+<ul>
+<li><a href="#org72efe83">1.1. Video/Results</a></li>
+<li><a href="#org3f14cb4">1.2. Code</a></li>
+</ul>
+</li>
+<li><a href="#orgc445536">2. Derivation</a></li>
+</ul>
+</div>
+</div>
+<p>
+When two simple pendulum are connected by a string, and one is moved, then gradually the osciallations are transferred from the first pendulum to the second (with the first one coming to a full stop) and then it transfers back from second to first, &#x2026; 
+</p>
+
+<p>
+I came across a interesting this interesting fact, and then tried deriving it mathematically as well as by writing a simulation. 
+</p>
+
+<div id="outline-container-orga258f1a" class="outline-2">
+<h2 id="orga258f1a"><span class="section-number-2">1.</span> Simulation</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org72efe83" class="outline-3">
+<h3 id="org72efe83"><span class="section-number-3">1.1.</span> Video/Results</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li><a href="./data/coupled_pendulum/coupled-pendulum-2020-10-17_21.54.59.mkv">./data/coupled_pendulum/coupled-pendulum-2020-10-17_21.54.59.mkv</a></li>
+<li><a href="./data/coupled_pendulum/coupled-pendulum-top-view-2020-10-17_22.04.12.mkv">./data/coupled_pendulum/coupled-pendulum-top-view-2020-10-17_22.04.12.mkv</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3f14cb4" class="outline-3">
+<h3 id="org3f14cb4"><span class="section-number-3">1.2.</span> Code</h3>
+<div class="outline-text-3" id="text-1-2">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(ql:quickload <span class="org-builtin">:lispbuilder-sdl</span>)
+(<span class="org-keyword">defpackage</span> <span class="org-type">:pendulum-coupled</span>
+  (<span class="org-builtin">:use</span> <span class="org-builtin">:cl</span>))
+
+(<span class="org-keyword">in-package</span> <span class="org-builtin">:pendulum-coupled</span>)
+
+(<span class="org-keyword">defstruct</span> (<span class="org-type">state</span> <span class="org-builtin">:conc-name</span>) 
+  (x1 0.0d0)
+  (v1 0.0d0)
+  (&#952;1 0.0d0)
+  (&#969;1 0.0d0)
+  (x2 0.0d0)
+  (v2 0.0d0)
+  (&#952;2 0.0d0)
+  (&#969;2 0.0d0))
+
+(<span class="org-keyword">defstruct</span> (<span class="org-type">configuration</span> <span class="org-builtin">:conc-name</span> )
+  (l 0.1d0)
+  (m0 1d0)
+  (s 0.15d0)
+  (h 0.05d0)
+  (m 3d0)
+  (g 9.81d0))
+
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*config*</span> (make-configuration))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">Tsin&#952;</span> (y s)
+  (* -35d4 y (- 1 (/ (sqrt (+ 1 (expt (/ y s) 2)))))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">support-force</span> (mex otherx)
+  <span class="org-doc">"force at support i.e. f"</span>
+  (+ (Tsin&#952; mex (h *config*))
+     (Tsin&#952; (- mex otherx) (s *config*))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">a-&#945;%</span> (&#969; &#952; support-force)
+  <span class="org-doc">"calculate a i.e. d&#178;x/dt&#178; and &#945; i.e. d&#178;&#952;/dt&#178; for a single pendulum"</span>
+  (<span class="org-keyword">let</span> ((c&#8321; (+ (/ support-force (m *config*) (l *config*))
+               (* (expt &#969; 2) (sin &#952;))))
+        (c&#8322; (* -1 (g *config*) (sin &#952;) (/ (l *config*))))
+        (det (/ (+ 1 
+                   (/ (m0 *config*) (m *config*)) 
+                   (- (cos &#952;)))
+                (l *config*))))
+    (values (/ (- c&#8321; (* c&#8322; (cos &#952;))) det)
+            (/ (- (* c&#8322; (+ 1 (/ (m0 *config*) (m *config*))))
+                  c&#8321;)
+               (* det (l *config*))))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">a-&#945;</span> (state)
+  (<span class="org-keyword">multiple-value-bind</span> (a1 &#945;1) (a-&#945;% (&#969;1 state) (&#952;1 state) 
+                                     (support-force (x1 state) (x2 state)))
+    (<span class="org-keyword">multiple-value-bind</span> (a2 &#945;2) (a-&#945;% (&#969;2 state) (&#952;2 state) 
+                                       (support-force (x2 state) (x1 state)))
+      (values a1 a2 &#945;1 &#945;2))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">dS/dt</span> (state) 
+  <span class="org-doc">"State = (&#952; x &#969; v)"</span>
+  (<span class="org-keyword">multiple-value-bind</span> (a1 a2 &#945;1 &#945;2) (a-&#945; state)
+    (make-state <span class="org-builtin">:&#952;1</span> (&#969;1 state)  <span class="org-builtin">:&#952;2</span> (&#969;2 state) 
+                <span class="org-builtin">:x1</span> (v1 state) <span class="org-builtin">:x2</span> (v2 state)
+                <span class="org-builtin">:&#969;1</span> &#945;1  <span class="org-builtin">:&#969;2</span> &#945;2
+                <span class="org-builtin">:v1</span> a1 <span class="org-builtin">:v2</span> a2)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">state+</span>  (state1 state2)
+  (make-state <span class="org-builtin">:x1</span> (+ (x1 state1) (x1 state2))
+              <span class="org-builtin">:v1</span> (+ (v1 state1) (v1 state2))
+              <span class="org-builtin">:&#952;1</span> (+ (&#952;1 state1) (&#952;1 state2))
+              <span class="org-builtin">:&#969;1</span> (+ (&#969;1 state1) (&#969;1 state2))
+              <span class="org-builtin">:x2</span> (+ (x2 state1) (x2 state2))
+              <span class="org-builtin">:v2</span> (+ (v2 state1) (v2 state2))
+              <span class="org-builtin">:&#952;2</span> (+ (&#952;2 state1) (&#952;2 state2))
+              <span class="org-builtin">:&#969;2</span> (+ (&#969;2 state1) (&#969;2 state2))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">state*</span> (k state)
+  (make-state <span class="org-builtin">:x1</span> (* k (x1 state))
+              <span class="org-builtin">:v1</span> (* k (v1 state))
+              <span class="org-builtin">:&#952;1</span> (* k (&#952;1 state))
+              <span class="org-builtin">:&#969;1</span> (* k (&#969;1 state))
+              <span class="org-builtin">:x2</span> (* k (x2 state))
+              <span class="org-builtin">:v2</span> (* k (v2 state))
+              <span class="org-builtin">:&#952;2</span> (* k (&#952;2 state))
+              <span class="org-builtin">:&#969;2</span> (* k (&#969;2 state))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">euler-forward</span> (state &#916;t) 
+  (state+ (state* &#916;t (dS/dt state))
+          state))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">rk4</span> (state &#916;t)
+  (<span class="org-keyword">let*</span> ((k&#8321; (dS/dt state))
+         (k&#8322; (dS/dt (state+ state (state* (/ &#916;t 2) k&#8321;))))
+         (k&#8323; (dS/dt (state+ state (state* (/ &#916;t 2) k&#8322;))))
+         (k&#8324; (dS/dt (state+ state (state* &#916;t k&#8323;))))
+         (k (state* (/ &#916;t 6) (reduce #'state+ 
+                                     (list k&#8321; 
+                                           (state* 2 k&#8322;)
+                                           (state* 2 k&#8323;)
+                                           k&#8324;)))))
+    (state+ state k)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">physics-update</span> (state &#916;t)
+  <span class="org-doc">"We update the state using RK4. We could also use euler forward but that would be much inaccurate"</span>
+  (rk4 state &#916;t))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">speedup</span> (dt)
+  (* 0.02 dt))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">create-edges</span> (state) 
+  (<span class="org-keyword">let</span> ((a (vector 0 0 (+ (h *config*))))
+        (b (vector 0 (x1 state) 0))
+        (c (vector (s *config*) (x2 state) 0))
+        (d (vector (s *config*) 0 (+ (h *config*)))))
+    (list (list a b)
+          (list b 
+                (vector 0 
+                        (+ (x1 state) (* (l *config*) (sin (&#952;1 state)))) 
+                        (* -1 (l *config*) (cos (&#952;1 state)))))
+          (list b c)
+          (list c
+                (vector (s *config*)
+                        (+ (x2 state) (* (l *config*) (sin (&#952;2 state)))) 
+                        (* -1 (l *config*) (cos (&#952;2 state)))))
+          (list c d))))
+
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">main3d</span> () 
+  (<span class="org-keyword">let</span> ((state (make-state <span class="org-builtin">:&#952;1</span> 0.3d0))
+        (t1 (get-internal-real-time)) t2
+        (loops 1))
+    (setf 3d::*scaling* #2A((3418.224 0.0 0.0) (0.0 3418.224 0.0) (0.0 0.0 3418.224)))
+    (setf 3d::*translation* #(240 -250 0))
+    (3d::main-loop 
+     <span class="org-builtin">:update-function</span> (<span class="org-keyword">lambda</span> () 
+                        (setf t2 (get-internal-real-time))
+                        (<span class="org-keyword">let</span> ((dt (/ (- t2 t1) internal-time-units-per-second)))
+                          (<span class="org-keyword">loop</span> repeat loops do 
+                            (setf state (physics-update state (speedup dt)))))
+                        (setf t1 t2)
+                        (setf 3d::*edges* (create-edges state)))
+     <span class="org-builtin">:drawing-function</span> (<span class="org-keyword">lambda</span> () 
+                         (sdl:draw-string-solid-* (format nil <span class="org-string">"~dx"</span> loops) 50 50)
+                         (sdl:draw-circle (3d:process-coordinate 
+                                           (vector 0 
+                                                   (+ (x1 state) (* (l *config*) (sin (&#952;1 state)))) 
+                                                   (* -1 (l *config*) (cos (&#952;1 state)))))
+                                          5)
+                         (sdl:draw-circle (3d:process-coordinate 
+                                           (vector (s *config*)
+                                                   (+ (x2 state) (* (l *config*) (sin (&#952;2 state)))) 
+                                                   (* -1 (l *config*) (cos (&#952;2 state)))))
+                                          5))
+     <span class="org-builtin">:keypress-function</span> (<span class="org-keyword">lambda</span> (key) 
+                          (<span class="org-keyword">case</span> key 
+                            (<span class="org-builtin">:sdl-key-kp-plus</span> (setf loops (* loops 2)))
+                            (<span class="org-builtin">:sdl-key-kp-minus</span> (setf loops (ceiling (/ loops 2)))))))))
+
+</pre>
+</div></details>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc445536" class="outline-2">
+<h2 id="orgc445536"><span class="section-number-2">2.</span> Derivation</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<img src="./data/coupled_pendulum/IMG_20201017_223819.jpg" alt="IMG_20201017_223819.jpg" />
+<img src="./data/coupled_pendulum/IMG_20201017_223857.jpg" alt="IMG_20201017_223857.jpg" />
+<img src="./data/coupled_pendulum/IMG_20201017_223918.jpg" alt="IMG_20201017_223918.jpg" />
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Coupled Pendulum">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

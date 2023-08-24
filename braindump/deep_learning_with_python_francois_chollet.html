@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Deep Learning with Python - François Chollet</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="../js/counters.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">Deep Learning with Python - François Chollet</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb3513b5">1. The Manifold Hypothesis</a></li>
+<li><a href="#org3738b44">2. Workflow of Deep Learning</a>
+<ul>
+<li><a href="#orgc6eeee9">2.1. Beat a Baseline</a></li>
+<li><a href="#orgb5e28cb">2.2. Try Overfitting</a></li>
+<li><a href="#orga832e8d">2.3. Improve Generalization</a>
+<ul>
+<li><a href="#orga3dff28">2.3.1. Dataset quality</a></li>
+<li><a href="#orgaf7eead">2.3.2. Early Stopping</a></li>
+<li><a href="#org1d31470">2.3.3. Regularizing your model</a></li>
+</ul>
+</li>
+<li><a href="#orgdbc4e84">2.4. Tips</a>
+<ul>
+<li><a href="#orgbb86a97">2.4.1. Value Normalization</a></li>
+<li><a href="#orgeb8af06">2.4.2. Evaluation Metric</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+by <a href="francois_chollet.html#ID-FD945F60-EB37-42D3-8EDC-D9043178F944">François Chollet</a>
+</p>
+
+<p>
+ISBN: 9781617296864
+Got to know about the book from this <a href="https://twitter.com/fchollet/status/1659949383813832706">tweet</a>.
+</p>
+
+<p>
+<a href="books/Deep Learning with Python - François Chollet.pdf">books/Deep Learning with Python - François Chollet.pdf</a> 
+</p>
+
+<p>
+The fundamental issue in machine learning is the tension between optimization and generalization.
+</p>
+
+<div id="outline-container-orgb3513b5" class="outline-2">
+<h2 id="orgb3513b5"><span class="section-number-2">1.</span> The Manifold Hypothesis</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+The manifold hypothesis posits that natural/real-world high-dimensional data lies on a low-dimensional manifold embedded in the high dimension. 
+</p>
+
+<p>
+Take the example of MNIST dataset, the space of all inputs is 28x28 array of integers (i.e. 256<sup>784</sup> ). However, very few of these inputs would look like the MNIST samples. And the subspace of valid samples isn't randomly sprinkled, but is rather highly structured and forms a <b><a href="http://colah.github.io/posts/2014-03-NN-Manifolds-Topology/">Manifold</a></b>. The input space is: 
+</p>
+
+<ol class="org-ol">
+<li><b>Continuous</b>: Take a sample, and modify it a little, it would still be valid.</li>
+<li><b>Connected by smooth path</b>: Two samples can be smoothly morphed from one to other. This morphing is not done (say linearly) in the input space but in the latent manifold.</li>
+</ol>
+
+
+<p>
+A Manifold is the low-dimensional subspace of the high-dimensional input space, where all the natural data lies. This gives two advantage to deep learning models:
+</p>
+<ol class="org-ol">
+<li>ML models need to only fit the simpler, low-dimensional, highly structured subspace</li>
+<li>Within the manifold, it is always possible to interpolate between two inputs. (i.e. morph one input to another along a continuous path). This is the <b>key to generalization</b> in deep learning.</li>
+</ol>
+
+<p>
+In this sense, Deep Learning is nothing but curve fitting and thus for a model to perform well it needs to be trained on a dense sampling of its input space. Dense sampling lead to a learned model that approximates the latent space well and generalizes well on interpolation. 
+</p>
+
+
+<div id="org1277b49" class="figure">
+<p><img src="data/deep_learning_with_python_francois_chollet/dense_sampling_leads_to_generalization-20230615223259.png" alt="dense_sampling_leads_to_generalization-20230615223259.png" height="400px" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Dense Sampling Leads to Generalization</p>
+</div>
+
+<blockquote>
+<p>
+Humans are capable of extreme generalization, which is enabled by cognitive mechanisms other than interpolation: 
+</p>
+<ul class="org-ul">
+<li>abstraction,</li>
+<li>symbolic models of the world,</li>
+<li>reasoning,</li>
+<li>logic,</li>
+<li>common sense,</li>
+<li>innate priors about the world—what we generally call reason,</li>
+</ul>
+<p>
+as opposed to intuition and pattern recognition. The latter are largely interpolative in nature, but the former isn’t.
+</p>
+</blockquote>
+</div>
+</div>
+
+
+<div id="outline-container-org3738b44" class="outline-2">
+<h2 id="org3738b44"><span class="section-number-2">2.</span> Workflow of Deep Learning</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgc6eeee9" class="outline-3">
+<h3 id="orgc6eeee9"><span class="section-number-3">2.1.</span> Beat a Baseline</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+In deep learning, you can't observe the manifold learning process because its happening in far higher dimension than our familiar 3 dimensions. The only feedback you have is your validation metrics. 
+</p>
+
+<p>
+So, first pick a trivial baseline that you'll try to beat. Once the validation metrics are going down and you seem to achieve some level of generalization, you are on the right path. 
+</p>
+
+<p>
+During this stage, there are three important things to focus on:
+</p>
+<ol class="org-ol">
+<li>Feature Engineering: Filter out uninformative features, and develop new features that are likely to be useful</li>
+
+<li>Architecture piors: Choose the right architecture for the problem: MLP, or Convnet or RNN or Transformer</li>
+
+<li>Training Configuration: Find the right Loss function, batch size and learning rate</li>
+</ol>
+
+<p>
+So, the initial goal is to achieve <b>statistical power</b>: A small model that is capable of beating a baseline. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb5e28cb" class="outline-3">
+<h3 id="orgb5e28cb"><span class="section-number-3">2.2.</span> Try Overfitting</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Once you have a model with statistical power, the question becomes, is your model sufficiently powerful? We don't want model that underfit or that is starved for memorization capacity. The model should have the capacity to overfit. 
+</p>
+
+<p>
+If the validation curve goes down and stays flat, it's likely a problem with the representational power of the model, and you need a bigger model. It should always be possible to overfit. The model should fit fast and start overfitting. 
+</p>
+
+<p>
+To find an overfitting model:
+</p>
+<ul class="org-ul">
+<li>Add layers</li>
+<li>Make the layers bigger</li>
+<li>Train for more epochs</li>
+</ul>
+
+
+<div id="orgea6965a" class="figure">
+<p><img src="data/deep_learning_with_python_francois_chollet/validation_loss_for_a_model_of_appropriate_capacity-20230616202607.png" alt="validation_loss_for_a_model_of_appropriate_capacity-20230616202607.png" height="400px" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Validation Loss for a Model of Appropriate Capacity</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orga832e8d" class="outline-3">
+<h3 id="orga832e8d"><span class="section-number-3">2.3.</span> Improve Generalization</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Once the model has shown to have some generalization and is able to overfit, it's time to focus on maximizing generalization. 
+</p>
+</div>
+
+<div id="outline-container-orga3dff28" class="outline-4">
+<h4 id="orga3dff28"><span class="section-number-4">2.3.1.</span> Dataset quality</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<p>
+Dataset quality is very important:
+</p>
+<ul class="org-ul">
+<li>Make sure to have enough data</li>
+<li>Minimize labeling errors</li>
+<li>Clean you data (deal with missing values)</li>
+<li>Do feature selection (if there are many features)</li>
+<li>Feature engineering improves the generalization potential</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgaf7eead" class="outline-4">
+<h4 id="orgaf7eead"><span class="section-number-4">2.3.2.</span> Early Stopping</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<p>
+In deep learning, we always use models that are vastly overparameterized: they have way more degrees of freedom than the minimum necessary to fit to the latent manifold of the data. This overparameterization is not an issue, because you never fully fit a deep learning model. Such a fit wouldn’t generalize at all. You will always interrupt training long before you’ve reached the minimum possible training loss.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1d31470" class="outline-4">
+<h4 id="org1d31470"><span class="section-number-4">2.3.3.</span> Regularizing your model</h4>
+<div class="outline-text-4" id="text-2-3-3">
+<p>
+Regularization techniques are a set of best practices that actively impede the model’s ability to fit perfectly to the training data, with the goal of making the model perform better during validation. This is called “regularizing” the model, because it tends to make the model simpler, more “regular,” its curve smoother, more “generic”. 
+</p>
+
+<p>
+Some ways to regulaize model are:
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgbceb63d"></a>Reducing network's size<br />
+<div class="outline-text-5" id="text-2-3-3-1">
+<p>
+If the model has limited memorization resource, it won't be able to simply memorize its training data. But also, it should have enough parameters such that it doesn't underfit. So, use a big model but not too big.
+</p>
+
+<p>
+The general workflow for finding an appropriate model size is to start with relatively few layers and parameters, and increase the size of the layers or add new layers until you see diminishing returns with regard to validation loss.
+</p>
+</div>
+</li>
+
+<li><a id="org0998eda"></a>Weight Regualization: L1 or L2 Regualization<br />
+<div class="outline-text-5" id="text-2-3-3-2">
+<p>
+Weight regularization is more typically used for smaller deep learning models. Large deep learning models tend to be so overparameterized that imposing constraints on weight values hasn’t much impact on model capacity and generalization. In that case <span class="underline">dropout</span> is preferred.
+</p>
+</div>
+</li>
+
+<li><a id="org16ef429"></a>Dropout<br />
+<div class="outline-text-5" id="text-2-3-3-3">
+<p>
+The core idea in <a href="dropout.html#ID-E34661FC-DC0C-4131-994C-9B7B1EABF34F">Dropout (NN)</a> is that introducing noise in the output values of a layer can break up happenstance patterns that aren’t significant (what Hinton refers to as conspiracies), which the model will start memorizing if no noise is present.
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgdbc4e84" class="outline-3">
+<h3 id="orgdbc4e84"><span class="section-number-3">2.4.</span> Tips</h3>
+<div class="outline-text-3" id="text-2-4">
+</div>
+<div id="outline-container-orgbb86a97" class="outline-4">
+<h4 id="orgbb86a97"><span class="section-number-4">2.4.1.</span> Value Normalization</h4>
+<div class="outline-text-4" id="text-2-4-1">
+<p>
+In general, it isn’t safe to feed into a neural network data that takes relatively large values (for example, multi-digit integers, which are much larger than the initial values taken by the weights of a network) or data that is heterogeneous (for example, data where one feature is in the range 0–1 and another is in the range 100–200). Doing so can trigger large gradient updates that will prevent the network from converging.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgeb8af06" class="outline-4">
+<h4 id="orgeb8af06"><span class="section-number-4">2.4.2.</span> Evaluation Metric</h4>
+<div class="outline-text-4" id="text-2-4-2">
+<p>
+While setting up your validation procedure, be sure to:
+</p>
+<ul class="org-ul">
+<li>randomly shuffle (e.g. in classification problem the data might have been ordered by class)</li>
+
+<li>avoid temporal leak in time series data (training data should be older than validation data which should be again older than test data) because in some problem changing the arrow of time can make the problem trivial.</li>
+
+<li>avoid redundancy in training and validation data (i.e. they must be disjoint). E.g. Chest X-ray images from different angles of the same person should not be in both training and validation dataset.</li>
+</ul>
+
+<p>
+Evaluation metric can be accuracy, area under reciever operating characteristic ROC AUC or some other custom metric. For class-imbalanced problems, you can use precision and recall, as well as weighted form of accuracy, ROC AUC. 
+</p>
+
+<p>
+Once you’ve developed a satisfactory model configuration, you can train your final production model on all the available data (training and validation) and evaluate it one last time on the test set. If it turns out that performance on the test set is significantly worse than the performance measured on the validation data, this may mean either that your validation procedure wasn’t reliable after all, or that you began overfitting to the validation data while tuning the parameters of the model. In this case, you may want to switch to a more reliable evaluation protocol (such as iterated K-fold validation).
+</p>
+
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="generative_adversarial_networks.html#ID-BC7C2B9E-0992-44B7-8C02-2EE694741FB2">Generative Adversarial Networks</a></li>
+<li><a href="vanishing_gradient.html#ID-2880697B-C48B-40C2-B25D-CEA991940A8A">Vanishing Gradient</a></li>
+<li><a href="architecture.html#ID-658AA87C-A2BD-43E0-85A3-F9BF670EA5E8">MHR (Modularity, Heirarchy and Reuse)</a></li>
+<li><a href="batchnorm_nn.html#ID-AFD3AD13-EF16-4307-82D9-988A7E098851">BatchNorm NN</a></li>
+<li><a href="kernel_trick.html#ID-BD522C08-752A-46F6-8DD0-58B2AF28F7E2">Kernel Trick</a></li>
+<li><a href="convolutional_neural_network.html#ID-27AA0284-6683-4A97-B54B-9620A790CECC">Depthwise Separable Convolutions</a></li>
+<li><a href="francois_chollet.html#ID-FD945F60-EB37-42D3-8EDC-D9043178F944">François Chollet</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Deep Learning with Python - François Chollet">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

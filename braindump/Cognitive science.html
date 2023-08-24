@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cognitive science</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="../js/counters.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">Cognitive science</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org2a4e2d0">1. Cognitive science</a>
+<ul>
+<li><a href="#org259b872">1.1. Contents</a></li>
+<li><a href="#org946c357">1.2. Principles</a>
+<ul>
+<li><a href="#orgf406ab6">1.2.1. Levels of analysis</a></li>
+<li><a href="#org710ab52">1.2.2. Interdisciplinary nature</a></li>
+<li><a href="#orge49911f">1.2.3. Cognitive  science: the term</a></li>
+</ul>
+</li>
+<li><a href="#org444c6f7">1.3. Scope</a>
+<ul>
+<li><a href="#org4ad49f3">1.3.1. Artificial intelligence</a></li>
+<li><a href="#org4fbb8ae">1.3.2. Attention</a></li>
+<li><a href="#org249f07c">1.3.3. Knowledge and processing of language</a></li>
+<li><a href="#org0567028">1.3.4. Learning and development</a></li>
+<li><a href="#orgdac48d2">1.3.5. Memory</a></li>
+<li><a href="#orgc65341b">1.3.6. Perception and action</a></li>
+<li><a href="#orgd1c108c">1.3.7. Consciousness</a></li>
+</ul>
+</li>
+<li><a href="#orgc034da8">1.4. Research methods</a>
+<ul>
+<li><a href="#org8e20fb8">1.4.1. Behavioral experiments</a></li>
+<li><a href="#orgf309d8f">1.4.2. Brain imaging</a></li>
+<li><a href="#org97436ad">1.4.3. Computational modeling</a></li>
+<li><a href="#orge7c0544">1.4.4. Neurobiological methods</a></li>
+</ul>
+</li>
+<li><a href="#orgaadeafb">1.5. Key findings</a></li>
+<li><a href="#orgae64d11">1.6. History</a></li>
+<li><a href="#orge2983e1">1.7. Criticism</a></li>
+<li><a href="#org2abfb0a">1.8. Notable researchers</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2a4e2d0" class="outline-2">
+<h2 id="org2a4e2d0"><span class="section-number-2">1.</span> Cognitive science</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Cognitive science is the interdisciplinary, scientific study of the mind and its processes.[2] It examines the nature, the tasks, and the functions of cognition (in a broad sense). Cognitive scientists study intelligence and behavior, with a focus on how nervous systems represent, process, and transform information. Mental faculties of concern to cognitive scientists include language, perception, memory, attention, reasoning, and emotion; to understand these faculties, cognitive scientists borrow from fields such as linguistics, psychology, artificial intelligence, philosophy, neuroscience, and anthropology.[3] The typical analysis of cognitive science spans many levels of organization, from learning and decision to logic and planning; from neural circuitry to modular brain organization.  One of the fundamental concepts of cognitive science is that "thinking can best be understood in terms of representational structures in the mind and computational procedures that operate on those structures."[3]
+</p>
+</div>
+<div id="outline-container-org259b872" class="outline-3">
+<h3 id="org259b872"><span class="section-number-3">1.1.</span> Contents</h3>
+</div>
+<div id="outline-container-org946c357" class="outline-3">
+<h3 id="org946c357"><span class="section-number-3">1.2.</span> Principles</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-orgf406ab6" class="outline-4">
+<h4 id="orgf406ab6"><span class="section-number-4">1.2.1.</span> Levels of analysis</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+A central tenet of cognitive science is that a complete understanding of the mind/brain cannot be attained by studying only a single level.
+</p>
+
+<p>
+The Embodied Mind: Cognitive Science and Human Experience says "the new sciences of the mind need to enlarge their horizon to encompass both lived human experience and the possibilities for transformation inherent in human experience".[5] This can be provided by a functional level account of the process. Studying a particular phenomenon from multiple levels creates a better understanding of the processes that occur in the brain to give rise to a particular behavior.
+</p>
+
+<p>
+Marr[6] gave a famous description of three levels of analysis:
+The  computational theory , specifying the goals of the computation;Representation and algorithms , giving a representation of the inputs and outputs and the algorithms which transform one into the other; andThe hardware implementation, or how algorithm and representation may be physically realized.
+</p>
+</div>
+</div>
+<div id="outline-container-org710ab52" class="outline-4">
+<h4 id="org710ab52"><span class="section-number-4">1.2.2.</span> Interdisciplinary nature</h4>
+</div>
+<div id="outline-container-orge49911f" class="outline-4">
+<h4 id="orge49911f"><span class="section-number-4">1.2.3.</span> Cognitive  science: the term</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+The earliest entries for the word "cognitive" in the OED take it to mean roughly "pertaining to the action or process of knowing". The first entry, from 1586, shows the word was at one time used in the context of discussions of Platonic theories of knowledge. Most in cognitive science, however, presumably do not believe their field is the study of anything as certain as the knowledge sought by Plato
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org444c6f7" class="outline-3">
+<h3 id="org444c6f7"><span class="section-number-3">1.3.</span> Scope</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-org4ad49f3" class="outline-4">
+<h4 id="org4ad49f3"><span class="section-number-4">1.3.1.</span> Artificial intelligence</h4>
+</div>
+<div id="outline-container-org4fbb8ae" class="outline-4">
+<h4 id="org4fbb8ae"><span class="section-number-4">1.3.2.</span> Attention</h4>
+</div>
+<div id="outline-container-org249f07c" class="outline-4">
+<h4 id="org249f07c"><span class="section-number-4">1.3.3.</span> Knowledge and processing of language</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+Language is acquired within the first few years of life, and all humans under normal circumstances are able to acquire language proficiently. 
+</p>
+
+<p>
+A major driving force in the theoretical linguistic field is discovering the nature that language must have in the abstract in order to be learned in such a fashion.
+</p>
+
+<p>
+Linguistics often divides language processing into orthography, phonetics, phonology, morphology, syntax, semantics, and pragmatics. 
+</p>
+</div>
+</div>
+<div id="outline-container-org0567028" class="outline-4">
+<h4 id="org0567028"><span class="section-number-4">1.3.4.</span> Learning and development</h4>
+<div class="outline-text-4" id="text-1-3-4">
+<p>
+Main articles: Learning and Developmental psychology
+</p>
+</div>
+</div>
+<div id="outline-container-orgdac48d2" class="outline-4">
+<h4 id="orgdac48d2"><span class="section-number-4">1.3.5.</span> Memory</h4>
+<div class="outline-text-4" id="text-1-3-5">
+<p>
+Memory allows us to store information for later retrieval.
+</p>
+
+<p>
+Memory is also often grouped into declarative and procedural forms.
+</p>
+
+<p>
+Declarative memory—grouped into subsets of semantic and episodic forms of memory
+</p>
+
+<p>
+Procedural memory allows us to remember actions and motor sequences (e.g. how to ride a bicycle) and is often dubbed implicit knowledge or memory .
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc65341b" class="outline-4">
+<h4 id="orgc65341b"><span class="section-number-4">1.3.6.</span> Perception and action</h4>
+<div class="outline-text-4" id="text-1-3-6">
+<p>
+Perception is the ability to take in information via the senses, and process it in some way. Vision and hearing are two dominant senses that allow us to perceive the environment. Some questions in the study of visual perception, for example, include: (1) How are we able to recognize objects?, (2) Why do we perceive a continuous visual environment, even though we only see small bits of it at any one time? One tool for studying visual perception is by looking at how people process optical illusions. The image on the right of a Necker cube is an example of a bistable percept, that is, the cube can be interpreted as being oriented in two different directions.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd1c108c" class="outline-4">
+<h4 id="orgd1c108c"><span class="section-number-4">1.3.7.</span> Consciousness</h4>
+<div class="outline-text-4" id="text-1-3-7">
+<p>
+Consciousness is the awareness whether something is an external object or something within oneself. 
+This helps the mind with having the ability to experience or feel a sense of self.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc034da8" class="outline-3">
+<h3 id="orgc034da8"><span class="section-number-3">1.4.</span> Research methods</h3>
+<div class="outline-text-3" id="text-1-4">
+</div>
+<div id="outline-container-org8e20fb8" class="outline-4">
+<h4 id="org8e20fb8"><span class="section-number-4">1.4.1.</span> Behavioral experiments</h4>
+</div>
+<div id="outline-container-orgf309d8f" class="outline-4">
+<h4 id="orgf309d8f"><span class="section-number-4">1.4.2.</span> Brain imaging</h4>
+</div>
+<div id="outline-container-org97436ad" class="outline-4">
+<h4 id="org97436ad"><span class="section-number-4">1.4.3.</span> Computational modeling</h4>
+</div>
+<div id="outline-container-orge7c0544" class="outline-4">
+<h4 id="orge7c0544"><span class="section-number-4">1.4.4.</span> Neurobiological methods</h4>
+</div>
+</div>
+<div id="outline-container-orgaadeafb" class="outline-3">
+<h3 id="orgaadeafb"><span class="section-number-3">1.5.</span> Key findings</h3>
+</div>
+<div id="outline-container-orgae64d11" class="outline-3">
+<h3 id="orgae64d11"><span class="section-number-3">1.6.</span> History</h3>
+</div>
+<div id="outline-container-orge2983e1" class="outline-3">
+<h3 id="orge2983e1"><span class="section-number-3">1.7.</span> Criticism</h3>
+</div>
+<div id="outline-container-org2abfb0a" class="outline-3">
+<h3 id="org2abfb0a"><span class="section-number-3">1.8.</span> Notable researchers</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+John Searle
+</p>
+
+<p>
+Chinese room
+</p>
+
+<p>
+Douglas Hofstadter
+</p>
+
+<p>
+Gödel, Escher, Bach[37]
+</p>
+
+<p>
+Marvin Minsky
+</p>
+
+<p>
+Noam Chomsky
+</p>
+
+<p>
+John McCarthy
+</p>
+
+<p>
+Coined the term artificial intelligence and organized the famous Dartmouth conference in Summer 1956, which started AI as a field
+</p>
+
+
+<hr />
+<h3>References</h3>
+
+<ul class="org-ul">
+<li><a href="https://en.wikipedia.org/wiki/Cognitive_science">https://en.wikipedia.org/wiki/Cognitive_science</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Cognitive science">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

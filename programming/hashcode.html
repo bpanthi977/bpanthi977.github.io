@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-08-24 Thu 12:18 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Google HashCode 2022</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="/js/counters.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">Google HashCode 2022</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org5591497">1. HashCode</a></li>
+<li><a href="#orgd23cf31">2. Parse Data</a></li>
+<li><a href="#org0c174ae">3. First Iteration</a>
+<ul>
+<li><a href="#org7f11635">3.1. Result and Discussion</a></li>
+</ul>
+</li>
+<li><a href="#orgd560728">4. Next Iterations</a></li>
+<li><a href="#orgd9f2414">5. Our Best Iterations</a>
+<ul>
+<li><a href="#org8767949">5.1. Problem B, C &amp; D</a></li>
+<li><a href="#org06ee715">5.2. Problem E &amp; F</a></li>
+</ul>
+</li>
+<li><a href="#org12bf5cb">6. Scores</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org5591497" class="outline-2">
+<h2 id="org5591497"><span class="section-number-2">1.</span> HashCode</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+HashCode is an annual competition that Google organizes. It is open to everyone in the world and people participate in teams of two to four members. It was my first time in this competition. Atish included me in his team and we four (<a href="https://www.facebook.com/atishshah.rouniyar.3">Atish</a>, I, <a href="https://www.facebook.com/nirajan.basnet.16">Nirajan</a>, and <a href="https://www.facebook.com/profile.php?id=100068719602528">Subarna</a>) spent the competition night solving the problem.
+</p>
+
+<p>
+We had 3 hours 45 minutes to solve the problem and submit solutions. We can submit solutions as many times as we want, and teams are ranked according to the score. The actual problem statement in detail is <a href="https://codingcompetitions.withgoogle.com/hashcode/round/00000000008caae7/000000000098afc8">here</a>. I'll summarize the problem in short. There are some projects that require certain skills of some level. And there are people that have skills. We need to select people to be involved in the project, assigning people with required skill (at required level). Also, a person with skill level just one less than required can also take part in the project, if there is someone else in the project that can mentor him. Projects have scores, number of days for completion and best before deadlines. There were 6 problem data sets i.e. collection of projects and people. And we need to write code that generated solution to each problem, run the code locally and submit the solution. The score for each problem is the total score of projects completed. (There are some details that I didn't elaborate).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd23cf31" class="outline-2">
+<h2 id="orgd23cf31"><span class="section-number-2">2.</span> Parse Data</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+First Task was to parse the input dataset. So, I started with <code>read-input</code> function, implementing its dependency functions turn by turn. I thought lookup would be necessary, so I stored <code>people</code>, <code>projects</code> in hashtable with names as keys. But, it wasn't necessary. However, <code>skills</code> table was necessary for speed. It associates each skill with a list of people and the level of skill they have. 
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*people*</span> nil)
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*projects*</span> nil)
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*skills*</span> nil)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">add-to-table</span> (table data)
+  (<span class="org-keyword">loop</span> for row in data 
+        for key = (getf row <span class="org-builtin">:name</span>) do 
+          (setf (gethash key table) row)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">read-input</span>(file) 
+  (setf *people* (make-hash-table <span class="org-builtin">:test</span> 'equal))
+  (setf *projects* (make-hash-table <span class="org-builtin">:test</span> 'equal))
+  (setf *skills* (make-hash-table <span class="org-builtin">:test</span> 'equal))
+
+  (<span class="org-keyword">with-open-file</span> (f file <span class="org-builtin">:direction</span> <span class="org-builtin">:input</span>)
+    (<span class="org-keyword">let</span> ((people-n (read f))
+          (projects-n (read f)))
+      (<span class="org-keyword">let</span> ((people (<span class="org-keyword">loop</span> repeat people-n collect (read-people f)))
+            (projects (<span class="org-keyword">loop</span> repeat projects-n collect (read-project f))))
+        (add-to-table *people* people)
+        (add-to-table *projects* projects)
+        (list <span class="org-builtin">:people</span> people 
+              <span class="org-builtin">:projects</span> projects)
+        nil))))
+</pre>
+</div></details>
+
+<p>
+I didn't use structs or classes to represent people, or projects. This decision was influenced by a sentence/idea Rich Hickey said in a talk, "Let Data be Data". In retrospect, I now know in this case that quote/ideas wasn't applicable, but being in no mood to contemplate on minor details (because of limited time), I had decided not to use structs. So, lists it was. Plain lists like 
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-string">"Bob"</span> ((<span class="org-string">"HTML"</span> 5)
+        (<span class="org-string">"CSS"</span> 3)))
+(<span class="org-string">"Logging"</span> 5 10 5 1
+           ((<span class="org-string">"C++"</span> 3)))
+</pre>
+</div></details>
+
+<p>
+could have worked but without thinking much I used property lists. And this was better, because with plain lists I needed to remember the position of data. <code>(nth 1 person)</code> to get the list of skills, and there would be chances of mistake. But with property list, I didn't need to remember location <code>(getf :skills person)</code> . 
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-builtin">:name</span> <span class="org-string">"Bob"</span> <span class="org-builtin">:skills</span> ((<span class="org-string">"HTML"</span> 5)
+                      (<span class="org-string">"CSS"</span> 3)))
+(<span class="org-builtin">:name</span> <span class="org-string">"Logging"</span>
+       <span class="org-builtin">:days</span> 5
+       <span class="org-builtin">:score</span> 10
+       <span class="org-builtin">:bf</span> 5
+       <span class="org-builtin">:skills</span> ((<span class="org-string">"C++"</span> 3)))
+</pre>
+</div></details>
+
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">read-string</span> (file)
+  (<span class="org-keyword">with-output-to-string</span> (str)
+    (<span class="org-keyword">loop</span> for char = (read-char file) do 
+          (<span class="org-keyword">if</span> (equal char #\Space)
+              (<span class="org-keyword">return</span>)
+              (write-char char str)))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">register-skill</span> (skill person)
+  (<span class="org-keyword">let</span> ((s (first skill))
+        (l (second skill)))
+    (push (list l person)
+          (gethash s *skills*))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">read-people</span> (file)
+  (<span class="org-keyword">let</span> ((name (read-string file))
+        (skill-n (read file)))
+    (<span class="org-keyword">let</span> ((skills (<span class="org-keyword">loop</span> repeat skill-n 
+                        collect (list (read-string file)
+                                      (read file)))))
+      (<span class="org-keyword">let</span> ((person 
+              (list <span class="org-builtin">:name</span> name 
+                    <span class="org-builtin">:skills</span> skills)))
+        (<span class="org-keyword">loop</span> for skill in skills do 
+              (register-skill skill person))
+        person))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">read-project</span> (file)
+  (<span class="org-keyword">let</span> ((name (read-string file))
+        (days (read file))
+        (score (read file))
+        (bb (read file))
+        (roles-n (read file)))
+    (<span class="org-keyword">let</span> ((roles (<span class="org-keyword">loop</span> repeat roles-n 
+                        collect (list (read-string file)
+                                      (read file)))))
+      (list <span class="org-builtin">:name</span> name 
+            <span class="org-builtin">:days</span> days 
+            <span class="org-builtin">:score</span> score 
+            <span class="org-builtin">:bb</span> bb
+            <span class="org-builtin">:skills</span> roles))))
+</pre>
+</div></details>
+</div>
+</div>
+
+<div id="outline-container-org0c174ae" class="outline-2">
+<h2 id="org0c174ae"><span class="section-number-2">3.</span> First Iteration</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The main flow of my program was simple:
+</p>
+<ul class="org-ul">
+<li>From all the uncompleted projects, find projects that we can start (I call these <code>solvable-projects</code> in the code)</li>
+<li>Select one of those projects</li>
+<li>Select people to work on that project</li>
+<li>Then mark the project as done and increase the skill level of people</li>
+</ul>
+
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">get-people-ge</span> (skill level)
+  <span class="org-doc">"return list of people with `</span><span class="org-doc"><span class="org-constant">skill</span></span><span class="org-doc">' level greater than or equal to `</span><span class="org-doc"><span class="org-constant">level</span></span><span class="org-doc">'"</span>
+  (<span class="org-keyword">loop</span> for (l person) in (gethash skill *skills*)
+        when (&gt;= l level)
+          collect person))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">get-people-e</span> (skill level)
+  <span class="org-doc">"return list of people with `</span><span class="org-doc"><span class="org-constant">skill</span></span><span class="org-doc">' level equal to `</span><span class="org-doc"><span class="org-constant">level</span></span><span class="org-doc">'"</span>
+  (<span class="org-keyword">loop</span> for (l person) in (gethash skill *skills*)
+        when (= l level)
+          collect person))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">solvable?</span> (peoples)
+  <span class="org-doc">"return one possible team assignment"</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">peoples is in reverse order </span>
+  (<span class="org-keyword">when</span> (every #'first peoples)
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">pick min skilled person strategy</span>
+    (<span class="org-keyword">let</span> ((assigned nil))
+      (<span class="org-keyword">loop</span> for (can may) in peoples 
+            for assigned? = nil do  
+            (<span class="org-keyword">loop</span> for person in can do
+              (<span class="org-keyword">unless</span> (find person assigned)
+                (setf assigned? t)
+                (push person assigned)
+                (<span class="org-keyword">return</span>)))
+            (<span class="org-keyword">unless</span> assigned?
+              (<span class="org-keyword">return-from</span> solvable? nil)))
+      assigned)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">solvable-projects</span> ()
+  <span class="org-doc">"returns list of projects that can be completed"</span>
+  (<span class="org-keyword">let</span> ((result nil))
+    (maphash (<span class="org-keyword">lambda</span> (key value)
+               (<span class="org-keyword">declare</span> (ignore key))
+               (<span class="org-keyword">let</span> ((peoples nil)
+                     (solvable t))
+                 (<span class="org-keyword">loop</span> for (skill level) in (getf value <span class="org-builtin">:skills</span>) 
+                       for can-people = (get-people-ge skill level)
+                       for maybe-people = (get-people-e skill (1- level)) do 
+                         (<span class="org-keyword">if</span> (and (null maybe-people)
+                                  (null can-people))
+                             (<span class="org-keyword">progn</span> (setf solvable nil)
+                                    (<span class="org-keyword">return</span>))
+                             (push (list can-people
+                                         maybe-people)
+                                   peoples)))
+                 (<span class="org-keyword">when</span> solvable
+                   (<span class="org-keyword">let</span> ((soln (solvable? peoples)))
+                     (<span class="org-keyword">when</span> soln 
+                       (push (list <span class="org-builtin">:project</span> value
+                                   <span class="org-builtin">:people</span> (reverse peoples)
+                                   <span class="org-builtin">:one-solution</span> soln)
+                             result))))))
+             *projects*)
+    result))
+</pre>
+</div></details>
+<p>
+I looped through the projects and for each skill a project requires, found <code>can-people</code> (who have skill level greater or equal to that required) and <code>may-people</code> (those who have one level below, but may take part in the project if a mentor is present). Then, if the project is possible with the those peoples  <code>(solvable? peoples)</code> (peoples = list of list of person),  add it to the list of possible projects. <code>(solvable? peoples)</code> returns one possible team for the project (selecting the first person available for the task).
+</p>
+
+<p>
+Now, I need to select a project and complete it. 
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">do-project</span> (project people)
+  (<span class="org-keyword">loop</span> for (skill l) in (getf project <span class="org-builtin">:skills</span>)
+        for person in people  
+        for sk = (find skill (getf person <span class="org-builtin">:skills</span>) <span class="org-builtin">:test</span> #'string-equal <span class="org-builtin">:key</span> #'first) do 
+          (<span class="org-keyword">when</span> (&lt;= (second sk) l)
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">level up!! </span>
+            (incf (second sk))
+            (<span class="org-keyword">let*</span> ((levels (gethash skill *skills*))
+                   (record (find person levels <span class="org-builtin">:key</span> #'second)))
+              (incf (first record)))))
+
+  (remhash (getf project <span class="org-builtin">:name</span>)
+           *projects*))  
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">main</span> (file out) 
+  (read-input file)
+  (<span class="org-keyword">let</span> (result)
+    (<span class="org-keyword">loop</span> for solvable = (solvable-projects) do 
+      (<span class="org-keyword">unless</span> solvable 
+        (<span class="org-keyword">return</span>))
+      (<span class="org-keyword">let</span> ((assignment (getf (first solvable) <span class="org-builtin">:one-solution</span>))
+            (project (getf (first solvable) <span class="org-builtin">:project</span>)))
+        (<span class="org-keyword">do-project</span> project assignment)
+        (push (list <span class="org-builtin">:project</span> (getf (first solvable) <span class="org-builtin">:project</span>)
+                    <span class="org-builtin">:assignment</span> assignment)
+              result)))
+    (setf result (reverse result))
+    (write-output out result)))
+</pre>
+</div></details>
+
+<p>
+I did the simplest thing possible, select the first project from the list, and <code>do-project</code>. Doing a project is also simple, remove the project from the <code>*projects*</code> table, and increase the level of people working in the project if applicable. 
+</p>
+</div>
+
+<div id="outline-container-org7f11635" class="outline-3">
+<h3 id="org7f11635"><span class="section-number-3">3.1.</span> Result and Discussion</h3>
+<div class="outline-text-3" id="text-3-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Attempt</th>
+<th scope="col" class="org-left">Set</th>
+<th scope="col" class="org-right">Score</th>
+<th scope="col" class="org-right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">25</td>
+<td class="org-left">F - Find great mentors</td>
+<td class="org-right">42282</td>
+<td class="org-right">02:27:24</td>
+</tr>
+
+<tr>
+<td class="org-right">24</td>
+<td class="org-left">E - Exceptional skills</td>
+<td class="org-right">1208352</td>
+<td class="org-right">02:27:23</td>
+</tr>
+
+<tr>
+<td class="org-right">23</td>
+<td class="org-left">C - Collaboration</td>
+<td class="org-right">4180</td>
+<td class="org-right">02:24:19</td>
+</tr>
+
+<tr>
+<td class="org-right">22</td>
+<td class="org-left">B - Better start small</td>
+<td class="org-right">741913</td>
+<td class="org-right">02:24:19</td>
+</tr>
+
+<tr>
+<td class="org-right">21</td>
+<td class="org-left">D - Dense schedule</td>
+<td class="org-right">133020</td>
+<td class="org-right">02:24:19</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">Total</td>
+<td class="org-right">2129747</td>
+<td class="org-right">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+So, we got a total score of 21 Lakhs (about 77% of our final score) from this first code. The core logic of the solution was simple. However 2.5 hrs had already past, and we had only 1.25 hours left. The remaining 1.25 hours were spent making slight adjustments and resumitting the solution, increasing our score few lakhs at a time. 
+</p>
+
+<p>
+There was one flaw in the core logic that I missed during the competition. Projects can be done parallelly, but increasing the level of people and having no concept of a person being not available meant that sometimes the projects which could have executed parallelly were being done sequentially, decreasing the score. 
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd560728" class="outline-2">
+<h2 id="orgd560728"><span class="section-number-2">4.</span> Next Iterations</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Since the core logic was simple, places possible for optimization were obvious. 
+</p>
+<ul class="org-ul">
+<li>Finding projects that we can start : This can be optimized in terms of code execution time, but needs no change in the logic. And my main concern wasn't code execution speed, but solution score. I could wait extra 1 min for the program to give me the results.</li>
+<li>Select project : First place for logical change/optimiaztion</li>
+<li>Select people to work on the project: Second place for logical change/optimization</li>
+<li>Mark the project and level up the team members : This also needs change in logic but as I mentioned earlier it didn't occur to me at that time.</li>
+</ul>
+
+<p>
+So, in the second and next iterations I made small changes in the project selection and team selection strategy. Some strategies were silly, some worked. for example in the second iteration, I selected team members for each skill randomly rather than selecting the first one available. However this gave almost the same score as first iteration. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd9f2414" class="outline-2">
+<h2 id="orgd9f2414"><span class="section-number-2">5.</span> Our Best Iterations</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Rather than listing all changes in each iteration, lets look at the changes that gave top score in each problem. In each case changes were only done in two places: choice of project, and choice of team. 
+</p>
+</div>
+
+<div id="outline-container-org8767949" class="outline-3">
+<h3 id="org8767949"><span class="section-number-3">5.1.</span> Problem B, C &amp; D</h3>
+<div class="outline-text-3" id="text-5-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Attempt</th>
+<th scope="col" class="org-left">Set</th>
+<th scope="col" class="org-right">Score</th>
+<th scope="col" class="org-right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">115</td>
+<td class="org-left">B - Better start small</td>
+<td class="org-right">743212</td>
+<td class="org-right">03:37:11</td>
+</tr>
+
+<tr>
+<td class="org-right">119</td>
+<td class="org-left">C - Collaboration</td>
+<td class="org-right">24716</td>
+<td class="org-right">03:39:40</td>
+</tr>
+
+<tr>
+<td class="org-right">116</td>
+<td class="org-left">D - Dense schedule</td>
+<td class="org-right">133020</td>
+<td class="org-right">03:37:11</td>
+</tr>
+</tbody>
+</table>
+
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">project-bb-&lt;=</span> (p1 p2)
+  <span class="org-doc">"return true if project1 has best before deadline earlier than project2"</span>
+  (&lt;= (getf p1 <span class="org-builtin">:bb</span>)
+     (getf p2 <span class="org-builtin">:bb</span>)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">choose-project</span> (solvable)
+  (first (sort solvable #'project-bb-&lt;=
+               <span class="org-builtin">:key</span> (<span class="org-keyword">lambda</span> (p)
+                      (getf p <span class="org-builtin">:project</span>)))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">solvable?</span> (peoples)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">peoples is in reverse order </span>
+  (<span class="org-keyword">when</span> (every #'first peoples)
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">pick min skilled person strategy</span>
+    (<span class="org-keyword">let</span> ((assigned nil))
+      (<span class="org-keyword">loop</span> for (can may) in peoples 
+         for assigned? = nil do  
+           (<span class="org-keyword">loop</span> for person in (sort can #'&lt; <span class="org-builtin">:key</span> (<span class="org-keyword">lambda</span> (p)
+                                                    (getf p <span class="org-builtin">:exp</span>)))
+              do
+                (<span class="org-keyword">unless</span> (find person assigned)
+                  (setf assigned? t)
+                  (push person assigned)
+                  (<span class="org-keyword">return</span>)))
+           (<span class="org-keyword">unless</span> assigned?
+             (<span class="org-keyword">return-from</span> solvable? nil)))
+      assigned)))
+</pre>
+</div></details>
+
+<ul class="org-ul">
+<li>Project choice: Choose the project with the earliest best before deadline.</li>
+<li>Team choice: Choose the members with least <code>:exp</code> (experience points)</li>
+</ul>
+
+<p>
+After a project completion, each team member's <code>:exp</code> was increased by one i.e. it is a count of number of projects that the person participated in. So, choosing a person with least <code>:exp</code> meant more new people would be involved, meaning that the chances of project being executed parallelly was increased.
+</p>
+
+<p>
+This simple change increase our score by about 21 thousand.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org06ee715" class="outline-3">
+<h3 id="org06ee715"><span class="section-number-3">5.2.</span> Problem E &amp; F</h3>
+<div class="outline-text-3" id="text-5-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">92</td>
+<td class="org-left">E - Exceptional skills</td>
+<td class="org-right">1637258</td>
+<td class="org-right">03:20:20</td>
+</tr>
+
+<tr>
+<td class="org-right">78</td>
+<td class="org-left">F - Find great mentors</td>
+<td class="org-right">226272</td>
+<td class="org-right">03:05:01</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The best solution for problem E &amp; F from our team was not mine. Other team members were trying different strategies on their own. In overall we increased our score by 6.1 Lakhs.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org12bf5cb" class="outline-2">
+<h2 id="org12bf5cb"><span class="section-number-2">6.</span> Scores</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Our best score: 
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Attempt</th>
+<th scope="col" class="org-left">Set</th>
+<th scope="col" class="org-right">Score</th>
+<th scope="col" class="org-right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">A - An example</td>
+<td class="org-right">33</td>
+<td class="org-right">00:35:28</td>
+</tr>
+
+<tr>
+<td class="org-right">115</td>
+<td class="org-left">B - Better start small</td>
+<td class="org-right">743212</td>
+<td class="org-right">03:37:11</td>
+</tr>
+
+<tr>
+<td class="org-right">119</td>
+<td class="org-left">C - Collaboration</td>
+<td class="org-right">24716</td>
+<td class="org-right">03:39:40</td>
+</tr>
+
+<tr>
+<td class="org-right">116</td>
+<td class="org-left">D - Dense schedule</td>
+<td class="org-right">133020</td>
+<td class="org-right">03:37:11</td>
+</tr>
+
+<tr>
+<td class="org-right">92</td>
+<td class="org-left">E - Exceptional skills</td>
+<td class="org-right">1637258</td>
+<td class="org-right">03:20:20</td>
+</tr>
+
+<tr>
+<td class="org-right">78</td>
+<td class="org-left">F - Find great mentors</td>
+<td class="org-right">226272</td>
+<td class="org-right">03:05:01</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">Total</td>
+<td class="org-right">2764511</td>
+<td class="org-right">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+For me, score of 27 lakh and 589th position in global scoreboard was not bad.  Global winner (team <i>Make love, not war</i> from Russia) had a score of about 42 Lakh. I hadn't expected that from about ~10,000 teams worldwide, we could be in top ~600th. But more importantly, the challenge and those 3.75 hours were fun. 
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Google HashCode 2022">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

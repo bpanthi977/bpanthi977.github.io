@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Open Source License</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: 2020-06-20</p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Open Source License</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org44dd7f2">1. PyConf Talk</a>
+<ul>
+<li><a href="#org98e396d">1.1. Patents</a>
+<ul>
+<li><a href="#orgf94f9f5">1.1.1. Patent Trolls</a></li>
+</ul>
+</li>
+<li><a href="#orgbd35c94">1.2. Trademarks</a></li>
+<li><a href="#org7cc9c6d">1.3. Licenses</a>
+<ul>
+<li><a href="#orgb390652">1.3.1. Background</a></li>
+<li><a href="#orgd79855a">1.3.2. Permissive License</a></li>
+<li><a href="#org29019a7">1.3.3. Copyleft licenses</a></li>
+<li><a href="#orgbca11cd">1.3.4. Public Domain</a></li>
+<li><a href="#org61478f4">1.3.5. Custom License</a></li>
+<li><a href="#org857d028">1.3.6. Non-Software Licenses</a></li>
+<li><a href="#org4385db2">1.3.7. Licensing Contributions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org3adf6d8">2. A blog post</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org44dd7f2" class="outline-2">
+<h2 id="org44dd7f2"><span class="section-number-2">1.</span> PyConf Talk</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+(<a href="https://www.youtube.com/watch?v=9kGrKBOytYM">Source</a>)
+Objective: To learn the basics of how <i>intellectual property law</i> and in particular <i>copyright</i> works. 
+</p>
+
+
+<p>
+The idea is that to encourage people to make expressive, creative works, we have laws that give them exclusive rights to copy, distribute, build upon, and modify that work, even though there may be no technical restriction that would otherwise keep anyone else from doing the same.
+</p>
+
+<p>
+Copyright is given to the creator of a work completely automatically. You don't have to do anything to get copyrights or to keep them. That used to not be the case, but for a really long time now it's all been fully automatic. 
+</p>
+
+<p>
+Moral rights are a very closely related concept to copyright. In some countries, they're considered just a subset of copyright, and in some places, they're a little bit different, and in some places, they don't even exist at all. And moral rights are sort of the non-commercial part of copyright. It's not so much about making money off of your creation. It's about things like the right to be identified as the author. 
+</p>
+</div>
+
+<div id="outline-container-org98e396d" class="outline-3">
+<h3 id="org98e396d"><span class="section-number-3">1.1.</span> Patents</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Next big kind of intellectual property is <i>patents</i>. Where copyright was about creative works, patents are about protecting functional inventions. The deal is that you share the details of how your new gizmo works, and society in exchange gives you this exclusive monopoly on the invention for a little while.
+</p>
+</div>
+
+<div id="outline-container-orgf94f9f5" class="outline-4">
+<h4 id="orgf94f9f5"><span class="section-number-4">1.1.1.</span> Patent Trolls</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+The owner of a patent might try to get their patented software technique adopted as part of a standard. So that anyone who implements that standard then has to pay them money for a license or risk being sued.  Or they might even actually themselves contribute the code that implements their patented technique, and then later, either because they planned this in advance or just because they changed their minds, they might come back later and try to sue you for using that code that they themselves contributed to your project. So some licenses have protections against this kind of thing.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbd35c94" class="outline-3">
+<h3 id="orgbd35c94"><span class="section-number-3">1.2.</span> Trademarks</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+The idea behind a trademark is to protect protect consumers from fakes that might be trying to take advantage of the good reputation of a particular brand by imitating or copying their name or logo or identifiers like that.
+</p>
+
+<p>
+You might remember that in 2013, the Python Software Foundation actually had to fight for the name "Python," and up until very recently earlier this year, the Debian GNU/Linux distribution had to ship Firefox under the name "Iceweasel" with a really cute different little blue logo because of disagreements about trademarks, even though the licensing of that code was perfectly fine.
+</p>
+
+<p>
+But again, most licenses don't have anything to say about trademarks, but you should know what they are because they do come up for software projects.
+</p>
+</div>
+</div>
+<div id="outline-container-org7cc9c6d" class="outline-3">
+<h3 id="org7cc9c6d"><span class="section-number-3">1.3.</span> Licenses</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-orgb390652" class="outline-4">
+<h4 id="orgb390652"><span class="section-number-4">1.3.1.</span> Background</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+So a license is a set of permissions that you give to someone.  When you create something like a piece of software, you alone have the right to it, and you have control over how to share those rights with others.  And a license is what we use to give people rights they wouldn't ordinarily have, like the right to use the software, to modify it, or to copy and share it.
+</p>
+
+<p>
+License can also be used to set conditions or create obligations. 
+</p>
+<ul class="org-ul">
+<li>The most obvious examples is of course proprietary software, which generally has a lincence that only gives you the right to use it but prohibits you not just from copying and sharing it but also from things like reverse engineering. (In some rare cases, benchmarking the performance of the software and sharing that data is prohibited)</li>
+</ul>
+
+<p>
+And no, just publishing the source code, like by throwing it up on GitHub without a license, that does not give anyone any rights. That is not code you can use, it's just code you happen to be able to look at, like how you can probably see my laptop sitting up here right now and you can look at it, but you don't have the right to take it home.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd79855a" class="outline-4">
+<h4 id="orgd79855a"><span class="section-number-4">1.3.2.</span> Permissive License</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<ul class="org-ul">
+<li>Almost (not always) say you can do pretty much whatever with the software.</li>
+<li>Usually have to provide attribution.</li>
+</ul>
+<p>
+and 
+</p>
+<ul class="org-ul">
+<li>Usually there's also a warranty disclaimer (It's a good idea to have this disclaimer)</li>
+<li>You should not use a license that does not have a warranty disclaimer.</li>
+</ul>
+
+<p>
+You would generally pick a permissive license like this when your goal is just for the code to be shared and used as widely as possible.  You're trying to make life as easy as possible for developers by making everything available to them for whatever use they want, even if they don't want to reciprocate by sharing their improvements back to you.
+</p>
+
+<p>
+Just be sure that you really would be OK with seeing someone make a lot of money off of your work and give you nothing in return, because that can and does happen, and it's well within their rights.
+</p>
+
+<p>
+MIT/Expat/X11, ISC/n-clause BSD, Apache 2.0 
+</p>
+
+<p>
+Popular licences in some community: 
+</p>
+<dl class="org-dl">
+<dt>Javascript, Python</dt><dd>MIT</dd>
+<dt>BSD, FreeBSD</dt><dd>BSD</dd>
+</dl>
+
+<p>
+Right now the cultural fashion is to go too permissive license. But don't go blindly with the community. 
+</p>
+
+<p>
+Unlike other permissive licenses, Apache 2.0 has a clause on grant of patent license. Each Contributor grants anyone using the code a license to use any other patents that would otherwise be infringed upon by the code contributed. So, this is a patent-troll killing clause. Further, if you sue anyone over those patent use then you loose right to the patent license granted to you by others contributing to the code. Apache license also has sth about notices and modifications &#x2026; 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org29019a7" class="outline-4">
+<h4 id="org29019a7"><span class="section-number-4">1.3.3.</span> Copyleft licenses</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<ul class="org-ul">
+<li>Guarantee user freedom</li>
+<li>Its not to make life easier as a devoloper, not to let you bootstrap your startup faster, not to incide collaboration from industry</li>
+<li>Freedom to use, study, change, and redistribute.</li>
+<li>Requires to share the changes you made under the license terms that other shared them with you. Guranteeing that the user get the rights you wanted even after contribution from multiple users.</li>
+<li>They don't prevent commercial software, but don't allow proprietary software.</li>
+<li>Copyleft is also described as 'viral'.</li>
+
+<li id="GPL">disallows adding other restrictions
+<ul class="org-ul">
+<li>GPLv2 is not compatible with Apache License (because of patent clause)</li>
+<li>GPLv3 is compatible with Apache License and is patent-troll proof.</li>
+</ul></li>
+<li id="LGPL">differs in that the virality aspect applies only to the specific code its attached together not anything that's linked to it to build a larger software application. And users only have to share the changes to LGPL part.  
+LGPL also adds some extra requirements. Essentially, users have to be able to replace the version that you've shipped with whatever version they want, which &#x2013; maybe that's a newer version from upstream or maybe they have their own custom version or whatever.  The idea is that even if you ship a non-free proprietary application, if it's built on top of an LGPL library, then users will always have the freedom to control what version of that library they use, so they can maybe keep it up to date even if you've stopped supporting it, or they can change behavior that they just disagree with you about.</li>
+
+<li id="AGPL">Softwares that run in server and user interact with through a browser,are technically not distributed to user. So, the GPL's source code sharing clause doesn't apply. AGPL fixes this loophole.</li>
+</ul>
+
+<p>
+AGPL, LGPL, GPLv3 are compatible with one another.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbca11cd" class="outline-4">
+<h4 id="orgbca11cd"><span class="section-number-4">1.3.4.</span> Public Domain</h4>
+<div class="outline-text-4" id="text-1-3-4">
+<ul class="org-ul">
+<li>Please do pick a license</li>
+<li>Visible source is not Free/Open Software</li>
+</ul>
+
+<p>
+Public domain is sth that is outside of license. Either because license expired, the product is not eligible for license or you choose to do so. 
+</p>
+
+<p>
+E.g. Unlicense, Create Commons Zero. 
+</p>
+<ul class="org-ul">
+<li>Better than nothing, but not recommended.</li>
+<li>At least protect yourself by including the warranty disclaimer language.</li>
+<li>Even the Unlicense website suggest "Warranty Disclaimer for code"</li>
+</ul>
+
+<p>
+Because of <b>Moral Rights</b>:
+</p>
+<ul class="org-ul">
+<li>When you say people can do anything, you are giving up your moral rights. And in some places that is not something that law lets to do. (Like law maynot allow you to allow someone to murder you). It's to protect against coercion, exploitation.</li>
+<li>So, the public domain notice you put may be null and void legally, depending where you are in the world.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org61478f4" class="outline-4">
+<h4 id="org61478f4"><span class="section-number-4">1.3.5.</span> Custom License</h4>
+<div class="outline-text-4" id="text-1-3-5">
+<p>
+Don't write your own! Pick an existing license. 
+</p>
+
+<p>
+Because its just take extra effort for developers and lawyers to figure out if its ok with the existing license they used. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org857d028" class="outline-4">
+<h4 id="org857d028"><span class="section-number-4">1.3.6.</span> Non-Software Licenses</h4>
+<div class="outline-text-4" id="text-1-3-6">
+<ul class="org-ul">
+<li>Documentation (GFDL)</li>
+<li>Logos</li>
+<li>Tutorial</li>
+</ul>
+
+<p>
+Creative Commons (BY,NC,ND,SA)
+</p>
+<ul class="org-ul">
+<li>BY :attributoin</li>
+<li>NC :non-commercial</li>
+<li>ND: non-derivatives</li>
+<li>SA: share-alike</li>
+</ul>
+
+<p>
+attribution is not optional because of moral rights issues. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4385db2" class="outline-4">
+<h4 id="org4385db2"><span class="section-number-4">1.3.7.</span> Licensing Contributions</h4>
+<div class="outline-text-4" id="text-1-3-7">
+<ul class="org-ul">
+<li>Copyright assignment: give copyright to the owner of the code. (Don't do this, if the owner wants he can lock you out of your own contributions)</li>
+<li>Contributor License Agreement (CLA) : You have to sign the agreements, are a hassle.</li>
+<li>Developer's Certificate of Origin (DCO): You have the copyright to the code and the project can distribute, use it under the same license as the project. E.g. Linux. (This is good! minimal hassle!)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org3adf6d8" class="outline-2">
+<h2 id="org3adf6d8"><span class="section-number-2">2.</span> A blog post</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<b>What Are You Afraid Of?</b>
+</p>
+
+<p>
+Another way of looking at it is that you’re picking a license based on what you are afraid of. All of these licenses assume you’re afraid of being sued. The MIT license is if you’re afraid no one will use your code; you’re making the licensing as short and non-intimidating as possible. The Apache License you are somewhat afraid of no one using your code, but you are also afraid of legal ambiguity and patent trolls. With the GPL licenses, you are afraid of someone else profiting from your work (and ambiguity, and patent trolls). This is a radical simplification, but if nothing else it can be a helpful framework in discussing with your attorney what license makes sense for your software.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Open Source License">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

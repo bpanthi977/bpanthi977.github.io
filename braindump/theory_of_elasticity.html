@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Theory of Elasticity</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: 2020-05-27</p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Theory of Elasticity</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org72b93cb">1. Stress Tensor</a>
+<ul>
+<li><a href="#orgd2704a0">1.1. Field of stresses in a continuum</a></li>
+<li><a href="#org8f03e5a">1.2. External forces</a></li>
+<li><a href="#org3d38292">1.3. Internal force in the continuum</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org72b93cb" class="outline-2">
+<h2 id="org72b93cb"><span class="section-number-2">1.</span> Stress Tensor</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgd2704a0" class="outline-3">
+<h3 id="orgd2704a0"><span class="section-number-3">1.1.</span> Field of stresses in a continuum</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+A continuum is characterised by a mass \(dm = \rho d\tau\) contained in an elementary volume \(d\tau\). 
+</p>
+
+<p>
+a material continuum which was originally in equilibrium and occupied a volume \(v\) with a surface \(o\) reaches a new equilibrium state whose volume and surface are denoted by \(v\) and \(o\) respectively. the first state is reffered to as <b>initial state</b> (volume \(v\) or $v$-volume), whilst the second state is called the <b>final state</b> (volumen \(V\) or \(V\) -volume). 
+</p>
+
+<p>
+The <b>natural state</b> is the state when the continuum is not stressed. Unless otherwise stated, teh natural stated is not identified with an initial state. 
+</p>
+
+
+<p>
+Position vector is in initial state is given by 
+</p>
+\begin{equation*}
+r = a_s i_s
+\end{equation*}
+<p>
+where \(i_s\) denotes the unit base vectors of the coordinate axes. <i>The summation over a dummy index is <b>omitted</b></i>. 
+</p>
+
+<p>
+The final position is:
+</p>
+\begin{equation*}
+R = x_s i_s
+\end{equation*}
+
+<p>
+The geometric difference \(R-r\) determines the displacement vector denoted by \(u\) 
+</p>
+\begin{equation}
+\label{org0dbc8ba}
+x_s = a_s + u_s
+\tag{1.1.3}
+\end{equation}
+<p>
+It is also assumed that equations \eqref{org0dbc8ba} are uniquely resolvable for variable \(a_s\) that is 
+</p>
+\begin{equation}
+\label{org9229e49}
+a_s = x_s - u_s
+\tag{1.1.4}
+\end{equation}
+<p>
+The condition for unique solvability of the system of equations \eqref{org0dbc8ba} is that the Jacobian
+</p>
+\begin{equation}
+\label{orga750044}
+J(a_1,a_2,a_3) = |\frac{\del x_s} {a_k} | = | \delta_{sk} +  \frac {\del u_s} {\del a_k} |
+\tag{1.1.5}
+\end{equation}
+<p>
+does not vanish in the closed domain \(v+o\). It is taken that \(J>0\) . THe Jacobian is know to be a ratio of the elementary volumes in the intital and final states. 
+\(d\tau = J d\tau_0\) 
+According to the law of mass conservation
+\(dm = \rho d\tau = \rho_0 d\tau_0\) 
+so that 
+</p>
+\begin{equation}
+\label{org74a6bf4}
+J = \frac {\rho_0} {\rho}
+\tag{1.1.8}
+\end{equation}
+
+
+<p>
+The Cartensian coordinates \(a_s\) of teh material particle in its initial sate can be considered as variables related to this point and are thus in the final state, where these coordinates play the role of curvilinear coordinates. 
+Due to established terminology, \(a_s\) and \(x_s\) are referred to as <b>Lagrangian</b> and <b>Eulerian</b> coordinates, respectively. Better still, \(a_s\) are material coordinates which <i>inividiualise</i> a material particel and <i>distinguish</i> it from other particles, whereas \(x_s\) denote the coordinates of the particle in volume V. 
+</p>
+
+<p>
+Remark: The matrial coordinates of a point are not necessarily the Cartesian coordinates \(a_s\) of the initial state. Presentation of the basics of continuous mechanics becomes more regorous if any curvilinear coordinates \(q^1,q^2,q^3\) are taken as the matrial coordinates. Then
+</p>
+\begin{equation}
+\label{org25badb3}
+a_s = a_s(q^1,q^2,q^3)
+\tag{1.1.11}
+\end{equation}
+<p>
+as well as 
+</p>
+\begin{equation}
+\label{orgae59be4}
+x_s = x_s(q^1,q^2,q^3)
+\tag{1.1.12}
+\end{equation}
+<p>
+should be considered as the coordinates of the particle in volumes \(v\) and \(V\), respectively.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8f03e5a" class="outline-3">
+<h3 id="org8f03e5a"><span class="section-number-3">1.2.</span> External forces</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+The forces acting on the continuum are classified as external or internal force. 
+</p>
+
+<p>
+The force acting on each particle of the continuum is called a mass force. 
+The vector of the mass force applied to a unit mass of continuum is denoted by \(K\), then \(\rho K d\tau\) is the force acting on an elementary mass \(\rho d\tau\) conatained in volume \(d\tau\) whilst \(\rho K\) is the force acting on a unit volume and is termed as volume force. 
+</p>
+
+<p>
+When equilibrium of the continuum is considered relative to amoving coordinate system the inertial force of the translational motion
+</p>
+\begin{equation}
+\label{orgda2e125}
+K = -w_e = - [w_0 + \dot\omega \times R + \omega \times (\omega \times R) ]
+\tag{1.2.3}
+\end{equation}
+
+<p>
+Here \(w_e\) denotes the vector of translational acceleration = sum of acceleration \(w_0\) of the origin of coordinate sysem, rotational acceleration \(\dot\omega \times R\) and centripetal accelration. The Coriolis acceleration is not inlucde in the right hand side of \eqref{orgda2e125} because <i>the continuum does not move relative to the moving axes</i>. 
+</p>
+
+
+<p>
+<b>External surface forces</b> are forces distributed over surface \(O\) of volume \(V\). 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3d38292" class="outline-3">
+<h3 id="org3d38292"><span class="section-number-3">1.3.</span> Internal force in the continuum</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>when the whole continuum is in equlibrium, then any arbitary part of this continuum is also in equilibrium (the free-body principle)</li>
+<li>the equilibrium conditions for a rigid body are the necessary conditions of equilibrium of the considered part of the continuum (<i>the principle of soildification</i>)</li>
+</ul>
+
+<p>
+For any oridneted surface \(NdO\) at any location in the continuum, there exists a force \(t_NdO\) (a vector) which is teh force exerted on \(NdO\) by the part "above" this surface. By virtue of the principle of action and reaction we have
+</p>
+\begin{equation}
+\label{org42cd59e}
+t_{-N}dO = -t_NdO
+\tag{1.3.1}
+\end{equation}
+
+<p>
+THis interaction of the part of the continuum defiens the field forces, or in other words, the stress field in continuum. The physicla state reffered to as the stress field is determined by a quantitly which relates vector \(t_n\) to vector \(N\) . Adopting a linear relationship between these vectors means that this quantity is a tensor of second rank. (Denoted by \(\hat{T}\), and components denoted as \(t_{ik}\)) 
+</p>
+
+<p>
+Remark: We assumed  a zero prinicple moment of the force \(t_N dO\) about a point on the line of action of this force. This assumption was omitted in the <a href="cosserat_continuum.html#ID-9ca17f04-fe58-4bef-bb2b-b491f136c636">Cosserat Continuum</a> mechanics. The reason for such a seemingly paradoxical statement that the moment has the order of smallness of the principle vector (order \(dO\) ) is apprently due to the conditional character of the very concept of smallness in continuum mechanics The so-called infinitesimally small volume comprises a complex object in itself and consists of a very large number of elementary particles. There is nothing logically inconsistent in that the influence of the moments can be comparable with that of the force, <i>at least at palces of sharply changing stress state</i>.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Theory of Elasticity">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

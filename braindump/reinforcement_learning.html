@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Reinforcement Learning</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="../js/counters.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">Reinforcement Learning</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgf752df1">1. CS 285: Deep Reinforcement Learning</a></li>
+<li><a href="#org5e91d53">2. CS 234: Reinforcement Learning  - Emma Brunskill</a></li>
+<li><a href="#orgb9c390b">3. Books</a></li>
+<li><a href="#org1ffbeb3">4. Sutton &amp; Barto</a></li>
+<li><a href="#orga57987e">5. Papers</a>
+<ul>
+<li><a href="#orgf688470">5.1. Imperfect Information Game, Collaboration and Communication</a></li>
+<li><a href="#org924f8e4">5.2. Learning Decision Trees With RL</a></li>
+<li><a href="#orgee2ace1">5.3. Intention Conditioned Value Function</a></li>
+</ul>
+</li>
+<li><a href="#org829aa9f">6. Websites</a></li>
+<li><a href="#orgaa8e0a1">7. Spinning Up by OpenAI</a>
+<ul>
+<li><a href="#org24f00c2">7.1. Mathematical Background</a></li>
+<li><a href="#org88ae817">7.2. General Knowledge of Deep Learning</a>
+<ul>
+<li><a href="#org5e9885a">7.2.1. Standard Architectures</a></li>
+<li><a href="#org959fdc8">7.2.2. Regularizers</a></li>
+<li><a href="#orgabfc633">7.2.3. Normalization</a></li>
+<li><a href="#orge949d2b">7.2.4. Optimizers</a></li>
+<li><a href="#orgcefda61">7.2.5. Reparameterization trick</a></li>
+</ul>
+</li>
+<li><a href="#org1836957">7.3. Suggested Main Concepts</a></li>
+<li><a href="#org1002767">7.4. Write Your own Code (in the beginning)</a></li>
+<li><a href="#org47da506">7.5. Taxonomy of RL Algorithms</a></li>
+</ul>
+</li>
+<li><a href="#org8536444">8. Debugging RL Algorithms</a></li>
+<li><a href="#org47cc416">9. Podcast</a></li>
+<li><a href="#orga748137">10. Concepts</a>
+<ul>
+<li><a href="#org017e177">10.1. Averagers</a></li>
+<li><a href="#org9d1d093">10.2. True Gradient Descent</a></li>
+<li><a href="#orgea2a10c">10.3. DQN</a>
+<ul>
+<li><a href="#org0b1b54b">10.3.1. Replay Buffer</a></li>
+<li><a href="#org8889567">10.3.2. Stable Target</a></li>
+<li><a href="#org7c3203d">10.3.3. Prioritized Replay Buffer</a></li>
+<li><a href="#orgfa2189b">10.3.4. Double DQN</a></li>
+<li><a href="#orgb8afa54">10.3.5. Duelling DQN</a></li>
+<li><a href="#org54d0133">10.3.6. Maximization Bias</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org5482e5d">11. People</a>
+<ul>
+<li><a href="#orgdda3a4f">11.1. Dibya Gosh</a></li>
+</ul>
+</li>
+<li><a href="#org36aec29">12. MARL</a></li>
+</ul>
+</div>
+</div>
+<p>
+<a href="../../../org/tasks.html#org0e716da">TODO: Reinforcement Learning</a>
+</p>
+
+<div id="outline-container-orgf752df1" class="outline-2">
+<h2 id="orgf752df1"><span class="section-number-2">1.</span> CS 285: Deep Reinforcement Learning</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<a href="https://rail.eecs.berkeley.edu/deeprlcourse/">https://rail.eecs.berkeley.edu/deeprlcourse/</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5e91d53" class="outline-2">
+<h2 id="org5e91d53"><span class="section-number-2">2.</span> CS 234: Reinforcement Learning  - Emma Brunskill</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<a href="https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u">https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb9c390b" class="outline-2">
+<h2 id="orgb9c390b"><span class="section-number-2">3.</span> Books</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+From <a href="https://qr.ae/prnRfl">https://qr.ae/prnRfl</a>
+</p>
+<blockquote>
+<p>
+In my opinion, the main RL problems are related to:
+</p>
+
+<p>
+Information representation: from POMDP to predictive state representation to TD-networks to deep-learning.
+Inverse RL: how to learn the reward
+Algorithms
+</p>
+<ul class="org-ul">
+<li>Off-policy</li>
+<li>Large scale: linear and nonlinear approximations of the value function</li>
+<li>Policy search vs. Q-learning based</li>
+</ul>
+<p>
+Beyond MDP, contextual MDPs
+Optimal exploration
+Hierarchical RL
+Multitask RL and life long learning
+Multiagent RL
+Efficient model based RL
+</p>
+
+<p>
+I can suggest good papers for each of these problems, but there are few books. This is a list of most of the books I am aware of:
+</p>
+
+<ul class="org-ul">
+<li>Sutton &amp; Barto Book: Reinforcement Learning: An Introduction. The classical intuitive intro to the field. I love it.</li>
+
+<li>The chapter by Bertsekas: Page on mit.edu</li>
+
+<li>Algorithms for Reinforcement Learning: Csaba Szepesvari. Nice compendium of ready to be implemented algorithms.</li>
+
+<li>Approximators. Busoniu, Lucian; Robert Babuska ; Bart De Schutter ; Damien Ernst (2010). This is a very practical book that explains some state-of-the-art algorithms (i.e., useful for real world problems) like fitted-Q-iteration and its variations.</li>
+
+<li>Reinforcement Learning: State-of-the-Art. Vol. 12 of Adaptation, Learning and Optimization. Wiering, M., van Otterlo, M. (Eds.), 2012. Springer, Berlin. In Sutton's words "This book is a valuable resource for students wanting to</li>
+</ul>
+<p>
+go beyond the older textbooks and for researchers wanting to easily catch up with
+recent developments".
+</p>
+
+<ul class="org-ul">
+<li>Optimal Adaptive Control and Differential Games by Reinforcement Learning Principles : Draguna Vrabie, Kyriakos G. Vamvoudakis , Frank L. Lewis. I am not familiar with this one, but I have seen it recommended.</li>
+
+<li>Markov Decision Processes in Artificial Intelligence, Sigaud O. &amp; Buffet O. editors, ISTE Ld., Wiley and Sons Inc, 2010.</li>
+</ul>
+
+<p>
+I definitely suggest the books by Sutton and Barto as an excellent intro, the chapter by Bertsekas for getting a solid theoretical background and the book by Busoniu et al. for practical algorithms that can solve some non-toy problems. I also find useful the book by Szepesvari as a quick reference for understanding an comparing algorithms.
+</p>
+
+<p>
+There are also several good specialized monographs and surveys on the topic, some of these are:
+</p>
+
+<ul class="org-ul">
+<li>"From Bandits to Monte-Carlo Tree Search: The Optimistic Principle Applied to Optimization and Planning" by Remi Munos (New trends on Machine Learning). This monograph covers important nonconvex optimistic optimization methods that can be applied for policy search. Available at <a href="https://hal.archives-ouvertes.fr/hal-00747575v5/document">https://hal.archives-ouvertes.fr/hal-00747575v5/document</a></li>
+
+<li>"Reinforcement Learning in Robotics: A Survey" by J. Kober, J. A. Bagnell and J. Peters. Available at Page on ias.tu-darmstadt.de</li>
+
+<li>"A Tutorial on Linear Function Approximators for Dynamic Programming and Reinforcement Learning" by A. Geramifard, T. J. Walsh, S. Tllex, G. Chowdhary, N. Roy and J. P. How (Foundations and Trends in Machine Learning). Available at Page on mit.edu</li>
+
+<li>"A Survey on Policy Search for Robotic" by Newmann and Peters (Foundations and Trends in Machine Learning). Available at Page on ausy.tu-darmstadt.de</li>
+</ul>
+</blockquote>
+
+<ul class="org-ul">
+<li><a href="reinforcement_learning_problem_is_the_ai_problem.html#ID-63DC47AA-7705-432D-A185-EF5CEE5E6149">Reinforcement Learning Problem is the AI Problem</a></li>
+<li id="<a href="https://stable-baselines.readthedocs.io/en/master/">Stable Baseline</a>">Collection of RL Algorithms</li>
+<li><a href="https://medium.datadriveninvestor.com/which-reinforcement-learning-rl-algorithm-to-use-where-when-and-in-what-scenario-e3e7617fb0b1">A collection of psuedocode of RL Algorithms with notes on which to use when</a></li>
+<li><a href="https://jonathan-hui.medium.com/rl-reinforcement-learning-algorithms-comparison-76df90f180cf">An excellent collection of RL algorithms and their comparision</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1ffbeb3" class="outline-2">
+<h2 id="org1ffbeb3"><span class="section-number-2">4.</span> Sutton &amp; Barto</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li><p>
+321 : \(\widehat{\nabla{J(\theta)}}\) is a stochastic estimate whose expectation approximates the gradient of the performance measure with respect to its argument.
+</p>
+<blockquote>
+<p>
+“Stochastic Estimate” triggered these thoughts:
+</p>
+<ul class="org-ul">
+<li>We can not know the gradient of the performance, because it may be difficult to measure through out all states, or due to other reasons</li>
+<li>In these cases, we can instead use “Stochastic Estimate” of the desired thing. This estimate has to approximate the true thing in its Expectation. ie. the Expectation (on average value) must be the desired thing.</li>
+<li>Thus when we can’ t compute the thing we require, it may suffice to compute the thing which in ‘expectation’ is the desired thing.</li>
+</ul>
+</blockquote></li>
+
+<li><p>
+329  <b>Monte Carlo Method have high variance.</b>
+</p>
+<blockquote>
+<p>
+As a Monte Carlo Method REINFORCE may be of high variance and thus produce slow learning.
+</p>
+</blockquote></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga57987e" class="outline-2">
+<h2 id="orga57987e"><span class="section-number-2">5.</span> Papers</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-orgf688470" class="outline-3">
+<h3 id="orgf688470"><span class="section-number-3">5.1.</span> Imperfect Information Game, Collaboration and Communication</h3>
+<div class="outline-text-3" id="text-5-1">
+<ul class="org-ul">
+<li>Learning Multi-agent Implicit Communication Through Actions: A Case Study in Contract Bridge, a Collaborative <a href="imperfect_information_game.html#ID-21C0EDEC-B6E7-48FB-8D25-24EE3BBBE8D6">Imperfect-Information Game</a>. [<a href="papers/rl/Learning MultiAgent Implicit Communication Through Actions - Bridge - Imperfect Information Collaborative Game - 1810.04444v1.pdf">file</a>]</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org924f8e4" class="outline-3">
+<h3 id="org924f8e4"><span class="section-number-3">5.2.</span> Learning Decision Trees With RL</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+<a href="papers/rl/Learning Decision Trees with RL - Xiong.pdf">papers/rl/Learning Decision Trees with RL - Xiong.pdf</a>
+Trains a RNN network using RL, to decide which feature to split the decision tree next. Performs better than greedy strategy. 
+</p>
+
+<p>
+Because greedy strategies look on immediate infromation gain, where RL can be trained for longterm payoff.
+</p>
+</div>
+</div>
+<div id="outline-container-orgee2ace1" class="outline-3">
+<h3 id="orgee2ace1"><span class="section-number-3">5.3.</span> Intention Conditioned Value Function</h3>
+<div class="outline-text-3" id="text-5-3">
+<ul class="org-ul">
+<li><a href="papers/RL from Passive Data via Latent Intentions - 2304.04782; Intention Conditioned Value Function (ICVF).pdf">papers/RL from Passive Data via Latent Intentions - 2304.04782; Intention Conditioned Value Function (ICVF).pdf</a></li>
+<li><a href="papers/The Successor Representation - Peter Dayan.pdf">papers/The Successor Representation - Peter Dayan.pdf</a></li>
+<li><a href="papers/Learning One Representation to Optimize All Rewards - 2103.07945.pdf">papers/Learning One Representation to Optimize All Rewards - 2103.07945.pdf</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org829aa9f" class="outline-2">
+<h2 id="org829aa9f"><span class="section-number-2">6.</span> Websites</h2>
+<div class="outline-text-2" id="text-6">
+<ul class="org-ul">
+<li>A (Long) Peek into Reinforcement Learning : <a href="https://lilianweng.github.io/posts/2018-02-19-rl-overview/">https://lilianweng.github.io/posts/2018-02-19-rl-overview/</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgaa8e0a1" class="outline-2">
+<h2 id="orgaa8e0a1"><span class="section-number-2">7.</span> Spinning Up by OpenAI</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+<a href="https://spinningup.openai.com/en/latest/user/introduction.html">https://spinningup.openai.com/en/latest/user/introduction.html</a>
+</p>
+</div>
+<div id="outline-container-org24f00c2" class="outline-3">
+<h3 id="org24f00c2"><span class="section-number-3">7.1.</span> Mathematical Background</h3>
+<div class="outline-text-3" id="text-7-1">
+<ul class="org-ul">
+<li>Probability and Statistics
+<ul class="org-ul">
+<li>Random Variables</li>
+<li>Bayes' Theorem</li>
+<li>Chain Rule of Probability</li>
+<li>Expected Values</li>
+<li>Standard Deviations</li>
+<li>Importance Sampling</li>
+</ul></li>
+<li>Multivariate Calculus
+<ul class="org-ul">
+<li>Gradients</li>
+<li>Taylor Series Expansion</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org88ae817" class="outline-3">
+<h3 id="org88ae817"><span class="section-number-3">7.2.</span> General Knowledge of Deep Learning</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+[ Links to resources on all these are in the page <a href="https://spinningup.openai.com/en/latest/spinningup/spinningup.html">Spinning Up as a Deep RL Researcher</a> : (<a href="papers/RL/Spinning Up as a Deep RL Researcher — Spinning Up documentation.html">saved html</a>) ]
+</p>
+</div>
+<div id="outline-container-org5e9885a" class="outline-4">
+<h4 id="org5e9885a"><span class="section-number-4">7.2.1.</span> Standard Architectures</h4>
+<div class="outline-text-4" id="text-7-2-1">
+<ul class="org-ul">
+<li>MLP</li>
+<li>Vanilla RNN</li>
+<li>LSTM</li>
+<li>GRU</li>
+<li>conv layers</li>
+<li>resnets</li>
+<li>attention mechanisms</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org959fdc8" class="outline-4">
+<h4 id="org959fdc8"><span class="section-number-4">7.2.2.</span> Regularizers</h4>
+<div class="outline-text-4" id="text-7-2-2">
+<ul class="org-ul">
+<li>Weight decay</li>
+<li>Dropout</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgabfc633" class="outline-4">
+<h4 id="orgabfc633"><span class="section-number-4">7.2.3.</span> Normalization</h4>
+<div class="outline-text-4" id="text-7-2-3">
+<ul class="org-ul">
+<li>batch norm</li>
+<li>layer norm</li>
+<li>weight norm</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge949d2b" class="outline-4">
+<h4 id="orge949d2b"><span class="section-number-4">7.2.4.</span> Optimizers</h4>
+<div class="outline-text-4" id="text-7-2-4">
+<ul class="org-ul">
+<li>SGD</li>
+<li>Momentums SGD</li>
+<li>Adam</li>
+<li>others</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcefda61" class="outline-4">
+<h4 id="orgcefda61"><span class="section-number-4">7.2.5.</span> Reparameterization trick</h4>
+<div class="outline-text-4" id="text-7-2-5">
+<p>
+<a href="https://arxiv.org/abs/1312.6114">https://arxiv.org/abs/1312.6114</a> : <a href="papers/ML Base/Auto-Encoding Variational Bayes - 1312.6114.pdf">papers/ML Base/Auto-Encoding Variational Bayes - 1312.6114.pdf</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org1836957" class="outline-3">
+<h3 id="org1836957"><span class="section-number-3">7.3.</span> Suggested Main Concepts</h3>
+<div class="outline-text-3" id="text-7-3">
+<ul class="org-ul">
+<li>Montonic Improvement Theory : <a href="papers/rl/Optimizing Expectations Graphs - John Schulman.pdf">papers/rl/Optimizing Expectations Graphs - John Schulman.pdf</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1002767" class="outline-3">
+<h3 id="org1002767"><span class="section-number-3">7.4.</span> Write Your own Code (in the beginning)</h3>
+<div class="outline-text-3" id="text-7-4">
+<ul class="org-ul">
+<li></li>
+
+
+<li>Which algorithms?
+You should probably start with vanilla policy gradient (also called REINFORCE), DQN, A2C (the synchronous version of A3C), PPO (the variant with the clipped objective), and DDPG, approximately in that order. The simplest versions of all of these can be written in just a few hundred lines of code (ballpark 250-300), and some of them even less (for example, a no-frills version of VPG can be written in about 80 lines). Write single-threaded code before you try writing parallelized versions of these algorithms. (Do try to parallelize at least one.)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org47da506" class="outline-3">
+<h3 id="org47da506"><span class="section-number-3">7.5.</span> Taxonomy of RL Algorithms</h3>
+<div class="outline-text-3" id="text-7-5">
+
+<div id="orgb3b718d" class="figure">
+<p><img src="data/reinforcement_learning/a_taxonomy_of_rl_algorithms-20230727194644.png" alt="a_taxonomy_of_rl_algorithms-20230727194644.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>A Taxonomy of RL Algorithms</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org8536444" class="outline-2">
+<h2 id="org8536444"><span class="section-number-2">8.</span> Debugging RL Algorithms</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+<a href="https://andyljones.com/posts/rl-debugging.html">https://andyljones.com/posts/rl-debugging.html</a> talks about:
+</p>
+<ul class="org-ul">
+<li>Probe Environments</li>
+<li>Probe Agents</li>
+<li>Logs execessively</li>
+<li>Use really large batch size</li>
+<li>Rescale your rewards</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org47cc416" class="outline-2">
+<h2 id="org47cc416"><span class="section-number-2">9.</span> Podcast</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+TalkRL: <a href="https://podcasts.apple.com/us/podcast/talkrl-the-reinforcement-learning-podcast/id1478198107">https://podcasts.apple.com/us/podcast/talkrl-the-reinforcement-learning-podcast/id1478198107</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orga748137" class="outline-2">
+<h2 id="orga748137"><span class="section-number-2">10.</span> Concepts</h2>
+<div class="outline-text-2" id="text-10">
+</div>
+<div id="outline-container-org017e177" class="outline-3">
+<h3 id="org017e177"><span class="section-number-3">10.1.</span> Averagers</h3>
+<div class="outline-text-3" id="text-10-1">
+<p>
+<a href="https://youtu.be/gOV8-bC1_KU?t=608">https://youtu.be/gOV8-bC1_KU?t=608</a>
+</p>
+
+<p>
+<a href="file:///Users/bpanthi977/Desktop/RLAlgsInMDPs.pdf">file:///Users/bpanthi977/Desktop/RLAlgsInMDPs.pdf</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org9d1d093" class="outline-3">
+<h3 id="org9d1d093"><span class="section-number-3">10.2.</span> True Gradient Descent</h3>
+<div class="outline-text-3" id="text-10-2">
+<ul class="org-ul">
+<li>Is DQN True Gradient Descent? No. They are approximations to it.   <a href="https://youtu.be/gOV8-bC1_KU?t=3253">CS234 - Lecture 6 (t=3253)</a></li>
+<li>GTD (Gradient Temporal Difference) are true gradient descent</li>
+<li>The first section of chapter on Function Approximation (Sutton &amp; Barto) has few points on this.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgea2a10c" class="outline-3">
+<h3 id="orgea2a10c"><span class="section-number-3">10.3.</span> DQN</h3>
+<div class="outline-text-3" id="text-10-3">
+<ul class="org-ul">
+<li>Huber Loss on Bellman Error <a href="https://youtu.be/gOV8-bC1_KU?t=4756">https://youtu.be/gOV8-bC1_KU?t=4756</a></li>
+</ul>
+</div>
+<div id="outline-container-org0b1b54b" class="outline-4">
+<h4 id="org0b1b54b"><span class="section-number-4">10.3.1.</span> Replay Buffer</h4>
+</div>
+<div id="outline-container-org8889567" class="outline-4">
+<h4 id="org8889567"><span class="section-number-4">10.3.2.</span> Stable Target</h4>
+</div>
+<div id="outline-container-org7c3203d" class="outline-4">
+<h4 id="org7c3203d"><span class="section-number-4">10.3.3.</span> Prioritized Replay Buffer</h4>
+</div>
+<div id="outline-container-orgfa2189b" class="outline-4">
+<h4 id="orgfa2189b"><span class="section-number-4">10.3.4.</span> Double DQN</h4>
+</div>
+<div id="outline-container-orgb8afa54" class="outline-4">
+<h4 id="orgb8afa54"><span class="section-number-4">10.3.5.</span> Duelling DQN</h4>
+</div>
+<div id="outline-container-org54d0133" class="outline-4">
+<h4 id="org54d0133"><span class="section-number-4">10.3.6.</span> Maximization Bias</h4>
+<div class="outline-text-4" id="text-10-3-6">
+<ul class="org-ul">
+<li>Double DQN</li>
+<li>Stable Target</li>
+</ul>
+<p>
+prevent maximization bias 
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org5482e5d" class="outline-2">
+<h2 id="org5482e5d"><span class="section-number-2">11.</span> People</h2>
+<div class="outline-text-2" id="text-11">
+</div>
+<div id="outline-container-orgdda3a4f" class="outline-3">
+<h3 id="orgdda3a4f"><span class="section-number-3">11.1.</span> Dibya Gosh</h3>
+<div class="outline-text-3" id="text-11-1">
+<p>
+<a href="https://scholar.google.com/citations?user=znnl0kwAAAAJ">https://scholar.google.com/citations?user=znnl0kwAAAAJ</a>
+and his blog article: <a href="https://dibyaghosh.com/blog/probability/highdimensionalgeometry.html">Trouble in High-Dimensional Land</a> 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org36aec29" class="outline-2">
+<h2 id="org36aec29"><span class="section-number-2">12.</span> MARL</h2>
+<div class="outline-text-2" id="text-12">
+<ul class="org-ul">
+<li><a href="multi_agent_reinforcement_learning.html#ID-48C31D08-B4C5-434C-A1AC-1C7A94306D1C">MARL</a></li>
+<li><a href="https://github.com/thu-ml/tianshou">https://github.com/thu-ml/tianshou</a></li>
+<li><a href="https://pettingzoo.farama.org/api/aec/">https://pettingzoo.farama.org/api/aec/</a></li>
+</ul>
+
+
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="rl_can_be_used_to_train_non_differentiable_models.html#ID-125D38D9-A3F2-47E0-A4A8-B8084C7EF72D">RL can be used to train Non-Differentiable Models</a></li>
+<li><a href="procgen_benchmark.html#ID-A62AC955-8AC8-4D6A-A899-5D9A8A042CEF">Procgen Benchmark</a></li>
+<li><a href="eugene_vinitsky.html#ID-C4AFE654-AF46-4C34-97C2-656AA111312B">Eugene Vinitsky</a></li>
+<li><a href="sergey_levine.html#ID-65DED394-F17D-4C6A-A86D-FE48A5EED74A">Sergey Levine</a></li>
+<li><a href="genetic_algorithm.html#ID-73B816D0-ABEF-40AF-BB38-E680F26CA7EB">Genetic Algorithm</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Reinforcement Learning">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

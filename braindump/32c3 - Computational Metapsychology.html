@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Computational Meta-Psychology</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">Computational Meta-Psychology</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org20f5e31">1. AI is to Understand Ourself</a></li>
+<li><a href="#org15a8b24">2. Color Renormalization</a></li>
+<li><a href="#org8a20dd3">3. Computational Monism</a></li>
+<li><a href="#org62e174c">4. What algorithm should a robot use? - Solomonoff Induction</a></li>
+<li><a href="#org164c10a">5. AI has made huge progress in encoding data</a></li>
+<li><a href="#orgf3b0ddb">6. Inceptionism looks like Psychedelic</a></li>
+<li><a href="#org568bd2d">7. Representation by Simulation</a></li>
+<li><a href="#orgeee562b">8. Causal Model</a>
+<ul>
+<li><a href="#orgc3730e3">8.1. Associative model - Weakly Determined model</a></li>
+<li><a href="#orgd1be8e5">8.2. Algorithm - Strongly determined model</a></li>
+</ul>
+</li>
+<li><a href="#org77a5e79">9. Computation vs Mathematics</a></li>
+<li><a href="#org57e73bf">10. Mental Representation</a>
+<ul>
+<li><a href="#org9d0f55f">10.1. Precepts</a></li>
+<li><a href="#orgd20c769">10.2. Mental Simulation</a></li>
+<li><a href="#org5fb664e">10.3. Coneptual Representation</a></li>
+<li><a href="#org38ccce5">10.4. Linguistic Protocol</a></li>
+</ul>
+</li>
+<li><a href="#orgd72635c">11. But AI progressed the opposite way</a></li>
+<li><a href="#org6b8d478">12. Our Hardware</a></li>
+<li><a href="#orgc25840a">13. Brain boots itself in 80 mega seconds</a></li>
+<li><a href="#org8624cc5">14. Storage Capacity of Brain: 100GB to 2.5PB</a></li>
+</ul>
+</div>
+</div>
+<p>
+Notes from <a href="Joscha - Computational Meta-Psychology-WRdJCFEqFTU.mp4">Computational Meta-Psychology - 32c3</a> by Josch Bach
+</p>
+<div id="outline-container-org20f5e31" class="outline-2">
+<h2 id="org20f5e31"><span class="section-number-2">1.</span> AI is to Understand Ourself</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+We are system that find meaning in patterns - Best way to understand us is to build systems 
+</p>
+</div>
+</div>
+<div id="outline-container-org15a8b24" class="outline-2">
+<h2 id="org15a8b24"><span class="section-number-2">2.</span> Color Renormalization</h2>
+<div class="outline-text-2" id="text-2">
+
+<div id="org2f2fb53" class="figure">
+<p><img src="./data/32c3 - Computational Metapsychology/mpv-screenshotA9jdRd.png" alt="mpv-screenshotA9jdRd.png" />
+</p>
+</div>
+
+<p>
+0:02:37 Minds cannot know objective truths (outside of mathematics) but they can generate meaning 
+</p>
+</div>
+</div>
+<div id="outline-container-org8a20dd3" class="outline-2">
+<h2 id="org8a20dd3"><span class="section-number-2">3.</span> Computational Monism</h2>
+<div class="outline-text-2" id="text-3">
+
+<div id="orgd68af5c" class="figure">
+<p><img src="./data/32c3 - Computational Metapsychology/mpv-screenshotplI7Zh.png" alt="mpv-screenshotplI7Zh.png" />
+</p>
+</div>
+
+<p>
+We make sense of the data at out systemic interface. 
+</p>
+</div>
+</div>
+<div id="outline-container-org62e174c" class="outline-2">
+<h2 id="org62e174c"><span class="section-number-2">4.</span> What algorithm should a robot use? - Solomonoff Induction</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Bayesian Reasoning + Induction + Occam's Razor = <a href="solomonoff_induction.html#ID-ad7eb4b6-a1b1-4ccc-ba96-5479bc4440d0">Solomonoff Induction</a> 
+</p>
+
+<p>
+Solomonoff Induction is not computational, so we can only approximate it. 
+So, we can't get to the truth. 
+</p>
+
+<p>
+0:05:01 We get meaning by <code>suitable encoding</code>. 
+</p>
+</div>
+</div>
+<div id="outline-container-org164c10a" class="outline-2">
+<h2 id="org164c10a"><span class="section-number-2">5.</span> AI has made huge progress in encoding data</h2>
+<div class="outline-text-2" id="text-5">
+
+<div id="org7986a44" class="figure">
+<p><img src="./data/32c3 - Computational Metapsychology/mpv-screenshotibhwm1.png" alt="mpv-screenshotibhwm1.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf3b0ddb" class="outline-2">
+<h2 id="orgf3b0ddb"><span class="section-number-2">6.</span> Inceptionism looks like Psychedelic</h2>
+<div class="outline-text-2" id="text-6">
+
+<div id="org54736d3" class="figure">
+<p><img src="./data/32c3 - Computational Metapsychology/mpv-screenshotiwDFkR.png" alt="mpv-screenshotiwDFkR.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org568bd2d" class="outline-2">
+<h2 id="org568bd2d"><span class="section-number-2">7.</span> Representation by Simulation</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Campbell and Foster, 2015 
+</p>
+
+
+<div id="orgb2f3213" class="figure">
+<p><img src="./data/32c3 - Computational Metapsychology/mpv-screenshotwK15EG.png" alt="mpv-screenshotwK15EG.png" />
+</p>
+</div>
+
+<p>
+Sounds = Percept 
+Sequences &amp; Grammar = Simulation 
+Concept = Styles 
+</p>
+</div>
+</div>
+<div id="outline-container-orgeee562b" class="outline-2">
+<h2 id="orgeee562b"><span class="section-number-2">8.</span> Causal Model</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-orgc3730e3" class="outline-3">
+<h3 id="orgc3730e3"><span class="section-number-3">8.1.</span> Associative model - Weakly Determined model</h3>
+</div>
+<div id="outline-container-orgd1be8e5" class="outline-3">
+<h3 id="orgd1be8e5"><span class="section-number-3">8.2.</span> Algorithm - Strongly determined model</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+0:09:44
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org77a5e79" class="outline-2">
+<h2 id="org77a5e79"><span class="section-number-2">9.</span> Computation vs Mathematics</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Nothing is mathematics. 
+Mathematics is a domain of formal language - it doesn't exist. 
+</p>
+
+
+<div id="org8db8f63" class="figure">
+<p><img src="./data/32c3 - Computational Metapsychology/mpv-screenshot7B76lk.png" alt="mpv-screenshot7B76lk.png" />
+</p>
+</div>
+
+<p>
+Computation can exist 
+</p>
+<ul class="org-ul">
+<li>you start with an state</li>
+<li>then apply transition function</li>
+<li>it is finite</li>
+</ul>
+
+<p>
+We can understand mathematics beacause our brain can compute some part of mathematics. Very little of it, and with little complexity. But enough so that can map some of the inifite complexity to computational patterns. 
+</p>
+</div>
+</div>
+<div id="outline-container-org57e73bf" class="outline-2">
+<h2 id="org57e73bf"><span class="section-number-2">10.</span> Mental Representation</h2>
+<div class="outline-text-2" id="text-10">
+</div>
+<div id="outline-container-org9d0f55f" class="outline-3">
+<h3 id="org9d0f55f"><span class="section-number-3">10.1.</span> Precepts</h3>
+</div>
+<div id="outline-container-orgd20c769" class="outline-3">
+<h3 id="orgd20c769"><span class="section-number-3">10.2.</span> Mental Simulation</h3>
+</div>
+<div id="outline-container-org5fb664e" class="outline-3">
+<h3 id="org5fb664e"><span class="section-number-3">10.3.</span> Coneptual Representation</h3>
+<div class="outline-text-3" id="text-10-3">
+</div>
+<div id="outline-container-org6847121" class="outline-4">
+<h4 id="org6847121"><span class="section-number-4">10.3.1.</span> Concept Spaces</h4>
+<div class="outline-text-4" id="text-10-3-1">
+<ul class="org-ul">
+<li>Interface (often shared between individuals)</li>
+<li>compositional</li>
+<li>can be described using high-dimentional vector spaces</li>
+<li>we don't do simulation and prediction but can capture regularity</li>
+</ul>
+
+
+<div id="org56ced78" class="figure">
+<p><img src="./data/32c3 - Computational Metapsychology/mpv-screenshotgSXsfX.png" alt="mpv-screenshotgSXsfX.png" />
+</p>
+</div>
+
+<p>
+Because it is high level vector spaces, we can do interesting things like machine translation without understanding what it means; i.e. without any proper mental representations 
+</p>
+
+<p>
+So, concept space is a mental representation that is incomplete. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org38ccce5" class="outline-3">
+<h3 id="org38ccce5"><span class="section-number-3">10.4.</span> Linguistic Protocol</h3>
+<div class="outline-text-3" id="text-10-4">
+<p>
+To transfer mental representation to others. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd72635c" class="outline-2">
+<h2 id="orgd72635c"><span class="section-number-2">11.</span> But AI progressed the opposite way</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+Progression of AI Models
+</p>
+
+<ul class="org-ul">
+<li>Linguistic protocols (formal grammars)</li>
+<li>Concept spaces</li>
+<li>percepts</li>
+<li>mental simulations</li>
+<li>Attention directed, motivationally connected systems</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6b8d478" class="outline-2">
+<h2 id="org6b8d478"><span class="section-number-2">12.</span> Our Hardware</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+For brain: about 5% of the 2% is for brain 
+another 10% of 2% is for things related to brain 
+</p>
+
+<p>
+so, to code for brain, we need ~500kb of codes. 
+</p>
+
+<p>
+The code of the universe doesn't define what this planet or you look like 
+similary this code (genome) define the rules for how the brain is built.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc25840a" class="outline-2">
+<h2 id="orgc25840a"><span class="section-number-2">13.</span> Brain boots itself in 80 mega seconds</h2>
+<div class="outline-text-2" id="text-13">
+<ul class="org-ul">
+<li>dimension learnign</li>
+<li>basic model of the world so that we can operated in a world</li>
+</ul>
+
+<p>
+by 80 mega seconds i.e. 3.5 years a child  can make sense of the world 
+</p>
+<ul class="org-ul">
+<li>we are awake for about 1.5 Giga second if we reach old age</li>
+</ul>
+<p>
+0:16:44 by this time we can make &lt; 5Million concepts 
+</p>
+</div>
+</div>
+<div id="outline-container-org8624cc5" class="outline-2">
+<h2 id="org8624cc5"><span class="section-number-2">14.</span> Storage Capacity of Brain: 100GB to 2.5PB</h2>
+<div class="outline-text-2" id="text-14">
+<p>
+Maybe a neuron doesn't matter too much. There is lot of redundancy. So, 100 GB maybe is better estimate 
+</p>
+
+<p>
+0:18:12
+</p>
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="joscha_bach.html#ID-1d6a0a05-e48a-44ac-aaa7-1783e4bc7664">Joscha Bach</a></li>
+<li><a href="solomonoff_induction.html#ID-ad7eb4b6-a1b1-4ccc-ba96-5479bc4440d0">Solomonoff Induction</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Computational Meta-Psychology">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

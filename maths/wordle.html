@@ -1,0 +1,1057 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-08-24 Thu 12:18 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Solving Wordle</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<script type="text/javascript" src="/js/counters.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">Solving Wordle</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb4f8ef2">1. Introduction</a></li>
+<li><a href="#org8709913">2. Probability &amp; Information</a></li>
+<li><a href="#org8a8ee41">3. Entropy</a></li>
+<li><a href="#orgb814b46">4. Lets play a game</a></li>
+<li><a href="#org95b2b52">5. Code</a>
+<ul>
+<li><a href="#orgfa12360">5.1. Color</a></li>
+<li><a href="#orgfd23123">5.2. Valid Guesses</a></li>
+<li><a href="#org39d0335">5.3. Entropy</a></li>
+</ul>
+</li>
+<li><a href="#orgff7af92">6. Benchmark</a></li>
+<li><a href="#orgc3ebb40">7. Optimized Code</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb4f8ef2" class="outline-2">
+<h2 id="orgb4f8ef2"><span class="section-number-2">1.</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+3Blue1Brown's fantastic video <a href="https://www.youtube.com/watch?v=v68zYyaEmEA">Solving Wordle using Information Theory</a> introduced me to the game of <a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a>. In this article, I am going to explain what I learnt and implement a program to play this game. 
+</p>
+
+<p>
+Wordle is a word guessing game. You get 6 chances to guess a 5 letter word. For each guess, the game reveals following information:
+</p>
+<ul class="org-ul">
+<li>if any letter in your guess word is at the exact same location as in the answer word, it is marked green,</li>
+<li>if any letter in your guess word exists in the answer word  but at a different location, it is marked yellow,</li>
+<li>and the letters that don't exist in the answer word are marked black.</li>
+</ul>
+
+<p>
+Using the revealed information, you narrow the possibilites and try to guess the correct word. As humans, we can intuitively think weather one guess might be better than other or not. "What exactly is a good guess?" is the main question. Or, put different, "What strategy for selecting guess words is the best?". Only when we answer this, we can implement that strategy in code and see the result. To answer this, observe that we tend to think of following strategies while playing the game ourselves: 
+</p>
+<ul class="org-ul">
+<li>we would like to use words that have different letters than previous guesses,</li>
+<li>even if we know the correct letters of few positions, its may be better to use words that have wrong letters at those positions, because we can then know if those letter exist or not at other positions of the answer word,</li>
+<li>we give priority to vowels and other letters that are more frequent in most of the words.</li>
+</ul>
+
+<p>
+There is one central theme to these thoughts: <i>Increase the amount of information we can extract from each guess</i>. If we use letters previously used, we get less information; If we test uncommon letters in the guess, on average we narrow down the possible words by much less than if we had tested common letters. Now, we need to quantify these notions. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8709913" class="outline-2">
+<h2 id="org8709913"><span class="section-number-2">2.</span> Probability &amp; Information</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Lets imagine, we are playing a different game. I think of a random number between 0 and 255, and your task is to guess it. Initially your probability of guessing the right one is \(1/256 = 0.4\%\). If I say, that the number is divisible by three. The probability of the number being divisible by 3 is about \(33\%\) and not being divisible by 3 is \(67\%\). Then how much information did I reveal?. And, If I had said that the number is divisible by 2, then how much information would I be revealing?. Intuitively, you can guess that I would be revealing much more information in the former case than in the latter. As another example, if I had said that the number is not greater than 400, then I would not be revealing any information. Because the probability of the number being not greater than 400 is already known to be 100%. So, in this case where the probability of each number being the right one is equal, the amount of information revealed is higher if that information reduces the space of right answers by a large number. And in general, the amount of information revealed is higher for events of lesser probability and lesser for events of higher probability. i.e. Information is decreasing function of probability.
+</p>
+
+<p>
+Now, lets look at this in another way. A number between 0 and 255 can be represented in binary by 8 digits (8 binary digits = 8 bits). e.g. 56 is <code>00111000</code>. And if I say that the number is divisible by 2, then it is the same as saying that the last digit in binary is <code>0</code>. We need 8 bits to represent the number, and I revealed one of those 8 bits. So, we can say I revealed 1 bit of information. Now, it shouldn't feel surprising that we can measure information in bits. After all, every information (documents, images, audio, &#x2026;) you store in your computer is stored in binary and their size measured in bits, bytes (8 bits = 1 byte), MBs (Mega Byte = 2<sup>20</sup> bytes), GBs. Revealing that the last digit is divisible by 2, reduced the possible answers by 1/2 and gave 1 bit of information. If I said that the last two digits are <code>10</code> the possible answers would be reduced by 1/4th and this would be 2 bits of information. And if I reveal the right answer, it would reduce the possibilites to 1 out of all possible 256, i.e. 8 bits of information. So, information \(I\) is:
+</p>
+
+\begin{equation*}
+I = - \log_2(P)
+\end{equation*}
+<p>
+\(- \log_2(1/2) = 1\) bit, and \(-\log_2(1/4) = 2\) bits. 
+Here, \(P\) is the probability of event = the amount by which the possibilites are reduced (because in this case each number is equally likely).
+</p>
+
+<p>
+Now, we can answer the previous questions:
+</p>
+<ul class="org-ul">
+<li>If I say that the number is divisible by 3, then I restrict the digits to some pattern. And it would be \(-\log_2(1/3) = 1.58\) bits of information.</li>
+<li>If I say that the number is divisible by 2, then it would be \(-\log_2(1/2) = 1\) bit of information.</li>
+</ul>
+<p>
+And as we had intuitively said previously, we can now say numerically too that the former reveals higher information than the latter.   
+</p>
+
+<p>
+Let's get back to wordle. Our target is to <i>increase the amount of information we can extract from each guess</i>. There are 2315 words that can be right answers in the original wordle game.
+</p>
+
+<p>
+In a wordle game instance where <code>sweet</code> is the right answer, using the guess word <code>crane</code> would show following color:
+</p>
+
+
+<div class="org-center">
+<p>
+<code>⬛⬛⬛⬛🟨</code>
+</p>
+</div>
+
+<p>
+And if we check every possible answer words, there are 127 words that would give the above color. 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">beefy</td>
+<td class="org-left">befit</td>
+<td class="org-left">beget</td>
+<td class="org-left">belly</td>
+<td class="org-left">below</td>
+<td class="org-left">beset</td>
+<td class="org-left">betel</td>
+<td class="org-left">bevel</td>
+<td class="org-left">bezel</td>
+<td class="org-left">bleed</td>
+</tr>
+
+<tr>
+<td class="org-left">bleep</td>
+<td class="org-left">bless</td>
+<td class="org-left">bowel</td>
+<td class="org-left">bused</td>
+<td class="org-left">debit</td>
+<td class="org-left">debug</td>
+<td class="org-left">debut</td>
+<td class="org-left">deity</td>
+<td class="org-left">depot</td>
+<td class="org-left">depth</td>
+</tr>
+
+<tr>
+<td class="org-left">detox</td>
+<td class="org-left">devil</td>
+<td class="org-left">dopey</td>
+<td class="org-left">dowel</td>
+<td class="org-left">duvet</td>
+<td class="org-left">dwell</td>
+<td class="org-left">dwelt</td>
+<td class="org-left">edify</td>
+<td class="org-left">eight</td>
+<td class="org-left">elbow</td>
+</tr>
+
+<tr>
+<td class="org-left">elegy</td>
+<td class="org-left">embed</td>
+<td class="org-left">empty</td>
+<td class="org-left">epoxy</td>
+<td class="org-left">equip</td>
+<td class="org-left">ethos</td>
+<td class="org-left">exist</td>
+<td class="org-left">expel</td>
+<td class="org-left">extol</td>
+<td class="org-left">exult</td>
+</tr>
+
+<tr>
+<td class="org-left">fetid</td>
+<td class="org-left">fetus</td>
+<td class="org-left">field</td>
+<td class="org-left">filet</td>
+<td class="org-left">fleet</td>
+<td class="org-left">flesh</td>
+<td class="org-left">geeky</td>
+<td class="org-left">golem</td>
+<td class="org-left">gooey</td>
+<td class="org-left">guess</td>
+</tr>
+
+<tr>
+<td class="org-left">guest</td>
+<td class="org-left">hefty</td>
+<td class="org-left">heist</td>
+<td class="org-left">helix</td>
+<td class="org-left">hello</td>
+<td class="org-left">hotel</td>
+<td class="org-left">hovel</td>
+<td class="org-left">impel</td>
+<td class="org-left">islet</td>
+<td class="org-left">jelly</td>
+</tr>
+
+<tr>
+<td class="org-left">jetty</td>
+<td class="org-left">jewel</td>
+<td class="org-left">lefty</td>
+<td class="org-left">leggy</td>
+<td class="org-left">level</td>
+<td class="org-left">libel</td>
+<td class="org-left">model</td>
+<td class="org-left">modem</td>
+<td class="org-left">motel</td>
+<td class="org-left">pesky</td>
+</tr>
+
+<tr>
+<td class="org-left">pesto</td>
+<td class="org-left">petty</td>
+<td class="org-left">piety</td>
+<td class="org-left">pixel</td>
+<td class="org-left">plied</td>
+<td class="org-left">poesy</td>
+<td class="org-left">quell</td>
+<td class="org-left">quest</td>
+<td class="org-left">quiet</td>
+<td class="org-left">seedy</td>
+</tr>
+
+<tr>
+<td class="org-left">setup</td>
+<td class="org-left">sheep</td>
+<td class="org-left">sheet</td>
+<td class="org-left">sheik</td>
+<td class="org-left">shelf</td>
+<td class="org-left">shell</td>
+<td class="org-left">shied</td>
+<td class="org-left">sleek</td>
+<td class="org-left">sleep</td>
+<td class="org-left">sleet</td>
+</tr>
+
+<tr>
+<td class="org-left">slept</td>
+<td class="org-left">smell</td>
+<td class="org-left">smelt</td>
+<td class="org-left">speed</td>
+<td class="org-left">spell</td>
+<td class="org-left">spelt</td>
+<td class="org-left">spied</td>
+<td class="org-left">spiel</td>
+<td class="org-left">steed</td>
+<td class="org-left">steel</td>
+</tr>
+
+<tr>
+<td class="org-left">steep</td>
+<td class="org-left">sweep</td>
+<td class="org-left">sweet</td>
+<td class="org-left">swell</td>
+<td class="org-left">swept</td>
+<td class="org-left">teddy</td>
+<td class="org-left">teeth</td>
+<td class="org-left">tempo</td>
+<td class="org-left">tepid</td>
+<td class="org-left">testy</td>
+</tr>
+
+<tr>
+<td class="org-left">theft</td>
+<td class="org-left">thief</td>
+<td class="org-left">totem</td>
+<td class="org-left">towel</td>
+<td class="org-left">tweed</td>
+<td class="org-left">tweet</td>
+<td class="org-left">upset</td>
+<td class="org-left">video</td>
+<td class="org-left">vowel</td>
+<td class="org-left">weedy</td>
+</tr>
+
+<tr>
+<td class="org-left">weigh</td>
+<td class="org-left">welsh</td>
+<td class="org-left">wheel</td>
+<td class="org-left">whelp</td>
+<td class="org-left">wield</td>
+<td class="org-left">yield</td>
+<td class="org-left">zesty</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+So, <code>crane</code> reduced the possibilites from 2315 words to 127 words, i.e. it revealed \(-\log_2 (127/2315) = 4.19\) bits of information. Lets denote this as:
+</p>
+
+\begin{equation*}
+I(\textrm{crane}|\textrm{sweet}) = 4.19
+\end{equation*}
+
+<p>
+However, if we were in the game where right answer was <code>rebar</code>, then guessing <code>crane</code> would show
+</p>
+<div class="org-center">
+<p>
+<code>⬛🟨🟨⬛🟨</code>
+</p>
+</div>
+<p>
+and there would be <code>50</code> possible valid answer words next. In this game, <code>crane</code> reveals \(-\log_2(50/2315) = 5.53\) bits of information.
+</p>
+
+<p>
+However, if we had guessed <code>pearl</code> then for the first game it would show
+</p>
+<div class="org-center">
+<p>
+<code>⬛🟨⬛⬛⬛</code>
+</p>
+</div>
+<p>
+and reduce possibilites to <code>159</code> words (3.86 bits of information) and while for the second case, it would show
+</p>
+<div class="org-center">
+<p>
+<code>⬛🟩🟨🟨⬛</code>
+</p>
+</div>
+<p>
+and reduce possibilites to <code>4</code> word (9.18  bits of information). So, crane is a better guess if the right answer is <code>sweet</code> while <code>pearl</code> is better guess if the right answer is <code>rebar</code>. But we don't know beforehand what the right answer is.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org8a8ee41" class="outline-2">
+<h2 id="org8a8ee41"><span class="section-number-2">3.</span> Entropy</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Equipped with what we learned about information, we are now able to quantify what information is and how it relates to the reduction in the number of possibilites. Also, we saw that the amount of information each guess would reveal depends on what the right answer is. But we don't know what the right answer is beforehand. So, for each guess, we can't say how much information that word reveals but still we can compute the average (i.e. expected) value of the information we could get. In the above example, when we don't know what the right answer is, both <code>sweet</code> and <code>rebar</code> are equally likely and so are all other 2315 words. So, on average <code>crane</code> would reveal 
+</p>
+
+\begin{equation*}
+H(\textrm{crane}) = E[I(\textrm{crane})] =\frac 1 {2315} \sum_{w \in \textrm{D}} I(\textrm{crane}|w) = 5.74
+\end{equation*}
+
+<p>
+bits of information. \(E[I(w)]\) is the expected (average) value of information that the word \(w\) would reveal. This is also the entropy of the event. <i>Event</i> here is the event of guessing the word <code>crane</code>, and entropy is the amount of information we would get from the result of the <i>event</i> on average.
+</p>
+
+<p>
+If you look up <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">Wikipedia</a>, entropy is defined as: 
+</p>
+<blockquote>
+<p>
+Given a discrete random variable \(X\) with possible outcomes \(x_1\), &#x2026;, \(x_n\) with probability \(P(x_1)\), &#x2026;, \(P(x_n)\), the entropy is defined as 
+</p>
+
+\begin{equation}
+H(X) = - \sum_{i=1}^{n} P(x_i) log(P(x_i))
+\end{equation}
+</blockquote>
+
+
+<p>
+Here our discrete random variable \(X\) is the result we get for a guess word (say <code>crane</code>), with possible outcomes <code>⬛⬛⬛⬛🟨</code>, <code>⬛🟨🟨⬛🟨</code>, &#x2026; with probability of occurrences \(127/2315 = 5.5\%\), \(50/2315 = 2.2\%\), and the entropy of guess <code>crane</code> would be \(H(X) = 5.74\) bits. 
+</p>
+
+<p>
+Finally!!! We can answer the question <i>`How to increase the amount of information we can extract from each guess</i>?'
+<i>Select the guess word such that the entropy of guess word is highest.</i>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb814b46" class="outline-2">
+<h2 id="orgb814b46"><span class="section-number-2">4.</span> Lets play a game</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+The right answer for this game is <code>focus</code> but we don't know this yet. So, our first guess would be the word that has the highest entropy over all possible answer words. 
+</p>
+
+<ul class="org-ul">
+<li><code>crane</code> has an entropy of 5.74</li>
+<li><code>pearl</code> has an entropy of 5.53</li>
+<li><p>
+<code>soare</code> has the highest entropy of 5.89
+</p>
+
+<p>
+So, our first guess is soare. 
+</p></li>
+</ul>
+
+<div class="org-center">
+<p>
+<code>🟨🟩⬛⬛⬛</code>
+</p>
+</div>
+
+<p>
+Now, from this color pattern we can figure out, by going through all words in the dictionary, that there are <code>15</code> possible words: 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">bonus</td>
+<td class="org-left">boost</td>
+<td class="org-left">bosom</td>
+<td class="org-left">bossy</td>
+<td class="org-left">focus</td>
+<td class="org-left">foist</td>
+<td class="org-left">hoist</td>
+<td class="org-left">joist</td>
+<td class="org-left">joust</td>
+<td class="org-left">locus</td>
+</tr>
+
+<tr>
+<td class="org-left">lousy</td>
+<td class="org-left">moist</td>
+<td class="org-left">mossy</td>
+<td class="org-left">noisy</td>
+<td class="org-left">posit</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Now, you might think we may be better off guessing one of the words from this list but remember, we have to extract the maximum amount of information form each guess.
+</p>
+
+<p>
+Assuming that each of the words above is equally likely to be the right answer, the average information that <code>bonus</code> would reveal is <code>2.2892463</code> bits. Where as the word <code>thumb</code> would reveal the highest amount of information on average of <code>3.4565654</code> bits. 
+</p>
+
+<p>
+With the next guess <code>thumb</code> resulting in the following color: 
+</p>
+
+<div class="org-center">
+<p>
+<code>⬛⬛🟨⬛⬛</code>
+</p>
+</div>
+
+<p>
+We now have only <code>2</code> valid guesses:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">focus</td>
+<td class="org-left">locus</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Now, the entropy of each of the two words is 1 bit because they each reduces the possibilites to half on average. The guess can be either right or wrong. At this point, we guess <code>focus</code> and complete the game in 3 steps.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org95b2b52" class="outline-2">
+<h2 id="org95b2b52"><span class="section-number-2">5.</span> Code</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-orgfa12360" class="outline-3">
+<h3 id="orgfa12360"><span class="section-number-3">5.1.</span> Color</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+We can encode the color a guess word shows for an actual answer word as an integer between 0 to \(3^5-1\), i.e. a number from 00000 to 22222 in base 3. If the color of first letter is black the first digit is 0, and 1 if its yellow and 2 if its green. Similarly, the second digit represent color of second letter, and so on.
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">deftype</span> <span class="org-type">color</span> ()
+  '(integer 0 #.(1- (expt 3 5))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">color0</span> (guess actual-word)
+  <span class="org-doc">"the sequence of colors obtained when `</span><span class="org-doc"><span class="org-constant">guess</span></span><span class="org-doc">' word is used to guess `</span><span class="org-doc"><span class="org-constant">actual-word</span></span><span class="org-doc">'</span>
+<span class="org-doc">represented as a number for 0 to 3^5 in base 3</span>
+<span class="org-doc">| digit | meaning         |</span>
+<span class="org-doc">|-------|-----------------|</span>
+<span class="org-doc">| 0     | wrong           |</span>
+<span class="org-doc">| 1     | different place |</span>
+<span class="org-doc">| 2     | right           |"</span>
+  (<span class="org-keyword">let</span> ((total 0)
+        (matches (make-array 5 <span class="org-builtin">:element-type</span> 'bit <span class="org-builtin">:initial-element</span> 0)))
+    (<span class="org-keyword">flet</span> ((match-position (char)
+             (<span class="org-keyword">loop</span> for c across actual-word
+                   for pos from 0
+                   when (and (eql c char) (eql (aref matches pos) 0))
+                     return pos)))
+
+      <span class="org-comment-delimiter">;; </span><span class="org-comment">mark green positions</span>
+      (map-into matches (<span class="org-keyword">lambda</span> (c1 c2) (<span class="org-keyword">if</span> (eql c1 c2) 1 0))
+                guess actual-word)
+      <span class="org-comment-delimiter">;; </span><span class="org-comment">compute color </span>
+      (<span class="org-keyword">loop</span> for c1 across guess
+            for c2 across actual-word
+            for i from 0
+            for color = (serapeum:cond-let p
+                          ((eql c1 c2)
+                           2)
+                          ((match-position c1)
+                           (setf (aref matches p) 1)
+                           1)
+                          (t 0))
+            do (incf total (* color (expt 3 i))))
+      total)))
+</pre>
+</div></details>
+</div>
+</div>
+
+<div id="outline-container-orgfd23123" class="outline-3">
+<h3 id="orgfd23123"><span class="section-number-3">5.2.</span> Valid Guesses</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+Once we know the guess words and the color the game shows for those words we iterate through all the words and select those word that could show that pattern.
+</p>
+
+<p>
+For that we first need to download the word-list for Wordle. In the original wordle game, only a portion of the valid guess words are the actual answers.
+</p>
+<ul class="org-ul">
+<li><a href="https://gist.github.com/cfreshman/a03ef2cba789d8cf00c08f767e0fad7b">Possible Answer words</a> : 2315</li>
+<li><a href="https://gist.github.com/cfreshman/cdcdf777450c5b5301e439061d29694c">Allowed guess words</a> : 12972</li>
+</ul>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*answers*</span> (uiop:read-file-lines <span class="org-string">"./wordle-answers-alphabetical.txt"</span>))
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*words*</span> (concatenate 'vector
+                                   *answers*
+                                   (uiop:read-file-lines <span class="org-string">"./wordle-allowed-guesses.txt"</span>)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">valid-guesses</span> (previous-guesses-and-colors)
+  <span class="org-doc">"return the `</span><span class="org-doc"><span class="org-constant">words</span></span><span class="org-doc">' which are possible answers given the previous guesses and their color</span>
+<span class="org-doc">`</span><span class="org-doc"><span class="org-constant">previous-guesses-and-colors</span></span><span class="org-doc">' is a list of pairs (`</span><span class="org-doc"><span class="org-constant">guess-word</span></span><span class="org-doc">' and `</span><span class="org-doc"><span class="org-constant">color</span></span><span class="org-doc">')"</span>
+  (<span class="org-keyword">let</span> ((guesses (make-array 0 <span class="org-builtin">:element-type</span> 'index <span class="org-builtin">:fill-pointer</span> 0 <span class="org-builtin">:adjustable</span> t)))
+    (<span class="org-keyword">loop</span> for word in in *answers*
+          when (every #'(<span class="org-keyword">lambda</span> (pair)
+                          (<span class="org-keyword">destructuring-bind</span> (guess-word . color) pair
+                            (= (color0 guess-word word) color)))
+                      previous-guesses-and-colors)
+            do (vector-push-extend word guesses))
+    guesses))
+</pre>
+</div></details>
+</div>
+</div>
+
+<div id="outline-container-org39d0335" class="outline-3">
+<h3 id="org39d0335"><span class="section-number-3">5.3.</span> Entropy</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+Now we can calculate the entropy (i.e. expected information) of a guess word for some given possible answer words. At first the possible answer words is the whole answer word list (of 2315 word) and later on as we guess and colors are revealed, this list is reduced (which we can generate by <code>valid-guesses</code> function). 
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">entropy</span> (word possible-words)
+  <span class="org-doc">"compute the average information that the `</span><span class="org-doc"><span class="org-constant">word</span></span><span class="org-doc">' would reveal under given `</span><span class="org-doc"><span class="org-constant">possible-word</span></span><span class="org-doc">'"</span>
+  (<span class="org-keyword">let</span> ((possibilites (make-array #.(expt 3 5) <span class="org-builtin">:element-type</span> 'fixnum <span class="org-builtin">:initial-element</span> 0)))
+    (map 'nil #'(<span class="org-keyword">lambda</span> (w)
+                  (incf (aref possibilites (color word w))))
+         possible-words)
+    (<span class="org-keyword">loop</span> for k across possibilites
+          with l  = (length possible-words)
+          unless (= k 0)
+            summing (* (/ k l) (log (/ k l))) into total
+          finally (<span class="org-keyword">return</span> (* -1 total (/ (log 2)))))))
+</pre>
+</div></details>
+
+<p>
+There are only \(3^5 = 243\) possible color pattern. At first I have 243 zeros in the array <code>possibilites</code>. Then, we map across all possible answer words (<code>possible-words</code>) and find the color that would show on guessing <code>word</code> for that answer word. Incrementing the count in the array <code>possible-words</code> for that color. Finally, since each answer word is equally likely, the possibility of the color showing for the guess word is equal to the count (<code>k</code>) divided by total possible words (<code>l</code>). Summing \(- \frac k l \log(\frac k l)\) for all occurring colors gives the entropy.
+</p>
+
+<p>
+Now, to play the game we find the guess word which has the highest entropy.
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">highest-entropy</span> (previous-guesses-and-colors)
+  <span class="org-doc">"find the `</span><span class="org-doc"><span class="org-constant">word</span></span><span class="org-doc">' that reveals the highest average information given the previous guesses"</span>
+  (<span class="org-keyword">let</span> ((guesses (valid-guesses previous-guesses-and-colors)))
+    (<span class="org-keyword">if</span> (&lt;= (length guesses) 2)
+        (aref guesses 0)
+        (<span class="org-keyword">loop</span> for word across *words*
+              for entropy = (entropy word guesses)
+              with max = -1
+              with w = nil 
+              do (<span class="org-keyword">when</span> (&gt; entropy max)
+                   (setf max entropy
+                         w word))
+              finally (<span class="org-keyword">return</span> w)))))
+</pre>
+</div></details>
+
+<p>
+This is it. In just about 75 lines of code we have a program that solves wordle games. 
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgff7af92" class="outline-2">
+<h2 id="orgff7af92"><span class="section-number-2">6.</span> Benchmark</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Lets check the how effective this program is. For this we let the program play all possible wordle game and see how many guesses it take to solve those games.
+</p>
+
+<p>
+Our first guess would always be <code>soare</code> and then the guess would be the word with the <code>highest-entropy</code> given the <code>previous-guesses</code> and their resulting color.
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">simulate-game</span> (word)
+  (<span class="org-keyword">let</span> ((previous-guesses ()))
+    (<span class="org-keyword">loop</span> repeat 6
+          for guess = <span class="org-string">"soare"</span>
+            then (highest-entropy previous-guesses)
+          for color = (color guess word) do
+            (push (cons guess color) previous-guesses)
+            (<span class="org-keyword">when</span> (= guess word)
+              (<span class="org-keyword">return</span>)))
+    (reverse (map 'list #'car previous-guesses))))
+</pre>
+</div></details>
+
+<p>
+Simulating a game of <code>sweet</code>, it takes our program 4 steps to solve it. 
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(reverse (simulate-game <span class="org-string">"sweet"</span>))
+</pre>
+</div></details>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">soare</td>
+<td class="org-left">clipt</td>
+<td class="org-left">sheet</td>
+<td class="org-left">sweet</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+For, <code>focus</code> it takes just 3 steps. 
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(reverse (simulate-game <span class="org-string">"focus"</span>))
+</pre>
+</div></details>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">soare</td>
+<td class="org-left">thumb</td>
+<td class="org-left">focus</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Now, lets iterate through all possible answer words and simulate the game, counting the number of guesses it takes to solve the game.
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">histogram</span> ()
+  (<span class="org-keyword">let</span> ((steps)
+        (total 0))
+    (<span class="org-keyword">loop</span> for word across *words*
+          for steps in (simulate-game word) do
+            (<span class="org-keyword">if</span> (string-equal word (first steps))
+                (incf (getf steps (length steps) 0))
+                (incf (getf steps <span class="org-builtin">:fail</span> 0)))
+          (incf total))
+    (<span class="org-keyword">loop</span> for i from 1 to 6
+          for percent = (* 100 (/ (or (getf steps i) 0) total)) do
+            (format t <span class="org-string">"~&amp;~a : ~4,1f%~%"</span> i percent))
+    (format t <span class="org-string">"~&amp;&gt;6: ~4d~%"</span> (or (getf steps <span class="org-builtin">:fail</span>) 0))))
+</pre>
+</div></details>
+
+
+<p class="verse">
+1 :  0.0%<br />
+2 :  1.3%<br />
+3 : 47.8%<br />
+4 : 47.9%<br />
+5 :  2.9%<br />
+6 :  0.0%<br />
+&gt;6:    0<br />
+</p>
+
+<p>
+So, it solves almost all games in 3 or 4 steps, and only takes 5 guesses for about 2.9% games.
+</p>
+
+<p>
+We can slightly increase the performance of the program if we select the guess word by computing entropy for two or more steps of game. And then the best first guess word would change from <code>soare</code> to something else. As elaborated in <a href="https://www.youtube.com/watch?v=fRed0Xmc2Wg">3Blue1Brown</a>'s another video, <code>trace</code> performs slightly better. 
+</p>
+
+<p class="verse">
+1 :  0.0%<br />
+2 :  2.3%<br />
+3 : 48.6%<br />
+4 : 46.3%<br />
+5 :  2.7%<br />
+6 :  0.0%<br />
+&gt;6:    0<br />
+</p>
+
+<p>
+With <code>trace</code> as the first guess word and no change in entropy function, the program solves 48.6% of wordle games in 3 steps and 46.3% of the games in 4 steps. 
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgc3ebb40" class="outline-2">
+<h2 id="orgc3ebb40"><span class="section-number-2">7.</span> Optimized Code</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Running above benchmark takes a few minutes without optimization. Upon optimization of the code and using multi-threading it takes about 20 seconds for the optimized version of the above code to play all games. Optimization I did were:
+</p>
+<ul class="org-ul">
+<li>cache the <code>color</code> of every pair of guess word and answer word,</li>
+<li>represent words as numbers by using index of words in the <code>*words*</code> array to filter, check equality, and do other operation. This is faster than directly using strings,</li>
+<li>add type declarations,</li>
+<li>and running benchmark in multiple threads.</li>
+</ul>
+
+<p>
+Here's the <a href="https://github.com/bpanthi977/random-code-collection/blob/main/puzzles/wordle.lisp">optimized code</a>. 
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Solving Wordle">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

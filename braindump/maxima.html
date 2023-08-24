@@ -1,0 +1,1162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Introduction to Maxima</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: 2020-08-30</p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Introduction to Maxima</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgdd73eef">1. Abacus / History of Computers</a></li>
+<li><a href="#orgcacf41b">2. Modern Calculator</a></li>
+<li><a href="#org5f7089b">3. But maths is not all about numbers</a></li>
+<li><a href="#orgf5ee2a6">4. Computer <span class="underline">Algebra</span> System (CAS)</a></li>
+<li><a href="#orgfebb325">5. Maxima</a></li>
+<li><a href="#org4ab72fb">6. Example 1</a></li>
+<li><a href="#orge187d17">7. Variables and Expression</a></li>
+<li><a href="#org725da06">8. Solving Equation</a></li>
+<li><a href="#org4218a66">9. Plotting</a></li>
+<li><a href="#org9a9415f">10. However sometimes analytical solutions don't exist</a>
+<ul>
+<li><a href="#orgf147e8e">10.1. Numerical solution</a></li>
+</ul>
+</li>
+<li><a href="#orgb746d71">11. Simplification</a>
+<ul>
+<li><a href="#org9368df5">11.1. Rational Simplification</a></li>
+</ul>
+</li>
+<li><a href="#org0823f52">12. Trignometric Simplification</a></li>
+<li><a href="#orga9de791">13. Getting Help</a></li>
+<li><a href="#orgc397487">14. Constants</a></li>
+<li><a href="#orgcb8287b">15. Calculus</a>
+<ul>
+<li><a href="#orga634fc3">15.1. limit</a></li>
+</ul>
+</li>
+<li><a href="#orgff45b28">16. Derivative and Integrals</a>
+<ul>
+<li><a href="#org359c492">16.1. diff</a></li>
+<li><a href="#org9cf84f5">16.2. integrate</a></li>
+</ul>
+</li>
+<li><a href="#orgd880753">17. Differential Equation</a>
+<ul>
+<li><a href="#org6bcfc94">17.1. ode2(y'' + 2y' + y = 0)</a></li>
+</ul>
+</li>
+<li><a href="#orge10fb63">18. Example: Projectile motion</a>
+<ul>
+<li><a href="#orgd0f19fc">18.1. Numerical solution</a></li>
+</ul>
+</li>
+<li><a href="#org17b7d97">19. Example 2</a></li>
+<li><a href="#orgc5fd0bb">20. Example 2 (Contd)</a></li>
+<li><a href="#org6c01f28">21. Sums and Products</a></li>
+<li><a href="#org92aef29">22. Example : Economics - Linear Gradient Series</a></li>
+<li><a href="#orgcc87268">23. Example : Economics - Geometric Gradient Series</a></li>
+<li><a href="#org0f1e21a">24. Other things</a></li>
+<li><a href="#org463d5f0">25. Packages</a>
+<ul>
+<li><a href="#orge2fe873">25.1. Simplex</a></li>
+</ul>
+</li>
+<li><a href="#orgaab0a5d">26. Mathematica</a>
+<ul>
+<li><a href="#org5b6ba4e">26.1. Try online at</a></li>
+</ul>
+</li>
+<li><a href="#orga832363">27. Maple</a></li>
+<li><a href="#org5e1b43c">28. Maxima vs ?</a></li>
+<li><a href="#org48c9c84">29. Bifurcation Diagram / Orbit Diagram</a></li>
+<li><a href="#org3817ce6">30. I don't know what this is</a></li>
+<li><a href="#orgb4da1f2">31. Lists &amp; Matrices</a></li>
+<li><a href="#org8f7a072">32. Functions</a></li>
+<li><a href="#org1405c3c">33. Control</a>
+<ul>
+<li><a href="#org2d5f379">33.1. IF THEN ELSE</a></li>
+<li><a href="#org3cd7a23">33.2. FOR Loop</a></li>
+<li><a href="#org7840964">33.3. Block</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+Presentation by: Bibek Panthi
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">bp/copy-source-block</span> () 
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">save-excursion</span> 
+    (org-edit-src-code)
+    (kill-ring-save (point-min) (point-max))
+    (org-edit-src-abort)))
+
+(local-set-key (kbd <span class="org-string">"M-c"</span>) 'bp/copy-source-block)
+</pre>
+</div></details>
+
+<div id="outline-container-orgdd73eef" class="outline-2">
+<h2 id="orgdd73eef"><span class="section-number-2">1.</span> Abacus / History of Computers</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Computers started with the need for caluclating/computing</li>
+<li id="Abacus">The First computer 
+<ul class="org-ul">
+<li>additions, subtractions</li>
+<li>and with some effort multiplication</li>
+</ul></li>
+</ul>
+
+
+<div id="org7c217b5" class="figure">
+<p><img src="./data/maxima/abacus.jpg" alt="abacus.jpg" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Abacus</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcacf41b" class="outline-2">
+<h2 id="orgcacf41b"><span class="section-number-2">2.</span> Modern Calculator</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>division, square roots, and powers</li>
+<li>Matrix</li>
+<li>Vectors</li>
+<li>Statistics</li>
+<li>and much more</li>
+</ul>
+
+
+<div id="org77da8f3" class="figure">
+<p><img src="./data/maxima/20200907135227-calculator.png" alt="20200907135227-calculator.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>TI-84 Plus</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org5f7089b" class="outline-2">
+<h2 id="org5f7089b"><span class="section-number-2">3.</span> But maths is not all about numbers</h2>
+<div class="outline-text-2" id="text-3">
+<dl class="org-dl">
+<dt>Arithmetics</dt><dd>Numbers</dd>
+<dt>_Algebra</dt><dd>Symbols_</dd>
+<dt>Geometry</dt><dd>Shapes</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-orgf5ee2a6" class="outline-2">
+<h2 id="orgf5ee2a6"><span class="section-number-2">4.</span> Computer <span class="underline">Algebra</span> System (CAS)</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+is any mathematical software which manipulates mathematical expressions in a way similar to humans. 
+</p>
+
+<ul class="org-ul">
+<li>i.e. just as calcuators do arithmetics, CAS do algebra</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgfebb325" class="outline-2">
+<h2 id="orgfebb325"><span class="section-number-2">5.</span> Maxima</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Maxima is a free and open source CAS. 
+</p>
+
+
+<div id="org3498704" class="figure">
+<p><img src="./data/maxima/20200907142106-maxima.png" alt="20200907142106-maxima.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span>Maxima</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4ab72fb" class="outline-2">
+<h2 id="org4ab72fb"><span class="section-number-2">6.</span> Example 1</h2>
+<div class="outline-text-2" id="text-6">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima"><span class="org-constant">1</span><span class="org-keyword">+</span><span class="org-constant">1</span>;
+<span class="org-constant">15</span><span class="org-keyword">*</span><span class="org-constant">15</span> <span class="org-keyword">+</span> <span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">5</span><span class="org-keyword">*</span> ( <span class="org-constant">12</span><span class="org-keyword">/</span><span class="org-constant">3</span>)
+</pre>
+</div></details>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima"><span class="org-constant">2</span><span class="org-keyword">*</span>x<span class="org-keyword">+</span><span class="org-constant">5</span><span class="org-keyword">*</span>x;
+(y<span class="org-keyword">+</span>x)<span class="org-keyword">^</span><span class="org-constant">2</span>;
+<span class="org-builtin">expand</span>(<span class="org-keyword">%</span>);
+</pre>
+</div></details>
+
+<ul class="org-ul">
+<li>Familiar rules of BODMAS</li>
+</ul>
+
+<p>
+Notice:
+</p>
+<ul class="org-ul">
+<li>explicit multiplication</li>
+<li>%</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge187d17" class="outline-2">
+<h2 id="orge187d17"><span class="section-number-2">7.</span> Variables and Expression</h2>
+<div class="outline-text-2" id="text-7">
+<ul class="org-ul">
+<li>Assigning values</li>
+</ul>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima">a<span class="org-keyword">:</span><span class="org-constant">5</span>;
+a<span class="org-keyword">+</span><span class="org-constant">1</span>;
+</pre>
+</div></details>
+
+<ul class="org-ul">
+<li>Evaluating expression with specific values</li>
+</ul>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima">y<span class="org-keyword">:</span> <span class="org-constant">4</span><span class="org-keyword">*</span>a<span class="org-keyword">*</span>(x<span class="org-keyword">-</span><span class="org-constant">1</span>);
+y, a<span class="org-keyword">:</span><span class="org-constant">2</span>;
+</pre>
+</div></details>
+</div>
+</div>
+
+<div id="outline-container-org725da06" class="outline-2">
+<h2 id="org725da06"><span class="section-number-2">8.</span> Solving Equation</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+In calculators we could solve:
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima">x<span class="org-keyword">^</span><span class="org-constant">2</span> <span class="org-keyword">+</span> <span class="org-constant">4</span><span class="org-keyword">*</span>x <span class="org-keyword">+</span> <span class="org-constant">4</span> <span class="org-keyword">=</span> <span class="org-constant">0</span>;
+<span class="org-builtin">solve</span>(<span class="org-keyword">%</span>,x);
+</pre>
+</div></details>
+
+<p>
+Now we can handle: 
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima">a<span class="org-keyword">^</span><span class="org-constant">2</span><span class="org-keyword">*</span>x<span class="org-keyword">^</span><span class="org-constant">2</span> <span class="org-keyword">+</span> <span class="org-constant">2</span><span class="org-keyword">*</span>a<span class="org-keyword">*</span>x <span class="org-keyword">+</span> c <span class="org-keyword">=</span> <span class="org-constant">0</span>;
+<span class="org-builtin">solve</span>(<span class="org-keyword">%</span>,x);
+</pre>
+</div></details>
+
+<p>
+<code>solve</code> can find analytical solutions of:
+</p>
+<ul class="org-ul">
+<li>algebraic equations
+<ul class="org-ul">
+<li>especially polynomial</li>
+</ul></li>
+<li>trigonometric equations</li>
+<li>system of linear and non-linear equations 
+<ul class="org-ul">
+<li>solve for x,y</li>
+</ul></li>
+</ul>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima"><span class="org-builtin">solve</span> (<span class="org-keyword">[</span>y<span class="org-keyword">=</span>x, y<span class="org-keyword">=</span><span class="org-constant">4</span><span class="org-keyword">*</span>a<span class="org-keyword">*</span>x<span class="org-keyword">^</span><span class="org-constant">2</span><span class="org-keyword">]</span>,<span class="org-keyword">[</span>x,y<span class="org-keyword">]</span>);
+<span class="org-keyword">%</span>,a<span class="org-keyword">:</span><span class="org-constant">1</span><span class="org-keyword">/</span><span class="org-constant">8</span>;
+</pre>
+</div></details>
+</div>
+</div>
+
+<div id="outline-container-org4218a66" class="outline-2">
+<h2 id="org4218a66"><span class="section-number-2">9.</span> Plotting</h2>
+<div class="outline-text-2" id="text-9">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima">wxplot2d (<span class="org-keyword">[</span>x, <span class="org-constant">4</span><span class="org-keyword">*</span>a<span class="org-keyword">*</span>x<span class="org-keyword">^</span><span class="org-constant">2</span><span class="org-keyword">]</span>,<span class="org-keyword">[</span>x,<span class="org-keyword">-</span><span class="org-constant">4</span>,<span class="org-constant">4</span><span class="org-keyword">]</span>),a<span class="org-keyword">=</span><span class="org-constant">1</span><span class="org-keyword">/</span><span class="org-constant">8</span>;
+</pre>
+</div></details>
+</div>
+</div>
+
+
+<div id="outline-container-org9a9415f" class="outline-2">
+<h2 id="org9a9415f"><span class="section-number-2">10.</span> However sometimes analytical solutions don't exist</h2>
+<div class="outline-text-2" id="text-10">
+</div>
+<div id="outline-container-orgf147e8e" class="outline-3">
+<h3 id="orgf147e8e"><span class="section-number-3">10.1.</span> Numerical solution</h3>
+<div class="outline-text-3" id="text-10-1">
+<ul class="org-ul">
+<li>find<sub>roots</sub></li>
+</ul>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima"><span class="org-builtin">exp</span> <span class="org-keyword">:</span> x<span class="org-keyword">^</span>(<span class="org-constant">2</span><span class="org-keyword">/</span><span class="org-constant">3</span>) <span class="org-keyword">+</span> x<span class="org-keyword">^</span>(<span class="org-constant">1</span><span class="org-keyword">/</span><span class="org-constant">2</span>) <span class="org-keyword">-</span> <span class="org-constant">1</span>;
+<span class="org-builtin">solve</span>(<span class="org-builtin">exp</span>, x);
+<span class="org-builtin">find_root</span>(<span class="org-builtin">exp</span>, <span class="org-constant">0</span>, <span class="org-constant">100</span>);
+</pre>
+</div></details>
+
+<ul class="org-ul">
+<li>newton</li>
+<li>mnewton (for multiple nonlinear equations)</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb746d71" class="outline-2">
+<h2 id="orgb746d71"><span class="section-number-2">11.</span> Simplification</h2>
+<div class="outline-text-2" id="text-11">
+</div>
+<div id="outline-container-org9368df5" class="outline-3">
+<h3 id="org9368df5"><span class="section-number-3">11.1.</span> Rational Simplification</h3>
+<div class="outline-text-3" id="text-11-1">
+<p>
+ratsimp()
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima">x<span class="org-keyword">+</span>x<span class="org-keyword">^</span><span class="org-constant">2</span><span class="org-keyword">+</span><span class="org-constant">2</span><span class="org-keyword">*</span>x <span class="org-keyword">*</span> (x <span class="org-keyword">-</span> <span class="org-constant">1</span>);
+<span class="org-builtin">ratsimp</span>(<span class="org-keyword">%</span>);
+</pre>
+</div></details>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<pre class="example">
+expr: (x^(a/2) + 1)^2*(x^(a/2) - 1)^2/(x^a - 1);
+ratsimp(expr)
+</pre></details>
+
+<p>
+ratsimp (%)
+<code>fullratsimp</code> (%)
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org0823f52" class="outline-2">
+<h2 id="org0823f52"><span class="section-number-2">12.</span> Trignometric Simplification</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+trigsimp()
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima"><span class="org-builtin">sin</span>(x)<span class="org-keyword">^</span><span class="org-constant">2</span> <span class="org-keyword">+</span> <span class="org-builtin">cos</span>(x)<span class="org-keyword">^</span><span class="org-constant">2</span>; 
+</pre>
+</div></details>
+</div>
+</div>
+
+
+<div id="outline-container-orga9de791" class="outline-2">
+<h2 id="orga9de791"><span class="section-number-2">13.</span> Getting Help</h2>
+<div class="outline-text-2" id="text-13">
+<ul class="org-ul">
+<li>example(factor)</li>
+<li>? factor</li>
+</ul>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima">x<span class="org-keyword">^</span><span class="org-constant">2</span> <span class="org-keyword">-</span> <span class="org-constant">1</span>;
+<span class="org-builtin">factor</span>(<span class="org-keyword">%</span>)
+</pre>
+</div></details>
+</div>
+</div>
+
+<div id="outline-container-orgc397487" class="outline-2">
+<h2 id="orgc397487"><span class="section-number-2">14.</span> Constants</h2>
+<div class="outline-text-2" id="text-14">
+<ul class="org-ul">
+<li>%pi</li>
+<li>%e</li>
+<li>%i</li>
+</ul>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima"><span class="org-constant">%e</span><span class="org-keyword">^</span>(<span class="org-constant">%pi</span> <span class="org-keyword">*</span> <span class="org-constant">%i</span>) <span class="org-keyword">+</span> <span class="org-constant">1</span>;
+</pre>
+</div></details>
+</div>
+</div>
+
+<div id="outline-container-orgcb8287b" class="outline-2">
+<h2 id="orgcb8287b"><span class="section-number-2">15.</span> Calculus</h2>
+<div class="outline-text-2" id="text-15">
+</div>
+<div id="outline-container-orga634fc3" class="outline-3">
+<h3 id="orga634fc3"><span class="section-number-3">15.1.</span> limit</h3>
+<div class="outline-text-3" id="text-15-1">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima"><span class="org-builtin">limit</span>((<span class="org-constant">1</span> <span class="org-keyword">+</span> <span class="org-constant">5</span><span class="org-keyword">/</span>x) <span class="org-keyword">^</span> x, x, <span class="org-constant">inf</span>);
+</pre>
+</div></details>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxim">limit(sin(x)/x*%e^x/x!, x , 0 );
+</pre>
+</div></details>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgff45b28" class="outline-2">
+<h2 id="orgff45b28"><span class="section-number-2">16.</span> Derivative and Integrals</h2>
+<div class="outline-text-2" id="text-16">
+</div>
+<div id="outline-container-org359c492" class="outline-3">
+<h3 id="org359c492"><span class="section-number-3">16.1.</span> diff</h3>
+<div class="outline-text-3" id="text-16-1">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima"><span class="org-builtin">diff</span>(<span class="org-builtin">sec</span>(x)<span class="org-keyword">*</span>x<span class="org-keyword">^</span><span class="org-constant">2</span>, x, <span class="org-constant">2</span>);
+</pre>
+</div></details>
+
+<p>
+Simplify the result:
+%,x:1;
+float(%)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9cf84f5" class="outline-3">
+<h3 id="org9cf84f5"><span class="section-number-3">16.2.</span> integrate</h3>
+<div class="outline-text-3" id="text-16-2">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima"><span class="org-builtin">integrate</span>(<span class="org-builtin">sec</span>(x), x)
+</pre>
+</div></details>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd880753" class="outline-2">
+<h2 id="orgd880753"><span class="section-number-2">17.</span> Differential Equation</h2>
+<div class="outline-text-2" id="text-17">
+</div>
+<div id="outline-container-org6bcfc94" class="outline-3">
+<h3 id="org6bcfc94"><span class="section-number-3">17.1.</span> ode2(y'' + 2y' + y = 0)</h3>
+<div class="outline-text-3" id="text-17-1">
+<p>
+Ordinary Differential Equation 
+y'' + 2y' + y =0 
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge10fb63" class="outline-2">
+<h2 id="orge10fb63"><span class="section-number-2">18.</span> Example: Projectile motion</h2>
+<div class="outline-text-2" id="text-18">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima"><span class="org-builtin">ode2</span>(<span class="org-keyword">'</span><span class="org-builtin">diff</span>(y,t,<span class="org-constant">2</span>) <span class="org-keyword">=</span> <span class="org-keyword">-</span>g, y, t);
+
+<span class="org-builtin">ic2</span>(%o96, t <span class="org-keyword">=</span> <span class="org-constant">0</span>, y <span class="org-keyword">=</span> <span class="org-constant">0</span>, <span class="org-keyword">'</span><span class="org-builtin">diff</span>(y,t) <span class="org-keyword">=</span> u);
+
+wxplot2d(<span class="org-builtin">part</span>(<span class="org-keyword">%</span>,<span class="org-constant">2</span>), <span class="org-keyword">[</span>t,<span class="org-constant">0</span>,<span class="org-constant">1</span><span class="org-keyword">]</span>), v_<span class="org-constant">0</span> <span class="org-keyword">=</span> <span class="org-constant">10</span>,g<span class="org-keyword">=</span><span class="org-constant">9</span><span class="org-keyword">.</span><span class="org-constant">8</span>;
+</pre>
+</div></details>
+</div>
+<div id="outline-container-orgd0f19fc" class="outline-3">
+<h3 id="orgd0f19fc"><span class="section-number-3">18.1.</span> Numerical solution</h3>
+</div>
+</div>
+
+
+<div id="outline-container-org17b7d97" class="outline-2">
+<h2 id="org17b7d97"><span class="section-number-2">19.</span> Example 2</h2>
+<div class="outline-text-2" id="text-19">
+<p>
+Numerical Solutions 
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=p_di4Zn4wz4">From 3Blue1Brown Video | DE1</a>
+</p>
+
+
+<div id="orgf46fed9" class="figure">
+<p><img src="./data/maxima/20200907182701-pendulum_equation.png" alt="20200907182701-pendulum_equation.png" />
+</p>
+<p><span class="figure-number">Figure 4: </span>Pendulum Equation</p>
+</div>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima">eqn<span class="org-keyword">:</span> <span class="org-keyword">'</span><span class="org-builtin">diff</span>(\theta, t, <span class="org-constant">2</span>)<span class="org-keyword">=</span> <span class="org-keyword">-</span> \mu <span class="org-keyword">*</span> <span class="org-keyword">'</span><span class="org-builtin">diff</span>(\theta, t) <span class="org-keyword">-</span> g<span class="org-keyword">/</span>L <span class="org-keyword">*</span> <span class="org-builtin">sin</span>(\theta);
+</pre>
+</div></details>
+</div>
+</div>
+
+<div id="outline-container-orgc5fd0bb" class="outline-2">
+<h2 id="orgc5fd0bb"><span class="section-number-2">20.</span> Example 2 (Contd)</h2>
+<div class="outline-text-2" id="text-20">
+<p>
+Convert second order ode to two first order ode:
+with independent variables \(\theta\) and \(\omega\) 
+\(\frac{d\theta}{dt} = \omega\)
+\(\frac {d\omega} {dt} = \alpha = \frac{d^2 \theta}{dt^2} = -\mu \omega - \frac gL \sin(\theta)\)
+</p>
+
+
+
+<div id="org32c7110" class="figure">
+<p><img src="./data/maxima/20200907184317-one_intital_condition.png" alt="20200907184317-one_intital_condition.png" />
+</p>
+<p><span class="figure-number">Figure 5: </span>one intital condition</p>
+</div>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima">\alpha<span class="org-keyword">:</span>  <span class="org-keyword">-</span>\mu <span class="org-keyword">*</span> \omega <span class="org-keyword">-</span> g <span class="org-keyword">/</span> L <span class="org-keyword">*</span> <span class="org-builtin">sin</span>(\theta);
+
+variables<span class="org-keyword">:</span> <span class="org-keyword">[</span>\theta, \omega<span class="org-keyword">]</span>;
+derivatives<span class="org-keyword">:</span> <span class="org-keyword">[</span>\omega, \alpha<span class="org-keyword">]</span>;
+
+<span class="org-builtin">plotdf</span> (derivatives, variables, <span class="org-keyword">[</span>parameters, <span class="org-string">"g=9.81,L=1,mu=0.4"</span><span class="org-keyword">]</span>, <span class="org-keyword">[</span>\theta, <span class="org-keyword">-</span><span class="org-constant">%pi</span>, <span class="org-constant">6</span><span class="org-keyword">*</span><span class="org-constant">%pi</span><span class="org-keyword">]</span>, <span class="org-keyword">[</span>\omega, <span class="org-keyword">-</span><span class="org-constant">15</span>, <span class="org-constant">15</span><span class="org-keyword">]</span>, <span class="org-keyword">[</span>direction, f<span class="org-keyword">or</span>ward<span class="org-keyword">]</span>, <span class="org-keyword">[</span>sliders, <span class="org-string">"mu=0:2"</span><span class="org-keyword">]</span>)$
+</pre>
+</div></details>
+</div>
+</div>
+
+<div id="outline-container-org6c01f28" class="outline-2">
+<h2 id="org6c01f28"><span class="section-number-2">21.</span> Sums and Products</h2>
+<div class="outline-text-2" id="text-21">
+<ul class="org-ul">
+<li>Arithmetic series</li>
+<li><p>
+Geometric series
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima"><span class="org-builtin">sum</span>(<span class="org-constant">1</span><span class="org-keyword">/</span>k<span class="org-keyword">^</span><span class="org-constant">2</span>, k , <span class="org-constant">1</span> , <span class="org-constant">inf</span>), simpsum;
+</pre>
+</div></details></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org92aef29" class="outline-2">
+<h2 id="org92aef29"><span class="section-number-2">22.</span> Example : Economics - Linear Gradient Series</h2>
+<div class="outline-text-2" id="text-22">
+
+<div id="orgca4ccc4" class="figure">
+<p><img src="./data/maxima/20200904104609-linear_gradient_series.png" alt="20200904104609-linear_gradient_series.png" />
+</p>
+</div>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima">P <span class="org-keyword">=</span> <span class="org-builtin">sum</span> ( G<span class="org-keyword">*</span>(y<span class="org-keyword">-</span><span class="org-constant">1</span>)<span class="org-keyword">/</span>(<span class="org-constant">1</span><span class="org-keyword">+</span>i)<span class="org-keyword">^</span>y, y, <span class="org-constant">1</span> ,N);
+</pre>
+</div></details>
+
+<p>
+load("simplify<sub>sum</sub>")
+</p>
+
+
+
+<div id="org14b537b" class="figure">
+<p><img src="./data/maxima/20200907203012-linear_gradient_formula.png" alt="20200907203012-linear_gradient_formula.png" />
+</p>
+<p><span class="figure-number">Figure 6: </span>linear gradient formula</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcc87268" class="outline-2">
+<h2 id="orgcc87268"><span class="section-number-2">23.</span> Example : Economics - Geometric Gradient Series</h2>
+<div class="outline-text-2" id="text-23">
+
+<div id="orgba71ad7" class="figure">
+<p><img src="./data/maxima/20200907203159-geometric_gradient.png" alt="20200907203159-geometric_gradient.png" />
+</p>
+<p><span class="figure-number">Figure 7: </span>geometric gradient</p>
+</div>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima">P <span class="org-keyword">=</span> <span class="org-builtin">sum</span>(A_<span class="org-constant">1</span> <span class="org-keyword">*</span> (<span class="org-constant">1</span><span class="org-keyword">+</span>g)<span class="org-keyword">^</span>(y<span class="org-keyword">-</span><span class="org-constant">1</span>) <span class="org-keyword">/</span> (<span class="org-constant">1</span><span class="org-keyword">+</span>i)<span class="org-keyword">^</span>y, y, <span class="org-constant">1</span>, N);
+</pre>
+</div></details>
+
+
+<div id="orgf598f8d" class="figure">
+<p><img src="./data/maxima/20200907203419-solution.png" alt="20200907203419-solution.png" />
+</p>
+<p><span class="figure-number">Figure 8: </span>solution</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0f1e21a" class="outline-2">
+<h2 id="org0f1e21a"><span class="section-number-2">24.</span> Other things</h2>
+<div class="outline-text-2" id="text-24">
+<ul class="org-ul">
+<li>Taylor expansion</li>
+<li>List, Matrices, &#x2026;</li>
+<li>Functions</li>
+<li>Control Statements, Loops</li>
+<li>Laplace Transform</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org463d5f0" class="outline-2">
+<h2 id="org463d5f0"><span class="section-number-2">25.</span> Packages</h2>
+<div class="outline-text-2" id="text-25">
+<ul class="org-ul">
+<li>Tools not loaded by default</li>
+<li>Extra tools from users</li>
+</ul>
+</div>
+
+<div id="outline-container-orge2fe873" class="outline-3">
+<h3 id="orge2fe873"><span class="section-number-3">25.1.</span> Simplex</h3>
+<div class="outline-text-3" id="text-25-1">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima"><span class="org-builtin">load</span>(<span class="org-string">"simplex"</span>);
+<span class="org-builtin">maximize_lp</span>(x_<span class="org-constant">1</span> <span class="org-keyword">+</span> <span class="org-constant">2</span><span class="org-keyword">*</span>x_<span class="org-constant">2</span>, <span class="org-keyword">[</span>x_<span class="org-constant">1</span><span class="org-keyword">-</span>x_<span class="org-constant">2</span> <span class="org-keyword">&lt;</span> <span class="org-constant">5</span>, x_<span class="org-constant">2</span> <span class="org-keyword">&lt;</span> <span class="org-constant">4</span><span class="org-keyword">]</span>);
+</pre>
+</div></details>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgaab0a5d" class="outline-2">
+<h2 id="orgaab0a5d"><span class="section-number-2">26.</span> Mathematica</h2>
+<div class="outline-text-2" id="text-26">
+<p>
+The BOSS of this field.
+</p>
+
+
+<div id="org61d45a4" class="figure">
+<p><img src="./data/maxima/20200907141014-some_notable_softwares_mathematica_wolfram_alpha_maple.png" alt="20200907141014-some_notable_softwares_mathematica_wolfram_alpha_maple.png" />
+</p>
+<p><span class="figure-number">Figure 9: </span>Mathematica</p>
+</div>
+</div>
+
+<div id="outline-container-org5b6ba4e" class="outline-3">
+<h3 id="org5b6ba4e"><span class="section-number-3">26.1.</span> Try online at</h3>
+<div class="outline-text-3" id="text-26-1">
+<p>
+<a href="https://www.wolframalpha.com/">https://www.wolframalpha.com/</a>
+</p>
+
+
+<div id="org79e5928" class="figure">
+<p><img src="./data/maxima/20200907141437-wolfram_alpha.png" alt="20200907141437-wolfram_alpha.png" />
+</p>
+<p><span class="figure-number">Figure 10: </span>Wolfram alpha</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga832363" class="outline-2">
+<h2 id="orga832363"><span class="section-number-2">27.</span> Maple</h2>
+<div class="outline-text-2" id="text-27">
+
+<div id="org7756681" class="figure">
+<p><img src="./data/maxima/20200907141924-maple.png" alt="20200907141924-maple.png" />
+</p>
+<p><span class="figure-number">Figure 11: </span>Maple</p>
+</div>
+
+
+<p>
+<img src="./data/maxima/20200907211548-popularity_comparision.png" alt="20200907211548-popularity_comparision.png" />
+(<a href="https://themaximalist.org/2017/04/06/popularity-of-cas-packages-maxima-mathematica-maple/">Source</a>)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5e1b43c" class="outline-2">
+<h2 id="org5e1b43c"><span class="section-number-2">28.</span> Maxima vs ?</h2>
+<div class="outline-text-2" id="text-28">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Maxima</td>
+<td class="org-left">?</td>
+</tr>
+
+<tr>
+<td class="org-left">Free</td>
+<td class="org-left">expensive</td>
+</tr>
+
+<tr>
+<td class="org-left">Open Source</td>
+<td class="org-left">Proprietary</td>
+</tr>
+
+<tr>
+<td class="org-left">Powerful</td>
+<td class="org-left">Powerful++</td>
+</tr>
+
+<tr>
+<td class="org-left">Lighweight</td>
+<td class="org-left">Heavy</td>
+</tr>
+
+<tr>
+<td class="org-left">Will Remain Forever</td>
+<td class="org-left">Not so sure</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Written in Common Lisp. 
+</p>
+
+<p>
+Install from <a href="https://sourceforge.net/projects/maxima/files/">here</a>. Installation instructions for <a href="http://maxima.sourceforge.net/windows-install.html">windows</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org48c9c84" class="outline-2">
+<h2 id="org48c9c84"><span class="section-number-2">29.</span> Bifurcation Diagram / <a href="(browse-url-of-file "/usr/share/maxima/5.44.0/doc/html/maxima_singlepage.html#Item_003a-dynamics_002fdeffn_002forbits")">Orbit Diagram</a></h2>
+<div class="outline-text-2" id="text-29">
+<p>
+\(x_{n+1} = r x_n (1- x_n)\)
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima"><span class="org-builtin">orbits</span>(r<span class="org-keyword">*</span>x<span class="org-keyword">*</span>(<span class="org-constant">1</span><span class="org-keyword">-</span>x), <span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">1</span>, <span class="org-constant">50</span>, <span class="org-constant">200</span>, <span class="org-keyword">[</span>r,<span class="org-constant">0</span>,<span class="org-constant">4</span><span class="org-keyword">]</span>, <span class="org-keyword">[</span>style,dots<span class="org-keyword">]</span>);
+</pre>
+</div></details>
+</div>
+</div>
+
+<div id="outline-container-org3817ce6" class="outline-2">
+<h2 id="org3817ce6"><span class="section-number-2">30.</span> I don't know what this is</h2>
+<div class="outline-text-2" id="text-30">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima">a1<span class="org-keyword">:</span> <span class="org-builtin">matrix</span>(<span class="org-keyword">[</span><span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">85</span>,<span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">04</span><span class="org-keyword">]</span>,<span class="org-keyword">[-</span><span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">04</span>,<span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">85</span><span class="org-keyword">]</span>)$
+a2<span class="org-keyword">:</span> <span class="org-builtin">matrix</span>(<span class="org-keyword">[</span><span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">2</span>,<span class="org-keyword">-</span><span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">26</span><span class="org-keyword">]</span>,<span class="org-keyword">[</span><span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">23</span>,<span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">22</span><span class="org-keyword">]</span>)$
+a3<span class="org-keyword">:</span> <span class="org-builtin">matrix</span>(<span class="org-keyword">[-</span><span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">15</span>,<span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">28</span><span class="org-keyword">]</span>,<span class="org-keyword">[</span><span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">26</span>,<span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">24</span><span class="org-keyword">]</span>)$
+a4<span class="org-keyword">:</span> <span class="org-builtin">matrix</span>(<span class="org-keyword">[</span><span class="org-constant">0</span>,<span class="org-constant">0</span><span class="org-keyword">]</span>,<span class="org-keyword">[</span><span class="org-constant">0</span>,<span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">16</span><span class="org-keyword">]</span>)$
+p1<span class="org-keyword">:</span> <span class="org-keyword">[</span><span class="org-constant">0</span>,<span class="org-constant">1</span><span class="org-keyword">.</span><span class="org-constant">6</span><span class="org-keyword">]</span>$
+p2<span class="org-keyword">:</span> <span class="org-keyword">[</span><span class="org-constant">0</span>,<span class="org-constant">1</span><span class="org-keyword">.</span><span class="org-constant">6</span><span class="org-keyword">]</span>$
+p3<span class="org-keyword">:</span> <span class="org-keyword">[</span><span class="org-constant">0</span>,<span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">44</span><span class="org-keyword">]</span>$
+p4<span class="org-keyword">:</span> <span class="org-keyword">[</span><span class="org-constant">0</span>,<span class="org-constant">0</span><span class="org-keyword">]</span>$
+w<span class="org-keyword">:</span> <span class="org-keyword">[</span><span class="org-constant">85</span>,<span class="org-constant">92</span>,<span class="org-constant">99</span>,<span class="org-constant">100</span><span class="org-keyword">]</span>$
+<span class="org-builtin">ifs</span>(w, <span class="org-keyword">[</span>a1,a2,a3,a4<span class="org-keyword">]</span>, <span class="org-keyword">[</span>p1,p2,p3,p4<span class="org-keyword">]</span>, <span class="org-keyword">[</span><span class="org-constant">5</span>,<span class="org-constant">0</span><span class="org-keyword">]</span>, <span class="org-constant">50000</span>, <span class="org-keyword">[</span>style,dots<span class="org-keyword">]</span>);
+</pre>
+</div></details>
+
+
+<div id="org9cd9d48" class="figure">
+<p><img src="./data/maxima/leaf.png" alt="leaf.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb4da1f2" class="outline-2">
+<h2 id="orgb4da1f2"><span class="section-number-2">31.</span> Lists &amp; Matrices</h2>
+<div class="outline-text-2" id="text-31">
+<p>
+[ _ , _ , &#x2026;.]
+</p>
+
+<p>
+append(L, L2)
+append(L, 3)
+used to add element to a list
+</p>
+
+<p>
+L[i]
+</p>
+
+<p>
+length(L)
+</p>
+
+<p>
+M : matrix([ ], [ ] , [ ]);
+invert(M);
+echelon(M);
+copymatrix()
+</p>
+
+<p>
+Matrix multiplication: 
+M.R 
+</p>
+
+<p>
+addrow()
+addcol()
+ident(n)
+</p>
+
+<p>
+M[1,2]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8f7a072" class="outline-2">
+<h2 id="org8f7a072"><span class="section-number-2">32.</span> Functions</h2>
+<div class="outline-text-2" id="text-32">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-maxima">f(x) <span class="org-keyword">:=</span> x<span class="org-keyword">^</span><span class="org-constant">2</span>;
+f(x<span class="org-keyword">+</span><span class="org-constant">1</span>);
+</pre>
+</div></details>
+</div>
+</div>
+
+<div id="outline-container-org1405c3c" class="outline-2">
+<h2 id="org1405c3c"><span class="section-number-2">33.</span> Control</h2>
+<div class="outline-text-2" id="text-33">
+</div>
+<div id="outline-container-org2d5f379" class="outline-3">
+<h3 id="org2d5f379"><span class="section-number-3">33.1.</span> IF THEN ELSE</h3>
+<div class="outline-text-3" id="text-33-1">
+<p>
+if then else for piecewise function 
+</p>
+
+<p>
+f(x) := if 0&lt;x and x&lt;1 then x<sup>2</sup> else 12
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org3cd7a23" class="outline-3">
+<h3 id="org3cd7a23"><span class="section-number-3">33.2.</span> FOR Loop</h3>
+<div class="outline-text-3" id="text-33-2">
+<p>
+m:0; 
+for k:0 thru 100 step 0.5 do m:m+k
+</p>
+</div>
+</div>
+<div id="outline-container-org7840964" class="outline-3">
+<h3 id="org7840964"><span class="section-number-3">33.3.</span> Block</h3>
+<div class="outline-text-3" id="text-33-3">
+<p>
+block(
+m:0,
+for k:0 thru 100 do m:m+k,
+m
+);
+</p>
+
+<p>
+s(x) := block(
+m:0,
+for k:0 thru s do m:m+k,
+m
+);
+</p>
+
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="plato_s_academy.html#ID-3b9ebac0-3572-47ad-a1c0-39bbd1520408">Plato's Academy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Introduction to Maxima">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>
