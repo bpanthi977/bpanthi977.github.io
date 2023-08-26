@@ -47,7 +47,7 @@ function stackNote(href, level) {
 
     if (!href && level === 1) return;
     if (level >= 1) {
-        document.querySelector("body").style.width = '100%';
+        document.querySelector("body").classList.add('body-multipage');
     }
 }
 
@@ -157,21 +157,18 @@ function initializePage(page, level) {
         ) {
             var prefetchLink = element.href;
             async function myFetch() {
+                element.addEventListener("click", function (e) {
+                    if (!e.ctrlKey && !e.metaKey) {
+                        e.preventDefault();
+                        fetchNote(element.getAttribute("href"), this.dataset.level);
+                    }
+                });
+
                 // The commented code did prefetching
-                let ct;
                 if (doPrefetch){
                     let response = await fetch(prefetchLink);
                     let fragment = document.createElement("template");
                     fragment.innerHTML = await response.text();
-                    ct = await response.headers.get("content-type");
-                }
-                if (!doPrefetch || ct.includes("text/html")) {
-                    element.addEventListener("click", function (e) {
-                        if (!e.ctrlKey && !e.metaKey) {
-                            e.preventDefault();
-                            fetchNote(element.getAttribute("href"), this.dataset.level);
-                        }
-                    });
                 }
                 updateLinkStatuses();
             }
@@ -216,9 +213,9 @@ function setupPages() {
 
 function setup() {
     if (typeof draw_graph != 'undefined') {
-        draw_graph(graph_name).then(() => {;
-                                           setupPages();
-                                          });
+        draw_graph(graph_name).then(() => {
+            setupPages();
+        });
     } else {
         setupPages();
     }
