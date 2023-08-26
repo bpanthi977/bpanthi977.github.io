@@ -91,7 +91,7 @@ function handleZoom(svg, els) {
   const zoom = d3.zoom()
         .on('zoom', zoomed)
 
-  svg.call(zoom)
+  svg.call(zoom);
 
   const initial = new d3.ZoomTransform(0.15, 800, 460)
   svg.call(zoom.transform, initial);

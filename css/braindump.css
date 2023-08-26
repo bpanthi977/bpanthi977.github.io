@@ -49,6 +49,27 @@ html, body, #grid-container{
     overflow-y: auto
 }
 
+.body-multipage {
+    width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+    .page {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .page:only-child {
+        width: 100%;
+        max-width: 100%;
+    }
+
+
+    .page:last-child {
+        margin-right:0px;
+    }
+}
+
 .content {
     padding:32px
 }
