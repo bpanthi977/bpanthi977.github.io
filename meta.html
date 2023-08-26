@@ -6,7 +6,7 @@
 <!-- 2023-08-26 Sat 09:08 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Deep Learning New Frontiers</title>
+<title>&lrm;</title>
 <meta name="author" content="Bibek Panthi" />
 <meta name="generator" content="Org Mode" />
 <style>
@@ -193,252 +193,59 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-<script type="text/javascript" src="/js/counters.js"></script>
-<script>
-  window.MathJax = {
-    tex: {
-      ams: {
-        multlineWidth: '85%'
-      },
-      tags: 'ams',
-      tagSide: 'right',
-      tagIndent: '.8em'
-    },
-    chtml: {
-      scale: 1.0,
-      displayAlign: 'center',
-      displayIndent: '0em'
-    },
-    svg: {
-      scale: 1.0,
-      displayAlign: 'center',
-      displayIndent: '0em'
-    },
-    output: {
-      font: 'mathjax-modern',
-      displayOverflow: 'overflow'
-    }
-  };
-</script>
-
-<script
-  id="MathJax-script"
-  async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
 </head>
 <body>
-<div id="org-div-home-and-up">
- <a accesskey="h" href="./index.html"> UP </a>
- |
- <a accesskey="H" href="../index.html"> HOME </a>
-</div><div id="preamble" class="status">
-<p class="date">Date: 2023-03-18</p>
-</div>
 <div id="content" class="content">
-<h1 class="title">Deep Learning New Frontiers</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2f7f9df">1. Universal Approximation Theorem</a></li>
-<li><a href="#orgf845b1d">2. AI `Hype`: Historical Perspective</a></li>
-<li><a href="#orgb5129ec">3. Limitations</a>
-<ul>
-<li><a href="#orgbf4960a">3.1. Generalization</a></li>
-<li><a href="#org524c9c6">3.2. Aleatoric Uncertainty</a></li>
-<li><a href="#orga7aa83a">3.3. Epistemic Uncertainty</a></li>
-<li><a href="#org5b293dd">3.4. Perturbations: Adversarial Examples</a></li>
-<li><a href="#org870791a">3.5. Other Limitations</a></li>
-</ul>
-</li>
-<li><a href="#orgc91d2c7">4. Frontiers</a>
-<ul>
-<li><a href="#org6baf03a">4.1. Graph Convolution Networks</a></li>
-<li><a href="#org376a878">4.2. Automated Machine Learning &amp; Learning to Learn</a></li>
-</ul>
-</li>
+<li><a href="#org9f9ca47">1. Favicon</a></li>
+<li><a href="#org29110cc">2. Database Dump</a></li>
 </ul>
 </div>
 </div>
-<p>
-<a href="https://www.youtube.com/watch?v=wySXLRTxAGQ&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=8">Lecture 6: Deep Learning: Limitations &amp; New Frontiers</a>
-</p>
-
-<div id="outline-container-org2f7f9df" class="outline-2">
-<h2 id="org2f7f9df"><span class="section-number-2">1.</span> Universal Approximation Theorem</h2>
+<div id="outline-container-org9f9ca47" class="outline-2">
+<h2 id="org9f9ca47"><span class="section-number-2">1.</span> Favicon</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-0:10:07
-</p>
-
-<p>
-A feedforward network with a single layer is sufficient to approximate, to an arbitrary precision, any continuous function.
-</p>
-
-<p>
-<img src="../img/mit_6s191/universal_approximation_theorem-20230316223922.png" alt="universal_approximation_theorem-20230316223922.png" />
-But, 
+Generated from <a href="https://favicon.io/favicon-generator/">https://favicon.io/favicon-generator/</a> with 
 </p>
 <ul class="org-ul">
-<li>number of hidden units may be infeasibly large</li>
-<li>the resulting model may not generalize</li>
-<li>no method to find weights is provided by this theorem</li>
+<li>Text : BP</li>
+<li>Background : Rounded</li>
+<li>Font Family : Baskervville</li>
+<li>Font Variant : Regular 400 Normal</li>
+<li>Font size : 90</li>
+<li>Font Color : #000</li>
+<li>Background Color : #FFF</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgf845b1d" class="outline-2">
-<h2 id="orgf845b1d"><span class="section-number-2">2.</span> AI `Hype`: Historical Perspective</h2>
+<div id="outline-container-org29110cc" class="outline-2">
+<h2 id="org29110cc"><span class="section-number-2">2.</span> Database Dump</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-0:13:15
-</p>
-
-
-<div id="org8503c78" class="figure">
-<p><img src="../img/mit_6s191/ai_history-20230316224159.png" alt="ai_history-20230316224159.png" />
-</p>
-<p><span class="figure-number">Figure 1: </span>AI History</p>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgb5129ec" class="outline-2">
-<h2 id="orgb5129ec"><span class="section-number-2">3.</span> Limitations</h2>
-<div class="outline-text-2" id="text-3">
-</div>
-<div id="outline-container-orgbf4960a" class="outline-3">
-<h3 id="orgbf4960a"><span class="section-number-3">3.1.</span> Generalization</h3>
-<div class="outline-text-3" id="text-3-1">
-<p>
-0:15:08
+&#x2013;&#x2014;BEGIN PGP MESSAGE&#x2013;&#x2014;
 </p>
 
 <p>
-Understanding Deep Neural Networks requires rethinking Generalization
-</p>
-
-<p>
-In Zhang+ ICLR 2017 Paper,
-</p>
-<ul class="org-ul">
-<li>they assign random labels to image classification training set</li>
-<li>as the degree of randomization increased, the test accuracy decreased</li>
-<li>but the training accuracy didn't</li>
-</ul>
-
-<p>
-This implies, the NN was able to fit the random data. 
-</p>
-
-
-<div id="org53e5d4a" class="figure">
-<p><img src="../img/mit_6s191/deep_nn_can_fit_to_random_data-20230316224457.png" alt="deep_nn_can_fit_to_random_data-20230316224457.png" />
-</p>
-<p><span class="figure-number">Figure 2: </span>Deep NN can fit to random data</p>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org524c9c6" class="outline-3">
-<h3 id="org524c9c6"><span class="section-number-3">3.2.</span> Aleatoric Uncertainty</h3>
-<div class="outline-text-3" id="text-3-2">
-<p>
-0:27:30 
-Uncertainty inherent in the data.
-</p>
-
-<p>
-E.g. for a NN trained to classify dog vs cat. If we show image with both cat and dog, it should output P(cat) = 1 and P(dog) = 1 but it can't because it is constrained (P(cat) + P(dog) = 1)
+hQEMA57HSbKodqEzAQf/bxpBhM08Uk+6zCrU1R+JKsrI0nPejNZnSKKLReXs9S8l
+cKfotUbtjr6e+GHzx9c7LOiU+dNdKIWRtil7FwrTKMZ4HT/IdX4XE+eoB4LvN02p
+E02Wzv4W87DsyJaWv3pAzrGex4w0LhTkdcMptEsvDN64c5UTi1RPiNjxDKWQ7ugB
+CAivkCZ0Kfs3FltSVffdsqqEAOi4XNTlEuF9bEHVQNNqPHwX+RX6DBjuG+T+mRiq
+8IXiZtg0PaLh4ZYviA1D455TTOT03mkjVYtyhX/8aa81UP8Dhq2sHLjugbU9pHqZ
+2MNfOIMgx+je4IUe5domE2Iz+vXu71o3noO/rxsEdNKgAfKgfCTOqxRteWJLXYSG
+fWf6OjAd/ye+WaGmWQosXfmVeqkqaBCY0cE2gS6RB175Unyc5lZJetGlZqSm87EB
+8iWdlSac5xR58j4WgHuqIs9BgqEQ2W1GHa4XHS//vn5YOBJgld/fpZnNZu5znXi4
+sSQ7SbqPA8C8ZLjtpc5Nd9JFRovdgWx9F1UMzW2ScroJeJmUCisiAB/nSexAx3C9
+Qw==
+=8cy4
+&#x2013;&#x2014;END PGP MESSAGE&#x2013;&#x2014;
 </p>
 </div>
 </div>
-
-<div id="outline-container-orga7aa83a" class="outline-3">
-<h3 id="orga7aa83a"><span class="section-number-3">3.3.</span> Epistemic Uncertainty</h3>
-<div class="outline-text-3" id="text-3-3">
-<p>
-Network's confidence in its perdiction. Aka. model uncertainty. 
-</p>
-</div>
-</div>
-
-<div id="outline-container-org5b293dd" class="outline-3">
-<h3 id="org5b293dd"><span class="section-number-3">3.4.</span> Perturbations: Adversarial Examples</h3>
-<div class="outline-text-3" id="text-3-4">
-<p>
-0:30:23
-</p>
-<p>
-<img src="../img/mit_6s191/temple_noise_ostrich-20230316225651.png" alt="temple_noise_ostrich-20230316225651.png" />
-To generate adversarial examples, fix the label (\(y\)) and weight (\(W\)), and perturb the input (\(x\)) to increase the loss. 
-</p>
-
-<p>
-\(x \leftarrow x + \eta \frac {\partial L(W,x,y)} {\partial x}\)
-</p>
-</div>
-</div>
-
-<div id="outline-container-org870791a" class="outline-3">
-<h3 id="org870791a"><span class="section-number-3">3.5.</span> Other Limitations</h3>
-<div class="outline-text-3" id="text-3-5">
-<p>
-0:35:05
-</p>
-
-<ul class="org-ul">
-<li>Very <b>data hungry</b> (eg, often millions of examples)</li>
-<li><b>Computationally intensive</b> to train and deploy (tractably requires GPUs)</li>
-<li>Easily fooled by <b>adversarial examples</b></li>
-<li>Can be subject to <b>algorithmic bias</b></li>
-<li>Poor at representing <b>uncertainty</b> (how do you know what the model knows?)</li>
-<li><b>Uninterpretable</b> black boxes, difficult to trust</li>
-<li>Difficult to <b>encode structure</b> and prior knowledge during learning</li>
-<li><b>Finicky to optimize</b>: non-convex, choice of architecture, learning parameters</li>
-<li>Often require <b>expert knowledge</b> to design, fine tune architectures</li>
-</ul>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgc91d2c7" class="outline-2">
-<h2 id="orgc91d2c7"><span class="section-number-2">4.</span> Frontiers</h2>
-<div class="outline-text-2" id="text-4">
-</div>
-<div id="outline-container-org6baf03a" class="outline-3">
-<h3 id="org6baf03a"><span class="section-number-3">4.1.</span> Graph Convolution Networks</h3>
-<div class="outline-text-3" id="text-4-1">
-<p>
-0:38:13
-</p>
-
-
-<div id="orgea77486" class="figure">
-<p><img src="../img/mit_6s191/applications_of_graph_neural_network-20230316230723.png" alt="applications_of_graph_neural_network-20230316230723.png" />
-</p>
-<p><span class="figure-number">Figure 3: </span>Applications of Graph Neural Network</p>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org376a878" class="outline-3">
-<h3 id="org376a878"><span class="section-number-3">4.2.</span> Automated Machine Learning &amp; Learning to Learn</h3>
-<div class="outline-text-3" id="text-4-2">
-<p>
-0:45:43
-</p>
-<ul class="org-ul">
-<li>AutoML</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Deep Learning New Frontiers">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
 </div>
 </body>
 </html>
