@@ -193,7 +193,11 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-<script type="text/javascript" src="../js/counters.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script>
   window.MathJax = {
     tex: {
@@ -232,7 +236,10 @@
  <a accesskey="h" href="./index.html"> UP </a>
  |
  <a accesskey="H" href="../index.html"> HOME </a>
-</div><div id="content" class="content">
+</div><div id="preamble" class="status">
+<p class="date">Date: 2020-12-15</p>
+</div>
+<div id="content" class="content">
 <h1 class="title">Mathematical Physics</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
@@ -255,7 +262,7 @@
 <li><a href="#orgf6ece01">3.3.1. Divergent Series converge faster than convergent series</a></li>
 </ul>
 </li>
-<li><a href="#org6243b30">3.4. Another approach to the Quintic Equation (Week Coupling)</a></li>
+<li><a href="#org4bfb4f4">3.4. Another approach to the Quintic Equation (Weak Coupling)</a></li>
 <li><a href="#org67dd960">3.5. Shanks Transformation - for accelerating convergent series</a></li>
 <li><a href="#orgf1f0406">3.6. Pade Summation - To sum divergent Series</a></li>
 <li><a href="#orge2b0d06">3.7. Asymptotics and Perturbation Theory</a>
@@ -279,7 +286,7 @@
 </div>
 <p>
 from Lecture by Carl Bender (posted in YouTube)
-<a href="https://www.youtube.com/watch?v=LYNOGk3ZjFM">https://www.youtube.com/watch?v=LYNOGk3ZjFM</a>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/lJIrF4YjHfQ" title="//youtube.com/embed/LYNOGk3ZjFM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
 </p>
 <div id="outline-container-org59aa97f" class="outline-2">
 <h2 id="org59aa97f"><span class="section-number-2">1.</span> One style of Mathematical Physics is very very rigorous</h2>
@@ -407,7 +414,7 @@ Finally, the solution is obtained when we set \(\epsilon = 1\)
 </p>
 
 
-<div id="org7d324ba" class="figure">
+<div id="orgd174f26" class="figure">
 <p><img src="./data/mathematical_physics/mpv-screenshotmKIG2j.png" alt="mpv-screenshotmKIG2j.png" />
 </p>
 </div>
@@ -431,8 +438,8 @@ We were lucky that the series converged. Because the radius of convergence is 1.
 </div>
 </div>
 </div>
-<div id="outline-container-org6243b30" class="outline-3">
-<h3 id="org6243b30"><span class="section-number-3">3.4.</span> Another approach to the Quintic Equation (Week Coupling)</h3>
+<div id="outline-container-org4bfb4f4" class="outline-3">
+<h3 id="org4bfb4f4"><span class="section-number-3">3.4.</span> Another approach to the Quintic Equation (Weak Coupling)</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 \(\epsilon x^5 + x = 1\)
@@ -492,7 +499,7 @@ Now if we set \(\epsilon = 1\), we have a divergent series
 <h3 id="orgf1f0406"><span class="section-number-3">3.6.</span> Pade Summation - To sum divergent Series</h3>
 <div class="outline-text-3" id="text-3-6">
 
-<div id="orgb471ad2" class="figure">
+<div id="orgdb85888" class="figure">
 <p><img src="./data/mathematical_physics/mpv-screenshotYSGsaN.png" alt="mpv-screenshotYSGsaN.png" />
 </p>
 </div>

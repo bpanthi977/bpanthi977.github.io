@@ -256,7 +256,7 @@
 <li><a href="#org4218a66">9. Plotting</a></li>
 <li><a href="#org9a9415f">10. However sometimes analytical solutions don't exist</a>
 <ul>
-<li><a href="#orgf147e8e">10.1. Numerical solution</a></li>
+<li><a href="#orgd0f19fc">10.1. Numerical solution</a></li>
 </ul>
 </li>
 <li><a href="#orgb746d71">11. Simplification</a>
@@ -285,7 +285,7 @@
 </li>
 <li><a href="#orge10fb63">18. Example: Projectile motion</a>
 <ul>
-<li><a href="#orgd0f19fc">18.1. Numerical solution</a></li>
+<li><a href="#org4d3983b">18.1. Numerical solution</a></li>
 </ul>
 </li>
 <li><a href="#org17b7d97">19. Example 2</a></li>
@@ -324,19 +324,6 @@
 Presentation by: Bibek Panthi
 </p>
 
-<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
-<div class="org-src-container">
-<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">bp/copy-source-block</span> () 
-  (<span class="org-keyword">interactive</span>)
-  (<span class="org-keyword">save-excursion</span> 
-    (org-edit-src-code)
-    (kill-ring-save (point-min) (point-max))
-    (org-edit-src-abort)))
-
-(local-set-key (kbd <span class="org-string">"M-c"</span>) 'bp/copy-source-block)
-</pre>
-</div></details>
-
 <div id="outline-container-orgdd73eef" class="outline-2">
 <h2 id="orgdd73eef"><span class="section-number-2">1.</span> Abacus / History of Computers</h2>
 <div class="outline-text-2" id="text-1">
@@ -350,7 +337,7 @@ Presentation by: Bibek Panthi
 </ul>
 
 
-<div id="org7c217b5" class="figure">
+<div id="orgc95bc3d" class="figure">
 <p><img src="./data/maxima/abacus.jpg" alt="abacus.jpg" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Abacus</p>
@@ -369,7 +356,7 @@ Presentation by: Bibek Panthi
 </ul>
 
 
-<div id="org77da8f3" class="figure">
+<div id="org1e657d8" class="figure">
 <p><img src="./data/maxima/20200907135227-calculator.png" alt="20200907135227-calculator.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>TI-84 Plus</p>
@@ -411,7 +398,7 @@ Maxima is a free and open source CAS.
 </p>
 
 
-<div id="org3498704" class="figure">
+<div id="org2ea9d49" class="figure">
 <p><img src="./data/maxima/20200907142106-maxima.png" alt="20200907142106-maxima.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>Maxima</p>
@@ -424,18 +411,40 @@ Maxima is a free and open source CAS.
 <div class="outline-text-2" id="text-6">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-maxima"><span class="org-constant">1</span><span class="org-keyword">+</span><span class="org-constant">1</span>;
-<span class="org-constant">15</span><span class="org-keyword">*</span><span class="org-constant">15</span> <span class="org-keyword">+</span> <span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">5</span><span class="org-keyword">*</span> ( <span class="org-constant">12</span><span class="org-keyword">/</span><span class="org-constant">3</span>)
+<pre class="src src-maxima"><span class="org-builtin">print</span>(<span class="org-constant">1</span><span class="org-keyword">+</span><span class="org-constant">1</span>);
+<span class="org-builtin">print</span>(<span class="org-constant">15</span><span class="org-keyword">*</span><span class="org-constant">15</span> <span class="org-keyword">+</span> <span class="org-constant">0</span><span class="org-keyword">.</span><span class="org-constant">5</span><span class="org-keyword">*</span> ( <span class="org-constant">12</span><span class="org-keyword">/</span><span class="org-constant">3</span>));
 </pre>
 </div></details>
 
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">2</td>
+</tr>
+
+<tr>
+<td class="org-right">227.0</td>
+</tr>
+</tbody>
+</table>
+
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-maxima"><span class="org-constant">2</span><span class="org-keyword">*</span>x<span class="org-keyword">+</span><span class="org-constant">5</span><span class="org-keyword">*</span>x;
-(y<span class="org-keyword">+</span>x)<span class="org-keyword">^</span><span class="org-constant">2</span>;
-<span class="org-builtin">expand</span>(<span class="org-keyword">%</span>);
+<pre class="src src-maxima"><span class="org-builtin">tex</span>(<span class="org-constant">2</span><span class="org-keyword">*</span>x<span class="org-keyword">+</span><span class="org-constant">5</span><span class="org-keyword">*</span>x);
+<span class="org-builtin">tex</span>(<span class="org-builtin">expand</span>((y<span class="org-keyword">+</span>x)<span class="org-keyword">^</span><span class="org-constant">2</span>));
 </pre>
 </div></details>
+
+<p>
+\[7\,x\]
+\[y^2+2\,x\,y+x^2\]
+</p>
+
 
 <ul class="org-ul">
 <li>Familiar rules of BODMAS</li>
@@ -469,11 +478,17 @@ a<span class="org-keyword">+</span><span class="org-constant">1</span>;
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
 <pre class="src src-maxima">y<span class="org-keyword">:</span> <span class="org-constant">4</span><span class="org-keyword">*</span>a<span class="org-keyword">*</span>(x<span class="org-keyword">-</span><span class="org-constant">1</span>);
-y, a<span class="org-keyword">:</span><span class="org-constant">2</span>;
+<span class="org-builtin">print</span>(<span class="org-builtin">tex</span>((y, a<span class="org-keyword">:</span><span class="org-constant">2</span>)));
 </pre>
 </div></details>
+
+<p>
+\[2\]
+</p>
 </div>
 </div>
+
+
 
 <div id="outline-container-org725da06" class="outline-2">
 <h2 id="org725da06"><span class="section-number-2">8.</span> Solving Equation</h2>
@@ -483,20 +498,30 @@ In calculators we could solve:
 </p>
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-maxima">x<span class="org-keyword">^</span><span class="org-constant">2</span> <span class="org-keyword">+</span> <span class="org-constant">4</span><span class="org-keyword">*</span>x <span class="org-keyword">+</span> <span class="org-constant">4</span> <span class="org-keyword">=</span> <span class="org-constant">0</span>;
-<span class="org-builtin">solve</span>(<span class="org-keyword">%</span>,x);
+<pre class="src src-maxima">eqn<span class="org-keyword">:</span> x<span class="org-keyword">^</span><span class="org-constant">2</span> <span class="org-keyword">+</span> <span class="org-constant">4</span><span class="org-keyword">*</span>x <span class="org-keyword">+</span> <span class="org-constant">4</span> <span class="org-keyword">=</span> <span class="org-constant">0</span>;
+<span class="org-builtin">print</span>(<span class="org-builtin">solve</span>(eqn,x));
 </pre>
 </div></details>
+
+<pre class="example">
+[x = - 2]
+</pre>
+
 
 <p>
 Now we can handle: 
 </p>
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-maxima">a<span class="org-keyword">^</span><span class="org-constant">2</span><span class="org-keyword">*</span>x<span class="org-keyword">^</span><span class="org-constant">2</span> <span class="org-keyword">+</span> <span class="org-constant">2</span><span class="org-keyword">*</span>a<span class="org-keyword">*</span>x <span class="org-keyword">+</span> c <span class="org-keyword">=</span> <span class="org-constant">0</span>;
-<span class="org-builtin">solve</span>(<span class="org-keyword">%</span>,x);
+<pre class="src src-maxima">eqn<span class="org-keyword">:</span>  a<span class="org-keyword">^</span><span class="org-constant">2</span><span class="org-keyword">*</span>x<span class="org-keyword">^</span><span class="org-constant">2</span> <span class="org-keyword">+</span> <span class="org-constant">2</span><span class="org-keyword">*</span>a<span class="org-keyword">*</span>x <span class="org-keyword">+</span> c <span class="org-keyword">=</span> <span class="org-constant">0</span>;
+<span class="org-builtin">tex</span>(<span class="org-builtin">solve</span>(eqn,x));
 </pre>
 </div></details>
+
+<p>
+\[\left[ x=-\left({{\sqrt{1-c}+1}\over{a}}\right) , x={{\sqrt{1-c}-1
+ }\over{a}} \right] \]
+</p>
 
 <p>
 <code>solve</code> can find analytical solutions of:
@@ -515,10 +540,14 @@ Now we can handle:
 
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-maxima"><span class="org-builtin">solve</span> (<span class="org-keyword">[</span>y<span class="org-keyword">=</span>x, y<span class="org-keyword">=</span><span class="org-constant">4</span><span class="org-keyword">*</span>a<span class="org-keyword">*</span>x<span class="org-keyword">^</span><span class="org-constant">2</span><span class="org-keyword">]</span>,<span class="org-keyword">[</span>x,y<span class="org-keyword">]</span>);
-<span class="org-keyword">%</span>,a<span class="org-keyword">:</span><span class="org-constant">1</span><span class="org-keyword">/</span><span class="org-constant">8</span>;
+<pre class="src src-maxima">soln<span class="org-keyword">:</span> <span class="org-builtin">solve</span> (<span class="org-keyword">[</span>y<span class="org-keyword">=</span>x, y<span class="org-keyword">=</span><span class="org-constant">4</span><span class="org-keyword">*</span>a<span class="org-keyword">*</span>x<span class="org-keyword">^</span><span class="org-constant">2</span><span class="org-keyword">]</span>,<span class="org-keyword">[</span>x,y<span class="org-keyword">]</span>);
+<span class="org-builtin">tex</span>((soln, a<span class="org-keyword">:</span><span class="org-constant">1</span><span class="org-keyword">/</span><span class="org-constant">8</span>));
 </pre>
 </div></details>
+
+<p>
+\[{{1}\over{8}}\]
+</p>
 </div>
 </div>
 
@@ -527,7 +556,7 @@ Now we can handle:
 <div class="outline-text-2" id="text-9">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-maxima">wxplot2d (<span class="org-keyword">[</span>x, <span class="org-constant">4</span><span class="org-keyword">*</span>a<span class="org-keyword">*</span>x<span class="org-keyword">^</span><span class="org-constant">2</span><span class="org-keyword">]</span>,<span class="org-keyword">[</span>x,<span class="org-keyword">-</span><span class="org-constant">4</span>,<span class="org-constant">4</span><span class="org-keyword">]</span>),a<span class="org-keyword">=</span><span class="org-constant">1</span><span class="org-keyword">/</span><span class="org-constant">8</span>;
+<pre class="src src-maxima"><span class="org-builtin">plot2d</span> (<span class="org-keyword">[</span>x, <span class="org-constant">4</span><span class="org-keyword">*</span>a<span class="org-keyword">*</span>x<span class="org-keyword">^</span><span class="org-constant">2</span><span class="org-keyword">]</span>,<span class="org-keyword">[</span>x,<span class="org-keyword">-</span><span class="org-constant">4</span>,<span class="org-constant">4</span><span class="org-keyword">]</span>),a<span class="org-keyword">=</span><span class="org-constant">1</span><span class="org-keyword">/</span><span class="org-constant">8</span>;
 </pre>
 </div></details>
 </div>
@@ -538,19 +567,24 @@ Now we can handle:
 <h2 id="org9a9415f"><span class="section-number-2">10.</span> However sometimes analytical solutions don't exist</h2>
 <div class="outline-text-2" id="text-10">
 </div>
-<div id="outline-container-orgf147e8e" class="outline-3">
-<h3 id="orgf147e8e"><span class="section-number-3">10.1.</span> Numerical solution</h3>
+<div id="outline-container-orgd0f19fc" class="outline-3">
+<h3 id="orgd0f19fc"><span class="section-number-3">10.1.</span> Numerical solution</h3>
 <div class="outline-text-3" id="text-10-1">
 <ul class="org-ul">
-<li>find<sub>roots</sub></li>
+<li><code>find_roots</code></li>
 </ul>
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
 <pre class="src src-maxima"><span class="org-builtin">exp</span> <span class="org-keyword">:</span> x<span class="org-keyword">^</span>(<span class="org-constant">2</span><span class="org-keyword">/</span><span class="org-constant">3</span>) <span class="org-keyword">+</span> x<span class="org-keyword">^</span>(<span class="org-constant">1</span><span class="org-keyword">/</span><span class="org-constant">2</span>) <span class="org-keyword">-</span> <span class="org-constant">1</span>;
 <span class="org-builtin">solve</span>(<span class="org-builtin">exp</span>, x);
-<span class="org-builtin">find_root</span>(<span class="org-builtin">exp</span>, <span class="org-constant">0</span>, <span class="org-constant">100</span>);
+<span class="org-builtin">print</span>(<span class="org-builtin">find_root</span>(<span class="org-builtin">exp</span>, <span class="org-constant">0</span>, <span class="org-constant">100</span>));
 </pre>
 </div></details>
+
+<pre class="example">
+0.3021706154056545
+</pre>
+
 
 <ul class="org-ul">
 <li>newton</li>
@@ -574,16 +608,25 @@ ratsimp()
 
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-maxima">x<span class="org-keyword">+</span>x<span class="org-keyword">^</span><span class="org-constant">2</span><span class="org-keyword">+</span><span class="org-constant">2</span><span class="org-keyword">*</span>x <span class="org-keyword">*</span> (x <span class="org-keyword">-</span> <span class="org-constant">1</span>);
-<span class="org-builtin">ratsimp</span>(<span class="org-keyword">%</span>);
+<pre class="src src-maxima">expr<span class="org-keyword">:</span> x<span class="org-keyword">+</span>x<span class="org-keyword">^</span><span class="org-constant">2</span><span class="org-keyword">+</span><span class="org-constant">2</span><span class="org-keyword">*</span>x <span class="org-keyword">*</span> (x <span class="org-keyword">-</span> <span class="org-constant">1</span>);
+<span class="org-builtin">tex</span>(<span class="org-builtin">ratsimp</span>(expr));
 </pre>
 </div></details>
 
+<p>
+\[3\,x^2-x\]
+</p>
+
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
-<pre class="example">
-expr: (x^(a/2) + 1)^2*(x^(a/2) - 1)^2/(x^a - 1);
-ratsimp(expr)
-</pre></details>
+<div class="org-src-container">
+<pre class="src src-maxima">expr<span class="org-keyword">:</span> (x<span class="org-keyword">^</span>(a<span class="org-keyword">/</span><span class="org-constant">2</span>) <span class="org-keyword">+</span> <span class="org-constant">1</span>)<span class="org-keyword">^</span><span class="org-constant">2</span><span class="org-keyword">*</span>(x<span class="org-keyword">^</span>(a<span class="org-keyword">/</span><span class="org-constant">2</span>) <span class="org-keyword">-</span> <span class="org-constant">1</span>)<span class="org-keyword">^</span><span class="org-constant">2</span><span class="org-keyword">/</span>(x<span class="org-keyword">^</span>a <span class="org-keyword">-</span> <span class="org-constant">1</span>);
+<span class="org-builtin">tex</span>(<span class="org-builtin">ratsimp</span>(expr));
+</pre>
+</div></details>
+
+<p>
+\[{{x^{2\,a}-2\,x^{a}+1}\over{x^{a}-1}}\]
+</p>
 
 <p>
 ratsimp (%)
@@ -603,9 +646,13 @@ trigsimp()
 
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-maxima"><span class="org-builtin">sin</span>(x)<span class="org-keyword">^</span><span class="org-constant">2</span> <span class="org-keyword">+</span> <span class="org-builtin">cos</span>(x)<span class="org-keyword">^</span><span class="org-constant">2</span>; 
+<pre class="src src-maxima"><span class="org-builtin">print</span>(<span class="org-builtin">trigsimp</span>(<span class="org-builtin">sin</span>(x)<span class="org-keyword">^</span><span class="org-constant">2</span> <span class="org-keyword">+</span> <span class="org-builtin">cos</span>(x)<span class="org-keyword">^</span><span class="org-constant">2</span>)); 
 </pre>
 </div></details>
+
+<pre class="example">
+1
+</pre>
 </div>
 </div>
 
@@ -620,10 +667,14 @@ trigsimp()
 
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-maxima">x<span class="org-keyword">^</span><span class="org-constant">2</span> <span class="org-keyword">-</span> <span class="org-constant">1</span>;
-<span class="org-builtin">factor</span>(<span class="org-keyword">%</span>)
+<pre class="src src-maxima">expr<span class="org-keyword">:</span> x<span class="org-keyword">^</span><span class="org-constant">2</span> <span class="org-keyword">-</span> <span class="org-constant">1</span>;
+<span class="org-builtin">tex</span>(<span class="org-builtin">factor</span>(expr));
 </pre>
 </div></details>
+
+<p>
+\[\left(x-1\right)\,\left(x+1\right)\]
+</p>
 </div>
 </div>
 
@@ -638,9 +689,14 @@ trigsimp()
 
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-maxima"><span class="org-constant">%e</span><span class="org-keyword">^</span>(<span class="org-constant">%pi</span> <span class="org-keyword">*</span> <span class="org-constant">%i</span>) <span class="org-keyword">+</span> <span class="org-constant">1</span>;
+<pre class="src src-maxima">expr<span class="org-keyword">:</span> <span class="org-constant">%e</span><span class="org-keyword">^</span>(<span class="org-constant">%pi</span> <span class="org-keyword">*</span> <span class="org-constant">%i</span>) <span class="org-keyword">+</span> <span class="org-constant">1</span>;
+<span class="org-builtin">print</span>(expr);
 </pre>
 </div></details>
+
+<pre class="example">
+0
+</pre>
 </div>
 </div>
 
@@ -653,18 +709,35 @@ trigsimp()
 <div class="outline-text-3" id="text-15-1">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-maxima"><span class="org-builtin">limit</span>((<span class="org-constant">1</span> <span class="org-keyword">+</span> <span class="org-constant">5</span><span class="org-keyword">/</span>x) <span class="org-keyword">^</span> x, x, <span class="org-constant">inf</span>);
+<pre class="src src-maxima">expr<span class="org-keyword">:</span> <span class="org-keyword">'</span><span class="org-builtin">limit</span>((<span class="org-constant">1</span> <span class="org-keyword">+</span> <span class="org-constant">5</span><span class="org-keyword">/</span>x) <span class="org-keyword">^</span> x, x, <span class="org-constant">inf</span>);
+<span class="org-builtin">tex</span>(expr);
+<span class="org-builtin">tex</span>(<span class="org-builtin">ev</span>(expr, <span class="org-keyword">nouns</span>));
 </pre>
 </div></details>
 
+<p>
+\[\lim_{x\rightarrow \infty }{\left({{5}\over{x}}+1\right)^{x}}\]
+\[e^5\]
+</p>
+
+
+
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-maxim">limit(sin(x)/x*%e^x/x!, x , 0 );
+<pre class="src src-maxima">expr<span class="org-keyword">:</span> <span class="org-keyword">'</span><span class="org-builtin">limit</span>(<span class="org-builtin">sin</span>(x)<span class="org-keyword">/</span>x<span class="org-keyword">*</span><span class="org-constant">%e</span><span class="org-keyword">^</span>x<span class="org-keyword">/</span>x<span class="org-keyword">!</span>, x , <span class="org-constant">0</span> );
+<span class="org-builtin">tex</span>(expr);
+<span class="org-builtin">tex</span>(<span class="org-builtin">ev</span>(expr, <span class="org-keyword">nouns</span>));
 </pre>
 </div></details>
+
+<p>
+\[\lim_{x\rightarrow 0}{{{e^{x}\,\sin x}\over{x\,x!}}}\]
+\[1\]
+</p>
 </div>
 </div>
 </div>
+
 
 <div id="outline-container-orgff45b28" class="outline-2">
 <h2 id="orgff45b28"><span class="section-number-2">16.</span> Derivative and Integrals</h2>
@@ -675,15 +748,21 @@ trigsimp()
 <div class="outline-text-3" id="text-16-1">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-maxima"><span class="org-builtin">diff</span>(<span class="org-builtin">sec</span>(x)<span class="org-keyword">*</span>x<span class="org-keyword">^</span><span class="org-constant">2</span>, x, <span class="org-constant">2</span>);
+<pre class="src src-maxima"><span class="org-builtin">tex</span>(<span class="org-builtin">diff</span>(<span class="org-builtin">sec</span>(x)<span class="org-keyword">*</span>x<span class="org-keyword">^</span><span class="org-constant">2</span>, x, <span class="org-constant">2</span>));
 </pre>
 </div></details>
 
 <p>
+\[x^2\,\sec x\,\tan ^2x+4\,x\,\sec x\,\tan x+x^2\,\sec ^3x+2\,\sec x\]
+</p>
+
+<p>
 Simplify the result:
+</p>
+<pre class="example">
 %,x:1;
 float(%)
-</p>
+</pre>
 </div>
 </div>
 
@@ -692,12 +771,17 @@ float(%)
 <div class="outline-text-3" id="text-16-2">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-maxima"><span class="org-builtin">integrate</span>(<span class="org-builtin">sec</span>(x), x)
+<pre class="src src-maxima"><span class="org-builtin">tex</span>(<span class="org-builtin">integrate</span>(<span class="org-builtin">sec</span>(x), x));
 </pre>
 </div></details>
+
+<p>
+\[\log \left(\tan x+\sec x\right)\]
+</p>
 </div>
 </div>
 </div>
+
 
 <div id="outline-container-orgd880753" class="outline-2">
 <h2 id="orgd880753"><span class="section-number-2">17.</span> Differential Equation</h2>
@@ -727,8 +811,9 @@ wxplot2d(<span class="org-builtin">part</span>(<span class="org-keyword">%</span
 </pre>
 </div></details>
 </div>
-<div id="outline-container-orgd0f19fc" class="outline-3">
-<h3 id="orgd0f19fc"><span class="section-number-3">18.1.</span> Numerical solution</h3>
+
+<div id="outline-container-org4d3983b" class="outline-3">
+<h3 id="org4d3983b"><span class="section-number-3">18.1.</span> Numerical solution</h3>
 </div>
 </div>
 
@@ -745,7 +830,7 @@ Numerical Solutions
 </p>
 
 
-<div id="orgf46fed9" class="figure">
+<div id="orgc93b0e3" class="figure">
 <p><img src="./data/maxima/20200907182701-pendulum_equation.png" alt="20200907182701-pendulum_equation.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>Pendulum Equation</p>
@@ -771,7 +856,7 @@ with independent variables \(\theta\) and \(\omega\)
 
 
 
-<div id="org32c7110" class="figure">
+<div id="org17d2dd7" class="figure">
 <p><img src="./data/maxima/20200907184317-one_intital_condition.png" alt="20200907184317-one_intital_condition.png" />
 </p>
 <p><span class="figure-number">Figure 5: </span>one intital condition</p>
@@ -801,19 +886,25 @@ Geometric series
 
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-maxima"><span class="org-builtin">sum</span>(<span class="org-constant">1</span><span class="org-keyword">/</span>k<span class="org-keyword">^</span><span class="org-constant">2</span>, k , <span class="org-constant">1</span> , <span class="org-constant">inf</span>), simpsum;
+<pre class="src src-maxima">s<span class="org-keyword">:</span> <span class="org-builtin">sum</span>(<span class="org-constant">1</span><span class="org-keyword">/</span>k<span class="org-keyword">^</span><span class="org-constant">2</span>, k , <span class="org-constant">1</span> , <span class="org-constant">inf</span>), simpsum;
+<span class="org-builtin">tex</span>(s);
 </pre>
-</div></details></li>
+</div></details>
+
+<p>
+\[{{\pi^2}\over{6}}\]
+</p></li>
 </ul>
 </div>
 </div>
+
 
 
 <div id="outline-container-org92aef29" class="outline-2">
 <h2 id="org92aef29"><span class="section-number-2">22.</span> Example : Economics - Linear Gradient Series</h2>
 <div class="outline-text-2" id="text-22">
 
-<div id="orgca4ccc4" class="figure">
+<div id="orgc2ec365" class="figure">
 <p><img src="./data/maxima/20200904104609-linear_gradient_series.png" alt="20200904104609-linear_gradient_series.png" />
 </p>
 </div>
@@ -830,7 +921,7 @@ load("simplify<sub>sum</sub>")
 
 
 
-<div id="org14b537b" class="figure">
+<div id="org770a78d" class="figure">
 <p><img src="./data/maxima/20200907203012-linear_gradient_formula.png" alt="20200907203012-linear_gradient_formula.png" />
 </p>
 <p><span class="figure-number">Figure 6: </span>linear gradient formula</p>
@@ -841,7 +932,7 @@ load("simplify<sub>sum</sub>")
 <h2 id="orgcc87268"><span class="section-number-2">23.</span> Example : Economics - Geometric Gradient Series</h2>
 <div class="outline-text-2" id="text-23">
 
-<div id="orgba71ad7" class="figure">
+<div id="org8b3026b" class="figure">
 <p><img src="./data/maxima/20200907203159-geometric_gradient.png" alt="20200907203159-geometric_gradient.png" />
 </p>
 <p><span class="figure-number">Figure 7: </span>geometric gradient</p>
@@ -854,7 +945,7 @@ load("simplify<sub>sum</sub>")
 </div></details>
 
 
-<div id="orgf598f8d" class="figure">
+<div id="org036cc29" class="figure">
 <p><img src="./data/maxima/20200907203419-solution.png" alt="20200907203419-solution.png" />
 </p>
 <p><span class="figure-number">Figure 8: </span>solution</p>
@@ -905,7 +996,7 @@ The BOSS of this field.
 </p>
 
 
-<div id="org61d45a4" class="figure">
+<div id="org0567c0a" class="figure">
 <p><img src="./data/maxima/20200907141014-some_notable_softwares_mathematica_wolfram_alpha_maple.png" alt="20200907141014-some_notable_softwares_mathematica_wolfram_alpha_maple.png" />
 </p>
 <p><span class="figure-number">Figure 9: </span>Mathematica</p>
@@ -920,7 +1011,7 @@ The BOSS of this field.
 </p>
 
 
-<div id="org79e5928" class="figure">
+<div id="orgf048d42" class="figure">
 <p><img src="./data/maxima/20200907141437-wolfram_alpha.png" alt="20200907141437-wolfram_alpha.png" />
 </p>
 <p><span class="figure-number">Figure 10: </span>Wolfram alpha</p>
@@ -933,7 +1024,7 @@ The BOSS of this field.
 <h2 id="orga832363"><span class="section-number-2">27.</span> Maple</h2>
 <div class="outline-text-2" id="text-27">
 
-<div id="org7756681" class="figure">
+<div id="org0400219" class="figure">
 <p><img src="./data/maxima/20200907141924-maple.png" alt="20200907141924-maple.png" />
 </p>
 <p><span class="figure-number">Figure 11: </span>Maple</p>
@@ -1035,7 +1126,7 @@ w<span class="org-keyword">:</span> <span class="org-keyword">[</span><span clas
 </div></details>
 
 
-<div id="org9cd9d48" class="figure">
+<div id="org5e093b3" class="figure">
 <p><img src="./data/maxima/leaf.png" alt="leaf.png" />
 </p>
 </div>

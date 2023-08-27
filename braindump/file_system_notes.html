@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Configuring GPG for Emacs in MacOS</title>
+<title>File System Notes</title>
 <meta name="author" content="Bibek Panthi" />
 <meta name="generator" content="Org Mode" />
 <style>
@@ -205,107 +205,81 @@
  |
  <a accesskey="H" href="../index.html"> HOME </a>
 </div><div id="preamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-09-30 Fri&gt;</span></span></p>
+<p class="date">Date: 2020-05-27</p>
 </div>
 <div id="content" class="content">
-<h1 class="title">Configuring GPG for Emacs in MacOS</h1>
+<h1 class="title">File System Notes</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb000082">1. pinentry fix</a></li>
-<li><a href="#org02435b2">2. gnupg &gt;2.4.0 doesn't work with emacs</a></li>
+<li><a href="#org9275c8a">1. Benefits</a></li>
+<li><a href="#org38d6b03">2. How?</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgb000082" class="outline-2">
-<h2 id="orgb000082"><span class="section-number-2">1.</span> pinentry fix</h2>
+<div id="outline-container-org9275c8a" class="outline-2">
+<h2 id="org9275c8a"><span class="section-number-2">1.</span> Benefits</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-Decrypting with GPG failed with following message in Emacs
+Use file system that is collection of files and folders as note managing style program.
 </p>
-<blockquote>
-<p>
-Error while decrypting with "/opt/homebrew/bin/gpg":
-</p>
-
-<p>
-gpg: encrypted with rsa2048 key, ID 9EC749B2A876A133, created 2020-10-19
-      "Bibek Panthi &lt;bpanthi977@gmail.com&gt;"
-gpg: public key decryption failed: Inappropriate ioctl for device
-gpg: decryption failed: Inappropriate ioctl for device
-</p>
-</blockquote>
-
-<p>
-in <code>~/.gnupg/gpg-agent.conf</code> add the following (<a href="https://vxlabs.com/2021/03/21/gnupg-pinentry-via-the-emacs-minibuffer/">Source</a>)
-</p>
-<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
-<div class="org-src-container">
-<pre class="src src-config"># this means clients like Emacs can get the password in their own way and push to gpg
-# for this to work with Emacs, set epa-pinentry-mode to 'loopback in Emacs
-allow-loopback-entry
-</pre>
-</div></details>
-
-<p>
-and add to you config: 
-</p>
-<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
-<div class="org-src-container">
-<pre class="src src-elisp">(<span class="org-keyword">setq</span> epa-pinentry-mode 'loopback)
-</pre>
-</div></details>
+<ul class="org-ul">
+<li>it remains foever and everywhere accessible</li>
+<li>no problem of unsupported softwares</li>
+<li>can mix different file types like org,txt,html,doc,&#x2026;</li>
+</ul>
 </div>
 </div>
 
-<div id="outline-container-org02435b2" class="outline-2">
-<h2 id="org02435b2"><span class="section-number-2">2.</span> gnupg &gt;2.4.0 doesn't work with emacs</h2>
+<div id="outline-container-org38d6b03" class="outline-2">
+<h2 id="org38d6b03"><span class="section-number-2">2.</span> How?</h2>
 <div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>Make a convention for file naming:</li>
+</ul>
 <p>
-<a href="https://www.reddit.com/r/emacs/comments/137r7j7/gnupg_241_encryption_issues_with_emacs_orgmode/">https://www.reddit.com/r/emacs/comments/137r7j7/gnupg_241_encryption_issues_with_emacs_orgmode/</a>
+YYMMDD-X-NAME
 </p>
-
-<p>
-There are fixees for gnupg (and maybe emacs) being discussed here: <a href="https://dev.gnupg.org/T6481">https://dev.gnupg.org/T6481</a>
-</p>
-
-<p>
-In the meanwhile force install gnupg==2.4.0 or lower. 
-</p>
-
-<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
-<div class="org-src-container">
-<pre class="src src-sh">brew info gnupg | grep <span class="org-string">"From:"</span> | cut -d <span class="org-string">" "</span> -f 2
-</pre>
-</div></details>
-
-<pre class="example">
-https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/g/gnupg.rb
-</pre>
+<ul class="org-ul">
+<li>First part is timestamp. Its good to order file by a timestamp as humans are good at remebering dates of events (<a href="noguchi_filing_system.html#ID-88c977e0-067c-4ca1-b4dc-ddad459ca8bb">Noguchi Filing System</a>)</li>
+<li>X is a broad category identifier. e.g:
+<ul class="org-ul">
+<li>R for record</li>
+<li>J for journal</li>
+<li>N for notes</li>
+<li>P for project related notes &#x2026;</li>
+</ul></li>
+<li>X may further be subcategorized as X1,X2,&#x2026;</li>
+<li>NAME is an unique identifying name</li>
+</ul>
 
 
-<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
-<div class="org-src-container">
-<pre class="src src-sh"><span class="org-variable-name">URL</span>=https://raw.githubusercontent.com/Homebrew/homebrew-core/59edfe598541186430d49cc34f42671e849e2fc9/Formula/gnupg.rb
-wget $<span class="org-variable-name">URL</span>
-brew uninstall --ignore-dependencies gnupg
-brew install -s gnupg.rb
-</pre>
-</div></details>
+<ul class="org-ul">
+<li>Further the files can be arranged in cateogrical folders and sub-folders as per need.</li>
+</ul>
+
+
+
 
 <hr />
 <h3>References</h3>
 
 <ul class="org-ul">
-<li><a href="https://vxlabs.com/2021/03/21/gnupg-pinentry-via-the-emacs-minibuffer/">https://vxlabs.com/2021/03/21/gnupg-pinentry-via-the-emacs-minibuffer/</a> (<a href="configuring_gpg_for_emacs_in_macos.html#ID-C896DC59-2D11-4ADC-859F-54E4721C3B3A">Configuring GPG for Emacs in MacOS</a>)</li>
+<li><a href="http://dougist.com/2009/08/file-system-infobase-manager/">http://dougist.com/2009/08/file-system-infobase-manager/</a> (<a href="douglas_barone.html#ID-6e58fafc-7d77-43d4-b03f-39c880905b73">Douglas Barone</a>)</li>
+</ul>
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="douglas_barone.html#ID-6e58fafc-7d77-43d4-b03f-39c880905b73">Douglas Barone</a></li>
 </ul>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Configuring GPG for Emacs in MacOS">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: File System Notes">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
 </div>
 </body>
 </html>
