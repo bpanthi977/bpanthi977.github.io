@@ -266,11 +266,12 @@
 </div>
 </div>
 
+
 <div id="outline-container-orgc4f7e55" class="outline-2">
 <h2 id="orgc4f7e55"><span class="section-number-2">1.</span> Reinforcement Learning</h2>
 <div class="outline-text-2" id="text-1">
 
-<div id="org761913f" class="figure">
+<div id="orgd67a5b6" class="figure">
 <p><img src="data/icvf/agent_environement_action-20230828082819.png" alt="agent_environement_action-20230828082819.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Agent-Environement-Action</p>
@@ -278,7 +279,7 @@
 
 
 
-<div id="org61a99f8" class="figure">
+<div id="orgfe2dc9e" class="figure">
 <p><img src="data/icvf/rl-20230828082843.png" alt="rl-20230828082843.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>RL</p>
@@ -294,7 +295,7 @@ Q Function \(Q: (s, a) \to r\)
 </p>
 
 <p>
-At a state \(s\), 
+At a state \(s\),
 </p>
 
 <ul class="org-ul">
@@ -308,15 +309,15 @@ Pick the action with highest return
 </p>
 
 <p>
-\(a = argmax_{a} Q(s, a)\) 
+\(a = argmax_{a} Q(s, a)\)
 </p>
 
 <p>
-But we don't know the \(Q\) function, so use a network to represent the function (\(\hat{Q}\)) and learn that function. 
+But we don't know the \(Q\) function, so use a network to represent the function (\(\hat{Q}\)) and learn that function.
 </p>
 
 <p>
-\(Q(s, a) \gets r + max_a Q(s', a)\) 
+\(Q(s, a) \gets r + max_a Q(s', a)\)
 </p>
 </div>
 </div>
@@ -325,7 +326,7 @@ But we don't know the \(Q\) function, so use a network to represent the function
 <h2 id="org12392af"><span class="section-number-2">3.</span> Value Function</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-Value Function: \(V: s \to r\) 
+Value Function: \(V: s \to r\)
 </p>
 
 <p>
@@ -339,7 +340,7 @@ At a state \(s\),
 </ul>
 
 <p>
-Pick the action with highest return 
+Pick the action with highest return
 </p>
 </div>
 </div>
@@ -374,7 +375,7 @@ The alogrithm has to try to understand the reason/intent behind whatever's happe
 </p>
 
 <p>
-Let's learn a function that says, what's the probability that we transition from state \(s\) to state \(s_+\) if acting with intent \(z\) 
+Let's learn a function that says, what's the probability that we transition from state \(s\) to state \(s_+\) if acting with intent \(z\)
 </p>
 </div>
 
@@ -382,7 +383,7 @@ Let's learn a function that says, what's the probability that we transition from
 <h3 id="org580570f"><span class="section-number-3">5.1.</span> How would this function be useful?</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
-After pre-training we know the reward function say \(r^\#\) thus we also know the intent with which we have to play \(z^\#\) then with, 
+After pre-training we know the reward function say \(r^\#\) thus we also know the intent with which we have to play \(z^\#\) then with,
 </p>
 
 <p>
@@ -399,7 +400,7 @@ At state \(s\)
 </ul>
 
 <p>
-Choose the action with max return. 
+Choose the action with max return.
 </p>
 </div>
 </div>
@@ -416,28 +417,29 @@ Choose the action with max return.
 
 <dl class="org-dl">
 <dt><b>Intent</b> \(z\)</dt><dd><p>
-Intent is a representation of reward \(r\) 
+Intent is a representation of reward \(r\)
 </p>
 
 <p>
-\(r: s \to \mathrm{R}\) 
+\(r: s \to \mathrm{R}\)
 </p>
 
 <p>
-and  \(r\) is a function from state to a real number. 
-</p>
-
-<p>
-How do we represent functions? 
+and  \(r\) is a function from state to a real number.
 </p></dd>
 </dl>
+
+
+<p>
+How do we represent functions?
+</p>
 
 
 
 
 <dl class="org-dl">
 <dt><b>Value function</b>   \(V\)</dt><dd><p>
-is a function of two states and a intent. 
+is a function of two states and a intent.
 </p>
 
 <p>
@@ -448,7 +450,7 @@ How do we represent that?
 
 
 <p>
-<b>Solution</b>: 
+<b>Solution</b>:
 </p>
 
 <ol class="org-ol">
@@ -464,7 +466,7 @@ How do we represent that?
 <h4 id="org5e54df1"><span class="section-number-4">5.2.1.</span> Example of Feature Extraction</h4>
 <div class="outline-text-4" id="text-5-2-1">
 
-<div id="org99b88e0" class="figure">
+<div id="org326c44c" class="figure">
 <p><img src="data/icvf/feature_extraction-20230828192436.png" alt="feature_extraction-20230828192436.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>Example of Feature Extraction</p>
@@ -473,25 +475,23 @@ How do we represent that?
 </div>
 
 
-
 <div id="outline-container-org0133383" class="outline-4">
 <h4 id="org0133383"><span class="section-number-4">5.2.2.</span> Successor Representation</h4>
 <div class="outline-text-4" id="text-5-2-2">
 <p>
-\(V(s, s_+, z) = e_s^T (I - P_z)^{-1} e_{s_+}\) 
+\(V(s, s_+, z) = e_s^T (I - P_z)^{-1} e_{s_+}\)
 </p>
 
 <ul class="org-ul">
-<li>\(e_s\)            : Vector representing \(s\)</li>
+<li>\(e_s\)             : Vector representing \(s\)</li>
 <li>\(e_{s_+}\)           : Vector representing \(s_+\)</li>
 <li>\((I - P_z)^{-1}\) : Matrix representing Intention \(z\), \(P_z\) is transition probabilities under a policy with intent \(z\)</li>
 </ul>
 
 
 <p>
-This form derives from <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/The Successor Representation - Peter Dayan.pdf#page=4">The Successor Representation - Peter Dayan.pdf: Page 4</a> 
+This form derives from <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/The Successor Representation - Peter Dayan.pdf#page=4">The Successor Representation - Peter Dayan.pdf: Page 4</a>
 </p>
-
 
 
 <p>
@@ -500,7 +500,7 @@ But since using punctate (1-hot) state encoding is not feasible, we convert stat
 
 
 <p>
-\(V(s, s_+, z) = \phi(s) T(z) \psi(z)\) 
+\(V(s, s_+, z) = \phi(s) T(z) \psi(z)\)
 </p>
 
 
@@ -510,17 +510,16 @@ And this feature extraction is done using neural network parameterized by \(\the
 
 
 <p>
-\(\hat{V}(s, s_+, z) = \phi_\theta(s) T_\theta (z) \psi_\theta (z)\)
+\(\hat{V}(s, s_+, z) = \phi_\theta(s) T_\theta (z) \psi_\theta (s_+)\)
 </p>
 
 
 <p>
-where, \(\phi(s)\) and \(\psi(s)\) are $d$-dimensional and \(T(z)\) is \(d \times d\) dimensional
+where, \(\phi(s)\) and \(\psi(s_+)\) are $d$-dimensional and \(T(z)\) is \(d \times d\) dimensional
 </p>
 </div>
 </div>
 </div>
-
 
 <div id="outline-container-orgabf7419" class="outline-3">
 <h3 id="orgabf7419"><span class="section-number-3">5.3.</span> Piecing it together</h3>
@@ -530,7 +529,7 @@ where, \(\phi(s)\) and \(\psi(s)\) are $d$-dimensional and \(T(z)\) is \(d \time
 </p>
 
 <p>
-If we can learn the above ICVF, then for a given reward function \(r^\#\),  (<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/RL from Passive Data via Latent Intentions - 2304.04782; Intention Conditioned Value Function (ICVF).pdf#page=4">pg. 4 eqn. 4</a>)
+If we can learn the above ICVF, then for a given reward function \(r^\#\), (<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/RL from Passive Data via Latent Intentions - 2304.04782; Intention Conditioned Value Function (ICVF).pdf#page=4">pg. 4 eqn. 4</a>)
 </p>
 
 <p>
@@ -546,16 +545,16 @@ If we can learn the above ICVF, then for a given reward function \(r^\#\),  (<a 
 </p>
 
 <p>
-Now, we also have an representation for \(r\) i.e. \(\psi(r)\), 
-Since, Intent is a representation of reward \(r\), we have a representation for \(z\) 
+Now, we also have an representation for \(r\) i.e. \(\psi(r)\),
+Since, Intent is a representation of reward \(r\), we have a representation for \(z\)
 </p>
 
 <p>
-\(z = \psi(r)\) 
+\(z = \psi(r)\)
 </p>
 
 <p>
-This completes the representation part. 
+This completes the representation part.
 </p>
 </div>
 </div>
@@ -569,7 +568,7 @@ This completes the representation part.
 </p>
 
 <p>
-Advantage function \(A_z(s, a)\) is the extra reward from taking action \(a\) at state \(s\) instead of acting according to intent \(z\) 
+Advantage function \(A_z(s, a)\) is the extra reward from taking action \(a\) at state \(s\) instead of acting according to intent \(z\)
 </p>
 
 <p>
@@ -578,19 +577,23 @@ Advantage function \(A_z(s, a)\) is the extra reward from taking action \(a\) at
 
 
 <p>
-If \(A > 0\) : action is taken with intention \(z\) 
+If \(A > 0\) : action is taken with intention \(z\)
 </p>
 
 <p>
-In that case, 
+In that case,
 </p>
 
 <p>
-\(V(s, s_+, z) \gets 1(s=s_+) + V(s', s_+, z)\) 
+\(V(s, s_+, z) \gets 1(s=s_+) + V(s', s_+, z)\)
 </p>
 
 <p>
-This is the update equation. 
+If \(A<0\) : don't update
+</p>
+
+<p>
+This is the update equation.
 </p>
 
 <p>
