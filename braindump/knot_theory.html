@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Knot Theory</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2023-09-07 Thu&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Knot Theory</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge1e9f94">1. Composite and Prime Knots</a></li>
+<li><a href="#orga76c98e">2. Knot Equivalence Problem</a>
+<ul>
+<li><a href="#org960cafd">2.1. Reidemeister Moves</a></li>
+<li><a href="#orgc0d4be6">2.2. Upper Bound on Reidemeister Moves</a></li>
+<li><a href="#org42ba92c">2.3. Invariants</a>
+<ul>
+<li><a href="#orgf29cadd">2.3.1. Crossing Number</a></li>
+<li><a href="#org0370835">2.3.2. Tri-Colorability</a></li>
+<li><a href="#org3e86fc5">2.3.3. p-colorability</a></li>
+<li><a href="#org4162268">2.3.4. Polynomial</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org2a1b565">3. Practical Application in Chemistry</a></li>
+<li><a href="#orgbc2b458">4. Biology</a></li>
+<li><a href="#org53d30e3">5. Real Life Hacks</a></li>
+</ul>
+</div>
+</div>
+<p>
+<a href="https://www.youtube.com/watch?v=8DBhTXM_Br4">YT: How The Most Useless Branch of Math Could Save Your Life</a> (<a href="www.youtube.com#yt:video:8DBhTXM_Br4">elfeed</a>)
+</p>
+
+<div id="outline-container-orge1e9f94" class="outline-2">
+<h2 id="orge1e9f94"><span class="section-number-2">1.</span> Composite and Prime Knots</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<a href="https://youtube.com/watch?v=8DBhTXM_Br4&t=449s">00:07:29</a>  
+</p>
+
+<p>
+Knots are additive. You can stick multiple knots together to make a new knot. This is called a <b>composite knot</b>, but some knots aren't decomposable into simpler knots. These are known as <b>prime knots</b>.
+</p>
+
+<p>
+Since all composite knots are just built from primes, people mainly focus on tabulating prime knots.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga76c98e" class="outline-2">
+<h2 id="orga76c98e"><span class="section-number-2">2.</span> Knot Equivalence Problem</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Turing believed it was undecidable, but it is not.  
+</p>
+</div>
+
+<div id="outline-container-org960cafd" class="outline-3">
+<h3 id="org960cafd"><span class="section-number-3">2.1.</span> <a href="https://youtube.com/watch?v=8DBhTXM_Br4&t=600s">Reidemeister Moves</a></h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Proved by German mathematician Kurt Reidemeister in 1927. You only need three types of moves to transform any two identical knots into each other.
+</p>
+<ul class="org-ul">
+<li>The twist,</li>
+<li>the poke and</li>
+<li>the slide: where you move a string from one side of a crossing to the other.</li>
+</ul>
+
+<p>
+Now we can prove some knots are the same: if they're connected by Reidemeister moves. But this still can't be use to  prove two knots are different from each other.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc0d4be6" class="outline-3">
+<h3 id="orgc0d4be6"><span class="section-number-3">2.2.</span> Upper Bound on Reidemeister Moves</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+<a href="https://youtube.com/watch?v=8DBhTXM_Br4&t=726s">00:12:06</a> 
+</p>
+
+<p>
+In 2011, Alexander Coward and Mac Lackenby found upper bound on Reidemeister Moves to convert between any two links. This solved the Knot Equivalence Problem. 
+</p>
+
+<p>
+But the upper bound is very big: 
+</p>
+
+<p>
+\((2\uparrow\uparrow10^{1,000,000})^n\) 
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org42ba92c" class="outline-3">
+<h3 id="org42ba92c"><span class="section-number-3">2.3.</span> Invariants</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+<a href="https://youtube.com/watch?v=8DBhTXM_Br4&t=781s">00:13:01</a>
+</p>
+
+<p>
+There are some properties of a knot that never change, no matter how much you twist or tangle it up. These are called invariants, and these invariants will be different for some knots compared to other ones.
+</p>
+</div>
+
+<div id="outline-container-orgf29cadd" class="outline-4">
+<h4 id="orgf29cadd"><span class="section-number-4">2.3.1.</span> Crossing Number</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<p>
+<a href="https://youtube.com/watch?v=8DBhTXM_Br4&t=815s">00:13:35</a>
+</p>
+
+<p>
+Different variations of same knot (know as different <b>projections</b> of that knot) can have different numbers of crossings. So, crossing number is the least number of crossings a knot can have. i.e. crossings in the <b>reduced form</b> of the knot. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0370835" class="outline-4">
+<h4 id="org0370835"><span class="section-number-4">2.3.2.</span> Tri-Colorability</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<p>
+<a href="https://youtube.com/watch?v=8DBhTXM_Br4&t=852s">00:14:12</a>
+</p>
+
+<p>
+Tricolorability = Can a knot be colored with 3 colors or not? 
+</p>
+
+<ul class="org-ul">
+<li>You must use at least two colors because you can color any knot in with one color.</li>
+<li>And second, at crossings, the three intersecting strands must either be all the same color or all different colors. Basically no two colored crossings.</li>
+</ul>
+
+<p>
+This is an invariant becuase the <a href="#org960cafd">Reidemeister Moves</a> preserver the Tri-colorability
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3e86fc5" class="outline-4">
+<h4 id="org3e86fc5"><span class="section-number-4">2.3.3.</span> p-colorability</h4>
+<div class="outline-text-4" id="text-2-3-3">
+<p>
+Same a tri-colorability with p = any prime except 2 
+</p>
+
+
+
+<div id="org4ab23d8" class="figure">
+<p><img src="data/knot_theory/p_colorability-20230907102949.png" alt="p_colorability-20230907102949.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>p-colorability</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4162268" class="outline-4">
+<h4 id="org4162268"><span class="section-number-4">2.3.4.</span> Polynomial</h4>
+<div class="outline-text-4" id="text-2-3-4">
+<ul class="org-ul">
+<li><a href="https://youtube.com/watch?v=8DBhTXM_Br4&t=1072s">00:17:52</a> Alexander Polynomial (discovered in 1923)</li>
+<li><a href="https://youtube.com/watch?v=8DBhTXM_Br4&t=1189s">00:19:49</a> Vaughan Jones discovered another polynomial invariant and won a fields medal</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org2a1b565" class="outline-2">
+<h2 id="org2a1b565"><span class="section-number-2">3.</span> Practical Application in Chemistry</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+In 1989, chemist Jean-Pierre Sauvage tied molecules around copper ions to form the first ever synthetic knotted molecule. This trefoil knot restricted the atoms from unfurling, trapping them in higher energy states to give the molecule new properties. 
+</p>
+
+
+<p>
+The most complex knot yet created is the 819 knot with 192 atoms tied around a central chloride ion. This molecule holds the Guinness World Record for tightest knot in the world, defined as the most crossings per unit length, in this case, eight crossings in 20 nanometers. Since it's knotted around a chloride ion, once the ion is removed, this molecule is one of the <b>strongest chloride binders in existence</b>
+</p>
+
+
+<div id="org3b2c02f" class="figure">
+<p><img src="data/knot_theory/chloride_binder_819_knot-20230907103835.png" alt="chloride_binder_819_knot-20230907103835.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Chloride Binder - 819 Knot</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbc2b458" class="outline-2">
+<h2 id="orgbc2b458"><span class="section-number-2">4.</span> Biology</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+<a href="https://youtube.com/watch?v=8DBhTXM_Br4&t=1675s">00:27:55</a> Type II Topoisomerase is an enzyme that cuts entangled DNA and separates them for copying. 
+</p>
+
+<p>
+Some antibiotics inhibit the Type II Topoisomerase of bacterias to inhibit their replication. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org53d30e3" class="outline-2">
+<h2 id="org53d30e3"><span class="section-number-2">5.</span> Real Life Hacks</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li>Better Shoe Lace Style:  <a href="https://youtube.com/watch?v=8DBhTXM_Br4&t=1726s">00:28:46</a></li>
+<li><p>
+Headphone wires
+</p>
+<ul class="org-ul">
+<li><a href="https://youtube.com/watch?v=8DBhTXM_Br4&t=1808s">00:30:08</a> Confine the wires in small volume because this decreases knotting probability</li>
+</ul>
+
+
+<div id="orgeb6257f" class="figure">
+<p><img src="data/knot_theory/knot_probability-20230907104519.png" alt="knot_probability-20230907104519.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span>Knot Probability</p>
+</div>
+
+<ul class="org-ul">
+<li><a href="https://youtube.com/watch?v=8DBhTXM_Br4&t=1876s">00:31:16</a> Increasing stiffness reduces knotting. So bring two ends together and twist them together</li>
+</ul></li>
+</ul>
+
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="maths.html#ID-761094A4-41A7-4F8E-9C3D-3783BC66D5A2">Maths</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Knot Theory">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>
