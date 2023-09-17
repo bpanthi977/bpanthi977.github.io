@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>HoneyBee</title>
+<title>syscall</title>
 <meta name="author" content="Bibek Panthi" />
 <meta name="generator" content="Org Mode" />
 <style>
@@ -205,123 +205,95 @@
  |
  <a accesskey="H" href="../index.html"> HOME </a>
 </div><div id="preamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2020-09-27 Sun]</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2023-09-16 Sat&gt;</span></span></p>
 </div>
 <div id="content" class="content">
-<h1 class="title">HoneyBee</h1>
+<h1 class="title">syscall</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0bb96c2">1. Test of Honey</a></li>
+<li><a href="#org399c9c0">1. How do syscall work</a></li>
 </ul>
 </div>
 </div>
-<p>
-By: Kapil Pantha
-</p>
 
-<p>
-Eusocial Creatures.
-</p>
-
-<p>
-Popular Bees
-</p>
-<ul class="org-ul">
-<li>Apis mellifera (pahad tira)</li>
-<li>Apis Cerana (terai tira)</li>
-</ul>
-
-<p>
-Jelly (Honey?) type 
-</p>
-<ul class="org-ul">
-<li>Worker Jelly</li>
-<li>Queen Jelly</li>
-</ul>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left">Type</td>
-<td class="org-left">Life Span</td>
-</tr>
-
-<tr>
-<td class="org-left">Queen</td>
-<td class="org-left">3-4 years</td>
-</tr>
-
-<tr>
-<td class="org-left">Worker</td>
-<td class="org-left">100-200 days</td>
-</tr>
-</tbody>
-</table>
-
-<p>
-Can carry pollens upto 1/3 of their weight 
-</p>
-
-<p>
-Two types of honey: 
-</p>
-<ul class="org-ul">
-<li>Solid/Freeze hune (Oil (e.g. mustard, &#x2026; ) ko honey)</li>
-<li>Fluid type (Litchhi, &#x2026; ko honey)</li>
-</ul>
-
-<div id="outline-container-org0bb96c2" class="outline-2">
-<h2 id="org0bb96c2"><span class="section-number-2">1.</span> Test of Honey</h2>
+<div id="outline-container-org399c9c0" class="outline-2">
+<h2 id="org399c9c0"><span class="section-number-2">1.</span> How do syscall work</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+From <a href="https://ayoubomari.medium.com/system-call-how-it-works-4d0d7a452d24">https://ayoubomari.medium.com/system-call-how-it-works-4d0d7a452d24</a> &amp; <a href="https://stackoverflow.com/questions/24036214/how-does-a-system-call-work">https://stackoverflow.com/questions/24036214/how-does-a-system-call-work</a>
+</p>
+
+<ol class="org-ol">
+<li><p>
+sycalls are made through a software interrupt 
+</p>
+
+<p>
+In general, an interrupt can be a hardware interrupt such as a timer interrupt that makes the CPU switch to kernel mode and execute a process switch for example, or it can be a software interrupt which are caused by the program itself, such as a division by zero, a page fault or a .. system call.
+</p></li>
+
+<li><p>
+The instruction <code>int $0x80</code> (in x86 CPU) causes a software interrupt (<code>int</code>) and calls the interrupt handler for system call (<code>0x80</code>)
+</p>
+
+<p>
+Interrupts are handled by the OS by means of a table called the Interrupt Descriptor Table (IDT), which maps each type of interrupt to a function that the OS will execute when the interrupt happens (we call this function an interrupt handler
+</p></li>
+
+<li><p>
+Before calling the interrupt the system call to make and its arguments are stored on specifi registers 
+</p>
+
+<p>
+We store in well defined registers the system call number of the function we want to execute (open, read, fork) and its arguments. For example, the system call number should be stored in EAX register.
+</p></li>
+
+<li><p>
+Executing the interrupt instruction will switch from user mode to kernel mode, the kernel mode stack is retrieved and the user mode register values are are pushed to the stack, and instruction pointer points to the first instruction in the system call handler.
+</p>
+
+<p>
+The process needs to switch from user mode to kernel mode as it is going to execute privileged instructions. Switching from user mode to kernel mode involves many changes in the state and privilege of the current process.
+</p></li>
+
+<li><p>
+Kernel code performs the system call 
+</p>
+
+<p>
+The notion of current privilege is stored in the cpu. For example, in x86 CPUs, this information is available in the CS register under a 2 bits flag called CPL (Current Privilege Level). Its value is 0 under kernel mode, and 3 under user mode. So the first step of a sytem call is to change the value of CPL to 0.
+</p></li>
+
+<li><p>
+<code>iret</code> instruction returns from kernel mode to user mode 
+</p>
+
+<p>
+It pops the user registers that were pushed by int(CS, SS, ESP, EIP, and eflags) and store them back in corresponding registers. Doing this we have switched back to user mode and we are ready to continue the execution of our program.
+</p></li>
+</ol>
+
+
+<hr />
+<h3>References</h3>
+
 <ul class="org-ul">
-<li>Thumb test 
-Thumb ma rakhda melt nahune is good</li>
-<li>Water test 
-Should drop in water ;)</li>
-<li>Fire test: Inflammable</li>
-<li>Heat test: Caramilze quickly and won't become foamy</li>
+<li><a href="https://ayoubomari.medium.com/system-call-how-it-works-4d0d7a452d24">https://ayoubomari.medium.com/system-call-how-it-works-4d0d7a452d24</a> (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="syscall.html#ID-05402C35-670C-4EB4-AED3-05FAFB5560C3">syscall</a>)</li>
+<li><a href="https://stackoverflow.com/questions/24036214/how-does-a-system-call-work">https://stackoverflow.com/questions/24036214/how-does-a-system-call-work</a> (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="syscall.html#ID-05402C35-670C-4EB4-AED3-05FAFB5560C3">syscall</a>)</li>
 </ul>
-
-
-<div id="org6fd18d3" class="figure">
-<p><img src="./data/honeybee/20200927220051-bee_pollen.png" alt="20200927220051-bee_pollen.png" />
-</p>
-<p><span class="figure-number">Figure 1: </span>Bee Pollen</p>
-</div>
-
-<p>
-Cancer treatment using bee venom!!
-</p>
-
-<p>
-Use of Artificial hive reduces time for production of honey. 
-</p>
-
-
-<p>
-$&int;<sub>nil</sub>
-</p>
-
 <hr />
 <h3>Backlinks</h3>
 
 <ul class="org-ul">
-<li><a href="tilottama_podcast.html#ID-c4fb8f47-d7ef-44cc-8503-53db9f792889">Tilottama Podcast</a></li>
+<li><a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a></li>
 </ul>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: HoneyBee">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: syscall">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
 </div>
 </body>
 </html>
