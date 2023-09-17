@@ -1,0 +1,1473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>80,000 Hours</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2023-09-17 Sun&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">80,000 Hours</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org3d87af9">1. Chapter 1: What makes for a dream job</a>
+<ul>
+<li><a href="#org44f42d0">1.1. We can't predict what makes us happy</a></li>
+<li><a href="#orga995831">1.2. Easy and Well Paid != Dream job</a></li>
+<li><a href="#org02b94c2">1.3. Dream Job</a></li>
+<li><a href="#orgb0f7749">1.4. Don't ceaselessly serach for true passion</a></li>
+</ul>
+</li>
+<li><a href="#org558ed4a">2. Chapter 2 &amp; 3: How to make a difference</a>
+<ul>
+<li><a href="#org3a557d4">2.1. Doctor's and their impact</a></li>
+<li><a href="#orgd6b0142">2.2. Easy way to make impact is to donate</a></li>
+<li><a href="#orgae4a0bd">2.3. Vote right or do political advocacy</a></li>
+</ul>
+</li>
+<li><a href="#orgb407f9b">3. Chapter 4: Choose an area to focus</a></li>
+<li><a href="#org53a50c3">4. Chapter 5: World's biggest problems</a>
+<ul>
+<li><a href="#org60e83d7">4.1. Health and Poverty</a></li>
+<li><a href="#orgb895da6">4.2. Future Generation</a></li>
+<li><a href="#org153b2d9">4.3. BioRisk</a></li>
+<li><a href="#org3704d77">4.4. AI Alignment</a></li>
+<li><a href="#org291b6cb">4.5. Effective Altruism</a></li>
+</ul>
+</li>
+<li><a href="#orge99d99f">5. Chapter 6: Which Jobs help people the most?</a>
+<ul>
+<li><a href="#org53d95fb">5.1. Approach 1: Earning to give</a></li>
+<li><a href="#org11e5f94">5.2. Approach 2: Presuade other to Earn to give</a></li>
+<li><a href="#orgb8d99af">5.3. Approach 3: Research</a></li>
+<li><a href="#org676deee">5.4. Approach 4: Government and policy</a></li>
+<li><a href="#org5e5e771">5.5. Approach 5: Building organisations</a></li>
+</ul>
+</li>
+<li><a href="#org7718f5a">6. Chapter 7: Best Long-Term Strategy</a>
+<ul>
+<li><a href="#orgbcc7a42">6.1. Be an Expert</a></li>
+<li><a href="#org661c08f">6.2. Career Capital</a></li>
+</ul>
+</li>
+<li><a href="#orgd25e9ad">7. Chapter 8: How to find the right career for you</a>
+<ul>
+<li><a href="#org614ccd5">7.1. Think like a scientist</a></li>
+<li><a href="#org10a284e">7.2. Being good at your job is more important than you think</a></li>
+<li><a href="#orgbfea9b4">7.3. Going with your gut doesn't work</a></li>
+<li><a href="#orgc5b6480">7.4. Like a scientist: Make hypothesis, and test</a></li>
+<li><a href="#orge88c65c">7.5. Explore early in the career</a></li>
+<li><a href="#orgfc93736">7.6. If unsure, quit</a></li>
+</ul>
+</li>
+<li><a href="#orgafd1ca9">8. Chapter 10: How to get a job</a>
+<ul>
+<li><a href="#orga576d22">8.1. Use connections</a></li>
+<li><a href="#orgf57d3e4">8.2. How to get Referrals</a></li>
+<li><a href="#org9fbe456">8.3. Capitalize you Referrals</a></li>
+<li><a href="#org8a51a45">8.4. Negotiation</a></li>
+</ul>
+</li>
+<li><a href="#orgbb17430">9. Chapter 11: Join a community</a></li>
+<li><a href="#orgb0e3d38">10. Miscellaneous</a>
+<ul>
+<li><a href="#orgda0a6ce">10.1. Productivity Tips</a></li>
+<li><a href="#orgeb701f5">10.2. Surround yourself with great people</a></li>
+<li><a href="#org2a67849">10.3. Apply scientific research into happiness</a></li>
+<li><a href="#org4891fe7">10.4. Learn how to learn</a></li>
+<li><a href="#org599ee62">10.5. Should you goto college?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+source: <a href="books/80,000 Hours.pdf#page=nil">80,000 Hours</a> 
+</p>
+
+
+<p>
+To have a truly fulfilling life, we need to turn outwards rather than inwards. Rather than asking “What’s my passion?,” ask “How can I best contribute to the world?” <a href="./books/80,000 Hours.pdf#page=217">pg. 217</a>
+</p>
+
+<p>
+To do what contributes, build useful skills and apply them to meaningful
+problems. Here’s the three key stages to focus on over time:
+</p>
+
+<ul class="org-ul">
+<li>Explore</li>
+<li>Build career capital to become as great as you can be.</li>
+<li>Deploy.</li>
+</ul>
+
+<div id="outline-container-org3d87af9" class="outline-2">
+<h2 id="org3d87af9"><span class="section-number-2">1.</span> Chapter 1: What makes for a dream job</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+To have a dream job, 
+</p>
+<ul class="org-ul">
+<li>don’t worry too much about money and stress, and</li>
+<li>don’t endlessly self-reflect to find your one true passion.</li>
+<li>Rather, get good at something that helps others.</li>
+</ul>
+
+<p>
+It’s best for you, and it’s best for the world. <a href="./books/80,000 Hours.pdf#page=35">pg. 35</a>
+</p>
+</div>
+
+<div id="outline-container-org44f42d0" class="outline-3">
+<h3 id="org44f42d0"><span class="section-number-3">1.1.</span> We can't predict what makes us happy</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+<a href="./books/80,000 Hours.pdf#page=18">pg. 18</a>
+</p>
+<ul class="org-ul">
+<li>We're not always great at predicting what will make us most happy, and we don’t realise how bad we are.</li>
+<li>we're even bad at remembering how satisfying different experiences were</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga995831" class="outline-3">
+<h3 id="orga995831"><span class="section-number-3">1.2.</span> Easy and Well Paid != Dream job</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-org44f14c9" class="outline-4">
+<h4 id="org44f14c9"><span class="section-number-4">1.2.1.</span> Happiness from Money saturates at around 50k a year</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<ul class="org-ul">
+<li><a href="./books/80,000 Hours.pdf#page=20">pg. 20</a> If we look as life satisfaction: Money makes you happier, but only a little</li>
+<li><a href="./books/80,000 Hours.pdf#page=21">pg. 21</a> If we look at day-to-day happiness, income seems even less important. “Positive affect” is whether people reported feeling happy yesterday. The left axis of the chart below shows the fraction of people who reported “yes.” This line goes flat around $50,000,</li>
+<li><a href="./books/80,000 Hours.pdf#page=22">pg. 22</a> We think there’s a good chance this result is an error, and day-to-day happiness does continue to increase with income, at least a little bit</li>
+</ul>
+
+
+<div id="org9528ba8" class="figure">
+<p><img src="data/80_000_hours/Money-vs-Happiness.png" alt="Money-vs-Happiness.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Happiness vs Money</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6ebdd83" class="outline-4">
+<h4 id="org6ebdd83"><span class="section-number-4">1.2.2.</span> Dont aim for low stress - Sense of control removes Stress</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+<a href="./books/80,000 Hours.pdf#page=23">pg. 23</a>
+</p>
+
+<ul class="org-ul">
+<li>Because strangely high ranking jobs had less stress: studies of high-ranking government and military leaders found they had lower levels of stress hormones and less anxiety, despite sleeping fewer hours, managing more people, and having higher occupational demands.</li>
+<li>Becuase sense of control protects from stress: setting their own schedules and determining how to tackle the challenges they face protects them against the demands of the position.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org961d9b3" class="outline-4">
+<h4 id="org961d9b3"><span class="section-number-4">1.2.3.</span> Seek support, meaningful work and challenge</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+<a href="./books/80,000 Hours.pdf#page=25">pg. 25</a>
+</p>
+
+<p>
+Instead of seeking to avoid stress, seek out a supportive context and meaningful work, and then challenge yourself.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org02b94c2" class="outline-3">
+<h3 id="org02b94c2"><span class="section-number-3">1.3.</span> Dream Job</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+<a href="./books/80,000 Hours.pdf#page=25">pg. 25</a>
+</p>
+
+<p>
+What should you aim for in a dream job?
+</p>
+</div>
+
+<div id="outline-container-org4c10512" class="outline-4">
+<h4 id="org4c10512"><span class="section-number-4">1.3.1.</span> Work that’s engaging</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<ol class="org-ol">
+<li><a href="./books/80,000 Hours.pdf#page=26">pg. 26</a> The freedom to decide how to perform your work.</li>
+<li><a href="./books/80,000 Hours.pdf#page=26">pg. 26</a> Clear tasks, with a clearly defined start and end.</li>
+<li><a href="./books/80,000 Hours.pdf#page=26">pg. 26</a> Variety in the types of tasks.</li>
+<li><a href="./books/80,000 Hours.pdf#page=26">pg. 26</a> Feedback, so you know how well you’re doing.</li>
+</ol>
+
+<p>
+Each of these factors has been shown to correlate with job satisfaction
+</p>
+</div>
+</div>
+<div id="outline-container-orgbca3390" class="outline-4">
+<h4 id="orgbca3390"><span class="section-number-4">1.3.2.</span> Work that helps others</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+<a href="./books/80,000 Hours.pdf#page=26">pg. 26</a> 
+</p>
+
+<p>
+Such work are meaningful, and a key ingeredient for life satisfaction. 
+</p>
+
+<p>
+Helping others isn’t the only route to a meaningful career, but it’s widely accepted by researchers that it’s one of the most powerful. <a href="./books/80,000 Hours.pdf#page=27">pg. 27</a> 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org250499f" class="outline-4">
+<h4 id="org250499f"><span class="section-number-4">1.3.3.</span> Work you're good at</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+<a href="./books/80,000 Hours.pdf#page=27">pg. 27</a>
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="org61035c4"></a>Skill ultimately trumps interest<br />
+<div class="outline-text-5" id="text-1-3-3-1">
+<p>
+That’s not to say you should only do work you’re already good at — but you do want the potential to get good at it. <a href="./books/80,000 Hours.pdf#page=27">pg. 27</a>
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org7f5997a" class="outline-4">
+<h4 id="org7f5997a"><span class="section-number-4">1.3.4.</span> Work with supportive colleagues</h4>
+<div class="outline-text-4" id="text-1-3-4">
+<p>
+<a href="./books/80,000 Hours.pdf#page=28">pg. 28</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge8959c2" class="outline-4">
+<h4 id="orge8959c2"><span class="section-number-4">1.3.5.</span> Work that doesn’t have major negatives</h4>
+<div class="outline-text-4" id="text-1-3-5">
+<p>
+<a href="./books/80,000 Hours.pdf#page=28">pg. 28</a>
+</p>
+
+<p>
+E.g. Commute: The negative consequences of a long commute can be enough to outweigh many other positive factors. <a href="./books/80,000 Hours.pdf#page=29">pg. 29</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org77fd21a" class="outline-4">
+<h4 id="org77fd21a"><span class="section-number-4">1.3.6.</span> Work that fits with the rest of your life</h4>
+<div class="outline-text-4" id="text-1-3-6">
+<p>
+<a href="./books/80,000 Hours.pdf#page=29">pg. 29</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb0f7749" class="outline-3">
+<h3 id="orgb0f7749"><span class="section-number-3">1.4.</span> Don't ceaselessly serach for true passion</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li>If you don’t have a “passion,” don’t worry — you can still find work you’ll become passionate about. <a href="./books/80,000 Hours.pdf#page=31">pg. 31</a></li>
+<li>Don't let the idea of your "one true passion" eliminate other options <a href="./books/80,000 Hours.pdf#page=31">pg. 31</a></li>
+<li>Because you can become passionate about new areas <a href="./books/80,000 Hours.pdf#page=31">pg. 31</a></li>
+</ul>
+
+<p>
+Rather than “follow your passion,” our slogan for a fulfilling career is: get good at something that helps others. Or simply: do what contributes. <a href="./books/80,000 Hours.pdf#page=32">pg. 32</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org558ed4a" class="outline-2">
+<h2 id="org558ed4a"><span class="section-number-2">2.</span> Chapter 2 &amp; 3: How to make a difference</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Due to our fortunate positions in the world, there’s a lot we can do to make a difference without making significant sacrifices, whatever jobs we end up in. <a href="./books/80,000 Hours.pdf#page=56">pg. 56</a>
+</p>
+
+<ol class="org-ol">
+<li>Give 10% of your income to effective charities.</li>
+<li>Use your political influence, such as by voting.</li>
+<li>Help others have an impact.</li>
+</ol>
+</div>
+
+<div id="outline-container-org3a557d4" class="outline-3">
+<h3 id="org3a557d4"><span class="section-number-3">2.1.</span> Doctor's and their impact</h3>
+<div class="outline-text-3" id="text-2-1">
+<blockquote>
+<p>
+Researchers largely agree that medicine has only increased average life expectancy by a few years. Most gains in life expectancy over the last 100 years have instead occurred due to better nutrition, improved sanitation, increased wealth, and other factors. <a href="./books/80,000 Hours.pdf#page=39">pg. 39</a>
+</p>
+</blockquote>
+</div>
+
+<div id="outline-container-org3c81b73" class="outline-4">
+<h4 id="org3c81b73"><span class="section-number-4">2.1.1.</span> Impact of doctors saturate at around 150 doctors per 1 Lakh people</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+The curve goes nearly flat once you have more than 150 doctors per 100,000 people. After this point (which almost all developed countries meet), additional doctors only achieve a small impact on average. <a href="./books/80,000 Hours.pdf#page=40">pg. 40</a>
+</p>
+
+
+<div id="org7a1c37e" class="figure">
+<p><img src="data/80_000_hours/Doctor-and-DALYs.png" alt="Doctor-and-DALYs.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>DALYs (Disability-Adjusted Life Years) per 100,000 people vs. Doctors per 100,000 people</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd6b0142" class="outline-3">
+<h3 id="orgd6b0142"><span class="section-number-3">2.2.</span> Easy way to make impact is to donate</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>Give 10% of your income to the world’s poorest people. It’s as simple as that. <a href="./books/80,000 Hours.pdf#page=48">pg. 48</a></li>
+</ul>
+
+
+<blockquote>
+<p>
+Normally when we think of doing good with our careers, we think of paths like becoming a teacher or charity worker, which often pay under half what you could earn in the private sector, and may not align with your skills or interests. Compared to switching to those careers, giving 10% of your income could easily be less of a sacrifice.  <a href="./books/80,000 Hours.pdf#page=50">pg. 50</a>
+</p>
+</blockquote>
+</div>
+
+<div id="outline-container-org9918561" class="outline-4">
+<h4 id="org9918561"><span class="section-number-4">2.2.1.</span> You can make more impact than a doctor</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+With a typical US graduate salary, donating 10% of your income to the Against Malaria Foundation could therefore save more than one life every year. <a href="./books/80,000 Hours.pdf#page=51">pg. 51</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2e440e6" class="outline-4">
+<h4 id="org2e440e6"><span class="section-number-4">2.2.2.</span> If all the rich donated 10%, world problems could go away</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<blockquote>
+<p>
+If everyone in the richest 10% of the world’s population donated 10% of their income, that would be $5 trillion per year. That would be enough to double scientific research funding, raise everyone in the world above the $2.15 per day poverty line, provide universal basic education, and still have plenty left to fund a renaissance in the arts, go to Mars, and then invest $1 trillion in mitigating climate change. None of this would be straightforward to achieve, but it at least illustrates the enormous potential of greater giving.49  <a href="./books/80,000 Hours.pdf#page=52">pg. 52</a>
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org0fc7c8c" class="outline-4">
+<h4 id="org0fc7c8c"><span class="section-number-4">2.2.3.</span> &gt;60,000k a year, you are in global 1%</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<p>
+If you earn $60,000 per year after taxes and don’t have kids, then globally speaking, you are the 1%. <a href="./books/80,000 Hours.pdf#page=53">pg. 53</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgae4a0bd" class="outline-3">
+<h3 id="orgae4a0bd"><span class="section-number-3">2.3.</span> Vote right or do political advocacy</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+<a href="./books/80,000 Hours.pdf#page=54">pg. 54</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb407f9b" class="outline-2">
+<h2 id="orgb407f9b"><span class="section-number-2">3.</span> Chapter 4: Choose an area to focus</h2>
+<div class="outline-text-2" id="text-3">
+<ol class="org-ol">
+<li>Is this problem lage in scale? <a href="./books/80,000 Hours.pdf#page=59">pg. 59</a></li>
+<li>Is this problem neglected? <a href="./books/80,000 Hours.pdf#page=61">pg. 61</a></li>
+<li>Is this problem solvable? <a href="./books/80,000 Hours.pdf#page=62">pg. 62</a></li>
+</ol>
+
+<p>
+So, 
+</p>
+<ul class="org-ul">
+<li>A problem could be worth tackling if it’s extremely big and neglected, even if it seems hard to solve. <a href="./books/80,000 Hours.pdf#page=64">pg. 64</a></li>
+<li>But it should fit you: There’s no point working on a problem if you can’t find any roles that are a good fit for you: you won’t be satisfied or have much impact. <a href="./books/80,000 Hours.pdf#page=64">pg. 64</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org53a50c3" class="outline-2">
+<h2 id="org53a50c3"><span class="section-number-2">4.</span> Chapter 5: World's biggest problems</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org60e83d7" class="outline-3">
+<h3 id="org60e83d7"><span class="section-number-3">4.1.</span> Health and Poverty</h3>
+<div class="outline-text-3" id="text-4-1">
+</div>
+<div id="outline-container-orgd82eff6" class="outline-4">
+<h4 id="orgd82eff6"><span class="section-number-4">4.1.1.</span> Poor in US is not poor</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<p>
+Even someone living on the US poverty line of $14,580 per year (as of 2023)66 is richer than about 85% of the world’s population,67 and about 20 times wealthier than the world’s poorest 700 million, who mostly live in Central America, Africa, and South Asia on under $800 per year.68 These figures are already adjusted for the fact that money goes further in poor countries (purchasing power parity). <a href="./books/80,000 Hours.pdf#page=68">pg. 68</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org199e99f" class="outline-4">
+<h4 id="org199e99f"><span class="section-number-4">4.1.2.</span> Diarrohea takes more lives than war</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<p>
+<a href="./books/80,000 Hours.pdf#page=69">pg. 69</a>
+</p>
+
+<p>
+Dr. Nalin develpoped Oral Rehydration Therapy as treatment for diarrhoea. Over the second half of the 20th century, efforts by Dr Nalin and others did as much to save lives as achieving world peace over the same period would have done. 
+</p>
+
+<ul class="org-ul">
+<li>The number of deaths each year due to diarrhoea have fallen by 3 million over the last five decades</li>
+<li>All wars and political famines killed about 2 million people per year over the second half of the 20th century.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0d6fbe7" class="outline-4">
+<h4 id="org0d6fbe7"><span class="section-number-4">4.1.3.</span> Health is measured in: Quality-Adjusted Life Year</h4>
+<div class="outline-text-4" id="text-4-1-3">
+<p>
+Health is measured in a standard unit used by health economists, called the “quality-adjusted life year.” <a href="./books/80,000 Hours.pdf#page=71">pg. 71</a>
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb895da6" class="outline-3">
+<h3 id="orgb895da6"><span class="section-number-3">4.2.</span> Future Generation</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Focusing on future generations might be even more effective than tackling global health  <a href="./books/80,000 Hours.pdf#page=74">pg. 74</a>
+</p>
+</div>
+
+<div id="outline-container-org632315c" class="outline-4">
+<h4 id="org632315c"><span class="section-number-4">4.2.1.</span> They can't speak, their plight is abstract</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<ul class="org-ul">
+<li>First, future generations matter, but they can’t vote, they can’t buy things, and they can’t stand up for their interests. This means our system neglects them. You can see this in the global failure to come to an international agreement to tackle climate change that actually works.  <a href="./books/80,000 Hours.pdf#page=74">pg. 74</a></li>
+
+<li>Second, their plight is abstract. We’re reminded of issues like global poverty and factory farming far more often. But we can’t so easily visualise suffering that will happen in the future. <a href="./books/80,000 Hours.pdf#page=74">pg. 74</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org153b2d9" class="outline-3">
+<h3 id="org153b2d9"><span class="section-number-3">4.3.</span> BioRisk</h3>
+<div class="outline-text-3" id="text-4-3">
+<ul class="org-ul">
+<li>In 2006, The Guardian ordered segments of smallpox DNA via mail. If assembled into a complete strand and transmitted to 10 people, a study estimated it could infect up to 2.2 million people in 180 days <a href="./books/80,000 Hours.pdf#page=76">pg. 76</a></li>
+
+<li>Lots of death: COVID-19 disrupted the world and has, so far, killed over 10 million people.92</li>
+<li>But not much focus: We estimate that over $600 billion is spent annually on efforts to fight climate change, compared to $1–$10 billion towards biosecurity aimed at addressing the worst-case pandemics. <a href="./books/80,000 Hours.pdf#page=77">pg. 77</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3704d77" class="outline-3">
+<h3 id="org3704d77"><span class="section-number-3">4.4.</span> AI Alignment</h3>
+<div class="outline-text-3" id="text-4-4">
+<ul class="org-ul">
+<li>Low investment: Billions of dollars are spent trying to make artificial intelligence more powerful, but hardly any effort is devoted to making sure that those added capabilities are implemented safely and for the benefit of humanity.  <a href="./books/80,000 Hours.pdf#page=78">pg. 78</a></li>
+
+<li>Few researchers: We estimate the number of full-time researchers working directly on the alignment problem is around 300, making it over 10 times more neglected than biosecurity. <a href="./books/80,000 Hours.pdf#page=81">pg. 81</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org291b6cb" class="outline-3">
+<h3 id="org291b6cb"><span class="section-number-3">4.5.</span> Effective Altruism</h3>
+<div class="outline-text-3" id="text-4-5">
+<p>
+If you’re uncertain which problems will be most pressing in the future, a third strategy is to simply save money or invest in your career capital (which we’ll get to in chapter 7), so you’re in a better position to do good when you have more information. <a href="./books/80,000 Hours.pdf#page=83">pg. 83</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge99d99f" class="outline-2">
+<h2 id="orge99d99f"><span class="section-number-2">5.</span> Chapter 6: Which Jobs help people the most?</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org53d95fb" class="outline-3">
+<h3 id="org53d95fb"><span class="section-number-3">5.1.</span> Approach 1: Earning to give</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+<a href="./books/80,000 Hours.pdf#page=90">pg. 90</a>
+</p>
+
+<p>
+People who are a good fit for a higher-earning option can donate to these organisations, making a large indirect contribution.
+</p>
+
+<p>
+Won’t people earning to give end up being influenced by their peers to spend the money on luxuries rather than donating? But this doesn't happen as offten as you might think. <a href="./books/80,000 Hours.pdf#page=95">pg. 95</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org11e5f94" class="outline-3">
+<h3 id="org11e5f94"><span class="section-number-3">5.2.</span> Approach 2: Presuade other to Earn to give</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+<a href="./books/80,000 Hours.pdf#page=96">pg. 96</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb8d99af" class="outline-3">
+<h3 id="orgb8d99af"><span class="section-number-3">5.3.</span> Approach 3: Research</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+<a href="./books/80,000 Hours.pdf#page=98">pg. 98</a>
+</p>
+
+<p>
+When you look at the problems we’re most concerned about — like preventing future pandemics or reducing risks from AI systems — many are mainly constrained by a need for additional research.. 
+</p>
+
+<p>
+Research is especially promising when you’re a very good fit, because the best researchers achieve much more than the median. <a href="./books/80,000 Hours.pdf#page=100">pg. 100</a>
+</p>
+
+<p>
+While lots of research happens in academia, there are also many research positions elsewhere. For example, many private companies develop crucial technology — BioNTech is now famous for developing the first COVID vaccine— while think tanks often do important research in policy.  <a href="./books/80,000 Hours.pdf#page=101">pg. 101</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org676deee" class="outline-3">
+<h3 id="org676deee"><span class="section-number-3">5.4.</span> Approach 4: Government and policy</h3>
+<div class="outline-text-3" id="text-5-4">
+<p>
+<a href="./books/80,000 Hours.pdf#page=103">pg. 103</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5e5e771" class="outline-3">
+<h3 id="org5e5e771"><span class="section-number-3">5.5.</span> Approach 5: Building organisations</h3>
+<div class="outline-text-3" id="text-5-5">
+<p>
+<a href="./books/80,000 Hours.pdf#page=104">pg. 104</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7718f5a" class="outline-2">
+<h2 id="org7718f5a"><span class="section-number-2">6.</span> Chapter 7: Best Long-Term Strategy</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-orgbcc7a42" class="outline-3">
+<h3 id="orgbcc7a42"><span class="section-number-3">6.1.</span> Be an Expert</h3>
+<div class="outline-text-3" id="text-6-1">
+<blockquote>
+<p>
+A small percentage of the workers in any given domain is responsible for the bulk of the work. Generally, the top 10% of the most prolific elite can be credited with around 50% of all contributions, whereas the bottom 50% of the least productive workers can claim only 15% of the total work, and the most productive contributor is usually about 100 times more prolific than the least. <a href="./books/80,000 Hours.pdf#page=109">pg. 109</a>
+</p>
+</blockquote>
+
+
+<ul class="org-ul">
+<li>Experts only reach their peak abilities between age 30 to 60 <a href="./books/80,000 Hours.pdf#page=116">pg. 116</a></li>
+<li>Epert-level performance in established fields usually requires 10 to 30 years of focused practice.  <a href="./books/80,000 Hours.pdf#page=117">pg. 117</a></li>
+</ul>
+
+<blockquote>
+<p>
+“I have never found a convincing case for anyone developing extraordinary abilities without intense, extended practice.”
+</p>
+<ul class="org-ul">
+<li>K. Anders Ericsson (Psychologist) <a href="./books/80,000 Hours.pdf#page=117">pg. 117</a></li>
+</ul>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org661c08f" class="outline-3">
+<h3 id="org661c08f"><span class="section-number-3">6.2.</span> Career Capital</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+<a href="./books/80,000 Hours.pdf#page=117">pg. 117</a>
+</p>
+
+<p>
+By “career capital,” we mean anything that puts you in a better position to make a difference or secure a fulfilling career in the future.
+</p>
+
+<p>
+Early in your career, it’s more important to ensure you invest in your skills and get the training you need to maximise your long-term impact.
+</p>
+
+<p>
+Focusing on impact too much too early can even be shortsighted, because it can preclude being in an even better position later. This means that for most people, the top priority early in their career is to build what we call career capital. 
+</p>
+</div>
+
+<div id="outline-container-org96c20e3" class="outline-4">
+<h4 id="org96c20e3"><span class="section-number-4">6.2.1.</span> Five Components of Career Capital</h4>
+<div class="outline-text-4" id="text-6-2-1">
+<p>
+<a href="./books/80,000 Hours.pdf#page=118">pg. 118</a>
+</p>
+
+<ul class="org-ul">
+<li>Skills and knowledge</li>
+
+<li>Connections</li>
+
+<li><p>
+Credentials
+</p>
+
+<p>
+We don’t just mean formal credentials like having a law degree, but also your achievements and reputation — or anything else that acts as a good signal to future collaborators or employers. If you’re a writer, it could be the quality of your blog. If you’re a coder, it might be your GitHub.  <a href="./books/80,000 Hours.pdf#page=119">pg. 119</a>
+</p></li>
+
+<li>Character</li>
+
+<li><p>
+Runway: How much money will you save in this job? Your “runway” is how long you could comfortably live with no income. <a href="./books/80,000 Hours.pdf#page=119">pg. 119</a>
+</p>
+
+<p>
+We recommend aiming for at least six months of runway to maintain your financial security, while 12–18 months of runway gives you the flexibility to make a major career change.
+</p></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1fd24cd" class="outline-4">
+<h4 id="org1fd24cd"><span class="section-number-4">6.2.2.</span> How to get Career Capital</h4>
+<div class="outline-text-4" id="text-6-2-2">
+<p>
+<a href="./books/80,000 Hours.pdf#page=120">pg. 120</a>
+</p>
+
+<p>
+Get good at something useful.
+</p>
+
+<p>
+Gain abilities that are valued in the job market — making it easier to bargain for the ingredients of a fulfilling job — as well as those that are needed in tackling the world’s most pressing problems
+</p>
+
+<ul class="org-ul">
+<li><p>
+Choose valuable skills to learn
+</p>
+
+<p>
+We covered some broad skill types that we think are valuable for doing good in the previous chapter: organisation building, communication and community building, research, earning to give, and government and policy.
+</p></li>
+
+<li>Find skills that are a good fit for you</li>
+
+<li>Practice</li>
+
+<li>Increase your chances of being in the right place at the right time</li>
+</ul>
+
+<p>
+In short, try to maximise your rate of useful learning <a href="./books/80,000 Hours.pdf#page=121">pg. 121</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9408d8b" class="outline-4">
+<h4 id="org9408d8b"><span class="section-number-4">6.2.3.</span> Concrete Steps for gaining career capital</h4>
+<div class="outline-text-4" id="text-6-2-3">
+<p>
+<a href="./books/80,000 Hours.pdf#page=124">pg. 124</a>
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="org22cf35c"></a>Work at a growing organisation that has a reputation for high performance in your path<br />
+<div class="outline-text-5" id="text-6-2-3-1">
+<p>
+<a href="./books/80,000 Hours.pdf#page=124">pg. 124</a>
+</p>
+
+<ul class="org-ul">
+<li>Projects don’t (automatically) have well-defined scopes or success criteria. Great performance might not be possible, or could take many years.</li>
+</ul>
+
+
+<ul class="org-ul">
+<li>Work with any high-performing, high-integrity team, where you can be mentored in the highly useful skill of generally getting stuff done at work.</li>
+
+<li>The private sector might actually be a better place to learn productivity,  <a href="./books/80,000 Hours.pdf#page=125">pg. 125</a></li>
+
+<li>Even putting impact aside, working in an organisation with a social mission can offer major advantages, such as getting to learn about a pressing global problem, meeting and being around other people who want to do good, and more motivation and meaning.</li>
+
+<li>If your goal is career capital, you should prioritise working somewhere you’ll get good mentoring and feedback on your work. It’s hard to learn without good teaching or role models. Likewise, the character of the people you work with will rub off on you. <a href="./books/80,000 Hours.pdf#page=126">pg. 126</a></li>
+</ul>
+
+
+<p>
+A promising tech startup, which can potentially combine many of the benefits above: high- performing teams with strong incentives to produce results, rapid growth, and the opportunity to gain a generalist skillset. If the startup succeeds, you’ll also get a good credential and money. Of course, a lot of startups are terribly run, and likely to fail. <a href="./books/80,000 Hours.pdf#page=126">pg. 126</a>
+</p>
+</div>
+</li>
+
+<li><a id="org6e3186d"></a>Go to graduate school in carefully chosen subjects<br />
+<div class="outline-text-5" id="text-6-2-3-2">
+<p>
+<a href="./books/80,000 Hours.pdf#page=127">pg. 127</a>
+</p>
+
+<p>
+If we had to pick, the most attractive grad programmes might be economics or machine learning PhDs.
+</p>
+</div>
+</li>
+
+<li><a id="org4ac8fa8"></a>Develop a useful skill<br />
+<div class="outline-text-5" id="text-6-2-3-3">
+<p>
+<a href="./books/80,000 Hours.pdf#page=133">pg. 133</a>
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="org9669c7d"></a>Management<br />
+<div class="outline-text-6" id="text-6-2-3-3-1">
+<p>
+<a href="./books/80,000 Hours.pdf#page=134">pg. 134</a>
+</p>
+
+<ul class="org-ul">
+<li>whether it’s managing people, long and complex projects, or both.</li>
+<li>find ways to start managing on a small scale. Ideally, work under a great manager or find a mentor or coach who is, and then regularly check in with them about what is and isn’t working.</li>
+<li>Make sure to collect feedback from the people you manage.</li>
+</ul>
+</div>
+</li>
+
+<li><a id="org9c610d1"></a>Sales and Negotiation<br />
+<div class="outline-text-6" id="text-6-2-3-3-2">
+<p>
+<a href="./books/80,000 Hours.pdf#page=135">pg. 135</a>
+</p>
+
+<p>
+Sales can feel adversarial — like you’re trying to persuade people to do something against their interest. But the best kind of sales is collaborative: it’s about finding ways to meet the needs of both parties
+</p>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="orgd71bf29"></a>Do anything where you might excel (even if it’s a bit random)<br />
+<div class="outline-text-5" id="text-6-2-3-4">
+<p>
+<a href="./books/80,000 Hours.pdf#page=136">pg. 136</a>
+</p>
+
+<p>
+The “soft” aspects of career capital — your skills, achievements, connections, and reputation — are equally important
+</p>
+
+<p>
+Doing great work builds your reputation, and that allows you to make connections with other high achievers. <a href="./books/80,000 Hours.pdf#page=136">pg. 136</a>
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgad5babf" class="outline-4">
+<h4 id="orgad5babf"><span class="section-number-4">6.2.4.</span> Transferable Vs Specialist Career Capital</h4>
+<div class="outline-text-4" id="text-6-2-4">
+<p>
+<a href="./books/80,000 Hours.pdf#page=139">pg. 139</a>
+</p>
+
+<p>
+All else equal, when you’re earlier in your career, you should focus more on transferable career capital.
+</p>
+
+<p>
+Unfortunately, however, all else is often not equal. While specialist career capital gives you fewer options, it’s often necessary to enter the most impactful jobs, so it’s still probably worth focusing on at some point.
+</p>
+
+<p>
+*
+</p>
+
+<blockquote>
+<p>
+Career capital is anything that puts you in a better position to make a difference in the future, including skills, connections, credentials, character, and financial runway. To get career capital, we suggest getting good at something useful. To do that, you need to: 
+</p>
+<ul class="org-ul">
+<li>Focus on learning valuable skills.</li>
+<li>Learn skills that are a good fit for you.</li>
+<li>Practice for many years with good mentorship.</li>
+<li>Increase your chances of being in the right place at the right time (e.g. by working in new and rapidly growing fields).  <a href="./books/80,000 Hours.pdf#page=143">pg. 143</a></li>
+</ul>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd25e9ad" class="outline-2">
+<h2 id="orgd25e9ad"><span class="section-number-2">7.</span> Chapter 8: How to find the right career for you</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+<a href="./books/80,000 Hours.pdf#page=145">pg. 145</a>
+</p>
+</div>
+
+<div id="outline-container-org614ccd5" class="outline-3">
+<h3 id="org614ccd5"><span class="section-number-3">7.1.</span> Think like a scientist</h3>
+<div class="outline-text-3" id="text-7-1">
+<ul class="org-ul">
+<li>Asking “What am I good at?” needlessly narrows your options. It’s better to ask: “What could I become good at?”</li>
+
+<li>But the bigger problem is that these methods aren’t reliable.  <a href="./books/80,000 Hours.pdf#page=145">pg. 145</a></li>
+
+<li>Instead, you should be prepared to think like a scientist — learn about and try out your options, looking outwards rather than inwards. * <a href="./books/80,000 Hours.pdf#page=145">pg. 145</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org10a284e" class="outline-3">
+<h3 id="org10a284e"><span class="section-number-3">7.2.</span> Being good at your job is more important than you think</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+<a href="./books/80,000 Hours.pdf#page=146">pg. 146</a>
+</p>
+
+<ul class="org-ul">
+<li>First, the most successful people in a field account for a disproportionately large fraction of the impact.</li>
+
+<li><p>
+Second, as we argued, being successful in your field gives you more career capital. 
+</p>
+
+<p>
+This sounds obvious but can be a big deal. Generally being known as a person who gets shit done and is great at what they do can open all sorts of (often surprising) opportunities. <a href="./books/80,000 Hours.pdf#page=147">pg. 147</a>
+</p></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgbfea9b4" class="outline-3">
+<h3 id="orgbfea9b4"><span class="section-number-3">7.3.</span> Going with your gut doesn't work</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+<a href="./books/80,000 Hours.pdf#page=149">pg. 149</a>
+</p>
+
+<p>
+Why introspection, going with your gut, and career tests don’t work?
+</p>
+
+
+<ul class="org-ul">
+<li>Almost all of the tests (IQ, Intervies, Peer ratings, Job knowledge, &#x2026;) are fairly bad. A correlation with job performance of 0.6 (for IQ) is pretty weak. And the accuracy for longer-term predictions is probably even worse <a href="./books/80,000 Hours.pdf#page=150">pg. 150</a></li>
+</ul>
+</div>
+
+<div id="outline-container-org1f4ae79" class="outline-4">
+<h4 id="org1f4ae79"><span class="section-number-4">7.3.1.</span> It’s hard to train our gut instinct</h4>
+<div class="outline-text-4" id="text-7-3-1">
+<p>
+<a href="./books/80,000 Hours.pdf#page=151">pg. 151</a>
+</p>
+
+<p>
+It’s hard to train our gut instinct when, 
+</p>
+
+<ol class="org-ol">
+<li>The results of our decisions take a long time to arrive.</li>
+<li>We have few opportunities to practise.</li>
+<li>The situation keeps changing.</li>
+</ol>
+
+
+<p>
+This is exactly the situation with career choices: 
+</p>
+<ol class="org-ol">
+<li>we only make a couple of major career decisions in our life,</li>
+<li>it takes years to see the results,</li>
+<li>and the job market keeps changing.p</li>
+</ol>
+
+<p>
+Your gut can still give you clues about the best career. It can tell you things like “I don’t trust this person” or “I’m not excited by this project.” But you can’t simply “go with your gut.”
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc5b6480" class="outline-3">
+<h3 id="orgc5b6480"><span class="section-number-3">7.4.</span> Like a scientist: Make hypothesis, and test</h3>
+<div class="outline-text-3" id="text-7-4">
+<p>
+<a href="./books/80,000 Hours.pdf#page=153">pg. 153</a>
+</p>
+
+<p>
+If it’s hard to predict where you’ll perform best ahead of time, and going with your gut intuition doesn’t work, then we need to take an empirical approach:
+</p>
+
+<ol class="org-ol">
+<li>Make some best guesses (hypotheses) about which options seem best.</li>
+<li>Identify your key uncertainties about those hypotheses.</li>
+<li>Go and investigate those uncertainties.</li>
+</ol>
+
+
+<p>
+And even when your investigation is complete and you start a job, that too is another experiment. After you’ve tried the job for a couple of years, update your best guesses, and repeat.
+</p>
+
+<p>
+Finding the right career for you isn’t something you’ll figure out right away — it’s a step-by-step
+</p>
+</div>
+
+<div id="outline-container-orga7826bf" class="outline-4">
+<h4 id="orga7826bf"><span class="section-number-4">7.4.1.</span> Cheap Tests for potential careers</h4>
+<div class="outline-text-4" id="text-7-4-1">
+<p>
+<a href="./books/80,000 Hours.pdf#page=155">pg. 155</a>
+</p>
+
+<ul class="org-ul">
+<li>Read our relevant career reviews,</li>
+<li>Speak to someone</li>
+<li>Read one or two books. (20 hours)</li>
+<li>Look for a relevant project that might take 1–4 weeks of work</li>
+<li>Only then, consider taking on a 2– to 24–month commitment</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org12fefc4" class="outline-4">
+<h4 id="org12fefc4"><span class="section-number-4">7.4.2.</span> Try something</h4>
+<div class="outline-text-4" id="text-7-4-2">
+<p>
+You’ll never be certain about which option is best, and even worse, you may never even feel confident in your best guess <a href="./books/80,000 Hours.pdf#page=156">pg. 156</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgda622a5" class="outline-4">
+<h4 id="orgda622a5"><span class="section-number-4">7.4.3.</span> Stop when your best guess stops changing</h4>
+<div class="outline-text-4" id="text-7-4-3">
+<p>
+So when should you stop your research and try something? 
+</p>
+
+<p>
+When your best guess stops changing. <a href="./books/80,000 Hours.pdf#page=156">pg. 156</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge88c65c" class="outline-3">
+<h3 id="orge88c65c"><span class="section-number-3">7.5.</span> Explore early in the career</h3>
+<div class="outline-text-3" id="text-7-5">
+<p>
+To get a better sense of your potential over the long term, you should try to look at your rate of improvement rather than just recent performance. <a href="./books/80,000 Hours.pdf#page=158">pg. 158</a>
+</p>
+
+<p>
+Suppose you’ve decided to try a job for a few years. You now face a tradeoff: should you stick with it, or quit with the hope of finding something better? Many successful people explored a lot early in their career.  <a href="./books/80,000 Hours.pdf#page=159">pg. 159</a>
+</p>
+
+<p>
+In the book Range: Why Generalists Triumph in a Specialized World, David Epstein argues that most people try several paths, and that athletes who try several sports before settling on one tend to be more successful. 
+</p>
+
+<p>
+A 2018 study in Nature found that “hot streaks” among creatives and scientists tended to follow periods of exploring several areas.179  <a href="./books/80,000 Hours.pdf#page=160">pg. 160</a>
+</p>
+
+<ul class="org-ul">
+<li>Explore more when you’re young  <a href="./books/80,000 Hours.pdf#page=160">pg. 160</a></li>
+<li>Consider trying several paths (with careful ordering)  <a href="./books/80,000 Hours.pdf#page=161">pg. 161</a></li>
+<li>Try something on the side <a href="./books/80,000 Hours.pdf#page=162">pg. 162</a></li>
+<li>Consider including a wildcard <a href="./books/80,000 Hours.pdf#page=163">pg. 163</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgfc93736" class="outline-3">
+<h3 id="orgfc93736"><span class="section-number-3">7.6.</span> If unsure, quit</h3>
+<div class="outline-text-3" id="text-7-6">
+<p>
+<a href="./books/80,000 Hours.pdf#page=165">pg. 165</a>
+</p>
+
+<p>
+The sunk cost bias leads us to expect people to:
+</p>
+<ul class="org-ul">
+<li>Continue with their current path for too long.</li>
+<li>Want to avoid the short-term costs of switching.</li>
+<li>Be averse to leaping into an unknown new option.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgafd1ca9" class="outline-2">
+<h2 id="orgafd1ca9"><span class="section-number-2">8.</span> Chapter 10: How to get a job</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-orga576d22" class="outline-3">
+<h3 id="orga576d22"><span class="section-number-3">8.1.</span> Use connections</h3>
+<div class="outline-text-3" id="text-8-1">
+<ul class="org-ul">
+<li>Which would you prefer: a recommendation from someone you trust, or 20 CVs from people who saw your job listing on indeed.com? <a href="./books/80,000 Hours.pdf#page=192">pg. 192</a>
+
+<ul class="org-ul">
+<li>Many recruiters consider referrals to be the best method of finding candidates.</li>
+
+<li>But job seekers usually get things backwards — they start with the methods that recruiters least like. This is not optimal.</li>
+</ul></li>
+
+<li>Applicants find around 50% of jobs through connections,200 and many are never advertised.  <a href="./books/80,000 Hours.pdf#page=193">pg. 193</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf57d3e4" class="outline-3">
+<h3 id="orgf57d3e4"><span class="section-number-3">8.2.</span> How to get Referrals</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+<a href="./books/80,000 Hours.pdf#page=194">pg. 194</a>
+</p>
+<ul class="org-ul">
+<li>You need to master the art of asking for introductions. W</li>
+<li>Focus your profile on your most impressive accomplishments. Be as concrete as possible Cut the rest. It’s better to have two impressive achievements than two impressive achievements and three weak ones.</li>
+<li>If you already know someone in the industry who can hire people, then ask for a meeting to discuss opportunities in the industry.</li>
+<li>There doesn’t need to be an open position — employers will often create positions for good people.</li>
+<li>To find out who your connections know, use LinkedIn, Twitter, or other social networks. Say you want to work at Airbnb. Go to LinkedIn and search “Airbnb.” It’ll show a list of all your contacts who work at Airbnb, followed by connections of connections who work at Airbnb. Pick the person with the most mutual connections and get in touch.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9fbe456" class="outline-3">
+<h3 id="org9fbe456"><span class="section-number-3">8.3.</span> Capitalize you Referrals</h3>
+<div class="outline-text-3" id="text-8-3">
+<p>
+<a href="./books/80,000 Hours.pdf#page=200">pg. 200</a>
+</p>
+
+<p>
+When you meet an employer, ask lots of questions to understand their challenges. Discuss how you might be able to contribute to solving these challenges. This is exactly what great salespeople do. A survey of research on sales concluded “there is a clear statistical association between the use of questions and the success of the interaction.”
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8a51a45" class="outline-3">
+<h3 id="org8a51a45"><span class="section-number-3">8.4.</span> Negotiation</h3>
+<div class="outline-text-3" id="text-8-4">
+<p>
+<a href="./books/80,000 Hours.pdf#page=203">pg. 203</a>
+</p>
+
+<p>
+Most people are so happy to get a job, or awkward about the idea of negotiating, that they never try. But 10 minutes of negotiation could mean major benefits over the next couple of years. So the key message here is to actually consider doing it.
+</p>
+
+<p>
+Negotiation is not always appropriate. 
+</p>
+<ul class="org-ul">
+<li>Don’t do it if you’re only narrowly better than the other candidates or have no alternatives.</li>
+<li>Don’t negotiate until the employer has made an offer — it looks bad to start negotiating during the interview.</li>
+</ul>
+</div>
+
+<div id="outline-container-orgc21ba5b" class="outline-4">
+<h4 id="orgc21ba5b"><span class="section-number-4">8.4.1.</span> How to negotiate</h4>
+<div class="outline-text-4" id="text-8-4-1">
+<p>
+<a href="./books/80,000 Hours.pdf#page=204">pg. 204</a>
+</p>
+
+<ul class="org-ul">
+<li>Explain the value you’ll give the employer, and why it’s justified to give you the benefits you want.</li>
+
+<li>Negotiate after you’ve started</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbb17430" class="outline-2">
+<h2 id="orgbb17430"><span class="section-number-2">9.</span> Chapter 11: Join a community</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+<a href="./books/80,000 Hours.pdf#page=209">pg. 209</a>
+</p>
+
+<p>
+One of the most powerful ways to improve your career — join a community.
+</p>
+
+<ul class="org-ul">
+<li>Don't get into echo chamber: It’s healthy to spend time in several communities, so your sense of your identity and connections aren’t too dependent on one group or set of ideas, which can make the views of the group hard to question and have an ‘echo chamber’ effect. <a href="./books/80,000 Hours.pdf#page=212">pg. 212</a></li>
+</ul>
+
+
+<ul class="org-ul">
+<li>By “community,” we mean something very broad. It could be anything from a casual group of friends who are interested in the same thing, to larger movements, like animal welfare, with conferences and websites.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb0e3d38" class="outline-2">
+<h2 id="orgb0e3d38"><span class="section-number-2">10.</span> Miscellaneous</h2>
+<div class="outline-text-2" id="text-10">
+</div>
+<div id="outline-container-orgda0a6ce" class="outline-3">
+<h3 id="orgda0a6ce"><span class="section-number-3">10.1.</span> Productivity Tips</h3>
+<div class="outline-text-3" id="text-10-1">
+</div>
+<div id="outline-container-org7dd0d2a" class="outline-4">
+<h4 id="org7dd0d2a"><span class="section-number-4">10.1.1.</span> Use pomodoro to fight procrastination</h4>
+<div class="outline-text-4" id="text-10-1-1">
+<p>
+<a href="./books/80,000 Hours.pdf#page=236">pg. 236</a>
+</p>
+
+<p>
+Be more focused by using the pomodoro technique. Whenever you need to work on a task, set a timer, and only focus on that task for 25 minutes. It’s hard to imagine a simpler technique, but many people find it helps them to overcome procrastination and be more focused, making a major difference to how much they can get done each day.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org290bb66" class="outline-4">
+<h4 id="org290bb66"><span class="section-number-4">10.1.2.</span> Block Social Media</h4>
+<div class="outline-text-4" id="text-10-1-2">
+<p>
+<a href="./books/80,000 Hours.pdf#page=237">pg. 237</a>
+</p>
+
+<p>
+Block social media. It’s designed to be addictive, so it can ruin your focus. Changing tasks a lot makes you less productive due to attention residue. For this reason, many people have found tools that block social media during work hours, or for a certain amount of time each day, to majorly boost their productivity.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgeb701f5" class="outline-3">
+<h3 id="orgeb701f5"><span class="section-number-3">10.2.</span> Surround yourself with great people</h3>
+<div class="outline-text-3" id="text-10-2">
+<p>
+<a href="./books/80,000 Hours.pdf#page=239">pg. 239</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2a67849" class="outline-3">
+<h3 id="org2a67849"><span class="section-number-3">10.3.</span> Apply scientific research into happiness</h3>
+<div class="outline-text-3" id="text-10-3">
+<p>
+<a href="./books/80,000 Hours.pdf#page=245">pg. 245</a>
+</p>
+
+<p>
+Although most advice about being happier isn’t based on anything much, the last few decades has seen the rise of “positive psychology” — the science of the causes of wellbeing
+</p>
+
+
+<p>
+Below is a list of techniques recommended by Professor Martin Seligman, one of the founders of the field. Most of these are in his book, Flourish. Some of these techniques have been successfully replicated265 and multiple recent meta-studies have found statistically significant positive effects of all of these techniques. Test them out, and keep using them if they’re helpful.
+</p>
+<ul class="org-ul">
+<li>Rate your happiness at the end of each day.</li>
+<li>Start gratitude journaling. Write down three things you’re grateful for at the end of each day, and why they happened.</li>
+<li>Use your signature strengths: Make sure you use one of your top five strengths each day.</li>
+<li><p>
+Try out a mindfulness practice — usually meditation
+</p>
+
+<p>
+There’s a significant amount of evidence from trials that meditation helps with wellbeing, stress, mental health, focus, empathy, and more  <a href="./books/80,000 Hours.pdf#page=246">pg. 246</a>
+</p></li>
+
+<li>Practise active constructive responding to celebrate successes with others</li>
+
+<li>Craft your job
+Often it’s possible to adapt your job so that it involves more of the satisfying ingredients, like ‘flow’ states, and less of what you don’t enjoy.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4891fe7" class="outline-3">
+<h3 id="org4891fe7"><span class="section-number-3">10.4.</span> Learn how to learn</h3>
+<div class="outline-text-3" id="text-10-4">
+<p>
+<a href="./books/80,000 Hours.pdf#page=248">pg. 248</a>    
+</p>
+
+<ul class="org-ul">
+<li>Spaced repetition (e.g. use Anki)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org599ee62" class="outline-3">
+<h3 id="org599ee62"><span class="section-number-3">10.5.</span> Should you goto college?</h3>
+<div class="outline-text-3" id="text-10-5">
+<p>
+On average, in financial terms, college is a great investment. Researchers on this topic widely agree that going to college significantly boosts your income, even after you account for (i) lost earnings while studying (ii) the fact that the people who go to college are often more able, which means they’ll earn more anyway. <a href="./books/80,000 Hours.pdf#page=310">pg. 310</a>
+</p>
+
+<p>
+One famous study in the US found that students who were accepted to an ‘elite’ university but turned it down, went on to earn just as much. This suggests that elite universities are selecting more talented people, but not actually helping them be more successful (with the exception of low-income students, who did earn more).  <a href="./books/80,000 Hours.pdf#page=312">pg. 312</a>
+</p>
+
+
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: 80,000 Hours">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>
