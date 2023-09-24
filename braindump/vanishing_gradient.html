@@ -205,7 +205,7 @@
  |
  <a accesskey="H" href="../index.html"> HOME </a>
 </div><div id="preamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2023-03-18 Sat&gt;</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2023-03-18 Sat]</span></span></p>
 </div>
 <div id="content" class="content">
 <h1 class="title">Vanishing Gradient</h1>
@@ -213,16 +213,16 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6ca73ef">1. Solution to Vanishing Gradient Problem</a>
+<li><a href="#org0891a59">1. Solution to Vanishing Gradient Problem</a>
 <ul>
-<li><a href="#org028e221">1.1. Trick 1: Activation Function - ReLU (has derivative = 1 or 0)</a></li>
-<li><a href="#org6a7d9e0">1.2. Trick 2: Initialized the weights to identity matrix and Bias to zero to prevent rapid shrinking</a></li>
-<li><a href="#org70ac981">1.3. Trick 3: Gated Cells (LSTM, GRU, etc)- Best</a></li>
+<li><a href="#orgbc92805">1.1. Trick 1: Activation Function - ReLU (has derivative = 1 or 0)</a></li>
+<li><a href="#org2ed1942">1.2. Trick 2: Initialized the weights to identity matrix and Bias to zero to prevent rapid shrinking</a></li>
+<li><a href="#orgdbd6d95">1.3. Trick 3: Gated Cells (LSTM, GRU, etc)- Best</a></li>
 </ul>
 </li>
-<li><a href="#orgf95bf6e">2. Vanishing Gradients in Deep Neural Networks</a>
+<li><a href="#org71efbe1">2. Vanishing Gradients in Deep Neural Networks</a>
 <ul>
-<li><a href="#org971d368">2.1. Residual Connection</a></li>
+<li><a href="#orga8979ed">2.1. Residual Connection</a></li>
 </ul>
 </li>
 </ul>
@@ -233,32 +233,32 @@ If the gradients are &lt; 1, then as gradients are backpropagated the gradients 
 </p>
 
 
-<div id="org799cb9b" class="figure">
+<div id="org9bdb817" class="figure">
 <p><img src="./data/Recurrent neural network/mpv-screenshot1ey2dT.png" alt="mpv-screenshot1ey2dT.png" />
 </p>
 </div>
-<div id="outline-container-org6ca73ef" class="outline-2">
-<h2 id="org6ca73ef"><span class="section-number-2">1.</span> Solution to Vanishing Gradient Problem</h2>
+<div id="outline-container-org0891a59" class="outline-2">
+<h2 id="org0891a59"><span class="section-number-2">1.</span> Solution to Vanishing Gradient Problem</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 See <a href="recurrent_neural_network_6_s191_2020.html#ID-A0A5D7DB-A9A8-4227-9F9B-38762D4A25AF">Recurrent Neural Network - MIT 6.S191 2020</a>, <a href="mit_6_s191_introduction_to_deep_learning.html#ID-B81B32C3-D182-4BDC-9235-8079D7C250CB">RNN and Transformers (MIT 6.S191 2022)</a> for links to video lecture.
 </p>
 </div>
-<div id="outline-container-org028e221" class="outline-3">
-<h3 id="org028e221"><span class="section-number-3">1.1.</span> Trick 1: Activation Function - ReLU (has derivative = 1 or 0)</h3>
+<div id="outline-container-orgbc92805" class="outline-3">
+<h3 id="orgbc92805"><span class="section-number-3">1.1.</span> Trick 1: Activation Function - ReLU (has derivative = 1 or 0)</h3>
 <div class="outline-text-3" id="text-1-1">
 
-<div id="org446aa75" class="figure">
+<div id="org4611a70" class="figure">
 <p><img src="./data/Recurrent neural network/mpv-screenshotSyWU5h.png" alt="mpv-screenshotSyWU5h.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org6a7d9e0" class="outline-3">
-<h3 id="org6a7d9e0"><span class="section-number-3">1.2.</span> Trick 2: Initialized the weights to identity matrix and Bias to zero to prevent rapid shrinking</h3>
+<div id="outline-container-org2ed1942" class="outline-3">
+<h3 id="org2ed1942"><span class="section-number-3">1.2.</span> Trick 2: Initialized the weights to identity matrix and Bias to zero to prevent rapid shrinking</h3>
 </div>
-<div id="outline-container-org70ac981" class="outline-3">
-<h3 id="org70ac981"><span class="section-number-3">1.3.</span> Trick 3: Gated Cells (LSTM, GRU, etc)- Best</h3>
+<div id="outline-container-orgdbd6d95" class="outline-3">
+<h3 id="orgdbd6d95"><span class="section-number-3">1.3.</span> Trick 3: Gated Cells (LSTM, GRU, etc)- Best</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Use a more complex recurrent unit with gates to control what information is passed through.
@@ -267,8 +267,8 @@ Use a more complex recurrent unit with gates to control what information is pass
 </div>
 </div>
 
-<div id="outline-container-orgf95bf6e" class="outline-2">
-<h2 id="orgf95bf6e"><span class="section-number-2">2.</span> Vanishing Gradients in Deep Neural Networks</h2>
+<div id="outline-container-org71efbe1" class="outline-2">
+<h2 id="org71efbe1"><span class="section-number-2">2.</span> Vanishing Gradients in Deep Neural Networks</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 (pg. 252 <a href="deep_learning_with_python_francois_chollet.html#ID-857CAF91-5AFC-4F9E-8BD6-0A1804942B7B">Deep Learning with Python - François Chollet</a>)
@@ -286,8 +286,8 @@ Your model won’t train at all. This is the vanishing gradients problem.
 </p>
 </div>
 
-<div id="outline-container-org971d368" class="outline-3">
-<h3 id="org971d368"><span class="section-number-3">2.1.</span> Residual Connection</h3>
+<div id="outline-container-orga8979ed" class="outline-3">
+<h3 id="orga8979ed"><span class="section-number-3">2.1.</span> Residual Connection</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Residual connection acts as an information shortcut around destructive or noisy blocks (such as blocks that contain relu activations or dropout layers), enabling error gradient infor- mation from early layers to propagate noiselessly through a deep network.

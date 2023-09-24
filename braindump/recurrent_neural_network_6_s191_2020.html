@@ -237,7 +237,7 @@
  |
  <a accesskey="H" href="../index.html"> HOME </a>
 </div><div id="preamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2023-03-19 Sun&gt;</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2023-03-19 Sun]</span></span></p>
 </div>
 <div id="content" class="content">
 <h1 class="title">Recurrent Neural Network - 6.S191 2020</h1>
@@ -245,75 +245,75 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfb55681">1. Sequence Modelling</a>
+<li><a href="#orga3e7efc">1. Sequence Modelling</a>
 <ul>
-<li><a href="#orgad5fdc3">1.1. Using a Fixed Window won't work because long term dependencies wont' work</a></li>
-<li><a href="#org1d101a0">1.2. Use Entire Sequence as Set of Counts - Bag of Words</a></li>
-<li><a href="#org79f5f0d">1.3. Use a REALLY Big Fixed Window</a></li>
+<li><a href="#orgb5938e0">1.1. Using a Fixed Window won't work because long term dependencies wont' work</a></li>
+<li><a href="#orgd61edc2">1.2. Use Entire Sequence as Set of Counts - Bag of Words</a></li>
+<li><a href="#orgb28c5cf">1.3. Use a REALLY Big Fixed Window</a></li>
 </ul>
 </li>
-<li><a href="#org9b8f4a1">2. Sequence Modeling: Design Criteria</a></li>
-<li><a href="#org31cdee1">3. Recurrent Neural Networks for Sequence Modeling</a>
+<li><a href="#org8c30e0f">2. Sequence Modeling: Design Criteria</a></li>
+<li><a href="#org01aad7b">3. Recurrent Neural Networks for Sequence Modeling</a>
 <ul>
-<li><a href="#org02f5d79">3.1. RNN State Update and Output</a></li>
+<li><a href="#org27e925d">3.1. RNN State Update and Output</a></li>
 </ul>
 </li>
-<li><a href="#org18daf32">4. Backpropagation Through time</a>
+<li><a href="#org8e6683b">4. Backpropagation Through time</a>
 <ul>
-<li><a href="#org8ee59a3">4.1. The Problem of Long-Term Dependencies: Vanishing Gradient</a>
+<li><a href="#orgbb5b145">4.1. The Problem of Long-Term Dependencies: Vanishing Gradient</a>
 <ul>
-<li><a href="#org82b59a3">4.1.1. Trick 1: Activation Function - ReLU (has derivative = 1 or 0)</a></li>
-<li><a href="#org3b80167">4.1.2. Trick 2: Initialized the weights to identity matrix and Bias to zero</a></li>
-<li><a href="#org189bd4f">4.1.3. Trick 3: Gated Cells (LSTM, GRU, etc)- Best</a></li>
+<li><a href="#org1488ffe">4.1.1. Trick 1: Activation Function - ReLU (has derivative = 1 or 0)</a></li>
+<li><a href="#orge06ee87">4.1.2. Trick 2: Initialized the weights to identity matrix and Bias to zero</a></li>
+<li><a href="#org358e9b3">4.1.3. Trick 3: Gated Cells (LSTM, GRU, etc)- Best</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orga15c8c7">5. LSTMs</a>
+<li><a href="#orgf8c0472">5. LSTMs</a>
 <ul>
-<li><a href="#orgf77f956">5.1. Standard RNN</a></li>
-<li><a href="#orgfba3e61">5.2. LSTMs</a></li>
-<li><a href="#orgbc03bf4">5.3. Information is added or removed through structures called gates - sigmoid neural net layer and pointwise multiplication</a></li>
-<li><a href="#org37641a9">5.4. Forget Store Update Output</a>
+<li><a href="#org6a2c34d">5.1. Standard RNN</a></li>
+<li><a href="#org1d25551">5.2. LSTMs</a></li>
+<li><a href="#org4b04fdf">5.3. Information is added or removed through structures called gates - sigmoid neural net layer and pointwise multiplication</a></li>
+<li><a href="#orgfb9fb39">5.4. Forget Store Update Output</a>
 <ul>
-<li><a href="#org0c61da3">5.4.1. Forget</a></li>
-<li><a href="#org0047195">5.4.2. Store</a></li>
-<li><a href="#org174d00a">5.4.3. Update</a></li>
-<li><a href="#org3cf1754">5.4.4. Output</a></li>
+<li><a href="#org832d969">5.4.1. Forget</a></li>
+<li><a href="#orge07949b">5.4.2. Store</a></li>
+<li><a href="#orgf5fe32f">5.4.3. Update</a></li>
+<li><a href="#org4fb1009">5.4.4. Output</a></li>
 </ul>
 </li>
-<li><a href="#org74d545a">5.5. Uninterrupted flow of gradient throught cell state</a></li>
-<li><a href="#org35716da">5.6. LSTMs: Key Concepts</a></li>
+<li><a href="#org918f8f6">5.5. Uninterrupted flow of gradient throught cell state</a></li>
+<li><a href="#org4926267">5.6. LSTMs: Key Concepts</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 <p>
-<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/SEnXr6v2ifU" title="nil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/lJIrF4YjHfQ" title="//youtube.com/embed/SEnXr6v2ifU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
 </p>
-<div id="outline-container-orgfb55681" class="outline-2">
-<h2 id="orgfb55681"><span class="section-number-2">1.</span> Sequence Modelling</h2>
+<div id="outline-container-orga3e7efc" class="outline-2">
+<h2 id="orga3e7efc"><span class="section-number-2">1.</span> Sequence Modelling</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgad5fdc3" class="outline-3">
-<h3 id="orgad5fdc3"><span class="section-number-3">1.1.</span> Using a Fixed Window won't work because long term dependencies wont' work</h3>
+<div id="outline-container-orgb5938e0" class="outline-3">
+<h3 id="orgb5938e0"><span class="section-number-3">1.1.</span> Using a Fixed Window won't work because long term dependencies wont' work</h3>
 <div class="outline-text-3" id="text-1-1">
 </div>
 </div>
-<div id="outline-container-org1d101a0" class="outline-3">
-<h3 id="org1d101a0"><span class="section-number-3">1.2.</span> Use Entire Sequence as Set of Counts - Bag of Words</h3>
+<div id="outline-container-orgd61edc2" class="outline-3">
+<h3 id="orgd61edc2"><span class="section-number-3">1.2.</span> Use Entire Sequence as Set of Counts - Bag of Words</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 But they don't preserve order 
 </p>
 </div>
 </div>
-<div id="outline-container-org79f5f0d" class="outline-3">
-<h3 id="org79f5f0d"><span class="section-number-3">1.3.</span> Use a REALLY Big Fixed Window</h3>
+<div id="outline-container-orgb28c5cf" class="outline-3">
+<h3 id="orgb28c5cf"><span class="section-number-3">1.3.</span> Use a REALLY Big Fixed Window</h3>
 <div class="outline-text-3" id="text-1-3">
 
-<div id="org1bbfb63" class="figure">
+<div id="orge273c38" class="figure">
 <p><img src="./data/Recurrent neural network/mpv-screenshot0JVeei.png" alt="mpv-screenshot0JVeei.png" />
 </p>
 </div>
@@ -324,8 +324,8 @@ Occurence of parameters in diffrent position requirer retraining - sortof
 </div>
 </div>
 </div>
-<div id="outline-container-org9b8f4a1" class="outline-2">
-<h2 id="org9b8f4a1"><span class="section-number-2">2.</span> Sequence Modeling: Design Criteria</h2>
+<div id="outline-container-org8c30e0f" class="outline-2">
+<h2 id="org8c30e0f"><span class="section-number-2">2.</span> Sequence Modeling: Design Criteria</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 To model sequences, we need to:
@@ -339,11 +339,11 @@ To model sequences, we need to:
 </ol>
 </div>
 </div>
-<div id="outline-container-org31cdee1" class="outline-2">
-<h2 id="org31cdee1"><span class="section-number-2">3.</span> Recurrent Neural Networks for Sequence Modeling</h2>
+<div id="outline-container-org01aad7b" class="outline-2">
+<h2 id="org01aad7b"><span class="section-number-2">3.</span> Recurrent Neural Networks for Sequence Modeling</h2>
 <div class="outline-text-2" id="text-3">
 
-<div id="org74cf55a" class="figure">
+<div id="orgbcab03a" class="figure">
 <p><img src="./data/Recurrent neural network/mpv-screenshotN68cMG.png" alt="mpv-screenshotN68cMG.png" />
 </p>
 </div>
@@ -359,11 +359,11 @@ which is updated based on previous state and current input
 and here same set of functions and same set of parameters are used i.e. \(f_w\)  is remains same in each time step and it is what we learn 
 </p>
 </div>
-<div id="outline-container-org02f5d79" class="outline-3">
-<h3 id="org02f5d79"><span class="section-number-3">3.1.</span> RNN State Update and Output</h3>
+<div id="outline-container-org27e925d" class="outline-3">
+<h3 id="org27e925d"><span class="section-number-3">3.1.</span> RNN State Update and Output</h3>
 <div class="outline-text-3" id="text-3-1">
 
-<div id="orga1c0682" class="figure">
+<div id="orgfc0fa94" class="figure">
 <p><img src="./data/Recurrent neural network/mpv-screenshot4gIooJ.png" alt="mpv-screenshot4gIooJ.png" />
 </p>
 </div>
@@ -374,39 +374,39 @@ There are three weight matrices \(W_{hh}\) , \(W_{xh}\) , \(W_{hy}\)
 </div>
 </div>
 </div>
-<div id="outline-container-org18daf32" class="outline-2">
-<h2 id="org18daf32"><span class="section-number-2">4.</span> Backpropagation Through time</h2>
+<div id="outline-container-org8e6683b" class="outline-2">
+<h2 id="org8e6683b"><span class="section-number-2">4.</span> Backpropagation Through time</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org8ee59a3" class="outline-3">
-<h3 id="org8ee59a3"><span class="section-number-3">4.1.</span> The Problem of Long-Term Dependencies: Vanishing Gradient</h3>
+<div id="outline-container-orgbb5b145" class="outline-3">
+<h3 id="orgbb5b145"><span class="section-number-3">4.1.</span> The Problem of Long-Term Dependencies: Vanishing Gradient</h3>
 <div class="outline-text-3" id="text-4-1">
 <ul class="org-ul">
 <li><a href="vanishing_gradient.html#ID-2880697B-C48B-40C2-B25D-CEA991940A8A">Vanishing Gradient</a></li>
 </ul>
 
-<div id="orgbcd82ab" class="figure">
+<div id="orgcb580a5" class="figure">
 <p><img src="./data/Recurrent neural network/mpv-screenshot1ey2dT.png" alt="mpv-screenshot1ey2dT.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-org82b59a3" class="outline-4">
-<h4 id="org82b59a3"><span class="section-number-4">4.1.1.</span> Trick 1: Activation Function - ReLU (has derivative = 1 or 0)</h4>
+<div id="outline-container-org1488ffe" class="outline-4">
+<h4 id="org1488ffe"><span class="section-number-4">4.1.1.</span> Trick 1: Activation Function - ReLU (has derivative = 1 or 0)</h4>
 <div class="outline-text-4" id="text-4-1-1">
 
-<div id="orgc012dc7" class="figure">
+<div id="org00393a4" class="figure">
 <p><img src="./data/Recurrent neural network/mpv-screenshotSyWU5h.png" alt="mpv-screenshotSyWU5h.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org3b80167" class="outline-4">
-<h4 id="org3b80167"><span class="section-number-4">4.1.2.</span> Trick 2: Initialized the weights to identity matrix and Bias to zero</h4>
+<div id="outline-container-orge06ee87" class="outline-4">
+<h4 id="orge06ee87"><span class="section-number-4">4.1.2.</span> Trick 2: Initialized the weights to identity matrix and Bias to zero</h4>
 <div class="outline-text-4" id="text-4-1-2">
 </div>
 </div>
-<div id="outline-container-org189bd4f" class="outline-4">
-<h4 id="org189bd4f"><span class="section-number-4">4.1.3.</span> Trick 3: Gated Cells (LSTM, GRU, etc)- Best</h4>
+<div id="outline-container-org358e9b3" class="outline-4">
+<h4 id="org358e9b3"><span class="section-number-4">4.1.3.</span> Trick 3: Gated Cells (LSTM, GRU, etc)- Best</h4>
 <div class="outline-text-4" id="text-4-1-3">
 <p>
 Use a more complex recurrent unit with gates to control what information is passed through.
@@ -415,45 +415,45 @@ Use a more complex recurrent unit with gates to control what information is pass
 </div>
 </div>
 </div>
-<div id="outline-container-orga15c8c7" class="outline-2">
-<h2 id="orga15c8c7"><span class="section-number-2">5.</span> LSTMs</h2>
+<div id="outline-container-orgf8c0472" class="outline-2">
+<h2 id="orgf8c0472"><span class="section-number-2">5.</span> LSTMs</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Links: <a href="lstm.html#ID-5A05C89D-F75E-4B28-B8A7-3A68D1B6C5CA">LSTM</a>.
 </p>
 </div>
 
-<div id="outline-container-orgf77f956" class="outline-3">
-<h3 id="orgf77f956"><span class="section-number-3">5.1.</span> Standard RNN</h3>
+<div id="outline-container-org6a2c34d" class="outline-3">
+<h3 id="org6a2c34d"><span class="section-number-3">5.1.</span> Standard RNN</h3>
 <div class="outline-text-3" id="text-5-1">
 
-<div id="org854b3b3" class="figure">
+<div id="org6d15553" class="figure">
 <p><img src="./data/Recurrent neural network/mpv-screenshotkCtu5q.png" alt="mpv-screenshotkCtu5q.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgfba3e61" class="outline-3">
-<h3 id="orgfba3e61"><span class="section-number-3">5.2.</span> LSTMs</h3>
+<div id="outline-container-org1d25551" class="outline-3">
+<h3 id="org1d25551"><span class="section-number-3">5.2.</span> LSTMs</h3>
 <div class="outline-text-3" id="text-5-2">
 
-<div id="org729f1e2" class="figure">
+<div id="org1ee32cd" class="figure">
 <p><img src="./data/Recurrent neural network/mpv-screenshot4K4faK.png" alt="mpv-screenshot4K4faK.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgbc03bf4" class="outline-3">
-<h3 id="orgbc03bf4"><span class="section-number-3">5.3.</span> Information is added or removed through structures called gates - sigmoid neural net layer and pointwise multiplication</h3>
+<div id="outline-container-org4b04fdf" class="outline-3">
+<h3 id="org4b04fdf"><span class="section-number-3">5.3.</span> Information is added or removed through structures called gates - sigmoid neural net layer and pointwise multiplication</h3>
 <div class="outline-text-3" id="text-5-3">
 </div>
 </div>
-<div id="outline-container-org37641a9" class="outline-3">
-<h3 id="org37641a9"><span class="section-number-3">5.4.</span> Forget Store Update Output</h3>
+<div id="outline-container-orgfb9fb39" class="outline-3">
+<h3 id="orgfb9fb39"><span class="section-number-3">5.4.</span> Forget Store Update Output</h3>
 <div class="outline-text-3" id="text-5-4">
 </div>
-<div id="outline-container-org0c61da3" class="outline-4">
-<h4 id="org0c61da3"><span class="section-number-4">5.4.1.</span> Forget</h4>
+<div id="outline-container-org832d969" class="outline-4">
+<h4 id="org832d969"><span class="section-number-4">5.4.1.</span> Forget</h4>
 <div class="outline-text-4" id="text-5-4-1">
 <p>
 Decide what information is going to be thrown state depending on \(h_{t-1}\) and input \(x_t\) 
@@ -461,8 +461,8 @@ Decide what information is going to be thrown state depending on \(h_{t-1}\) and
 </p>
 </div>
 </div>
-<div id="outline-container-org0047195" class="outline-4">
-<h4 id="org0047195"><span class="section-number-4">5.4.2.</span> Store</h4>
+<div id="outline-container-orge07949b" class="outline-4">
+<h4 id="orge07949b"><span class="section-number-4">5.4.2.</span> Store</h4>
 <div class="outline-text-4" id="text-5-4-2">
 <p>
 Decide what part of new information is important and store that to cell state 
@@ -470,8 +470,8 @@ Decide what part of new information is important and store that to cell state
 </p>
 </div>
 </div>
-<div id="outline-container-org174d00a" class="outline-4">
-<h4 id="org174d00a"><span class="section-number-4">5.4.3.</span> Update</h4>
+<div id="outline-container-orgf5fe32f" class="outline-4">
+<h4 id="orgf5fe32f"><span class="section-number-4">5.4.3.</span> Update</h4>
 <div class="outline-text-4" id="text-5-4-3">
 <p>
 Use the relevant part of prior information and current state to selectively update the cell state values
@@ -479,33 +479,33 @@ Use the relevant part of prior information and current state to selectively upda
 </p>
 </div>
 </div>
-<div id="outline-container-org3cf1754" class="outline-4">
-<h4 id="org3cf1754"><span class="section-number-4">5.4.4.</span> Output</h4>
+<div id="outline-container-org4fb1009" class="outline-4">
+<h4 id="org4fb1009"><span class="section-number-4">5.4.4.</span> Output</h4>
 <div class="outline-text-4" id="text-5-4-4">
 <p>
 What info stored in cell state is used to compute the hidden state to carry over to next time step
 </p>
 
 
-<div id="org787bf1d" class="figure">
+<div id="org554d81b" class="figure">
 <p><img src="./data/Recurrent neural network/mpv-screenshotblSzjU.png" alt="mpv-screenshotblSzjU.png" />
 </p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org74d545a" class="outline-3">
-<h3 id="org74d545a"><span class="section-number-3">5.5.</span> Uninterrupted flow of gradient throught cell state</h3>
+<div id="outline-container-org918f8f6" class="outline-3">
+<h3 id="org918f8f6"><span class="section-number-3">5.5.</span> Uninterrupted flow of gradient throught cell state</h3>
 <div class="outline-text-3" id="text-5-5">
 
-<div id="org8ad2da4" class="figure">
+<div id="orgc7b7cef" class="figure">
 <p><img src="./data/Recurrent neural network/mpv-screenshota0DSl0.png" alt="mpv-screenshota0DSl0.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org35716da" class="outline-3">
-<h3 id="org35716da"><span class="section-number-3">5.6.</span> LSTMs: Key Concepts</h3>
+<div id="outline-container-org4926267" class="outline-3">
+<h3 id="org4926267"><span class="section-number-3">5.6.</span> LSTMs: Key Concepts</h3>
 <div class="outline-text-3" id="text-5-6">
 <ol class="org-ol">
 <li>Maintain a separate cell state from what is outputted</li>
@@ -523,9 +523,9 @@ What info stored in cell state is used to compute the hidden state to carry over
 <h3>Backlinks</h3>
 
 <ul class="org-ul">
+<li><a href="vanishing_gradient.html#ID-2880697B-C48B-40C2-B25D-CEA991940A8A">Vanishing Gradient</a></li>
 <li><a href="lstm.html#ID-5A05C89D-F75E-4B28-B8A7-3A68D1B6C5CA">LSTM</a></li>
 <li><a href="Recurrent neural network.html#ID-62e97a52-1804-4948-91e4-bede2027d3d5">Recurrent neural network</a></li>
-<li><a href="vanishing_gradient.html#ID-2880697B-C48B-40C2-B25D-CEA991940A8A">Vanishing Gradient</a></li>
 </ul>
 </div>
 </div>

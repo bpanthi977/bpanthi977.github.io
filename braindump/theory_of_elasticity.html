@@ -237,7 +237,7 @@
  |
  <a accesskey="H" href="../index.html"> HOME </a>
 </div><div id="preamble" class="status">
-<p class="date">Date: 2020-05-27</p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2020-05-27 Wed]</span></span></p>
 </div>
 <div id="content" class="content">
 <h1 class="title">Theory of Elasticity</h1>
@@ -245,23 +245,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org72b93cb">1. Stress Tensor</a>
+<li><a href="#org9bc5fb2">1. Stress Tensor</a>
 <ul>
-<li><a href="#orgd2704a0">1.1. Field of stresses in a continuum</a></li>
-<li><a href="#org8f03e5a">1.2. External forces</a></li>
-<li><a href="#org3d38292">1.3. Internal force in the continuum</a></li>
+<li><a href="#orgc6f6d26">1.1. Field of stresses in a continuum</a></li>
+<li><a href="#orgf35797e">1.2. External forces</a></li>
+<li><a href="#orgb6e3c0a">1.3. Internal force in the continuum</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org72b93cb" class="outline-2">
-<h2 id="org72b93cb"><span class="section-number-2">1.</span> Stress Tensor</h2>
+<div id="outline-container-org9bc5fb2" class="outline-2">
+<h2 id="org9bc5fb2"><span class="section-number-2">1.</span> Stress Tensor</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgd2704a0" class="outline-3">
-<h3 id="orgd2704a0"><span class="section-number-3">1.1.</span> Field of stresses in a continuum</h3>
+<div id="outline-container-orgc6f6d26" class="outline-3">
+<h3 id="orgc6f6d26"><span class="section-number-3">1.1.</span> Field of stresses in a continuum</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 A continuum is characterised by a mass \(dm = \rho d\tau\) contained in an elementary volume \(d\tau\). 
@@ -297,23 +297,23 @@ R = x_s i_s
 The geometric difference \(R-r\) determines the displacement vector denoted by \(u\) 
 </p>
 \begin{equation}
-\label{org0dbc8ba}
+\label{orga79f6d2}
 x_s = a_s + u_s
 \tag{1.1.3}
 \end{equation}
 <p>
-It is also assumed that equations \eqref{org0dbc8ba} are uniquely resolvable for variable \(a_s\) that is 
+It is also assumed that equations \eqref{orga79f6d2} are uniquely resolvable for variable \(a_s\) that is 
 </p>
 \begin{equation}
-\label{org9229e49}
+\label{org6660081}
 a_s = x_s - u_s
 \tag{1.1.4}
 \end{equation}
 <p>
-The condition for unique solvability of the system of equations \eqref{org0dbc8ba} is that the Jacobian
+The condition for unique solvability of the system of equations \eqref{orga79f6d2} is that the Jacobian
 </p>
 \begin{equation}
-\label{orga750044}
+\label{org36a19ba}
 J(a_1,a_2,a_3) = |\frac{\del x_s} {a_k} | = | \delta_{sk} +  \frac {\del u_s} {\del a_k} |
 \tag{1.1.5}
 \end{equation}
@@ -325,7 +325,7 @@ According to the law of mass conservation
 so that 
 </p>
 \begin{equation}
-\label{org74a6bf4}
+\label{org17b7625}
 J = \frac {\rho_0} {\rho}
 \tag{1.1.8}
 \end{equation}
@@ -340,7 +340,7 @@ Due to established terminology, \(a_s\) and \(x_s\) are referred to as <b>Lagran
 Remark: The matrial coordinates of a point are not necessarily the Cartesian coordinates \(a_s\) of the initial state. Presentation of the basics of continuous mechanics becomes more regorous if any curvilinear coordinates \(q^1,q^2,q^3\) are taken as the matrial coordinates. Then
 </p>
 \begin{equation}
-\label{org25badb3}
+\label{org30ea442}
 a_s = a_s(q^1,q^2,q^3)
 \tag{1.1.11}
 \end{equation}
@@ -348,7 +348,7 @@ a_s = a_s(q^1,q^2,q^3)
 as well as 
 </p>
 \begin{equation}
-\label{orgae59be4}
+\label{org58e0fbb}
 x_s = x_s(q^1,q^2,q^3)
 \tag{1.1.12}
 \end{equation}
@@ -358,8 +358,8 @@ should be considered as the coordinates of the particle in volumes \(v\) and \(V
 </div>
 </div>
 
-<div id="outline-container-org8f03e5a" class="outline-3">
-<h3 id="org8f03e5a"><span class="section-number-3">1.2.</span> External forces</h3>
+<div id="outline-container-orgf35797e" class="outline-3">
+<h3 id="orgf35797e"><span class="section-number-3">1.2.</span> External forces</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 The forces acting on the continuum are classified as external or internal force. 
@@ -374,13 +374,13 @@ The vector of the mass force applied to a unit mass of continuum is denoted by \
 When equilibrium of the continuum is considered relative to amoving coordinate system the inertial force of the translational motion
 </p>
 \begin{equation}
-\label{orgda2e125}
+\label{orga2ca359}
 K = -w_e = - [w_0 + \dot\omega \times R + \omega \times (\omega \times R) ]
 \tag{1.2.3}
 \end{equation}
 
 <p>
-Here \(w_e\) denotes the vector of translational acceleration = sum of acceleration \(w_0\) of the origin of coordinate sysem, rotational acceleration \(\dot\omega \times R\) and centripetal accelration. The Coriolis acceleration is not inlucde in the right hand side of \eqref{orgda2e125} because <i>the continuum does not move relative to the moving axes</i>. 
+Here \(w_e\) denotes the vector of translational acceleration = sum of acceleration \(w_0\) of the origin of coordinate sysem, rotational acceleration \(\dot\omega \times R\) and centripetal accelration. The Coriolis acceleration is not inlucde in the right hand side of \eqref{orga2ca359} because <i>the continuum does not move relative to the moving axes</i>. 
 </p>
 
 
@@ -390,8 +390,8 @@ Here \(w_e\) denotes the vector of translational acceleration = sum of accelerat
 </div>
 </div>
 
-<div id="outline-container-org3d38292" class="outline-3">
-<h3 id="org3d38292"><span class="section-number-3">1.3.</span> Internal force in the continuum</h3>
+<div id="outline-container-orgb6e3c0a" class="outline-3">
+<h3 id="orgb6e3c0a"><span class="section-number-3">1.3.</span> Internal force in the continuum</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li>when the whole continuum is in equlibrium, then any arbitary part of this continuum is also in equilibrium (the free-body principle)</li>
@@ -402,7 +402,7 @@ Here \(w_e\) denotes the vector of translational acceleration = sum of accelerat
 For any oridneted surface \(NdO\) at any location in the continuum, there exists a force \(t_NdO\) (a vector) which is teh force exerted on \(NdO\) by the part "above" this surface. By virtue of the principle of action and reaction we have
 </p>
 \begin{equation}
-\label{org42cd59e}
+\label{orgb8698f2}
 t_{-N}dO = -t_NdO
 \tag{1.3.1}
 \end{equation}
