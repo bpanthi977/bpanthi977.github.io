@@ -205,7 +205,7 @@
  |
  <a accesskey="H" href="../index.html"> HOME </a>
 </div><div id="preamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2023-09-15 Fri&gt;</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2023-09-15 Fri]</span></span></p>
 </div>
 <div id="content" class="content">
 <h1 class="title">Linux</h1>
@@ -213,16 +213,100 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgba39dd2">1. Articles</a></li>
+<li><a href="#org6eee044">1. Greg Kroah Hartman on the Linux Kernel</a>
+<ul>
+<li><a href="#org3f7a70b">1.1. Kernel moves really fast</a></li>
+<li><a href="#org12baf8d">1.2. There is no conventional test</a></li>
+</ul>
+</li>
+<li><a href="#org240435e">2. Articles</a></li>
 </ul>
 </div>
 </div>
 <ul class="org-ul">
 <li><a href="arch_linux.html#ID-e7df9711-1489-4775-9234-469eb870b357">Arch Linux</a></li>
 </ul>
-<div id="outline-container-orgba39dd2" class="outline-2">
-<h2 id="orgba39dd2"><span class="section-number-2">1.</span> Articles</h2>
+
+<div id="outline-container-org6eee044" class="outline-2">
+<h2 id="org6eee044"><span class="section-number-2">1.</span> Greg Kroah Hartman on the Linux Kernel</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+<a href="https://youtu.be/L2SED6sewRw?si=xr2RwLyOMzrMcAjm&amp;t=864">https://youtu.be/L2SED6sewRw?si=xr2RwLyOMzrMcAjm&amp;t=864</a>
+</p>
+
+<p>
+<a href="https://youtu.be/vyenmLqJQjs?si=E5E4OAlrDrllb5Y9&amp;t=181">https://youtu.be/vyenmLqJQjs?si=E5E4OAlrDrllb5Y9&amp;t=181</a>
+</p>
+
+
+<div id="orgbeb47cc" class="figure">
+<p><img src="data/linux/linux_hierarchy-20230922221930.png" alt="linux_hierarchy-20230922221930.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Linux Hierarchy</p>
+</div>
+</div>
+
+<div id="outline-container-org3f7a70b" class="outline-3">
+<h3 id="org3f7a70b"><span class="section-number-3">1.1.</span> Kernel moves really fast</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+per day (2007-2008): (<a href="https://youtu.be/L2SED6sewRw?si=xr2RwLyOMzrMcAjm&amp;t=864">YT</a>)
+</p>
+<ul class="org-ul">
+<li>4.3k Lines added</li>
+<li>1.8k Lines removed</li>
+<li>1.5k Lines modified</li>
+</ul>
+
+<p>
+And that change is proportional across all kernel parts:
+</p>
+<ul class="org-ul">
+<li>50-55% of Kernel code is drivers</li>
+<li>5% is core kernel</li>
+</ul>
+
+<p>
+per day (2015): (<a href="https://youtu.be/vyenmLqJQjs?si=E5E4OAlrDrllb5Y9&amp;t=181">YT</a>)
+</p>
+<ul class="org-ul">
+<li>10.8k Lines added</li>
+<li>5.3k lines removed</li>
+<li>1.9k lines modified</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org12baf8d" class="outline-3">
+<h3 id="org12baf8d"><span class="section-number-3">1.2.</span> There is no conventional test</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+<a href="https://youtu.be/L2SED6sewRw?si=xr2RwLyOMzrMcAjm&amp;t=864">https://youtu.be/L2SED6sewRw?si=xr2RwLyOMzrMcAjm&amp;t=864</a>
+There is no test in the traditional/popular sense of test.
+</p>
+
+<p>
+Kernel is tested by running it. 
+</p>
+
+<p>
+Developers test it. Because there are hundreds of permutations of
+configs and conditions to test. 
+</p>
+
+<p>
+Zero day test (<a href="https://youtu.be/vyenmLqJQjs?si=leZ1mJ60eKRJXkjA&amp;t=1493">https://youtu.be/vyenmLqJQjs?si=leZ1mJ60eKRJXkjA&amp;t=1493</a>)
+</p>
+<ul class="org-ul">
+<li>Intel has 0-day bots that build the public linux kernel trees on different configurations and test a bunch of things</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org240435e" class="outline-2">
+<h2 id="org240435e"><span class="section-number-2">2.</span> Articles</h2>
+<div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li><a href="https://iq.thc.org/how-does-linux-start-a-process">How does Linux start a process</a></li>
 </ul>
@@ -231,7 +315,7 @@
 <h3>References</h3>
 
 <ul class="org-ul">
-<li><a href="https://iq.thc.org/how-does-linux-start-a-process">https://iq.thc.org/how-does-linux-start-a-process</a> (<a href="linux.html#ID-F36B9E7C-9559-451A-9E25-CFA33D0C6156">Linux</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)  (<a href="tasks.html#ID-70f6fbfa-f673-4be4-b5e4-34bfb8b4677b">Tasks</a>)</li>
+<li><a href="https://iq.thc.org/how-does-linux-start-a-process">https://iq.thc.org/how-does-linux-start-a-process</a> (<a href="linux.html#ID-F36B9E7C-9559-451A-9E25-CFA33D0C6156">Linux</a>)</li>
 </ul>
 </div>
 </div>
