@@ -1,10 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
    <feed xmlns="http://www.w3.org/2005/Atom">
      <title type="text">Bibek's Digital Garden</title>
-     <updated>2023-09-26T00:51:52+05:45</updated>
+     <updated>2023-11-12T12:34:33+05:45</updated>
      <link rel="self" type="application/atom+xml" href="https://bpanthi977.github.io/braindump/data/rss.xml"/>
      <id>https://bpanthi977.github.io/braindump/</id>
      <generator uri="https://www.gnu.org/software/emacs/" version="29.1">Emacs</generator>
+<entry>
+   <title type="text">Debugging</title>
+   <link href="https://bpanthi977.github.io/braindump/debugging.html" />
+   <id>urn:uuid:10D05A9C-7119-4E77-BD97-81E81632F424</id>
+   <published>2023-11-12T00:00:00+05:45</published>
+   <updated>2023-11-12T09:34:35+05:45</updated>
+   <author>
+     <name>Bibek Panthi</name>
+   </author>
+   <content type="text/html">
+     <a href="https://bpanthi977.github.io/braindump/debugging.html">https://bpanthi977.github.io/braindump/debugging.html</a>
+   </content>
+ </entry>
+<entry>
+   <title type="text">NodeJS</title>
+   <link href="https://bpanthi977.github.io/braindump/nodejs.html" />
+   <id>urn:uuid:62D638CB-75C0-4875-80F2-5339DD77D12F</id>
+   <published>2023-11-06T00:00:00+05:45</published>
+   <updated>2023-11-06T20:08:21+05:45</updated>
+   <author>
+     <name>Bibek Panthi</name>
+   </author>
+   <content type="text/html">
+     <a href="https://bpanthi977.github.io/braindump/nodejs.html">https://bpanthi977.github.io/braindump/nodejs.html</a>
+   </content>
+ </entry>
+<entry>
+   <title type="text">Code that Fits in Your Head</title>
+   <link href="https://bpanthi977.github.io/braindump/code_that_fits_in_your_head.html" />
+   <id>urn:uuid:F0399450-3428-49FE-BABE-47E00BE43246</id>
+   <published>2023-11-04T00:00:00+05:45</published>
+   <updated>2023-11-05T10:39:03+05:45</updated>
+   <author>
+     <name>Bibek Panthi</name>
+   </author>
+   <content type="text/html">
+     <a href="https://bpanthi977.github.io/braindump/code_that_fits_in_your_head.html">https://bpanthi977.github.io/braindump/code_that_fits_in_your_head.html</a>
+   </content>
+ </entry>
+<entry>
+   <title type="text">Graphics Shader</title>
+   <link href="https://bpanthi977.github.io/braindump/graphics_shader.html" />
+   <id>urn:uuid:9BD8C6D9-66D7-4205-AFC7-FCEB16EBF120</id>
+   <published>2023-11-03T00:00:00+05:45</published>
+   <updated>2023-11-03T20:23:53+05:45</updated>
+   <author>
+     <name>Bibek Panthi</name>
+   </author>
+   <content type="text/html">
+     <a href="https://bpanthi977.github.io/braindump/graphics_shader.html">https://bpanthi977.github.io/braindump/graphics_shader.html</a>
+   </content>
+ </entry>
+<entry>
+   <title type="text">Universal Differential Equation</title>
+   <link href="https://bpanthi977.github.io/braindump/universal_differential_equation.html" />
+   <id>urn:uuid:6FEEB9C3-DC71-4FAD-8542-E315AD46EAA4</id>
+   <published>2023-10-31T00:00:00+05:45</published>
+   <updated>2023-10-31T23:55:02+05:45</updated>
+   <author>
+     <name>Bibek Panthi</name>
+   </author>
+   <content type="text/html">
+     <a href="https://bpanthi977.github.io/braindump/universal_differential_equation.html">https://bpanthi977.github.io/braindump/universal_differential_equation.html</a>
+   </content>
+ </entry>
+<entry>
+   <title type="text">Symmetric Group</title>
+   <link href="https://bpanthi977.github.io/braindump/symmetric_group.html" />
+   <id>urn:uuid:5C5C859F-248C-4935-92FB-0CA4E7C201E6</id>
+   <published>2023-09-28T00:00:00+05:45</published>
+   <updated>2023-09-28T13:52:54+05:45</updated>
+   <author>
+     <name>Bibek Panthi</name>
+   </author>
+   <content type="text/html">
+     <a href="https://bpanthi977.github.io/braindump/symmetric_group.html">https://bpanthi977.github.io/braindump/symmetric_group.html</a>
+   </content>
+ </entry>
 <entry>
    <title type="text">A First Look at Rigorous Probability Theory</title>
    <link href="https://bpanthi977.github.io/braindump/a_first_look_at_rigorous_probability_theory.html" />
@@ -70,19 +148,7 @@
      <a href="https://bpanthi977.github.io/braindump/poem.html">https://bpanthi977.github.io/braindump/poem.html</a>
    </content>
  </entry>
-<entry>
-   <title type="text">80,000 Hours</title>
-   <link href="https://bpanthi977.github.io/braindump/80_000_hours.html" />
-   <id>urn:uuid:FF55FB6C-C4D8-4893-A620-0C2C89F6387C</id>
-   <published>2023-09-17T00:00:00+05:45</published>
-   <updated>2023-09-24T22:32:20+05:45</updated>
-   <author>
-     <name>Bibek Panthi</name>
-   </author>
-   <content type="text/html">
-     <a href="https://bpanthi977.github.io/braindump/80_000_hours.html">https://bpanthi977.github.io/braindump/80_000_hours.html</a>
-   </content>
- </entry>
+
 <entry>
    <title type="text">syscall</title>
    <link href="https://bpanthi977.github.io/braindump/syscall.html" />
@@ -302,19 +368,6 @@
    </author>
    <content type="text/html">
      <a href="https://bpanthi977.github.io/braindump/neural-network-turing-complete.html">https://bpanthi977.github.io/braindump/neural-network-turing-complete.html</a>
-   </content>
- </entry>
-<entry>
-   <title type="text">Flashcards (org-drill)</title>
-   <link href="https://bpanthi977.github.io/braindump/drill.html" />
-   <id>https://bpanthi977.github.io/braindump/drill.html</id>
-   <published>2023-08-24T12:44:57+05:45</published>
-   <updated>2023-08-24T12:44:57+05:45</updated>
-   <author>
-     <name>Bibek Panthi</name>
-   </author>
-   <content type="text/html">
-     <a href="https://bpanthi977.github.io/braindump/drill.html">https://bpanthi977.github.io/braindump/drill.html</a>
    </content>
  </entry>
 <entry>
@@ -2957,19 +3010,6 @@
    </content>
  </entry>
 <entry>
-   <title type="text">Bibek Panthi</title>
-   <link href="https://bpanthi977.github.io/braindump/bibek_panthi.html" />
-   <id>urn:uuid:5EAC4F53-89B0-4EDA-9DBA-9AADACFD6048</id>
-   <published>2023-02-07T00:00:00+05:45</published>
-   <updated>2023-09-24T22:32:12+05:45</updated>
-   <author>
-     <name>Bibek Panthi</name>
-   </author>
-   <content type="text/html">
-     <a href="https://bpanthi977.github.io/braindump/bibek_panthi.html">https://bpanthi977.github.io/braindump/bibek_panthi.html</a>
-   </content>
- </entry>
-<entry>
    <title type="text">Emotion</title>
    <link href="https://bpanthi977.github.io/braindump/emotion.html" />
    <id>urn:uuid:8418AAF8-FB3A-4014-91B4-D2F9A1AE8226</id>
@@ -3000,7 +3040,7 @@
    <link href="https://bpanthi977.github.io/braindump/programming.html" />
    <id>urn:uuid:F3E66B76-D993-42FD-AD0F-E9BC424B47C9</id>
    <published>2023-02-07T00:00:00+05:45</published>
-   <updated>2023-09-24T22:31:33+05:45</updated>
+   <updated>2023-11-02T17:57:14+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -3357,19 +3397,6 @@
    </author>
    <content type="text/html">
      <a href="https://bpanthi977.github.io/braindump/recoll.html">https://bpanthi977.github.io/braindump/recoll.html</a>
-   </content>
- </entry>
-<entry>
-   <title type="text">Binod Bhattarai</title>
-   <link href="https://bpanthi977.github.io/braindump/binod_bhattarai.html" />
-   <id>urn:uuid:B6E69818-DB7B-4C3D-940A-4D9C919E9B32</id>
-   <published>2022-12-01T00:00:00+05:45</published>
-   <updated>2023-09-24T22:32:12+05:45</updated>
-   <author>
-     <name>Bibek Panthi</name>
-   </author>
-   <content type="text/html">
-     <a href="https://bpanthi977.github.io/braindump/binod_bhattarai.html">https://bpanthi977.github.io/braindump/binod_bhattarai.html</a>
    </content>
  </entry>
 <entry>
@@ -3871,7 +3898,7 @@
    <link href="https://bpanthi977.github.io/braindump/configuring_gpg_for_emacs_in_macos.html" />
    <id>urn:uuid:C896DC59-2D11-4ADC-859F-54E4721C3B3A</id>
    <published>2022-09-30T00:00:00+05:45</published>
-   <updated>2023-09-24T22:32:08+05:45</updated>
+   <updated>2023-11-06T14:58:28+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -4339,7 +4366,7 @@
    <link href="https://bpanthi977.github.io/braindump/continuous_flash_suppression.html" />
    <id>urn:uuid:2784c6c5-99c3-4fd1-9535-7ec7a41e8f67</id>
    <published>2022-07-25T00:00:00+05:45</published>
-   <updated>2023-09-24T22:32:08+05:45</updated>
+   <updated>2023-09-26T10:49:10+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -6757,7 +6784,7 @@
    <link href="https://bpanthi977.github.io/braindump/research.html" />
    <id>urn:uuid:39AC53E9-259B-45DF-A28D-DD3F6077A866</id>
    <published>2020-05-26T00:00:00+05:45</published>
-   <updated>2023-09-24T22:31:30+05:45</updated>
+   <updated>2023-11-08T18:59:07+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -6835,7 +6862,7 @@
    <link href="https://bpanthi977.github.io/braindump/emacs.html" />
    <id>urn:uuid:5d7a5064-6bd7-497b-99a7-2ce8c6576459</id>
    <published>2020-05-24T00:00:00+05:45</published>
-   <updated>2023-09-24T22:32:03+05:45</updated>
+   <updated>2023-10-12T19:00:58+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
