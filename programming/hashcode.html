@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-08-26 Sat 09:08 -->
+<!-- 2023-11-13 Mon 20:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Google HashCode 2022</title>
@@ -210,27 +210,27 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5591497">1. HashCode</a></li>
-<li><a href="#orgd23cf31">2. Parse Data</a></li>
-<li><a href="#org0c174ae">3. First Iteration</a>
+<li><a href="#HashCode">1. HashCode</a></li>
+<li><a href="#Parse%20Data">2. Parse Data</a></li>
+<li><a href="#First%20Iteration">3. First Iteration</a>
 <ul>
-<li><a href="#org7f11635">3.1. Result and Discussion</a></li>
+<li><a href="#Result%20and%20Discussion">3.1. Result and Discussion</a></li>
 </ul>
 </li>
-<li><a href="#orgd560728">4. Next Iterations</a></li>
-<li><a href="#orgd9f2414">5. Our Best Iterations</a>
+<li><a href="#Next%20Iterations">4. Next Iterations</a></li>
+<li><a href="#Our%20Best%20Iterations">5. Our Best Iterations</a>
 <ul>
-<li><a href="#org8767949">5.1. Problem B, C &amp; D</a></li>
-<li><a href="#org06ee715">5.2. Problem E &amp; F</a></li>
+<li><a href="#Problem%20B%2C%20C%20%26%20D">5.1. Problem B, C &amp; D</a></li>
+<li><a href="#Problem%20E%20%26%20F">5.2. Problem E &amp; F</a></li>
 </ul>
 </li>
-<li><a href="#org12bf5cb">6. Scores</a></li>
+<li><a href="#Scores">6. Scores</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org5591497" class="outline-2">
-<h2 id="org5591497"><span class="section-number-2">1.</span> HashCode</h2>
+<div id="outline-container-HashCode" class="outline-2">
+<h2 id="HashCode"><span class="section-number-2">1.</span> HashCode</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 HashCode is an annual competition that Google organizes. It is open to everyone in the world and people participate in teams of two to four members. It was my first time in this competition. Atish included me in his team and we four (<a href="https://www.facebook.com/atishshah.rouniyar.3">Atish</a>, I, <a href="https://www.facebook.com/nirajan.basnet.16">Nirajan</a>, and <a href="https://www.facebook.com/profile.php?id=100068719602528">Subarna</a>) spent the competition night solving the problem.
@@ -242,8 +242,8 @@ We had 3 hours 45 minutes to solve the problem and submit solutions. We can subm
 </div>
 </div>
 
-<div id="outline-container-orgd23cf31" class="outline-2">
-<h2 id="orgd23cf31"><span class="section-number-2">2.</span> Parse Data</h2>
+<div id="outline-container-Parse%20Data" class="outline-2">
+<h2 id="Parse%20Data"><span class="section-number-2">2.</span> Parse Data</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 First Task was to parse the input dataset. So, I started with <code>read-input</code> function, implementing its dependency functions turn by turn. I thought lookup would be necessary, so I stored <code>people</code>, <code>projects</code> in hashtable with names as keys. But, it wasn't necessary. However, <code>skills</code> table was necessary for speed. It associates each skill with a list of people and the level of skill they have. 
@@ -353,8 +353,8 @@ could have worked but without thinking much I used property lists. And this was 
 </div>
 </div>
 
-<div id="outline-container-org0c174ae" class="outline-2">
-<h2 id="org0c174ae"><span class="section-number-2">3.</span> First Iteration</h2>
+<div id="outline-container-First%20Iteration" class="outline-2">
+<h2 id="First%20Iteration"><span class="section-number-2">3.</span> First Iteration</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 The main flow of my program was simple:
@@ -472,8 +472,8 @@ I did the simplest thing possible, select the first project from the list, and <
 </p>
 </div>
 
-<div id="outline-container-org7f11635" class="outline-3">
-<h3 id="org7f11635"><span class="section-number-3">3.1.</span> Result and Discussion</h3>
+<div id="outline-container-Result%20and%20Discussion" class="outline-3">
+<h3 id="Result%20and%20Discussion"><span class="section-number-3">3.1.</span> Result and Discussion</h3>
 <div class="outline-text-3" id="text-3-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -552,8 +552,8 @@ There was one flaw in the core logic that I missed during the competition. Proje
 </div>
 </div>
 
-<div id="outline-container-orgd560728" class="outline-2">
-<h2 id="orgd560728"><span class="section-number-2">4.</span> Next Iterations</h2>
+<div id="outline-container-Next%20Iterations" class="outline-2">
+<h2 id="Next%20Iterations"><span class="section-number-2">4.</span> Next Iterations</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Since the core logic was simple, places possible for optimization were obvious. 
@@ -571,16 +571,16 @@ So, in the second and next iterations I made small changes in the project select
 </div>
 </div>
 
-<div id="outline-container-orgd9f2414" class="outline-2">
-<h2 id="orgd9f2414"><span class="section-number-2">5.</span> Our Best Iterations</h2>
+<div id="outline-container-Our%20Best%20Iterations" class="outline-2">
+<h2 id="Our%20Best%20Iterations"><span class="section-number-2">5.</span> Our Best Iterations</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Rather than listing all changes in each iteration, lets look at the changes that gave top score in each problem. In each case changes were only done in two places: choice of project, and choice of team. 
 </p>
 </div>
 
-<div id="outline-container-org8767949" class="outline-3">
-<h3 id="org8767949"><span class="section-number-3">5.1.</span> Problem B, C &amp; D</h3>
+<div id="outline-container-Problem%20B%2C%20C%20%26%20D" class="outline-3">
+<h3 id="Problem%20B%2C%20C%20%26%20D"><span class="section-number-3">5.1.</span> Problem B, C &amp; D</h3>
 <div class="outline-text-3" id="text-5-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -674,8 +674,8 @@ This simple change increase our score by about 21 thousand.
 </div>
 </div>
 
-<div id="outline-container-org06ee715" class="outline-3">
-<h3 id="org06ee715"><span class="section-number-3">5.2.</span> Problem E &amp; F</h3>
+<div id="outline-container-Problem%20E%20%26%20F" class="outline-3">
+<h3 id="Problem%20E%20%26%20F"><span class="section-number-3">5.2.</span> Problem E &amp; F</h3>
 <div class="outline-text-3" id="text-5-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -713,8 +713,8 @@ The best solution for problem E &amp; F from our team was not mine. Other team m
 </div>
 </div>
 
-<div id="outline-container-org12bf5cb" class="outline-2">
-<h2 id="org12bf5cb"><span class="section-number-2">6.</span> Scores</h2>
+<div id="outline-container-Scores" class="outline-2">
+<h2 id="Scores"><span class="section-number-2">6.</span> Scores</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Our best score: 
@@ -799,7 +799,7 @@ For me, score of 27 lakh and 589th position in global scoreboard was not bad.  G
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Google HashCode 2022">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Google HashCode 2022">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/rss.xml"><img src="https://bpanthi977.github.io/img/rss.png" /></a>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-08-26 Sat 09:08 -->
+<!-- 2023-11-13 Mon 20:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>RNN and Transformers</title>
@@ -242,29 +242,29 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbb660bd">1. Sequential Modeling</a></li>
-<li><a href="#org60d5aeb">2. Sequence Modelling: Design Criteria</a>
+<li><a href="#Sequential%20Modeling">1. Sequential Modeling</a></li>
+<li><a href="#Sequence%20Modelling%3A%20Design%20Criteria">2. Sequence Modelling: Design Criteria</a>
 <ul>
-<li><a href="#org5b7b190">2.1. Example Task: Predict the Next Word</a></li>
+<li><a href="#Example%20Task%3A%20Predict%20the%20Next%20Word">2.1. Example Task: Predict the Next Word</a></li>
 </ul>
 </li>
-<li><a href="#orgc5694fb">3. Recurrence and RNNs</a></li>
-<li><a href="#org3d74192">4. Learning Algorithm: Back propagation through time (BPTT)</a>
+<li><a href="#Recurrence%20and%20RNNs">3. Recurrence and RNNs</a></li>
+<li><a href="#Learning%20Algorithm%3A%20Back%20propagation%20through%20time%20%28BPTT%29">4. Learning Algorithm: Back propagation through time (BPTT)</a>
 <ul>
-<li><a href="#orgf47f028">4.1. Exploding Gradients and Vanishing Gradients</a>
+<li><a href="#Exploding%20Gradients%20and%20Vanishing%20Gradients">4.1. Exploding Gradients and Vanishing Gradients</a>
 <ul>
-<li><a href="#org4b7daca">4.1.1. Exploding Gradient</a></li>
-<li><a href="#org852779d">4.1.2. Vanishing Gradient</a></li>
+<li><a href="#Exploding%20Gradient">4.1.1. Exploding Gradient</a></li>
+<li><a href="#Vanishing%20Gradient">4.1.2. Vanishing Gradient</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org7c98423">5. Gated Cells</a></li>
-<li><a href="#org3385530">6. Limitations &amp; Desired Capabilities of RNN</a></li>
-<li><a href="#org19141d2">7. Attention Is All You Need: Transformers</a>
+<li><a href="#Gated%20Cells">5. Gated Cells</a></li>
+<li><a href="#Limitations%20%26%20Desired%20Capabilities%20of%20RNN">6. Limitations &amp; Desired Capabilities of RNN</a></li>
+<li><a href="#Attention%20Is%20All%20You%20Need%3A%20Transformers">7. Attention Is All You Need: Transformers</a>
 <ul>
-<li><a href="#org42687d8">7.1. Idenitfying parts to attend to is similar to <span class="underline">Search problem</span></a></li>
-<li><a href="#org83af2ad">7.2. Self-Attention in Sequence Modelling</a></li>
+<li><a href="#Idenitfying%20parts%20to%20attend%20to%20is%20similar%20to%20_Search%20problem_">7.1. Idenitfying parts to attend to is similar to <span class="underline">Search problem</span></a></li>
+<li><a href="#Self-Attention%20in%20Sequence%20Modelling">7.2. Self-Attention in Sequence Modelling</a></li>
 </ul>
 </li>
 </ul>
@@ -274,8 +274,8 @@
 <a href="https://www.youtube.com/watch?v=QvkQ1B3FBqA&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=3">Lecture 2: Deep Sequence Modeling</a>: In which we get introduced to sequential modeling, and how recurrence (&amp; RNN) help in sequential modelling. 
 </p>
 
-<div id="outline-container-orgbb660bd" class="outline-2">
-<h2 id="orgbb660bd"><span class="section-number-2">1.</span> Sequential Modeling</h2>
+<div id="outline-container-Sequential%20Modeling" class="outline-2">
+<h2 id="Sequential%20Modeling"><span class="section-number-2">1.</span> Sequential Modeling</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <img src="../img/mit_6s191/squential_model_application-20230314091644.png" alt="squential_model_application-20230314091644.png" />
@@ -293,8 +293,8 @@ Example of Sequence Modeling tasks:
 </div>
 </div>
 
-<div id="outline-container-org60d5aeb" class="outline-2">
-<h2 id="org60d5aeb"><span class="section-number-2">2.</span> Sequence Modelling: Design Criteria</h2>
+<div id="outline-container-Sequence%20Modelling%3A%20Design%20Criteria" class="outline-2">
+<h2 id="Sequence%20Modelling%3A%20Design%20Criteria"><span class="section-number-2">2.</span> Sequence Modelling: Design Criteria</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 @ 0:20:29
@@ -312,8 +312,8 @@ To model sequences, we need to:
 </p>
 </div>
 
-<div id="outline-container-org5b7b190" class="outline-3">
-<h3 id="org5b7b190"><span class="section-number-3">2.1.</span> Example Task: Predict the Next Word</h3>
+<div id="outline-container-Example%20Task%3A%20Predict%20the%20Next%20Word" class="outline-3">
+<h3 id="Example%20Task%3A%20Predict%20the%20Next%20Word"><span class="section-number-3">2.1.</span> Example Task: Predict the Next Word</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 First we need to address <b>Embedding</b>: i.e. How to represent language to a Neural Network? (@ 0:23:10)
@@ -324,7 +324,7 @@ First we need to address <b>Embedding</b>: i.e. How to represent language to a N
 </ul>
 
 
-<div id="org976d2ae" class="figure">
+<div id="org82b7f9d" class="figure">
 <p><img src="../img/mit_6s191/encoding_language_for_nn-20230316093655.png" alt="encoding_language_for_nn-20230316093655.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Encoding Language for NN</p>
@@ -341,8 +341,8 @@ Now observe that this problem demands all the <b>Design Criteria</b> for sequent
 </div>
 </div>
 </div>
-<div id="outline-container-orgc5694fb" class="outline-2">
-<h2 id="orgc5694fb"><span class="section-number-2">3.</span> Recurrence and RNNs</h2>
+<div id="outline-container-Recurrence%20and%20RNNs" class="outline-2">
+<h2 id="Recurrence%20and%20RNNs"><span class="section-number-2">3.</span> Recurrence and RNNs</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 @ 0:08:32
@@ -358,7 +358,7 @@ Consider a single feed forward network, it takes input and gives output at a sin
 </ul>
 
 
-<div id="org408f166" class="figure">
+<div id="orgb3d2835" class="figure">
 <p><img src="../img/mit_6s191/recurrent_nn-20230314092546.png" alt="recurrent_nn-20230314092546.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Recurrent NN</p>
@@ -374,7 +374,7 @@ Consider a single feed forward network, it takes input and gives output at a sin
 </ul>
 
 
-<div id="org002cc23" class="figure">
+<div id="org19ca316" class="figure">
 <p><img src="../img/mit_6s191/rnn_computation_graph_across_time-20230314093011.png" alt="rnn_computation_graph_across_time-20230314093011.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>RNN: Computation Graph Across Time @ 0:15:16</p>
@@ -386,8 +386,8 @@ Consider a single feed forward network, it takes input and gives output at a sin
 </div>
 </div>
 
-<div id="outline-container-org3d74192" class="outline-2">
-<h2 id="org3d74192"><span class="section-number-2">4.</span> Learning Algorithm: Back propagation through time (BPTT)</h2>
+<div id="outline-container-Learning%20Algorithm%3A%20Back%20propagation%20through%20time%20%28BPTT%29" class="outline-2">
+<h2 id="Learning%20Algorithm%3A%20Back%20propagation%20through%20time%20%28BPTT%29"><span class="section-number-2">4.</span> Learning Algorithm: Back propagation through time (BPTT)</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Loss function: @ 0:16:28
@@ -399,15 +399,15 @@ Loss function: @ 0:16:28
 
 
 
-<div id="org2f275dc" class="figure">
+<div id="orgdb4975b" class="figure">
 <p><img src="../img/mit_6s191/bptt-20230316094048.png" alt="bptt-20230316094048.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>BPTT @ 0:29:34</p>
 </div>
 </div>
 
-<div id="outline-container-orgf47f028" class="outline-3">
-<h3 id="orgf47f028"><span class="section-number-3">4.1.</span> Exploding Gradients and Vanishing Gradients</h3>
+<div id="outline-container-Exploding%20Gradients%20and%20Vanishing%20Gradients" class="outline-3">
+<h3 id="Exploding%20Gradients%20and%20Vanishing%20Gradients"><span class="section-number-3">4.1.</span> Exploding Gradients and Vanishing Gradients</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 @ 0:30:21
@@ -415,8 +415,8 @@ Computing gradients wrt \(h_0\) involves many factors of \(W_{hh}\) &amp; repeat
 </p>
 </div>
 
-<div id="outline-container-org4b7daca" class="outline-4">
-<h4 id="org4b7daca"><span class="section-number-4">4.1.1.</span> Exploding Gradient</h4>
+<div id="outline-container-Exploding%20Gradient" class="outline-4">
+<h4 id="Exploding%20Gradient"><span class="section-number-4">4.1.1.</span> Exploding Gradient</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
 If the gradients are &gt; 1 then, repeated gradient computation causes graident to explode. Exploding gradient problem can be solved by: 
@@ -427,8 +427,8 @@ If the gradients are &gt; 1 then, repeated gradient computation causes graident 
 </div>
 </div>
 
-<div id="outline-container-org852779d" class="outline-4">
-<h4 id="org852779d"><span class="section-number-4">4.1.2.</span> Vanishing Gradient</h4>
+<div id="outline-container-Vanishing%20Gradient" class="outline-4">
+<h4 id="Vanishing%20Gradient"><span class="section-number-4">4.1.2.</span> Vanishing Gradient</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
 However if the gradients are &lt; 1, then as gradients are backpropagated the gradients decrease to near zero (vanishing gradient). Vanishing Gradient cause the model to focus on short term dependencies and ignore long term dependencies. It can solved by: 
@@ -443,8 +443,8 @@ However if the gradients are &lt; 1, then as gradients are backpropagated the gr
 </div>
 </div>
 
-<div id="outline-container-org7c98423" class="outline-2">
-<h2 id="org7c98423"><span class="section-number-2">5.</span> Gated Cells</h2>
+<div id="outline-container-Gated%20Cells" class="outline-2">
+<h2 id="Gated%20Cells"><span class="section-number-2">5.</span> Gated Cells</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 @ 0:33:41
@@ -452,7 +452,7 @@ Instead of using simple feed forward network as <b>recurrent cell</b>, Gated Cel
 </p>
 
 
-<div id="orgee0e770" class="figure">
+<div id="orgf3552fb" class="figure">
 <p><img src="../img/mit_6s191/gated_cell-20230316094902.png" alt="gated_cell-20230316094902.png" />
 </p>
 <p><span class="figure-number">Figure 5: </span>Gated Cell</p>
@@ -476,8 +476,8 @@ LSTMs have the following property: (@ 0:35:24)
 </div>
 </div>
 
-<div id="outline-container-org3385530" class="outline-2">
-<h2 id="org3385530"><span class="section-number-2">6.</span> Limitations &amp; Desired Capabilities of RNN</h2>
+<div id="outline-container-Limitations%20%26%20Desired%20Capabilities%20of%20RNN" class="outline-2">
+<h2 id="Limitations%20%26%20Desired%20Capabilities%20of%20RNN"><span class="section-number-2">6.</span> Limitations &amp; Desired Capabilities of RNN</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 RNN as presented above have the following limitations: @ 0:39:20
@@ -489,7 +489,7 @@ RNN as presented above have the following limitations: @ 0:39:20
 </ul>
 
 
-<div id="orgab8e273" class="figure">
+<div id="orgfebcbf4" class="figure">
 <p><img src="../img/mit_6s191/desired_capabilities_of_rnn-20230316100804.png" alt="desired_capabilities_of_rnn-20230316100804.png" />
 </p>
 <p><span class="figure-number">Figure 6: </span>Desired Capabilities of RNN @ 0:41:48</p>
@@ -520,8 +520,8 @@ In contrast to those limitations, what we want is:
 </div>
 </div>
 
-<div id="outline-container-org19141d2" class="outline-2">
-<h2 id="org19141d2"><span class="section-number-2">7.</span> Attention Is All You Need: Transformers</h2>
+<div id="outline-container-Attention%20Is%20All%20You%20Need%3A%20Transformers" class="outline-2">
+<h2 id="Attention%20Is%20All%20You%20Need%3A%20Transformers"><span class="section-number-2">7.</span> Attention Is All You Need: Transformers</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 @ 0:43:28
@@ -541,8 +541,8 @@ Attention has been used in:
 </ul>
 </div>
 
-<div id="outline-container-org42687d8" class="outline-3">
-<h3 id="org42687d8"><span class="section-number-3">7.1.</span> Idenitfying parts to attend to is similar to <span class="underline">Search problem</span></h3>
+<div id="outline-container-Idenitfying%20parts%20to%20attend%20to%20is%20similar%20to%20_Search%20problem_" class="outline-3">
+<h3 id="Idenitfying%20parts%20to%20attend%20to%20is%20similar%20to%20_Search%20problem_"><span class="section-number-3">7.1.</span> Idenitfying parts to attend to is similar to <span class="underline">Search problem</span></h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 @ 0:44:54
@@ -556,7 +556,7 @@ Attention has been used in:
 </ul>
 
 
-<div id="org39618c9" class="figure">
+<div id="orgb358573" class="figure">
 <p><img src="../img/mit_6s191/attention_as_search-20230316105659.png" alt="attention_as_search-20230316105659.png" />
 </p>
 <p><span class="figure-number">Figure 7: </span>Attention as Search</p>
@@ -564,8 +564,8 @@ Attention has been used in:
 </div>
 </div>
 
-<div id="outline-container-org83af2ad" class="outline-3">
-<h3 id="org83af2ad"><span class="section-number-3">7.2.</span> Self-Attention in Sequence Modelling</h3>
+<div id="outline-container-Self-Attention%20in%20Sequence%20Modelling" class="outline-3">
+<h3 id="Self-Attention%20in%20Sequence%20Modelling"><span class="section-number-3">7.2.</span> Self-Attention in Sequence Modelling</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 Goal: Identify and attend to most important features in input
@@ -576,7 +576,7 @@ Goal: Identify and attend to most important features in input
 We want to elimintate recurrence because that what gave rise to the limitations. So, we need to <b>encode position information</b>
 </p>
 
-<div id="org193a370" class="figure">
+<div id="org76876c9" class="figure">
 <p><img src="../img/mit_6s191/position_aware_encoding-20230316113706.png" alt="position_aware_encoding-20230316113706.png" />
 </p>
 <p><span class="figure-number">Figure 8: </span>Position-Aware Encoding (@ 0:48:32)</p>
@@ -602,7 +602,7 @@ Attention Score = \(\frac {Q . K^T} {scaling}\)
 </ol>
 
 
-<div id="org92c0920" class="figure">
+<div id="org4ae7ac5" class="figure">
 <p><img src="../img/mit_6s191/self_attention_head-20230316114501.png" alt="self_attention_head-20230316114501.png" />
 </p>
 <p><span class="figure-number">Figure 9: </span>Self-Attention Head</p>
@@ -612,7 +612,7 @@ Attention Score = \(\frac {Q . K^T} {scaling}\)
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: RNN and Transformers">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: RNN and Transformers">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/rss.xml"><img src="https://bpanthi977.github.io/img/rss.png" /></a>
 </div>
 </body>
 </html>

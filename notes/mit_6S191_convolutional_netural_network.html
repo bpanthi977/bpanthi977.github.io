@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-08-26 Sat 09:08 -->
+<!-- 2023-11-13 Mon 20:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Convolutional Neural Networks</title>
@@ -242,17 +242,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4cd3709">1. Feature Detection</a></li>
-<li><a href="#orgd9dbc92">2. Filters detect Features</a></li>
-<li><a href="#orgfc7261c">3. Convolutional Neural Networks (CNNs)</a></li>
-<li><a href="#org25d846b">4. Object Detection</a>
+<li><a href="#Feature%20Detection">1. Feature Detection</a></li>
+<li><a href="#Filters%20detect%20Features">2. Filters detect Features</a></li>
+<li><a href="#Convolutional%20Neural%20Networks%20%28CNNs%29">3. Convolutional Neural Networks (CNNs)</a></li>
+<li><a href="#Object%20Detection">4. Object Detection</a>
 <ul>
-<li><a href="#orge8a0aa4">4.1. Object Detection with R-CNNs</a></li>
-<li><a href="#orge5dd7fd">4.2. Faster R-CNN</a></li>
+<li><a href="#Object%20Detection%20with%20R-CNNs">4.1. Object Detection with R-CNNs</a></li>
+<li><a href="#Faster%20R-CNN">4.2. Faster R-CNN</a></li>
 </ul>
 </li>
-<li><a href="#orgdbda2ac">5. Semantic Segmentation: Fully Convolutional Networks</a></li>
-<li><a href="#orgebb2fa9">6. Continuous Control</a></li>
+<li><a href="#Semantic%20Segmentation%3A%20Fully%20Convolutional%20Networks">5. Semantic Segmentation: Fully Convolutional Networks</a></li>
+<li><a href="#Continuous%20Control">6. Continuous Control</a></li>
 </ul>
 </div>
 </div>
@@ -264,8 +264,8 @@
 We use vision to recognize what is there, where it is and also use it to predict future motion &amp; intent. So, the task of Compute Vision is more than simply detecting stuffs. 
 </p>
 
-<div id="outline-container-org4cd3709" class="outline-2">
-<h2 id="org4cd3709"><span class="section-number-2">1.</span> Feature Detection</h2>
+<div id="outline-container-Feature%20Detection" class="outline-2">
+<h2 id="Feature%20Detection"><span class="section-number-2">1.</span> Feature Detection</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 For computers image is input as matrix of numbers. And image classfication is done by High Level Feature Detection (0:08:45)
@@ -294,7 +294,7 @@ But its not easy. Defining features may be easy but problems in detection are: 0
 </ul>
 
 
-<div id="org6624333" class="figure">
+<div id="orga84f640" class="figure">
 <p><img src="../img/mit_6s191/difficulty_in_feature_detection-20230316132313.png" alt="difficulty_in_feature_detection-20230316132313.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Difficulty in Feature Detection</p>
@@ -321,14 +321,14 @@ Instead Use Neural Network for Feature Detection.
 </div>
 </div>
 
-<div id="outline-container-orgd9dbc92" class="outline-2">
-<h2 id="orgd9dbc92"><span class="section-number-2">2.</span> Filters detect Features</h2>
+<div id="outline-container-Filters%20detect%20Features" class="outline-2">
+<h2 id="Filters%20detect%20Features"><span class="section-number-2">2.</span> Filters detect Features</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 0:20:00
 </p>
 
-<div id="org4818202" class="figure">
+<div id="org1170c61" class="figure">
 <p><img src="../img/mit_6s191/filters_detect_features-20230316132940.png" alt="filters_detect_features-20230316132940.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Example of Filters detecting features for X shape</p>
@@ -340,11 +340,11 @@ Instead Use Neural Network for Feature Detection.
 </div>
 </div>
 
-<div id="outline-container-orgfc7261c" class="outline-2">
-<h2 id="orgfc7261c"><span class="section-number-2">3.</span> Convolutional Neural Networks (CNNs)</h2>
+<div id="outline-container-Convolutional%20Neural%20Networks%20%28CNNs%29" class="outline-2">
+<h2 id="Convolutional%20Neural%20Networks%20%28CNNs%29"><span class="section-number-2">3.</span> Convolutional Neural Networks (CNNs)</h2>
 <div class="outline-text-2" id="text-3">
 
-<div id="orgf8bca02" class="figure">
+<div id="org22a107d" class="figure">
 <p><img src="../img/mit_6s191/cnn_spatial_arrangement_of_output_volumne-20230316133419.png" alt="cnn_spatial_arrangement_of_output_volumne-20230316133419.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>CNN: Spatial Arrangement of Output Volume</p>
@@ -393,8 +393,8 @@ We can keep the first part of the network (the feature learning) and swap out th
 </div>
 </div>
 
-<div id="outline-container-org25d846b" class="outline-2">
-<h2 id="org25d846b"><span class="section-number-2">4.</span> Object Detection</h2>
+<div id="outline-container-Object%20Detection" class="outline-2">
+<h2 id="Object%20Detection"><span class="section-number-2">4.</span> Object Detection</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 @ 0:38:51
@@ -410,8 +410,8 @@ Native Method would be to:
 </ul>
 </div>
 
-<div id="outline-container-orge8a0aa4" class="outline-3">
-<h3 id="orge8a0aa4"><span class="section-number-3">4.1.</span> Object Detection with R-CNNs</h3>
+<div id="outline-container-Object%20Detection%20with%20R-CNNs" class="outline-3">
+<h3 id="Object%20Detection%20with%20R-CNNs"><span class="section-number-3">4.1.</span> Object Detection with R-CNNs</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 0:41:39
@@ -419,7 +419,7 @@ Find regions that we think have objects. Use CNN to classify. So, a model propos
 </p>
 
 
-<div id="org5296f11" class="figure">
+<div id="org7422747" class="figure">
 <p><img src="../img/mit_6s191/r_cnns-20230316134458.png" alt="r_cnns-20230316134458.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>R-CNNs</p>
@@ -435,15 +435,15 @@ Demerits:
 </div>
 </div>
 
-<div id="outline-container-orge5dd7fd" class="outline-3">
-<h3 id="orge5dd7fd"><span class="section-number-3">4.2.</span> Faster R-CNN</h3>
+<div id="outline-container-Faster%20R-CNN" class="outline-3">
+<h3 id="Faster%20R-CNN"><span class="section-number-3">4.2.</span> Faster R-CNN</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 0:42:01
 </p>
 
 
-<div id="org647b602" class="figure">
+<div id="org1369a5d" class="figure">
 <p><img src="../img/mit_6s191/faster_r_cnn-20230316134851.png" alt="faster_r_cnn-20230316134851.png" />
 </p>
 <p><span class="figure-number">Figure 5: </span>Faster R-CNN</p>
@@ -463,8 +463,8 @@ Demerits:
 </div>
 </div>
 
-<div id="outline-container-orgdbda2ac" class="outline-2">
-<h2 id="orgdbda2ac"><span class="section-number-2">5.</span> Semantic Segmentation: Fully Convolutional Networks</h2>
+<div id="outline-container-Semantic%20Segmentation%3A%20Fully%20Convolutional%20Networks" class="outline-2">
+<h2 id="Semantic%20Segmentation%3A%20Fully%20Convolutional%20Networks"><span class="section-number-2">5.</span> Semantic Segmentation: Fully Convolutional Networks</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 0:43:29
@@ -475,7 +475,7 @@ Semantic Segmentation is like one classification per pixel. Fully Convolutional 
 </p>
 
 
-<div id="org7799e04" class="figure">
+<div id="org9035b9c" class="figure">
 <p><img src="../img/mit_6s191/semantic_segmentation-20230316135344.png" alt="semantic_segmentation-20230316135344.png" />
 </p>
 <p><span class="figure-number">Figure 6: </span>Semantic Segmentation</p>
@@ -483,8 +483,8 @@ Semantic Segmentation is like one classification per pixel. Fully Convolutional 
 </div>
 </div>
 
-<div id="outline-container-orgebb2fa9" class="outline-2">
-<h2 id="orgebb2fa9"><span class="section-number-2">6.</span> Continuous Control</h2>
+<div id="outline-container-Continuous%20Control" class="outline-2">
+<h2 id="Continuous%20Control"><span class="section-number-2">6.</span> Continuous Control</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 0:45:15
@@ -496,7 +496,7 @@ Here the output is a continuous probability distribution. This is different from
 </p>
 
 
-<div id="org4e234d2" class="figure">
+<div id="orge90d0d0" class="figure">
 <p><img src="../img/mit_6s191/navigation_from_vision-20230316135436.png" alt="navigation_from_vision-20230316135436.png" />
 </p>
 <p><span class="figure-number">Figure 7: </span>Navigation from Vision</p>
@@ -523,7 +523,7 @@ The loss function here is interesting because in reality we won't take multiple 
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Convolutional Neural Networks">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Convolutional Neural Networks">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/rss.xml"><img src="https://bpanthi977.github.io/img/rss.png" /></a>
 </div>
 </body>
 </html>

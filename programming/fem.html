@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-08-26 Sat 09:08 -->
+<!-- 2023-11-13 Mon 20:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Finite Element Method - Solid Mechanics</title>
@@ -242,39 +242,39 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgebaa24c">1. Packages &amp; Utilties</a></li>
-<li><a href="#org0043a47">2. Input</a>
+<li><a href="#Packages%20%26%20Utilties">1. Packages &amp; Utilties</a></li>
+<li><a href="#Input">2. Input</a>
 <ul>
-<li><a href="#orgf1c7089">2.1. File Format</a></li>
-<li><a href="#orge385d0d">2.2. Input Parsing</a></li>
+<li><a href="#File%20Format">2.1. File Format</a></li>
+<li><a href="#Input%20Parsing">2.2. Input Parsing</a></li>
 </ul>
 </li>
-<li><a href="#org731cd47">3. Elasticity Matrix</a></li>
-<li><a href="#org4d2f27a">4. Element Stiffness Matrix</a>
+<li><a href="#Elasticity%20Matrix">3. Elasticity Matrix</a></li>
+<li><a href="#Element%20Stiffness%20Matrix">4. Element Stiffness Matrix</a>
 <ul>
-<li><a href="#orgc839ed9">4.1. Strain</a></li>
-<li><a href="#org8462ade">4.2. Internal Virtual Work</a></li>
+<li><a href="#Strain">4.1. Strain</a></li>
+<li><a href="#Internal%20Virtual%20Work">4.2. Internal Virtual Work</a></li>
 </ul>
 </li>
-<li><a href="#orgd78381d">5. Code For Element Stiffness Matrix</a>
+<li><a href="#Code%20For%20Element%20Stiffness%20Matrix">5. Code For Element Stiffness Matrix</a>
 <ul>
-<li><a href="#orgb3bf9e6">5.1. Linear Interpolation Function</a></li>
-<li><a href="#org24a9165">5.2. Element Stiffness Matrix</a></li>
+<li><a href="#Linear%20Interpolation%20Function">5.1. Linear Interpolation Function</a></li>
+<li><a href="#Code%20For%20Element%20Stiffness%20Matrix--Element%20Stiffness%20Matrix">5.2. Element Stiffness Matrix</a></li>
 </ul>
 </li>
-<li><a href="#org4c70c80">6. Assembly of Global Stiffness Matrix</a></li>
-<li><a href="#org652d534">7. Solution</a></li>
-<li><a href="#org3416a6e">8. Visualization</a></li>
-<li><a href="#org923ca44">9. Complex Meshes</a>
+<li><a href="#Assembly%20of%20Global%20Stiffness%20Matrix">6. Assembly of Global Stiffness Matrix</a></li>
+<li><a href="#Solution">7. Solution</a></li>
+<li><a href="#Visualization">8. Visualization</a></li>
+<li><a href="#Complex%20Meshes">9. Complex Meshes</a>
 <ul>
-<li><a href="#orga63d247">9.1. Parser</a></li>
-<li><a href="#org5f82e00">9.2. Solution</a></li>
+<li><a href="#Parser">9.1. Parser</a></li>
+<li><a href="#Complex%20Meshes--Solution">9.2. Solution</a></li>
 </ul>
 </li>
-<li><a href="#org2164b59">10. Utilities</a>
+<li><a href="#Utilities">10. Utilities</a>
 <ul>
-<li><a href="#org26c5ba2">10.1. Linear Algebra - Pure Common Lisp</a></li>
-<li><a href="#orgbc0a778">10.2. Linear Algebra - GSL (GNU Scientific Library)</a></li>
+<li><a href="#Linear%20Algebra%20-%20Pure%20Common%20Lisp">10.1. Linear Algebra - Pure Common Lisp</a></li>
+<li><a href="#Linear%20Algebra%20-%20GSL%20%28GNU%20Scientific%20Library%29">10.2. Linear Algebra - GSL (GNU Scientific Library)</a></li>
 </ul>
 </li>
 </ul>
@@ -284,8 +284,8 @@
 My objective is to use FEM (Finite Element Method) to solve solid mechanics problem of finding body deformation from applied external loads (forces). I followed this excellent article <a href="https://podgorskiy.com/spblog/304/writing-a-fem-solver-in-less-the-180-lines-of-code">Writing a FEM Solve in less than 180 lines of code</a> and rewrote the solver program in Common Lisp. Aditionally, I wrote a few lines for visualizing the problem and solution and also  a mesh file parser to input a complex mesh from <code>gmsh</code> program. You can find all the code of this blog in my <a href="https://github.com/bpanthi977/random-code-collection/tree/main/nm/fem">GitHub</a>.
 </p>
 
-<div id="outline-container-orgebaa24c" class="outline-2">
-<h2 id="orgebaa24c"><span class="section-number-2">1.</span> Packages &amp; Utilties</h2>
+<div id="outline-container-Packages%20%26%20Utilties" class="outline-2">
+<h2 id="Packages%20%26%20Utilties"><span class="section-number-2">1.</span> Packages &amp; Utilties</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Lets setup a packages, and load some utilities.
@@ -296,11 +296,11 @@ Lets setup a packages, and load some utilities.
 </p>
 
 <p>
-<code>linalg.lisp</code> has my naive linear algebra functions. While <code>fastlinalg.lisp</code> provides them using GSL library. (See <a href="#org2164b59">Utilities</a> section)
+<code>linalg.lisp</code> has my naive linear algebra functions. While <code>fastlinalg.lisp</code> provides them using GSL library. (See <a href="#Utilities">Utilities</a> section)
 </p>
 
 <p>
-<code>parse-mesh.lisp</code> is later used to read mesh from <code>*.msh</code> file. (See <a href="#org923ca44">Custom Meshes</a> section)
+<code>parse-mesh.lisp</code> is later used to read mesh from <code>*.msh</code> file. (See <a href="#Complex%20Meshes">Custom Meshes</a> section)
 </p>
 
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
@@ -320,23 +320,23 @@ Lets setup a packages, and load some utilities.
 </div>
 </div>
 
-<div id="outline-container-org0043a47" class="outline-2">
-<h2 id="org0043a47"><span class="section-number-2">2.</span> Input</h2>
+<div id="outline-container-Input" class="outline-2">
+<h2 id="Input"><span class="section-number-2">2.</span> Input</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Lets define input file format for problem input.
 </p>
 </div>
 
-<div id="outline-container-orgf1c7089" class="outline-3">
-<h3 id="orgf1c7089"><span class="section-number-3">2.1.</span> File Format</h3>
+<div id="outline-container-File%20Format" class="outline-3">
+<h3 id="File%20Format"><span class="section-number-3">2.1.</span> File Format</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Its easy to explain the input file structure using an example
 </p>
 
 
-<div id="org55b90e5" class="figure">
+<div id="orgf0884de" class="figure">
 <p><img src="../img/fem/20210625165724-simple_mesh_1.png" alt="20210625165724-simple_mesh_1.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Simple Mesh 1</p>
@@ -381,8 +381,8 @@ It can be easily seen, that we have a square body, that has constraints at its b
 </div>
 </div>
 
-<div id="outline-container-orge385d0d" class="outline-3">
-<h3 id="orge385d0d"><span class="section-number-3">2.2.</span> Input Parsing</h3>
+<div id="outline-container-Input%20Parsing" class="outline-3">
+<h3 id="Input%20Parsing"><span class="section-number-3">2.2.</span> Input Parsing</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 <code>parse-input-file</code> function reads the above defineds input file, and creates a <code>problem</code> instance. 
@@ -488,8 +488,8 @@ Let's test with sample input file
 </div>
 </div>
 
-<div id="outline-container-org731cd47" class="outline-2">
-<h2 id="org731cd47"><span class="section-number-2">3.</span> Elasticity Matrix</h2>
+<div id="outline-container-Elasticity%20Matrix" class="outline-2">
+<h2 id="Elasticity%20Matrix"><span class="section-number-2">3.</span> Elasticity Matrix</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Elasticity matrix converts strain to stress. We'll need this to define the stiffness matrix. 
@@ -548,8 +548,8 @@ These relation can used to solve for &sigma; and expressed as:
 </div>
 </div>
 
-<div id="outline-container-org4d2f27a" class="outline-2">
-<h2 id="org4d2f27a"><span class="section-number-2">4.</span> Element Stiffness Matrix</h2>
+<div id="outline-container-Element%20Stiffness%20Matrix" class="outline-2">
+<h2 id="Element%20Stiffness%20Matrix"><span class="section-number-2">4.</span> Element Stiffness Matrix</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The theme/idea of FEM is that we convert the problem of solving for a function (in our case deformation functions) in complex &amp; big domain, to simple domain (i.e. the elements). Our elements are triangle. And if we can solve the problem of finding deformations within the triangle given the forces at the nodes, we can solve the big problem. 
@@ -584,8 +584,8 @@ So, we need to find the strain induced due to virtual displacement and the stres
 </p>
 </div>
 
-<div id="outline-container-orgc839ed9" class="outline-3">
-<h3 id="orgc839ed9"><span class="section-number-3">4.1.</span> Strain</h3>
+<div id="outline-container-Strain" class="outline-3">
+<h3 id="Strain"><span class="section-number-3">4.1.</span> Strain</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 If any point inside the triangle at (x,y) is displaced to \(\vec{u}(x,y)\), then the strain at that position is given by 
@@ -641,8 +641,8 @@ Here, [&delta;] is a vector of nodal displacements. We express &delta; as (&delt
 </div>
 </div>
 
-<div id="outline-container-org8462ade" class="outline-3">
-<h3 id="org8462ade"><span class="section-number-3">4.2.</span> Internal Virtual Work</h3>
+<div id="outline-container-Internal%20Virtual%20Work" class="outline-3">
+<h3 id="Internal%20Virtual%20Work"><span class="section-number-3">4.2.</span> Internal Virtual Work</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Finally, we can express internal virtual works as: 
@@ -691,12 +691,12 @@ where V is total Volume of element; V = A * t
 </div>
 </div>
 
-<div id="outline-container-orgd78381d" class="outline-2">
-<h2 id="orgd78381d"><span class="section-number-2">5.</span> Code For Element Stiffness Matrix</h2>
+<div id="outline-container-Code%20For%20Element%20Stiffness%20Matrix" class="outline-2">
+<h2 id="Code%20For%20Element%20Stiffness%20Matrix"><span class="section-number-2">5.</span> Code For Element Stiffness Matrix</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orgb3bf9e6" class="outline-3">
-<h3 id="orgb3bf9e6"><span class="section-number-3">5.1.</span> Linear Interpolation Function</h3>
+<div id="outline-container-Linear%20Interpolation%20Function" class="outline-3">
+<h3 id="Linear%20Interpolation%20Function"><span class="section-number-3">5.1.</span> Linear Interpolation Function</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Linear interpolation function [N] can easily be found by using a little bit of linear algebra. 
@@ -875,8 +875,8 @@ We can see from the expression for [N*] that,
 </div>
 </div>
 
-<div id="outline-container-org24a9165" class="outline-3">
-<h3 id="org24a9165"><span class="section-number-3">5.2.</span> Element Stiffness Matrix</h3>
+<div id="outline-container-Code%20For%20Element%20Stiffness%20Matrix--Element%20Stiffness%20Matrix" class="outline-3">
+<h3 id="Code%20For%20Element%20Stiffness%20Matrix--Element%20Stiffness%20Matrix"><span class="section-number-3">5.2.</span> Element Stiffness Matrix</h3>
 <div class="outline-text-3" id="text-5-2">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -896,8 +896,8 @@ We can see from the expression for [N*] that,
 </div>
 </div>
 </div>
-<div id="outline-container-org4c70c80" class="outline-2">
-<h2 id="org4c70c80"><span class="section-number-2">6.</span> Assembly of Global Stiffness Matrix</h2>
+<div id="outline-container-Assembly%20of%20Global%20Stiffness%20Matrix" class="outline-2">
+<h2 id="Assembly%20of%20Global%20Stiffness%20Matrix"><span class="section-number-2">6.</span> Assembly of Global Stiffness Matrix</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Global Stiffness matrix is obtained by stiching together individual element stiffness matrix. First create a 2n by 2n global stiffness matrix, and then for each node of each element add the node's stiffness value to appropriate location in the global stiffness matrix.
@@ -956,8 +956,8 @@ To apply the constraints, we modify the matrix's values at the rows and columns 
 </div>
 </div>
 
-<div id="outline-container-org652d534" class="outline-2">
-<h2 id="org652d534"><span class="section-number-2">7.</span> Solution</h2>
+<div id="outline-container-Solution" class="outline-2">
+<h2 id="Solution"><span class="section-number-2">7.</span> Solution</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Finally we can solve the problem.
@@ -1010,8 +1010,8 @@ This deformations seem plausible. The 0th node is fixed, as well as the y value 
 </div>
 </div>
 
-<div id="outline-container-org3416a6e" class="outline-2">
-<h2 id="org3416a6e"><span class="section-number-2">8.</span> Visualization</h2>
+<div id="outline-container-Visualization" class="outline-2">
+<h2 id="Visualization"><span class="section-number-2">8.</span> Visualization</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Lets define a mesh object for the visualizer to use. Later we'll use this struct for the mesh parser too.
@@ -1114,7 +1114,7 @@ Using sdl, we can quickly write a simple graphics for visualizing the problem an
 </div></details>
 
 
-<div id="org0b4c02b" class="figure">
+<div id="org114c3b5" class="figure">
 <p><img src="../img/fem/mesh-simple.jpg" alt="mesh-simple.jpg" />
 </p>
 </div>
@@ -1139,7 +1139,7 @@ and its solution
 </div></details>
 
 
-<div id="org152fdbc" class="figure">
+<div id="orgb382e74" class="figure">
 <p><img src="../img/fem/mesh-simple-solution.jpg" alt="mesh-simple-solution.jpg" />
 </p>
 </div>
@@ -1154,8 +1154,8 @@ The resulting displacements (exagerated) is visualised above.
 </div>
 </div>
 
-<div id="outline-container-org923ca44" class="outline-2">
-<h2 id="org923ca44"><span class="section-number-2">9.</span> Complex Meshes</h2>
+<div id="outline-container-Complex%20Meshes" class="outline-2">
+<h2 id="Complex%20Meshes"><span class="section-number-2">9.</span> Complex Meshes</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 We can use our custom input format for simple meshes only. For complex shapes, we need help of other software to generated mesh. <a href="https://gmsh.info/">gmsh</a> is a free and open software for meshing of 2D and 3D domain. It outputs a <code>.msh</code> file that we can import into our solver. 
@@ -1171,8 +1171,8 @@ Now, we need to write a parser of the <code>.msh</code> file. <code>.msh</code> 
 </p>
 </div>
 
-<div id="outline-container-orga63d247" class="outline-3">
-<h3 id="orga63d247"><span class="section-number-3">9.1.</span> Parser</h3>
+<div id="outline-container-Parser" class="outline-3">
+<h3 id="Parser"><span class="section-number-3">9.1.</span> Parser</h3>
 <div class="outline-text-3" id="text-9-1">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -1398,15 +1398,15 @@ Lets check the mesh:
 </div></details>
 
 
-<div id="orgfef2ac2" class="figure">
+<div id="orgb0f12ef" class="figure">
 <p><img src="../img/fem/chairlike-mesh.jpg" alt="chairlike-mesh.jpg" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org5f82e00" class="outline-3">
-<h3 id="org5f82e00"><span class="section-number-3">9.2.</span> Solution</h3>
+<div id="outline-container-Complex%20Meshes--Solution" class="outline-3">
+<h3 id="Complex%20Meshes--Solution"><span class="section-number-3">9.2.</span> Solution</h3>
 <div class="outline-text-3" id="text-9-2">
 <p>
 Once we have the mesh we can setup the constraints and load, and solve the problem.
@@ -1468,7 +1468,7 @@ Now we can give the problem to the solver and visualize it.
 </div></details>
 
 
-<div id="org576e8b0" class="figure">
+<div id="org31d025e" class="figure">
 <p><img src="../img/fem/chairlike-mesh-solution.png" alt="chairlike-mesh-solution.png" />
 </p>
 </div>
@@ -1476,12 +1476,12 @@ Now we can give the problem to the solver and visualize it.
 </div>
 </div>
 
-<div id="outline-container-org2164b59" class="outline-2">
-<h2 id="org2164b59"><span class="section-number-2">10.</span> Utilities</h2>
+<div id="outline-container-Utilities" class="outline-2">
+<h2 id="Utilities"><span class="section-number-2">10.</span> Utilities</h2>
 <div class="outline-text-2" id="text-10">
 </div>
-<div id="outline-container-org26c5ba2" class="outline-3">
-<h3 id="org26c5ba2"><span class="section-number-3">10.1.</span> Linear Algebra - Pure Common Lisp</h3>
+<div id="outline-container-Linear%20Algebra%20-%20Pure%20Common%20Lisp" class="outline-3">
+<h3 id="Linear%20Algebra%20-%20Pure%20Common%20Lisp"><span class="section-number-3">10.1.</span> Linear Algebra - Pure Common Lisp</h3>
 <div class="outline-text-3" id="text-10-1">
 <p>
 These naive implementation of Linear Algebra functions are feasible only for very small meshes. I wrote these during rapid prototyping. 
@@ -1551,8 +1551,8 @@ These naive implementation of Linear Algebra functions are feasible only for ver
 </div>
 </div>
 
-<div id="outline-container-orgbc0a778" class="outline-3">
-<h3 id="orgbc0a778"><span class="section-number-3">10.2.</span> Linear Algebra - GSL (GNU Scientific Library)</h3>
+<div id="outline-container-Linear%20Algebra%20-%20GSL%20%28GNU%20Scientific%20Library%29" class="outline-3">
+<h3 id="Linear%20Algebra%20-%20GSL%20%28GNU%20Scientific%20Library%29"><span class="section-number-3">10.2.</span> Linear Algebra - GSL (GNU Scientific Library)</h3>
 <div class="outline-text-3" id="text-10-2">
 <p>
 For big meshes, we'll need to use routines provided by GSL Library. Actually I should have used sparse matrix representaion and corresponding alogrithms, but lets keep that for another day. 
@@ -1621,7 +1621,7 @@ For big meshes, we'll need to use routines provided by GSL Library. Actually I s
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Finite Element Method - Solid Mechanics">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Finite Element Method - Solid Mechanics">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/rss.xml"><img src="https://bpanthi977.github.io/img/rss.png" /></a>
 </div>
 </body>
 </html>

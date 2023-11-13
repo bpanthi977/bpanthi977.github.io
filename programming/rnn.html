@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-08-26 Sat 09:08 -->
+<!-- 2023-11-13 Mon 20:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Recurrent Neural Network - Backpropagation Through Time</title>
@@ -242,40 +242,40 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7169963">1. Download tokenized text from Brown Corpus and Import to CL</a></li>
-<li><a href="#org40cb19f">2. Create training data</a>
+<li><a href="#Download%20tokenized%20text%20from%20Brown%20Corpus%20and%20Import%20to%20CL">1. Download tokenized text from Brown Corpus and Import to CL</a></li>
+<li><a href="#Create%20training%20data">2. Create training data</a>
 <ul>
-<li><a href="#orgedce466">2.1. Assign index to each word</a></li>
-<li><a href="#orga8b5e7b">2.2. Create traning data by converting sentences to vector - also replace infrequent words with unknown-word</a></li>
+<li><a href="#Assign%20index%20to%20each%20word">2.1. Assign index to each word</a></li>
+<li><a href="#Create%20traning%20data%20by%20converting%20sentences%20to%20vector%20-%20also%20replace%20infrequent%20words%20with%20unknown-word">2.2. Create traning data by converting sentences to vector - also replace infrequent words with unknown-word</a></li>
 </ul>
 </li>
-<li><a href="#orgd24cf5f">3. RNN Structure</a></li>
-<li><a href="#org510161e">4. Initialization</a></li>
-<li><a href="#org70e08ce">5. Forward Propagation</a></li>
-<li><a href="#orgfb46ca7">6. Loss Function</a>
+<li><a href="#RNN%20Structure">3. RNN Structure</a></li>
+<li><a href="#Initialization">4. Initialization</a></li>
+<li><a href="#Forward%20Propagation">5. Forward Propagation</a></li>
+<li><a href="#Loss%20Function">6. Loss Function</a>
 <ul>
-<li><a href="#org72aa6af">6.1. Testing forward-propagation and loss calculation</a></li>
+<li><a href="#Testing%20forward-propagation%20and%20loss%20calculation">6.1. Testing forward-propagation and loss calculation</a></li>
 </ul>
 </li>
-<li><a href="#orgeb3a634">7. Training the RNN with SGD and Backpropagation Throught Time (BPTT)</a>
+<li><a href="#Training%20the%20RNN%20with%20SGD%20and%20Backpropagation%20Throught%20Time%20%28BPTT%29">7. Training the RNN with SGD and Backpropagation Throught Time (BPTT)</a>
 <ul>
-<li><a href="#org36f1419">7.1. Derivative of loss function wrt output</a></li>
-<li><a href="#org2988280">7.2. Diagramatic representation</a></li>
-<li><a href="#org575738d">7.3. Code</a></li>
-<li><a href="#orgd4fafdb">7.4. Test of BPTT</a></li>
-<li><a href="#org6c9ce97">7.5. Stochastic Gradient Descent</a></li>
+<li><a href="#Derivative%20of%20loss%20function%20wrt%20output">7.1. Derivative of loss function wrt output</a></li>
+<li><a href="#Diagramatic%20representation">7.2. Diagramatic representation</a></li>
+<li><a href="#Code">7.3. Code</a></li>
+<li><a href="#Test%20of%20BPTT">7.4. Test of BPTT</a></li>
+<li><a href="#Stochastic%20Gradient%20Descent">7.5. Stochastic Gradient Descent</a></li>
 </ul>
 </li>
-<li><a href="#orgf08e214">8. Train!!</a></li>
-<li><a href="#orge42565b">9. Lets check predictions</a></li>
+<li><a href="#Train%21%21">8. Train!!</a></li>
+<li><a href="#Lets%20check%20predictions">9. Lets check predictions</a></li>
 </ul>
 </div>
 </div>
 <p>
 Adopted from <a href="http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-2-implementing-a-language-model-rnn-with-python-numpy-and-theano/">tutorial</a>. 
 </p>
-<div id="outline-container-org7169963" class="outline-2">
-<h2 id="org7169963"><span class="section-number-2">1.</span> Download tokenized text from Brown Corpus and Import to CL</h2>
+<div id="outline-container-Download%20tokenized%20text%20from%20Brown%20Corpus%20and%20Import%20to%20CL" class="outline-2">
+<h2 id="Download%20tokenized%20text%20from%20Brown%20Corpus%20and%20Import%20to%20CL"><span class="section-number-2">1.</span> Download tokenized text from Brown Corpus and Import to CL</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Download the corpus using nltk (Python Library)
@@ -315,15 +315,15 @@ Load it into Common Lisp
 </div>
 </div>
 
-<div id="outline-container-org40cb19f" class="outline-2">
-<h2 id="org40cb19f"><span class="section-number-2">2.</span> Create training data</h2>
+<div id="outline-container-Create%20training%20data" class="outline-2">
+<h2 id="Create%20training%20data"><span class="section-number-2">2.</span> Create training data</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 The input to our Recurrent Neural Networks are vectors, not strings. So we create a mapping between words and indices, index-to-word, and word-to-index. For example,  the word “friendly” may be at index 2001. A training example x may look like [0, 179, 341, 416], where 0 corresponds to SENTENCE-START. The corresponding label y would be [179, 341, 416, 1]. Remember that our goal is to predict the next word, so y is just the x vector shifted by one position with the last element being the SENTENCE-END token. In other words, the correct prediction for word 179 above would be 341, the actual next word.
 </p>
 </div>
-<div id="outline-container-orgedce466" class="outline-3">
-<h3 id="orgedce466"><span class="section-number-3">2.1.</span> Assign index to each word</h3>
+<div id="outline-container-Assign%20index%20to%20each%20word" class="outline-3">
+<h3 id="Assign%20index%20to%20each%20word"><span class="section-number-3">2.1.</span> Assign index to each word</h3>
 <div class="outline-text-3" id="text-2-1">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -357,8 +357,8 @@ unique words.
 </p>
 </div>
 </div>
-<div id="outline-container-orga8b5e7b" class="outline-3">
-<h3 id="orga8b5e7b"><span class="section-number-3">2.2.</span> Create traning data by converting sentences to vector - also replace infrequent words with unknown-word</h3>
+<div id="outline-container-Create%20traning%20data%20by%20converting%20sentences%20to%20vector%20-%20also%20replace%20infrequent%20words%20with%20unknown-word" class="outline-3">
+<h3 id="Create%20traning%20data%20by%20converting%20sentences%20to%20vector%20-%20also%20replace%20infrequent%20words%20with%20unknown-word"><span class="section-number-3">2.2.</span> Create traning data by converting sentences to vector - also replace infrequent words with unknown-word</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 We remove less frequent words and take only 1000 words in our vocabulary. This limit is mainly because of the one-hot encoding we use for the words. So, the input vector size is 1000. The words that don't fall in our vocabulary are replaced by UKNONWN-WORD. 
@@ -463,15 +463,15 @@ Here’s an actual training example from the text (with corresponding index of t
 </div>
 </div>
 
-<div id="outline-container-orgd24cf5f" class="outline-2">
-<h2 id="orgd24cf5f"><span class="section-number-2">3.</span> RNN Structure</h2>
+<div id="outline-container-RNN%20Structure" class="outline-2">
+<h2 id="RNN%20Structure"><span class="section-number-2">3.</span> RNN Structure</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Let’s get concrete and see what the RNN for our language model looks like. The input x will be a sequence of words (just like the example printed above) and each x<sub>t</sub> is a single word. But there’s one more thing: Because of how matrix multiplication works we can’t simply use a word index (like 36) as an input. Instead, we represent each word as a one-hot vector of size vocabulary-size. For example, the word with index 36 would be the vector of all 0’s and a 1 at position 36. So, each x<sub>t</sub> will become a vector, and x will be a matrix, with each row representing a word. We’ll perform this transformation in our Neural Network code instead of doing it in the pre-processing. The output/predictions of our network p has a similar format. Each p<sub>t</sub> is a vector of vocabulary-size elements, and each element represents the probability of that word being the next word in the sentence.
 </p>
 
 
-<div id="orgc2e13dc" class="figure">
+<div id="orge2ea035" class="figure">
 <p><img src="../img/rnn/rnn.png" alt="rnn.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>RNN (copied from the tutorial; (In this document o<sub>t</sub> is replaced with p<sub>t</sub>))</p>
@@ -501,8 +501,8 @@ This is valuable information. Remember that U,V and W are the parameters of our 
 </div>
 </div>
 
-<div id="outline-container-org510161e" class="outline-2">
-<h2 id="org510161e"><span class="section-number-2">4.</span> Initialization</h2>
+<div id="outline-container-Initialization" class="outline-2">
+<h2 id="Initialization"><span class="section-number-2">4.</span> Initialization</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 We start by declaring a RNN network class and initializing our parameters.Initializing the parameters U,V and W is a bit tricky. We can’t just initialize them to 0’s because that would result in symmetric calculations in all our layers. We must initialize them randomly. Because proper initialization seems to have an impact on training results there has been lot of research in this area. It turns out that the best initialization depends on the activation function (\(\tanh\) in our case) and one recommended approach is to initialize the weights randomly in the interval from \(\left[-\frac{1}{\sqrt{n}}, \frac{1}{\sqrt{n}}\right]\) where n is the number of incoming connections from the previous layer. This may sound overly complicated, but don’t worry too much it. As long as you initialize your parameters to small random values it typically works out fine.
@@ -538,8 +538,8 @@ We start by declaring a RNN network class and initializing our parameters.Initia
 </div>
 </div>
 
-<div id="outline-container-org70e08ce" class="outline-2">
-<h2 id="org70e08ce"><span class="section-number-2">5.</span> Forward Propagation</h2>
+<div id="outline-container-Forward%20Propagation" class="outline-2">
+<h2 id="Forward%20Propagation"><span class="section-number-2">5.</span> Forward Propagation</h2>
 <div class="outline-text-2" id="text-5">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -599,8 +599,8 @@ We start by declaring a RNN network class and initializing our parameters.Initia
 </div>
 </div>
 
-<div id="outline-container-orgfb46ca7" class="outline-2">
-<h2 id="orgfb46ca7"><span class="section-number-2">6.</span> Loss Function</h2>
+<div id="outline-container-Loss%20Function" class="outline-2">
+<h2 id="Loss%20Function"><span class="section-number-2">6.</span> Loss Function</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 To train our network we need a way to measure the errors it makes. We call this the loss function L, and our goal is find the parameters U,V and W that minimize the loss function for our training data. A common choice for the loss function is the cross-entropy loss. If we have N training examples (words in our text) and C classes (the size of our vocabulary) then the loss with respect to our predictions p and the true labels y is given by:
@@ -630,8 +630,8 @@ L(y,p) = -\frac 1 N \sum_{n\in N} \log(\vec{y}_n . \vec{p}_n)
 </div></details>
 </div>
 
-<div id="outline-container-org72aa6af" class="outline-3">
-<h3 id="org72aa6af"><span class="section-number-3">6.1.</span> Testing forward-propagation and loss calculation</h3>
+<div id="outline-container-Testing%20forward-propagation%20and%20loss%20calculation" class="outline-3">
+<h3 id="Testing%20forward-propagation%20and%20loss%20calculation"><span class="section-number-3">6.1.</span> Testing forward-propagation and loss calculation</h3>
 <div class="outline-text-3" id="text-6-1">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -659,12 +659,12 @@ Our value is also quite close, so we are in the right track.
 </div>
 </div>
 
-<div id="outline-container-orgeb3a634" class="outline-2">
-<h2 id="orgeb3a634"><span class="section-number-2">7.</span> Training the RNN with SGD and Backpropagation Throught Time (BPTT)</h2>
+<div id="outline-container-Training%20the%20RNN%20with%20SGD%20and%20Backpropagation%20Throught%20Time%20%28BPTT%29" class="outline-2">
+<h2 id="Training%20the%20RNN%20with%20SGD%20and%20Backpropagation%20Throught%20Time%20%28BPTT%29"><span class="section-number-2">7.</span> Training the RNN with SGD and Backpropagation Throught Time (BPTT)</h2>
 <div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-org36f1419" class="outline-3">
-<h3 id="org36f1419"><span class="section-number-3">7.1.</span> Derivative of loss function wrt output</h3>
+<div id="outline-container-Derivative%20of%20loss%20function%20wrt%20output" class="outline-3">
+<h3 id="Derivative%20of%20loss%20function%20wrt%20output"><span class="section-number-3">7.1.</span> Derivative of loss function wrt output</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 \(\vec{o}\)  is the output \(V . \vec{s}\)  and the softmax function turns that into probabilities \(\vec{p}\) 
@@ -695,26 +695,26 @@ Thus, following the derivation <a href="https://math.stackexchange.com/questions
 </div>
 </div>
 
-<div id="outline-container-org2988280" class="outline-3">
-<h3 id="org2988280"><span class="section-number-3">7.2.</span> Diagramatic representation</h3>
+<div id="outline-container-Diagramatic%20representation" class="outline-3">
+<h3 id="Diagramatic%20representation"><span class="section-number-3">7.2.</span> Diagramatic representation</h3>
 <div class="outline-text-3" id="text-7-2">
 
-<div id="org8ac02b7" class="figure">
+<div id="org5877277" class="figure">
 <p><img src="../img/rnn/directions.png" alt="directions.png" />
 </p>
 </div>
 
 
 
-<div id="org25fdb52" class="figure">
+<div id="org1255b54" class="figure">
 <p><img src="../img/rnn/derivatives.png" alt="derivatives.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org575738d" class="outline-3">
-<h3 id="org575738d"><span class="section-number-3">7.3.</span> Code</h3>
+<div id="outline-container-Code" class="outline-3">
+<h3 id="Code"><span class="section-number-3">7.3.</span> Code</h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
 Lets implement Backpropagation through time 
@@ -813,8 +813,8 @@ Lets implement Backpropagation through time
 </div>
 </div>
 
-<div id="outline-container-orgd4fafdb" class="outline-3">
-<h3 id="orgd4fafdb"><span class="section-number-3">7.4.</span> Test of BPTT</h3>
+<div id="outline-container-Test%20of%20BPTT" class="outline-3">
+<h3 id="Test%20of%20BPTT"><span class="section-number-3">7.4.</span> Test of BPTT</h3>
 <div class="outline-text-3" id="text-7-4">
 <p>
 We can always check backpropagation with an acutal gradient computed using 
@@ -860,7 +860,7 @@ We can always check backpropagation with an acutal gradient computed using
 </pre>
 </div></details>
 
-<pre class="example" id="org6706ff4">
+<pre class="example" id="org9fc8d0e">
  Checking at 1,933 of U
    Actual Derivative: 0.0
    Computed Derivative: 0.0
@@ -914,8 +914,8 @@ This shows that our BPTT algorithm has higher probability of being correct. only
 </p>
 </div>
 </div>
-<div id="outline-container-org6c9ce97" class="outline-3">
-<h3 id="org6c9ce97"><span class="section-number-3">7.5.</span> Stochastic Gradient Descent</h3>
+<div id="outline-container-Stochastic%20Gradient%20Descent" class="outline-3">
+<h3 id="Stochastic%20Gradient%20Descent"><span class="section-number-3">7.5.</span> Stochastic Gradient Descent</h3>
 <div class="outline-text-3" id="text-7-5">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -964,14 +964,14 @@ This shows that our BPTT algorithm has higher probability of being correct. only
 </div>
 </div>
 </div>
-<div id="outline-container-orgf08e214" class="outline-2">
-<h2 id="orgf08e214"><span class="section-number-2">8.</span> Train!!</h2>
+<div id="outline-container-Train%21%21" class="outline-2">
+<h2 id="Train%21%21"><span class="section-number-2">8.</span> Train!!</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Lets initialize a RNN with a single hidden layer. The input and output layers have 1000 neurons and the hidden layer has 100 neurons. 
 </p>
 
-<div id="orgc9101b2" class="figure">
+<div id="org71ec780" class="figure">
 <p><img src="../img/rnn/neurons.png" alt="neurons.png" />
 </p>
 </div>
@@ -987,7 +987,7 @@ Lets initialize a RNN with a single hidden layer. The input and output layers ha
 </pre>
 </div></details>
 
-<pre class="example" id="org261ba70">
+<pre class="example" id="org58023ac">
     0 examples learned
     50 examples learned
 Epoch 0 done in 17.47 seconds.
@@ -1029,8 +1029,8 @@ We can see that the loss is decreasing. However the time taken for each epoch (j
 </p>
 </div>
 </div>
-<div id="outline-container-orge42565b" class="outline-2">
-<h2 id="orge42565b"><span class="section-number-2">9.</span> Lets check predictions</h2>
+<div id="outline-container-Lets%20check%20predictions" class="outline-2">
+<h2 id="Lets%20check%20predictions"><span class="section-number-2">9.</span> Lets check predictions</h2>
 <div class="outline-text-2" id="text-9">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -1059,7 +1059,7 @@ We can see that the loss is decreasing. However the time taken for each epoch (j
 </pre>
 </div></details>
 
-<pre class="example" id="org809f09a">
+<pre class="example" id="org7e96b33">
 ""     "``"
 "now"     ""
 "that"     ""
@@ -1093,7 +1093,7 @@ Unfortunately with just 9 epochs of learning, the RNN hasn't learnt anything yet
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Recurrent Neural Network - Backpropagation Through Time">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Recurrent Neural Network - Backpropagation Through Time">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/rss.xml"><img src="https://bpanthi977.github.io/img/rss.png" /></a>
 </div>
 </body>
 </html>

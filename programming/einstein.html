@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-08-26 Sat 09:08 -->
+<!-- 2023-11-13 Mon 20:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Einstein Summation Notation in Common Lisp</title>
@@ -210,41 +210,41 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org109dcb5">1. Introduction</a></li>
-<li><a href="#org516e9e6">2. Einsum</a></li>
-<li><a href="#org59e5504">3. Overview</a></li>
-<li><a href="#org6ac9b53">4. Index Variables - Dynamic Extend</a></li>
-<li><a href="#orgb165d87">5. Array Dimensions</a></li>
-<li><a href="#orga6914db">6. Allocate Result array</a></li>
-<li><a href="#orgd457765">7. Loops</a>
+<li><a href="#Introduction">1. Introduction</a></li>
+<li><a href="#Einsum">2. Einsum</a></li>
+<li><a href="#Overview">3. Overview</a></li>
+<li><a href="#Index%20Variables%20-%20Dynamic%20Extend">4. Index Variables - Dynamic Extend</a></li>
+<li><a href="#Array%20Dimensions">5. Array Dimensions</a></li>
+<li><a href="#Allocate%20Result%20array">6. Allocate Result array</a></li>
+<li><a href="#Loops">7. Loops</a>
 <ul>
-<li><a href="#orgf56c729">7.1. Loop Over</a>
+<li><a href="#Loop%20Over">7.1. Loop Over</a>
 <ul>
-<li><a href="#org54e0807">7.1.1. Utilites used</a></li>
+<li><a href="#Utilites%20used">7.1.1. Utilites used</a></li>
 </ul>
 </li>
-<li><a href="#org946e856">7.2. Outer and Inner loops</a></li>
+<li><a href="#Outer%20and%20Inner%20loops">7.2. Outer and Inner loops</a></li>
 </ul>
 </li>
-<li><a href="#org47fa6e6">8. Return Result</a></li>
-<li><a href="#org9813b66">9. Lets see usecases</a>
+<li><a href="#Return%20Result">8. Return Result</a></li>
+<li><a href="#Lets%20see%20usecases">9. Lets see usecases</a>
 <ul>
-<li><a href="#org20262eb">9.1. Transpose</a></li>
-<li><a href="#orgd871b37">9.2. Outer Product</a>
+<li><a href="#Transpose">9.1. Transpose</a></li>
+<li><a href="#Outer%20Product">9.2. Outer Product</a>
 <ul>
-<li><a href="#org82d5dbb">9.2.1. Lets see the timing.</a></li>
+<li><a href="#Lets%20see%20the%20timing.">9.2.1. Lets see the timing.</a></li>
 </ul>
 </li>
-<li><a href="#org69686ca">9.3. Transpose then dot</a></li>
-<li><a href="#orgcdc1740">9.4. Sth complicated</a></li>
+<li><a href="#Transpose%20then%20dot">9.3. Transpose then dot</a></li>
+<li><a href="#Sth%20complicated">9.4. Sth complicated</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org109dcb5" class="outline-2">
-<h2 id="org109dcb5"><span class="section-number-2">1.</span> Introduction</h2>
+<div id="outline-container-Introduction" class="outline-2">
+<h2 id="Introduction"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 My target is to be able to write operations on vector, matrices, tensors directly in Einstein summation notation instead of loops. 
@@ -281,8 +281,8 @@ Inside the expressions the indices are associated with tensors using function ca
 </p>
 </div>
 </div>
-<div id="outline-container-org516e9e6" class="outline-2">
-<h2 id="org516e9e6"><span class="section-number-2">2.</span> Einsum</h2>
+<div id="outline-container-Einsum" class="outline-2">
+<h2 id="Einsum"><span class="section-number-2">2.</span> Einsum</h2>
 <div class="outline-text-2" id="text-2">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -303,8 +303,8 @@ Inside the `einsum' macro we only handle the syntactic structure and use `einsum
 </div>
 </div>
 
-<div id="outline-container-org59e5504" class="outline-2">
-<h2 id="org59e5504"><span class="section-number-2">3.</span> Overview</h2>
+<div id="outline-container-Overview" class="outline-2">
+<h2 id="Overview"><span class="section-number-2">3.</span> Overview</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Let see at the final result to get a general feel of how `einsum' would work. 
@@ -317,7 +317,7 @@ Let see at the final result to get a general feel of how `einsum' would work.
 </pre>
 </div></details>
 
-<pre class="example" id="orgd1caaa7">
+<pre class="example" id="orgf26ffef">
 (LET ((#:|I-max754| (ARRAY-DIMENSION S 0)) (#:|K-max755| (ARRAY-DIMENSION V 0)))
   (ASSERT (= (ARRAY-DIMENSION S 0) (ARRAY-DIMENSION V 1)))
   (ASSERT (= (ARRAY-DIMENSION V 0) (ARRAY-DIMENSION L 0)))
@@ -352,8 +352,8 @@ We can break down the above expanded code into few parts:
 </ul>
 </div>
 </div>
-<div id="outline-container-org6ac9b53" class="outline-2">
-<h2 id="org6ac9b53"><span class="section-number-2">4.</span> Index Variables - Dynamic Extend</h2>
+<div id="outline-container-Index%20Variables%20-%20Dynamic%20Extend" class="outline-2">
+<h2 id="Index%20Variables%20-%20Dynamic%20Extend"><span class="section-number-2">4.</span> Index Variables - Dynamic Extend</h2>
 <div class="outline-text-2" id="text-4">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -411,12 +411,12 @@ A `defparameter' in the top-level of the file makes those variable `special'. An
 </div>
 </div>
 
-<div id="outline-container-orgb165d87" class="outline-2">
-<h2 id="orgb165d87"><span class="section-number-2">5.</span> Array Dimensions</h2>
+<div id="outline-container-Array%20Dimensions" class="outline-2">
+<h2 id="Array%20Dimensions"><span class="section-number-2">5.</span> Array Dimensions</h2>
 <div class="outline-text-2" id="text-5">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgbe692e6">(<span class="org-keyword">defun</span> <span class="org-function-name">einsum%</span> (input-indices output-indices result-array <span class="org-type">&amp;rest</span> expr)
+<pre class="src src-lisp" id="orgab385f3">(<span class="org-keyword">defun</span> <span class="org-function-name">einsum%</span> (input-indices output-indices result-array <span class="org-type">&amp;rest</span> expr)
   (<span class="org-keyword">declare</span> (optimize (debug 3)))
   (<span class="org-keyword">let*</span> ((*indices* (map 'list #'identity input-indices))
          (*indices-max* (mapcar (<span class="org-keyword">lambda</span> (i) 
@@ -492,8 +492,8 @@ This return value means that index `i' is the 2nd dimensions of V, index K is th
 </div>
 </div>
 
-<div id="outline-container-orga6914db" class="outline-2">
-<h2 id="orga6914db"><span class="section-number-2">6.</span> Allocate Result array</h2>
+<div id="outline-container-Allocate%20Result%20array" class="outline-2">
+<h2 id="Allocate%20Result%20array"><span class="section-number-2">6.</span> Allocate Result array</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 If the array to store the results (`result-array') is provided then new result array is not created otherwise a new array is allocated with size given by product of the dimensions of the output-indices. 
@@ -501,7 +501,7 @@ If the array to store the results (`result-array') is provided then new result a
 
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgb404485"><span class="org-comment-delimiter">;; </span><span class="org-comment">allocate resulting array or reuse given array </span>
+<pre class="src src-lisp" id="org9d978c7"><span class="org-comment-delimiter">;; </span><span class="org-comment">allocate resulting array or reuse given array </span>
 (<span class="org-keyword">let</span> ,(<span class="org-keyword">unless</span> result-array 
               `((,result ,(<span class="org-keyword">if</span> output-indices
                              `(make-array (* ,@(map 'list #'index-max output-indices)))))))
@@ -509,12 +509,12 @@ If the array to store the results (`result-array') is provided then new result a
 </div></details>
 </div>
 </div>
-<div id="outline-container-orgd457765" class="outline-2">
-<h2 id="orgd457765"><span class="section-number-2">7.</span> Loops</h2>
+<div id="outline-container-Loops" class="outline-2">
+<h2 id="Loops"><span class="section-number-2">7.</span> Loops</h2>
 <div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-orgf56c729" class="outline-3">
-<h3 id="orgf56c729"><span class="section-number-3">7.1.</span> Loop Over</h3>
+<div id="outline-container-Loop%20Over" class="outline-3">
+<h3 id="Loop%20Over"><span class="section-number-3">7.1.</span> Loop Over</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 To write the outer and inner loops with ease, a helper function `loop-over' is defined as follows:
@@ -581,8 +581,8 @@ As an example see this:
 In this `loop-over' function few other small functions are used that perform small and easy tasks. 
 </p>
 </div>
-<div id="outline-container-org54e0807" class="outline-4">
-<h4 id="org54e0807"><span class="section-number-4">7.1.1.</span> Utilites used</h4>
+<div id="outline-container-Utilites%20used" class="outline-4">
+<h4 id="Utilites%20used"><span class="section-number-4">7.1.1.</span> Utilites used</h4>
 <div class="outline-text-4" id="text-7-1-1">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -661,8 +661,8 @@ An example of `expand-arefs' in action
 </div>
 </div>
 
-<div id="outline-container-org946e856" class="outline-3">
-<h3 id="org946e856"><span class="section-number-3">7.2.</span> Outer and Inner loops</h3>
+<div id="outline-container-Outer%20and%20Inner%20loops" class="outline-3">
+<h3 id="Outer%20and%20Inner%20loops"><span class="section-number-3">7.2.</span> Outer and Inner loops</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 Now that we have the convenient loop-over function we can use it to generate the outer and inner loops inside `einsum%'
@@ -670,7 +670,7 @@ Now that we have the convenient loop-over function we can use it to generate the
 
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org0527e26"><span class="org-comment-delimiter">;; </span><span class="org-comment">now loop!! :) </span>
+<pre class="src src-lisp" id="org2621640"><span class="org-comment-delimiter">;; </span><span class="org-comment">now loop!! :) </span>
 ,(<span class="org-keyword">labels</span> ((outer-loop (indices expr const)
             (loop-over 
              (first indices)
@@ -733,15 +733,15 @@ The `inner-loop' computes the indices that need to be summed over (which is the 
 </div>
 </div>
 </div>
-<div id="outline-container-org47fa6e6" class="outline-2">
-<h2 id="org47fa6e6"><span class="section-number-2">8.</span> Return Result</h2>
+<div id="outline-container-Return%20Result" class="outline-2">
+<h2 id="Return%20Result"><span class="section-number-2">8.</span> Return Result</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Finally the resulting array is returned. 
 </p>
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org369531b"><span class="org-comment-delimiter">;; </span><span class="org-comment">return the results </span>
+<pre class="src src-lisp" id="orgf85f2e6"><span class="org-comment-delimiter">;; </span><span class="org-comment">return the results </span>
 ,(or result-array result)))))
 </pre>
 </div></details>
@@ -830,8 +830,8 @@ Stiching all the pieces together we have the `einsum%' function:
 </div></details>
 </div>
 </div>
-<div id="outline-container-org9813b66" class="outline-2">
-<h2 id="org9813b66"><span class="section-number-2">9.</span> Lets see usecases</h2>
+<div id="outline-container-Lets%20see%20usecases" class="outline-2">
+<h2 id="Lets%20see%20usecases"><span class="section-number-2">9.</span> Lets see usecases</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 For use in following examples lets define a matrix and two vector 
@@ -845,8 +845,8 @@ For use in following examples lets define a matrix and two vector
 </div></details>
 </div>
 
-<div id="outline-container-org20262eb" class="outline-3">
-<h3 id="org20262eb"><span class="section-number-3">9.1.</span> Transpose</h3>
+<div id="outline-container-Transpose" class="outline-3">
+<h3 id="Transpose"><span class="section-number-3">9.1.</span> Transpose</h3>
 <div class="outline-text-3" id="text-9-1">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -883,8 +883,8 @@ Equivalent einsum expression
 </div>
 </div>
 
-<div id="outline-container-orgd871b37" class="outline-3">
-<h3 id="orgd871b37"><span class="section-number-3">9.2.</span> Outer Product</h3>
+<div id="outline-container-Outer%20Product" class="outline-3">
+<h3 id="Outer%20Product"><span class="section-number-3">9.2.</span> Outer Product</h3>
 <div class="outline-text-3" id="text-9-2">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -939,7 +939,7 @@ Lets see the code generated by einsum:
 </pre>
 </div></details>
 
-<pre class="example" id="org01d9ed8">
+<pre class="example" id="orgb25dbfa">
 (LET ((#:|I-max730| (ARRAY-DIMENSION U 0)) (#:|J-max731| (ARRAY-DIMENSION V 0)))
   (ASSERT (= (ARRAY-DIMENSION U 0) (ARRAY-DIMENSION M 0)))
   (ASSERT (= (ARRAY-DIMENSION V 0) (ARRAY-DIMENSION M 1)))
@@ -959,8 +959,8 @@ Both the handwritten code and generated code are similar.
 </p>
 </div>
 
-<div id="outline-container-org82d5dbb" class="outline-4">
-<h4 id="org82d5dbb"><span class="section-number-4">9.2.1.</span> Lets see the timing.</h4>
+<div id="outline-container-Lets%20see%20the%20timing." class="outline-4">
+<h4 id="Lets%20see%20the%20timing."><span class="section-number-4">9.2.1.</span> Lets see the timing.</h4>
 <div class="outline-text-4" id="text-9-2-1">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -1014,8 +1014,8 @@ einsum:
 
 
 
-<div id="outline-container-org69686ca" class="outline-3">
-<h3 id="org69686ca"><span class="section-number-3">9.3.</span> Transpose then dot</h3>
+<div id="outline-container-Transpose%20then%20dot" class="outline-3">
+<h3 id="Transpose%20then%20dot"><span class="section-number-3">9.3.</span> Transpose then dot</h3>
 <div class="outline-text-3" id="text-9-3">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -1053,8 +1053,8 @@ einsum:
 </div>
 </div>
 
-<div id="outline-container-orgcdc1740" class="outline-3">
-<h3 id="orgcdc1740"><span class="section-number-3">9.4.</span> Sth complicated</h3>
+<div id="outline-container-Sth%20complicated" class="outline-3">
+<h3 id="Sth%20complicated"><span class="section-number-3">9.4.</span> Sth complicated</h3>
 <div class="outline-text-3" id="text-9-4">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -1119,7 +1119,7 @@ Special Variables are global variabes with dynamic extend. i.e. they can be asse
 </div>
 </div></div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Einstein Summation Notation in Common Lisp">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Einstein Summation Notation in Common Lisp">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/rss.xml"><img src="https://bpanthi977.github.io/img/rss.png" /></a>
 </div>
 </body>
 </html>

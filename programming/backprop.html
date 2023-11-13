@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-08-26 Sat 09:08 -->
+<!-- 2023-11-13 Mon 20:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Backpropagation Algorithm in Lisp</title>
@@ -242,50 +242,50 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd482cc1">1. Forward Propagate</a>
+<li><a href="#Forward%20Propagate">1. Forward Propagate</a>
 <ul>
-<li><a href="#org1a1b52e">1.1. Neuron Activation</a></li>
-<li><a href="#org8f66055">1.2. Neuron Transfer - Activation function</a></li>
-<li><a href="#orgd23cd54">1.3. Network</a>
+<li><a href="#Neuron%20Activation">1.1. Neuron Activation</a></li>
+<li><a href="#Neuron%20Transfer%20-%20Activation%20function">1.2. Neuron Transfer - Activation function</a></li>
+<li><a href="#Network">1.3. Network</a>
 <ul>
-<li><a href="#org95874f1">1.3.1. Weights</a></li>
-<li><a href="#org579fc03">1.3.2. Output and Errors</a></li>
+<li><a href="#Weights">1.3.1. Weights</a></li>
+<li><a href="#Output%20and%20Errors">1.3.2. Output and Errors</a></li>
 </ul>
 </li>
-<li><a href="#org09274ca">1.4. Forward Propagation</a></li>
-<li><a href="#orge04ff54">1.5. Testing Forward Propagation</a></li>
+<li><a href="#Forward%20Propagation">1.4. Forward Propagation</a></li>
+<li><a href="#Testing%20Forward%20Propagation">1.5. Testing Forward Propagation</a></li>
 </ul>
 </li>
-<li><a href="#orga98d4e0">2. Back Propagation Error</a>
+<li><a href="#Back%20Propagation%20Error">2. Back Propagation Error</a>
 <ul>
-<li><a href="#org3eee551">2.1. Derivative of transfer function</a></li>
-<li><a href="#orgf4560bb">2.2. Backpropagation</a>
+<li><a href="#Derivative%20of%20transfer%20function">2.1. Derivative of transfer function</a></li>
+<li><a href="#Backpropagation">2.2. Backpropagation</a>
 <ul>
-<li><a href="#org788ee6c">2.2.1. Theory</a></li>
-<li><a href="#orga7f579b">2.2.2. Code</a></li>
+<li><a href="#Theory">2.2.1. Theory</a></li>
+<li><a href="#Code">2.2.2. Code</a></li>
 </ul>
 </li>
-<li><a href="#org6f22f6c">2.3. Test Backprop</a></li>
+<li><a href="#Test%20Backprop">2.3. Test Backprop</a></li>
 </ul>
 </li>
-<li><a href="#org344e9e2">3. Training the Network</a>
+<li><a href="#Training%20the%20Network">3. Training the Network</a>
 <ul>
-<li><a href="#org85db91f">3.1. updaing weights</a></li>
-<li><a href="#orgddd76a1">3.2. training</a></li>
-<li><a href="#orge9f24fb">3.3. Testing training</a></li>
+<li><a href="#updaing%20weights">3.1. updaing weights</a></li>
+<li><a href="#training">3.2. training</a></li>
+<li><a href="#Testing%20training">3.3. Testing training</a></li>
 </ul>
 </li>
-<li><a href="#org6e71def">4. Predict</a>
+<li><a href="#Predict">4. Predict</a>
 <ul>
-<li><a href="#org30bc45d">4.1. Testing on previous data</a></li>
+<li><a href="#Testing%20on%20previous%20data">4.1. Testing on previous data</a></li>
 </ul>
 </li>
-<li><a href="#org03e5037">5. Lets apply to real world database - Wheat Seeds Database</a>
+<li><a href="#Lets%20apply%20to%20real%20world%20database%20-%20Wheat%20Seeds%20Database">5. Lets apply to real world database - Wheat Seeds Database</a>
 <ul>
-<li><a href="#org0ce9339">5.1. Download the dataset and normalize it</a></li>
-<li><a href="#org0e20fb4">5.2. Train with all data</a></li>
-<li><a href="#org7a1575f">5.3. Split Database for k-fold cross validation; k = 5</a></li>
-<li><a href="#org08ab87a">5.4. Evaluate Algorithm</a></li>
+<li><a href="#Download%20the%20dataset%20and%20normalize%20it">5.1. Download the dataset and normalize it</a></li>
+<li><a href="#Train%20with%20all%20data">5.2. Train with all data</a></li>
+<li><a href="#Split%20Database%20for%20k-fold%20cross%20validation%3B%20k%20%3D%205">5.3. Split Database for k-fold cross validation; k = 5</a></li>
+<li><a href="#Evaluate%20Algorithm">5.4. Evaluate Algorithm</a></li>
 </ul>
 </li>
 </ul>
@@ -304,12 +304,12 @@ This <a href="https://machinelearningmastery.com/implement-backpropagation-algor
 </pre>
 </div></details>
 
-<div id="outline-container-orgd482cc1" class="outline-2">
-<h2 id="orgd482cc1"><span class="section-number-2">1.</span> Forward Propagate</h2>
+<div id="outline-container-Forward%20Propagate" class="outline-2">
+<h2 id="Forward%20Propagate"><span class="section-number-2">1.</span> Forward Propagate</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org1a1b52e" class="outline-3">
-<h3 id="org1a1b52e"><span class="section-number-3">1.1.</span> Neuron Activation</h3>
+<div id="outline-container-Neuron%20Activation" class="outline-3">
+<h3 id="Neuron%20Activation"><span class="section-number-3">1.1.</span> Neuron Activation</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 activation = sum (weights * inputs) + bias
@@ -333,8 +333,8 @@ ACTIVATION
 </div>
 </div>
 
-<div id="outline-container-org8f66055" class="outline-3">
-<h3 id="org8f66055"><span class="section-number-3">1.2.</span> Neuron Transfer - Activation function</h3>
+<div id="outline-container-Neuron%20Transfer%20-%20Activation%20function" class="outline-3">
+<h3 id="Neuron%20Transfer%20-%20Activation%20function"><span class="section-number-3">1.2.</span> Neuron Transfer - Activation function</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 For now we use sigmod activation function. 
@@ -349,19 +349,19 @@ For now we use sigmod activation function.
 </div></details>
 </div>
 </div>
-<div id="outline-container-orgd23cd54" class="outline-3">
-<h3 id="orgd23cd54"><span class="section-number-3">1.3.</span> Network</h3>
+<div id="outline-container-Network" class="outline-3">
+<h3 id="Network"><span class="section-number-3">1.3.</span> Network</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Before we implement forward propagation we need a data structure to store the weights and outputs of the network
 </p>
 </div>
-<div id="outline-container-org95874f1" class="outline-4">
-<h4 id="org95874f1"><span class="section-number-4">1.3.1.</span> Weights</h4>
+<div id="outline-container-Weights" class="outline-4">
+<h4 id="Weights"><span class="section-number-4">1.3.1.</span> Weights</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org31ee8fa">(<span class="org-keyword">defstruct</span> <span class="org-type">network</span> 
+<pre class="src src-lisp" id="orgce0c464">(<span class="org-keyword">defstruct</span> <span class="org-type">network</span> 
   weights 
   outputs 
   errors)
@@ -400,8 +400,8 @@ Before we implement forward propagation we need a data structure to store the we
 </div></details>
 </div>
 </div>
-<div id="outline-container-org579fc03" class="outline-4">
-<h4 id="org579fc03"><span class="section-number-4">1.3.2.</span> Output and Errors</h4>
+<div id="outline-container-Output%20and%20Errors" class="outline-4">
+<h4 id="Output%20and%20Errors"><span class="section-number-4">1.3.2.</span> Output and Errors</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -426,8 +426,8 @@ Before we implement forward propagation we need a data structure to store the we
 </div>
 </div>
 
-<div id="outline-container-org09274ca" class="outline-3">
-<h3 id="org09274ca"><span class="section-number-3">1.4.</span> Forward Propagation</h3>
+<div id="outline-container-Forward%20Propagation" class="outline-3">
+<h3 id="Forward%20Propagation"><span class="section-number-3">1.4.</span> Forward Propagation</h3>
 <div class="outline-text-3" id="text-1-4">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -445,8 +445,8 @@ Before we implement forward propagation we need a data structure to store the we
 </div></details>
 </div>
 </div>
-<div id="outline-container-orge04ff54" class="outline-3">
-<h3 id="orge04ff54"><span class="section-number-3">1.5.</span> Testing Forward Propagation</h3>
+<div id="outline-container-Testing%20Forward%20Propagation" class="outline-3">
+<h3 id="Testing%20Forward%20Propagation"><span class="section-number-3">1.5.</span> Testing Forward Propagation</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 We create a neural network with 4 inputs a single hidden layer with 2 neurons and an output layer with 2 neurons. 
@@ -479,12 +479,12 @@ finally we get two output values
 </div>
 </div>
 </div>
-<div id="outline-container-orga98d4e0" class="outline-2">
-<h2 id="orga98d4e0"><span class="section-number-2">2.</span> Back Propagation Error</h2>
+<div id="outline-container-Back%20Propagation%20Error" class="outline-2">
+<h2 id="Back%20Propagation%20Error"><span class="section-number-2">2.</span> Back Propagation Error</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org3eee551" class="outline-3">
-<h3 id="org3eee551"><span class="section-number-3">2.1.</span> Derivative of transfer function</h3>
+<div id="outline-container-Derivative%20of%20transfer%20function" class="outline-3">
+<h3 id="Derivative%20of%20transfer%20function"><span class="section-number-3">2.1.</span> Derivative of transfer function</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 We were using sigmod activation function whose derivative is very cheaply calcuated from the output of transfer functions \(o\) as \(o (1 - o)\).
@@ -497,12 +497,12 @@ We were using sigmod activation function whose derivative is very cheaply calcua
 </div></details>
 </div>
 </div>
-<div id="outline-container-orgf4560bb" class="outline-3">
-<h3 id="orgf4560bb"><span class="section-number-3">2.2.</span> Backpropagation</h3>
+<div id="outline-container-Backpropagation" class="outline-3">
+<h3 id="Backpropagation"><span class="section-number-3">2.2.</span> Backpropagation</h3>
 <div class="outline-text-3" id="text-2-2">
 </div>
-<div id="outline-container-org788ee6c" class="outline-4">
-<h4 id="org788ee6c"><span class="section-number-4">2.2.1.</span> Theory</h4>
+<div id="outline-container-Theory" class="outline-4">
+<h4 id="Theory"><span class="section-number-4">2.2.1.</span> Theory</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 Loss function is defined as
@@ -560,8 +560,8 @@ and hence by chain rule
 \end{equation*}
 </div>
 </div>
-<div id="outline-container-orga7f579b" class="outline-4">
-<h4 id="orga7f579b"><span class="section-number-4">2.2.2.</span> Code</h4>
+<div id="outline-container-Code" class="outline-4">
+<h4 id="Code"><span class="section-number-4">2.2.2.</span> Code</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -598,8 +598,8 @@ and hence by chain rule
 </div>
 </div>
 </div>
-<div id="outline-container-org6f22f6c" class="outline-3">
-<h3 id="org6f22f6c"><span class="section-number-3">2.3.</span> Test Backprop</h3>
+<div id="outline-container-Test%20Backprop" class="outline-3">
+<h3 id="Test%20Backprop"><span class="section-number-3">2.3.</span> Test Backprop</h3>
 <div class="outline-text-3" id="text-2-3">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -623,8 +623,8 @@ and hence by chain rule
 </div>
 </div>
 </div>
-<div id="outline-container-org344e9e2" class="outline-2">
-<h2 id="org344e9e2"><span class="section-number-2">3.</span> Training the Network</h2>
+<div id="outline-container-Training%20the%20Network" class="outline-2">
+<h2 id="Training%20the%20Network"><span class="section-number-2">3.</span> Training the Network</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 the network is trained using stochastic gradient descent.
@@ -644,8 +644,8 @@ this part is broken down into two sections:
 </ul>
 </div>
 
-<div id="outline-container-org85db91f" class="outline-3">
-<h3 id="org85db91f"><span class="section-number-3">3.1.</span> updaing weights</h3>
+<div id="outline-container-updaing%20weights" class="outline-3">
+<h3 id="updaing%20weights"><span class="section-number-3">3.1.</span> updaing weights</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 we have calculated the derivative of loss function with respect to activation of each neuron and stored in the errors array. 
@@ -688,8 +688,8 @@ UPDATE-WEIGHTS
 </div>
 </div>
 
-<div id="outline-container-orgddd76a1" class="outline-3">
-<h3 id="orgddd76a1"><span class="section-number-3">3.2.</span> training</h3>
+<div id="outline-container-training" class="outline-3">
+<h3 id="training"><span class="section-number-3">3.2.</span> training</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 As mentioned, the network is updated using stochastic gradient descent.
@@ -729,13 +729,13 @@ TRAIN-NETWORK
 </div>
 </div>
 
-<div id="outline-container-orge9f24fb" class="outline-3">
-<h3 id="orge9f24fb"><span class="section-number-3">3.3.</span> Testing training</h3>
+<div id="outline-container-Testing%20training" class="outline-3">
+<h3 id="Testing%20training"><span class="section-number-3">3.3.</span> Testing training</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Input:
 </p>
-<table id="orgf8afb79" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org2dbd389" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -828,7 +828,7 @@ Input:
 </pre>
 </div></details>
 
-<pre class="example" id="orgb3489dc">
+<pre class="example" id="org3e75eda">
 epoch=1,  learning-rate=0.500  error=2.905
 epoch=2,  learning-rate=0.500  error=2.780
 epoch=3,  learning-rate=0.500  error=2.668
@@ -854,8 +854,8 @@ epoch=20,  learning-rate=0.500  error=0.489
 </div>
 </div>
 
-<div id="outline-container-org6e71def" class="outline-2">
-<h2 id="org6e71def"><span class="section-number-2">4.</span> Predict</h2>
+<div id="outline-container-Predict" class="outline-2">
+<h2 id="Predict"><span class="section-number-2">4.</span> Predict</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Making predictions with a trained neural network is easy enough.
@@ -884,8 +884,8 @@ We can do this by selecting the class value with the larger probability. This is
 </div></details>
 </div>
 
-<div id="outline-container-org30bc45d" class="outline-3">
-<h3 id="org30bc45d"><span class="section-number-3">4.1.</span> Testing on previous data</h3>
+<div id="outline-container-Testing%20on%20previous%20data" class="outline-3">
+<h3 id="Testing%20on%20previous%20data"><span class="section-number-3">4.1.</span> Testing on previous data</h3>
 <div class="outline-text-3" id="text-4-1">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -894,7 +894,7 @@ We can do this by selecting the class value with the larger probability. This is
 </pre>
 </div></details>
 
-<pre class="example" id="orgc57ddcc">
+<pre class="example" id="orge2ed853">
 Expected: 0  Got: 0
 Expected: 0  Got: 0
 Expected: 0  Got: 0
@@ -910,12 +910,12 @@ Expected: 1  Got: 1
 </div>
 </div>
 
-<div id="outline-container-org03e5037" class="outline-2">
-<h2 id="org03e5037"><span class="section-number-2">5.</span> Lets apply to real world database - Wheat Seeds Database</h2>
+<div id="outline-container-Lets%20apply%20to%20real%20world%20database%20-%20Wheat%20Seeds%20Database" class="outline-2">
+<h2 id="Lets%20apply%20to%20real%20world%20database%20-%20Wheat%20Seeds%20Database"><span class="section-number-2">5.</span> Lets apply to real world database - Wheat Seeds Database</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org0ce9339" class="outline-3">
-<h3 id="org0ce9339"><span class="section-number-3">5.1.</span> Download the dataset and normalize it</h3>
+<div id="outline-container-Download%20the%20dataset%20and%20normalize%20it" class="outline-3">
+<h3 id="Download%20the%20dataset%20and%20normalize%20it"><span class="section-number-3">5.1.</span> Download the dataset and normalize it</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Info about the data is here: <a href="http://archive.ics.uci.edu/ml/datasets/seeds">http://archive.ics.uci.edu/ml/datasets/seeds</a>
@@ -965,8 +965,8 @@ NIL
 </pre>
 </div>
 </div>
-<div id="outline-container-org0e20fb4" class="outline-3">
-<h3 id="org0e20fb4"><span class="section-number-3">5.2.</span> Train with all data</h3>
+<div id="outline-container-Train%20with%20all%20data" class="outline-3">
+<h3 id="Train%20with%20all%20data"><span class="section-number-3">5.2.</span> Train with all data</h3>
 <div class="outline-text-3" id="text-5-2">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -999,8 +999,8 @@ NIL
 </p>
 </div>
 </div>
-<div id="outline-container-org7a1575f" class="outline-3">
-<h3 id="org7a1575f"><span class="section-number-3">5.3.</span> Split Database for k-fold cross validation; k = 5</h3>
+<div id="outline-container-Split%20Database%20for%20k-fold%20cross%20validation%3B%20k%20%3D%205" class="outline-3">
+<h3 id="Split%20Database%20for%20k-fold%20cross%20validation%3B%20k%20%3D%205"><span class="section-number-3">5.3.</span> Split Database for k-fold cross validation; k = 5</h3>
 <div class="outline-text-3" id="text-5-3">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -1035,8 +1035,8 @@ RANDOM-POINTS
 </div>
 </div>
 
-<div id="outline-container-org08ab87a" class="outline-3">
-<h3 id="org08ab87a"><span class="section-number-3">5.4.</span> Evaluate Algorithm</h3>
+<div id="outline-container-Evaluate%20Algorithm" class="outline-3">
+<h3 id="Evaluate%20Algorithm"><span class="section-number-3">5.4.</span> Evaluate Algorithm</h3>
 <div class="outline-text-3" id="text-5-4">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -1072,7 +1072,7 @@ Lets evaluate a single hidden layer neural network with 5 neurons in the hidden 
 </pre>
 </div></details>
 
-<table id="org8021119" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org49f4ffe" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1120,7 +1120,7 @@ i.e. on average
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Backpropagation Algorithm in Lisp">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Backpropagation Algorithm in Lisp">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/rss.xml"><img src="https://bpanthi977.github.io/img/rss.png" /></a>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-08-26 Sat 09:08 -->
+<!-- 2023-11-13 Mon 20:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Solving Wordle</title>
@@ -242,25 +242,25 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb4f8ef2">1. Introduction</a></li>
-<li><a href="#org8709913">2. Probability &amp; Information</a></li>
-<li><a href="#org39d0335">3. Entropy</a></li>
-<li><a href="#orgb814b46">4. Lets play a game</a></li>
-<li><a href="#org95b2b52">5. Code</a>
+<li><a href="#Introduction">1. Introduction</a></li>
+<li><a href="#Probability%20%26%20Information">2. Probability &amp; Information</a></li>
+<li><a href="#Entropy">3. Entropy</a></li>
+<li><a href="#Lets%20play%20a%20game">4. Lets play a game</a></li>
+<li><a href="#Code">5. Code</a>
 <ul>
-<li><a href="#orgfa12360">5.1. Color</a></li>
-<li><a href="#orgfd23123">5.2. Valid Guesses</a></li>
-<li><a href="#orgf70f024">5.3. Entropy</a></li>
+<li><a href="#Color">5.1. Color</a></li>
+<li><a href="#Valid%20Guesses">5.2. Valid Guesses</a></li>
+<li><a href="#Code--Entropy">5.3. Entropy</a></li>
 </ul>
 </li>
-<li><a href="#orgff7af92">6. Benchmark</a></li>
-<li><a href="#orgc3ebb40">7. Optimized Code</a></li>
+<li><a href="#Benchmark">6. Benchmark</a></li>
+<li><a href="#Optimized%20Code">7. Optimized Code</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgb4f8ef2" class="outline-2">
-<h2 id="orgb4f8ef2"><span class="section-number-2">1.</span> Introduction</h2>
+<div id="outline-container-Introduction" class="outline-2">
+<h2 id="Introduction"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 3Blue1Brown's fantastic video <a href="https://www.youtube.com/watch?v=v68zYyaEmEA">Solving Wordle using Information Theory</a> introduced me to the game of <a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a>. In this article, I am going to explain what I learnt and implement a program to play this game. 
@@ -290,8 +290,8 @@ There is one central theme to these thoughts: <i>Increase the amount of informat
 </div>
 </div>
 
-<div id="outline-container-org8709913" class="outline-2">
-<h2 id="org8709913"><span class="section-number-2">2.</span> Probability &amp; Information</h2>
+<div id="outline-container-Probability%20%26%20Information" class="outline-2">
+<h2 id="Probability%20%26%20Information"><span class="section-number-2">2.</span> Probability &amp; Information</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Lets imagine, we are playing a different game. I think of a random number between 0 and 255, and your task is to guess it. Initially your probability of guessing the right one is \(1/256 = 0.4\%\). If I say, that the number is divisible by three. The probability of the number being divisible by 3 is about \(33\%\) and not being divisible by 3 is \(67\%\). Then how much information did I reveal?. And, If I had said that the number is divisible by 2, then how much information would I be revealing?. Intuitively, you can guess that I would be revealing much more information in the former case than in the latter. As another example, if I had said that the number is not greater than 400, then I would not be revealing any information. Because the probability of the number being not greater than 400 is already known to be 100%. So, in this case where the probability of each number being the right one is equal, the amount of information revealed is higher if that information reduces the space of right answers by a large number. And in general, the amount of information revealed is higher for events of lesser probability and lesser for events of higher probability. i.e. Information is decreasing function of probability.
@@ -578,8 +578,8 @@ and reduce possibilites to <code>4</code> word (9.18  bits of information). So, 
 </div>
 
 
-<div id="outline-container-org39d0335" class="outline-2">
-<h2 id="org39d0335"><span class="section-number-2">3.</span> Entropy</h2>
+<div id="outline-container-Entropy" class="outline-2">
+<h2 id="Entropy"><span class="section-number-2">3.</span> Entropy</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Equipped with what we learned about information, we are now able to quantify what information is and how it relates to the reduction in the number of possibilites. Also, we saw that the amount of information each guess would reveal depends on what the right answer is. But we don't know what the right answer is beforehand. So, for each guess, we can't say how much information that word reveals but still we can compute the average (i.e. expected) value of the information we could get. In the above example, when we don't know what the right answer is, both <code>sweet</code> and <code>rebar</code> are equally likely and so are all other 2315 words. So, on average <code>crane</code> would reveal 
@@ -618,8 +618,8 @@ Finally!!! We can answer the question <i>`How to increase the amount of informat
 </div>
 </div>
 
-<div id="outline-container-orgb814b46" class="outline-2">
-<h2 id="orgb814b46"><span class="section-number-2">4.</span> Lets play a game</h2>
+<div id="outline-container-Lets%20play%20a%20game" class="outline-2">
+<h2 id="Lets%20play%20a%20game"><span class="section-number-2">4.</span> Lets play a game</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The right answer for this game is <code>focus</code> but we don't know this yet. So, our first guess would be the word that has the highest entropy over all possible answer words. 
@@ -744,12 +744,12 @@ Now, the entropy of each of the two words is 1 bit because they each reduces the
 </div>
 </div>
 
-<div id="outline-container-org95b2b52" class="outline-2">
-<h2 id="org95b2b52"><span class="section-number-2">5.</span> Code</h2>
+<div id="outline-container-Code" class="outline-2">
+<h2 id="Code"><span class="section-number-2">5.</span> Code</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orgfa12360" class="outline-3">
-<h3 id="orgfa12360"><span class="section-number-3">5.1.</span> Color</h3>
+<div id="outline-container-Color" class="outline-3">
+<h3 id="Color"><span class="section-number-3">5.1.</span> Color</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 We can encode the color a guess word shows for an actual answer word as an integer between 0 to \(3^5-1\), i.e. a number from 00000 to 22222 in base 3. If the color of first letter is black the first digit is 0, and 1 if its yellow and 2 if its green. Similarly, the second digit represent color of second letter, and so on.
@@ -797,8 +797,8 @@ We can encode the color a guess word shows for an actual answer word as an integ
 </div>
 </div>
 
-<div id="outline-container-orgfd23123" class="outline-3">
-<h3 id="orgfd23123"><span class="section-number-3">5.2.</span> Valid Guesses</h3>
+<div id="outline-container-Valid%20Guesses" class="outline-3">
+<h3 id="Valid%20Guesses"><span class="section-number-3">5.2.</span> Valid Guesses</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 Once we know the guess words and the color the game shows for those words we iterate through all the words and select those word that could show that pattern.
@@ -835,8 +835,8 @@ For that we first need to download the word-list for Wordle. In the original wor
 </div>
 </div>
 
-<div id="outline-container-orgf70f024" class="outline-3">
-<h3 id="orgf70f024"><span class="section-number-3">5.3.</span> Entropy</h3>
+<div id="outline-container-Code--Entropy" class="outline-3">
+<h3 id="Code--Entropy"><span class="section-number-3">5.3.</span> Entropy</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 Now we can calculate the entropy (i.e. expected information) of a guess word for some given possible answer words. At first the possible answer words is the whole answer word list (of 2315 word) and later on as we guess and colors are revealed, this list is reduced (which we can generate by <code>valid-guesses</code> function). 
@@ -890,8 +890,8 @@ This is it. In just about 75 lines of code we have a program that solves wordle 
 </div>
 </div>
 
-<div id="outline-container-orgff7af92" class="outline-2">
-<h2 id="orgff7af92"><span class="section-number-2">6.</span> Benchmark</h2>
+<div id="outline-container-Benchmark" class="outline-2">
+<h2 id="Benchmark"><span class="section-number-2">6.</span> Benchmark</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Lets check the how effective this program is. For this we let the program play all possible wordle game and see how many guesses it take to solve those games.
@@ -1034,8 +1034,8 @@ With <code>trace</code> as the first guess word and no change in entropy functio
 
 
 
-<div id="outline-container-orgc3ebb40" class="outline-2">
-<h2 id="orgc3ebb40"><span class="section-number-2">7.</span> Optimized Code</h2>
+<div id="outline-container-Optimized%20Code" class="outline-2">
+<h2 id="Optimized%20Code"><span class="section-number-2">7.</span> Optimized Code</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Running above benchmark takes a few minutes without optimization. Upon optimization of the code and using multi-threading it takes about 20 seconds for the optimized version of the above code to play all games. Optimization I did were:
@@ -1054,7 +1054,7 @@ Here's the <a href="https://github.com/bpanthi977/random-code-collection/blob/ma
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Solving Wordle">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Solving Wordle">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/rss.xml"><img src="https://bpanthi977.github.io/img/rss.png" /></a>
 </div>
 </body>
 </html>

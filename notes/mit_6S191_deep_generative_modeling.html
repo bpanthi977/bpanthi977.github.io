@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-08-26 Sat 09:08 -->
+<!-- 2023-11-13 Mon 20:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Deep Generative Modeling</title>
@@ -242,32 +242,32 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org13c4936">1. Uses of Generative Models</a>
+<li><a href="#Uses%20of%20Generative%20Models">1. Uses of Generative Models</a>
 <ul>
-<li><a href="#orgbb18805">1.1. Debiasing</a></li>
-<li><a href="#org61098ac">1.2. Outlier Detection</a></li>
+<li><a href="#Debiasing">1.1. Debiasing</a></li>
+<li><a href="#Outlier%20Detection">1.2. Outlier Detection</a></li>
 </ul>
 </li>
-<li><a href="#orgd8d467e">2. Latent Variable</a></li>
-<li><a href="#orgb2e7f72">3. Autoencoders</a></li>
-<li><a href="#org2f89e7c">4. Variational AutoEncoder</a>
+<li><a href="#Latent%20Variable">2. Latent Variable</a></li>
+<li><a href="#Autoencoders">3. Autoencoders</a></li>
+<li><a href="#Variational%20AutoEncoder">4. Variational AutoEncoder</a>
 <ul>
-<li><a href="#orgd47ca3e">4.1. VAE Loss</a></li>
-<li><a href="#org7c3c12d">4.2. Regularization Loss</a></li>
-<li><a href="#orge9d2951">4.3. Optimization</a></li>
-<li><a href="#org9614ec8">4.4. Disentanglement &beta;-VAEs</a></li>
+<li><a href="#VAE%20Loss">4.1. VAE Loss</a></li>
+<li><a href="#Regularization%20Loss">4.2. Regularization Loss</a></li>
+<li><a href="#Optimization">4.3. Optimization</a></li>
+<li><a href="#Disentanglement%20%5Cbeta-VAEs">4.4. Disentanglement &beta;-VAEs</a></li>
 </ul>
 </li>
-<li><a href="#org8230405">5. Generative Adversarial Networks (GANs)</a>
+<li><a href="#Generative%20Adversarial%20Networks%20%28GANs%29">5. Generative Adversarial Networks (GANs)</a>
 <ul>
-<li><a href="#org9718760">5.1. Training GANs</a></li>
-<li><a href="#org4b357a5">5.2. Progressive Growing</a></li>
-<li><a href="#org5c4c60c">5.3. StyleGAN(2): progressive growing + style transfer</a></li>
-<li><a href="#orgcee7218">5.4. Conditional GANs</a></li>
-<li><a href="#org447ab2c">5.5. CycleGAN: domain transformation</a></li>
+<li><a href="#Training%20GANs">5.1. Training GANs</a></li>
+<li><a href="#Progressive%20Growing">5.2. Progressive Growing</a></li>
+<li><a href="#StyleGAN%282%29%3A%20progressive%20growing%20%2B%20style%20transfer">5.3. StyleGAN(2): progressive growing + style transfer</a></li>
+<li><a href="#Conditional%20GANs">5.4. Conditional GANs</a></li>
+<li><a href="#CycleGAN%3A%20domain%20transformation">5.5. CycleGAN: domain transformation</a></li>
 </ul>
 </li>
-<li><a href="#org48a1479">6. Distribution Transformer</a></li>
+<li><a href="#Distribution%20Transformer">6. Distribution Transformer</a></li>
 </ul>
 </div>
 </div>
@@ -310,12 +310,12 @@ Some classes of Generative models are (0:07:30):
 Both of these are latent variable models.
 </p>
 
-<div id="outline-container-org13c4936" class="outline-2">
-<h2 id="org13c4936"><span class="section-number-2">1.</span> Uses of Generative Models</h2>
+<div id="outline-container-Uses%20of%20Generative%20Models" class="outline-2">
+<h2 id="Uses%20of%20Generative%20Models"><span class="section-number-2">1.</span> Uses of Generative Models</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgbb18805" class="outline-3">
-<h3 id="orgbb18805"><span class="section-number-3">1.1.</span> Debiasing</h3>
+<div id="outline-container-Debiasing" class="outline-3">
+<h3 id="Debiasing"><span class="section-number-3">1.1.</span> Debiasing</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 0:05:44
@@ -326,15 +326,15 @@ We can uncover underlying features in a dataset and create more fair and represe
 </p>
 
 
-<div id="org85da77b" class="figure">
+<div id="orge7b08e1" class="figure">
 <p><img src="../img/mit_6s191/debiasing-20230316142121.png" alt="debiasing-20230316142121.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Debiasing</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org61098ac" class="outline-3">
-<h3 id="org61098ac"><span class="section-number-3">1.2.</span> Outlier Detection</h3>
+<div id="outline-container-Outlier%20Detection" class="outline-3">
+<h3 id="Outlier%20Detection"><span class="section-number-3">1.2.</span> Outlier Detection</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 0:06:42
@@ -345,7 +345,7 @@ We can detect rare events in data which are nonetheless important for model to h
 </p>
 
 
-<div id="org3e83e19" class="figure">
+<div id="orgdcc3044" class="figure">
 <p><img src="../img/mit_6s191/outlier_detection-20230316142354.png" alt="outlier_detection-20230316142354.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Outlier Detection</p>
@@ -353,8 +353,8 @@ We can detect rare events in data which are nonetheless important for model to h
 </div>
 </div>
 </div>
-<div id="outline-container-orgd8d467e" class="outline-2">
-<h2 id="orgd8d467e"><span class="section-number-2">2.</span> Latent Variable</h2>
+<div id="outline-container-Latent%20Variable" class="outline-2">
+<h2 id="Latent%20Variable"><span class="section-number-2">2.</span> Latent Variable</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 0:07:50
@@ -367,8 +367,8 @@ As an analogy, take Plato's Allegory of Cave. The shadows are what we observe (t
 </div>
 </div>
 
-<div id="outline-container-orgb2e7f72" class="outline-2">
-<h2 id="orgb2e7f72"><span class="section-number-2">3.</span> Autoencoders</h2>
+<div id="outline-container-Autoencoders" class="outline-2">
+<h2 id="Autoencoders"><span class="section-number-2">3.</span> Autoencoders</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 0:09:14
@@ -380,7 +380,7 @@ As an analogy, take Plato's Allegory of Cave. The shadows are what we observe (t
 </ul>
 
 
-<div id="org4099fec" class="figure">
+<div id="org1ddcc87" class="figure">
 <p><img src="../img/mit_6s191/autoencoders-20230316145850.png" alt="autoencoders-20230316145850.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>AutoEncoders</p>
@@ -391,8 +391,8 @@ Reconstruction is an powerful technique in Unsupervised Learning. 0:12:40
 </p>
 </div>
 </div>
-<div id="outline-container-org2f89e7c" class="outline-2">
-<h2 id="org2f89e7c"><span class="section-number-2">4.</span> Variational AutoEncoder</h2>
+<div id="outline-container-Variational%20AutoEncoder" class="outline-2">
+<h2 id="Variational%20AutoEncoder"><span class="section-number-2">4.</span> Variational AutoEncoder</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 0:14:08
@@ -406,14 +406,14 @@ With autoencoder, the same latent variable \(z\) gives the same output \(\hat{x}
 This is done by breaking down the latent space \(z\) to a mean vector (\(\mu\)) and standard deviation vector (\(\sigma\)). The encoder outputs \(\mu\) and \(\sigma\) from which \(z\) can be sampled. 
 </p>
 </div>
-<div id="outline-container-orgd47ca3e" class="outline-3">
-<h3 id="orgd47ca3e"><span class="section-number-3">4.1.</span> VAE Loss</h3>
+<div id="outline-container-VAE%20Loss" class="outline-3">
+<h3 id="VAE%20Loss"><span class="section-number-3">4.1.</span> VAE Loss</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 0:17:30
 </p>
 
-<div id="org7f22bed" class="figure">
+<div id="org59bd781" class="figure">
 <p><img src="../img/mit_6s191/vae_optimization-20230316153957.png" alt="vae_optimization-20230316153957.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>VAE optimization</p>
@@ -431,8 +431,8 @@ Loss function \(L(\phi, \theta, x)\) is reconstruction loss + regularization ter
 </div>
 </div>
 
-<div id="outline-container-org7c3c12d" class="outline-3">
-<h3 id="org7c3c12d"><span class="section-number-3">4.2.</span> Regularization Loss</h3>
+<div id="outline-container-Regularization%20Loss" class="outline-3">
+<h3 id="Regularization%20Loss"><span class="section-number-3">4.2.</span> Regularization Loss</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Regularization loss: \(D(q_{\phi}(z|x)\ ||\ p(z))\) is divergence in the two probability distribution. 
@@ -469,8 +469,8 @@ However, greater Regularization can adversely effect the reconstruction. So, a b
 </div>
 </div>
 
-<div id="outline-container-orge9d2951" class="outline-3">
-<h3 id="orge9d2951"><span class="section-number-3">4.3.</span> Optimization</h3>
+<div id="outline-container-Optimization" class="outline-3">
+<h3 id="Optimization"><span class="section-number-3">4.3.</span> Optimization</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 0:26:55
@@ -478,15 +478,15 @@ Backpropagation cannot be done through Sampling operation. So, we have to use a 
 </p>
 
 
-<div id="org357c99c" class="figure">
+<div id="orgbcf147a" class="figure">
 <p><img src="../img/mit_6s191/reparametization_of_sampling_layer-20230316155303.png" alt="reparametization_of_sampling_layer-20230316155303.png" />
 </p>
 <p><span class="figure-number">Figure 5: </span>Reparametization of Sampling Layer</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org9614ec8" class="outline-3">
-<h3 id="org9614ec8"><span class="section-number-3">4.4.</span> Disentanglement &beta;-VAEs</h3>
+<div id="outline-container-Disentanglement%20%5Cbeta-VAEs" class="outline-3">
+<h3 id="Disentanglement%20%5Cbeta-VAEs"><span class="section-number-3">4.4.</span> Disentanglement &beta;-VAEs</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 0:30:44
@@ -497,7 +497,7 @@ We want latent variables that are uncorrelated with each other. &beta;-VAEs achi
 </p>
 
 
-<div id="org7b61554" class="figure">
+<div id="org952f47b" class="figure">
 <p><img src="../img/mit_6s191/beta_vaes-20230316155613.png" alt="beta_vaes-20230316155613.png" />
 </p>
 <p><span class="figure-number">Figure 6: </span>&beta;-VAEs</p>
@@ -505,8 +505,8 @@ We want latent variables that are uncorrelated with each other. &beta;-VAEs achi
 </div>
 </div>
 </div>
-<div id="outline-container-org8230405" class="outline-2">
-<h2 id="org8230405"><span class="section-number-2">5.</span> Generative Adversarial Networks (GANs)</h2>
+<div id="outline-container-Generative%20Adversarial%20Networks%20%28GANs%29" class="outline-2">
+<h2 id="Generative%20Adversarial%20Networks%20%28GANs%29"><span class="section-number-2">5.</span> Generative Adversarial Networks (GANs)</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 0:35:07
@@ -517,7 +517,7 @@ Idea: We don't want to explicitly model density, and instead just sample to gene
 </p>
 
 
-<div id="org8429a58" class="figure">
+<div id="org112928f" class="figure">
 <p><img src="../img/mit_6s191/gans-20230316160043.png" alt="gans-20230316160043.png" />
 </p>
 <p><span class="figure-number">Figure 7: </span>GANs</p>
@@ -533,8 +533,8 @@ GANs avoid the problem of latent space regularization in AutoEncoders, because i
 </p>
 </div>
 
-<div id="outline-container-org9718760" class="outline-3">
-<h3 id="org9718760"><span class="section-number-3">5.1.</span> Training GANs</h3>
+<div id="outline-container-Training%20GANs" class="outline-3">
+<h3 id="Training%20GANs"><span class="section-number-3">5.1.</span> Training GANs</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 0:39:43
@@ -567,8 +567,8 @@ So, the overall objective is:
 </p>
 </div>
 </div>
-<div id="outline-container-org4b357a5" class="outline-3">
-<h3 id="org4b357a5"><span class="section-number-3">5.2.</span> Progressive Growing</h3>
+<div id="outline-container-Progressive%20Growing" class="outline-3">
+<h3 id="Progressive%20Growing"><span class="section-number-3">5.2.</span> Progressive Growing</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 0:44:51
@@ -584,31 +584,31 @@ Add more layers as training progresses
 </ul>
 </div>
 </div>
-<div id="outline-container-org5c4c60c" class="outline-3">
-<h3 id="org5c4c60c"><span class="section-number-3">5.3.</span> StyleGAN(2): progressive growing + style transfer</h3>
+<div id="outline-container-StyleGAN%282%29%3A%20progressive%20growing%20%2B%20style%20transfer" class="outline-3">
+<h3 id="StyleGAN%282%29%3A%20progressive%20growing%20%2B%20style%20transfer"><span class="section-number-3">5.3.</span> StyleGAN(2): progressive growing + style transfer</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 0:45:30
 </p>
 </div>
 </div>
-<div id="outline-container-orgcee7218" class="outline-3">
-<h3 id="orgcee7218"><span class="section-number-3">5.4.</span> Conditional GANs</h3>
+<div id="outline-container-Conditional%20GANs" class="outline-3">
+<h3 id="Conditional%20GANs"><span class="section-number-3">5.4.</span> Conditional GANs</h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 0:47:18
 </p>
 
 
-<div id="orgf9b435c" class="figure">
+<div id="org529c462" class="figure">
 <p><img src="../img/mit_6s191/paired_translation-20230316161742.png" alt="paired_translation-20230316161742.png" />
 </p>
 <p><span class="figure-number">Figure 8: </span>Paired Translation an example of Conditional GANs</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org447ab2c" class="outline-3">
-<h3 id="org447ab2c"><span class="section-number-3">5.5.</span> CycleGAN: domain transformation</h3>
+<div id="outline-container-CycleGAN%3A%20domain%20transformation" class="outline-3">
+<h3 id="CycleGAN%3A%20domain%20transformation"><span class="section-number-3">5.5.</span> CycleGAN: domain transformation</h3>
 <div class="outline-text-3" id="text-5-5">
 <p>
 0:50:21 
@@ -618,7 +618,7 @@ Add more layers as training progresses
 CycleGAN emphasize the idea of GANs being <a href="../../mit_6_s191_introduction_to_deep_learning.html#ID-777B6F6F-054F-434D-8357-7E9D2BBBEFFF">distribution transformers</a>. 
 </p>
 
-<div id="org0d97237" class="figure">
+<div id="org7372fae" class="figure">
 <p><img src="../img/mit_6s191/cyclegan-20230316161848.png" alt="cyclegan-20230316161848.png" />
 </p>
 <p><span class="figure-number">Figure 9: </span>CycleGAN: Transformation from one distribution to another distribution.</p>
@@ -627,11 +627,11 @@ CycleGAN emphasize the idea of GANs being <a href="../../mit_6_s191_introduction
 </div>
 </div>
 
-<div id="outline-container-org48a1479" class="outline-2">
-<h2 id="org48a1479"><span class="section-number-2">6.</span> Distribution Transformer</h2>
+<div id="outline-container-Distribution%20Transformer" class="outline-2">
+<h2 id="Distribution%20Transformer"><span class="section-number-2">6.</span> Distribution Transformer</h2>
 <div class="outline-text-2" id="text-6">
 
-<div id="org8f0adbc" class="figure">
+<div id="orgce3c101" class="figure">
 <p><img src="../img/mit_6s191/distribution_transformers-20230316161917.png" alt="distribution_transformers-20230316161917.png" />
 </p>
 <p><span class="figure-number">Figure 10: </span>Distribution Transformers</p>
@@ -640,7 +640,7 @@ CycleGAN emphasize the idea of GANs being <a href="../../mit_6_s191_introduction
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Deep Generative Modeling">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Deep Generative Modeling">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/rss.xml"><img src="https://bpanthi977.github.io/img/rss.png" /></a>
 </div>
 </body>
 </html>
