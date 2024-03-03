@@ -193,7 +193,11 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-<script type="text/javascript" src="../js/counters.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script>
   window.MathJax = {
     tex: {
@@ -232,32 +236,35 @@
  <a accesskey="h" href="./index.html"> UP </a>
  |
  <a accesskey="H" href="../index.html"> HOME </a>
-</div><div id="content" class="content">
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2023-04-01 Sat]</span></span></p>
+</div>
+<div id="content" class="content">
 <h1 class="title">Generative Adversarial Networks</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org02b58a3">1. Training GANs</a></li>
-<li><a href="#org185aa44">2. Progressive Growing</a></li>
-<li><a href="#org761ac81">3. StyleGAN(2): progressive growing + style transfer</a></li>
-<li><a href="#org86448cf">4. Conditional GANs</a></li>
-<li><a href="#org18d7a94">5. CycleGAN: domain transformation</a></li>
-<li><a href="#org27721e5">6. Problem with GANs</a>
+<li><a href="#Training%20GANs">1. Training GANs</a></li>
+<li><a href="#Progressive%20Growing">2. Progressive Growing</a></li>
+<li><a href="#StyleGAN%282%29%3A%20progressive%20growing%20%2B%20style%20transfer">3. StyleGAN(2): progressive growing + style transfer</a></li>
+<li><a href="#Conditional%20GANs">4. Conditional GANs</a></li>
+<li><a href="#CycleGAN%3A%20domain%20transformation">5. CycleGAN: domain transformation</a></li>
+<li><a href="#Problem%20with%20GANs">6. Problem with GANs</a>
 <ul>
-<li><a href="#org58bdbd0">6.1. Hallucination due to non-reference formulation</a></li>
+<li><a href="#Hallucination%20due%20to%20non-reference%20formulation">6.1. Hallucination due to non-reference formulation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 <p>
-<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=6::0:35:07">0:35:07</a>
+<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=6&t=2107s">0:35:07</a>
 Idea: We don't want to explicitly model density, and instead just sample to generate new instances.
 </p>
 
 
-<div id="org7ce6905" class="figure">
+<div id="orgd078c9b" class="figure">
 <p><img src="data/mit_6_s191_introduction_to_deep_learning/gans-20230316160043.png" alt="gans-20230316160043.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>GANs</p>
@@ -272,11 +279,11 @@ Idea: We don't want to explicitly model density, and instead just sample to gene
 GANs avoid the problem of latent space regularization in AutoEncoders, because in some way the random noise \(z\) is itself the latent space, and it being within our control is both continuous and complete. If it wasn't complete the generator won't perform good on some input. 
 </p>
 
-<div id="outline-container-org02b58a3" class="outline-2">
-<h2 id="org02b58a3"><span class="section-number-2">1.</span> Training GANs</h2>
+<div id="outline-container-Training%20GANs" class="outline-2">
+<h2 id="Training%20GANs"><span class="section-number-2">1.</span> Training GANs</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=6::0:39:43">0:39:43</a>
+<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=6&t=2383s">0:39:43</a>
 </p>
 
 <ul class="org-ul">
@@ -306,21 +313,21 @@ So, the overall objective is:
 </p>
 
 <p>
-<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=6::0:43:06">0:43:06</a> GANs are distribution transformers. The generator maps data from gaussain noise to a target distribution. 
-<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=6::0:43:27">0:43:27</a> We can interpolate in noise distribution to interpolate in target distribution.
+<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=6&t=2586s">0:43:06</a> GANs are distribution transformers. The generator maps data from gaussain noise to a target distribution. 
+<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=6&t=2607s">0:43:27</a> We can interpolate in noise distribution to interpolate in target distribution.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org185aa44" class="outline-2">
-<h2 id="org185aa44"><span class="section-number-2">2.</span> Progressive Growing</h2>
+<div id="outline-container-Progressive%20Growing" class="outline-2">
+<h2 id="Progressive%20Growing"><span class="section-number-2">2.</span> Progressive Growing</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=6::0:44:51">0:44:51</a>
+<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=6&t=2691s">0:44:51</a>
 </p>
 
 
-<div id="org3fd5609" class="figure">
+<div id="orgc225c0c" class="figure">
 <p><img src="data/mit_6_s191_introduction_to_deep_learning/progressive_growing-20230316161414.png" alt="progressive_growing-20230316161414.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Progressive Growing</p>
@@ -336,24 +343,24 @@ Add more layers as training progresses
 </div>
 </div>
 
-<div id="outline-container-org761ac81" class="outline-2">
-<h2 id="org761ac81"><span class="section-number-2">3.</span> StyleGAN(2): progressive growing + style transfer</h2>
+<div id="outline-container-StyleGAN%282%29%3A%20progressive%20growing%20%2B%20style%20transfer" class="outline-2">
+<h2 id="StyleGAN%282%29%3A%20progressive%20growing%20%2B%20style%20transfer"><span class="section-number-2">3.</span> StyleGAN(2): progressive growing + style transfer</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=6::0:45:30">0:45:30</a>
+<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=6&t=2730s">0:45:30</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-org86448cf" class="outline-2">
-<h2 id="org86448cf"><span class="section-number-2">4.</span> Conditional GANs</h2>
+<div id="outline-container-Conditional%20GANs" class="outline-2">
+<h2 id="Conditional%20GANs"><span class="section-number-2">4.</span> Conditional GANs</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=6::0:47:18">0:47:18</a>
+<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=6&t=2838s">0:47:18</a>
 </p>
 
 
-<div id="orgbf65481" class="figure">
+<div id="org6aef9f8" class="figure">
 <p><img src="data/mit_6_s191_introduction_to_deep_learning/paired_translation-20230316161742.png" alt="paired_translation-20230316161742.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>Paired Translation an example of Conditional GANs</p>
@@ -361,18 +368,18 @@ Add more layers as training progresses
 </div>
 </div>
 
-<div id="outline-container-org18d7a94" class="outline-2">
-<h2 id="org18d7a94"><span class="section-number-2">5.</span> CycleGAN: domain transformation</h2>
+<div id="outline-container-CycleGAN%3A%20domain%20transformation" class="outline-2">
+<h2 id="CycleGAN%3A%20domain%20transformation"><span class="section-number-2">5.</span> CycleGAN: domain transformation</h2>
 <div class="outline-text-2" id="text-5">
 <p>
-<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;index=6::0:50:21">0:50:21</a> 
+<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=6&t=3021s">0:50:21</a> 
 </p>
 
 <p>
 CycleGAN emphasize the idea of GANs being <a href="mit_6_s191_introduction_to_deep_learning.html#ID-777B6F6F-054F-434D-8357-7E9D2BBBEFFF">distribution transformers</a>. 
 </p>
 
-<div id="org18672e5" class="figure">
+<div id="org7e89e1c" class="figure">
 <p><img src="data/mit_6_s191_introduction_to_deep_learning/cyclegan-20230316161848.png" alt="cyclegan-20230316161848.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>CycleGAN: Transformation from one distribution to another distribution.</p>
@@ -380,12 +387,12 @@ CycleGAN emphasize the idea of GANs being <a href="mit_6_s191_introduction_to_de
 </div>
 </div>
 
-<div id="outline-container-org27721e5" class="outline-2">
-<h2 id="org27721e5"><span class="section-number-2">6.</span> Problem with GANs</h2>
+<div id="outline-container-Problem%20with%20GANs" class="outline-2">
+<h2 id="Problem%20with%20GANs"><span class="section-number-2">6.</span> Problem with GANs</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org58bdbd0" class="outline-3">
-<h3 id="org58bdbd0"><span class="section-number-3">6.1.</span> Hallucination due to non-reference formulation</h3>
+<div id="outline-container-Hallucination%20due%20to%20non-reference%20formulation" class="outline-3">
+<h3 id="Hallucination%20due%20to%20non-reference%20formulation"><span class="section-number-3">6.1.</span> Hallucination due to non-reference formulation</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 from <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Inversion by Direct Iteration - An Alternative to Denoising Diffusion for Image Restoration - TMLR - 2303.11435.pdf#page=3">InDI pg. 3</a>
@@ -404,7 +411,7 @@ This is a direct consequence of a non-reference formulation that directly tries 
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Generative Adversarial Networks">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Generative Adversarial Networks">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

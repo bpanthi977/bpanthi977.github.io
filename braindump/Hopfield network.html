@@ -193,7 +193,11 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-<script type="text/javascript" src="../js/counters.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script>
   window.MathJax = {
     tex: {
@@ -232,36 +236,39 @@
  <a accesskey="h" href="./index.html"> UP </a>
  |
  <a accesskey="H" href="../index.html"> HOME </a>
-</div><div id="content" class="content">
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2020-11-15 Sun]</span></span></p>
+</div>
+<div id="content" class="content">
 <h1 class="title">Hopfield network</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org06ff71c">1. Hopfield network</a>
+<li><a href="#Hopfield%20network">1. Hopfield network</a>
 <ul>
-<li><a href="#orgca3b816">1.1. Contents</a></li>
-<li><a href="#org10665df">1.2. Origins</a></li>
-<li><a href="#org2a8e5c0">1.3. Structure</a></li>
-<li><a href="#orgcd40a8b">1.4. Updating</a>
+<li><a href="#Contents">1.1. Contents</a></li>
+<li><a href="#Origins">1.2. Origins</a></li>
+<li><a href="#Structure">1.3. Structure</a></li>
+<li><a href="#Updating">1.4. Updating</a>
 <ul>
-<li><a href="#org435bb9f">1.4.1. Neurons "attract or repel each other" in state space</a></li>
+<li><a href="#Neurons%20%22attract%20or%20repel%20each%20other%22%20in%20state%20space">1.4.1. Neurons "attract or repel each other" in state space</a></li>
 </ul>
 </li>
-<li><a href="#org222c423">1.5. Working principles of discrete and continuous Hopfield networks</a></li>
-<li><a href="#orgc1afde6">1.6. Energy</a></li>
-<li><a href="#orgf9e7482">1.7. Hopfield network in optimization</a></li>
-<li><a href="#org9836237">1.8. Initialization and running</a></li>
-<li><a href="#org01d1e97">1.9. Training</a>
+<li><a href="#Working%20principles%20of%20discrete%20and%20continuous%20Hopfield%20networks">1.5. Working principles of discrete and continuous Hopfield networks</a></li>
+<li><a href="#Energy">1.6. Energy</a></li>
+<li><a href="#Hopfield%20network%20in%20optimization">1.7. Hopfield network in optimization</a></li>
+<li><a href="#Initialization%20and%20running">1.8. Initialization and running</a></li>
+<li><a href="#Training">1.9. Training</a>
 <ul>
-<li><a href="#org5004ca3">1.9.1. Learning rules</a></li>
-<li><a href="#org5f8b196">1.9.2. Hebbian learning rule for Hopfield networks</a></li>
-<li><a href="#org2e349c3">1.9.3. The Storkey learning rule</a></li>
+<li><a href="#Learning%20rules">1.9.1. Learning rules</a></li>
+<li><a href="#%5B%5Bid%3A73d5bbb3-ded9-4f7e-846b-da4a069a9ab7%5D%5BHebbian%5D%5D%20learning%20rule%20for%20Hopfield%20networks">1.9.2. Hebbian learning rule for Hopfield networks</a></li>
+<li><a href="#The%20Storkey%20learning%20rule">1.9.3. The Storkey learning rule</a></li>
 </ul>
 </li>
-<li><a href="#org2801d3a">1.10. Spurious patterns</a></li>
-<li><a href="#org050333b">1.11. Capacity</a></li>
-<li><a href="#orgd92136d">1.12. Human memory</a></li>
+<li><a href="#Spurious%20patterns">1.10. Spurious patterns</a></li>
+<li><a href="#Capacity">1.11. Capacity</a></li>
+<li><a href="#Human%20memory">1.12. Human memory</a></li>
 </ul>
 </li>
 </ul>
@@ -271,8 +278,8 @@
 :FILE: <a href="./data/Hopfield network/Hopfield network - Wikipedia (2020-11-15 4_13_16 PM).html">Saved file</a>
 </p>
 
-<div id="outline-container-org06ff71c" class="outline-2">
-<h2 id="org06ff71c"><span class="section-number-2">1.</span> Hopfield network</h2>
+<div id="outline-container-Hopfield%20network" class="outline-2">
+<h2 id="Hopfield%20network"><span class="section-number-2">1.</span> Hopfield network</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 A Hopfield network (or Ising model of a neural network or Ising–Lenz–Little model) is a form of recurrentartificial neural network popularized by John Hopfield in 1982, but described earlier by Little in 1974 based on Ernst Ising's work with Wilhelm Lenz.[1][2]
@@ -282,54 +289,54 @@ A Hopfield network (or Ising model of a neural network or Ising–Lenz–Little 
 Hopfield networks also provide a model for understanding human memory [3][4]
 </p>
 </div>
-<div id="outline-container-orgca3b816" class="outline-3">
-<h3 id="orgca3b816"><span class="section-number-3">1.1.</span> Contents</h3>
+<div id="outline-container-Contents" class="outline-3">
+<h3 id="Contents"><span class="section-number-3">1.1.</span> Contents</h3>
 </div>
-<div id="outline-container-org10665df" class="outline-3">
-<h3 id="org10665df"><span class="section-number-3">1.2.</span> Origins</h3>
+<div id="outline-container-Origins" class="outline-3">
+<h3 id="Origins"><span class="section-number-3">1.2.</span> Origins</h3>
 </div>
-<div id="outline-container-org2a8e5c0" class="outline-3">
-<h3 id="org2a8e5c0"><span class="section-number-3">1.3.</span> Structure</h3>
+<div id="outline-container-Structure" class="outline-3">
+<h3 id="Structure"><span class="section-number-3">1.3.</span> Structure</h3>
 </div>
-<div id="outline-container-orgcd40a8b" class="outline-3">
-<h3 id="orgcd40a8b"><span class="section-number-3">1.4.</span> Updating</h3>
+<div id="outline-container-Updating" class="outline-3">
+<h3 id="Updating"><span class="section-number-3">1.4.</span> Updating</h3>
 <div class="outline-text-3" id="text-1-4">
 </div>
-<div id="outline-container-org435bb9f" class="outline-4">
-<h4 id="org435bb9f"><span class="section-number-4">1.4.1.</span> Neurons "attract or repel each other" in state space</h4>
+<div id="outline-container-Neurons%20%22attract%20or%20repel%20each%20other%22%20in%20state%20space" class="outline-4">
+<h4 id="Neurons%20%22attract%20or%20repel%20each%20other%22%20in%20state%20space"><span class="section-number-4">1.4.1.</span> Neurons "attract or repel each other" in state space</h4>
 </div>
 </div>
-<div id="outline-container-org222c423" class="outline-3">
-<h3 id="org222c423"><span class="section-number-3">1.5.</span> Working principles of discrete and continuous Hopfield networks</h3>
+<div id="outline-container-Working%20principles%20of%20discrete%20and%20continuous%20Hopfield%20networks" class="outline-3">
+<h3 id="Working%20principles%20of%20discrete%20and%20continuous%20Hopfield%20networks"><span class="section-number-3">1.5.</span> Working principles of discrete and continuous Hopfield networks</h3>
 </div>
-<div id="outline-container-orgc1afde6" class="outline-3">
-<h3 id="orgc1afde6"><span class="section-number-3">1.6.</span> Energy</h3>
+<div id="outline-container-Energy" class="outline-3">
+<h3 id="Energy"><span class="section-number-3">1.6.</span> Energy</h3>
 </div>
-<div id="outline-container-orgf9e7482" class="outline-3">
-<h3 id="orgf9e7482"><span class="section-number-3">1.7.</span> Hopfield network in optimization</h3>
+<div id="outline-container-Hopfield%20network%20in%20optimization" class="outline-3">
+<h3 id="Hopfield%20network%20in%20optimization"><span class="section-number-3">1.7.</span> Hopfield network in optimization</h3>
 </div>
-<div id="outline-container-org9836237" class="outline-3">
-<h3 id="org9836237"><span class="section-number-3">1.8.</span> Initialization and running</h3>
+<div id="outline-container-Initialization%20and%20running" class="outline-3">
+<h3 id="Initialization%20and%20running"><span class="section-number-3">1.8.</span> Initialization and running</h3>
 </div>
-<div id="outline-container-org01d1e97" class="outline-3">
-<h3 id="org01d1e97"><span class="section-number-3">1.9.</span> Training</h3>
+<div id="outline-container-Training" class="outline-3">
+<h3 id="Training"><span class="section-number-3">1.9.</span> Training</h3>
 <div class="outline-text-3" id="text-1-9">
 </div>
-<div id="outline-container-org5004ca3" class="outline-4">
-<h4 id="org5004ca3"><span class="section-number-4">1.9.1.</span> Learning rules</h4>
+<div id="outline-container-Learning%20rules" class="outline-4">
+<h4 id="Learning%20rules"><span class="section-number-4">1.9.1.</span> Learning rules</h4>
 </div>
-<div id="outline-container-org5f8b196" class="outline-4">
-<h4 id="org5f8b196"><span class="section-number-4">1.9.2.</span> <a href="hebbian_theory.html#ID-73d5bbb3-ded9-4f7e-846b-da4a069a9ab7">Hebbian</a> learning rule for Hopfield networks</h4>
+<div id="outline-container-%5B%5Bid%3A73d5bbb3-ded9-4f7e-846b-da4a069a9ab7%5D%5BHebbian%5D%5D%20learning%20rule%20for%20Hopfield%20networks" class="outline-4">
+<h4 id="%5B%5Bid%3A73d5bbb3-ded9-4f7e-846b-da4a069a9ab7%5D%5BHebbian%5D%5D%20learning%20rule%20for%20Hopfield%20networks"><span class="section-number-4">1.9.2.</span> <a href="hebbian_theory.html#ID-73d5bbb3-ded9-4f7e-846b-da4a069a9ab7">Hebbian</a> learning rule for Hopfield networks</h4>
 </div>
-<div id="outline-container-org2e349c3" class="outline-4">
-<h4 id="org2e349c3"><span class="section-number-4">1.9.3.</span> The Storkey learning rule</h4>
+<div id="outline-container-The%20Storkey%20learning%20rule" class="outline-4">
+<h4 id="The%20Storkey%20learning%20rule"><span class="section-number-4">1.9.3.</span> The Storkey learning rule</h4>
 </div>
 </div>
-<div id="outline-container-org2801d3a" class="outline-3">
-<h3 id="org2801d3a"><span class="section-number-3">1.10.</span> Spurious patterns</h3>
+<div id="outline-container-Spurious%20patterns" class="outline-3">
+<h3 id="Spurious%20patterns"><span class="section-number-3">1.10.</span> Spurious patterns</h3>
 </div>
-<div id="outline-container-org050333b" class="outline-3">
-<h3 id="org050333b"><span class="section-number-3">1.11.</span> Capacity</h3>
+<div id="outline-container-Capacity" class="outline-3">
+<h3 id="Capacity"><span class="section-number-3">1.11.</span> Capacity</h3>
 <div class="outline-text-3" id="text-1-11">
 <p>
 The Network capacity of the Hopfield network model is determined by neuron amounts and connections within a given network. 
@@ -348,8 +355,8 @@ The storage capacity can be given as C ≅ n 2 log 2 ⁡ n {\displaystyle C&cong
 </p>
 </div>
 </div>
-<div id="outline-container-orgd92136d" class="outline-3">
-<h3 id="orgd92136d"><span class="section-number-3">1.12.</span> Human memory</h3>
+<div id="outline-container-Human%20memory" class="outline-3">
+<h3 id="Human%20memory"><span class="section-number-3">1.12.</span> Human memory</h3>
 <div class="outline-text-3" id="text-1-12">
 <p>
 The Hopfield model accounts for associativememory through the incorporation of memory vectors.
@@ -375,7 +382,7 @@ Rizzuto and Kahana (2001) were able to show that the neural network model can ac
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Hopfield network">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Hopfield network">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

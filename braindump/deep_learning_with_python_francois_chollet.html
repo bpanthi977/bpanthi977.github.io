@@ -193,35 +193,42 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-<script type="text/javascript" src="../js/counters.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div id="org-div-home-and-up">
  <a accesskey="h" href="./index.html"> UP </a>
  |
  <a accesskey="H" href="../index.html"> HOME </a>
-</div><div id="content" class="content">
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2023-06-15 Thu]</span></span></p>
+</div>
+<div id="content" class="content">
 <h1 class="title">Deep Learning with Python - François Chollet</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb3513b5">1. The Manifold Hypothesis</a></li>
-<li><a href="#org3738b44">2. Workflow of Deep Learning</a>
+<li><a href="#The%20Manifold%20Hypothesis">1. The Manifold Hypothesis</a></li>
+<li><a href="#Workflow%20of%20Deep%20Learning">2. Workflow of Deep Learning</a>
 <ul>
-<li><a href="#orgc6eeee9">2.1. Beat a Baseline</a></li>
-<li><a href="#orgb5e28cb">2.2. Try Overfitting</a></li>
-<li><a href="#orga832e8d">2.3. Improve Generalization</a>
+<li><a href="#Beat%20a%20Baseline">2.1. Beat a Baseline</a></li>
+<li><a href="#Try%20Overfitting">2.2. Try Overfitting</a></li>
+<li><a href="#Improve%20Generalization">2.3. Improve Generalization</a>
 <ul>
-<li><a href="#orga3dff28">2.3.1. Dataset quality</a></li>
-<li><a href="#orgaf7eead">2.3.2. Early Stopping</a></li>
-<li><a href="#org1d31470">2.3.3. Regularizing your model</a></li>
+<li><a href="#Dataset%20quality">2.3.1. Dataset quality</a></li>
+<li><a href="#Early%20Stopping">2.3.2. Early Stopping</a></li>
+<li><a href="#Regularizing%20your%20model">2.3.3. Regularizing your model</a></li>
 </ul>
 </li>
-<li><a href="#orgdbc4e84">2.4. Tips</a>
+<li><a href="#Tips">2.4. Tips</a>
 <ul>
-<li><a href="#orgbb86a97">2.4.1. Value Normalization</a></li>
-<li><a href="#orgeb8af06">2.4.2. Evaluation Metric</a></li>
+<li><a href="#Value%20Normalization">2.4.1. Value Normalization</a></li>
+<li><a href="#Evaluation%20Metric">2.4.2. Evaluation Metric</a></li>
 </ul>
 </li>
 </ul>
@@ -246,8 +253,8 @@ Got to know about the book from this <a href="https://twitter.com/fchollet/statu
 The fundamental issue in machine learning is the tension between optimization and generalization.
 </p>
 
-<div id="outline-container-orgb3513b5" class="outline-2">
-<h2 id="orgb3513b5"><span class="section-number-2">1.</span> The Manifold Hypothesis</h2>
+<div id="outline-container-The%20Manifold%20Hypothesis" class="outline-2">
+<h2 id="The%20Manifold%20Hypothesis"><span class="section-number-2">1.</span> The Manifold Hypothesis</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The manifold hypothesis posits that natural/real-world high-dimensional data lies on a low-dimensional manifold embedded in the high dimension. 
@@ -276,7 +283,7 @@ In this sense, Deep Learning is nothing but curve fitting and thus for a model t
 </p>
 
 
-<div id="org1277b49" class="figure">
+<div id="org54f8d45" class="figure">
 <p><img src="data/deep_learning_with_python_francois_chollet/dense_sampling_leads_to_generalization-20230615223259.png" alt="dense_sampling_leads_to_generalization-20230615223259.png" height="400px" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Dense Sampling Leads to Generalization</p>
@@ -302,12 +309,12 @@ as opposed to intuition and pattern recognition. The latter are largely interpol
 </div>
 
 
-<div id="outline-container-org3738b44" class="outline-2">
-<h2 id="org3738b44"><span class="section-number-2">2.</span> Workflow of Deep Learning</h2>
+<div id="outline-container-Workflow%20of%20Deep%20Learning" class="outline-2">
+<h2 id="Workflow%20of%20Deep%20Learning"><span class="section-number-2">2.</span> Workflow of Deep Learning</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgc6eeee9" class="outline-3">
-<h3 id="orgc6eeee9"><span class="section-number-3">2.1.</span> Beat a Baseline</h3>
+<div id="outline-container-Beat%20a%20Baseline" class="outline-3">
+<h3 id="Beat%20a%20Baseline"><span class="section-number-3">2.1.</span> Beat a Baseline</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 In deep learning, you can't observe the manifold learning process because its happening in far higher dimension than our familiar 3 dimensions. The only feedback you have is your validation metrics. 
@@ -334,8 +341,8 @@ So, the initial goal is to achieve <b>statistical power</b>: A small model that 
 </div>
 </div>
 
-<div id="outline-container-orgb5e28cb" class="outline-3">
-<h3 id="orgb5e28cb"><span class="section-number-3">2.2.</span> Try Overfitting</h3>
+<div id="outline-container-Try%20Overfitting" class="outline-3">
+<h3 id="Try%20Overfitting"><span class="section-number-3">2.2.</span> Try Overfitting</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Once you have a model with statistical power, the question becomes, is your model sufficiently powerful? We don't want model that underfit or that is starved for memorization capacity. The model should have the capacity to overfit. 
@@ -355,7 +362,7 @@ To find an overfitting model:
 </ul>
 
 
-<div id="orgea6965a" class="figure">
+<div id="org0e708df" class="figure">
 <p><img src="data/deep_learning_with_python_francois_chollet/validation_loss_for_a_model_of_appropriate_capacity-20230616202607.png" alt="validation_loss_for_a_model_of_appropriate_capacity-20230616202607.png" height="400px" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Validation Loss for a Model of Appropriate Capacity</p>
@@ -364,16 +371,16 @@ To find an overfitting model:
 </div>
 
 
-<div id="outline-container-orga832e8d" class="outline-3">
-<h3 id="orga832e8d"><span class="section-number-3">2.3.</span> Improve Generalization</h3>
+<div id="outline-container-Improve%20Generalization" class="outline-3">
+<h3 id="Improve%20Generalization"><span class="section-number-3">2.3.</span> Improve Generalization</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Once the model has shown to have some generalization and is able to overfit, it's time to focus on maximizing generalization. 
 </p>
 </div>
 
-<div id="outline-container-orga3dff28" class="outline-4">
-<h4 id="orga3dff28"><span class="section-number-4">2.3.1.</span> Dataset quality</h4>
+<div id="outline-container-Dataset%20quality" class="outline-4">
+<h4 id="Dataset%20quality"><span class="section-number-4">2.3.1.</span> Dataset quality</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <p>
 Dataset quality is very important:
@@ -388,8 +395,8 @@ Dataset quality is very important:
 </div>
 </div>
 
-<div id="outline-container-orgaf7eead" class="outline-4">
-<h4 id="orgaf7eead"><span class="section-number-4">2.3.2.</span> Early Stopping</h4>
+<div id="outline-container-Early%20Stopping" class="outline-4">
+<h4 id="Early%20Stopping"><span class="section-number-4">2.3.2.</span> Early Stopping</h4>
 <div class="outline-text-4" id="text-2-3-2">
 <p>
 In deep learning, we always use models that are vastly overparameterized: they have way more degrees of freedom than the minimum necessary to fit to the latent manifold of the data. This overparameterization is not an issue, because you never fully fit a deep learning model. Such a fit wouldn’t generalize at all. You will always interrupt training long before you’ve reached the minimum possible training loss.
@@ -397,8 +404,8 @@ In deep learning, we always use models that are vastly overparameterized: they h
 </div>
 </div>
 
-<div id="outline-container-org1d31470" class="outline-4">
-<h4 id="org1d31470"><span class="section-number-4">2.3.3.</span> Regularizing your model</h4>
+<div id="outline-container-Regularizing%20your%20model" class="outline-4">
+<h4 id="Regularizing%20your%20model"><span class="section-number-4">2.3.3.</span> Regularizing your model</h4>
 <div class="outline-text-4" id="text-2-3-3">
 <p>
 Regularization techniques are a set of best practices that actively impede the model’s ability to fit perfectly to the training data, with the goal of making the model perform better during validation. This is called “regularizing” the model, because it tends to make the model simpler, more “regular,” its curve smoother, more “generic”. 
@@ -410,7 +417,7 @@ Some ways to regulaize model are:
 </div>
 
 <ol class="org-ol">
-<li><a id="orgbceb63d"></a>Reducing network's size<br />
+<li><a id="Reducing%20network%27s%20size"></a>Reducing network's size<br />
 <div class="outline-text-5" id="text-2-3-3-1">
 <p>
 If the model has limited memorization resource, it won't be able to simply memorize its training data. But also, it should have enough parameters such that it doesn't underfit. So, use a big model but not too big.
@@ -422,7 +429,7 @@ The general workflow for finding an appropriate model size is to start with rela
 </div>
 </li>
 
-<li><a id="org0998eda"></a>Weight Regualization: L1 or L2 Regualization<br />
+<li><a id="Weight%20Regualization%3A%20L1%20or%20L2%20Regualization"></a>Weight Regualization: L1 or L2 Regualization<br />
 <div class="outline-text-5" id="text-2-3-3-2">
 <p>
 Weight regularization is more typically used for smaller deep learning models. Large deep learning models tend to be so overparameterized that imposing constraints on weight values hasn’t much impact on model capacity and generalization. In that case <span class="underline">dropout</span> is preferred.
@@ -430,7 +437,7 @@ Weight regularization is more typically used for smaller deep learning models. L
 </div>
 </li>
 
-<li><a id="org16ef429"></a>Dropout<br />
+<li><a id="Dropout"></a>Dropout<br />
 <div class="outline-text-5" id="text-2-3-3-3">
 <p>
 The core idea in <a href="dropout.html#ID-E34661FC-DC0C-4131-994C-9B7B1EABF34F">Dropout (NN)</a> is that introducing noise in the output values of a layer can break up happenstance patterns that aren’t significant (what Hinton refers to as conspiracies), which the model will start memorizing if no noise is present.
@@ -442,12 +449,12 @@ The core idea in <a href="dropout.html#ID-E34661FC-DC0C-4131-994C-9B7B1EABF34F">
 </div>
 
 
-<div id="outline-container-orgdbc4e84" class="outline-3">
-<h3 id="orgdbc4e84"><span class="section-number-3">2.4.</span> Tips</h3>
+<div id="outline-container-Tips" class="outline-3">
+<h3 id="Tips"><span class="section-number-3">2.4.</span> Tips</h3>
 <div class="outline-text-3" id="text-2-4">
 </div>
-<div id="outline-container-orgbb86a97" class="outline-4">
-<h4 id="orgbb86a97"><span class="section-number-4">2.4.1.</span> Value Normalization</h4>
+<div id="outline-container-Value%20Normalization" class="outline-4">
+<h4 id="Value%20Normalization"><span class="section-number-4">2.4.1.</span> Value Normalization</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 In general, it isn’t safe to feed into a neural network data that takes relatively large values (for example, multi-digit integers, which are much larger than the initial values taken by the weights of a network) or data that is heterogeneous (for example, data where one feature is in the range 0–1 and another is in the range 100–200). Doing so can trigger large gradient updates that will prevent the network from converging.
@@ -455,8 +462,8 @@ In general, it isn’t safe to feed into a neural network data that takes relati
 </div>
 </div>
 
-<div id="outline-container-orgeb8af06" class="outline-4">
-<h4 id="orgeb8af06"><span class="section-number-4">2.4.2.</span> Evaluation Metric</h4>
+<div id="outline-container-Evaluation%20Metric" class="outline-4">
+<h4 id="Evaluation%20Metric"><span class="section-number-4">2.4.2.</span> Evaluation Metric</h4>
 <div class="outline-text-4" id="text-2-4-2">
 <p>
 While setting up your validation procedure, be sure to:
@@ -496,7 +503,7 @@ Once you’ve developed a satisfactory model configuration, you can train your f
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Deep Learning with Python - François Chollet">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Deep Learning with Python - François Chollet">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

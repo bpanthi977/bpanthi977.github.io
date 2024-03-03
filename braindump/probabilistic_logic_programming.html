@@ -193,56 +193,63 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-<script type="text/javascript" src="../js/counters.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div id="org-div-home-and-up">
  <a accesskey="h" href="./index.html"> UP </a>
  |
  <a accesskey="H" href="../index.html"> HOME </a>
-</div><div id="content" class="content">
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2020-11-12 Thu]</span></span></p>
+</div>
+<div id="content" class="content">
 <h1 class="title">Probabilistic Logic Programming</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org61dfc03">1. A key question in AI - Mixing Reasoning &amp; Learning with Uncertainity</a></li>
-<li><a href="#org78e75b8">2. ProbLog - Probability associated with logic</a></li>
-<li><a href="#orgeb2ae1b">3. ProbLog is one instance of a bigger family of Probabilistic Logic Programming</a>
+<li><a href="#A%20key%20question%20in%20AI%20-%20Mixing%20Reasoning%20%26%20Learning%20with%20Uncertainity">1. A key question in AI - Mixing Reasoning &amp; Learning with Uncertainity</a></li>
+<li><a href="#ProbLog%20-%20Probability%20associated%20with%20logic">2. ProbLog - Probability associated with logic</a></li>
+<li><a href="#ProbLog%20is%20one%20instance%20of%20a%20bigger%20family%20of%20Probabilistic%20Logic%20Programming">3. ProbLog is one instance of a bigger family of Probabilistic Logic Programming</a>
 <ul>
-<li><a href="#orgbc5e0a3">3.1. Same idea: Take probabilistic choice, take logic logic program describing the consequences of those choice =&gt; distribution over possible world</a></li>
+<li><a href="#Same%20idea%3A%20Take%20probabilistic%20choice%2C%20take%20logic%20logic%20program%20describing%20the%20consequences%20of%20those%20choice%20%3D%3E%20distribution%20over%20possible%20world">3.1. Same idea: Take probabilistic choice, take logic logic program describing the consequences of those choice =&gt; distribution over possible world</a></li>
 </ul>
 </li>
-<li><a href="#org53edc01">4. Other Extensions of basic PLP</a></li>
-<li><a href="#orga19e3f5">5. Example - ProbLog by example</a>
+<li><a href="#Other%20Extensions%20of%20basic%20PLP">4. Other Extensions of basic PLP</a></li>
+<li><a href="#Example%20-%20ProbLog%20by%20example">5. Example - ProbLog by example</a>
 <ul>
-<li><a href="#org978320d">5.1. One way is to randomly go over the choices</a></li>
+<li><a href="#One%20way%20is%20to%20randomly%20go%20over%20the%20choices">5.1. One way is to randomly go over the choices</a></li>
 </ul>
 </li>
-<li><a href="#orgcd1f31e">6. Distribution Semantics - (with probabilistic facts)</a></li>
-<li><a href="#org1a2c607">7. Alternative View - CP-Logic - Probabilistic Causal Laws</a></li>
-<li><a href="#orgec3e806">8. Both are same</a></li>
-<li><a href="#org7fbcbd4">9. Example 2 - Infinite Possible Worlds  - A markov chain</a></li>
-<li><a href="#orgab832be">10. Implementation</a>
+<li><a href="#Distribution%20Semantics%20-%20%28with%20probabilistic%20facts%29">6. Distribution Semantics - (with probabilistic facts)</a></li>
+<li><a href="#Alternative%20View%20-%20CP-Logic%20-%20Probabilistic%20Causal%20Laws">7. Alternative View - CP-Logic - Probabilistic Causal Laws</a></li>
+<li><a href="#Both%20are%20same">8. Both are same</a></li>
+<li><a href="#Example%202%20-%20Infinite%20Possible%20Worlds%20%20-%20A%20markov%20chain">9. Example 2 - Infinite Possible Worlds  - A markov chain</a></li>
+<li><a href="#Implementation">10. Implementation</a>
 <ul>
-<li><a href="#org0d86e3a">10.1. Rely in logical reasoning - not on sampling</a>
+<li><a href="#Rely%20in%20logical%20reasoning%20-%20not%20on%20sampling">10.1. Rely in logical reasoning - not on sampling</a>
 <ul>
-<li><a href="#org4724b15">10.1.1. Logical Reasoning : Proofs in Prolog  - by backward chaining</a></li>
-<li><a href="#org436c420">10.1.2. If there is a proof of a logic query then the product of the probabilities of the steps of the proofs is the result of probabilistic query</a></li>
-<li><a href="#org344ae27">10.1.3. For multiple proof don't just sum the probabilities of each proof - Disjoint-Sum-Problem</a></li>
+<li><a href="#Logical%20Reasoning%20%3A%20Proofs%20in%20Prolog%20%20-%20by%20backward%20chaining">10.1.1. Logical Reasoning : Proofs in Prolog  - by backward chaining</a></li>
+<li><a href="#If%20there%20is%20a%20proof%20of%20a%20logic%20query%20then%20the%20product%20of%20the%20probabilities%20of%20the%20steps%20of%20the%20proofs%20is%20the%20result%20of%20probabilistic%20query">10.1.2. If there is a proof of a logic query then the product of the probabilities of the steps of the proofs is the result of probabilistic query</a></li>
+<li><a href="#For%20multiple%20proof%20don%27t%20just%20sum%20the%20probabilities%20of%20each%20proof%20-%20Disjoint-Sum-Problem">10.1.3. For multiple proof don't just sum the probabilities of each proof - Disjoint-Sum-Problem</a></li>
 </ul>
 </li>
-<li><a href="#org1fadea3">10.2. Knowledge compilation - get rid of the common parts of the proof (solves Disjoint-Sum-Problem)</a></li>
-<li><a href="#org0af52b0">10.3. Weighted Model Counting - is also related to this PLP</a></li>
+<li><a href="#Knowledge%20compilation%20-%20get%20rid%20of%20the%20common%20parts%20of%20the%20proof%20%28solves%20Disjoint-Sum-Problem%29">10.2. Knowledge compilation - get rid of the common parts of the proof (solves Disjoint-Sum-Problem)</a></li>
+<li><a href="#Weighted%20Model%20Counting%20-%20is%20also%20related%20to%20this%20PLP">10.3. Weighted Model Counting - is also related to this PLP</a></li>
 </ul>
 </li>
-<li><a href="#org5b21ccd">11. Future Endeavours</a>
+<li><a href="#Future%20Endeavours">11. Future Endeavours</a>
 <ul>
-<li><a href="#orgaa28514">11.1. Approximate inference with bounds</a></li>
-<li><a href="#orgd9475e8">11.2. Lifted Inference</a></li>
-<li><a href="#org0b28c10">11.3. Parameter learning from partial interpretations</a></li>
-<li><a href="#orgfe918da">11.4. Learning probabilistic rules</a></li>
-<li><a href="#org42fe151">11.5. Sampling</a></li>
+<li><a href="#Approximate%20inference%20with%20bounds">11.1. Approximate inference with bounds</a></li>
+<li><a href="#Lifted%20Inference">11.2. Lifted Inference</a></li>
+<li><a href="#Parameter%20learning%20from%20partial%20interpretations">11.3. Parameter learning from partial interpretations</a></li>
+<li><a href="#Learning%20probabilistic%20rules">11.4. Learning probabilistic rules</a></li>
+<li><a href="#Sampling">11.5. Sampling</a></li>
 </ul>
 </li>
 </ul>
@@ -253,13 +260,13 @@
 </p>
 
 <p>
-<a href="https://www.youtube.com/watch?v=5g0Z5b77rOs">https://www.youtube.com/watch?v=5g0Z5b77rOs</a>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/lJIrF4YjHfQ" title="//youtube.com/embed/5g0Z5b77rOs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
 </p>
-<div id="outline-container-org61dfc03" class="outline-2">
-<h2 id="org61dfc03"><span class="section-number-2">1.</span> A key question in AI - Mixing Reasoning &amp; Learning with Uncertainity</h2>
+<div id="outline-container-A%20key%20question%20in%20AI%20-%20Mixing%20Reasoning%20%26%20Learning%20with%20Uncertainity" class="outline-2">
+<h2 id="A%20key%20question%20in%20AI%20-%20Mixing%20Reasoning%20%26%20Learning%20with%20Uncertainity"><span class="section-number-2">1.</span> A key question in AI - Mixing Reasoning &amp; Learning with Uncertainity</h2>
 <div class="outline-text-2" id="text-1">
 
-<div id="orgd010552" class="figure">
+<div id="orge08c1b4" class="figure">
 <p><img src="./data/probabilistic_logic_programming/mpv-screenshotWGnL5M.png" alt="mpv-screenshotWGnL5M.png" />
 </p>
 </div>
@@ -272,8 +279,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org78e75b8" class="outline-2">
-<h2 id="org78e75b8"><span class="section-number-2">2.</span> ProbLog - Probability associated with logic</h2>
+<div id="outline-container-ProbLog%20-%20Probability%20associated%20with%20logic" class="outline-2">
+<h2 id="ProbLog%20-%20Probability%20associated%20with%20logic"><span class="section-number-2">2.</span> ProbLog - Probability associated with logic</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 In prolog, world is modelled with facts and relations 
@@ -281,14 +288,14 @@ In problog, there is a probability associated with the facts to get a distributi
 </p>
 
 
-<div id="org1e5a981" class="figure">
+<div id="org9a4c61f" class="figure">
 <p><img src="./data/probabilistic_logic_programming/mpv-screenshotR4S8vk.png" alt="mpv-screenshotR4S8vk.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgeb2ae1b" class="outline-2">
-<h2 id="orgeb2ae1b"><span class="section-number-2">3.</span> ProbLog is one instance of a bigger family of Probabilistic Logic Programming</h2>
+<div id="outline-container-ProbLog%20is%20one%20instance%20of%20a%20bigger%20family%20of%20Probabilistic%20Logic%20Programming" class="outline-2">
+<h2 id="ProbLog%20is%20one%20instance%20of%20a%20bigger%20family%20of%20Probabilistic%20Logic%20Programming"><span class="section-number-2">3.</span> ProbLog is one instance of a bigger family of Probabilistic Logic Programming</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Distribution Semantics [Sato, ICLP 95]: probabilistic choices + logic program = distribution over possible worlds
@@ -306,18 +313,18 @@ e.g.
 </dl>
 </div>
 
-<div id="outline-container-orgbc5e0a3" class="outline-3">
-<h3 id="orgbc5e0a3"><span class="section-number-3">3.1.</span> Same idea: Take probabilistic choice, take logic logic program describing the consequences of those choice =&gt; distribution over possible world</h3>
+<div id="outline-container-Same%20idea%3A%20Take%20probabilistic%20choice%2C%20take%20logic%20logic%20program%20describing%20the%20consequences%20of%20those%20choice%20%3D%3E%20distribution%20over%20possible%20world" class="outline-3">
+<h3 id="Same%20idea%3A%20Take%20probabilistic%20choice%2C%20take%20logic%20logic%20program%20describing%20the%20consequences%20of%20those%20choice%20%3D%3E%20distribution%20over%20possible%20world"><span class="section-number-3">3.1.</span> Same idea: Take probabilistic choice, take logic logic program describing the consequences of those choice =&gt; distribution over possible world</h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
 </div>
 </div>
 
-<div id="outline-container-org53edc01" class="outline-2">
-<h2 id="org53edc01"><span class="section-number-2">4.</span> Other Extensions of basic PLP</h2>
+<div id="outline-container-Other%20Extensions%20of%20basic%20PLP" class="outline-2">
+<h2 id="Other%20Extensions%20of%20basic%20PLP"><span class="section-number-2">4.</span> Other Extensions of basic PLP</h2>
 <div class="outline-text-2" id="text-4">
 
-<div id="orgbce0b8a" class="figure">
+<div id="org4b4c73b" class="figure">
 <p><img src="./data/probabilistic_logic_programming/mpv-screenshotLx1VHJ.png" alt="mpv-screenshotLx1VHJ.png" />
 </p>
 </div>
@@ -332,8 +339,8 @@ e.g.
 </div>
 </div>
 
-<div id="outline-container-orga19e3f5" class="outline-2">
-<h2 id="orga19e3f5"><span class="section-number-2">5.</span> Example - ProbLog by example</h2>
+<div id="outline-container-Example%20-%20ProbLog%20by%20example" class="outline-2">
+<h2 id="Example%20-%20ProbLog%20by%20example"><span class="section-number-2">5.</span> Example - ProbLog by example</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 A bit of gambling
@@ -383,11 +390,11 @@ now we can ask probabilistic questions. e.g.
 </ul>
 </div>
 
-<div id="outline-container-org978320d" class="outline-3">
-<h3 id="org978320d"><span class="section-number-3">5.1.</span> One way is to randomly go over the choices</h3>
+<div id="outline-container-One%20way%20is%20to%20randomly%20go%20over%20the%20choices" class="outline-3">
+<h3 id="One%20way%20is%20to%20randomly%20go%20over%20the%20choices"><span class="section-number-3">5.1.</span> One way is to randomly go over the choices</h3>
 <div class="outline-text-3" id="text-5-1">
 
-<div id="org627c987" class="figure">
+<div id="org8d0d351" class="figure">
 <p><img src="./data/probabilistic_logic_programming/mpv-screenshotfReKnG.png" alt="mpv-screenshotfReKnG.png" />
 </p>
 </div>
@@ -399,33 +406,33 @@ This example is small enough to list all possiblistic choices.
 </div>
 </div>
 
-<div id="outline-container-orgcd1f31e" class="outline-2">
-<h2 id="orgcd1f31e"><span class="section-number-2">6.</span> Distribution Semantics - (with probabilistic facts)</h2>
+<div id="outline-container-Distribution%20Semantics%20-%20%28with%20probabilistic%20facts%29" class="outline-2">
+<h2 id="Distribution%20Semantics%20-%20%28with%20probabilistic%20facts%29"><span class="section-number-2">6.</span> Distribution Semantics - (with probabilistic facts)</h2>
 <div class="outline-text-2" id="text-6">
 
-<div id="orga430915" class="figure">
+<div id="org51cbd8c" class="figure">
 <p><img src="./data/probabilistic_logic_programming/mpv-screenshotssEcAL.png" alt="mpv-screenshotssEcAL.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org1a2c607" class="outline-2">
-<h2 id="org1a2c607"><span class="section-number-2">7.</span> Alternative View - CP-Logic - Probabilistic Causal Laws</h2>
+<div id="outline-container-Alternative%20View%20-%20CP-Logic%20-%20Probabilistic%20Causal%20Laws" class="outline-2">
+<h2 id="Alternative%20View%20-%20CP-Logic%20-%20Probabilistic%20Causal%20Laws"><span class="section-number-2">7.</span> Alternative View - CP-Logic - Probabilistic Causal Laws</h2>
 <div class="outline-text-2" id="text-7">
 
-<div id="org152ecca" class="figure">
+<div id="orgf49a63a" class="figure">
 <p><img src="./data/probabilistic_logic_programming/mpv-screenshot7uIUPm.png" alt="mpv-screenshot7uIUPm.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgec3e806" class="outline-2">
-<h2 id="orgec3e806"><span class="section-number-2">8.</span> Both are same</h2>
+<div id="outline-container-Both%20are%20same" class="outline-2">
+<h2 id="Both%20are%20same"><span class="section-number-2">8.</span> Both are same</h2>
 </div>
-<div id="outline-container-org7fbcbd4" class="outline-2">
-<h2 id="org7fbcbd4"><span class="section-number-2">9.</span> Example 2 - Infinite Possible Worlds  - A markov chain</h2>
+<div id="outline-container-Example%202%20-%20Infinite%20Possible%20Worlds%20%20-%20A%20markov%20chain" class="outline-2">
+<h2 id="Example%202%20-%20Infinite%20Possible%20Worlds%20%20-%20A%20markov%20chain"><span class="section-number-2">9.</span> Example 2 - Infinite Possible Worlds  - A markov chain</h2>
 <div class="outline-text-2" id="text-9">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -444,16 +451,16 @@ There are infinitely many possible worlds but for probabilistic queries finitely
 </div>
 </div>
 
-<div id="outline-container-orgab832be" class="outline-2">
-<h2 id="orgab832be"><span class="section-number-2">10.</span> Implementation</h2>
+<div id="outline-container-Implementation" class="outline-2">
+<h2 id="Implementation"><span class="section-number-2">10.</span> Implementation</h2>
 <div class="outline-text-2" id="text-10">
 </div>
 
-<div id="outline-container-org0d86e3a" class="outline-3">
-<h3 id="org0d86e3a"><span class="section-number-3">10.1.</span> Rely in logical reasoning - not on sampling</h3>
+<div id="outline-container-Rely%20in%20logical%20reasoning%20-%20not%20on%20sampling" class="outline-3">
+<h3 id="Rely%20in%20logical%20reasoning%20-%20not%20on%20sampling"><span class="section-number-3">10.1.</span> Rely in logical reasoning - not on sampling</h3>
 <div class="outline-text-3" id="text-10-1">
 
-<div id="orgd4b2d6f" class="figure">
+<div id="orgb1c2376" class="figure">
 <p><img src="./data/probabilistic_logic_programming/mpv-screenshotOLbaQa.png" alt="mpv-screenshotOLbaQa.png" />
 </p>
 </div>
@@ -463,31 +470,31 @@ There are infinitely many possible worlds but for probabilistic queries finitely
 </p>
 </div>
 
-<div id="outline-container-org4724b15" class="outline-4">
-<h4 id="org4724b15"><span class="section-number-4">10.1.1.</span> Logical Reasoning : Proofs in Prolog  - by backward chaining</h4>
+<div id="outline-container-Logical%20Reasoning%20%3A%20Proofs%20in%20Prolog%20%20-%20by%20backward%20chaining" class="outline-4">
+<h4 id="Logical%20Reasoning%20%3A%20Proofs%20in%20Prolog%20%20-%20by%20backward%20chaining"><span class="section-number-4">10.1.1.</span> Logical Reasoning : Proofs in Prolog  - by backward chaining</h4>
 <div class="outline-text-4" id="text-10-1-1">
 </div>
 </div>
 
-<div id="outline-container-org436c420" class="outline-4">
-<h4 id="org436c420"><span class="section-number-4">10.1.2.</span> If there is a proof of a logic query then the product of the probabilities of the steps of the proofs is the result of probabilistic query</h4>
+<div id="outline-container-If%20there%20is%20a%20proof%20of%20a%20logic%20query%20then%20the%20product%20of%20the%20probabilities%20of%20the%20steps%20of%20the%20proofs%20is%20the%20result%20of%20probabilistic%20query" class="outline-4">
+<h4 id="If%20there%20is%20a%20proof%20of%20a%20logic%20query%20then%20the%20product%20of%20the%20probabilities%20of%20the%20steps%20of%20the%20proofs%20is%20the%20result%20of%20probabilistic%20query"><span class="section-number-4">10.1.2.</span> If there is a proof of a logic query then the product of the probabilities of the steps of the proofs is the result of probabilistic query</h4>
 </div>
-<div id="outline-container-org344ae27" class="outline-4">
-<h4 id="org344ae27"><span class="section-number-4">10.1.3.</span> For multiple proof don't just sum the probabilities of each proof - Disjoint-Sum-Problem</h4>
+<div id="outline-container-For%20multiple%20proof%20don%27t%20just%20sum%20the%20probabilities%20of%20each%20proof%20-%20Disjoint-Sum-Problem" class="outline-4">
+<h4 id="For%20multiple%20proof%20don%27t%20just%20sum%20the%20probabilities%20of%20each%20proof%20-%20Disjoint-Sum-Problem"><span class="section-number-4">10.1.3.</span> For multiple proof don't just sum the probabilities of each proof - Disjoint-Sum-Problem</h4>
 <div class="outline-text-4" id="text-10-1-3">
 </div>
 </div>
 </div>
-<div id="outline-container-org1fadea3" class="outline-3">
-<h3 id="org1fadea3"><span class="section-number-3">10.2.</span> Knowledge compilation - get rid of the common parts of the proof (solves Disjoint-Sum-Problem)</h3>
+<div id="outline-container-Knowledge%20compilation%20-%20get%20rid%20of%20the%20common%20parts%20of%20the%20proof%20%28solves%20Disjoint-Sum-Problem%29" class="outline-3">
+<h3 id="Knowledge%20compilation%20-%20get%20rid%20of%20the%20common%20parts%20of%20the%20proof%20%28solves%20Disjoint-Sum-Problem%29"><span class="section-number-3">10.2.</span> Knowledge compilation - get rid of the common parts of the proof (solves Disjoint-Sum-Problem)</h3>
 <div class="outline-text-3" id="text-10-2">
 </div>
 </div>
-<div id="outline-container-org0af52b0" class="outline-3">
-<h3 id="org0af52b0"><span class="section-number-3">10.3.</span> Weighted Model Counting - is also related to this PLP</h3>
+<div id="outline-container-Weighted%20Model%20Counting%20-%20is%20also%20related%20to%20this%20PLP" class="outline-3">
+<h3 id="Weighted%20Model%20Counting%20-%20is%20also%20related%20to%20this%20PLP"><span class="section-number-3">10.3.</span> Weighted Model Counting - is also related to this PLP</h3>
 <div class="outline-text-3" id="text-10-3">
 
-<div id="org64a3468" class="figure">
+<div id="org187a283" class="figure">
 <p><img src="./data/probabilistic_logic_programming/mpv-screenshotc7Ubah.png" alt="mpv-screenshotc7Ubah.png" />
 </p>
 </div>
@@ -503,28 +510,28 @@ So, WMC can be converted to PLP
 </div>
 </div>
 </div>
-<div id="outline-container-org5b21ccd" class="outline-2">
-<h2 id="org5b21ccd"><span class="section-number-2">11.</span> Future Endeavours</h2>
+<div id="outline-container-Future%20Endeavours" class="outline-2">
+<h2 id="Future%20Endeavours"><span class="section-number-2">11.</span> Future Endeavours</h2>
 <div class="outline-text-2" id="text-11">
 </div>
-<div id="outline-container-orgaa28514" class="outline-3">
-<h3 id="orgaa28514"><span class="section-number-3">11.1.</span> Approximate inference with bounds</h3>
+<div id="outline-container-Approximate%20inference%20with%20bounds" class="outline-3">
+<h3 id="Approximate%20inference%20with%20bounds"><span class="section-number-3">11.1.</span> Approximate inference with bounds</h3>
 <div class="outline-text-3" id="text-11-1">
 </div>
 </div>
-<div id="outline-container-orgd9475e8" class="outline-3">
-<h3 id="orgd9475e8"><span class="section-number-3">11.2.</span> Lifted Inference</h3>
+<div id="outline-container-Lifted%20Inference" class="outline-3">
+<h3 id="Lifted%20Inference"><span class="section-number-3">11.2.</span> Lifted Inference</h3>
 <div class="outline-text-3" id="text-11-2">
 </div>
 </div>
-<div id="outline-container-org0b28c10" class="outline-3">
-<h3 id="org0b28c10"><span class="section-number-3">11.3.</span> Parameter learning from partial interpretations</h3>
+<div id="outline-container-Parameter%20learning%20from%20partial%20interpretations" class="outline-3">
+<h3 id="Parameter%20learning%20from%20partial%20interpretations"><span class="section-number-3">11.3.</span> Parameter learning from partial interpretations</h3>
 </div>
-<div id="outline-container-orgfe918da" class="outline-3">
-<h3 id="orgfe918da"><span class="section-number-3">11.4.</span> Learning probabilistic rules</h3>
+<div id="outline-container-Learning%20probabilistic%20rules" class="outline-3">
+<h3 id="Learning%20probabilistic%20rules"><span class="section-number-3">11.4.</span> Learning probabilistic rules</h3>
 </div>
-<div id="outline-container-org42fe151" class="outline-3">
-<h3 id="org42fe151"><span class="section-number-3">11.5.</span> Sampling</h3>
+<div id="outline-container-Sampling" class="outline-3">
+<h3 id="Sampling"><span class="section-number-3">11.5.</span> Sampling</h3>
 <div class="outline-text-3" id="text-11-5">
 <p>
 Online tutorial and system you can play with <a href="http://dtai.cs.kuleuven.be/problog">http://dtai.cs.kuleuven.be/problog</a>
@@ -542,7 +549,7 @@ Online tutorial and system you can play with <a href="http://dtai.cs.kuleuven.be
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Probabilistic Logic Programming">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Probabilistic Logic Programming">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

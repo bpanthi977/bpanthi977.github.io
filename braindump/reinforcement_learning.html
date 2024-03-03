@@ -237,7 +237,7 @@
  |
  <a accesskey="H" href="../index.html"> HOME </a>
 </div><div id="preamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-11-13 Sun&gt;</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2022-11-13 Sun]</span></span></p>
 </div>
 <div id="content" class="content">
 <h1 class="title">Reinforcement Learning</h1>
@@ -245,68 +245,68 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf752df1">1. CS 285: Deep Reinforcement Learning</a></li>
-<li><a href="#org5e91d53">2. CS 234: Reinforcement Learning  - Emma Brunskill</a></li>
-<li><a href="#orgb9c390b">3. Books</a></li>
-<li><a href="#org1ffbeb3">4. Sutton &amp; Barto</a></li>
-<li><a href="#orga57987e">5. Papers</a>
+<li><a href="#CS%20285%3A%20Deep%20Reinforcement%20Learning">1. CS 285: Deep Reinforcement Learning</a></li>
+<li><a href="#CS%20234%3A%20Reinforcement%20Learning%20%20-%20Emma%20Brunskill">2. CS 234: Reinforcement Learning  - Emma Brunskill</a></li>
+<li><a href="#Books">3. Books</a></li>
+<li><a href="#Sutton%20%26%20Barto">4. Sutton &amp; Barto</a></li>
+<li><a href="#Papers">5. Papers</a>
 <ul>
-<li><a href="#orgf688470">5.1. Imperfect Information Game, Collaboration and Communication</a></li>
-<li><a href="#org924f8e4">5.2. Learning Decision Trees With RL</a></li>
-<li><a href="#orgee2ace1">5.3. Intention Conditioned Value Function</a></li>
+<li><a href="#Imperfect%20Information%20Game%2C%20Collaboration%20and%20Communication">5.1. Imperfect Information Game, Collaboration and Communication</a></li>
+<li><a href="#Learning%20Decision%20Trees%20With%20RL">5.2. Learning Decision Trees With RL</a></li>
+<li><a href="#Intention%20Conditioned%20Value%20Function">5.3. Intention Conditioned Value Function</a></li>
 </ul>
 </li>
-<li><a href="#org829aa9f">6. Websites</a></li>
-<li><a href="#orgaa8e0a1">7. Spinning Up by OpenAI</a>
+<li><a href="#Websites">6. Websites</a></li>
+<li><a href="#Spinning%20Up%20by%20OpenAI">7. Spinning Up by OpenAI</a>
 <ul>
-<li><a href="#org24f00c2">7.1. Mathematical Background</a></li>
-<li><a href="#org88ae817">7.2. General Knowledge of Deep Learning</a>
+<li><a href="#Mathematical%20Background">7.1. Mathematical Background</a></li>
+<li><a href="#General%20Knowledge%20of%20Deep%20Learning">7.2. General Knowledge of Deep Learning</a>
 <ul>
-<li><a href="#org5e9885a">7.2.1. Standard Architectures</a></li>
-<li><a href="#org959fdc8">7.2.2. Regularizers</a></li>
-<li><a href="#orgabfc633">7.2.3. Normalization</a></li>
-<li><a href="#orge949d2b">7.2.4. Optimizers</a></li>
-<li><a href="#orgcefda61">7.2.5. Reparameterization trick</a></li>
+<li><a href="#Standard%20Architectures">7.2.1. Standard Architectures</a></li>
+<li><a href="#Regularizers">7.2.2. Regularizers</a></li>
+<li><a href="#Normalization">7.2.3. Normalization</a></li>
+<li><a href="#Optimizers">7.2.4. Optimizers</a></li>
+<li><a href="#Reparameterization%20trick">7.2.5. Reparameterization trick</a></li>
 </ul>
 </li>
-<li><a href="#org1836957">7.3. Suggested Main Concepts</a></li>
-<li><a href="#org1002767">7.4. Write Your own Code (in the beginning)</a></li>
-<li><a href="#org47da506">7.5. Taxonomy of RL Algorithms</a></li>
+<li><a href="#Suggested%20Main%20Concepts">7.3. Suggested Main Concepts</a></li>
+<li><a href="#Write%20Your%20own%20Code%20%28in%20the%20beginning%29">7.4. Write Your own Code (in the beginning)</a></li>
+<li><a href="#Taxonomy%20of%20RL%20Algorithms">7.5. Taxonomy of RL Algorithms</a></li>
 </ul>
 </li>
-<li><a href="#org8536444">8. Debugging RL Algorithms</a></li>
-<li><a href="#org47cc416">9. Podcast</a></li>
-<li><a href="#orga748137">10. Concepts</a>
+<li><a href="#Debugging%20RL%20Algorithms">8. Debugging RL Algorithms</a></li>
+<li><a href="#Podcast">9. Podcast</a></li>
+<li><a href="#Concepts">10. Concepts</a>
 <ul>
-<li><a href="#org017e177">10.1. Averagers</a></li>
-<li><a href="#org9d1d093">10.2. True Gradient Descent</a></li>
-<li><a href="#orgea2a10c">10.3. DQN</a>
+<li><a href="#Averagers">10.1. Averagers</a></li>
+<li><a href="#True%20Gradient%20Descent">10.2. True Gradient Descent</a></li>
+<li><a href="#DQN">10.3. DQN</a>
 <ul>
-<li><a href="#org0b1b54b">10.3.1. Replay Buffer</a></li>
-<li><a href="#org8889567">10.3.2. Stable Target</a></li>
-<li><a href="#org7c3203d">10.3.3. Prioritized Replay Buffer</a></li>
-<li><a href="#orgfa2189b">10.3.4. Double DQN</a></li>
-<li><a href="#orgb8afa54">10.3.5. Duelling DQN</a></li>
-<li><a href="#org54d0133">10.3.6. Maximization Bias</a></li>
+<li><a href="#Replay%20Buffer">10.3.1. Replay Buffer</a></li>
+<li><a href="#Stable%20Target">10.3.2. Stable Target</a></li>
+<li><a href="#Prioritized%20Replay%20Buffer">10.3.3. Prioritized Replay Buffer</a></li>
+<li><a href="#Double%20DQN">10.3.4. Double DQN</a></li>
+<li><a href="#Duelling%20DQN">10.3.5. Duelling DQN</a></li>
+<li><a href="#Maximization%20Bias">10.3.6. Maximization Bias</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org5482e5d">11. People</a>
+<li><a href="#People">11. People</a>
 <ul>
-<li><a href="#orgdda3a4f">11.1. Dibya Gosh</a></li>
+<li><a href="#Dibya%20Gosh">11.1. Dibya Gosh</a></li>
 </ul>
 </li>
-<li><a href="#org36aec29">12. MARL</a></li>
+<li><a href="#MARL">12. MARL</a></li>
 </ul>
 </div>
 </div>
 <p>
-<a href="../../../org/tasks.html#org0e716da">TODO: Reinforcement Learning</a>
+<a href="../../../org/tasks.html#orgbdef2bd">TODO: Reinforcement Learning</a>
 </p>
 
-<div id="outline-container-orgf752df1" class="outline-2">
-<h2 id="orgf752df1"><span class="section-number-2">1.</span> CS 285: Deep Reinforcement Learning</h2>
+<div id="outline-container-CS%20285%3A%20Deep%20Reinforcement%20Learning" class="outline-2">
+<h2 id="CS%20285%3A%20Deep%20Reinforcement%20Learning"><span class="section-number-2">1.</span> CS 285: Deep Reinforcement Learning</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="https://rail.eecs.berkeley.edu/deeprlcourse/">https://rail.eecs.berkeley.edu/deeprlcourse/</a>
@@ -314,8 +314,8 @@
 </div>
 </div>
 
-<div id="outline-container-org5e91d53" class="outline-2">
-<h2 id="org5e91d53"><span class="section-number-2">2.</span> CS 234: Reinforcement Learning  - Emma Brunskill</h2>
+<div id="outline-container-CS%20234%3A%20Reinforcement%20Learning%20%20-%20Emma%20Brunskill" class="outline-2">
+<h2 id="CS%20234%3A%20Reinforcement%20Learning%20%20-%20Emma%20Brunskill"><span class="section-number-2">2.</span> CS 234: Reinforcement Learning  - Emma Brunskill</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u">https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u</a>
@@ -323,8 +323,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgb9c390b" class="outline-2">
-<h2 id="orgb9c390b"><span class="section-number-2">3.</span> Books</h2>
+<div id="outline-container-Books" class="outline-2">
+<h2 id="Books"><span class="section-number-2">3.</span> Books</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 From <a href="https://qr.ae/prnRfl">https://qr.ae/prnRfl</a>
@@ -406,8 +406,8 @@ There are also several good specialized monographs and surveys on the topic, som
 </ul>
 </div>
 </div>
-<div id="outline-container-org1ffbeb3" class="outline-2">
-<h2 id="org1ffbeb3"><span class="section-number-2">4.</span> Sutton &amp; Barto</h2>
+<div id="outline-container-Sutton%20%26%20Barto" class="outline-2">
+<h2 id="Sutton%20%26%20Barto"><span class="section-number-2">4.</span> Sutton &amp; Barto</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li><p>
@@ -436,20 +436,20 @@ As a Monte Carlo Method REINFORCE may be of high variance and thus produce slow 
 </div>
 </div>
 
-<div id="outline-container-orga57987e" class="outline-2">
-<h2 id="orga57987e"><span class="section-number-2">5.</span> Papers</h2>
+<div id="outline-container-Papers" class="outline-2">
+<h2 id="Papers"><span class="section-number-2">5.</span> Papers</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orgf688470" class="outline-3">
-<h3 id="orgf688470"><span class="section-number-3">5.1.</span> Imperfect Information Game, Collaboration and Communication</h3>
+<div id="outline-container-Imperfect%20Information%20Game%2C%20Collaboration%20and%20Communication" class="outline-3">
+<h3 id="Imperfect%20Information%20Game%2C%20Collaboration%20and%20Communication"><span class="section-number-3">5.1.</span> Imperfect Information Game, Collaboration and Communication</h3>
 <div class="outline-text-3" id="text-5-1">
 <ul class="org-ul">
 <li>Learning Multi-agent Implicit Communication Through Actions: A Case Study in Contract Bridge, a Collaborative <a href="imperfect_information_game.html#ID-21C0EDEC-B6E7-48FB-8D25-24EE3BBBE8D6">Imperfect-Information Game</a>. [<a href="papers/rl/Learning MultiAgent Implicit Communication Through Actions - Bridge - Imperfect Information Collaborative Game - 1810.04444v1.pdf">file</a>]</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org924f8e4" class="outline-3">
-<h3 id="org924f8e4"><span class="section-number-3">5.2.</span> Learning Decision Trees With RL</h3>
+<div id="outline-container-Learning%20Decision%20Trees%20With%20RL" class="outline-3">
+<h3 id="Learning%20Decision%20Trees%20With%20RL"><span class="section-number-3">5.2.</span> Learning Decision Trees With RL</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 <a href="papers/rl/Learning Decision Trees with RL - Xiong.pdf">papers/rl/Learning Decision Trees with RL - Xiong.pdf</a>
@@ -461,8 +461,8 @@ Because greedy strategies look on immediate infromation gain, where RL can be tr
 </p>
 </div>
 </div>
-<div id="outline-container-orgee2ace1" class="outline-3">
-<h3 id="orgee2ace1"><span class="section-number-3">5.3.</span> Intention Conditioned Value Function</h3>
+<div id="outline-container-Intention%20Conditioned%20Value%20Function" class="outline-3">
+<h3 id="Intention%20Conditioned%20Value%20Function"><span class="section-number-3">5.3.</span> Intention Conditioned Value Function</h3>
 <div class="outline-text-3" id="text-5-3">
 <ul class="org-ul">
 <li><a href="papers/RL from Passive Data via Latent Intentions - 2304.04782; Intention Conditioned Value Function (ICVF).pdf">papers/RL from Passive Data via Latent Intentions - 2304.04782; Intention Conditioned Value Function (ICVF).pdf</a></li>
@@ -473,23 +473,23 @@ Because greedy strategies look on immediate infromation gain, where RL can be tr
 </div>
 </div>
 </div>
-<div id="outline-container-org829aa9f" class="outline-2">
-<h2 id="org829aa9f"><span class="section-number-2">6.</span> Websites</h2>
+<div id="outline-container-Websites" class="outline-2">
+<h2 id="Websites"><span class="section-number-2">6.</span> Websites</h2>
 <div class="outline-text-2" id="text-6">
 <ul class="org-ul">
 <li>A (Long) Peek into Reinforcement Learning : <a href="https://lilianweng.github.io/posts/2018-02-19-rl-overview/">https://lilianweng.github.io/posts/2018-02-19-rl-overview/</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgaa8e0a1" class="outline-2">
-<h2 id="orgaa8e0a1"><span class="section-number-2">7.</span> Spinning Up by OpenAI</h2>
+<div id="outline-container-Spinning%20Up%20by%20OpenAI" class="outline-2">
+<h2 id="Spinning%20Up%20by%20OpenAI"><span class="section-number-2">7.</span> Spinning Up by OpenAI</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 <a href="https://spinningup.openai.com/en/latest/user/introduction.html">https://spinningup.openai.com/en/latest/user/introduction.html</a>
 </p>
 </div>
-<div id="outline-container-org24f00c2" class="outline-3">
-<h3 id="org24f00c2"><span class="section-number-3">7.1.</span> Mathematical Background</h3>
+<div id="outline-container-Mathematical%20Background" class="outline-3">
+<h3 id="Mathematical%20Background"><span class="section-number-3">7.1.</span> Mathematical Background</h3>
 <div class="outline-text-3" id="text-7-1">
 <ul class="org-ul">
 <li>Probability and Statistics
@@ -509,15 +509,15 @@ Because greedy strategies look on immediate infromation gain, where RL can be tr
 </ul>
 </div>
 </div>
-<div id="outline-container-org88ae817" class="outline-3">
-<h3 id="org88ae817"><span class="section-number-3">7.2.</span> General Knowledge of Deep Learning</h3>
+<div id="outline-container-General%20Knowledge%20of%20Deep%20Learning" class="outline-3">
+<h3 id="General%20Knowledge%20of%20Deep%20Learning"><span class="section-number-3">7.2.</span> General Knowledge of Deep Learning</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 [ Links to resources on all these are in the page <a href="https://spinningup.openai.com/en/latest/spinningup/spinningup.html">Spinning Up as a Deep RL Researcher</a> : (<a href="papers/RL/Spinning Up as a Deep RL Researcher — Spinning Up documentation.html">saved html</a>) ]
 </p>
 </div>
-<div id="outline-container-org5e9885a" class="outline-4">
-<h4 id="org5e9885a"><span class="section-number-4">7.2.1.</span> Standard Architectures</h4>
+<div id="outline-container-Standard%20Architectures" class="outline-4">
+<h4 id="Standard%20Architectures"><span class="section-number-4">7.2.1.</span> Standard Architectures</h4>
 <div class="outline-text-4" id="text-7-2-1">
 <ul class="org-ul">
 <li>MLP</li>
@@ -530,8 +530,8 @@ Because greedy strategies look on immediate infromation gain, where RL can be tr
 </ul>
 </div>
 </div>
-<div id="outline-container-org959fdc8" class="outline-4">
-<h4 id="org959fdc8"><span class="section-number-4">7.2.2.</span> Regularizers</h4>
+<div id="outline-container-Regularizers" class="outline-4">
+<h4 id="Regularizers"><span class="section-number-4">7.2.2.</span> Regularizers</h4>
 <div class="outline-text-4" id="text-7-2-2">
 <ul class="org-ul">
 <li>Weight decay</li>
@@ -539,8 +539,8 @@ Because greedy strategies look on immediate infromation gain, where RL can be tr
 </ul>
 </div>
 </div>
-<div id="outline-container-orgabfc633" class="outline-4">
-<h4 id="orgabfc633"><span class="section-number-4">7.2.3.</span> Normalization</h4>
+<div id="outline-container-Normalization" class="outline-4">
+<h4 id="Normalization"><span class="section-number-4">7.2.3.</span> Normalization</h4>
 <div class="outline-text-4" id="text-7-2-3">
 <ul class="org-ul">
 <li>batch norm</li>
@@ -549,8 +549,8 @@ Because greedy strategies look on immediate infromation gain, where RL can be tr
 </ul>
 </div>
 </div>
-<div id="outline-container-orge949d2b" class="outline-4">
-<h4 id="orge949d2b"><span class="section-number-4">7.2.4.</span> Optimizers</h4>
+<div id="outline-container-Optimizers" class="outline-4">
+<h4 id="Optimizers"><span class="section-number-4">7.2.4.</span> Optimizers</h4>
 <div class="outline-text-4" id="text-7-2-4">
 <ul class="org-ul">
 <li>SGD</li>
@@ -560,8 +560,8 @@ Because greedy strategies look on immediate infromation gain, where RL can be tr
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcefda61" class="outline-4">
-<h4 id="orgcefda61"><span class="section-number-4">7.2.5.</span> Reparameterization trick</h4>
+<div id="outline-container-Reparameterization%20trick" class="outline-4">
+<h4 id="Reparameterization%20trick"><span class="section-number-4">7.2.5.</span> Reparameterization trick</h4>
 <div class="outline-text-4" id="text-7-2-5">
 <p>
 <a href="https://arxiv.org/abs/1312.6114">https://arxiv.org/abs/1312.6114</a> : <a href="papers/ML Base/Auto-Encoding Variational Bayes - 1312.6114.pdf">papers/ML Base/Auto-Encoding Variational Bayes - 1312.6114.pdf</a>
@@ -569,8 +569,8 @@ Because greedy strategies look on immediate infromation gain, where RL can be tr
 </div>
 </div>
 </div>
-<div id="outline-container-org1836957" class="outline-3">
-<h3 id="org1836957"><span class="section-number-3">7.3.</span> Suggested Main Concepts</h3>
+<div id="outline-container-Suggested%20Main%20Concepts" class="outline-3">
+<h3 id="Suggested%20Main%20Concepts"><span class="section-number-3">7.3.</span> Suggested Main Concepts</h3>
 <div class="outline-text-3" id="text-7-3">
 <ul class="org-ul">
 <li>Montonic Improvement Theory : <a href="papers/rl/Optimizing Expectations Graphs - John Schulman.pdf">papers/rl/Optimizing Expectations Graphs - John Schulman.pdf</a></li>
@@ -578,8 +578,8 @@ Because greedy strategies look on immediate infromation gain, where RL can be tr
 </div>
 </div>
 
-<div id="outline-container-org1002767" class="outline-3">
-<h3 id="org1002767"><span class="section-number-3">7.4.</span> Write Your own Code (in the beginning)</h3>
+<div id="outline-container-Write%20Your%20own%20Code%20%28in%20the%20beginning%29" class="outline-3">
+<h3 id="Write%20Your%20own%20Code%20%28in%20the%20beginning%29"><span class="section-number-3">7.4.</span> Write Your own Code (in the beginning)</h3>
 <div class="outline-text-3" id="text-7-4">
 <ul class="org-ul">
 <li></li>
@@ -590,11 +590,11 @@ You should probably start with vanilla policy gradient (also called REINFORCE), 
 </ul>
 </div>
 </div>
-<div id="outline-container-org47da506" class="outline-3">
-<h3 id="org47da506"><span class="section-number-3">7.5.</span> Taxonomy of RL Algorithms</h3>
+<div id="outline-container-Taxonomy%20of%20RL%20Algorithms" class="outline-3">
+<h3 id="Taxonomy%20of%20RL%20Algorithms"><span class="section-number-3">7.5.</span> Taxonomy of RL Algorithms</h3>
 <div class="outline-text-3" id="text-7-5">
 
-<div id="org4798768" class="figure">
+<div id="orge84191b" class="figure">
 <p><img src="data/reinforcement_learning/a_taxonomy_of_rl_algorithms-20230727194644.png" alt="a_taxonomy_of_rl_algorithms-20230727194644.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>A Taxonomy of RL Algorithms</p>
@@ -604,8 +604,8 @@ You should probably start with vanilla policy gradient (also called REINFORCE), 
 </div>
 
 
-<div id="outline-container-org8536444" class="outline-2">
-<h2 id="org8536444"><span class="section-number-2">8.</span> Debugging RL Algorithms</h2>
+<div id="outline-container-Debugging%20RL%20Algorithms" class="outline-2">
+<h2 id="Debugging%20RL%20Algorithms"><span class="section-number-2">8.</span> Debugging RL Algorithms</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 <a href="https://andyljones.com/posts/rl-debugging.html">https://andyljones.com/posts/rl-debugging.html</a> talks about:
@@ -621,20 +621,20 @@ You should probably start with vanilla policy gradient (also called REINFORCE), 
 </div>
 
 
-<div id="outline-container-org47cc416" class="outline-2">
-<h2 id="org47cc416"><span class="section-number-2">9.</span> Podcast</h2>
+<div id="outline-container-Podcast" class="outline-2">
+<h2 id="Podcast"><span class="section-number-2">9.</span> Podcast</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 TalkRL: <a href="https://podcasts.apple.com/us/podcast/talkrl-the-reinforcement-learning-podcast/id1478198107">https://podcasts.apple.com/us/podcast/talkrl-the-reinforcement-learning-podcast/id1478198107</a>
 </p>
 </div>
 </div>
-<div id="outline-container-orga748137" class="outline-2">
-<h2 id="orga748137"><span class="section-number-2">10.</span> Concepts</h2>
+<div id="outline-container-Concepts" class="outline-2">
+<h2 id="Concepts"><span class="section-number-2">10.</span> Concepts</h2>
 <div class="outline-text-2" id="text-10">
 </div>
-<div id="outline-container-org017e177" class="outline-3">
-<h3 id="org017e177"><span class="section-number-3">10.1.</span> Averagers</h3>
+<div id="outline-container-Averagers" class="outline-3">
+<h3 id="Averagers"><span class="section-number-3">10.1.</span> Averagers</h3>
 <div class="outline-text-3" id="text-10-1">
 <p>
 <a href="https://youtu.be/gOV8-bC1_KU?t=608">https://youtu.be/gOV8-bC1_KU?t=608</a>
@@ -645,8 +645,8 @@ TalkRL: <a href="https://podcasts.apple.com/us/podcast/talkrl-the-reinforcement-
 </p>
 </div>
 </div>
-<div id="outline-container-org9d1d093" class="outline-3">
-<h3 id="org9d1d093"><span class="section-number-3">10.2.</span> True Gradient Descent</h3>
+<div id="outline-container-True%20Gradient%20Descent" class="outline-3">
+<h3 id="True%20Gradient%20Descent"><span class="section-number-3">10.2.</span> True Gradient Descent</h3>
 <div class="outline-text-3" id="text-10-2">
 <ul class="org-ul">
 <li>Is DQN True Gradient Descent? No. They are approximations to it.   <a href="https://youtu.be/gOV8-bC1_KU?t=3253">CS234 - Lecture 6 (t=3253)</a></li>
@@ -655,30 +655,30 @@ TalkRL: <a href="https://podcasts.apple.com/us/podcast/talkrl-the-reinforcement-
 </ul>
 </div>
 </div>
-<div id="outline-container-orgea2a10c" class="outline-3">
-<h3 id="orgea2a10c"><span class="section-number-3">10.3.</span> DQN</h3>
+<div id="outline-container-DQN" class="outline-3">
+<h3 id="DQN"><span class="section-number-3">10.3.</span> DQN</h3>
 <div class="outline-text-3" id="text-10-3">
 <ul class="org-ul">
 <li>Huber Loss on Bellman Error <a href="https://youtu.be/gOV8-bC1_KU?t=4756">https://youtu.be/gOV8-bC1_KU?t=4756</a></li>
 </ul>
 </div>
-<div id="outline-container-org0b1b54b" class="outline-4">
-<h4 id="org0b1b54b"><span class="section-number-4">10.3.1.</span> Replay Buffer</h4>
+<div id="outline-container-Replay%20Buffer" class="outline-4">
+<h4 id="Replay%20Buffer"><span class="section-number-4">10.3.1.</span> Replay Buffer</h4>
 </div>
-<div id="outline-container-org8889567" class="outline-4">
-<h4 id="org8889567"><span class="section-number-4">10.3.2.</span> Stable Target</h4>
+<div id="outline-container-Stable%20Target" class="outline-4">
+<h4 id="Stable%20Target"><span class="section-number-4">10.3.2.</span> Stable Target</h4>
 </div>
-<div id="outline-container-org7c3203d" class="outline-4">
-<h4 id="org7c3203d"><span class="section-number-4">10.3.3.</span> Prioritized Replay Buffer</h4>
+<div id="outline-container-Prioritized%20Replay%20Buffer" class="outline-4">
+<h4 id="Prioritized%20Replay%20Buffer"><span class="section-number-4">10.3.3.</span> Prioritized Replay Buffer</h4>
 </div>
-<div id="outline-container-orgfa2189b" class="outline-4">
-<h4 id="orgfa2189b"><span class="section-number-4">10.3.4.</span> Double DQN</h4>
+<div id="outline-container-Double%20DQN" class="outline-4">
+<h4 id="Double%20DQN"><span class="section-number-4">10.3.4.</span> Double DQN</h4>
 </div>
-<div id="outline-container-orgb8afa54" class="outline-4">
-<h4 id="orgb8afa54"><span class="section-number-4">10.3.5.</span> Duelling DQN</h4>
+<div id="outline-container-Duelling%20DQN" class="outline-4">
+<h4 id="Duelling%20DQN"><span class="section-number-4">10.3.5.</span> Duelling DQN</h4>
 </div>
-<div id="outline-container-org54d0133" class="outline-4">
-<h4 id="org54d0133"><span class="section-number-4">10.3.6.</span> Maximization Bias</h4>
+<div id="outline-container-Maximization%20Bias" class="outline-4">
+<h4 id="Maximization%20Bias"><span class="section-number-4">10.3.6.</span> Maximization Bias</h4>
 <div class="outline-text-4" id="text-10-3-6">
 <ul class="org-ul">
 <li>Double DQN</li>
@@ -691,12 +691,12 @@ prevent maximization bias
 </div>
 </div>
 </div>
-<div id="outline-container-org5482e5d" class="outline-2">
-<h2 id="org5482e5d"><span class="section-number-2">11.</span> People</h2>
+<div id="outline-container-People" class="outline-2">
+<h2 id="People"><span class="section-number-2">11.</span> People</h2>
 <div class="outline-text-2" id="text-11">
 </div>
-<div id="outline-container-orgdda3a4f" class="outline-3">
-<h3 id="orgdda3a4f"><span class="section-number-3">11.1.</span> Dibya Gosh</h3>
+<div id="outline-container-Dibya%20Gosh" class="outline-3">
+<h3 id="Dibya%20Gosh"><span class="section-number-3">11.1.</span> Dibya Gosh</h3>
 <div class="outline-text-3" id="text-11-1">
 <p>
 <a href="https://scholar.google.com/citations?user=znnl0kwAAAAJ">https://scholar.google.com/citations?user=znnl0kwAAAAJ</a>
@@ -705,8 +705,8 @@ and his blog article: <a href="https://dibyaghosh.com/blog/probability/highdimen
 </div>
 </div>
 </div>
-<div id="outline-container-org36aec29" class="outline-2">
-<h2 id="org36aec29"><span class="section-number-2">12.</span> MARL</h2>
+<div id="outline-container-MARL" class="outline-2">
+<h2 id="MARL"><span class="section-number-2">12.</span> MARL</h2>
 <div class="outline-text-2" id="text-12">
 <ul class="org-ul">
 <li><a href="multi_agent_reinforcement_learning.html#ID-48C31D08-B4C5-434C-A1AC-1C7A94306D1C">MARL</a></li>
@@ -722,14 +722,14 @@ and his blog article: <a href="https://dibyaghosh.com/blog/probability/highdimen
 <ul class="org-ul">
 <li><a href="rl_can_be_used_to_train_non_differentiable_models.html#ID-125D38D9-A3F2-47E0-A4A8-B8084C7EF72D">RL can be used to train Non-Differentiable Models</a></li>
 <li><a href="procgen_benchmark.html#ID-A62AC955-8AC8-4D6A-A899-5D9A8A042CEF">Procgen Benchmark</a></li>
-<li><a href="sergey_levine.html#ID-65DED394-F17D-4C6A-A86D-FE48A5EED74A">Sergey Levine</a></li>
 <li><a href="genetic_algorithm.html#ID-73B816D0-ABEF-40AF-BB38-E680F26CA7EB">Genetic Algorithm</a></li>
+<li><a href="sergey_levine.html#ID-65DED394-F17D-4C6A-A86D-FE48A5EED74A">Sergey Levine</a></li>
 </ul>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Reinforcement Learning">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Reinforcement Learning">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

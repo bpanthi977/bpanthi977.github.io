@@ -237,7 +237,7 @@
  |
  <a accesskey="H" href="../index.html"> HOME </a>
 </div><div id="preamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2020-08-30 Sun&gt;</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2020-08-30 Sun]</span></span></p>
 </div>
 <div id="content" class="content">
 <h1 class="title">Introduction to Maxima</h1>
@@ -245,76 +245,76 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgdd73eef">1. Abacus / History of Computers</a></li>
-<li><a href="#orgcacf41b">2. Modern Calculator</a></li>
-<li><a href="#org5f7089b">3. But maths is not all about numbers</a></li>
-<li><a href="#orgf5ee2a6">4. Computer <span class="underline">Algebra</span> System (CAS)</a></li>
-<li><a href="#orgfebb325">5. Maxima</a></li>
-<li><a href="#org4ab72fb">6. Example 1</a></li>
-<li><a href="#orge187d17">7. Variables and Expression</a></li>
-<li><a href="#org725da06">8. Solving Equation</a></li>
-<li><a href="#org4218a66">9. Plotting</a></li>
-<li><a href="#org9a9415f">10. However sometimes analytical solutions don't exist</a>
+<li><a href="#Abacus%20%2F%20History%20of%20Computers">1. Abacus / History of Computers</a></li>
+<li><a href="#Modern%20Calculator">2. Modern Calculator</a></li>
+<li><a href="#But%20maths%20is%20not%20all%20about%20numbers">3. But maths is not all about numbers</a></li>
+<li><a href="#Computer%20_Algebra_%20System%20%28CAS%29">4. Computer <span class="underline">Algebra</span> System (CAS)</a></li>
+<li><a href="#Maxima">5. Maxima</a></li>
+<li><a href="#Example%201">6. Example 1</a></li>
+<li><a href="#Variables%20and%20Expression">7. Variables and Expression</a></li>
+<li><a href="#Solving%20Equation">8. Solving Equation</a></li>
+<li><a href="#Plotting">9. Plotting</a></li>
+<li><a href="#However%20sometimes%20analytical%20solutions%20don%27t%20exist">10. However sometimes analytical solutions don't exist</a>
 <ul>
-<li><a href="#orgd0f19fc">10.1. Numerical solution</a></li>
+<li><a href="#Numerical%20solution">10.1. Numerical solution</a></li>
 </ul>
 </li>
-<li><a href="#orgb746d71">11. Simplification</a>
+<li><a href="#Simplification">11. Simplification</a>
 <ul>
-<li><a href="#org9368df5">11.1. Rational Simplification</a></li>
+<li><a href="#Rational%20Simplification">11.1. Rational Simplification</a></li>
 </ul>
 </li>
-<li><a href="#org0823f52">12. Trignometric Simplification</a></li>
-<li><a href="#orga9de791">13. Getting Help</a></li>
-<li><a href="#orgc397487">14. Constants</a></li>
-<li><a href="#orgcb8287b">15. Calculus</a>
+<li><a href="#Trignometric%20Simplification">12. Trignometric Simplification</a></li>
+<li><a href="#Getting%20Help">13. Getting Help</a></li>
+<li><a href="#Constants">14. Constants</a></li>
+<li><a href="#Calculus">15. Calculus</a>
 <ul>
-<li><a href="#orga634fc3">15.1. limit</a></li>
+<li><a href="#limit">15.1. limit</a></li>
 </ul>
 </li>
-<li><a href="#orgff45b28">16. Derivative and Integrals</a>
+<li><a href="#Derivative%20and%20Integrals">16. Derivative and Integrals</a>
 <ul>
-<li><a href="#org359c492">16.1. diff</a></li>
-<li><a href="#org9cf84f5">16.2. integrate</a></li>
+<li><a href="#diff">16.1. diff</a></li>
+<li><a href="#integrate">16.2. integrate</a></li>
 </ul>
 </li>
-<li><a href="#orgd880753">17. Differential Equation</a>
+<li><a href="#Differential%20Equation">17. Differential Equation</a>
 <ul>
-<li><a href="#org6bcfc94">17.1. ode2(y'' + 2y' + y = 0)</a></li>
+<li><a href="#ode2%28y%27%27%20%2B%202y%27%20%2B%20y%20%3D%200%29">17.1. ode2(y'' + 2y' + y = 0)</a></li>
 </ul>
 </li>
-<li><a href="#orge10fb63">18. Example: Projectile motion</a>
+<li><a href="#Example%3A%20Projectile%20motion">18. Example: Projectile motion</a>
 <ul>
-<li><a href="#org4d3983b">18.1. Numerical solution</a></li>
+<li><a href="#Example%3A%20Projectile%20motion--Numerical%20solution">18.1. Numerical solution</a></li>
 </ul>
 </li>
-<li><a href="#org17b7d97">19. Example 2</a></li>
-<li><a href="#orgc5fd0bb">20. Example 2 (Contd)</a></li>
-<li><a href="#org6c01f28">21. Sums and Products</a></li>
-<li><a href="#org92aef29">22. Example : Economics - Linear Gradient Series</a></li>
-<li><a href="#orgcc87268">23. Example : Economics - Geometric Gradient Series</a></li>
-<li><a href="#org0f1e21a">24. Other things</a></li>
-<li><a href="#org463d5f0">25. Packages</a>
+<li><a href="#Example%202">19. Example 2</a></li>
+<li><a href="#Example%202%20%28Contd%29">20. Example 2 (Contd)</a></li>
+<li><a href="#Sums%20and%20Products">21. Sums and Products</a></li>
+<li><a href="#Example%20%3A%20Economics%20-%20Linear%20Gradient%20Series">22. Example : Economics - Linear Gradient Series</a></li>
+<li><a href="#Example%20%3A%20Economics%20-%20Geometric%20Gradient%20Series">23. Example : Economics - Geometric Gradient Series</a></li>
+<li><a href="#Other%20things">24. Other things</a></li>
+<li><a href="#Packages">25. Packages</a>
 <ul>
-<li><a href="#orge2fe873">25.1. Simplex</a></li>
+<li><a href="#Simplex">25.1. Simplex</a></li>
 </ul>
 </li>
-<li><a href="#orgaab0a5d">26. Mathematica</a>
+<li><a href="#Mathematica">26. Mathematica</a>
 <ul>
-<li><a href="#org5b6ba4e">26.1. Try online at</a></li>
+<li><a href="#Try%20online%20at">26.1. Try online at</a></li>
 </ul>
 </li>
-<li><a href="#orga832363">27. Maple</a></li>
-<li><a href="#org5e1b43c">28. Maxima vs ?</a></li>
-<li><a href="#org48c9c84">29. Bifurcation Diagram / Orbit Diagram</a></li>
-<li><a href="#org3817ce6">30. I don't know what this is</a></li>
-<li><a href="#orgb4da1f2">31. Lists &amp; Matrices</a></li>
-<li><a href="#org8f7a072">32. Functions</a></li>
-<li><a href="#org1405c3c">33. Control</a>
+<li><a href="#Maple">27. Maple</a></li>
+<li><a href="#Maxima%20vs%20%3F">28. Maxima vs ?</a></li>
+<li><a href="#Bifurcation%20Diagram%20%2F%20%5B%5Belisp%3A%28browse-url-of-file%20%22%2Fusr%2Fshare%2Fmaxima%2F5.44.0%2Fdoc%2Fhtml%2Fmaxima_singlepage.html%23Item_003a-dynamics_002fdeffn_002forbits%22%29%5D%5BOrbit%20Diagram%5D%5D">29. Bifurcation Diagram / Orbit Diagram</a></li>
+<li><a href="#I%20don%27t%20know%20what%20this%20is">30. I don't know what this is</a></li>
+<li><a href="#Lists%20%26%20Matrices">31. Lists &amp; Matrices</a></li>
+<li><a href="#Functions">32. Functions</a></li>
+<li><a href="#Control">33. Control</a>
 <ul>
-<li><a href="#org2d5f379">33.1. IF THEN ELSE</a></li>
-<li><a href="#org3cd7a23">33.2. FOR Loop</a></li>
-<li><a href="#org7840964">33.3. Block</a></li>
+<li><a href="#IF%20THEN%20ELSE">33.1. IF THEN ELSE</a></li>
+<li><a href="#FOR%20Loop">33.2. FOR Loop</a></li>
+<li><a href="#Block">33.3. Block</a></li>
 </ul>
 </li>
 </ul>
@@ -324,8 +324,8 @@
 Presentation by: Bibek Panthi
 </p>
 
-<div id="outline-container-orgdd73eef" class="outline-2">
-<h2 id="orgdd73eef"><span class="section-number-2">1.</span> Abacus / History of Computers</h2>
+<div id="outline-container-Abacus%20%2F%20History%20of%20Computers" class="outline-2">
+<h2 id="Abacus%20%2F%20History%20of%20Computers"><span class="section-number-2">1.</span> Abacus / History of Computers</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Computers started with the need for caluclating/computing</li>
@@ -337,15 +337,15 @@ Presentation by: Bibek Panthi
 </ul>
 
 
-<div id="orgc95bc3d" class="figure">
+<div id="orge7a7380" class="figure">
 <p><img src="./data/maxima/abacus.jpg" alt="abacus.jpg" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Abacus</p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgcacf41b" class="outline-2">
-<h2 id="orgcacf41b"><span class="section-number-2">2.</span> Modern Calculator</h2>
+<div id="outline-container-Modern%20Calculator" class="outline-2">
+<h2 id="Modern%20Calculator"><span class="section-number-2">2.</span> Modern Calculator</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>division, square roots, and powers</li>
@@ -356,7 +356,7 @@ Presentation by: Bibek Panthi
 </ul>
 
 
-<div id="org1e657d8" class="figure">
+<div id="orgf13c469" class="figure">
 <p><img src="./data/maxima/20200907135227-calculator.png" alt="20200907135227-calculator.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>TI-84 Plus</p>
@@ -365,8 +365,8 @@ Presentation by: Bibek Panthi
 </div>
 
 
-<div id="outline-container-org5f7089b" class="outline-2">
-<h2 id="org5f7089b"><span class="section-number-2">3.</span> But maths is not all about numbers</h2>
+<div id="outline-container-But%20maths%20is%20not%20all%20about%20numbers" class="outline-2">
+<h2 id="But%20maths%20is%20not%20all%20about%20numbers"><span class="section-number-2">3.</span> But maths is not all about numbers</h2>
 <div class="outline-text-2" id="text-3">
 <dl class="org-dl">
 <dt>Arithmetics</dt><dd>Numbers</dd>
@@ -377,8 +377,8 @@ Presentation by: Bibek Panthi
 </div>
 
 
-<div id="outline-container-orgf5ee2a6" class="outline-2">
-<h2 id="orgf5ee2a6"><span class="section-number-2">4.</span> Computer <span class="underline">Algebra</span> System (CAS)</h2>
+<div id="outline-container-Computer%20_Algebra_%20System%20%28CAS%29" class="outline-2">
+<h2 id="Computer%20_Algebra_%20System%20%28CAS%29"><span class="section-number-2">4.</span> Computer <span class="underline">Algebra</span> System (CAS)</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 is any mathematical software which manipulates mathematical expressions in a way similar to humans. 
@@ -390,15 +390,15 @@ is any mathematical software which manipulates mathematical expressions in a way
 </div>
 </div>
 
-<div id="outline-container-orgfebb325" class="outline-2">
-<h2 id="orgfebb325"><span class="section-number-2">5.</span> Maxima</h2>
+<div id="outline-container-Maxima" class="outline-2">
+<h2 id="Maxima"><span class="section-number-2">5.</span> Maxima</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Maxima is a free and open source CAS. 
 </p>
 
 
-<div id="org2ea9d49" class="figure">
+<div id="org34e5860" class="figure">
 <p><img src="./data/maxima/20200907142106-maxima.png" alt="20200907142106-maxima.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>Maxima</p>
@@ -406,8 +406,8 @@ Maxima is a free and open source CAS.
 </div>
 </div>
 
-<div id="outline-container-org4ab72fb" class="outline-2">
-<h2 id="org4ab72fb"><span class="section-number-2">6.</span> Example 1</h2>
+<div id="outline-container-Example%201" class="outline-2">
+<h2 id="Example%201"><span class="section-number-2">6.</span> Example 1</h2>
 <div class="outline-text-2" id="text-6">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -459,8 +459,8 @@ Notice:
 </ul>
 </div>
 </div>
-<div id="outline-container-orge187d17" class="outline-2">
-<h2 id="orge187d17"><span class="section-number-2">7.</span> Variables and Expression</h2>
+<div id="outline-container-Variables%20and%20Expression" class="outline-2">
+<h2 id="Variables%20and%20Expression"><span class="section-number-2">7.</span> Variables and Expression</h2>
 <div class="outline-text-2" id="text-7">
 <ul class="org-ul">
 <li>Assigning values</li>
@@ -490,8 +490,8 @@ a<span class="org-keyword">+</span><span class="org-constant">1</span>;
 
 
 
-<div id="outline-container-org725da06" class="outline-2">
-<h2 id="org725da06"><span class="section-number-2">8.</span> Solving Equation</h2>
+<div id="outline-container-Solving%20Equation" class="outline-2">
+<h2 id="Solving%20Equation"><span class="section-number-2">8.</span> Solving Equation</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 In calculators we could solve:
@@ -551,8 +551,8 @@ Now we can handle:
 </div>
 </div>
 
-<div id="outline-container-org4218a66" class="outline-2">
-<h2 id="org4218a66"><span class="section-number-2">9.</span> Plotting</h2>
+<div id="outline-container-Plotting" class="outline-2">
+<h2 id="Plotting"><span class="section-number-2">9.</span> Plotting</h2>
 <div class="outline-text-2" id="text-9">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -563,12 +563,12 @@ Now we can handle:
 </div>
 
 
-<div id="outline-container-org9a9415f" class="outline-2">
-<h2 id="org9a9415f"><span class="section-number-2">10.</span> However sometimes analytical solutions don't exist</h2>
+<div id="outline-container-However%20sometimes%20analytical%20solutions%20don%27t%20exist" class="outline-2">
+<h2 id="However%20sometimes%20analytical%20solutions%20don%27t%20exist"><span class="section-number-2">10.</span> However sometimes analytical solutions don't exist</h2>
 <div class="outline-text-2" id="text-10">
 </div>
-<div id="outline-container-orgd0f19fc" class="outline-3">
-<h3 id="orgd0f19fc"><span class="section-number-3">10.1.</span> Numerical solution</h3>
+<div id="outline-container-Numerical%20solution" class="outline-3">
+<h3 id="Numerical%20solution"><span class="section-number-3">10.1.</span> Numerical solution</h3>
 <div class="outline-text-3" id="text-10-1">
 <ul class="org-ul">
 <li><code>find_roots</code></li>
@@ -595,12 +595,12 @@ Now we can handle:
 </div>
 
 
-<div id="outline-container-orgb746d71" class="outline-2">
-<h2 id="orgb746d71"><span class="section-number-2">11.</span> Simplification</h2>
+<div id="outline-container-Simplification" class="outline-2">
+<h2 id="Simplification"><span class="section-number-2">11.</span> Simplification</h2>
 <div class="outline-text-2" id="text-11">
 </div>
-<div id="outline-container-org9368df5" class="outline-3">
-<h3 id="org9368df5"><span class="section-number-3">11.1.</span> Rational Simplification</h3>
+<div id="outline-container-Rational%20Simplification" class="outline-3">
+<h3 id="Rational%20Simplification"><span class="section-number-3">11.1.</span> Rational Simplification</h3>
 <div class="outline-text-3" id="text-11-1">
 <p>
 ratsimp()
@@ -637,8 +637,8 @@ ratsimp (%)
 </div>
 
 
-<div id="outline-container-org0823f52" class="outline-2">
-<h2 id="org0823f52"><span class="section-number-2">12.</span> Trignometric Simplification</h2>
+<div id="outline-container-Trignometric%20Simplification" class="outline-2">
+<h2 id="Trignometric%20Simplification"><span class="section-number-2">12.</span> Trignometric Simplification</h2>
 <div class="outline-text-2" id="text-12">
 <p>
 trigsimp()
@@ -657,8 +657,8 @@ trigsimp()
 </div>
 
 
-<div id="outline-container-orga9de791" class="outline-2">
-<h2 id="orga9de791"><span class="section-number-2">13.</span> Getting Help</h2>
+<div id="outline-container-Getting%20Help" class="outline-2">
+<h2 id="Getting%20Help"><span class="section-number-2">13.</span> Getting Help</h2>
 <div class="outline-text-2" id="text-13">
 <ul class="org-ul">
 <li>example(factor)</li>
@@ -678,8 +678,8 @@ trigsimp()
 </div>
 </div>
 
-<div id="outline-container-orgc397487" class="outline-2">
-<h2 id="orgc397487"><span class="section-number-2">14.</span> Constants</h2>
+<div id="outline-container-Constants" class="outline-2">
+<h2 id="Constants"><span class="section-number-2">14.</span> Constants</h2>
 <div class="outline-text-2" id="text-14">
 <ul class="org-ul">
 <li>%pi</li>
@@ -700,12 +700,12 @@ trigsimp()
 </div>
 </div>
 
-<div id="outline-container-orgcb8287b" class="outline-2">
-<h2 id="orgcb8287b"><span class="section-number-2">15.</span> Calculus</h2>
+<div id="outline-container-Calculus" class="outline-2">
+<h2 id="Calculus"><span class="section-number-2">15.</span> Calculus</h2>
 <div class="outline-text-2" id="text-15">
 </div>
-<div id="outline-container-orga634fc3" class="outline-3">
-<h3 id="orga634fc3"><span class="section-number-3">15.1.</span> limit</h3>
+<div id="outline-container-limit" class="outline-3">
+<h3 id="limit"><span class="section-number-3">15.1.</span> limit</h3>
 <div class="outline-text-3" id="text-15-1">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -739,12 +739,12 @@ trigsimp()
 </div>
 
 
-<div id="outline-container-orgff45b28" class="outline-2">
-<h2 id="orgff45b28"><span class="section-number-2">16.</span> Derivative and Integrals</h2>
+<div id="outline-container-Derivative%20and%20Integrals" class="outline-2">
+<h2 id="Derivative%20and%20Integrals"><span class="section-number-2">16.</span> Derivative and Integrals</h2>
 <div class="outline-text-2" id="text-16">
 </div>
-<div id="outline-container-org359c492" class="outline-3">
-<h3 id="org359c492"><span class="section-number-3">16.1.</span> diff</h3>
+<div id="outline-container-diff" class="outline-3">
+<h3 id="diff"><span class="section-number-3">16.1.</span> diff</h3>
 <div class="outline-text-3" id="text-16-1">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -766,8 +766,8 @@ float(%)
 </div>
 </div>
 
-<div id="outline-container-org9cf84f5" class="outline-3">
-<h3 id="org9cf84f5"><span class="section-number-3">16.2.</span> integrate</h3>
+<div id="outline-container-integrate" class="outline-3">
+<h3 id="integrate"><span class="section-number-3">16.2.</span> integrate</h3>
 <div class="outline-text-3" id="text-16-2">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -783,12 +783,12 @@ float(%)
 </div>
 
 
-<div id="outline-container-orgd880753" class="outline-2">
-<h2 id="orgd880753"><span class="section-number-2">17.</span> Differential Equation</h2>
+<div id="outline-container-Differential%20Equation" class="outline-2">
+<h2 id="Differential%20Equation"><span class="section-number-2">17.</span> Differential Equation</h2>
 <div class="outline-text-2" id="text-17">
 </div>
-<div id="outline-container-org6bcfc94" class="outline-3">
-<h3 id="org6bcfc94"><span class="section-number-3">17.1.</span> ode2(y'' + 2y' + y = 0)</h3>
+<div id="outline-container-ode2%28y%27%27%20%2B%202y%27%20%2B%20y%20%3D%200%29" class="outline-3">
+<h3 id="ode2%28y%27%27%20%2B%202y%27%20%2B%20y%20%3D%200%29"><span class="section-number-3">17.1.</span> ode2(y'' + 2y' + y = 0)</h3>
 <div class="outline-text-3" id="text-17-1">
 <p>
 Ordinary Differential Equation 
@@ -798,8 +798,8 @@ y'' + 2y' + y =0
 </div>
 </div>
 
-<div id="outline-container-orge10fb63" class="outline-2">
-<h2 id="orge10fb63"><span class="section-number-2">18.</span> Example: Projectile motion</h2>
+<div id="outline-container-Example%3A%20Projectile%20motion" class="outline-2">
+<h2 id="Example%3A%20Projectile%20motion"><span class="section-number-2">18.</span> Example: Projectile motion</h2>
 <div class="outline-text-2" id="text-18">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -812,14 +812,14 @@ wxplot2d(<span class="org-builtin">part</span>(<span class="org-keyword">%</span
 </div></details>
 </div>
 
-<div id="outline-container-org4d3983b" class="outline-3">
-<h3 id="org4d3983b"><span class="section-number-3">18.1.</span> Numerical solution</h3>
+<div id="outline-container-Example%3A%20Projectile%20motion--Numerical%20solution" class="outline-3">
+<h3 id="Example%3A%20Projectile%20motion--Numerical%20solution"><span class="section-number-3">18.1.</span> Numerical solution</h3>
 </div>
 </div>
 
 
-<div id="outline-container-org17b7d97" class="outline-2">
-<h2 id="org17b7d97"><span class="section-number-2">19.</span> Example 2</h2>
+<div id="outline-container-Example%202" class="outline-2">
+<h2 id="Example%202"><span class="section-number-2">19.</span> Example 2</h2>
 <div class="outline-text-2" id="text-19">
 <p>
 Numerical Solutions 
@@ -830,7 +830,7 @@ Numerical Solutions
 </p>
 
 
-<div id="orgc93b0e3" class="figure">
+<div id="orge6361e1" class="figure">
 <p><img src="./data/maxima/20200907182701-pendulum_equation.png" alt="20200907182701-pendulum_equation.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>Pendulum Equation</p>
@@ -844,8 +844,8 @@ Numerical Solutions
 </div>
 </div>
 
-<div id="outline-container-orgc5fd0bb" class="outline-2">
-<h2 id="orgc5fd0bb"><span class="section-number-2">20.</span> Example 2 (Contd)</h2>
+<div id="outline-container-Example%202%20%28Contd%29" class="outline-2">
+<h2 id="Example%202%20%28Contd%29"><span class="section-number-2">20.</span> Example 2 (Contd)</h2>
 <div class="outline-text-2" id="text-20">
 <p>
 Convert second order ode to two first order ode:
@@ -856,7 +856,7 @@ with independent variables \(\theta\) and \(\omega\)
 
 
 
-<div id="org17d2dd7" class="figure">
+<div id="orgc1c543e" class="figure">
 <p><img src="./data/maxima/20200907184317-one_intital_condition.png" alt="20200907184317-one_intital_condition.png" />
 </p>
 <p><span class="figure-number">Figure 5: </span>one intital condition</p>
@@ -875,8 +875,8 @@ derivatives<span class="org-keyword">:</span> <span class="org-keyword">[</span>
 </div>
 </div>
 
-<div id="outline-container-org6c01f28" class="outline-2">
-<h2 id="org6c01f28"><span class="section-number-2">21.</span> Sums and Products</h2>
+<div id="outline-container-Sums%20and%20Products" class="outline-2">
+<h2 id="Sums%20and%20Products"><span class="section-number-2">21.</span> Sums and Products</h2>
 <div class="outline-text-2" id="text-21">
 <ul class="org-ul">
 <li>Arithmetic series</li>
@@ -900,11 +900,11 @@ Geometric series
 
 
 
-<div id="outline-container-org92aef29" class="outline-2">
-<h2 id="org92aef29"><span class="section-number-2">22.</span> Example : Economics - Linear Gradient Series</h2>
+<div id="outline-container-Example%20%3A%20Economics%20-%20Linear%20Gradient%20Series" class="outline-2">
+<h2 id="Example%20%3A%20Economics%20-%20Linear%20Gradient%20Series"><span class="section-number-2">22.</span> Example : Economics - Linear Gradient Series</h2>
 <div class="outline-text-2" id="text-22">
 
-<div id="orgc2ec365" class="figure">
+<div id="org3062c9c" class="figure">
 <p><img src="./data/maxima/20200904104609-linear_gradient_series.png" alt="20200904104609-linear_gradient_series.png" />
 </p>
 </div>
@@ -921,18 +921,18 @@ load("simplify<sub>sum</sub>")
 
 
 
-<div id="org770a78d" class="figure">
+<div id="orgfc4e8fb" class="figure">
 <p><img src="./data/maxima/20200907203012-linear_gradient_formula.png" alt="20200907203012-linear_gradient_formula.png" />
 </p>
 <p><span class="figure-number">Figure 6: </span>linear gradient formula</p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgcc87268" class="outline-2">
-<h2 id="orgcc87268"><span class="section-number-2">23.</span> Example : Economics - Geometric Gradient Series</h2>
+<div id="outline-container-Example%20%3A%20Economics%20-%20Geometric%20Gradient%20Series" class="outline-2">
+<h2 id="Example%20%3A%20Economics%20-%20Geometric%20Gradient%20Series"><span class="section-number-2">23.</span> Example : Economics - Geometric Gradient Series</h2>
 <div class="outline-text-2" id="text-23">
 
-<div id="org8b3026b" class="figure">
+<div id="orgf574695" class="figure">
 <p><img src="./data/maxima/20200907203159-geometric_gradient.png" alt="20200907203159-geometric_gradient.png" />
 </p>
 <p><span class="figure-number">Figure 7: </span>geometric gradient</p>
@@ -945,7 +945,7 @@ load("simplify<sub>sum</sub>")
 </div></details>
 
 
-<div id="org036cc29" class="figure">
+<div id="org3a9705a" class="figure">
 <p><img src="./data/maxima/20200907203419-solution.png" alt="20200907203419-solution.png" />
 </p>
 <p><span class="figure-number">Figure 8: </span>solution</p>
@@ -953,8 +953,8 @@ load("simplify<sub>sum</sub>")
 </div>
 </div>
 
-<div id="outline-container-org0f1e21a" class="outline-2">
-<h2 id="org0f1e21a"><span class="section-number-2">24.</span> Other things</h2>
+<div id="outline-container-Other%20things" class="outline-2">
+<h2 id="Other%20things"><span class="section-number-2">24.</span> Other things</h2>
 <div class="outline-text-2" id="text-24">
 <ul class="org-ul">
 <li>Taylor expansion</li>
@@ -965,8 +965,8 @@ load("simplify<sub>sum</sub>")
 </ul>
 </div>
 </div>
-<div id="outline-container-org463d5f0" class="outline-2">
-<h2 id="org463d5f0"><span class="section-number-2">25.</span> Packages</h2>
+<div id="outline-container-Packages" class="outline-2">
+<h2 id="Packages"><span class="section-number-2">25.</span> Packages</h2>
 <div class="outline-text-2" id="text-25">
 <ul class="org-ul">
 <li>Tools not loaded by default</li>
@@ -974,8 +974,8 @@ load("simplify<sub>sum</sub>")
 </ul>
 </div>
 
-<div id="outline-container-orge2fe873" class="outline-3">
-<h3 id="orge2fe873"><span class="section-number-3">25.1.</span> Simplex</h3>
+<div id="outline-container-Simplex" class="outline-3">
+<h3 id="Simplex"><span class="section-number-3">25.1.</span> Simplex</h3>
 <div class="outline-text-3" id="text-25-1">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -988,30 +988,30 @@ load("simplify<sub>sum</sub>")
 </div>
 
 
-<div id="outline-container-orgaab0a5d" class="outline-2">
-<h2 id="orgaab0a5d"><span class="section-number-2">26.</span> Mathematica</h2>
+<div id="outline-container-Mathematica" class="outline-2">
+<h2 id="Mathematica"><span class="section-number-2">26.</span> Mathematica</h2>
 <div class="outline-text-2" id="text-26">
 <p>
 The BOSS of this field.
 </p>
 
 
-<div id="org0567c0a" class="figure">
+<div id="org461c896" class="figure">
 <p><img src="./data/maxima/20200907141014-some_notable_softwares_mathematica_wolfram_alpha_maple.png" alt="20200907141014-some_notable_softwares_mathematica_wolfram_alpha_maple.png" />
 </p>
 <p><span class="figure-number">Figure 9: </span>Mathematica</p>
 </div>
 </div>
 
-<div id="outline-container-org5b6ba4e" class="outline-3">
-<h3 id="org5b6ba4e"><span class="section-number-3">26.1.</span> Try online at</h3>
+<div id="outline-container-Try%20online%20at" class="outline-3">
+<h3 id="Try%20online%20at"><span class="section-number-3">26.1.</span> Try online at</h3>
 <div class="outline-text-3" id="text-26-1">
 <p>
 <a href="https://www.wolframalpha.com/">https://www.wolframalpha.com/</a>
 </p>
 
 
-<div id="orgf048d42" class="figure">
+<div id="orgec54a3d" class="figure">
 <p><img src="./data/maxima/20200907141437-wolfram_alpha.png" alt="20200907141437-wolfram_alpha.png" />
 </p>
 <p><span class="figure-number">Figure 10: </span>Wolfram alpha</p>
@@ -1020,11 +1020,11 @@ The BOSS of this field.
 </div>
 </div>
 
-<div id="outline-container-orga832363" class="outline-2">
-<h2 id="orga832363"><span class="section-number-2">27.</span> Maple</h2>
+<div id="outline-container-Maple" class="outline-2">
+<h2 id="Maple"><span class="section-number-2">27.</span> Maple</h2>
 <div class="outline-text-2" id="text-27">
 
-<div id="org0400219" class="figure">
+<div id="orgb37dd5c" class="figure">
 <p><img src="./data/maxima/20200907141924-maple.png" alt="20200907141924-maple.png" />
 </p>
 <p><span class="figure-number">Figure 11: </span>Maple</p>
@@ -1038,8 +1038,8 @@ The BOSS of this field.
 </div>
 </div>
 
-<div id="outline-container-org5e1b43c" class="outline-2">
-<h2 id="org5e1b43c"><span class="section-number-2">28.</span> Maxima vs ?</h2>
+<div id="outline-container-Maxima%20vs%20%3F" class="outline-2">
+<h2 id="Maxima%20vs%20%3F"><span class="section-number-2">28.</span> Maxima vs ?</h2>
 <div class="outline-text-2" id="text-28">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1092,8 +1092,8 @@ Install from <a href="https://sourceforge.net/projects/maxima/files/">here</a>. 
 </div>
 </div>
 
-<div id="outline-container-org48c9c84" class="outline-2">
-<h2 id="org48c9c84"><span class="section-number-2">29.</span> Bifurcation Diagram / <a href="(browse-url-of-file "/usr/share/maxima/5.44.0/doc/html/maxima_singlepage.html#Item_003a-dynamics_002fdeffn_002forbits")">Orbit Diagram</a></h2>
+<div id="outline-container-Bifurcation%20Diagram%20%2F%20%5B%5Belisp%3A%28browse-url-of-file%20%22%2Fusr%2Fshare%2Fmaxima%2F5.44.0%2Fdoc%2Fhtml%2Fmaxima_singlepage.html%23Item_003a-dynamics_002fdeffn_002forbits%22%29%5D%5BOrbit%20Diagram%5D%5D" class="outline-2">
+<h2 id="Bifurcation%20Diagram%20%2F%20%5B%5Belisp%3A%28browse-url-of-file%20%22%2Fusr%2Fshare%2Fmaxima%2F5.44.0%2Fdoc%2Fhtml%2Fmaxima_singlepage.html%23Item_003a-dynamics_002fdeffn_002forbits%22%29%5D%5BOrbit%20Diagram%5D%5D"><span class="section-number-2">29.</span> Bifurcation Diagram / <a href="(browse-url-of-file "/usr/share/maxima/5.44.0/doc/html/maxima_singlepage.html#Item_003a-dynamics_002fdeffn_002forbits")">Orbit Diagram</a></h2>
 <div class="outline-text-2" id="text-29">
 <p>
 \(x_{n+1} = r x_n (1- x_n)\)
@@ -1107,8 +1107,8 @@ Install from <a href="https://sourceforge.net/projects/maxima/files/">here</a>. 
 </div>
 </div>
 
-<div id="outline-container-org3817ce6" class="outline-2">
-<h2 id="org3817ce6"><span class="section-number-2">30.</span> I don't know what this is</h2>
+<div id="outline-container-I%20don%27t%20know%20what%20this%20is" class="outline-2">
+<h2 id="I%20don%27t%20know%20what%20this%20is"><span class="section-number-2">30.</span> I don't know what this is</h2>
 <div class="outline-text-2" id="text-30">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -1126,14 +1126,14 @@ w<span class="org-keyword">:</span> <span class="org-keyword">[</span><span clas
 </div></details>
 
 
-<div id="org5e093b3" class="figure">
+<div id="org42f7192" class="figure">
 <p><img src="./data/maxima/leaf.png" alt="leaf.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb4da1f2" class="outline-2">
-<h2 id="orgb4da1f2"><span class="section-number-2">31.</span> Lists &amp; Matrices</h2>
+<div id="outline-container-Lists%20%26%20Matrices" class="outline-2">
+<h2 id="Lists%20%26%20Matrices"><span class="section-number-2">31.</span> Lists &amp; Matrices</h2>
 <div class="outline-text-2" id="text-31">
 <p>
 [ _ , _ , &#x2026;.]
@@ -1177,8 +1177,8 @@ M[1,2]
 </div>
 </div>
 
-<div id="outline-container-org8f7a072" class="outline-2">
-<h2 id="org8f7a072"><span class="section-number-2">32.</span> Functions</h2>
+<div id="outline-container-Functions" class="outline-2">
+<h2 id="Functions"><span class="section-number-2">32.</span> Functions</h2>
 <div class="outline-text-2" id="text-32">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -1189,12 +1189,12 @@ f(x<span class="org-keyword">+</span><span class="org-constant">1</span>);
 </div>
 </div>
 
-<div id="outline-container-org1405c3c" class="outline-2">
-<h2 id="org1405c3c"><span class="section-number-2">33.</span> Control</h2>
+<div id="outline-container-Control" class="outline-2">
+<h2 id="Control"><span class="section-number-2">33.</span> Control</h2>
 <div class="outline-text-2" id="text-33">
 </div>
-<div id="outline-container-org2d5f379" class="outline-3">
-<h3 id="org2d5f379"><span class="section-number-3">33.1.</span> IF THEN ELSE</h3>
+<div id="outline-container-IF%20THEN%20ELSE" class="outline-3">
+<h3 id="IF%20THEN%20ELSE"><span class="section-number-3">33.1.</span> IF THEN ELSE</h3>
 <div class="outline-text-3" id="text-33-1">
 <p>
 if then else for piecewise function 
@@ -1207,8 +1207,8 @@ f(x) := if 0&lt;x and x&lt;1 then x<sup>2</sup> else 12
 </div>
 
 
-<div id="outline-container-org3cd7a23" class="outline-3">
-<h3 id="org3cd7a23"><span class="section-number-3">33.2.</span> FOR Loop</h3>
+<div id="outline-container-FOR%20Loop" class="outline-3">
+<h3 id="FOR%20Loop"><span class="section-number-3">33.2.</span> FOR Loop</h3>
 <div class="outline-text-3" id="text-33-2">
 <p>
 m:0; 
@@ -1216,8 +1216,8 @@ for k:0 thru 100 step 0.5 do m:m+k
 </p>
 </div>
 </div>
-<div id="outline-container-org7840964" class="outline-3">
-<h3 id="org7840964"><span class="section-number-3">33.3.</span> Block</h3>
+<div id="outline-container-Block" class="outline-3">
+<h3 id="Block"><span class="section-number-3">33.3.</span> Block</h3>
 <div class="outline-text-3" id="text-33-3">
 <p>
 block(
@@ -1247,7 +1247,7 @@ m
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Introduction to Maxima">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Introduction to Maxima">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

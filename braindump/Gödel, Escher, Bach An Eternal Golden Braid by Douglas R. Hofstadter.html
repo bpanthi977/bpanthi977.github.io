@@ -193,7 +193,11 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-<script type="text/javascript" src="../js/counters.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div id="org-div-home-and-up">
@@ -206,44 +210,44 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9c2229e">1. Notes from Godel Escher Bach</a>
+<li><a href="#Notes%20from%20Godel%20Escher%20Bach">1. Notes from Godel Escher Bach</a>
 <ul>
-<li><a href="#org7456774">1.1. Loops (Godel)</a></li>
-<li><a href="#org2a4dbce">1.2. Epimenides Paradox</a></li>
-<li><a href="#org24a8eb3">1.3. Godel's Theorem</a>
+<li><a href="#Loops%20%28Godel%29">1.1. Loops (Godel)</a></li>
+<li><a href="#Epimenides%20Paradox">1.2. Epimenides Paradox</a></li>
+<li><a href="#Godel%27s%20Theorem">1.3. Godel's Theorem</a>
 <ul>
-<li><a href="#orgc3e1816">1.3.1. Provability is a weaker notion than truth</a></li>
+<li><a href="#Provability%20is%20a%20weaker%20notion%20than%20truth">1.3.1. Provability is a weaker notion than truth</a></li>
 </ul>
 </li>
-<li><a href="#org53a8613">1.4. Mathematics doesn't study the real world</a></li>
-<li><a href="#org720e97a">1.5. Grelling's Paradox</a></li>
-<li><a href="#orge8b5514">1.6. Metamathematics</a></li>
-<li><a href="#org3c2907b">1.7. MIU Modes</a></li>
-<li><a href="#org9b218d7">1.8. Decision Procedure</a></li>
-<li><a href="#org68eaf24">1.9. Isomorphisms Induce Meaning</a></li>
-<li><a href="#org79bebf3">1.10. Can all of reality be turned into a formal system?</a></li>
-<li><a href="#orgf6cc8c9">1.11. Formal System with no typographical decision procedure</a></li>
-<li><a href="#org1222f82">1.12. Contrapunctus contains Bach's name</a></li>
-<li><a href="#org6284085">1.13. Notes for page 137</a></li>
-<li><a href="#orgb654baa">1.14. Consistency depends on interpretation of statements</a></li>
-<li><a href="#org3b0dafd">1.15. Formal Systems can be Layered</a></li>
-<li><a href="#org4c39666">1.16. Is Mathematics the Same in Every Conceivable World?</a></li>
-<li><a href="#orgb5fc36b">1.17. Bifurcation in Number Theory</a></li>
-<li><a href="#org8a0926e">1.18. Consistency &amp; Completeness</a></li>
-<li><a href="#org4f2d328">1.19. Two Striking Recursive Graphs</a></li>
-<li><a href="#org96dc8a1">1.20. Hofstadter's Law: It always takes longer than you expect, even when you take into account Hofstadter’s Law.</a></li>
+<li><a href="#Mathematics%20doesn%27t%20study%20the%20real%20world">1.4. Mathematics doesn't study the real world</a></li>
+<li><a href="#Grelling%27s%20Paradox">1.5. Grelling's Paradox</a></li>
+<li><a href="#Metamathematics">1.6. Metamathematics</a></li>
+<li><a href="#MIU%20Modes">1.7. MIU Modes</a></li>
+<li><a href="#Decision%20Procedure">1.8. Decision Procedure</a></li>
+<li><a href="#Isomorphisms%20Induce%20Meaning">1.9. Isomorphisms Induce Meaning</a></li>
+<li><a href="#Can%20all%20of%20reality%20be%20turned%20into%20a%20formal%20system%3F">1.10. Can all of reality be turned into a formal system?</a></li>
+<li><a href="#Formal%20System%20with%20no%20typographical%20decision%20procedure">1.11. Formal System with no typographical decision procedure</a></li>
+<li><a href="#Contrapunctus%20contains%20Bach%27s%20name">1.12. Contrapunctus contains Bach's name</a></li>
+<li><a href="#Notes%20for%20page%20137">1.13. Notes for page 137</a></li>
+<li><a href="#Consistency%20depends%20on%20interpretation%20of%20statements">1.14. Consistency depends on interpretation of statements</a></li>
+<li><a href="#Formal%20Systems%20can%20be%20Layered">1.15. Formal Systems can be Layered</a></li>
+<li><a href="#Is%20Mathematics%20the%20Same%20in%20Every%20Conceivable%20World%3F">1.16. Is Mathematics the Same in Every Conceivable World?</a></li>
+<li><a href="#Bifurcation%20in%20Number%20Theory">1.17. Bifurcation in Number Theory</a></li>
+<li><a href="#Consistency%20%26%20Completeness">1.18. Consistency &amp; Completeness</a></li>
+<li><a href="#Two%20Striking%20Recursive%20Graphs">1.19. Two Striking Recursive Graphs</a></li>
+<li><a href="#Hofstadter%27s%20Law%3A%20It%20always%20takes%20longer%20than%20you%20expect%2C%20even%20when%20you%20take%20into%20account%20Hofstadter%E2%80%99s%20Law.">1.20. Hofstadter's Law: It always takes longer than you expect, even when you take into account Hofstadter’s Law.</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org9c2229e" class="outline-2">
-<h2 id="org9c2229e"><span class="section-number-2">1.</span> Notes from Godel Escher Bach</h2>
+<div id="outline-container-Notes%20from%20Godel%20Escher%20Bach" class="outline-2">
+<h2 id="Notes%20from%20Godel%20Escher%20Bach"><span class="section-number-2">1.</span> Notes from Godel Escher Bach</h2>
 <div class="outline-text-2" id="text-1">
 </div>
 
-<div id="outline-container-org7456774" class="outline-3">
-<h3 id="org7456774"><span class="section-number-3">1.1.</span> Loops (Godel)</h3>
+<div id="outline-container-Loops%20%28Godel%29" class="outline-3">
+<h3 id="Loops%20%28Godel%29"><span class="section-number-3">1.1.</span> Loops (Godel)</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Waterfall = 6 step loop</li>
@@ -260,8 +264,8 @@ Loops imply Inifinity
 </div>
 </div>
 
-<div id="outline-container-org2a4dbce" class="outline-3">
-<h3 id="org2a4dbce"><span class="section-number-3">1.2.</span> Epimenides Paradox</h3>
+<div id="outline-container-Epimenides%20Paradox" class="outline-3">
+<h3 id="Epimenides%20Paradox"><span class="section-number-3">1.2.</span> Epimenides Paradox</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 aka Liar's Paradox 
@@ -278,8 +282,8 @@ is a <a href="one_step_loop.html#ID-3AE6D0F7-9CC3-432C-8B60-1F10B82FE721">One St
 </div>
 
 
-<div id="outline-container-org24a8eb3" class="outline-3">
-<h3 id="org24a8eb3"><span class="section-number-3">1.3.</span> Godel's Theorem</h3>
+<div id="outline-container-Godel%27s%20Theorem" class="outline-3">
+<h3 id="Godel%27s%20Theorem"><span class="section-number-3">1.3.</span> Godel's Theorem</h3>
 <div class="outline-text-3" id="text-1-3">
 <blockquote>
 <p>
@@ -300,15 +304,15 @@ All consistent axiomatic formulation of number theory include undecidable prepos
 </div>
 
 
-<div id="outline-container-orgc3e1816" class="outline-4">
-<h4 id="orgc3e1816"><span class="section-number-4">1.3.1.</span> Provability is a weaker notion than truth</h4>
+<div id="outline-container-Provability%20is%20a%20weaker%20notion%20than%20truth" class="outline-4">
+<h4 id="Provability%20is%20a%20weaker%20notion%20than%20truth"><span class="section-number-4">1.3.1.</span> Provability is a weaker notion than truth</h4>
 <div class="outline-text-4" id="text-1-3-1">
 </div>
 </div>
 </div>
 
-<div id="outline-container-org53a8613" class="outline-3">
-<h3 id="org53a8613"><span class="section-number-3">1.4.</span> Mathematics doesn't study the real world</h3>
+<div id="outline-container-Mathematics%20doesn%27t%20study%20the%20real%20world" class="outline-3">
+<h3 id="Mathematics%20doesn%27t%20study%20the%20real%20world"><span class="section-number-3">1.4.</span> Mathematics doesn't study the real world</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 The discovery of non-Euclidean geometry deeply challenges the idea tat mathematics studies the real world. 
@@ -316,8 +320,8 @@ The discovery of non-Euclidean geometry deeply challenges the idea tat mathemati
 </div>
 </div>
 
-<div id="outline-container-org720e97a" class="outline-3">
-<h3 id="org720e97a"><span class="section-number-3">1.5.</span> Grelling's Paradox</h3>
+<div id="outline-container-Grelling%27s%20Paradox" class="outline-3">
+<h3 id="Grelling%27s%20Paradox"><span class="section-number-3">1.5.</span> Grelling's Paradox</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Two types of adjectives: 
@@ -334,14 +338,14 @@ This is a <a href="two_step_loop.html#ID-9C1968DF-51A6-4149-A555-F4A2BDBE0699">t
 </div>
 </div>
 
-<div id="outline-container-orge8b5514" class="outline-3">
-<h3 id="orge8b5514"><span class="section-number-3">1.6.</span> Metamathematics</h3>
+<div id="outline-container-Metamathematics" class="outline-3">
+<h3 id="Metamathematics"><span class="section-number-3">1.6.</span> Metamathematics</h3>
 <div class="outline-text-3" id="text-1-6">
 </div>
 </div>
 
-<div id="outline-container-org3c2907b" class="outline-3">
-<h3 id="org3c2907b"><span class="section-number-3">1.7.</span> MIU Modes</h3>
+<div id="outline-container-MIU%20Modes" class="outline-3">
+<h3 id="MIU%20Modes"><span class="section-number-3">1.7.</span> MIU Modes</h3>
 <div class="outline-text-3" id="text-1-7">
 <ul class="org-ul">
 <li>M : Mechanical Mode</li>
@@ -351,8 +355,8 @@ This is a <a href="two_step_loop.html#ID-9C1968DF-51A6-4149-A555-F4A2BDBE0699">t
 </div>
 </div>
 
-<div id="outline-container-org9b218d7" class="outline-3">
-<h3 id="org9b218d7"><span class="section-number-3">1.8.</span> Decision Procedure</h3>
+<div id="outline-container-Decision%20Procedure" class="outline-3">
+<h3 id="Decision%20Procedure"><span class="section-number-3">1.8.</span> Decision Procedure</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 A test of theroemhood that terminates in finite time. 
@@ -368,8 +372,8 @@ The axioms &amp; rules of inference 'implicity' characterize the theorems and ev
 </div>
 </div>
 
-<div id="outline-container-org68eaf24" class="outline-3">
-<h3 id="org68eaf24"><span class="section-number-3">1.9.</span> Isomorphisms Induce Meaning</h3>
+<div id="outline-container-Isomorphisms%20Induce%20Meaning" class="outline-3">
+<h3 id="Isomorphisms%20Induce%20Meaning"><span class="section-number-3">1.9.</span> Isomorphisms Induce Meaning</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Isomorphisms induce <a href="meaning.html#ID-6E022649-6222-4351-8616-1F4975BFCD0F">meaning</a>. 
@@ -412,14 +416,14 @@ pq-system is isomorphic to addition. e.g.
 </div>
 </div>
 
-<div id="outline-container-org79bebf3" class="outline-3">
-<h3 id="org79bebf3"><span class="section-number-3">1.10.</span> Can all of reality be turned into a formal system?</h3>
+<div id="outline-container-Can%20all%20of%20reality%20be%20turned%20into%20a%20formal%20system%3F" class="outline-3">
+<h3 id="Can%20all%20of%20reality%20be%20turned%20into%20a%20formal%20system%3F"><span class="section-number-3">1.10.</span> Can all of reality be turned into a formal system?</h3>
 <div class="outline-text-3" id="text-1-10">
 </div>
 </div>
 
-<div id="outline-container-orgf6cc8c9" class="outline-3">
-<h3 id="orgf6cc8c9"><span class="section-number-3">1.11.</span> Formal System with no typographical decision procedure</h3>
+<div id="outline-container-Formal%20System%20with%20no%20typographical%20decision%20procedure" class="outline-3">
+<h3 id="Formal%20System%20with%20no%20typographical%20decision%20procedure"><span class="section-number-3">1.11.</span> Formal System with no typographical decision procedure</h3>
 <div class="outline-text-3" id="text-1-11">
 <p>
 There exist formal systems whose negative space (set of non-theorems) is not the positive space (set of theorems) of any formal system.
@@ -448,8 +452,8 @@ All formal systmes are recursively enumerable i.e. theorems can be generated usi
 </div>
 </div>
 
-<div id="outline-container-org1222f82" class="outline-3">
-<h3 id="org1222f82"><span class="section-number-3">1.12.</span> Contrapunctus contains Bach's name</h3>
+<div id="outline-container-Contrapunctus%20contains%20Bach%27s%20name" class="outline-3">
+<h3 id="Contrapunctus%20contains%20Bach%27s%20name"><span class="section-number-3">1.12.</span> Contrapunctus contains Bach's name</h3>
 <div class="outline-text-3" id="text-1-12">
 <p>
 Contrapunctus is the last fugue bach wrote
@@ -467,8 +471,8 @@ B A C H
 </div>
 </div>
 
-<div id="outline-container-org6284085" class="outline-3">
-<h3 id="org6284085"><span class="section-number-3">1.13.</span> Notes for page 137</h3>
+<div id="outline-container-Notes%20for%20page%20137" class="outline-3">
+<h3 id="Notes%20for%20page%20137"><span class="section-number-3">1.13.</span> Notes for page 137</h3>
 <div class="outline-text-3" id="text-1-13">
 <p>
 Elliptic Geometry = Sphere 
@@ -480,8 +484,8 @@ Elliptic &amp; hyperbolic geometries are called geometries because they share th
 </div>
 </div>
 
-<div id="outline-container-orgb654baa" class="outline-3">
-<h3 id="orgb654baa"><span class="section-number-3">1.14.</span> Consistency depends on interpretation of statements</h3>
+<div id="outline-container-Consistency%20depends%20on%20interpretation%20of%20statements" class="outline-3">
+<h3 id="Consistency%20depends%20on%20interpretation%20of%20statements"><span class="section-number-3">1.14.</span> Consistency depends on interpretation of statements</h3>
 <div class="outline-text-3" id="text-1-14">
 <ul class="org-ul">
 <li>Internal Consistency : Consisten/compatible theorems within the formal system with same interpretation of some or all the symbols</li>
@@ -490,8 +494,8 @@ Elliptic &amp; hyperbolic geometries are called geometries because they share th
 </div>
 </div>
 
-<div id="outline-container-org3b0dafd" class="outline-3">
-<h3 id="org3b0dafd"><span class="section-number-3">1.15.</span> Formal Systems can be Layered</h3>
+<div id="outline-container-Formal%20Systems%20can%20be%20Layered" class="outline-3">
+<h3 id="Formal%20Systems%20can%20be%20Layered"><span class="section-number-3">1.15.</span> Formal Systems can be Layered</h3>
 <div class="outline-text-3" id="text-1-15">
 <p>
 One formal system can be extended from another then it inherits the passive meanings of the undefined terms. 
@@ -499,8 +503,8 @@ One formal system can be extended from another then it inherits the passive mean
 </div>
 </div>
 
-<div id="outline-container-org4c39666" class="outline-3">
-<h3 id="org4c39666"><span class="section-number-3">1.16.</span> Is Mathematics the Same in Every Conceivable World?</h3>
+<div id="outline-container-Is%20Mathematics%20the%20Same%20in%20Every%20Conceivable%20World%3F" class="outline-3">
+<h3 id="Is%20Mathematics%20the%20Same%20in%20Every%20Conceivable%20World%3F"><span class="section-number-3">1.16.</span> Is Mathematics the Same in Every Conceivable World?</h3>
 <div class="outline-text-3" id="text-1-16">
 <p>
 At least logic must be. But zen embraces contradictions and non-contradictions with equal eagerness. 
@@ -508,8 +512,8 @@ At least logic must be. But zen embraces contradictions and non-contradictions w
 </div>
 </div>
 
-<div id="outline-container-orgb5fc36b" class="outline-3">
-<h3 id="orgb5fc36b"><span class="section-number-3">1.17.</span> Bifurcation in Number Theory</h3>
+<div id="outline-container-Bifurcation%20in%20Number%20Theory" class="outline-3">
+<h3 id="Bifurcation%20in%20Number%20Theory"><span class="section-number-3">1.17.</span> Bifurcation in Number Theory</h3>
 <div class="outline-text-3" id="text-1-17">
 <p>
 The core of number theory, the counterpart to absolute geometry—is called Peano arithmetic
@@ -525,8 +529,8 @@ For practical purposes, all number theories are the same. In other words, if bri
 </div>
 </div>
 
-<div id="outline-container-org8a0926e" class="outline-3">
-<h3 id="org8a0926e"><span class="section-number-3">1.18.</span> Consistency &amp; Completeness</h3>
+<div id="outline-container-Consistency%20%26%20Completeness" class="outline-3">
+<h3 id="Consistency%20%26%20Completeness"><span class="section-number-3">1.18.</span> Consistency &amp; Completeness</h3>
 <div class="outline-text-3" id="text-1-18">
 <ul class="org-ul">
 <li>Consistency: when every theorem, upon interpretation, comes out true (in some imaginable world).</li>
@@ -536,13 +540,13 @@ For practical purposes, all number theories are the same. In other words, if bri
 </div>
 </div>
 
-<div id="outline-container-org4f2d328" class="outline-3">
-<h3 id="org4f2d328"><span class="section-number-3">1.19.</span> Two Striking Recursive Graphs</h3>
+<div id="outline-container-Two%20Striking%20Recursive%20Graphs" class="outline-3">
+<h3 id="Two%20Striking%20Recursive%20Graphs"><span class="section-number-3">1.19.</span> Two Striking Recursive Graphs</h3>
 <div class="outline-text-3" id="text-1-19">
 </div>
 </div>
-<div id="outline-container-org96dc8a1" class="outline-3">
-<h3 id="org96dc8a1"><span class="section-number-3">1.20.</span> Hofstadter's Law: It always takes longer than you expect, even when you take into account Hofstadter’s Law.</h3>
+<div id="outline-container-Hofstadter%27s%20Law%3A%20It%20always%20takes%20longer%20than%20you%20expect%2C%20even%20when%20you%20take%20into%20account%20Hofstadter%E2%80%99s%20Law." class="outline-3">
+<h3 id="Hofstadter%27s%20Law%3A%20It%20always%20takes%20longer%20than%20you%20expect%2C%20even%20when%20you%20take%20into%20account%20Hofstadter%E2%80%99s%20Law."><span class="section-number-3">1.20.</span> Hofstadter's Law: It always takes longer than you expect, even when you take into account Hofstadter’s Law.</h3>
 <div class="outline-text-3" id="text-1-20">
 <hr />
 <h3>Backlinks</h3>
@@ -556,7 +560,7 @@ For practical purposes, all number theories are the same. In other words, if bri
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Gödel, Escher, Bach An Eternal Golden Braid by Douglas R. Hofstadter">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Gödel, Escher, Bach An Eternal Golden Braid by Douglas R. Hofstadter">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

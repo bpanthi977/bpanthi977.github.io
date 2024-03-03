@@ -213,22 +213,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgec09ea4">1. McCLIM</a>
+<li><a href="#McCLIM">1. McCLIM</a>
 <ul>
-<li><a href="#org58d6f7d">1.1. Panes vs Sheets</a></li>
+<li><a href="#Panes%20vs%20Sheets">1.1. Panes vs Sheets</a></li>
 </ul>
 </li>
-<li><a href="#orgd983be8">2. Frames</a>
+<li><a href="#Frames">2. Frames</a>
 <ul>
-<li><a href="#org2832b50">2.1. Constructing Application Frames</a></li>
+<li><a href="#Constructing%20Application%20Frames">2.1. Constructing Application Frames</a></li>
 </ul>
 </li>
-<li><a href="#org7408faf">3. Panes</a></li>
+<li><a href="#Panes">3. Panes</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgec09ea4" class="outline-2">
-<h2 id="orgec09ea4"><span class="section-number-2">1.</span> McCLIM</h2>
+<div id="outline-container-McCLIM" class="outline-2">
+<h2 id="McCLIM"><span class="section-number-2">1.</span> McCLIM</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Sheet: Windows and windows like objects</li>
@@ -287,8 +287,8 @@ With <code>:pane</code>,  we define atop-level-pane that becomes the content of 
 #&lt;STANDARD-METHOD CLIM:HANDLE-REPAINT (HELLO-WORLD-PANE T) {1005B38D93}&gt;
 </pre>
 </div>
-<div id="outline-container-org58d6f7d" class="outline-3">
-<h3 id="org58d6f7d"><span class="section-number-3">1.1.</span> Panes vs Sheets</h3>
+<div id="outline-container-Panes%20vs%20Sheets" class="outline-3">
+<h3 id="Panes%20vs%20Sheets"><span class="section-number-3">1.1.</span> Panes vs Sheets</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Panes  and  sheets  as  defined  by  the  windowing substrate have in common that they are associatedwith  a  region  on  screen,  a  parent,  and  optional children.   They  differ  in  their  usage  of  the  inputand  output  capabilities.    A  sheet  is  passive  and intended to be used by other,  active components,while a pane already contains this active part.  Forthis  reason,  panes  are  implemented  as  subclassesofbasic-sheetaugmenting the class with an activepart.   For  instance,  a  button-pane  actively  drawsits own button representation on its allotted screenarea and a click on the correct button area triggersa callback for the button.  A composite pane laysout  its  child  elements  and  requests  them  to  drawthemselves onto specific screen regions
@@ -298,8 +298,8 @@ Panes  and  sheets  as  defined  by  the  windowing substrate have in common tha
 </div>
 
 
-<div id="outline-container-orgd983be8" class="outline-2">
-<h2 id="orgd983be8"><span class="section-number-2">2.</span> Frames</h2>
+<div id="outline-container-Frames" class="outline-2">
+<h2 id="Frames"><span class="section-number-2">2.</span> Frames</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 (<a href="https://kantz.com/clim-primer/application-frames.htm">Source</a>)
@@ -313,8 +313,8 @@ Panes  and  sheets  as  defined  by  the  windowing substrate have in common tha
 </ul>
 </div>
 
-<div id="outline-container-org2832b50" class="outline-3">
-<h3 id="org2832b50"><span class="section-number-3">2.1.</span> Constructing Application Frames</h3>
+<div id="outline-container-Constructing%20Application%20Frames" class="outline-3">
+<h3 id="Constructing%20Application%20Frames"><span class="section-number-3">2.1.</span> Constructing Application Frames</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Before you can construct an actual instance of an application frame, you have to name it and define it by calling
@@ -331,8 +331,8 @@ This is a macro that helps you define a direct sub-class of the class standard-a
 </div>
 </div>
 
-<div id="outline-container-org7408faf" class="outline-2">
-<h2 id="org7408faf"><span class="section-number-2">3.</span> Panes</h2>
+<div id="outline-container-Panes" class="outline-2">
+<h2 id="Panes"><span class="section-number-2">3.</span> Panes</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>interactive objects = widgets, windows</li>
@@ -342,13 +342,13 @@ This is a macro that helps you define a direct sub-class of the class standard-a
 <h3>Backlinks</h3>
 
 <ul class="org-ul">
-<li><a href="Common Lisp.html#ID-0967f764-5889-4b30-bcad-8bbd88b1cb5e">Common Lisp</a></li>
+<li><a href="../Documents/synced/Notes/Common Lisp.html#ID-0967f764-5889-4b30-bcad-8bbd88b1cb5e">Common Lisp</a></li>
 </ul>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: McCLIM">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: McCLIM">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

@@ -193,7 +193,11 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-<script type="text/javascript" src="../js/counters.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script>
   window.MathJax = {
     tex: {
@@ -232,42 +236,45 @@
  <a accesskey="h" href="./index.html"> UP </a>
  |
  <a accesskey="H" href="../index.html"> HOME </a>
-</div><div id="content" class="content">
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2020-11-14 Sat]</span></span></p>
+</div>
+<div id="content" class="content">
 <h1 class="title">The Evolution of AlphaGo to MuZero</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge918bc0">1. DeepMind’s MuZero algorithm reaches superhuman ability in 57 different Atari games. This article will explain the context leading up to it!</a>
+<li><a href="#DeepMind%E2%80%99s%20MuZero%20algorithm%20reaches%20superhuman%20ability%20in%2057%20different%20Atari%20games.%20This%20article%20will%20explain%20the%20context%20leading%20up%20to%20it%21">1. DeepMind’s MuZero algorithm reaches superhuman ability in 57 different Atari games. This article will explain the context leading up to it!</a>
 <ul>
-<li><a href="#org4efbf17">1.1. AlphaGo</a></li>
-<li><a href="#org2b5416a">1.2. AlphaGo Zero</a></li>
-<li><a href="#orgccd5fd5">1.3. AlphaZero</a></li>
-<li><a href="#org9175bc4">1.4. MuZero</a></li>
-<li><a href="#org28f1262">1.5. Paper Links</a></li>
+<li><a href="#AlphaGo">1.1. AlphaGo</a></li>
+<li><a href="#AlphaGo%20Zero">1.2. AlphaGo Zero</a></li>
+<li><a href="#AlphaZero">1.3. AlphaZero</a></li>
+<li><a href="#MuZero">1.4. MuZero</a></li>
+<li><a href="#Paper%20Links">1.5. Paper Links</a></li>
 </ul>
 </li>
-<li><a href="#org898422c">2. Youtube Video</a>
+<li><a href="#Youtube%20Video">2. Youtube Video</a>
 <ul>
-<li><a href="#org85c8672">2.1. Alpha Go</a>
+<li><a href="#Alpha%20Go">2.1. Alpha Go</a>
 <ul>
-<li><a href="#orgd0cd2ef">2.1.1. The self play policy network is not used during actual gameplay</a></li>
-<li><a href="#org026fcac">2.1.2. Q + u(P)</a></li>
-<li><a href="#org02f932d">2.1.3. After reaching to leaf node, the rollout Policy network is used to play the game to the end to find the reward</a></li>
+<li><a href="#The%20self%20play%20policy%20network%20is%20not%20used%20during%20actual%20gameplay">2.1.1. The self play policy network is not used during actual gameplay</a></li>
+<li><a href="#Q%20%2B%20u%28P%29">2.1.2. Q + u(P)</a></li>
+<li><a href="#After%20reaching%20to%20leaf%20node%2C%20the%20rollout%20Policy%20network%20is%20used%20to%20play%20the%20game%20to%20the%20end%20to%20find%20the%20reward">2.1.3. After reaching to leaf node, the rollout Policy network is used to play the game to the end to find the reward</a></li>
 </ul>
 </li>
-<li><a href="#orgbf1a44c">2.2. Input State Representation</a></li>
-<li><a href="#org9b4ed30">2.3. AlphaGo Zero</a>
+<li><a href="#Input%20State%20Representation">2.2. Input State Representation</a></li>
+<li><a href="#Youtube%20Video--AlphaGo%20Zero">2.3. AlphaGo Zero</a>
 <ul>
-<li><a href="#org04074d4">2.3.1. Combine the value and policy networks</a></li>
-<li><a href="#org1aa00b1">2.3.2. ResNet - dual resnet out performs dual - convolutional network</a></li>
-<li><a href="#org1f58877">2.3.3. More general input states</a></li>
+<li><a href="#Combine%20the%20value%20and%20policy%20networks">2.3.1. Combine the value and policy networks</a></li>
+<li><a href="#ResNet%20-%20dual%20resnet%20out%20performs%20dual%20-%20convolutional%20network">2.3.2. ResNet - dual resnet out performs dual - convolutional network</a></li>
+<li><a href="#More%20general%20input%20states">2.3.3. More general input states</a></li>
 </ul>
 </li>
-<li><a href="#org8ada3e7">2.4. AlphaZero - Not much changes to AlphaGo Zero</a></li>
-<li><a href="#orgc996244">2.5. MuZero</a>
+<li><a href="#AlphaZero%20-%20Not%20much%20changes%20to%20AlphaGo%20Zero">2.4. AlphaZero - Not much changes to AlphaGo Zero</a></li>
+<li><a href="#Youtube%20Video--MuZero">2.5. MuZero</a>
 <ul>
-<li><a href="#orgb384613">2.5.1. Loss function</a></li>
+<li><a href="#Loss%20function">2.5.1. Loss function</a></li>
 </ul>
 </li>
 </ul>
@@ -276,8 +283,8 @@
 </div>
 </div>
 
-<div id="outline-container-orge918bc0" class="outline-2">
-<h2 id="orge918bc0"><span class="section-number-2">1.</span> DeepMind’s MuZero algorithm reaches superhuman ability in 57 different Atari games. This article will explain the context leading up to it!</h2>
+<div id="outline-container-DeepMind%E2%80%99s%20MuZero%20algorithm%20reaches%20superhuman%20ability%20in%2057%20different%20Atari%20games.%20This%20article%20will%20explain%20the%20context%20leading%20up%20to%20it%21" class="outline-2">
+<h2 id="DeepMind%E2%80%99s%20MuZero%20algorithm%20reaches%20superhuman%20ability%20in%2057%20different%20Atari%20games.%20This%20article%20will%20explain%20the%20context%20leading%20up%20to%20it%21"><span class="section-number-2">1.</span> DeepMind’s MuZero algorithm reaches superhuman ability in 57 different Atari games. This article will explain the context leading up to it!</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Reinforcement Learning agents that can play Atari games are interesting because, in addition to a visually complex state space, agents playing Atari games don’t have a perfect simulator they can use for planning as in Chess, Shogi, and Go.
@@ -299,8 +306,8 @@ MCTS is a perfect complement to using Deep Neural Networks for policy mappings a
 MuZero comes with a way of salvaging MCTS planning by learning a dynamics model 
 </p>
 </div>
-<div id="outline-container-org4efbf17" class="outline-3">
-<h3 id="org4efbf17"><span class="section-number-3">1.1.</span> AlphaGo</h3>
+<div id="outline-container-AlphaGo" class="outline-3">
+<h3 id="AlphaGo"><span class="section-number-3">1.1.</span> AlphaGo</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 AlphaGo is the first paper in the series, showing that Deep Neural Networks could play the game of <a href="go.html#ID-0B2EB862-26D1-4ED2-BF63-52B19F9D4A65">Go</a> by predicting a policy (mapping from state to action) and value estimate (probability of winning from a given state). 
@@ -343,8 +350,8 @@ The idea of MCTS is to perform lookahead search to get a better estimate of whic
 </p>
 </div>
 </div>
-<div id="outline-container-org2b5416a" class="outline-3">
-<h3 id="org2b5416a"><span class="section-number-3">1.2.</span> AlphaGo Zero</h3>
+<div id="outline-container-AlphaGo%20Zero" class="outline-3">
+<h3 id="AlphaGo%20Zero"><span class="section-number-3">1.2.</span> AlphaGo Zero</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 AlphaGo Zero significantly improves the AlphaGo algorithm by making it more general and starting from “Zero” human knowledge.
@@ -359,8 +366,8 @@ The MCTS trains the policy network by using it as supervision to update the poli
 </p>
 </div>
 </div>
-<div id="outline-container-orgccd5fd5" class="outline-3">
-<h3 id="orgccd5fd5"><span class="section-number-3">1.3.</span> AlphaZero</h3>
+<div id="outline-container-AlphaZero" class="outline-3">
+<h3 id="AlphaZero"><span class="section-number-3">1.3.</span> AlphaZero</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 AlphaZero is the first step towards generalizing the AlphaGo family outside of Go, looking at changes needed to play Chess and Shogi as well. This requires formulating input state and output action representations for the residual neural network.
@@ -375,8 +382,8 @@ AlphaZero also makes some more subtle changes to the algorithm such as the way t
 </p>
 </div>
 </div>
-<div id="outline-container-org9175bc4" class="outline-3">
-<h3 id="org9175bc4"><span class="section-number-3">1.4.</span> MuZero</h3>
+<div id="outline-container-MuZero" class="outline-3">
+<h3 id="MuZero"><span class="section-number-3">1.4.</span> MuZero</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 This leads us to the current state-of-the-art in this series, MuZero. MuZero presents a very powerful generalization to the algorithm that allows it to learn without a perfect simulator. 
@@ -400,8 +407,8 @@ Let’s say you are taking the difference between the MCTS action distribution p
 </div>
 </div>
 
-<div id="outline-container-org28f1262" class="outline-3">
-<h3 id="org28f1262"><span class="section-number-3">1.5.</span> Paper Links</h3>
+<div id="outline-container-Paper%20Links" class="outline-3">
+<h3 id="Paper%20Links"><span class="section-number-3">1.5.</span> Paper Links</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 AlphaGo:<a href="https://www.nature.com/articles/nature16961">https://www.nature.com/articles/nature16961</a>
@@ -418,16 +425,16 @@ MuZero: <a href="https://arxiv.org/abs/1911.08265">https://arxiv.org/abs/1911.08
 </div>
 </div>
 
-<div id="outline-container-org898422c" class="outline-2">
-<h2 id="org898422c"><span class="section-number-2">2.</span> Youtube Video</h2>
+<div id="outline-container-Youtube%20Video" class="outline-2">
+<h2 id="Youtube%20Video"><span class="section-number-2">2.</span> Youtube Video</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-<a href="https://www.youtube.com/watch?v=A0HX8BgckFI">https://www.youtube.com/watch?v=A0HX8BgckFI</a>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/lJIrF4YjHfQ" title="//youtube.com/embed/A0HX8BgckFI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
 </p>
 </div>
 
-<div id="outline-container-org85c8672" class="outline-3">
-<h3 id="org85c8672"><span class="section-number-3">2.1.</span> Alpha Go</h3>
+<div id="outline-container-Alpha%20Go" class="outline-3">
+<h3 id="Alpha%20Go"><span class="section-number-3">2.1.</span> Alpha Go</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 4 networks:
@@ -439,14 +446,14 @@ MuZero: <a href="https://arxiv.org/abs/1911.08265">https://arxiv.org/abs/1911.08
 </ul>
 </div>
 
-<div id="outline-container-orgd0cd2ef" class="outline-4">
-<h4 id="orgd0cd2ef"><span class="section-number-4">2.1.1.</span> The self play policy network is not used during actual gameplay</h4>
+<div id="outline-container-The%20self%20play%20policy%20network%20is%20not%20used%20during%20actual%20gameplay" class="outline-4">
+<h4 id="The%20self%20play%20policy%20network%20is%20not%20used%20during%20actual%20gameplay"><span class="section-number-4">2.1.1.</span> The self play policy network is not used during actual gameplay</h4>
 <div class="outline-text-4" id="text-2-1-1">
 </div>
 </div>
 
-<div id="outline-container-org026fcac" class="outline-4">
-<h4 id="org026fcac"><span class="section-number-4">2.1.2.</span> Q + u(P)</h4>
+<div id="outline-container-Q%20%2B%20u%28P%29" class="outline-4">
+<h4 id="Q%20%2B%20u%28P%29"><span class="section-number-4">2.1.2.</span> Q + u(P)</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <p>
 Select the max value of Q + u(P) which is combination of : 
@@ -458,15 +465,15 @@ Select the max value of Q + u(P) which is combination of :
 </ul>
 
 
-<div id="org739e13b" class="figure">
+<div id="org9118b45" class="figure">
 <p><img src="./data/The Evolution of AlphaGo to MuZero/mpv-screenshotRSQeF3.png" alt="mpv-screenshotRSQeF3.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org02f932d" class="outline-4">
-<h4 id="org02f932d"><span class="section-number-4">2.1.3.</span> After reaching to leaf node, the rollout Policy network is used to play the game to the end to find the reward</h4>
+<div id="outline-container-After%20reaching%20to%20leaf%20node%2C%20the%20rollout%20Policy%20network%20is%20used%20to%20play%20the%20game%20to%20the%20end%20to%20find%20the%20reward" class="outline-4">
+<h4 id="After%20reaching%20to%20leaf%20node%2C%20the%20rollout%20Policy%20network%20is%20used%20to%20play%20the%20game%20to%20the%20end%20to%20find%20the%20reward"><span class="section-number-4">2.1.3.</span> After reaching to leaf node, the rollout Policy network is used to play the game to the end to find the reward</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <p>
 because rollout (P<sub>pi</sub>)  takes 2microseconds compared to the 3 milliseconds for the full network P<sub>sigma</sub>
@@ -475,8 +482,8 @@ because rollout (P<sub>pi</sub>)  takes 2microseconds compared to the 3 millisec
 </div>
 </div>
 
-<div id="outline-container-orgbf1a44c" class="outline-3">
-<h3 id="orgbf1a44c"><span class="section-number-3">2.2.</span> Input State Representation</h3>
+<div id="outline-container-Input%20State%20Representation" class="outline-3">
+<h3 id="Input%20State%20Representation"><span class="section-number-3">2.2.</span> Input State Representation</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Feature plane is the N by N grid that form the N by N by m tensor fed into the convolutional neural network 
@@ -484,19 +491,19 @@ Feature plane is the N by N grid that form the N by N by m tensor fed into the c
 </div>
 </div>
 
-<div id="outline-container-org9b4ed30" class="outline-3">
-<h3 id="org9b4ed30"><span class="section-number-3">2.3.</span> AlphaGo Zero</h3>
+<div id="outline-container-Youtube%20Video--AlphaGo%20Zero" class="outline-3">
+<h3 id="Youtube%20Video--AlphaGo%20Zero"><span class="section-number-3">2.3.</span> AlphaGo Zero</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Use the MCTS action distribution to train policy network 
 </p>
 </div>
 
-<div id="outline-container-org04074d4" class="outline-4">
-<h4 id="org04074d4"><span class="section-number-4">2.3.1.</span> Combine the value and policy networks</h4>
+<div id="outline-container-Combine%20the%20value%20and%20policy%20networks" class="outline-4">
+<h4 id="Combine%20the%20value%20and%20policy%20networks"><span class="section-number-4">2.3.1.</span> Combine the value and policy networks</h4>
 <div class="outline-text-4" id="text-2-3-1">
 
-<div id="orgaa438ee" class="figure">
+<div id="org44fd82b" class="figure">
 <p><img src="./data/The Evolution of AlphaGo to MuZero/mpv-screenshotkdxVmK.png" alt="mpv-screenshotkdxVmK.png" />
 </p>
 </div>
@@ -511,14 +518,14 @@ loss function:  (z is return)
 </div>
 </div>
 
-<div id="outline-container-org1aa00b1" class="outline-4">
-<h4 id="org1aa00b1"><span class="section-number-4">2.3.2.</span> ResNet - dual resnet out performs dual - convolutional network</h4>
+<div id="outline-container-ResNet%20-%20dual%20resnet%20out%20performs%20dual%20-%20convolutional%20network" class="outline-4">
+<h4 id="ResNet%20-%20dual%20resnet%20out%20performs%20dual%20-%20convolutional%20network"><span class="section-number-4">2.3.2.</span> ResNet - dual resnet out performs dual - convolutional network</h4>
 <div class="outline-text-4" id="text-2-3-2">
 </div>
 </div>
 
-<div id="outline-container-org1f58877" class="outline-4">
-<h4 id="org1f58877"><span class="section-number-4">2.3.3.</span> More general input states</h4>
+<div id="outline-container-More%20general%20input%20states" class="outline-4">
+<h4 id="More%20general%20input%20states"><span class="section-number-4">2.3.3.</span> More general input states</h4>
 <div class="outline-text-4" id="text-2-3-3">
 <p>
 Player 1 stones and Player 2 stones as 2 feature planes. and those feature planes are concatenated to last 8 positions. 
@@ -527,19 +534,19 @@ Player 1 stones and Player 2 stones as 2 feature planes. and those feature plane
 </div>
 </div>
 
-<div id="outline-container-org8ada3e7" class="outline-3">
-<h3 id="org8ada3e7"><span class="section-number-3">2.4.</span> AlphaZero - Not much changes to AlphaGo Zero</h3>
+<div id="outline-container-AlphaZero%20-%20Not%20much%20changes%20to%20AlphaGo%20Zero" class="outline-3">
+<h3 id="AlphaZero%20-%20Not%20much%20changes%20to%20AlphaGo%20Zero"><span class="section-number-3">2.4.</span> AlphaZero - Not much changes to AlphaGo Zero</h3>
 <div class="outline-text-3" id="text-2-4">
 
-<div id="org9a384a8" class="figure">
+<div id="org53db7f3" class="figure">
 <p><img src="./data/The Evolution of AlphaGo to MuZero/mpv-screenshotkjnWxw.png" alt="mpv-screenshotkjnWxw.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgc996244" class="outline-3">
-<h3 id="orgc996244"><span class="section-number-3">2.5.</span> MuZero</h3>
+<div id="outline-container-Youtube%20Video--MuZero" class="outline-3">
+<h3 id="Youtube%20Video--MuZero"><span class="section-number-3">2.5.</span> MuZero</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 In an dynamic environment where the state transition function can't be accurate. 
@@ -548,8 +555,8 @@ In other words, MuZero's transition function doesn't try predict the actual spac
 </p>
 </div>
 
-<div id="outline-container-orgb384613" class="outline-4">
-<h4 id="orgb384613"><span class="section-number-4">2.5.1.</span> Loss function</h4>
+<div id="outline-container-Loss%20function" class="outline-4">
+<h4 id="Loss%20function"><span class="section-number-4">2.5.1.</span> Loss function</h4>
 <div class="outline-text-4" id="text-2-5-1">
 <p>
 <img src="./data/The Evolution of AlphaGo to MuZero/mpv-screenshotWVCaQD.png" alt="mpv-screenshotWVCaQD.png" />
@@ -577,7 +584,7 @@ In the joint optimization loss function, the h function, g function and policy n
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: The Evolution of AlphaGo to MuZero">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: The Evolution of AlphaGo to MuZero">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

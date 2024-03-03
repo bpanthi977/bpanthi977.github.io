@@ -193,48 +193,55 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-<script type="text/javascript" src="../js/counters.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div id="org-div-home-and-up">
  <a accesskey="h" href="./index.html"> UP </a>
  |
  <a accesskey="H" href="../index.html"> HOME </a>
-</div><div id="content" class="content">
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2020-10-08 Thu]</span></span></p>
+</div>
+<div id="content" class="content">
 <h1 class="title">Quality Control</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0906129">1. IQ, EQ, MQ, SQ</a></li>
-<li><a href="#org609e512">2. Examples</a></li>
-<li><a href="#orgc022189">3. 3C Relation</a></li>
-<li><a href="#org2f296a1">4. Quality Assurance Plan</a>
+<li><a href="#IQ%2C%20EQ%2C%20MQ%2C%20SQ">1. IQ, EQ, MQ, SQ</a></li>
+<li><a href="#Examples">2. Examples</a></li>
+<li><a href="#3C%20Relation">3. 3C Relation</a></li>
+<li><a href="#Quality%20Assurance%20Plan">4. Quality Assurance Plan</a>
 <ul>
-<li><a href="#org8e115b3">4.1. Hierarchy of Failures</a></li>
-<li><a href="#orgbe3064d">4.2. Average vs Multiplicative</a></li>
+<li><a href="#Hierarchy%20of%20Failures">4.1. Hierarchy of Failures</a></li>
+<li><a href="#Average%20vs%20Multiplicative">4.2. Average vs Multiplicative</a></li>
 </ul>
 </li>
-<li><a href="#orga74b30d">5. Document special event</a></li>
-<li><a href="#org7daa2cd">6. Saftey Measures</a>
+<li><a href="#Document%20special%20event">5. Document special event</a></li>
+<li><a href="#Saftey%20Measures">6. Saftey Measures</a>
 <ul>
-<li><a href="#org86ee4d4">6.1. Boards, Ribbons</a></li>
-<li><a href="#org2341d0d">6.2. Check Cement quality</a>
+<li><a href="#Boards%2C%20Ribbons">6.1. Boards, Ribbons</a></li>
+<li><a href="#Check%20Cement%20quality">6.2. Check Cement quality</a>
 <ul>
-<li><a href="#orgfe5d8de">6.2.1. Manufacture date</a></li>
-<li><a href="#orga25f89c">6.2.2. Lab test</a></li>
-<li><a href="#org7e994ff">6.2.3. Thumb rules</a></li>
+<li><a href="#Manufacture%20date">6.2.1. Manufacture date</a></li>
+<li><a href="#Lab%20test">6.2.2. Lab test</a></li>
+<li><a href="#Thumb%20rules">6.2.3. Thumb rules</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgf35667e">7. Crushing &amp; Screening Plant (BBDMP)</a></li>
-<li><a href="#org1581eaa">8. Rebar Chararcteristics</a></li>
-<li><a href="#org1f0ebd5">9. Formworks</a></li>
-<li><a href="#orgffb44e2">10. Real data (USEFUL) 7 days to 28 days strength ratio</a></li>
-<li><a href="#org46b78a6">11. Curing</a></li>
-<li><a href="#org20039ca">12. Single cube failure is not failure</a></li>
-<li><a href="#org58f5131">13. Aggregate Crusher</a></li>
+<li><a href="#Crushing%20%26%20Screening%20Plant%20%28BBDMP%29">7. Crushing &amp; Screening Plant (BBDMP)</a></li>
+<li><a href="#Rebar%20Chararcteristics">8. Rebar Chararcteristics</a></li>
+<li><a href="#Formworks">9. Formworks</a></li>
+<li><a href="#Real%20data%20%28USEFUL%29%207%20days%20to%2028%20days%20strength%20ratio">10. Real data (USEFUL) 7 days to 28 days strength ratio</a></li>
+<li><a href="#Curing">11. Curing</a></li>
+<li><a href="#Single%20cube%20failure%20is%20not%20failure">12. Single cube failure is not failure</a></li>
+<li><a href="#Aggregate%20Crusher">13. Aggregate Crusher</a></li>
 </ul>
 </div>
 </div>
@@ -242,8 +249,8 @@
 Civil Engineering Technical Workshop - Quality Assurance and Quality Control of RCC Structure 
 </p>
 
-<div id="outline-container-org0906129" class="outline-2">
-<h2 id="org0906129"><span class="section-number-2">1.</span> IQ, EQ, MQ, SQ</h2>
+<div id="outline-container-IQ%2C%20EQ%2C%20MQ%2C%20SQ" class="outline-2">
+<h2 id="IQ%2C%20EQ%2C%20MQ%2C%20SQ"><span class="section-number-2">1.</span> IQ, EQ, MQ, SQ</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Intelligence</li>
@@ -254,8 +261,8 @@ Civil Engineering Technical Workshop - Quality Assurance and Quality Control of 
 </div>
 </div>
 
-<div id="outline-container-org609e512" class="outline-2">
-<h2 id="org609e512"><span class="section-number-2">2.</span> Examples</h2>
+<div id="outline-container-Examples" class="outline-2">
+<h2 id="Examples"><span class="section-number-2">2.</span> Examples</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 [v:13:13]
@@ -277,8 +284,8 @@ Knowledge =&gt; Skill =&gt; Attitude (Willingness &amp; Sharing)
 </div>
 </div>
 
-<div id="outline-container-orgc022189" class="outline-2">
-<h2 id="orgc022189"><span class="section-number-2">3.</span> 3C Relation</h2>
+<div id="outline-container-3C%20Relation" class="outline-2">
+<h2 id="3C%20Relation"><span class="section-number-2">3.</span> 3C Relation</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Client -&gt; Consultant -&gt; Contractor 
@@ -290,7 +297,7 @@ So everyone should feel at same level.
 
 
 
-<div id="orgc7ad4e8" class="figure">
+<div id="org762690b" class="figure">
 <p><img src="./data/quality_control/20201008083337-3c_relation.png" alt="20201008083337-3c_relation.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>3C Relation</p>
@@ -298,8 +305,8 @@ So everyone should feel at same level.
 </div>
 </div>
 
-<div id="outline-container-org2f296a1" class="outline-2">
-<h2 id="org2f296a1"><span class="section-number-2">4.</span> Quality Assurance Plan</h2>
+<div id="outline-container-Quality%20Assurance%20Plan" class="outline-2">
+<h2 id="Quality%20Assurance%20Plan"><span class="section-number-2">4.</span> Quality Assurance Plan</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 [v:28:31]
@@ -321,14 +328,14 @@ So everyone should feel at same level.
 [v:40:46]
 </p>
 
-<div id="orgef3aa6f" class="figure">
+<div id="org4cabb92" class="figure">
 <p><img src="./data/quality_control/20201008183617-.png" alt="20201008183617-.png" />
 </p>
 </div>
 </div>
 
-<div id="outline-container-org8e115b3" class="outline-3">
-<h3 id="org8e115b3"><span class="section-number-3">4.1.</span> Hierarchy of Failures</h3>
+<div id="outline-container-Hierarchy%20of%20Failures" class="outline-3">
+<h3 id="Hierarchy%20of%20Failures"><span class="section-number-3">4.1.</span> Hierarchy of Failures</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Supervision -&gt; Detailings -&gt; Design 
@@ -336,8 +343,8 @@ Supervision -&gt; Detailings -&gt; Design
 </div>
 </div>
 
-<div id="outline-container-orgbe3064d" class="outline-3">
-<h3 id="orgbe3064d"><span class="section-number-3">4.2.</span> Average vs Multiplicative</h3>
+<div id="outline-container-Average%20vs%20Multiplicative" class="outline-3">
+<h3 id="Average%20vs%20Multiplicative"><span class="section-number-3">4.2.</span> Average vs Multiplicative</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 If every step is 95% then average is 95% but quality is multiplication and in 7 steps it results to 70% quality. 
@@ -346,8 +353,8 @@ If every step is 95% then average is 95% but quality is multiplication and in 7 
 </div>
 </div>
 
-<div id="outline-container-orga74b30d" class="outline-2">
-<h2 id="orga74b30d"><span class="section-number-2">5.</span> Document special event</h2>
+<div id="outline-container-Document%20special%20event" class="outline-2">
+<h2 id="Document%20special%20event"><span class="section-number-2">5.</span> Document special event</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Document special event like
@@ -360,15 +367,15 @@ Document special event like
 </div>
 </div>
 
-<div id="outline-container-org7daa2cd" class="outline-2">
-<h2 id="org7daa2cd"><span class="section-number-2">6.</span> Saftey Measures</h2>
+<div id="outline-container-Saftey%20Measures" class="outline-2">
+<h2 id="Saftey%20Measures"><span class="section-number-2">6.</span> Saftey Measures</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Simple measures save from big troubles.
 </p>
 </div>
-<div id="outline-container-org86ee4d4" class="outline-3">
-<h3 id="org86ee4d4"><span class="section-number-3">6.1.</span> Boards, Ribbons</h3>
+<div id="outline-container-Boards%2C%20Ribbons" class="outline-3">
+<h3 id="Boards%2C%20Ribbons"><span class="section-number-3">6.1.</span> Boards, Ribbons</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 e.g. A simple `caution danger' ribbon saved the contractor from having to pay compensation when an woman jumped and died in the pit. 
@@ -376,45 +383,45 @@ e.g. A simple `caution danger' ribbon saved the contractor from having to pay co
 
 
 
-<div id="org7fe2351" class="figure">
+<div id="org8f48411" class="figure">
 <p><img src="./data/quality_control/20201008090446-.png" alt="20201008090446-.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org2341d0d" class="outline-3">
-<h3 id="org2341d0d"><span class="section-number-3">6.2.</span> Check Cement quality</h3>
+<div id="outline-container-Check%20Cement%20quality" class="outline-3">
+<h3 id="Check%20Cement%20quality"><span class="section-number-3">6.2.</span> Check Cement quality</h3>
 <div class="outline-text-3" id="text-6-2">
 </div>
-<div id="outline-container-orgfe5d8de" class="outline-4">
-<h4 id="orgfe5d8de"><span class="section-number-4">6.2.1.</span> Manufacture date</h4>
+<div id="outline-container-Manufacture%20date" class="outline-4">
+<h4 id="Manufacture%20date"><span class="section-number-4">6.2.1.</span> Manufacture date</h4>
 <div class="outline-text-4" id="text-6-2-1">
 <ul class="org-ul">
 <li>manufacture date must be printed on the cement bag</li>
 </ul>
 
 
-<div id="org30dc3b3" class="figure">
+<div id="org81a9f3b" class="figure">
 <p><img src="./data/quality_control/20201008183902-.png" alt="20201008183902-.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orga25f89c" class="outline-4">
-<h4 id="orga25f89c"><span class="section-number-4">6.2.2.</span> Lab test</h4>
+<div id="outline-container-Lab%20test" class="outline-4">
+<h4 id="Lab%20test"><span class="section-number-4">6.2.2.</span> Lab test</h4>
 <div class="outline-text-4" id="text-6-2-2">
 
-<div id="orgfecbf33" class="figure">
+<div id="org61fe590" class="figure">
 <p><img src="./data/quality_control/20201008183539-.png" alt="20201008183539-.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org7e994ff" class="outline-4">
-<h4 id="org7e994ff"><span class="section-number-4">6.2.3.</span> Thumb rules</h4>
+<div id="outline-container-Thumb%20rules" class="outline-4">
+<h4 id="Thumb%20rules"><span class="section-number-4">6.2.3.</span> Thumb rules</h4>
 <div class="outline-text-4" id="text-6-2-3">
 <p>
 when lab test can't be done in rural plaes 
@@ -424,7 +431,7 @@ when lab test can't be done in rural plaes
 <li>PPC - NS 385:2054 (33 Grade)</li>
 </ul>
 
-<div id="orgccfe768" class="figure">
+<div id="orgd501caf" class="figure">
 <p><img src="./data/quality_control/20201008091733-thumb_rules_when_in_remote_places.png" alt="20201008091733-thumb_rules_when_in_remote_places.png" />
 </p>
 <p><span class="figure-number">Figure 5: </span>Thumb rules when in remote places</p>
@@ -433,21 +440,21 @@ when lab test can't be done in rural plaes
 </div>
 </div>
 </div>
-<div id="outline-container-orgf35667e" class="outline-2">
-<h2 id="orgf35667e"><span class="section-number-2">7.</span> Crushing &amp; Screening Plant (BBDMP)</h2>
+<div id="outline-container-Crushing%20%26%20Screening%20Plant%20%28BBDMP%29" class="outline-2">
+<h2 id="Crushing%20%26%20Screening%20Plant%20%28BBDMP%29"><span class="section-number-2">7.</span> Crushing &amp; Screening Plant (BBDMP)</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 [v:1:04:34]
 </p>
 
 
-<div id="org1bdfed3" class="figure">
+<div id="org44a1ff6" class="figure">
 <p><img src="./data/quality_control/20201008183937-.png" alt="20201008183937-.png" />
 </p>
 </div>
 
 
-<div id="org491f5eb" class="figure">
+<div id="orgc4d4772" class="figure">
 <p><img src="./data/quality_control/20201008184130-better_aggregate_had_high_impact_on_strength_of_concrete.png" alt="20201008184130-better_aggregate_had_high_impact_on_strength_of_concrete.png" />
 </p>
 <p><span class="figure-number">Figure 6: </span>better aggregate had high impact on strength of concrete</p>
@@ -455,11 +462,11 @@ when lab test can't be done in rural plaes
 </div>
 </div>
 
-<div id="outline-container-org1581eaa" class="outline-2">
-<h2 id="org1581eaa"><span class="section-number-2">8.</span> Rebar Chararcteristics</h2>
+<div id="outline-container-Rebar%20Chararcteristics" class="outline-2">
+<h2 id="Rebar%20Chararcteristics"><span class="section-number-2">8.</span> Rebar Chararcteristics</h2>
 <div class="outline-text-2" id="text-8">
 
-<div id="org7046d0b" class="figure">
+<div id="org2b81256" class="figure">
 <p><img src="./data/quality_control/20201008092434-.png" alt="20201008092434-.png" />
 </p>
 </div>
@@ -470,15 +477,15 @@ TMT fail bhairanxa
 </div>
 </div>
 
-<div id="outline-container-org1f0ebd5" class="outline-2">
-<h2 id="org1f0ebd5"><span class="section-number-2">9.</span> Formworks</h2>
+<div id="outline-container-Formworks" class="outline-2">
+<h2 id="Formworks"><span class="section-number-2">9.</span> Formworks</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 [v:1:17:00]
 IS 14687:1999 
 </p>
 
-<div id="orgaa81e26" class="figure">
+<div id="org093e9af" class="figure">
 <p><img src="./data/quality_control/20201008093703-upper_failed_lower_good.png" alt="20201008093703-upper_failed_lower_good.png" />
 </p>
 <p><span class="figure-number">Figure 8: </span>Upper - Failed; Lower - Good</p>
@@ -486,7 +493,7 @@ IS 14687:1999
 
 
 
-<div id="orgbeda79f" class="figure">
+<div id="orgce9f61b" class="figure">
 <p><img src="./data/quality_control/20201008094006-.png" alt="20201008094006-.png" />
 </p>
 <p><span class="figure-number">Figure 9: </span>Rusted rebars must be cleaned</p>
@@ -494,7 +501,7 @@ IS 14687:1999
 
 
 
-<div id="org47ba15e" class="figure">
+<div id="org566a4f9" class="figure">
 <p><img src="./data/quality_control/20201008094352-cover_blocks.png" alt="20201008094352-cover_blocks.png" />
 </p>
 <p><span class="figure-number">Figure 10: </span>Cover block or stones</p>
@@ -502,15 +509,15 @@ IS 14687:1999
 
 
 
-<div id="org353a8e8" class="figure">
+<div id="orgb0eb844" class="figure">
 <p><img src="./data/quality_control/20201008094529-beam_size_must_be_less_than_column_size.png" alt="20201008094529-beam_size_must_be_less_than_column_size.png" />
 </p>
 <p><span class="figure-number">Figure 11: </span>Beam size must be less than column size</p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgffb44e2" class="outline-2">
-<h2 id="orgffb44e2"><span class="section-number-2">10.</span> Real data (USEFUL) 7 days to 28 days strength ratio</h2>
+<div id="outline-container-Real%20data%20%28USEFUL%29%207%20days%20to%2028%20days%20strength%20ratio" class="outline-2">
+<h2 id="Real%20data%20%28USEFUL%29%207%20days%20to%2028%20days%20strength%20ratio"><span class="section-number-2">10.</span> Real data (USEFUL) 7 days to 28 days strength ratio</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 For Concrete test 
@@ -525,15 +532,15 @@ for higher grade concrete requirement of M50 in 28 days requires 80% of 50 = 40 
 
 
 
-<div id="orgcb5d60b" class="figure">
+<div id="org18e7068" class="figure">
 <p><img src="./data/quality_control/20201008115658-.png" alt="20201008115658-.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org46b78a6" class="outline-2">
-<h2 id="org46b78a6"><span class="section-number-2">11.</span> Curing</h2>
+<div id="outline-container-Curing" class="outline-2">
+<h2 id="Curing"><span class="section-number-2">11.</span> Curing</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 <img src="./data/quality_control/20201008183254-importance_of_curing.png" alt="20201008183254-importance_of_curing.png" />
@@ -545,11 +552,11 @@ then after that its like air (no use)
 </p>
 </div>
 </div>
-<div id="outline-container-org20039ca" class="outline-2">
-<h2 id="org20039ca"><span class="section-number-2">12.</span> Single cube failure is not failure</h2>
+<div id="outline-container-Single%20cube%20failure%20is%20not%20failure" class="outline-2">
+<h2 id="Single%20cube%20failure%20is%20not%20failure"><span class="section-number-2">12.</span> Single cube failure is not failure</h2>
 <div class="outline-text-2" id="text-12">
 
-<div id="org623e3a2" class="figure">
+<div id="org5d80f29" class="figure">
 <p><img src="./data/quality_control/20201008183453-is_456.png" alt="20201008183453-is_456.png" />
 </p>
 <p><span class="figure-number">Figure 13: </span>IS 456</p>
@@ -557,8 +564,8 @@ then after that its like air (no use)
 </div>
 </div>
 
-<div id="outline-container-org58f5131" class="outline-2">
-<h2 id="org58f5131"><span class="section-number-2">13.</span> Aggregate Crusher</h2>
+<div id="outline-container-Aggregate%20Crusher" class="outline-2">
+<h2 id="Aggregate%20Crusher"><span class="section-number-2">13.</span> Aggregate Crusher</h2>
 <div class="outline-text-2" id="text-13">
 <ul class="org-ul">
 <li>jaw crusher</li>
@@ -569,11 +576,18 @@ then after that its like air (no use)
 <p>
 use garera flakiness index control garera concrete ko strength high garna sakinxa. 
 </p>
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="cess_programs.html#ID-fb593903-4ae2-4cdf-bd05-a5f53fe36718">CESS Programs</a></li>
+</ul>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Quality Control">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Quality Control">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

@@ -193,7 +193,11 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-<script type="text/javascript" src="../js/counters.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script>
   window.MathJax = {
     tex: {
@@ -232,63 +236,66 @@
  <a accesskey="h" href="./index.html"> UP </a>
  |
  <a accesskey="H" href="../index.html"> HOME </a>
-</div><div id="content" class="content">
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2020-11-17 Tue]</span></span> November 22, 2020</p>
+</div>
+<div id="content" class="content">
 <h1 class="title">Recurrent neural network</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org57cca7d">1. Introduction</a>
+<li><a href="#Introduction">1. Introduction</a>
 <ul>
-<li><a href="#org1a38fe0">1.1. RNN can Exhibit Temporal Dynamic Bheviour</a></li>
-<li><a href="#orgcad98cf">1.2. Finite Impulse and Infinite Impulse Networks</a></li>
-<li><a href="#org3e926b5">1.3. RNN can have Memory Stored States (LSTMs, GRUs)</a></li>
+<li><a href="#RNN%20can%20Exhibit%20Temporal%20Dynamic%20Bheviour">1.1. RNN can Exhibit Temporal Dynamic Bheviour</a></li>
+<li><a href="#Finite%20Impulse%20and%20Infinite%20Impulse%20Networks">1.2. Finite Impulse and Infinite Impulse Networks</a></li>
+<li><a href="#RNN%20can%20have%20Memory%20Stored%20States%20%28LSTMs%2C%20GRUs%29">1.3. RNN can have Memory Stored States (LSTMs, GRUs)</a></li>
 </ul>
 </li>
-<li><a href="#org47f2069">2. Training by Gradient descent</a>
+<li><a href="#Training%20by%20Gradient%20descent">2. Training by Gradient descent</a>
 <ul>
-<li><a href="#orgef11793">2.1. BackProagation Through Time (BPTT)</a></li>
-<li><a href="#org996bec6">2.2. Real-Time Recurrent Learning (RTRL)</a></li>
-<li><a href="#orga46e779">2.3. LSTM for Vanishing gradient problem</a></li>
-<li><a href="#org098d6d7">2.4. Causal Recursive BackPropagation (CRBP)</a></li>
+<li><a href="#BackProagation%20Through%20Time%20%28BPTT%29">2.1. BackProagation Through Time (BPTT)</a></li>
+<li><a href="#Real-Time%20Recurrent%20Learning%20%28RTRL%29">2.2. Real-Time Recurrent Learning (RTRL)</a></li>
+<li><a href="#LSTM%20for%20Vanishing%20gradient%20problem">2.3. LSTM for Vanishing gradient problem</a></li>
+<li><a href="#Causal%20Recursive%20BackPropagation%20%28CRBP%29">2.4. Causal Recursive BackPropagation (CRBP)</a></li>
 </ul>
 </li>
-<li><a href="#org53ac6b0">3. Training by Global optimization methods</a></li>
-<li><a href="#org5e08390">4. Limitations of RNN</a></li>
-<li><a href="#org1a0a34b">5. Architectures</a>
+<li><a href="#Training%20by%20Global%20optimization%20methods">3. Training by Global optimization methods</a></li>
+<li><a href="#Limitations%20of%20RNN">4. Limitations of RNN</a></li>
+<li><a href="#Architectures">5. Architectures</a>
 <ul>
-<li><a href="#org42f7a30">5.1. Fully recurrent</a></li>
-<li><a href="#orge204feb">5.2. Elman networks and Jordan networks</a></li>
-<li><a href="#org4da0033">5.3. Hopfield</a></li>
-<li><a href="#org7625f8e">5.4. Echo state</a></li>
-<li><a href="#org088105c">5.5. Independently RNN (IndRNN)</a></li>
-<li><a href="#org59d4dbf">5.6. Recursive</a></li>
-<li><a href="#org5ea200a">5.7. Neural history compressor</a></li>
-<li><a href="#org5ac3b77">5.8. Second order RNNs</a></li>
-<li><a href="#org742c7b6">5.9. Long short-term memory</a></li>
-<li><a href="#orgc3476c6">5.10. Gated recurrent unit</a></li>
-<li><a href="#org9130c26">5.11. Bi-directional</a></li>
-<li><a href="#org79b3f0c">5.12. Continuous-time</a></li>
-<li><a href="#org82ee0d3">5.13. Hierarchical</a></li>
-<li><a href="#orgaed4112">5.14. Recurrent multilayer perceptron network</a></li>
-<li><a href="#org5e6b5f2">5.15. Multiple timescales model</a></li>
-<li><a href="#org6576bec">5.16. Neural Turing machines</a></li>
-<li><a href="#org9743904">5.17. Differentiable neural computer</a></li>
-<li><a href="#org0b373a5">5.18. Neural network pushdown automata</a></li>
-<li><a href="#org2406750">5.19. Memristive Networks</a></li>
+<li><a href="#Fully%20recurrent">5.1. Fully recurrent</a></li>
+<li><a href="#Elman%20networks%20and%20Jordan%20networks">5.2. Elman networks and Jordan networks</a></li>
+<li><a href="#Hopfield">5.3. Hopfield</a></li>
+<li><a href="#Echo%20state">5.4. Echo state</a></li>
+<li><a href="#Independently%20RNN%20%28IndRNN%29">5.5. Independently RNN (IndRNN)</a></li>
+<li><a href="#Recursive">5.6. Recursive</a></li>
+<li><a href="#Neural%20history%20compressor">5.7. Neural history compressor</a></li>
+<li><a href="#Second%20order%20RNNs">5.8. Second order RNNs</a></li>
+<li><a href="#Long%20short-term%20memory">5.9. Long short-term memory</a></li>
+<li><a href="#Gated%20recurrent%20unit">5.10. Gated recurrent unit</a></li>
+<li><a href="#Bi-directional">5.11. Bi-directional</a></li>
+<li><a href="#Continuous-time">5.12. Continuous-time</a></li>
+<li><a href="#Hierarchical">5.13. Hierarchical</a></li>
+<li><a href="#Recurrent%20multilayer%20perceptron%20network">5.14. Recurrent multilayer perceptron network</a></li>
+<li><a href="#Multiple%20timescales%20model">5.15. Multiple timescales model</a></li>
+<li><a href="#Neural%20Turing%20machines">5.16. Neural Turing machines</a></li>
+<li><a href="#Differentiable%20neural%20computer">5.17. Differentiable neural computer</a></li>
+<li><a href="#Neural%20network%20pushdown%20automata">5.18. Neural network pushdown automata</a></li>
+<li><a href="#Memristive%20Networks">5.19. Memristive Networks</a></li>
 </ul>
 </li>
-<li><a href="#org6026103">6. Applications</a></li>
-<li><a href="#org3856a10">7. Page Dumps &amp; Lecture Notes</a>
+<li><a href="#Applications">6. Applications</a></li>
+<li><a href="#Page%20Dumps%20%26%20Lecture%20Notes">7. Page Dumps &amp; Lecture Notes</a>
 <ul>
-<li><a href="#org2b96c2d">7.1. Building a custom LSTM cell - Page Dump</a></li>
+<li><a href="#Building%20a%20custom%20LSTM%20cell%20-%20Page%20Dump">7.1. Building a custom LSTM cell - Page Dump</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org57cca7d" class="outline-2">
-<h2 id="org57cca7d"><span class="section-number-2">1.</span> Introduction</h2>
+<div id="outline-container-Introduction" class="outline-2">
+<h2 id="Introduction"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 RNNs are network specifically for <a href="sequential_modelling.html#ID-6936E548-C4F7-4B06-94E8-40BAC1B3060D">Sequence Modeling</a>.
@@ -304,7 +311,7 @@ Consider a single feed forward network, it takes input and gives output at a sin
 </ul>
 
 
-<div id="orgc8b38ee" class="figure">
+<div id="org3d654a1" class="figure">
 <p><img src="data/mit_6_s191_introduction_to_deep_learning/recurrent_nn-20230314092546.png" alt="recurrent_nn-20230314092546.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Recurrent NN</p>
@@ -317,7 +324,7 @@ Consider a single feed forward network, it takes input and gives output at a sin
 </ul>
 
 
-<div id="org852c0b2" class="figure">
+<div id="orgdb19a59" class="figure">
 <p><img src="data/mit_6_s191_introduction_to_deep_learning/rnn_computation_graph_across_time-20230314093011.png" alt="rnn_computation_graph_across_time-20230314093011.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>RNN: Computation Graph Across Time</p>
@@ -328,8 +335,8 @@ Consider a single feed forward network, it takes input and gives output at a sin
 </ul>
 </div>
 
-<div id="outline-container-org1a38fe0" class="outline-3">
-<h3 id="org1a38fe0"><span class="section-number-3">1.1.</span> RNN can Exhibit Temporal Dynamic Bheviour</h3>
+<div id="outline-container-RNN%20can%20Exhibit%20Temporal%20Dynamic%20Bheviour" class="outline-3">
+<h3 id="RNN%20can%20Exhibit%20Temporal%20Dynamic%20Bheviour"><span class="section-number-3">1.1.</span> RNN can Exhibit Temporal Dynamic Bheviour</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 A recurrent neural network (RNN) is a class of artificial neural networks where connections between nodes form a directed graph along a temporal sequence. This allows it to <b>exhibit temporal dynamic behavior</b>. Derived from feedforward neural networks, RNNs can use their internal state (memory) to process variable length sequences of inputs. This makes them applicable to tasks such as unsegmented, connected handwriting recognition or speech recognition.
@@ -337,8 +344,8 @@ A recurrent neural network (RNN) is a class of artificial neural networks where 
 </div>
 </div>
 
-<div id="outline-container-orgcad98cf" class="outline-3">
-<h3 id="orgcad98cf"><span class="section-number-3">1.2.</span> Finite Impulse and Infinite Impulse Networks</h3>
+<div id="outline-container-Finite%20Impulse%20and%20Infinite%20Impulse%20Networks" class="outline-3">
+<h3 id="Finite%20Impulse%20and%20Infinite%20Impulse%20Networks"><span class="section-number-3">1.2.</span> Finite Impulse and Infinite Impulse Networks</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 The term “recurrent neural network” is used indiscriminately to refer to <b>two broad classes of networks</b> with a similar general structure, where 
@@ -350,25 +357,25 @@ The term “recurrent neural network” is used indiscriminately to refer to <b>
 </div>
 </div>
 
-<div id="outline-container-org3e926b5" class="outline-3">
-<h3 id="org3e926b5"><span class="section-number-3">1.3.</span> RNN can have Memory Stored States (LSTMs, GRUs)</h3>
+<div id="outline-container-RNN%20can%20have%20Memory%20Stored%20States%20%28LSTMs%2C%20GRUs%29" class="outline-3">
+<h3 id="RNN%20can%20have%20Memory%20Stored%20States%20%28LSTMs%2C%20GRUs%29"><span class="section-number-3">1.3.</span> RNN can have Memory Stored States (LSTMs, GRUs)</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
-Both finite impulse and infinite impulse <a href="logseq/bak/Recurrent neural network/2023-07-29T06_09_21.082Z.android.html#ID-62e97a52-1804-4948-91e4-bede2027d3d5">recurrent networks</a> <b>can have additional stored states</b>, and the storage can be under direct control by the neural network. The storage can also be replaced by another network or graph, if that incorporates time delays or has feedback loops. Such controlled states are <b>referred to as gated state or gated <a href="memory.html#ID-57AE69EE-47EC-40DD-9F28-7BA72E491659">memory</a></b>, and are part of <span class="underline">long short-term memory networks</span> (<a href="lstm.html#ID-5A05C89D-F75E-4B28-B8A7-3A68D1B6C5CA">LSTMs</a>) and <a href="gru.html#ID-8375DDEA-C07A-403F-9FF2-9CA917DA513D">gated recurrent units</a>. This is also called <a href="feedback_neural_network.html#ID-6D6949E8-13CF-4A15-BFD0-BF17CF47C050">Feedback Neural Network</a> (FNN).
+Both finite impulse and infinite impulse <a href="Recurrent neural network.html#ID-62e97a52-1804-4948-91e4-bede2027d3d5">recurrent networks</a> <b>can have additional stored states</b>, and the storage can be under direct control by the neural network. The storage can also be replaced by another network or graph, if that incorporates time delays or has feedback loops. Such controlled states are <b>referred to as gated state or gated <a href="memory.html#ID-57AE69EE-47EC-40DD-9F28-7BA72E491659">memory</a></b>, and are part of <span class="underline">long short-term memory networks</span> (<a href="lstm.html#ID-5A05C89D-F75E-4B28-B8A7-3A68D1B6C5CA">LSTMs</a>) and <a href="gru.html#ID-8375DDEA-C07A-403F-9FF2-9CA917DA513D">gated recurrent units</a>. This is also called <a href="feedback_neural_network.html#ID-6D6949E8-13CF-4A15-BFD0-BF17CF47C050">Feedback Neural Network</a> (FNN).
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org47f2069" class="outline-2">
-<h2 id="org47f2069"><span class="section-number-2">2.</span> Training by Gradient descent</h2>
+<div id="outline-container-Training%20by%20Gradient%20descent" class="outline-2">
+<h2 id="Training%20by%20Gradient%20descent"><span class="section-number-2">2.</span> Training by Gradient descent</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Gradient descent is a first-order iterative optimization algorithm for finding the minimum of a function. 
 </p>
 </div>
-<div id="outline-container-orgef11793" class="outline-3">
-<h3 id="orgef11793"><span class="section-number-3">2.1.</span> BackProagation Through Time (BPTT)</h3>
+<div id="outline-container-BackProagation%20Through%20Time%20%28BPTT%29" class="outline-3">
+<h3 id="BackProagation%20Through%20Time%20%28BPTT%29"><span class="section-number-3">2.1.</span> BackProagation Through Time (BPTT)</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 The standard method is called “backpropagation through time” or BPTT, and is a generalization of back-propagation for feed-forward networks.
@@ -376,11 +383,11 @@ The standard method is called “backpropagation through time” or BPTT, and is
 </div>
 </div>
 
-<div id="outline-container-org996bec6" class="outline-3">
-<h3 id="org996bec6"><span class="section-number-3">2.2.</span> Real-Time Recurrent Learning (RTRL)</h3>
+<div id="outline-container-Real-Time%20Recurrent%20Learning%20%28RTRL%29" class="outline-3">
+<h3 id="Real-Time%20Recurrent%20Learning%20%28RTRL%29"><span class="section-number-3">2.2.</span> Real-Time Recurrent Learning (RTRL)</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
-A more computationally expensive online variant is called “Real-Time Recurrent Learning” or RTRL, which is an instance of automatic differentiation in the forward accumulation mode with stacked tangent vectors. Unlike <a href="#orgef11793">BPTT</a>, this algorithm is local in time but not local in space.
+A more computationally expensive online variant is called “Real-Time Recurrent Learning” or RTRL, which is an instance of automatic differentiation in the forward accumulation mode with stacked tangent vectors. Unlike <a href="#BackProagation%20Through%20Time%20%28BPTT%29">BPTT</a>, this algorithm is local in time but not local in space.
 </p>
 
 <p>
@@ -389,17 +396,17 @@ In this context, local in space means that a unit's weight vector can be updated
 </div>
 </div>
 
-<div id="outline-container-orga46e779" class="outline-3">
-<h3 id="orga46e779"><span class="section-number-3">2.3.</span> LSTM for Vanishing gradient problem</h3>
+<div id="outline-container-LSTM%20for%20Vanishing%20gradient%20problem" class="outline-3">
+<h3 id="LSTM%20for%20Vanishing%20gradient%20problem"><span class="section-number-3">2.3.</span> LSTM for Vanishing gradient problem</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
-A major problem with gradient descent for standard RNN architectures is that error gradients <a href="vanishing_gradient.html#ID-2880697B-C48B-40C2-B25D-CEA991940A8A">vanish</a> exponentially quickly with the size of the time lag between important events. <a href="lstm.html#ID-5A05C89D-F75E-4B28-B8A7-3A68D1B6C5CA">LSTM</a> combined with a <a href="#orgef11793">BPTT</a>/<a href="#org996bec6">RTRL</a> hybrid learning method attempts to overcome these problems.
+A major problem with gradient descent for standard RNN architectures is that error gradients <a href="vanishing_gradient.html#ID-2880697B-C48B-40C2-B25D-CEA991940A8A">vanish</a> exponentially quickly with the size of the time lag between important events. <a href="lstm.html#ID-5A05C89D-F75E-4B28-B8A7-3A68D1B6C5CA">LSTM</a> combined with a <a href="#BackProagation%20Through%20Time%20%28BPTT%29">BPTT</a>/<a href="#Real-Time%20Recurrent%20Learning%20%28RTRL%29">RTRL</a> hybrid learning method attempts to overcome these problems.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org098d6d7" class="outline-3">
-<h3 id="org098d6d7"><span class="section-number-3">2.4.</span> Causal Recursive BackPropagation (CRBP)</h3>
+<div id="outline-container-Causal%20Recursive%20BackPropagation%20%28CRBP%29" class="outline-3">
+<h3 id="Causal%20Recursive%20BackPropagation%20%28CRBP%29"><span class="section-number-3">2.4.</span> Causal Recursive BackPropagation (CRBP)</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 The on-line algorithm called causal recursive backpropagation (CRBP), implements and combines BPTT and RTRL paradigms for locally recurrent networks.[77] It works with the most general locally recurrent networks.
@@ -408,8 +415,8 @@ The on-line algorithm called causal recursive backpropagation (CRBP), implements
 </div>
 </div>
 
-<div id="outline-container-org53ac6b0" class="outline-2">
-<h2 id="org53ac6b0"><span class="section-number-2">3.</span> Training by Global optimization methods</h2>
+<div id="outline-container-Training%20by%20Global%20optimization%20methods" class="outline-2">
+<h2 id="Training%20by%20Global%20optimization%20methods"><span class="section-number-2">3.</span> Training by Global optimization methods</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Training the weights in a neural network can be modeled as a non-linear <a href="global_optimization.html#ID-DC027022-C759-4D4F-991C-6A5EC640A10B">global optimization problem</a>.
@@ -425,8 +432,8 @@ Other global (and/or evolutionary) optimization techniques may be used to seek a
 </div>
 </div>
 
-<div id="outline-container-org5e08390" class="outline-2">
-<h2 id="org5e08390"><span class="section-number-2">4.</span> Limitations of RNN</h2>
+<div id="outline-container-Limitations%20of%20RNN" class="outline-2">
+<h2 id="Limitations%20of%20RNN"><span class="section-number-2">4.</span> Limitations of RNN</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 RNN as presented above have the following limitations:
@@ -438,7 +445,7 @@ RNN as presented above have the following limitations:
 </ul>
 
 
-<div id="org7b134e9" class="figure">
+<div id="org1cc9622" class="figure">
 <p><img src="data/mit_6_s191_introduction_to_deep_learning/desired_capabilities_of_rnn-20230316100804.png" alt="desired_capabilities_of_rnn-20230316100804.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>Desired Capabilities of RNN @ 0:41:48</p>
@@ -472,12 +479,12 @@ In contrast to those limitations, what we want is:
 </div>
 </div>
 
-<div id="outline-container-org1a0a34b" class="outline-2">
-<h2 id="org1a0a34b"><span class="section-number-2">5.</span> Architectures</h2>
+<div id="outline-container-Architectures" class="outline-2">
+<h2 id="Architectures"><span class="section-number-2">5.</span> Architectures</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org42f7a30" class="outline-3">
-<h3 id="org42f7a30"><span class="section-number-3">5.1.</span> Fully recurrent</h3>
+<div id="outline-container-Fully%20recurrent" class="outline-3">
+<h3 id="Fully%20recurrent"><span class="section-number-3">5.1.</span> Fully recurrent</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Basic RNNs are a network of neuron-like nodes organized into successive layers. Each node in a given layer is connected with a directed (one-way) connection to every other node in the next successive layer.[ citation needed ] Each node (neuron) has a time-varying real-valued activation. Each connection (synapse) has a modifiable real-valued weight.
@@ -498,11 +505,11 @@ Each sequence produces an error as the sum of the deviations of all target signa
 </div>
 </div>
 
-<div id="outline-container-orge204feb" class="outline-3">
-<h3 id="orge204feb"><span class="section-number-3">5.2.</span> Elman networks and Jordan networks</h3>
+<div id="outline-container-Elman%20networks%20and%20Jordan%20networks" class="outline-3">
+<h3 id="Elman%20networks%20and%20Jordan%20networks"><span class="section-number-3">5.2.</span> Elman networks and Jordan networks</h3>
 </div>
-<div id="outline-container-org4da0033" class="outline-3">
-<h3 id="org4da0033"><span class="section-number-3">5.3.</span> Hopfield</h3>
+<div id="outline-container-Hopfield" class="outline-3">
+<h3 id="Hopfield"><span class="section-number-3">5.3.</span> Hopfield</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 The Hopfield network is an RNN in which all connections are symmetric. It requires stationary inputs and is thus not a general RNN, as it does not process sequences of patterns. It guarantees that it will converge. If the connections are trained using Hebbian learning then the Hopfield network can perform as robustcontent-addressable memory, resistant to connection alteration.
@@ -510,28 +517,28 @@ The Hopfield network is an RNN in which all connections are symmetric. It requir
 </div>
 </div>
 
-<div id="outline-container-org7625f8e" class="outline-3">
-<h3 id="org7625f8e"><span class="section-number-3">5.4.</span> Echo state</h3>
+<div id="outline-container-Echo%20state" class="outline-3">
+<h3 id="Echo%20state"><span class="section-number-3">5.4.</span> Echo state</h3>
 </div>
-<div id="outline-container-org088105c" class="outline-3">
-<h3 id="org088105c"><span class="section-number-3">5.5.</span> Independently RNN (IndRNN)</h3>
+<div id="outline-container-Independently%20RNN%20%28IndRNN%29" class="outline-3">
+<h3 id="Independently%20RNN%20%28IndRNN%29"><span class="section-number-3">5.5.</span> Independently RNN (IndRNN)</h3>
 </div>
-<div id="outline-container-org59d4dbf" class="outline-3">
-<h3 id="org59d4dbf"><span class="section-number-3">5.6.</span> Recursive</h3>
+<div id="outline-container-Recursive" class="outline-3">
+<h3 id="Recursive"><span class="section-number-3">5.6.</span> Recursive</h3>
 <div class="outline-text-3" id="text-5-6">
 <p>
 A recursive neural network[32] is created by applying the same set of weights recursively over a differentiable graph-like structure by traversing the structure in topological order. Such networks are typically also trained by the reverse mode of automatic differentiation.[33][34] They can process distributed representations of structure, such as logical terms. A special case of recursive neural networks is the RNN whose structure corresponds to a linear chain. Recursive neural networks have been applied to natural language processing.[35] The Recursive Neural Tensor Network uses a tensor-based composition function for all nodes in the tree.[36]
 </p>
 </div>
 </div>
-<div id="outline-container-org5ea200a" class="outline-3">
-<h3 id="org5ea200a"><span class="section-number-3">5.7.</span> Neural history compressor</h3>
+<div id="outline-container-Neural%20history%20compressor" class="outline-3">
+<h3 id="Neural%20history%20compressor"><span class="section-number-3">5.7.</span> Neural history compressor</h3>
 </div>
-<div id="outline-container-org5ac3b77" class="outline-3">
-<h3 id="org5ac3b77"><span class="section-number-3">5.8.</span> Second order RNNs</h3>
+<div id="outline-container-Second%20order%20RNNs" class="outline-3">
+<h3 id="Second%20order%20RNNs"><span class="section-number-3">5.8.</span> Second order RNNs</h3>
 </div>
-<div id="outline-container-org742c7b6" class="outline-3">
-<h3 id="org742c7b6"><span class="section-number-3">5.9.</span> Long short-term memory</h3>
+<div id="outline-container-Long%20short-term%20memory" class="outline-3">
+<h3 id="Long%20short-term%20memory"><span class="section-number-3">5.9.</span> Long short-term memory</h3>
 <div class="outline-text-3" id="text-5-9">
 <p>
 Long short-term memory (LSTM) is a deep learning system that avoids the vanishing gradient problem. LSTM is normally augmented by recurrent gates called “forget gates”.[42] LSTM prevents backpropagated errors from vanishing or exploding.[39] Instead, errors can flow backwards through unlimited numbers of virtual layers unfolded in space.  That is, LSTM can learn tasks
@@ -551,14 +558,14 @@ Many applications use stacks of LSTM RNNs[44] and train them by Connectionist Te
 </p>
 </div>
 </div>
-<div id="outline-container-orgc3476c6" class="outline-3">
-<h3 id="orgc3476c6"><span class="section-number-3">5.10.</span> Gated recurrent unit</h3>
+<div id="outline-container-Gated%20recurrent%20unit" class="outline-3">
+<h3 id="Gated%20recurrent%20unit"><span class="section-number-3">5.10.</span> Gated recurrent unit</h3>
 </div>
-<div id="outline-container-org9130c26" class="outline-3">
-<h3 id="org9130c26"><span class="section-number-3">5.11.</span> Bi-directional</h3>
+<div id="outline-container-Bi-directional" class="outline-3">
+<h3 id="Bi-directional"><span class="section-number-3">5.11.</span> Bi-directional</h3>
 </div>
-<div id="outline-container-org79b3f0c" class="outline-3">
-<h3 id="org79b3f0c"><span class="section-number-3">5.12.</span> Continuous-time</h3>
+<div id="outline-container-Continuous-time" class="outline-3">
+<h3 id="Continuous-time"><span class="section-number-3">5.12.</span> Continuous-time</h3>
 <div class="outline-text-3" id="text-5-12">
 <p>
 A continuous time recurrent neural network (CTRNN) uses a system of ordinary differential equations to model the effects on a neuron of the incoming spike train.
@@ -570,25 +577,25 @@ CTRNNs have been applied to evolutionary robotics where they have been used to a
 </p>
 </div>
 </div>
-<div id="outline-container-org82ee0d3" class="outline-3">
-<h3 id="org82ee0d3"><span class="section-number-3">5.13.</span> Hierarchical</h3>
+<div id="outline-container-Hierarchical" class="outline-3">
+<h3 id="Hierarchical"><span class="section-number-3">5.13.</span> Hierarchical</h3>
 </div>
-<div id="outline-container-orgaed4112" class="outline-3">
-<h3 id="orgaed4112"><span class="section-number-3">5.14.</span> Recurrent multilayer perceptron network</h3>
+<div id="outline-container-Recurrent%20multilayer%20perceptron%20network" class="outline-3">
+<h3 id="Recurrent%20multilayer%20perceptron%20network"><span class="section-number-3">5.14.</span> Recurrent multilayer perceptron network</h3>
 </div>
-<div id="outline-container-org5e6b5f2" class="outline-3">
-<h3 id="org5e6b5f2"><span class="section-number-3">5.15.</span> Multiple timescales model</h3>
+<div id="outline-container-Multiple%20timescales%20model" class="outline-3">
+<h3 id="Multiple%20timescales%20model"><span class="section-number-3">5.15.</span> Multiple timescales model</h3>
 </div>
-<div id="outline-container-org6576bec" class="outline-3">
-<h3 id="org6576bec"><span class="section-number-3">5.16.</span> Neural Turing machines</h3>
+<div id="outline-container-Neural%20Turing%20machines" class="outline-3">
+<h3 id="Neural%20Turing%20machines"><span class="section-number-3">5.16.</span> Neural Turing machines</h3>
 <div class="outline-text-3" id="text-5-16">
 <p>
 Neural Turing machines (NTMs) are a method of extending recurrent neural networks by coupling them to external memory resources which they can interact with by attentional processes. The combined system is analogous to a Turing machine or Von Neumann architecture but is differentiable end-to-end, allowing it to be efficiently trained with gradient descent.[61]
 </p>
 </div>
 </div>
-<div id="outline-container-org9743904" class="outline-3">
-<h3 id="org9743904"><span class="section-number-3">5.17.</span> Differentiable neural computer</h3>
+<div id="outline-container-Differentiable%20neural%20computer" class="outline-3">
+<h3 id="Differentiable%20neural%20computer"><span class="section-number-3">5.17.</span> Differentiable neural computer</h3>
 <div class="outline-text-3" id="text-5-17">
 <p>
 Differentiable neural computers (DNCs) are an extension of Neural Turing machines, allowing for usage of fuzzy amounts of each memory address and a record of chronology.
@@ -596,15 +603,15 @@ Differentiable neural computers (DNCs) are an extension of Neural Turing machine
 </div>
 </div>
 
-<div id="outline-container-org0b373a5" class="outline-3">
-<h3 id="org0b373a5"><span class="section-number-3">5.18.</span> Neural network pushdown automata</h3>
+<div id="outline-container-Neural%20network%20pushdown%20automata" class="outline-3">
+<h3 id="Neural%20network%20pushdown%20automata"><span class="section-number-3">5.18.</span> Neural network pushdown automata</h3>
 </div>
-<div id="outline-container-org2406750" class="outline-3">
-<h3 id="org2406750"><span class="section-number-3">5.19.</span> Memristive Networks</h3>
+<div id="outline-container-Memristive%20Networks" class="outline-3">
+<h3 id="Memristive%20Networks"><span class="section-number-3">5.19.</span> Memristive Networks</h3>
 </div>
 </div>
-<div id="outline-container-org6026103" class="outline-2">
-<h2 id="org6026103"><span class="section-number-2">6.</span> Applications</h2>
+<div id="outline-container-Applications" class="outline-2">
+<h2 id="Applications"><span class="section-number-2">6.</span> Applications</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Applications of Recurrent Neural Networks include:
@@ -630,8 +637,8 @@ Applications of Recurrent Neural Networks include:
 </div>
 </div>
 
-<div id="outline-container-org3856a10" class="outline-2">
-<h2 id="org3856a10"><span class="section-number-2">7.</span> Page Dumps &amp; Lecture Notes</h2>
+<div id="outline-container-Page%20Dumps%20%26%20Lecture%20Notes" class="outline-2">
+<h2 id="Page%20Dumps%20%26%20Lecture%20Notes"><span class="section-number-2">7.</span> Page Dumps &amp; Lecture Notes</h2>
 <div class="outline-text-2" id="text-7">
 <ul class="org-ul">
 <li><a href="mit_6_s191_introduction_to_deep_learning.html#ID-B81B32C3-D182-4BDC-9235-8079D7C250CB">6.S191 2020 RNN and Transformers</a></li>
@@ -639,8 +646,8 @@ Applications of Recurrent Neural Networks include:
 <li><a href="training_recurrent_nets_is_optimization_over_programs.html#ID-3FEBA006-6D43-426F-BC0F-34BDAA88B9C5">Training Recurrent Nets is Optimization Over Programs</a></li>
 </ul>
 </div>
-<div id="outline-container-org2b96c2d" class="outline-3">
-<h3 id="org2b96c2d"><span class="section-number-3">7.1.</span> Building a custom LSTM cell - Page Dump</h3>
+<div id="outline-container-Building%20a%20custom%20LSTM%20cell%20-%20Page%20Dump" class="outline-3">
+<h3 id="Building%20a%20custom%20LSTM%20cell%20-%20Page%20Dump"><span class="section-number-3">7.1.</span> Building a custom LSTM cell - Page Dump</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 :FILE: <a href="./data/Recurrent neural network/Recurrent neural networks_ building a custom LSTM cell _ AI Summer (2020-11-22 8_01_14 AM).html">Saved file</a>
@@ -799,7 +806,7 @@ In a compact sentence, I would like to say that the magic of RNNs lies in the ab
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Recurrent neural network">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Recurrent neural network">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

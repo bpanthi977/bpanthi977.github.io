@@ -205,7 +205,7 @@
  |
  <a accesskey="H" href="../index.html"> HOME </a>
 </div><div id="preamble" class="status">
-<p class="date">Date: 2020-05-31</p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2020-05-31 Sun]</span></span></p>
 </div>
 <div id="content" class="content">
 <h1 class="title">Key Code</h1>
@@ -213,8 +213,8 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1ddf1bd">1. Obtaining the scan code of unrecognized keys</a></li>
-<li><a href="#org74ecc25">2. Assing a key code to the scan code</a></li>
+<li><a href="#Obtaining%20the%20scan%20code%20of%20unrecognized%20keys">1. Obtaining the scan code of unrecognized keys</a></li>
+<li><a href="#Assing%20a%20key%20code%20to%20the%20scan%20code">2. Assing a key code to the scan code</a></li>
 </ul>
 </div>
 </div>
@@ -231,8 +231,8 @@ In most cases, we can assign to this scan code the key code of the functionality
 </p>
 
 
-<div id="outline-container-org1ddf1bd" class="outline-2">
-<h2 id="org1ddf1bd"><span class="section-number-2">1.</span> Obtaining the scan code of unrecognized keys</h2>
+<div id="outline-container-Obtaining%20the%20scan%20code%20of%20unrecognized%20keys" class="outline-2">
+<h2 id="Obtaining%20the%20scan%20code%20of%20unrecognized%20keys"><span class="section-number-2">1.</span> Obtaining the scan code of unrecognized keys</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 When the kernel can't find the scan code of a pressed key in the map of key codes, the kernel produces an error saying that the key is unknown, and indicate us the scan code of the key in question.
@@ -242,7 +242,7 @@ When the kernel can't find the scan code of a pressed key in the map of key code
 You can press the unrecognized keys and use dmesg to find the scan codes, you would see something similar to this but with your own scan codes:
 </p>
 
-<pre class="example" id="org7fb2fbd">
+<pre class="example" id="org986f5d3">
 atkbd.c: Unknown key pressed (translated set 2, code 0xa6 on isa0060/serio0).
 atkbd.c: Use 'setkeycodes e026 &lt;keycode&gt;' to make it known.
 atkbd.c: Unknown key released (translated set 2, code 0xa6 on isa0060/serio0).
@@ -268,8 +268,8 @@ By this method you would see the same messages appear when you press said keys, 
 </div>
 </div>
 
-<div id="outline-container-org74ecc25" class="outline-2">
-<h2 id="org74ecc25"><span class="section-number-2">2.</span> Assing a key code to the scan code</h2>
+<div id="outline-container-Assing%20a%20key%20code%20to%20the%20scan%20code" class="outline-2">
+<h2 id="Assing%20a%20key%20code%20to%20the%20scan%20code"><span class="section-number-2">2.</span> Assing a key code to the scan code</h2>
 <div class="outline-text-2" id="text-2">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -285,7 +285,7 @@ By this method you would see the same messages appear when you press said keys, 
 This command will show you the current layout of the keyboard, in here you can both find unused key codes and well as the key codes of functionality already supported by xmodmap. If this three of the keys corresponded to the volume controls, mute, lower the volume and increase the volume, we will find that this functionality already have a key code associated to it, we will see the following lines:
 </p>
 
-<pre class="example" id="org24ba24b">
+<pre class="example" id="org438eaa9">
 keycode 121 = XF86AudioMute NoSymbol XF86AudioMute
 keycode 122 = XF86AudioLowerVolume NoSymbol XF86AudioLowerVolume
 keycode 123 = XF86AudioRaiseVolume NoSymbol XF86AudioRaiseVolume
@@ -344,7 +344,7 @@ update-rc.d -f keyremap remove
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Key Code">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Key Code">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

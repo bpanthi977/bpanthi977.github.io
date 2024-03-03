@@ -213,35 +213,35 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6f6c5a3">1. Strategy 1</a>
+<li><a href="#Strategy%201">1. Strategy 1</a>
 <ul>
-<li><a href="#orge8dff6f">1.1. Create a small core in C</a></li>
-<li><a href="#org17495df">1.2. Managing the dynamic run-time environment</a></li>
-<li><a href="#org3d597e6">1.3. Allocators, predicates, accessors</a></li>
-<li><a href="#org5635826">1.4. Reader</a></li>
-<li><a href="#org184056a">1.5. Printer</a></li>
-<li><a href="#org9d855f6">1.6. Evaluator</a>
+<li><a href="#Create%20a%20small%20core%20in%20C">1.1. Create a small core in C</a></li>
+<li><a href="#Managing%20the%20dynamic%20run-time%20environment">1.2. Managing the dynamic run-time environment</a></li>
+<li><a href="#Allocators%2C%20predicates%2C%20accessors">1.3. Allocators, predicates, accessors</a></li>
+<li><a href="#Reader">1.4. Reader</a></li>
+<li><a href="#Printer">1.5. Printer</a></li>
+<li><a href="#Evaluator">1.6. Evaluator</a>
 <ul>
-<li><a href="#org54b4510">1.6.1. Direct Imterpreter</a></li>
-<li><a href="#orgfeefdf3">1.6.2. A compiler generating native machine code</a></li>
-<li><a href="#org76020e7">1.6.3. Compiler generating byte codes</a></li>
+<li><a href="#Direct%20Imterpreter">1.6.1. Direct Imterpreter</a></li>
+<li><a href="#A%20compiler%20generating%20native%20machine%20code">1.6.2. A compiler generating native machine code</a></li>
+<li><a href="#Compiler%20generating%20byte%20codes">1.6.3. Compiler generating byte codes</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org6ef7cb5">2. Strategy 1 (Complications)</a></li>
+<li><a href="#Strategy%201%20%28Complications%29">2. Strategy 1 (Complications)</a></li>
 </ul>
 </div>
 </div>
 <p>
 (<a href="https://www.youtube.com/watch?v=Wa81OJnlsoI">Source</a>)
 </p>
-<div id="outline-container-org6f6c5a3" class="outline-2">
-<h2 id="org6f6c5a3"><span class="section-number-2">1.</span> Strategy 1</h2>
+<div id="outline-container-Strategy%201" class="outline-2">
+<h2 id="Strategy%201"><span class="section-number-2">1.</span> Strategy 1</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orge8dff6f" class="outline-3">
-<h3 id="orge8dff6f"><span class="section-number-3">1.1.</span> Create a small core in C</h3>
+<div id="outline-container-Create%20a%20small%20core%20in%20C" class="outline-3">
+<h3 id="Create%20a%20small%20core%20in%20C"><span class="section-number-3">1.1.</span> Create a small core in C</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Use C malloc() to allocate CL Objects</li>
@@ -249,8 +249,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org17495df" class="outline-3">
-<h3 id="org17495df"><span class="section-number-3">1.2.</span> Managing the dynamic run-time environment</h3>
+<div id="outline-container-Managing%20the%20dynamic%20run-time%20environment" class="outline-3">
+<h3 id="Managing%20the%20dynamic%20run-time%20environment"><span class="section-number-3">1.2.</span> Managing the dynamic run-time environment</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Environment consists:
@@ -278,8 +278,8 @@ Unwinding the stack (<code>throw</code>, <code>go</code>, <code>return-from</cod
 </div>
 </div>
 
-<div id="outline-container-org3d597e6" class="outline-3">
-<h3 id="org3d597e6"><span class="section-number-3">1.3.</span> Allocators, predicates, accessors</h3>
+<div id="outline-container-Allocators%2C%20predicates%2C%20accessors" class="outline-3">
+<h3 id="Allocators%2C%20predicates%2C%20accessors"><span class="section-number-3">1.3.</span> Allocators, predicates, accessors</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 for built-in data type. 
@@ -293,8 +293,8 @@ for built-in data type.
 </ul>
 </div>
 </div>
-<div id="outline-container-org5635826" class="outline-3">
-<h3 id="org5635826"><span class="section-number-3">1.4.</span> Reader</h3>
+<div id="outline-container-Reader" class="outline-3">
+<h3 id="Reader"><span class="section-number-3">1.4.</span> Reader</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Its complicated. So two options:
@@ -305,16 +305,16 @@ Its complicated. So two options:
 </ul>
 </div>
 </div>
-<div id="outline-container-org184056a" class="outline-3">
-<h3 id="org184056a"><span class="section-number-3">1.5.</span> Printer</h3>
+<div id="outline-container-Printer" class="outline-3">
+<h3 id="Printer"><span class="section-number-3">1.5.</span> Printer</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
-(Same as <a href="#org5635826">1.4</a>)
+(Same as <a href="#Reader">1.4</a>)
 </p>
 </div>
 </div>
-<div id="outline-container-org9d855f6" class="outline-3">
-<h3 id="org9d855f6"><span class="section-number-3">1.6.</span> Evaluator</h3>
+<div id="outline-container-Evaluator" class="outline-3">
+<h3 id="Evaluator"><span class="section-number-3">1.6.</span> Evaluator</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Several possible implementations: 
@@ -326,8 +326,8 @@ Several possible implementations:
 </ul>
 </div>
 
-<div id="outline-container-org54b4510" class="outline-4">
-<h4 id="org54b4510"><span class="section-number-4">1.6.1.</span> Direct Imterpreter</h4>
+<div id="outline-container-Direct%20Imterpreter" class="outline-4">
+<h4 id="Direct%20Imterpreter"><span class="section-number-4">1.6.1.</span> Direct Imterpreter</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <ul class="org-ul">
 <li>Relatively Simple</li>
@@ -337,8 +337,8 @@ Several possible implementations:
 </div>
 </div>
 
-<div id="outline-container-orgfeefdf3" class="outline-4">
-<h4 id="orgfeefdf3"><span class="section-number-4">1.6.2.</span> A compiler generating native machine code</h4>
+<div id="outline-container-A%20compiler%20generating%20native%20machine%20code" class="outline-4">
+<h4 id="A%20compiler%20generating%20native%20machine%20code"><span class="section-number-4">1.6.2.</span> A compiler generating native machine code</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <ul class="org-ul">
 <li>Hard to write</li>
@@ -348,8 +348,8 @@ Several possible implementations:
 </div>
 </div>
 
-<div id="outline-container-org76020e7" class="outline-4">
-<h4 id="org76020e7"><span class="section-number-4">1.6.3.</span> Compiler generating byte codes</h4>
+<div id="outline-container-Compiler%20generating%20byte%20codes" class="outline-4">
+<h4 id="Compiler%20generating%20byte%20codes"><span class="section-number-4">1.6.3.</span> Compiler generating byte codes</h4>
 <div class="outline-text-4" id="text-1-6-3">
 <ul class="org-ul">
 <li>Relatively simple to write</li>
@@ -362,8 +362,8 @@ Several possible implementations:
 </div>
 
 
-<div id="outline-container-org6ef7cb5" class="outline-2">
-<h2 id="org6ef7cb5"><span class="section-number-2">2.</span> Strategy 1 (Complications)</h2>
+<div id="outline-container-Strategy%201%20%28Complications%29" class="outline-2">
+<h2 id="Strategy%201%20%28Complications%29"><span class="section-number-2">2.</span> Strategy 1 (Complications)</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 CL does not have a unique set of basic operators. There are many possible choices. A long list of possible <a href="http://home.pipeline.com/~hbaker1/MetaCircular.html">choices</a>.
@@ -383,7 +383,7 @@ How and when do we define the macro <code>defmacro</code>?
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Common Lisp Implementation">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Common Lisp Implementation">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

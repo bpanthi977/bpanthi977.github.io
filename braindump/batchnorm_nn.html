@@ -193,22 +193,29 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-<script type="text/javascript" src="../js/counters.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div id="org-div-home-and-up">
  <a accesskey="h" href="./index.html"> UP </a>
  |
  <a accesskey="H" href="../index.html"> HOME </a>
-</div><div id="content" class="content">
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2023-05-19 Fri]</span></span></p>
+</div>
+<div id="content" class="content">
 <h1 class="title">BatchNorm NN</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org67a3d94">1. Why it works?</a></li>
-<li><a href="#orgdde34be">2. Use before activation</a></li>
-<li><a href="#orgd984ff2">3. BatchNorm affects Gradient Penalty in WGAN</a></li>
+<li><a href="#Why%20it%20works%3F">1. Why it works?</a></li>
+<li><a href="#Use%20before%20activation">2. Use before activation</a></li>
+<li><a href="#BatchNorm%20affects%20Gradient%20Penalty%20in%20WGAN">3. BatchNorm affects Gradient Penalty in WGAN</a></li>
 </ul>
 </div>
 </div>
@@ -228,8 +235,8 @@ Its easy for Neural Networks when then data is normalized.  The most common form
 BatchNormalization does this not for the input only but for the output of transformations in the Neural Network.
 </p>
 
-<div id="outline-container-org67a3d94" class="outline-2">
-<h2 id="org67a3d94"><span class="section-number-2">1.</span> Why it works?</h2>
+<div id="outline-container-Why%20it%20works%3F" class="outline-2">
+<h2 id="Why%20it%20works%3F"><span class="section-number-2">1.</span> Why it works?</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li><span class="underline">May not be internal covariate shift</span>: Although the original paper stated that batch normalization operates by "reducing internal covariate shift", no one really knows for sure why batch normalization helps.</li>
@@ -243,11 +250,11 @@ BatchNormalization does this not for the input only but for the output of transf
 </div>
 </div>
 
-<div id="outline-container-orgdde34be" class="outline-2">
-<h2 id="orgdde34be"><span class="section-number-2">2.</span> Use before activation</h2>
+<div id="outline-container-Use%20before%20activation" class="outline-2">
+<h2 id="Use%20before%20activation"><span class="section-number-2">2.</span> Use before activation</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-From <a href="file:///Users/bpanthi977/Development/Bhoos/ml-games-ai/29points/sl/Notes.html#org78efa1a">experiments during points29 bot</a>, I recommend using BatchNorm before activation function. 
+From <a href="file:///Users/bpanthi977/Development/Bhoos/ml-games-ai/29points/sl/Notes.html#orga85a364">experiments during points29 bot</a>, I recommend using BatchNorm before activation function. 
 </p>
 
 <p>
@@ -261,8 +268,8 @@ The intuitive reason for this approach is that batch normalization will center y
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgd984ff2" class="outline-2">
-<h2 id="orgd984ff2"><span class="section-number-2">3.</span> BatchNorm affects Gradient Penalty in WGAN</h2>
+<div id="outline-container-BatchNorm%20affects%20Gradient%20Penalty%20in%20WGAN" class="outline-2">
+<h2 id="BatchNorm%20affects%20Gradient%20Penalty%20in%20WGAN"><span class="section-number-2">3.</span> BatchNorm affects Gradient Penalty in WGAN</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 <a href="batchnorm_nn.html#ID-AFD3AD13-EF16-4307-82D9-988A7E098851">Batch normalization</a> is avoided for the critic (discriminator). Batch normalization creates correlations between samples in the same batch. It impacts the effectiveness of the gradient penalty which is confirmed by experiments.
@@ -278,7 +285,7 @@ The intuitive reason for this approach is that batch normalization will center y
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: BatchNorm NN">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: BatchNorm NN">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

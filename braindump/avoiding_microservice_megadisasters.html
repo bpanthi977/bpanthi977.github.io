@@ -193,33 +193,40 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-<script type="text/javascript" src="../js/counters.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div id="org-div-home-and-up">
  <a accesskey="h" href="./index.html"> UP </a>
  |
  <a accesskey="H" href="../index.html"> HOME </a>
-</div><div id="content" class="content">
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2022-10-25 Tue]</span></span></p>
+</div>
+<div id="content" class="content">
 <h1 class="title">Avoiding Microservice Megadisasters</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6cf1f7c">1. Nine and a half minutes</a></li>
-<li><a href="#org2106ee1">2. No stacktrace</a></li>
-<li><a href="#orgac48ae5">3. 99.99% Uptime x 200 Request = 0</a></li>
-<li><a href="#org0f6a191">4. What is a service</a></li>
-<li><a href="#org41fef66">5. Bounded Context</a></li>
-<li><a href="#org4d1660c">6. Duplicate Data</a></li>
-<li><a href="#orgfb20a7f">7. Service Dependency Inversion</a>
+<li><a href="#Nine%20and%20a%20half%20minutes">1. Nine and a half minutes</a></li>
+<li><a href="#No%20stacktrace">2. No stacktrace</a></li>
+<li><a href="#99.99%25%20Uptime%20x%20200%20Request%20%3D%200">3. 99.99% Uptime x 200 Request = 0</a></li>
+<li><a href="#What%20is%20a%20service">4. What is a service</a></li>
+<li><a href="#Bounded%20Context">5. Bounded Context</a></li>
+<li><a href="#Duplicate%20Data">6. Duplicate Data</a></li>
+<li><a href="#Service%20Dependency%20Inversion">7. Service Dependency Inversion</a>
 <ul>
-<li><a href="#org3326fe0">7.1. Localizaion</a></li>
-<li><a href="#org54002b9">7.2. Content</a></li>
+<li><a href="#Localizaion">7.1. Localizaion</a></li>
+<li><a href="#Content">7.2. Content</a></li>
 </ul>
 </li>
-<li><a href="#orgf7746ad">8. Jimmy's Law</a></li>
-<li><a href="#orgc38460e">9. Inverse Conway Maneuver</a></li>
+<li><a href="#Jimmy%27s%20Law">8. Jimmy's Law</a></li>
+<li><a href="#Inverse%20Conway%20Maneuver">9. Inverse Conway Maneuver</a></li>
 </ul>
 </div>
 </div>
@@ -228,11 +235,11 @@ by Jimmy Bogard
 </p>
 
 <p>
-<a href="https://www.youtube.com/watch?v=gfh-VCTwMw8">https://www.youtube.com/watch?v=gfh-VCTwMw8</a>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/lJIrF4YjHfQ" title="//youtube.com/embed/gfh-VCTwMw8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
 </p>
 
-<div id="outline-container-org6cf1f7c" class="outline-2">
-<h2 id="org6cf1f7c"><span class="section-number-2">1.</span> Nine and a half minutes</h2>
+<div id="outline-container-Nine%20and%20a%20half%20minutes" class="outline-2">
+<h2 id="Nine%20and%20a%20half%20minutes"><span class="section-number-2">1.</span> Nine and a half minutes</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 After converting the system to microservice architecture we had a pre-production go live.
@@ -258,8 +265,8 @@ What happend was a single API request calling many other services and _completel
 </div>
 </div>
 
-<div id="outline-container-org2106ee1" class="outline-2">
-<h2 id="org2106ee1"><span class="section-number-2">2.</span> No stacktrace</h2>
+<div id="outline-container-No%20stacktrace" class="outline-2">
+<h2 id="No%20stacktrace"><span class="section-number-2">2.</span> No stacktrace</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 With a normal application like a normal monolith, if something goes wrong there's an exception or crash it's really easy to figure out what went wrong because you have a stactrace.
@@ -275,8 +282,8 @@ With this kind of architecture where everything is an API call there's no one st
 </div>
 </div>
 
-<div id="outline-container-orgac48ae5" class="outline-2">
-<h2 id="orgac48ae5"><span class="section-number-2">3.</span> 99.99% Uptime x 200 Request = 0</h2>
+<div id="outline-container-99.99%25%20Uptime%20x%20200%20Request%20%3D%200" class="outline-2">
+<h2 id="99.99%25%20Uptime%20x%20200%20Request%20%3D%200"><span class="section-number-2">3.</span> 99.99% Uptime x 200 Request = 0</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 We looked to see if they had any resiliency built-in things like the service brake or the circuit breaker pattern. Of course not, if any one of those API calls failed the entire quest failed.
@@ -288,8 +295,8 @@ If you look at 99.9 percent uptime times 200 calls through my probabilities clas
 </div>
 </div>
 
-<div id="outline-container-org0f6a191" class="outline-2">
-<h2 id="org0f6a191"><span class="section-number-2">4.</span> What is a service</h2>
+<div id="outline-container-What%20is%20a%20service" class="outline-2">
+<h2 id="What%20is%20a%20service"><span class="section-number-2">4.</span> What is a service</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The original service oriented architecture definition of a service is that, a service is software that is
@@ -319,8 +326,8 @@ A micro service is small and focused on doing one thing well and it's autonomous
 </div>
 </div>
 
-<div id="outline-container-org41fef66" class="outline-2">
-<h2 id="org41fef66"><span class="section-number-2">5.</span> Bounded Context</h2>
+<div id="outline-container-Bounded%20Context" class="outline-2">
+<h2 id="Bounded%20Context"><span class="section-number-2">5.</span> Bounded Context</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Domain-Driven Design (DDD)
@@ -337,8 +344,8 @@ Domain-driven design says I have a particular model and that model may not make 
 </div>
 </div>
 
-<div id="outline-container-org4d1660c" class="outline-2">
-<h2 id="org4d1660c"><span class="section-number-2">6.</span> Duplicate Data</h2>
+<div id="outline-container-Duplicate%20Data" class="outline-2">
+<h2 id="Duplicate%20Data"><span class="section-number-2">6.</span> Duplicate Data</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 We can't have a system in which we don't duplicate data and in fact if you look at the real world the real world duplicates data constantly.
@@ -354,8 +361,8 @@ Duplication of data is good well one way to go about that is to recognize that w
 </div>
 </div>
 
-<div id="outline-container-orgfb20a7f" class="outline-2">
-<h2 id="orgfb20a7f"><span class="section-number-2">7.</span> Service Dependency Inversion</h2>
+<div id="outline-container-Service%20Dependency%20Inversion" class="outline-2">
+<h2 id="Service%20Dependency%20Inversion"><span class="section-number-2">7.</span> Service Dependency Inversion</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 In our original picture <span class="underline">we had one service depending on a lot of other ones</span>. And it is depending on those other ones is not wrong. It is wrong though that my uptime is completely dependent on the uptime of all those other services
@@ -371,8 +378,8 @@ So that when an external request came in I only ever had to go to a local databa
 </div>
 
 
-<div id="outline-container-org3326fe0" class="outline-3">
-<h3 id="org3326fe0"><span class="section-number-3">7.1.</span> Localizaion</h3>
+<div id="outline-container-Localizaion" class="outline-3">
+<h3 id="Localizaion"><span class="section-number-3">7.1.</span> Localizaion</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 Localization this one was a bit tricky because even though the information rarely changed there was a lot of it.
@@ -384,8 +391,8 @@ Once a day they would put out a file on a shared drive there was just a flat fil
 </div>
 </div>
 
-<div id="outline-container-org54002b9" class="outline-3">
-<h3 id="org54002b9"><span class="section-number-3">7.2.</span> Content</h3>
+<div id="outline-container-Content" class="outline-3">
+<h3 id="Content"><span class="section-number-3">7.2.</span> Content</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 Content changed fairly frequently and those changes actually needed to make it out to production pretty quickly.
@@ -398,8 +405,8 @@ We put some triggers inside the database for us. So when individual table change
 </div>
 </div>
 
-<div id="outline-container-orgf7746ad" class="outline-2">
-<h2 id="orgf7746ad"><span class="section-number-2">8.</span> Jimmy's Law</h2>
+<div id="outline-container-Jimmy%27s%20Law" class="outline-2">
+<h2 id="Jimmy%27s%20Law"><span class="section-number-2">8.</span> Jimmy's Law</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 After we fixed the problem, I went back later and talked to some of the teams. They said, everything was great but the problem was they still had the similar HR structure they used to have before.
@@ -432,8 +439,8 @@ A broken differential organization driven by meeting unhealthy goals and metrics
 </div>
 </div>
 
-<div id="outline-container-orgc38460e" class="outline-2">
-<h2 id="orgc38460e"><span class="section-number-2">9.</span> Inverse Conway Maneuver</h2>
+<div id="outline-container-Inverse%20Conway%20Maneuver" class="outline-2">
+<h2 id="Inverse%20Conway%20Maneuver"><span class="section-number-2">9.</span> Inverse Conway Maneuver</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 So if you have this crappy organisation and you want to build systems for it you're going to build crappy systems because Conway's law is the law.
@@ -454,7 +461,7 @@ just a company of one step does that count okay so this building a building
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Avoiding Microservice Megadisasters">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Avoiding Microservice Megadisasters">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

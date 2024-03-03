@@ -237,7 +237,7 @@
  |
  <a accesskey="H" href="../index.html"> HOME </a>
 </div><div id="preamble" class="status">
-<p class="date">Date: 2020-11-22</p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2020-11-22 Sun]</span></span></p>
 </div>
 <div id="content" class="content">
 <h1 class="title">Kalman Filters</h1>
@@ -245,25 +245,25 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd1444b2">1. When are they used?</a>
+<li><a href="#When%20are%20they%20used%3F">1. When are they used?</a>
 <ul>
-<li><a href="#org59493b1">1.1. An Example : Internal Temperature of Rocket Engine from External Temperature</a></li>
+<li><a href="#An%20Example%20%3A%20Internal%20Temperature%20of%20Rocket%20Engine%20from%20External%20Temperature">1.1. An Example : Internal Temperature of Rocket Engine from External Temperature</a></li>
 </ul>
 </li>
-<li><a href="#org47a51ca">2. Kalman Filters - Optimal State Estimator</a>
+<li><a href="#Kalman%20Filters%20-%20Optimal%20State%20Estimator">2. Kalman Filters - Optimal State Estimator</a>
 <ul>
-<li><a href="#org441d255">2.1. Equations</a></li>
-<li><a href="#org05e3a20">2.2. If error covariance in measurement is zero:</a></li>
-<li><a href="#orge79c02b">2.3. If predicted state estimate variance is zero:</a></li>
+<li><a href="#Equations">2.1. Equations</a></li>
+<li><a href="#If%20error%20covariance%20in%20measurement%20is%20zero%3A">2.2. If error covariance in measurement is zero:</a></li>
+<li><a href="#If%20predicted%20state%20estimate%20variance%20is%20zero%3A">2.3. If predicted state estimate variance is zero:</a></li>
 </ul>
 </li>
-<li><a href="#orgf470e78">3. Nonlinear state estimators</a></li>
-<li><a href="#org549d1cb">4. Extended Kalman Filters (EKFs)</a></li>
-<li><a href="#org73a8ddc">5. Unscented Kalman Filters</a>
+<li><a href="#Nonlinear%20state%20estimators">3. Nonlinear state estimators</a></li>
+<li><a href="#Extended%20Kalman%20Filters%20%28EKFs%29">4. Extended Kalman Filters (EKFs)</a></li>
+<li><a href="#Unscented%20Kalman%20Filters">5. Unscented Kalman Filters</a>
 <ul>
 <li>
 <ul>
-<li><a href="#org035837b">5.0.1. Particle Filters</a></li>
+<li><a href="#Particle%20Filters">5.0.1. Particle Filters</a></li>
 </ul>
 </li>
 </ul>
@@ -272,11 +272,11 @@
 </div>
 </div>
 
-<div id="outline-container-orgd1444b2" class="outline-2">
-<h2 id="orgd1444b2"><span class="section-number-2">1.</span> When are they used?</h2>
+<div id="outline-container-When%20are%20they%20used%3F" class="outline-2">
+<h2 id="When%20are%20they%20used%3F"><span class="section-number-2">1.</span> When are they used?</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/4OerJmPpkRg" title="nil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/lJIrF4YjHfQ" title="//youtube.com/embed/4OerJmPpkRg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
 </p>
 
 
@@ -286,8 +286,8 @@
 </ul>
 </div>
 
-<div id="outline-container-org59493b1" class="outline-3">
-<h3 id="org59493b1"><span class="section-number-3">1.1.</span> An Example : Internal Temperature of Rocket Engine from External Temperature</h3>
+<div id="outline-container-An%20Example%20%3A%20Internal%20Temperature%20of%20Rocket%20Engine%20from%20External%20Temperature" class="outline-3">
+<h3 id="An%20Example%20%3A%20Internal%20Temperature%20of%20Rocket%20Engine%20from%20External%20Temperature"><span class="section-number-3">1.1.</span> An Example : Internal Temperature of Rocket Engine from External Temperature</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Say we have as input:
@@ -302,7 +302,7 @@ If we have mathematical model of the system, then if your model and system would
 </p>
 
 
-<div id="org3a48b40" class="figure">
+<div id="org5ab103a" class="figure">
 <p><img src="./data/kalman_filters/mpv-screenshotn1iVIi.png" alt="mpv-screenshotn1iVIi.png" />
 </p>
 </div>
@@ -321,11 +321,11 @@ Use \(W_{fuel}\) to estimate \(\hat{T}_{ext}\) and minimize error between that a
 
 
 
-<div id="outline-container-org47a51ca" class="outline-2">
-<h2 id="org47a51ca"><span class="section-number-2">2.</span> Kalman Filters - Optimal State Estimator</h2>
+<div id="outline-container-Kalman%20Filters%20-%20Optimal%20State%20Estimator" class="outline-2">
+<h2 id="Kalman%20Filters%20-%20Optimal%20State%20Estimator"><span class="section-number-2">2.</span> Kalman Filters - Optimal State Estimator</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ul3u2yLPwU0" title="nil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/lJIrF4YjHfQ" title="//youtube.com/embed/ul3u2yLPwU0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
 </p>
 
 <p>
@@ -339,7 +339,7 @@ and \(w_k\) is process noise (error due to wind effects, velocity fluctuations)
 </p>
 
 
-<div id="org56c2a26" class="figure">
+<div id="org4dd3fe7" class="figure">
 <p><img src="./data/kalman_filters/mpv-screenshotukyrKM.png" alt="mpv-screenshotukyrKM.png" />
 </p>
 </div>
@@ -354,15 +354,15 @@ Multiply the probability density of the two esitmates to get the optimal state e
 </p>
 </div>
 
-<div id="outline-container-org441d255" class="outline-3">
-<h3 id="org441d255"><span class="section-number-3">2.1.</span> Equations</h3>
+<div id="outline-container-Equations" class="outline-3">
+<h3 id="Equations"><span class="section-number-3">2.1.</span> Equations</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
-<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/VFXf1lIZ3p8" title="nil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/lJIrF4YjHfQ" title="//youtube.com/embed/VFXf1lIZ3p8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
 </p>
 
 
-<div id="org920bdc9" class="figure">
+<div id="orgd573272" class="figure">
 <p><img src="./data/kalman_filters/mpv-screenshotGNHPug.png" alt="mpv-screenshotGNHPug.png" />
 </p>
 </div>
@@ -381,11 +381,11 @@ The Kalman gain \(K_k\) is calculated such that it minimizes the prosteri error 
 </div>
 </div>
 
-<div id="outline-container-org05e3a20" class="outline-3">
-<h3 id="org05e3a20"><span class="section-number-3">2.2.</span> If error covariance in measurement is zero:</h3>
+<div id="outline-container-If%20error%20covariance%20in%20measurement%20is%20zero%3A" class="outline-3">
+<h3 id="If%20error%20covariance%20in%20measurement%20is%20zero%3A"><span class="section-number-3">2.2.</span> If error covariance in measurement is zero:</h3>
 <div class="outline-text-3" id="text-2-2">
 
-<div id="org5ed82ce" class="figure">
+<div id="orgaa10e71" class="figure">
 <p><img src="./data/kalman_filters/mpv-screenshotgaiV7y.png" alt="mpv-screenshotgaiV7y.png" />
 </p>
 </div>
@@ -396,8 +396,8 @@ the state estimate is from measurement
 </div>
 </div>
 
-<div id="outline-container-orge79c02b" class="outline-3">
-<h3 id="orge79c02b"><span class="section-number-3">2.3.</span> If predicted state estimate variance is zero:</h3>
+<div id="outline-container-If%20predicted%20state%20estimate%20variance%20is%20zero%3A" class="outline-3">
+<h3 id="If%20predicted%20state%20estimate%20variance%20is%20zero%3A"><span class="section-number-3">2.3.</span> If predicted state estimate variance is zero:</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Then  predicted state estimate is used as state estimate. 
@@ -407,11 +407,11 @@ Then  predicted state estimate is used as state estimate.
 </div>
 </div>
 
-<div id="outline-container-orgf470e78" class="outline-2">
-<h2 id="orgf470e78"><span class="section-number-2">3.</span> Nonlinear state estimators</h2>
+<div id="outline-container-Nonlinear%20state%20estimators" class="outline-2">
+<h2 id="Nonlinear%20state%20estimators"><span class="section-number-2">3.</span> Nonlinear state estimators</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Vefia3JMeHE" title="nil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/lJIrF4YjHfQ" title="//youtube.com/embed/Vefia3JMeHE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
 </p>
 
 <p>
@@ -429,11 +429,11 @@ Kalman filter assumes gaussian distribution and after linear transformation then
 </div>
 </div>
 
-<div id="outline-container-org549d1cb" class="outline-2">
-<h2 id="org549d1cb"><span class="section-number-2">4.</span> Extended Kalman Filters (EKFs)</h2>
+<div id="outline-container-Extended%20Kalman%20Filters%20%28EKFs%29" class="outline-2">
+<h2 id="Extended%20Kalman%20Filters%20%28EKFs%29"><span class="section-number-2">4.</span> Extended Kalman Filters (EKFs)</h2>
 <div class="outline-text-2" id="text-4">
 
-<div id="org5e982f4" class="figure">
+<div id="orga81c225" class="figure">
 <p><img src="./data/kalman_filters/mpv-screenshotPiWIb5.png" alt="mpv-screenshotPiWIb5.png" />
 </p>
 </div>
@@ -452,23 +452,23 @@ Drawbacks to Using Extended Kalman Filters (EKFs):
 
 
 
-<div id="orgc0d652a" class="figure">
+<div id="orgd274f1c" class="figure">
 <p><img src="./data/kalman_filters/mpv-screenshotU4Otzp.png" alt="mpv-screenshotU4Otzp.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org73a8ddc" class="outline-2">
-<h2 id="org73a8ddc"><span class="section-number-2">5.</span> Unscented Kalman Filters</h2>
+<div id="outline-container-Unscented%20Kalman%20Filters" class="outline-2">
+<h2 id="Unscented%20Kalman%20Filters"><span class="section-number-2">5.</span> Unscented Kalman Filters</h2>
 <div class="outline-text-2" id="text-5">
 </div>
 
-<div id="outline-container-org035837b" class="outline-4">
-<h4 id="org035837b"><span class="section-number-4">5.0.1.</span> Particle Filters</h4>
+<div id="outline-container-Particle%20Filters" class="outline-4">
+<h4 id="Particle%20Filters"><span class="section-number-4">5.0.1.</span> Particle Filters</h4>
 <div class="outline-text-4" id="text-5-0-1">
 
-<div id="org7829d72" class="figure">
+<div id="org6c63304" class="figure">
 <p><img src="./data/kalman_filters/mpv-screenshotQ6nHMO.png" alt="mpv-screenshotQ6nHMO.png" />
 </p>
 </div>
@@ -477,7 +477,7 @@ Drawbacks to Using Extended Kalman Filters (EKFs):
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Kalman Filters">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Kalman Filters">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>

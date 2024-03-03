@@ -193,30 +193,37 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-<script type="text/javascript" src="../js/counters.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div id="org-div-home-and-up">
  <a accesskey="h" href="./index.html"> UP </a>
  |
  <a accesskey="H" href="../index.html"> HOME </a>
-</div><div id="content" class="content">
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2023-08-11 Fri]</span></span></p>
+</div>
+<div id="content" class="content">
 <h1 class="title">No SQL Database Indexing</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org676ac53">1. LSM Tree (Log-Structured Merge-Tree)</a>
+<li><a href="#LSM%20Tree%20%28Log-Structured%20Merge-Tree%29">1. LSM Tree (Log-Structured Merge-Tree)</a>
 <ul>
-<li><a href="#orgaa2258a">1.1. Secondary Index for LSM Tree-based Databases</a></li>
+<li><a href="#Secondary%20Index%20for%20LSM%20Tree-based%20Databases">1.1. Secondary Index for LSM Tree-based Databases</a></li>
 </ul>
 </li>
-<li><a href="#orgd04caef">2. Use case</a>
+<li><a href="#Use%20case">2. Use case</a>
 <ul>
-<li><a href="#orgfeb0313">2.1. Point Lookup</a></li>
-<li><a href="#org6f9830d">2.2. Range Lookup</a></li>
-<li><a href="#orga20907f">2.3. Prefix Search</a></li>
-<li><a href="#orgb2ae178">2.4. Geo-Location Lookup</a></li>
+<li><a href="#Point%20Lookup">2.1. Point Lookup</a></li>
+<li><a href="#Range%20Lookup">2.2. Range Lookup</a></li>
+<li><a href="#Prefix%20Search">2.3. Prefix Search</a></li>
+<li><a href="#Geo-Location%20Lookup">2.4. Geo-Location Lookup</a></li>
 </ul>
 </li>
 </ul>
@@ -226,8 +233,8 @@
 <li>YT: <a href="https://www.youtube.com/watch?v=I6jB0nM9SKU">https://www.youtube.com/watch?v=I6jB0nM9SKU</a></li>
 <li>Blog: <a href="https://blog.bytebytego.com/p/database-indexing-strategies-part">https://blog.bytebytego.com/p/database-indexing-strategies-part</a></li>
 </ul>
-<div id="outline-container-org676ac53" class="outline-2">
-<h2 id="org676ac53"><span class="section-number-2">1.</span> LSM Tree (Log-Structured Merge-Tree)</h2>
+<div id="outline-container-LSM%20Tree%20%28Log-Structured%20Merge-Tree%29" class="outline-2">
+<h2 id="LSM%20Tree%20%28Log-Structured%20Merge-Tree%29"><span class="section-number-2">1.</span> LSM Tree (Log-Structured Merge-Tree)</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 A popular data structure used in some types of NoSQL databases, notably key-value and wide-column stores, is the <b>Log-Structured Merge-tree (LSM Tree)</b>. 
@@ -256,7 +263,7 @@ A popular data structure used in some types of NoSQL databases, notably key-valu
 </ul>
 
 
-<div id="org7f079f5" class="figure">
+<div id="org008c2b4" class="figure">
 <p><img src="data/no_sql_indexing/lsm_tree-20230811130234.png" alt="lsm_tree-20230811130234.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>LSM-Tree</p>
@@ -264,8 +271,8 @@ A popular data structure used in some types of NoSQL databases, notably key-valu
 </div>
 
 
-<div id="outline-container-orgaa2258a" class="outline-3">
-<h3 id="orgaa2258a"><span class="section-number-3">1.1.</span> Secondary Index for LSM Tree-based Databases</h3>
+<div id="outline-container-Secondary%20Index%20for%20LSM%20Tree-based%20Databases" class="outline-3">
+<h3 id="Secondary%20Index%20for%20LSM%20Tree-based%20Databases"><span class="section-number-3">1.1.</span> Secondary Index for LSM Tree-based Databases</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 <b>Secondary Index keys are values of field and values are primary keys</b>
@@ -282,12 +289,12 @@ Creating a secondary index in an LSM Tree-based database involves creating a new
 </div>
 </div>
 
-<div id="outline-container-orgd04caef" class="outline-2">
-<h2 id="orgd04caef"><span class="section-number-2">2.</span> Use case</h2>
+<div id="outline-container-Use%20case" class="outline-2">
+<h2 id="Use%20case"><span class="section-number-2">2.</span> Use case</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgfeb0313" class="outline-3">
-<h3 id="orgfeb0313"><span class="section-number-3">2.1.</span> Point Lookup</h3>
+<div id="outline-container-Point%20Lookup" class="outline-3">
+<h3 id="Point%20Lookup"><span class="section-number-3">2.1.</span> Point Lookup</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 The simplest use case for an index is to speed up searches on a specific attribute or key
@@ -295,8 +302,8 @@ The simplest use case for an index is to speed up searches on a specific attribu
 </div>
 </div>
 
-<div id="outline-container-org6f9830d" class="outline-3">
-<h3 id="org6f9830d"><span class="section-number-3">2.2.</span> Range Lookup</h3>
+<div id="outline-container-Range%20Lookup" class="outline-3">
+<h3 id="Range%20Lookup"><span class="section-number-3">2.2.</span> Range Lookup</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Indexes can also be used to efficiently retrieve a range of value.
@@ -304,8 +311,8 @@ Indexes can also be used to efficiently retrieve a range of value.
 </div>
 </div>
 
-<div id="outline-container-orga20907f" class="outline-3">
-<h3 id="orga20907f"><span class="section-number-3">2.3.</span> Prefix Search</h3>
+<div id="outline-container-Prefix%20Search" class="outline-3">
+<h3 id="Prefix%20Search"><span class="section-number-3">2.3.</span> Prefix Search</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Indexes are also useful for prefix searches, thanks to their sorted nature. Imagine a scenario where a search engine keeps a table of previously searched terms and their corresponding popularity scores.
@@ -313,8 +320,8 @@ Indexes are also useful for prefix searches, thanks to their sorted nature. Imag
 </div>
 </div>
 
-<div id="outline-container-orgb2ae178" class="outline-3">
-<h3 id="orgb2ae178"><span class="section-number-3">2.4.</span> Geo-Location Lookup</h3>
+<div id="outline-container-Geo-Location%20Lookup" class="outline-3">
+<h3 id="Geo-Location%20Lookup"><span class="section-number-3">2.4.</span> Geo-Location Lookup</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 To find all the points within a certain radius of a location, we only need to search for points that share a geohash prefix with the target location. This is a lot faster than calculating the distance to every point in the database
@@ -333,7 +340,7 @@ To find all the points within a certain radius of a location, we only need to se
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: No SQL Database Indexing">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: No SQL Database Indexing">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>
 </body>
 </html>
