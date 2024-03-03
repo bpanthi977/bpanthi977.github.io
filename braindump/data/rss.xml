@@ -1,10 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
    <feed xmlns="http://www.w3.org/2005/Atom">
      <title type="text">Bibek's Digital Garden</title>
-     <updated>2023-11-13T20:24:51+05:45</updated>
+     <updated>2024-03-03T17:29:43+05:45</updated>
      <link rel="self" type="application/atom+xml" href="https://bpanthi977.github.io/braindump/data/rss.xml"/>
      <id>https://bpanthi977.github.io/braindump/</id>
      <generator uri="https://www.gnu.org/software/emacs/" version="29.1">Emacs</generator>
+<entry>
+   <title type="text">Worse is Better</title>
+   <link href="https://bpanthi977.github.io/braindump/worse_is_better.html" />
+   <id>urn:uuid:BDDCDDA3-2273-4D1A-B906-6ED7C546417A</id>
+   <published>2024-02-25T00:00:00+05:45</published>
+   <updated>2024-02-25T21:44:35+05:45</updated>
+   <author>
+     <name>Bibek Panthi</name>
+   </author>
+   <content type="text/html">
+     <a href="https://bpanthi977.github.io/braindump/worse_is_better.html">https://bpanthi977.github.io/braindump/worse_is_better.html</a>
+   </content>
+ </entry>
+<entry>
+   <title type="text">Learning</title>
+   <link href="https://bpanthi977.github.io/braindump/learning.html" />
+   <id>urn:uuid:965B1331-8F52-4128-8A6D-D59734C75722</id>
+   <published>2024-02-24T00:00:00+05:45</published>
+   <updated>2024-02-24T10:43:08+05:45</updated>
+   <author>
+     <name>Bibek Panthi</name>
+   </author>
+   <content type="text/html">
+     <a href="https://bpanthi977.github.io/braindump/learning.html">https://bpanthi977.github.io/braindump/learning.html</a>
+   </content>
+ </entry>
+<entry>
+   <title type="text">Mamba</title>
+   <link href="https://bpanthi977.github.io/braindump/mamba.html" />
+   <id>urn:uuid:2F81ADD5-41A9-4E8A-B3E0-CCFF74BBD311</id>
+   <published>2024-02-24T00:00:00+05:45</published>
+   <updated>2024-02-24T15:01:38+05:45</updated>
+   <author>
+     <name>Bibek Panthi</name>
+   </author>
+   <content type="text/html">
+     <a href="https://bpanthi977.github.io/braindump/mamba.html">https://bpanthi977.github.io/braindump/mamba.html</a>
+   </content>
+ </entry>
+<entry>
+   <title type="text">Great Green Wall</title>
+   <link href="https://bpanthi977.github.io/braindump/great_green_wall.html" />
+   <id>urn:uuid:63251204-9099-42A3-A052-384377BEACCA</id>
+   <published>2024-02-24T00:00:00+05:45</published>
+   <updated>2024-02-24T13:28:31+05:45</updated>
+   <author>
+     <name>Bibek Panthi</name>
+   </author>
+   <content type="text/html">
+     <a href="https://bpanthi977.github.io/braindump/great_green_wall.html">https://bpanthi977.github.io/braindump/great_green_wall.html</a>
+   </content>
+ </entry>
+<entry>
+   <title type="text">Documentation</title>
+   <link href="https://bpanthi977.github.io/braindump/documentation.html" />
+   <id>urn:uuid:D41395DA-5A30-4273-B72B-BF9E6E54C387</id>
+   <published>2024-02-15T00:00:00+05:45</published>
+   <updated>2024-02-15T20:40:15+05:45</updated>
+   <author>
+     <name>Bibek Panthi</name>
+   </author>
+   <content type="text/html">
+     <a href="https://bpanthi977.github.io/braindump/documentation.html">https://bpanthi977.github.io/braindump/documentation.html</a>
+   </content>
+ </entry>
+<entry>
+   <title type="text">PDFs</title>
+   <link href="https://bpanthi977.github.io/braindump/pdfs.html" />
+   <id>urn:uuid:2F44E3A3-8FAE-4000-809B-FD717B27CD7B</id>
+   <published>2023-12-14T00:00:00+05:45</published>
+   <updated>2023-12-14T13:31:50+05:45</updated>
+   <author>
+     <name>Bibek Panthi</name>
+   </author>
+   <content type="text/html">
+     <a href="https://bpanthi977.github.io/braindump/pdfs.html">https://bpanthi977.github.io/braindump/pdfs.html</a>
+   </content>
+ </entry>
+<entry>
+   <title type="text">Dollarization</title>
+   <link href="https://bpanthi977.github.io/braindump/dollarization.html" />
+   <id>urn:uuid:DA9B4F2A-C6BC-45CE-A464-FED19E2878B8</id>
+   <published>2023-11-21T00:00:00+05:45</published>
+   <updated>2023-11-21T19:55:43+05:45</updated>
+   <author>
+     <name>Bibek Panthi</name>
+   </author>
+   <content type="text/html">
+     <a href="https://bpanthi977.github.io/braindump/dollarization.html">https://bpanthi977.github.io/braindump/dollarization.html</a>
+   </content>
+ </entry>
 <entry>
    <title type="text">Debugging</title>
    <link href="https://bpanthi977.github.io/braindump/debugging.html" />
@@ -88,7 +179,7 @@
    <link href="https://bpanthi977.github.io/braindump/a_first_look_at_rigorous_probability_theory.html" />
    <id>urn:uuid:CA23C9D9-E321-4EB3-A875-6B36969BF6C9</id>
    <published>2023-09-24T00:00:00+05:45</published>
-   <updated>2023-09-24T22:32:17+05:45</updated>
+   <updated>2024-02-23T21:31:54+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -167,7 +258,7 @@
    <link href="https://bpanthi977.github.io/braindump/linux.html" />
    <id>urn:uuid:F36B9E7C-9559-451A-9E25-CFA33D0C6156</id>
    <published>2023-09-15T00:00:00+05:45</published>
-   <updated>2023-09-24T22:31:47+05:45</updated>
+   <updated>2024-03-03T16:33:03+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -193,7 +284,7 @@
    <link href="https://bpanthi977.github.io/braindump/dates.html" />
    <id>https://bpanthi977.github.io/braindump/dates.html</id>
    <published>2023-09-07T14:10:35+05:45</published>
-   <updated>2023-09-07T14:10:35+05:45</updated>
+   <updated>2023-11-30T15:21:09+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -258,7 +349,7 @@
    <link href="https://bpanthi977.github.io/braindump/postgres.html" />
    <id>urn:uuid:6E069A85-2E7F-4CCD-B03E-7884B86BEA55</id>
    <published>2023-08-28T00:00:00+05:45</published>
-   <updated>2023-09-24T22:31:34+05:45</updated>
+   <updated>2023-11-29T13:23:39+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -557,7 +648,7 @@
    <link href="https://bpanthi977.github.io/braindump/work.html" />
    <id>urn:uuid:F3341D6E-1A1B-482A-B8DA-E9BBD9D374C4</id>
    <published>2023-08-19T00:00:00+05:45</published>
-   <updated>2023-09-24T22:31:17+05:45</updated>
+   <updated>2024-02-25T15:16:54+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -635,7 +726,7 @@
    <link href="https://bpanthi977.github.io/braindump/the_bipolar_lisp_programmer.html" />
    <id>urn:uuid:D2B9ECBA-CEF0-4BE2-8EE6-031C278BAA94</id>
    <published>2023-08-11T00:00:00+05:45</published>
-   <updated>2023-09-24T22:31:23+05:45</updated>
+   <updated>2024-02-25T21:43:56+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -1220,7 +1311,7 @@
    <link href="https://bpanthi977.github.io/braindump/deep_reinforcement_learning_cs_285_fall_2021.html" />
    <id>urn:uuid:932A3DD9-9866-4BD7-85BF-0F5670169E39</id>
    <published>2023-07-09T00:00:00+05:45</published>
-   <updated>2023-09-24T22:32:06+05:45</updated>
+   <updated>2023-12-04T15:52:37+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -1571,7 +1662,7 @@
    <link href="https://bpanthi977.github.io/braindump/economics.html" />
    <id>urn:uuid:5CA838FF-9EEA-4E48-8741-996E5393AACC</id>
    <published>2023-05-01T00:00:00+05:45</published>
-   <updated>2023-09-24T22:32:04+05:45</updated>
+   <updated>2023-11-21T20:41:48+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -1792,7 +1883,7 @@
    <link href="https://bpanthi977.github.io/braindump/siamese_networks.html" />
    <id>urn:uuid:7EF26196-2837-4FB9-8A67-DC6C6DCE7CCF</id>
    <published>2023-04-01T00:00:00+05:45</published>
-   <updated>2023-09-24T22:31:27+05:45</updated>
+   <updated>2024-02-24T10:33:45+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -3040,7 +3131,7 @@
    <link href="https://bpanthi977.github.io/braindump/programming.html" />
    <id>urn:uuid:F3E66B76-D993-42FD-AD0F-E9BC424B47C9</id>
    <published>2023-02-07T00:00:00+05:45</published>
-   <updated>2023-11-02T17:57:14+05:45</updated>
+   <updated>2024-02-15T20:40:18+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -3326,7 +3417,7 @@
    <link href="https://bpanthi977.github.io/braindump/sergey_levine.html" />
    <id>urn:uuid:65DED394-F17D-4C6A-A86D-FE48A5EED74A</id>
    <published>2022-12-14T00:00:00+05:45</published>
-   <updated>2023-09-24T22:31:27+05:45</updated>
+   <updated>2024-03-03T16:38:44+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -4353,7 +4444,7 @@
    <link href="https://bpanthi977.github.io/braindump/Building%20Autoencoders%20in%20Keras%20(2022-07-28).html" />
    <id>urn:uuid:136e63b3-72de-4ef5-acd8-90b1c102476d</id>
    <published>2022-07-28T00:00:00+05:45</published>
-   <updated>2023-09-24T22:32:20+05:45</updated>
+   <updated>2024-03-03T15:51:16+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -5302,7 +5393,7 @@
    <link href="https://bpanthi977.github.io/braindump/How%20to%20write%20the%20perfect%20sentence.html" />
    <id>urn:uuid:2bbdd0c8-c0d6-4a8b-a0b0-0d502268077f</id>
    <published>2021-05-10T00:00:00+05:45</published>
-   <updated>2023-09-24T22:32:19+05:45</updated>
+   <updated>2024-03-03T16:48:39+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -5341,7 +5432,7 @@
    <link href="https://bpanthi977.github.io/braindump/mathematical_physics.html" />
    <id>urn:uuid:94c8da64-d090-407a-b376-606b5916c91d</id>
    <published>2020-12-15T00:00:00+05:45</published>
-   <updated>2023-09-24T22:31:45+05:45</updated>
+   <updated>2024-03-03T15:49:01+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -5692,7 +5783,7 @@
    <link href="https://bpanthi977.github.io/braindump/Cognitive%20science.html" />
    <id>urn:uuid:196b028a-a077-4815-9596-b1f7f1486e51</id>
    <published>2020-11-13T00:00:00+05:45</published>
-   <updated>2023-09-24T22:32:20+05:45</updated>
+   <updated>2024-03-03T15:52:27+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -5926,7 +6017,7 @@
    <link href="https://bpanthi977.github.io/braindump/coupled_pendulum.html" />
    <id>urn:uuid:5d83c70a-16df-4b45-9a06-957059160b80</id>
    <published>2020-10-18T00:00:00+05:45</published>
-   <updated>2023-09-24T22:32:07+05:45</updated>
+   <updated>2024-03-03T14:29:49+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -6069,7 +6160,7 @@
    <link href="https://bpanthi977.github.io/braindump/stock_market.html" />
    <id>urn:uuid:0a2cc957-d7ee-487b-8562-7f858d09c256</id>
    <published>2020-08-22T00:00:00+05:45</published>
-   <updated>2023-09-24T22:31:24+05:45</updated>
+   <updated>2024-02-25T15:16:58+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -6353,9 +6444,9 @@
 <entry>
    <title type="text">Linear Algebra via Exterior Products</title>
    <link href="https://bpanthi977.github.io/braindump/linear_algebra.html" />
-   <id>urn:uuid:3BE05C1D-E724-4019-84D6-5CC8D428805A</id>
+   <id>urn:uuid:AFBE9DB6-C73D-43A3-AF97-E0F4FE76F835</id>
    <published>2020-06-22T00:00:00+05:45</published>
-   <updated>2023-09-24T22:31:47+05:45</updated>
+   <updated>2024-03-03T13:52:40+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -6602,7 +6693,7 @@
    <link href="https://bpanthi977.github.io/braindump/note_taking.html" />
    <id>urn:uuid:10a214f1-9081-4264-ae88-ad7c02ccfdc8</id>
    <published>2020-05-27T00:00:00+05:45</published>
-   <updated>2023-09-24T22:31:39+05:45</updated>
+   <updated>2024-02-24T10:43:30+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
@@ -6771,7 +6862,7 @@
    <link href="https://bpanthi977.github.io/braindump/arch_linux.html" />
    <id>urn:uuid:e7df9711-1489-4775-9234-469eb870b357</id>
    <published>2020-05-26T00:00:00+05:45</published>
-   <updated>2023-09-24T22:32:14+05:45</updated>
+   <updated>2024-03-03T16:23:41+05:45</updated>
    <author>
      <name>Bibek Panthi</name>
    </author>
