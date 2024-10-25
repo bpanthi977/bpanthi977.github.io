@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Goal-Conditioned Supervised Learning</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-09-14 Sat&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Goal-Conditioned Supervised Learning</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#Any%20trajectory%20is%20optimal%20if%20the%20goal%20is%20the%20final%20state%20of%20trajectory">1. Any trajectory is optimal if the goal is the final state of trajectory</a></li>
+<li><a href="#Comparision%20with%20HER">2. Comparision with HER</a></li>
+</ul>
+</div>
+</div>
+<ul class="org-ul">
+<li><a href="https://dibyaghosh.com/blog/rl/gcsl.html">https://dibyaghosh.com/blog/rl/gcsl.html</a></li>
+<li><a href="https://www.youtube.com/watch?v=-vMcPk2Uc8g">https://www.youtube.com/watch?v=-vMcPk2Uc8g</a></li>
+<li>paper: <a href="papers/Learning to Reach Goals via Iterated Supervised Learning - 1912.06088v4.pdf#page=nil">Learning to Reach Goals via Iterated Supervised Learning - 1912.06088v4.pdf</a></li>
+</ul>
+
+<p>
+Authors: <a href="dibya_ghosh.html#ID-BA40970C-7D05-44CB-B640-E0E338620EF0">Dibya Ghosh</a>, <a href="benjamin_eysenbach.html#ID-4FD589C8-BAF5-454B-AAEC-CFE85C9F9B92">Benjamin Eysenbach</a>, <a href="sergey_levine.html#ID-65DED394-F17D-4C6A-A86D-FE48A5EED74A">Sergey Levine</a>
+</p>
+<div id="outline-container-Any%20trajectory%20is%20optimal%20if%20the%20goal%20is%20the%20final%20state%20of%20trajectory" class="outline-2">
+<h2 id="Any%20trajectory%20is%20optimal%20if%20the%20goal%20is%20the%20final%20state%20of%20trajectory"><span class="section-number-2">1.</span> Any trajectory is optimal if the goal is the final state of trajectory</h2>
+<div class="outline-text-2" id="text-1">
+<blockquote>
+<p>
+Any trajectory is a successful demonstration for reaching the final state in that same trajectory. (<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Learning to Reach Goals via Iterated Supervised Learning - 1912.06088v4.pdf#page=1">pg. 1</a>)
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Comparision%20with%20HER" class="outline-2">
+<h2 id="Comparision%20with%20HER"><span class="section-number-2">2.</span> Comparision with HER</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+GCSL is different from <a href="hindsight_experience_replay.html#ID-7A6B17BA-D697-4DE2-9A38-09C56B08BF08">Hindsight Experience Replay</a>. (See <a href="https://www.youtube.com/watch?v=-vMcPk2Uc8g&t=633s">00:10:33 Comparision with HER</a>)
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">HER</th>
+<th scope="col" class="org-left">GCSL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Is the Goal in the Trajectory?</td>
+<td class="org-left">NO</td>
+<td class="org-left">YES</td>
+</tr>
+
+<tr>
+<td class="org-left">Uses TD Learning?</td>
+<td class="org-left">YES</td>
+<td class="org-left">NO</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li>Goal from Trajectory?
+<ul class="org-ul">
+<li>Given a transition HER creates a fictitious transition by choosing an arbitrary goal and updating the reward as per the goal. The goal doesn't have to be in the trajectory</li>
+<li><a href="https://www.youtube.com/watch?v=-vMcPk2Uc8g&t=657s">00:10:57</a> GCSL only relables the transition goal to be the final state of the trajectory</li>
+</ul></li>
+
+<li>TD Learning? <a href="https://www.youtube.com/watch?v=-vMcPk2Uc8g&t=681s">00:11:21</a>
+<ul class="org-ul">
+<li>HER uses TD Learning (for learning value function) which is unstable</li>
+<li><p>
+GCSL directly learns policy using Supervised Learning: Imitation Learning is stable
+</p>
+
+<p>
+So even if we replace the goal in HER to be terminal state of trajectory, learning value function is not as stable as learning policy directly
+</p></li>
+</ul></li>
+</ul>
+
+<hr />
+<h3>References</h3>
+
+<ul class="org-ul">
+<li><a href="https://arxiv.org/abs/1912.06088">https://arxiv.org/abs/1912.06088</a></li>
+<li><a href="https://dibyaghosh.com/blog/rl/gcsl.html">https://dibyaghosh.com/blog/rl/gcsl.html</a> (<a href="goal_conditioned_supervised_learning.html#ID-C46B63F1-4324-4AC5-A956-CA49D593AFA3">Goal-Conditioned Supervised Learning</a>)</li>
+<li><a href="https://www.youtube.com/watch?v=-vMcPk2Uc8g">https://www.youtube.com/watch?v=-vMcPk2Uc8g</a> (<a href="goal_conditioned_supervised_learning.html#ID-C46B63F1-4324-4AC5-A956-CA49D593AFA3">Goal-Conditioned Supervised Learning</a>)</li>
+</ul>
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="supervised_learning_for_rl.html#ID-FFD963C6-CED1-4D80-9DC0-ABCC1AB9695A">Supervised Learning for RL</a></li>
+<li><a href="reinforcement_learning.html#ID-B010228E-5555-4D07-8E63-B54E476A249E">Reinforcement Learning</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Goal-Conditioned Supervised Learning">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>

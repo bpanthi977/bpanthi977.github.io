@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Every Model Learned by Gradient Descent Is Approximately a Kernel Machine</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-09-09 Mon&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Every Model Learned by Gradient Descent Is Approximately a Kernel Machine</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#%5B%5Bpdf%3Apapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A1%2B%2B0.37%3B%3Bannot-1-17%5D%5BGradient%20Descent%20%3D%3E%20Kernel%20Machines%5D%5D">1. Gradient Descent =&gt; Kernel Machines</a></li>
+<li><a href="#%5B%5Bpdf%3Apapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A2%2B%2B0.35%3B%3Bannot-2-21%5D%5BKernel%20Machines%20%3D%3E%201%20Layer%20NN%5D%5D">2. Kernel Machines =&gt; 1 Layer NN</a></li>
+<li><a href="#%5B%5Bpdf%3Apapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A2%2B%2B0.45%3B%3Bannot-2-19%5D%5BDeep%20NN%20seem%20more%20expressible%20but%20learned%20function%20depends%20on%20Learning%20Algorithm%5D%5D">3. Deep NN seem more expressible but learned function depends on Learning Algorithm</a></li>
+<li><a href="#Kernel">4. Kernel</a></li>
+<li><a href="#%5B%5Bpdf%3Apapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A8%2B%2B0.22%3B%3Bannot-8-29%5D%5BDo%20Deep%20NN%20learn%20representations%3F%5D%5D">5. Do Deep NN learn representations?</a></li>
+<li><a href="#%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A8%2B%2B0.59%3B%3Bannot-8-31%5D%5BUsing%20derivatives%20in%20Kernel%20helps%20combat%20curse%20of%20dimensionality%5D%5D">6. Using derivatives in Kernel helps combat curse of dimensionality</a></li>
+<li><a href="#%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A8%2B%2B0.79%3B%3Bannot-8-30%5D%5BPath%20Kernel%20save%20storage%20space%20and%20matching%20time%5D%5D">7. Path Kernel save storage space and matching time</a></li>
+<li><a href="#%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A9%2B%2B0.21%3B%3Bannot-9-21%5D%5BGradient%20descent%20can%20be%20viewed%20as%20a%20Boosting%20algorithm%5D%5D">8. Gradient descent can be viewed as a Boosting algorithm</a></li>
+<li><a href="#%5B%5Bpdf%3Apapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A9%2B%2B0.35%3B%3Bannot-9-20%5D%5BProbabilistic%20Models%20are%20Kernel%20Density%20Estimation%5D%5D">9. Probabilistic Models are Kernel Density Estimation</a></li>
+<li><a href="#Notes%20from%20the%20talk">10. Notes from the talk</a></li>
+</ul>
+</div>
+</div>
+<p>
+A paper by <a href="pedro_domingos.html#ID-401AB684-B8CE-421D-9720-C506B8894EDE">Pedro Domingos</a>.
+</p>
+
+<ul class="org-ul">
+<li>Link to <a href="papers/Every Model Learned by Gradient Descent Is Approximately a Kernel Machine - 2012.00152v1.pdf#page=nil">Paper</a></li>
+<li>Link to talk <a href="mpv:https://educast.fccn.pt/vod/clips/9ibhtuyhq/desktop.mp4">Deep Networks Are Kernel Machines. University of Lisbon, 2024.</a>
+(from author's <a href="https://homes.cs.washington.edu/~pedrod/">website</a>)</li>
+</ul>
+
+\begin{equation}
+ y = g\big(\sum_i a_i K(x, x_i) + b \big)
+\end{equation}
+<div id="outline-container-%5B%5Bpdf%3Apapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A1%2B%2B0.37%3B%3Bannot-1-17%5D%5BGradient%20Descent%20%3D%3E%20Kernel%20Machines%5D%5D" class="outline-2">
+<h2 id="%5B%5Bpdf%3Apapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A1%2B%2B0.37%3B%3Bannot-1-17%5D%5BGradient%20Descent%20%3D%3E%20Kernel%20Machines%5D%5D"><span class="section-number-2">1.</span> <a href="papers/Every Model Learned by Gradient Descent Is Approximately a Kernel Machine - 2012.00152v1.pdf#page=1">Gradient Descent =&gt; Kernel Machines</a></h2>
+<div class="outline-text-2" id="text-1">
+<blockquote>
+<p>
+Deep networks learned by the standard gradient descent algorithm are in fact
+mathematically approximately equivalent to <a href="kernel_machine.html#ID-409BB66D-307B-411A-9484-399E3D83E015">kernel machines</a>, a learning method
+that simply memorizes the data and uses it directly for prediction via a
+similarity function (the kernel). This greatly enhances the <a href="interpretability.html#ID-06B56620-27D5-4F0C-AB14-F50BD05B7102">interpretability</a> of deep network weights, by elucidating that they are effectively a <a href="superposition.html#ID-0528814B-D401-447B-96B9-B6BD6E9D78FF">superposition</a> of the training examples.
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-%5B%5Bpdf%3Apapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A2%2B%2B0.35%3B%3Bannot-2-21%5D%5BKernel%20Machines%20%3D%3E%201%20Layer%20NN%5D%5D" class="outline-2">
+<h2 id="%5B%5Bpdf%3Apapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A2%2B%2B0.35%3B%3Bannot-2-21%5D%5BKernel%20Machines%20%3D%3E%201%20Layer%20NN%5D%5D"><span class="section-number-2">2.</span> <a href="papers/Every Model Learned by Gradient Descent Is Approximately a Kernel Machine - 2012.00152v1.pdf#page=2">Kernel Machines =&gt; 1 Layer NN</a></h2>
+<div class="outline-text-2" id="text-2">
+<blockquote>
+<p>
+Kernel machines can be viewed as neural networks with one hidden layer, with the kernel as the nonlinearity.
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-%5B%5Bpdf%3Apapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A2%2B%2B0.45%3B%3Bannot-2-19%5D%5BDeep%20NN%20seem%20more%20expressible%20but%20learned%20function%20depends%20on%20Learning%20Algorithm%5D%5D" class="outline-2">
+<h2 id="%5B%5Bpdf%3Apapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A2%2B%2B0.45%3B%3Bannot-2-19%5D%5BDeep%20NN%20seem%20more%20expressible%20but%20learned%20function%20depends%20on%20Learning%20Algorithm%5D%5D"><span class="section-number-2">3.</span> <a href="papers/Every Model Learned by Gradient Descent Is Approximately a Kernel Machine - 2012.00152v1.pdf#page=2">Deep NN seem more expressible but learned function depends on Learning Algorithm</a></h2>
+<div class="outline-text-2" id="text-3">
+<blockquote>
+<p>
+But a deep network would seem to be irreducible to a kernel machine, since it
+can <a href="representation_learning.html#ID-5472BE86-3F85-4968-85F7-BF29128B8319">represent</a> some functions exponentially more compactly than a shallow one. <a href="papers/Every Model Learned by Gradient Descent Is Approximately a Kernel Machine - 2012.00152v1.pdf#page=2">(pg. 2</a>)
+</p>
+
+<p>
+Whether a representable function is actually learned, however, depends on the
+<a href="learning_algorithms.html#ID-59C04199-F124-43E2-8778-6831473A8C07">learning algorithm</a>.
+</p>
+
+<p>
+Learning by <a href="gradient_descent.html#ID-2782B0DD-D2E7-4A52-9E5C-46CAD26DFFD1">gradient descent</a> is a strong enough constraint that the end result
+is guaranteed to be approximately a kernel machine (<a href="papers/Every Model Learned by Gradient Descent Is Approximately a Kernel Machine - 2012.00152v1.pdf#page=2">pg. 2</a>)
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Kernel" class="outline-2">
+<h2 id="Kernel"><span class="section-number-2">4.</span> Kernel</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+The function \(y\) learned by gradient descent is the same as:
+</p>
+
+\begin{equation}
+  y = y_0 - \int_{c(t)} \sum_{i=1}^{m} \frac {\partial L} {\partial y_i} K_{y, w}^g(x, x_i) dt
+\end{equation}
+
+<p>
+Which can be written as a Kernel Machine:
+</p>
+
+\begin{equation}
+  y = \sum_{i=1}^m a_i K(x, x_i) + b
+\end{equation}
+
+<p>
+Here,
+</p>
+<ul class="org-ul">
+<li>\(m\) is the number of samples</li>
+<li>\(y_0\) is the initial model</li>
+<li>\(c(t)\) is the path followed by weights \(w\) during training</li>
+<li>\(K_{y, w}^g(x, x_i) = \nabla_w y_w(x) \cdot \nabla_w y_w(x_i)\) is the similarity (dot
+product) of the model's gradient for sample \(x_i\) and query \(x\)</li>
+</ul>
+
+<blockquote>
+<p>
+This differs from typical kernel machines in that the \(a_i\) ’s and \(b\) depend on \(x\).
+Nevertheless, the \(a_i\) ’s play a role similar to the example weights in ordinary
+SVMs and the perceptron algorithm (<a href="papers/Every Model Learned by Gradient Descent Is Approximately a Kernel Machine - 2012.00152v1.pdf#page=5">pg. 5</a>)
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+The proof above is for batch gradient descent, which uses all training data
+points at each step. To extend it to stochastic gradient descent, which uses a
+subsample, it suffices to multiply each term in the summation over data points
+by an indicator function \(I_i(t)\) (<a href="papers/Every Model Learned by Gradient Descent Is Approximately a Kernel Machine - 2012.00152v1.pdf#page=6">pg. 6</a>)
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-%5B%5Bpdf%3Apapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A8%2B%2B0.22%3B%3Bannot-8-29%5D%5BDo%20Deep%20NN%20learn%20representations%3F%5D%5D" class="outline-2">
+<h2 id="%5B%5Bpdf%3Apapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A8%2B%2B0.22%3B%3Bannot-8-29%5D%5BDo%20Deep%20NN%20learn%20representations%3F%5D%5D"><span class="section-number-2">5.</span> <a href="papers/Every Model Learned by Gradient Descent Is Approximately a Kernel Machine - 2012.00152v1.pdf#page=8">Do Deep NN learn representations?</a></h2>
+<div class="outline-text-2" id="text-5">
+<blockquote>
+<p>
+The most significant implication of our result for deep learning is that it casts doubt on the common view that it works by automatically discovering new <a href="representation_learning.html#ID-5472BE86-3F85-4968-85F7-BF29128B8319">representations</a> of the data, in contrast with other machine learning methods, which rely on predefined features.
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A8%2B%2B0.59%3B%3Bannot-8-31%5D%5BUsing%20derivatives%20in%20Kernel%20helps%20combat%20curse%20of%20dimensionality%5D%5D" class="outline-2">
+<h2 id="%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A8%2B%2B0.59%3B%3Bannot-8-31%5D%5BUsing%20derivatives%20in%20Kernel%20helps%20combat%20curse%20of%20dimensionality%5D%5D"><span class="section-number-2">6.</span> <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Every Model Learned by Gradient Descent Is Approximately a Kernel Machine - 2012.00152v1.pdf#page=8">Using derivatives in Kernel helps combat curse of dimensionality</a></h2>
+<div class="outline-text-2" id="text-6">
+<blockquote>
+<p>
+A key property of path kernels is that they combat the <a href="curse_of_dimensionality.html#ID-428E0A1A-2019-4776-832D-B53B19E6F506">curse of dimensionality</a> by incorporating derivatives into the kernel: two data points are similar if the candidate function’s derivatives at them are similar, rather than if they are close in the input space.
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+Points that are far in Euclidean space can be close in gradient space,
+potentially improving the ability to model complex functions. (For example, the
+maxima of a sine wave are all close in gradient space, even though they can be arbitrarily far apart in the input space.) (<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Every Model Learned by Gradient Descent Is Approximately a Kernel Machine - 2012.00152v1.pdf#page=8">pg. 8</a>)
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A8%2B%2B0.79%3B%3Bannot-8-30%5D%5BPath%20Kernel%20save%20storage%20space%20and%20matching%20time%5D%5D" class="outline-2">
+<h2 id="%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A8%2B%2B0.79%3B%3Bannot-8-30%5D%5BPath%20Kernel%20save%20storage%20space%20and%20matching%20time%5D%5D"><span class="section-number-2">7.</span> <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Every Model Learned by Gradient Descent Is Approximately a Kernel Machine - 2012.00152v1.pdf#page=8">Path Kernel save storage space and matching time</a></h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Kernel machines require to store all the samples for matching but for deep neural networks it is not necessary since they are effectively all stored and matched simultaneously via their <a href="superposition.html#ID-0528814B-D401-447B-96B9-B6BD6E9D78FF">superposition</a> in the model parameters. The storage space and matching time are independent of the number of examples.
+</p>
+</div>
+</div>
+<div id="outline-container-%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A9%2B%2B0.21%3B%3Bannot-9-21%5D%5BGradient%20descent%20can%20be%20viewed%20as%20a%20Boosting%20algorithm%5D%5D" class="outline-2">
+<h2 id="%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A9%2B%2B0.21%3B%3Bannot-9-21%5D%5BGradient%20descent%20can%20be%20viewed%20as%20a%20Boosting%20algorithm%5D%5D"><span class="section-number-2">8.</span> <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Every Model Learned by Gradient Descent Is Approximately a Kernel Machine - 2012.00152v1.pdf#page=9">Gradient descent can be viewed as a Boosting algorithm</a></h2>
+<div class="outline-text-2" id="text-8">
+<blockquote>
+<p>
+Gradient descent can be viewed as a boosting algorithm, with tangent kernel machines as the weak learner and path kernel machines as the strong learner obtained by boosting it.
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-%5B%5Bpdf%3Apapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A9%2B%2B0.35%3B%3Bannot-9-20%5D%5BProbabilistic%20Models%20are%20Kernel%20Density%20Estimation%5D%5D" class="outline-2">
+<h2 id="%5B%5Bpdf%3Apapers%2FEvery%20Model%20Learned%20by%20Gradient%20Descent%20Is%20Approximately%20a%20Kernel%20Machine%20-%202012.00152v1.pdf%3A%3A9%2B%2B0.35%3B%3Bannot-9-20%5D%5BProbabilistic%20Models%20are%20Kernel%20Density%20Estimation%5D%5D"><span class="section-number-2">9.</span> <a href="papers/Every Model Learned by Gradient Descent Is Approximately a Kernel Machine - 2012.00152v1.pdf#page=9">Probabilistic Models are Kernel Density Estimation</a></h2>
+<div class="outline-text-2" id="text-9">
+<blockquote>
+<p>
+Every probabilistic model learned by gradient descent, including <a href="bayesian_network.html#ID-08A04535-A715-40FD-B360-A98555FC86AC">Bayesian networks</a> (Koller and Friedman, 2009), is a form of kernel density estimation (Parzen, 1962).
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Notes%20from%20the%20talk" class="outline-2">
+<h2 id="Notes%20from%20the%20talk"><span class="section-number-2">10.</span> Notes from the talk</h2>
+<div class="outline-text-2" id="text-10">
+<ul class="org-ul">
+<li>We know all these theorems that show that we can learn some
+functions exponentially more compactly when we use Deep Neural Networks.
+(<a href="mpv:https://educast.fccn.pt/vod/clips/9ibhtuyhq/desktop.mp4::00:07:16">00:07:16</a>)</li>
+
+<li>But there is a difference between being able to represent something and
+being able to learn it. Gradient is a simple procedure. Maybe there is a
+better learning method other than <a href="backprop.html#ID-90B92089-8705-42B1-A87B-63D31C3CA121">backprop</a> that can learn it. (<a href="mpv:https://educast.fccn.pt/vod/clips/9ibhtuyhq/desktop.mp4::00:07:38">00:07:38</a>)</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Every Model Learned by Gradient Descent Is Approximately a Kernel Machine">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>

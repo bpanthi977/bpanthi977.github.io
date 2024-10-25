@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Neural Acceleration of Graph Based Utility Functions for Sparse Matrices</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-09-11 Wed&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Neural Acceleration of Graph Based Utility Functions for Sparse Matrices</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#Objective">1. Objective</a></li>
+<li><a href="#Traditional%20Method%20is%20%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A3%2B%2B0.08%3B%3Bannot-3-2%5D%5BSymbolic%20Factorization%5D%5D">2. Traditional Method is Symbolic Factorization</a>
+<ul>
+<li><a href="#Question%3A%20Is%20analysis%20required%20only%20once%3F">2.1. Question: Is analysis required only once?</a></li>
+</ul>
+</li>
+<li><a href="#Can%20be%20formulated%20mostly%20as%20a%20Graph%20Based%20problem">3. Can be formulated mostly as a Graph Based problem</a>
+<ul>
+<li><a href="#Graph%20Based%20Utility%20Functions">3.1. Graph Based Utility Functions</a></li>
+<li><a href="#Graph%20Based%20problems%20are%20usually%20approximated">3.2. Graph Based problems are usually approximated</a></li>
+</ul>
+</li>
+<li><a href="#Use%20Graph%20based%20Neural%20Network">4. Use Graph based Neural Network</a>
+<ul>
+<li><a href="#Dense%20NN%20are%20not%20fit%20for%20Neural%20Acceleration%20of%20Graph%20Algorithms">4.1. Dense NN are not fit for Neural Acceleration of Graph Algorithms</a></li>
+<li><a href="#%5B%5Bid%3A62e97a52-1804-4948-91e4-bede2027d3d5%5D%5BRNN%5D%5D%3A%20GRU%20vs%20LSTM">4.2. RNN: GRU vs LSTM</a></li>
+<li><a href="#%5B%5Bid%3AD67024E3-F6C1-4263-8B35-385F1DE5CC80%5D%5BGNN%5D%5D%3A%20GCN%20vs%20GAT">4.3. GNN: GCN vs GAT</a>
+<ul>
+<li><a href="#Question%3A%20What%20is%20spectral%20subarea%20convolution%20operator%3F">4.3.1. Question: What is spectral subarea convolution operator?</a></li>
+<li><a href="#Question%3A%20Network%20for%20M5%3F">4.3.2. Question: Network for M5?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Experiments">5. Experiments</a>
+<ul>
+<li><a href="#Dataset%20is%20SuiteSparse%20Collection">5.1. Dataset is SuiteSparse Collection</a></li>
+<li><a href="#Loss%20Function%20is%20Smooth%20L1%20Loss">5.2. Loss Function is Smooth L1 Loss</a></li>
+<li><a href="#Individual%20Model%20prediction%20Performance">5.3. Individual Model prediction Performance</a></li>
+<li><a href="#Usefullness%20for%20selecting%20best%20ordering">5.4. Usefullness for selecting best ordering</a>
+<ul>
+<li><a href="#%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A11%2B%2B0.36%3B%3Bannot-11-0%5D%5BDefinition%20of%20Accuracy%5D%5D">5.4.1. Definition of Accuracy</a></li>
+<li><a href="#%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A11%2B%2B0.87%3B%3Bannot-11-1%5D%5BAccuracy%20vs%20Precision%2FRecall%5D%5D">5.4.2. Accuracy vs Precision/Recall</a></li>
+<li><a href="#QN%3A%20%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A11%2B%2B0.54%3B%3Bannot-11-3%5D%5BTypo%3F%5D%5D">5.4.3. QN: Typo?</a></li>
+</ul>
+</li>
+<li><a href="#%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A14%2B%2B0.83%3B%3Bannot-14-0%5D%5BM5%20is%20good%5D%5D">5.5. M5 is good</a></li>
+<li><a href="#Question%3A%20Does%2030x%20speedup%20include%20finding%20the%20fill%20in%20too%3F">5.6. Question: Does 30x speedup include finding the fill in too?</a></li>
+</ul>
+</li>
+<li><a href="#Conclusion">6. Conclusion</a>
+<ul>
+<li><a href="#%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A16%2B%2B0.28%3B%3Bannot-16-0%5D%5BWe%20use%20NA%20to%20identify%20best%20ordering%5D%5D">6.1. We use NA to identify best ordering</a></li>
+<li><a href="#%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A16%2B%2B0.45%3B%3Bannot-16-1%5D%5BConsidering%20computation%20pattern%20is%20important%5D%5D">6.2. Considering computation pattern is important</a></li>
+<li><a href="#%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A16%2B%2B0.49%3B%3Bannot-16-2%5D%5BUpto%2030x%20speedup%20within%20~5%25%20accuracy%5D%5D">6.3. Upto 30x speedup within ~5% accuracy</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+[<a href="papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf">file:</a>][<a href="papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=nil">pdf:</a>]
+by <a href="private/joshua_booth.html#ID-FCB111EE-2B52-4D69-873D-2C34B9815884">Joshua Booth</a>, Greg Bolet
+</p>
+<div id="outline-container-Objective" class="outline-2">
+<h2 id="Objective"><span class="section-number-2">1.</span> Objective</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Use <a href="neural_acceleration.html#ID-A9F4A884-AEDF-49F1-9FBE-1C9579FF451D">Neural Acceleration</a> to approximate a utility function of Sparse Matrices</li>
+
+<li>The utility function here is the Prediction function for fill-in of an ordering algorithm</li>
+</ul>
+
+<blockquote>
+<p>
+We demonstrate these techniques on the problem related to the utility functions of sparse matrix ordering and fill-in (i.e., zero elements becoming nonzero during factorization) calculations [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=1">Page 1</a>]
+</p>
+</blockquote>
+
+<ul class="org-ul">
+<li>Find good ordering to reduce fill-in for Cholesky factorization</li>
+</ul>
+
+<blockquote>
+<p>
+This paper focuses on the sparse matrix problem of ordering to reduce fill-in for the Cholesky factorization of a sparse matrix. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=3">Page 3</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Traditional%20Method%20is%20%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A3%2B%2B0.08%3B%3Bannot-3-2%5D%5BSymbolic%20Factorization%5D%5D" class="outline-2">
+<h2 id="Traditional%20Method%20is%20%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A3%2B%2B0.08%3B%3Bannot-3-2%5D%5BSymbolic%20Factorization%5D%5D"><span class="section-number-2">2.</span> Traditional Method is <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=3">Symbolic Factorization</a></h2>
+<div class="outline-text-2" id="text-2">
+<p>
+One way to find a good ordering is through <a href="symbolic_factorization_of_sparse_matrix.html#ID-D2C6A460-0FFB-4C9F-A43B-E14B6E967AE7">Symbolic Factorization of Sparse Matrix</a>
+</p>
+
+<ol class="org-ol">
+<li>generate ordering</li>
+<li>estimate non zero count of \(L\) matrix using symbolic analysis</li>
+<li>apply cholesky with the best ordering to find the actual \(LU\) factorization</li>
+</ol>
+
+<blockquote>
+<p>
+This problem is normally done in two steps:
+(1) generating and applying the ordering to the sparse matrix and
+(2) applying a symbolic analysis via the graph representation to calculate the nonzero counts (i.e., nnz(L)).
+These steps together are normally referred to as symbolic factorization by sparse linear solver packages.
+</p>
+</blockquote>
+</div>
+<div id="outline-container-Question%3A%20Is%20analysis%20required%20only%20once%3F" class="outline-3">
+<h3 id="Question%3A%20Is%20analysis%20required%20only%20once%3F"><span class="section-number-3">2.1.</span> Question: Is analysis required only once?</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=3">Page 3</a>
+</p>
+
+<blockquote>
+<p>
+For a fixed sparse matrix, <b>this step</b> may only be done once, but the analysis could consider multiple different orderings.
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="outline-container-Can%20be%20formulated%20mostly%20as%20a%20Graph%20Based%20problem" class="outline-2">
+<h2 id="Can%20be%20formulated%20mostly%20as%20a%20Graph%20Based%20problem"><span class="section-number-2">3.</span> Can be formulated mostly as a Graph Based problem</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The problem of finding best ordering has components that can be formulated as graph based problem
+</p>
+</div>
+<div id="outline-container-Graph%20Based%20Utility%20Functions" class="outline-3">
+<h3 id="Graph%20Based%20Utility%20Functions"><span class="section-number-3">3.1.</span> Graph Based Utility Functions</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+All ordering algorithms, which we consider, are graph based.
+</p>
+
+<p>
+Ordering is a core graph problem but includes other graph problems like:
+</p>
+<ul class="org-ul">
+<li>vertex information</li>
+<li>graph partition</li>
+</ul>
+
+
+<p>
+Calculating fill-in is Subgraph identification problem.
+</p>
+
+<blockquote>
+<p>
+Both RCM and AMD have some part of the vertex information subproblem, and ND uses the graph partition subclass within its algorithm. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=3">Page 3</a>]
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+The problem of ordering to reduce fill-in contains a number of graph subclass problems. Overall, the problem fits into the first subclass [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=2">Page 2</a>] of graph ordering. However, many ordering algorithms themselves fall into other subclasses, such as vertex information and graph partitioning. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=4">Page 4</a>]
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+The algorithm for calculating fill-in is a graph-based algorithm that deals with the subclass of subgraph identification. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=4">Page 4</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Graph%20Based%20problems%20are%20usually%20approximated" class="outline-3">
+<h3 id="Graph%20Based%20problems%20are%20usually%20approximated"><span class="section-number-3">3.2.</span> Graph Based problems are usually approximated</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Sparse matrix problems formulated as Graph problems are usually only solved by approximation. So it makes sense to use Neural Acceleration.
+</p>
+
+<blockquote>
+<p>
+Many of the irregular sparse problems that are solved are already approximated in some manner, and this is especially true related to graph algorithms. This approximation for many of these problems is due to the exact solution being NP-hard, the exact solution being too computationally expensive, or the exact solution not being able to be parallelized. Therefore, these problems make sense to try to accelerate with neural acceleration. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=2">Page 2</a>]
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="outline-container-Use%20Graph%20based%20Neural%20Network" class="outline-2">
+<h2 id="Use%20Graph%20based%20Neural%20Network"><span class="section-number-2">4.</span> Use Graph based Neural Network</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-Dense%20NN%20are%20not%20fit%20for%20Neural%20Acceleration%20of%20Graph%20Algorithms" class="outline-3">
+<h3 id="Dense%20NN%20are%20not%20fit%20for%20Neural%20Acceleration%20of%20Graph%20Algorithms"><span class="section-number-3">4.1.</span> Dense NN are not fit for Neural Acceleration of Graph Algorithms</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>Graph based algorithms build information iteratively</li>
+<li>Dense NN don't mimic this behaviour</li>
+<li>However, RRN and GNN do mimic this behaviour</li>
+</ul>
+
+<blockquote>
+<p>
+The difficulty in many graph-based algorithms is the iterative nature that information is accumulated via the graph’s connectivity of nodes and edges as it builds up a holistic view of the input graph. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=5">Page 5</a>]
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+The next limiting factor is that the current approach utilizes only small dense neural networks that do not accurately approximate the computation pattern of graph algorithms. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=5">Page 5</a>]
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+Two general classifications of neural networks that do mimic this iterative nature are recurrent neural networks and graph neural networks. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=5">Page 5</a>]
+</p>
+</blockquote>
+
+<ul class="org-ul">
+<li>This paper show that neural acceleration can be used for graph based algorithms too in scalable way</li>
+<li>And the graph pattern of NN should be representative of graph algorithm</li>
+</ul>
+
+<blockquote>
+<p>
+In our approach, we demonstrate that the concept of neural acceleration can be extended to graph-based algorithms using different base neural networks that better fit the computational pattern of the application. Moreover, we will demonstrate that this approach is still scalable in terms of performance. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=5">Page 5</a>]
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+we attempt to show in this work that the graph pattern is not something that should be searched for or explored but should be representative of the graph algorithm we are looking to approximate. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=7">Page 7</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-%5B%5Bid%3A62e97a52-1804-4948-91e4-bede2027d3d5%5D%5BRNN%5D%5D%3A%20GRU%20vs%20LSTM" class="outline-3">
+<h3 id="%5B%5Bid%3A62e97a52-1804-4948-91e4-bede2027d3d5%5D%5BRNN%5D%5D%3A%20GRU%20vs%20LSTM"><span class="section-number-3">4.2.</span> <a href="Recurrent neural network.html#ID-62e97a52-1804-4948-91e4-bede2027d3d5">RNN</a>: GRU vs LSTM</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li>GRU is cheaper than LSTM</li>
+<li>GRU is better than plain RNN</li>
+</ul>
+
+<blockquote>
+<p>
+We select the GRU as it provides a better pass-through of history than RNN and is computationally cheaper than an LSTM. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=6">Page 6</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-%5B%5Bid%3AD67024E3-F6C1-4263-8B35-385F1DE5CC80%5D%5BGNN%5D%5D%3A%20GCN%20vs%20GAT" class="outline-3">
+<h3 id="%5B%5Bid%3AD67024E3-F6C1-4263-8B35-385F1DE5CC80%5D%5BGNN%5D%5D%3A%20GCN%20vs%20GAT"><span class="section-number-3">4.3.</span> <a href="graph_neural_network.html#ID-D67024E3-F6C1-4263-8B35-385F1DE5CC80">GNN</a>: GCN vs GAT</h3>
+<div class="outline-text-3" id="text-4-3">
+<ul class="org-ul">
+<li>GAT is more sensitive to input parameter space and requires more data and training</li>
+<li>GCN is cheaper</li>
+<li>We use two variety of GCN: [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=7">Page 7</a>]
+<ul class="org-ul">
+<li>GCN</li>
+<li>Gated Graph Convolution</li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-Question%3A%20What%20is%20spectral%20subarea%20convolution%20operator%3F" class="outline-4">
+<h4 id="Question%3A%20What%20is%20spectral%20subarea%20convolution%20operator%3F"><span class="section-number-4">4.3.1.</span> Question: What is spectral subarea convolution operator?</h4>
+<div class="outline-text-4" id="text-4-3-1">
+<blockquote>
+<p>
+GraphConv is commonly referred to as a GCN and is in the spectral subarea convolution operator, as opposed to Graph Attention Networks (GAT) which is a commonly used operator in the spatial subarea. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=7">Page 7</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Question%3A%20Network%20for%20M5%3F" class="outline-4">
+<h4 id="Question%3A%20Network%20for%20M5%3F"><span class="section-number-4">4.3.2.</span> Question: Network for M5?</h4>
+<div class="outline-text-4" id="text-4-3-2">
+<p>
+\(\hat{x}_i = GRU(x_i, concat_{j \in N(i)} W_1 x_j)\)
+</p>
+
+<ul class="org-ul">
+<li>We use One layer of graph convolution methods [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=7">Page 7</a>]</li>
+<li>concat =&gt; send the features for each neighbour edge one by one to RNN</li>
+<li>So, one layer means one don't pass the output of one GRU to another GRU</li>
+
+<li>M5 graph is that of <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=6">Figure 3</a>?</li>
+</ul>
+<blockquote>
+<p>
+In number M5, the GatedGraph model (equation 4) is used where the graph is that in figure 3 with n vertices and the vertex data is each column of the sparse matrix. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=9">Page 9</a>]
+</p>
+</blockquote>
+<p>
+typo?
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-Experiments" class="outline-2">
+<h2 id="Experiments"><span class="section-number-2">5.</span> Experiments</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-Dataset%20is%20SuiteSparse%20Collection" class="outline-3">
+<h3 id="Dataset%20is%20SuiteSparse%20Collection"><span class="section-number-3">5.1.</span> Dataset is SuiteSparse Collection</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+scaled down using Neighbourhood voting filter [TODO]
+</p>
+
+<blockquote>
+<p>
+This generated dataset is constructed using square sparse matrices of size 512 to 1,000,000 from the SuiteSparse matrix collection. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=9">Page 9</a>]
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+Larger matrices are scaled down to the needed dimension using a 3 × 3 local neighborhood voting filter (i.e., a local filter similar to edge detection and blurring in image process- ing) to determine the nonzero pattern. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=9">Page 9</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Loss%20Function%20is%20Smooth%20L1%20Loss" class="outline-3">
+<h3 id="Loss%20Function%20is%20Smooth%20L1%20Loss"><span class="section-number-3">5.2.</span> Loss Function is Smooth L1 Loss</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+[<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=10">Page 10</a>]
+</p>
+</div>
+</div>
+<div id="outline-container-Individual%20Model%20prediction%20Performance" class="outline-3">
+<h3 id="Individual%20Model%20prediction%20Performance"><span class="section-number-3">5.3.</span> Individual Model prediction Performance</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+[See <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=11">Table 5</a>]
+</p>
+</div>
+</div>
+<div id="outline-container-Usefullness%20for%20selecting%20best%20ordering" class="outline-3">
+<h3 id="Usefullness%20for%20selecting%20best%20ordering"><span class="section-number-3">5.4.</span> Usefullness for selecting best ordering</h3>
+<div class="outline-text-3" id="text-5-4">
+</div>
+<div id="outline-container-%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A11%2B%2B0.36%3B%3Bannot-11-0%5D%5BDefinition%20of%20Accuracy%5D%5D" class="outline-4">
+<h4 id="%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A11%2B%2B0.36%3B%3Bannot-11-0%5D%5BDefinition%20of%20Accuracy%5D%5D"><span class="section-number-4">5.4.1.</span> <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=11">Definition of Accuracy</a></h4>
+<div class="outline-text-4" id="text-5-4-1">
+<ul class="org-ul">
+<li>Ordering that have a prediction within \(\tau_b\) tolerance are recommended</li>
+<li>Accuracy = % of times best ordering is among the orderings recommended</li>
+<li>Accuracy can be trivially (but not arbitarily) increased by increasing \(\tau_b\)</li>
+</ul>
+
+<blockquote>
+<p>
+Recall that our method returns a list of all four orderings that are within τb = .05 of the smallest predicted nonzero count. If the observed smallest nonzero count is within this list, we consider this as being an accurate prediction of this ordering, even if it is not the smallest nonzero count for the returned list.
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A11%2B%2B0.87%3B%3Bannot-11-1%5D%5BAccuracy%20vs%20Precision%2FRecall%5D%5D" class="outline-4">
+<h4 id="%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A11%2B%2B0.87%3B%3Bannot-11-1%5D%5BAccuracy%20vs%20Precision%2FRecall%5D%5D"><span class="section-number-4">5.4.2.</span> <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=11">Accuracy vs Precision/Recall</a></h4>
+<div class="outline-text-4" id="text-5-4-2">
+<blockquote>
+<p>
+However, we would like to identify if our individual models are truly sorting out the different orderings or if the measurement of accuracy is due to solely the approximation tolerance (τb ).
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+For completeness, we additionally provide a confusion matrix for fill-in selection for each model type. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=11">Confusion Matrix</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-QN%3A%20%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A11%2B%2B0.54%3B%3Bannot-11-3%5D%5BTypo%3F%5D%5D" class="outline-4">
+<h4 id="QN%3A%20%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A11%2B%2B0.54%3B%3Bannot-11-3%5D%5BTypo%3F%5D%5D"><span class="section-number-4">5.4.3.</span> QN: <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=11">Typo?</a></h4>
+<div class="outline-text-4" id="text-5-4-3">
+<p>
+Divide by N is missing
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A14%2B%2B0.83%3B%3Bannot-14-0%5D%5BM5%20is%20good%5D%5D" class="outline-3">
+<h3 id="%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A14%2B%2B0.83%3B%3Bannot-14-0%5D%5BM5%20is%20good%5D%5D"><span class="section-number-3">5.5.</span> <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=14">M5 is good</a></h3>
+<div class="outline-text-3" id="text-5-5">
+<ul class="org-ul">
+<li>high accuracy with low \(\tau_b\)</li>
+</ul>
+
+<blockquote>
+<p>
+M5 is about to achieve an accuracy of around .90 with τb being .01. This demonstrates that all the submodels in M5 are fairly good approximation functions based on our argument related to our second consideration for sensitivity
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Question%3A%20Does%2030x%20speedup%20include%20finding%20the%20fill%20in%20too%3F" class="outline-3">
+<h3 id="Question%3A%20Does%2030x%20speedup%20include%20finding%20the%20fill%20in%20too%3F"><span class="section-number-3">5.6.</span> Question: Does 30x speedup include finding the fill in too?</h3>
+<div class="outline-text-3" id="text-5-6">
+<p>
+Does the time for M5 include computing the ordering too?
+</p>
+
+<p>
+As I understand, time for CHOLMOD is to find ordering as per all methods, and then compute the fill in for all methods.
+</p>
+
+<p>
+But for M5 is to find fill in directly for all methods.
+</p>
+
+<blockquote>
+<p>
+The time for CHOLMOD to find each of the orderings and calculate the fill-in is approximately 385.2 seconds for a suite of all 996 sparse matrices.
+</p>
+
+<p>
+The time for M5 is 302.1 seconds (∼ 1.3× speedup) on the CPU and 12.7 seconds (30.3× speedup) on GPU. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=16">Page 16</a>]
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="outline-container-Conclusion" class="outline-2">
+<h2 id="Conclusion"><span class="section-number-2">6.</span> Conclusion</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Objective achieved by understanding and using:
+</p>
+<ul class="org-ul">
+<li>Connectivity Computational Pattern</li>
+<li><a href="recursive_neural_network.html#ID-642B7AFB-9F9A-490F-8BE2-1D21506B094E">Recursive Neural Network</a></li>
+<li><a href="graph_neural_network.html#ID-D67024E3-F6C1-4263-8B35-385F1DE5CC80">Graph Neural Network</a></li>
+</ul>
+</div>
+<div id="outline-container-%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A16%2B%2B0.28%3B%3Bannot-16-0%5D%5BWe%20use%20NA%20to%20identify%20best%20ordering%5D%5D" class="outline-3">
+<h3 id="%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A16%2B%2B0.28%3B%3Bannot-16-0%5D%5BWe%20use%20NA%20to%20identify%20best%20ordering%5D%5D"><span class="section-number-3">6.1.</span> <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=16">We use NA to identify best ordering</a></h3>
+<div class="outline-text-3" id="text-6-1">
+<blockquote>
+<p>
+graph-based problem of computing the nonzero count of the factorized sparse matrix within the framework of the graph problem of identifying the best sparse matrix ordering.
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A16%2B%2B0.45%3B%3Bannot-16-1%5D%5BConsidering%20computation%20pattern%20is%20important%5D%5D" class="outline-3">
+<h3 id="%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A16%2B%2B0.45%3B%3Bannot-16-1%5D%5BConsidering%20computation%20pattern%20is%20important%5D%5D"><span class="section-number-3">6.2.</span> <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=16">Considering computation pattern is important</a></h3>
+<div class="outline-text-3" id="text-6-2">
+<blockquote>
+<p>
+picking the correct method and considering the connectivity computational pattern graph is important in reducing the search space for a suitable approximation method.
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A16%2B%2B0.49%3B%3Bannot-16-2%5D%5BUpto%2030x%20speedup%20within%20~5%25%20accuracy%5D%5D" class="outline-3">
+<h3 id="%5B%5Bpdf%3A~%2FDocuments%2Fsynced%2FNotes%2Fpapers%2FNeural%20Acceleration%20of%20Graph%20Based%20Utility%20Functions%20for%20Sparse%20Matrices.pdf%3A%3A16%2B%2B0.49%3B%3Bannot-16-2%5D%5BUpto%2030x%20speedup%20within%20~5%25%20accuracy%5D%5D"><span class="section-number-3">6.3.</span> <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration of Graph Based Utility Functions for Sparse Matrices.pdf#page=16">Upto 30x speedup within ~5% accuracy</a></h3>
+<div class="outline-text-3" id="text-6-3">
+<blockquote>
+<p>
+speed up the execution of this problem by more 30× compared to the standard serial graph-based method while still providing an average estimated fill-in within ∼ 5% of the true
+</p>
+</blockquote>
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="neural_acceleration_for_incomplete_factorization_preconditioning.html#ID-05873B8B-5AC0-40FE-AF6F-629FF139A173">Neural Acceleration for Incomplete Factorization Preconditioning</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Neural Acceleration of Graph Based Utility Functions for Sparse Matrices">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>

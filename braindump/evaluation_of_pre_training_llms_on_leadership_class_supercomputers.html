@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Evaluation of Pre-training LLMs on Supercomputers</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-10-01 Tue&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Evaluation of Pre-training LLMs on Supercomputers</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#Contributions%2FScope">1. Contributions/Scope</a></li>
+<li><a href="#Setup">2. Setup</a></li>
+<li><a href="#Big%20LLMs%20require%20distributed%20training">3. Big LLMs require distributed training</a></li>
+<li><a href="#Parallelism%20Approach%20for%20Distributed%20Training%20of%20LLMs">4. Parallelism Approach for Distributed Training of LLMs</a>
+<ul>
+<li><a href="#Data%20Parallel">4.1. Data Parallel</a>
+<ul>
+<li><a href="#Distributed%20Data%20Parallel">4.1.1. Distributed Data Parallel</a></li>
+<li><a href="#FSDP%20%28Fully%20Sharded%20Data%20Parallel%29">4.1.2. FSDP (Fully Sharded Data Parallel)</a></li>
+</ul>
+</li>
+<li><a href="#Pipeline%20Parallel">4.2. Pipeline Parallel</a></li>
+<li><a href="#Tensor%20Parallel">4.3. Tensor Parallel</a>
+<ul>
+<li><a href="#Megatron">4.3.1. Megatron</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Experimental%20Setup%20%28%26%20Memory%2C%20Bandwidth%20Analysis%29">5. Experimental Setup (&amp; Memory, Bandwidth Analysis)</a>
+<ul>
+<li><a href="#Experimental%20Setup%20%28%26%20Memory%2C%20Bandwidth%20Analysis%29--FSDP%20%28Fully%20Sharded%20Data%20Parallel%29">5.1. FSDP (Fully Sharded Data Parallel)</a>
+<ul>
+<li><a href="#FSDP%20Algorithm">5.1.1. FSDP Algorithm</a></li>
+<li><a href="#Memory%20requirement%20is%20thus">5.1.2. Memory requirement is thus</a></li>
+<li><a href="#FSDP%20in%20Crusher">5.1.3. FSDP in Crusher</a></li>
+</ul>
+</li>
+<li><a href="#DeepSpeed-Megatron">5.2. DeepSpeed-Megatron</a>
+<ul>
+<li><a href="#Details">5.2.1. Details</a></li>
+<li><a href="#Fit%20the%20model%20and%20then%20use%20Data%20Parallelism">5.2.2. Fit the model and then use Data Parallelism</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Runtime%20and%20Energy%20Analysis">6. Runtime and Energy Analysis</a>
+<ul>
+<li><a href="#Compute%20scales%20with%20square%20of%20Parameters">6.1. Compute scales with square of Parameters</a>
+<ul>
+<li><a href="#Token%3AParameters%20%3D%2020%3A1%20is%20Optimal">6.1.1. Token:Parameters = 20:1 is Optimal</a></li>
+</ul>
+</li>
+<li><a href="#Compute%20Time%20~%20120%20P%5E2%20%2F%20R">6.2. Compute Time ~ 120 P<sup>2</sup> / R</a></li>
+<li><a href="#Energy">6.3. Energy</a></li>
+</ul>
+</li>
+<li><a href="#Evaluation">7. Evaluation</a>
+<ul>
+<li><a href="#Scaling%20Analysis">7.1. Scaling Analysis</a></li>
+<li><a href="#Memory%20%26%20Bandwidth">7.2. Memory &amp; Bandwidth</a></li>
+<li><a href="#Power">7.3. Power</a></li>
+<li><a href="#Train%20time%20and%20Energy%20Projections">7.4. Train time and Energy Projections</a>
+<ul>
+<li><a href="#Crusher%20is%20more%20energy%20efficient">7.4.1. Crusher is more energy efficient</a></li>
+<li><a href="#LLM%20workload%20is%204x%20more%20efficient%20that%20traditional%20workloads">7.4.2. LLM workload is 4x more efficient that traditional workloads</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Conclusions">8. Conclusions</a>
+<ul>
+<li><a href="#Software%20improvements%20might%20change%20the%20projections">8.1. Software improvements might change the projections</a></li>
+<li><a href="#Large%20per%20node%20memory%20and%20communication%20bandwidth%20required">8.2. Large per node memory and communication bandwidth required</a></li>
+<li><a href="#Current%20Memory%20Bandwidth%20is%20limiting%20for%20Crusher">8.3. Current Memory Bandwidth is limiting for Crusher</a></li>
+<li><a href="#Frontier%20is%20promising%20for%20GPT3%20size%20model%20training">8.4. Frontier is promising for GPT3 size model training</a></li>
+</ul>
+</li>
+<li><a href="#Thank%20you%21">9. Thank you!</a></li>
+<li><a href="#Misc">10. Misc</a>
+<ul>
+<li><a href="#DL%20scales%20with%20model%20and%20data">10.1. DL scales with model and data</a></li>
+<li><a href="#Nickel">10.2. Nickel</a></li>
+<li><a href="#Mistakes">10.3. Mistakes</a></li>
+<li><a href="#Model%20Parallel%20%20%3D%20PP%20or%20TP">10.4. Model Parallel  = PP or TP</a></li>
+<li><a href="#FSDP%20%3D%20ZeRO%20Stage%203">10.5. FSDP = ZeRO Stage 3</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+[<a href="papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf">file:</a>][<a href="papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=nil">pdf:</a>]
+</p>
+
+<p>
+Evaluates the Time, Memory and Energy cost of traning LLMs on SuperComputers.
+</p>
+<div id="outline-container-Contributions%2FScope" class="outline-2">
+<h2 id="Contributions%2FScope"><span class="section-number-2">1.</span> Contributions/Scope</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+[<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=2">Page 2</a>]
+</p>
+
+<ul class="org-ul">
+<li><b>Performance analysis of Training LLMs</b>: Give theoretical equations for
+<ul class="org-ul">
+<li>Memory, Bandwidth</li>
+<li>Time</li>
+<li>Energy</li>
+</ul></li>
+
+<li><b>Projection of Cost</b> : Develop cost models for train time and energy projection [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=15">Table 2</a>]</li>
+</ul>
+
+<blockquote>
+<p>
+We conduct a first-of-its-kind performance analysis to understand the time and energy cost of pre-training LLMs on the Department of Energy (DOE)’s leadership-class supercomputers [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=1">pg. 1</a>]
+</p>
+</blockquote>
+
+<ul class="org-ul">
+<li><b>Baseline and Insights</b>
+<ul class="org-ul">
+<li>Drawing insights on future platforms for training LLMs.</li>
+<li>Establish a performance baseline of two frameworks on two different systems [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=2">Page 2</a>][<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=11">Fig 6</a>]</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Setup" class="outline-2">
+<h2 id="Setup"><span class="section-number-2">2.</span> Setup</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+2 SuperComputers:
+</p>
+<ul class="org-ul">
+<li>Crusher Supercomputer: AMD M1250X [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=6">Fig 3</a>]</li>
+<li>Summit Supercomputer: NVIDIA V100 [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=7">Fig 4</a>]</li>
+</ul>
+
+<p>
+2 Training frameworks (both PyTorch based Distributed Traning Methods) [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=5">pg. 5</a>]
+</p>
+<ul class="org-ul">
+<li>Fully Sharded Data Parallel (FSDP)</li>
+<li>DeepSpeed-Megatron [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=5">pg. 5</a>]</li>
+</ul>
+
+<p>
+Multiple Models:
+</p>
+<ul class="org-ul">
+<li>175B GPT</li>
+<li>1T GPT</li>
+<li>1.4B, 16B</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Big%20LLMs%20require%20distributed%20training" class="outline-2">
+<h2 id="Big%20LLMs%20require%20distributed%20training"><span class="section-number-2">3.</span> Big LLMs require distributed training</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Big LLMs have high computation and memory requirements and they don't always fit in a single GPUs. Even if they do, scaling up the training requires multiple GPUs. This means a distributed approach to training is required. But how to build and train such system is not straightforward [~ <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=1">pg. 1</a>].
+</p>
+</div>
+</div>
+<div id="outline-container-Parallelism%20Approach%20for%20Distributed%20Training%20of%20LLMs" class="outline-2">
+<h2 id="Parallelism%20Approach%20for%20Distributed%20Training%20of%20LLMs"><span class="section-number-2">4.</span> Parallelism Approach for Distributed Training of LLMs</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+[<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=5">pg. 5</a>][<a href="https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/features/parallelisms.html">docs.nvidia.com</a>]
+</p>
+
+<ul class="org-ul">
+<li>Data Parallelism:
+<ul class="org-ul">
+<li>Distributed Data Parallel</li>
+<li>Zero Redundancy Optimizer (<a href="https://arxiv.org/abs/1910.02054">ZeRO</a>) [<a href="https://medium.com/@Shrishml/breaking-the-gmemory-barrier-how-zero-revolutionizes-large-language-model-training-8e00d2e2f30a">Article</a>]
+<ul class="org-ul">
+<li>Stage 1: Optimizer states (os)</li>
+<li>Stage 2: Gradients (os + g)</li>
+<li>Stage 3: Parameters (os + g + p)</li>
+</ul></li>
+</ul></li>
+<li>Pipeline Parallelism: Gpipe</li>
+<li>Tensor Parallelism: Megatron</li>
+</ul>
+
+<p>
+Memory Requirements:
+</p>
+<ul class="org-ul">
+<li>Model Parameters (\(M_p\))</li>
+<li>Optimizer States (\(M_o = 2 \times M_p\); for Adam)</li>
+<li>Gradient (\(M_g = 2 \times M_p\))</li>
+<li>Residue/Overheads (\(M_e = M_p\))</li>
+</ul>
+</div>
+<div id="outline-container-Data%20Parallel" class="outline-3">
+<h3 id="Data%20Parallel"><span class="section-number-3">4.1.</span> Data Parallel</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+[<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=5">Page 5</a>]
+</p>
+
+<p>
+Each model replica processes different batch of data and then synchronize the backward pass.
+</p>
+</div>
+<div id="outline-container-Distributed%20Data%20Parallel" class="outline-4">
+<h4 id="Distributed%20Data%20Parallel"><span class="section-number-4">4.1.1.</span> Distributed Data Parallel</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<p>
+[<a href="https://dl.acm.org/doi/10.14778/3415478.3415530">Paper</a>]
+</p>
+
+<ul class="org-ul">
+<li>Model is replicated across all devices</li>
+<li>Gradients are communicated to keep the models in sync</li>
+</ul>
+
+<p>
+Advanced Techniques:
+</p>
+<ul class="org-ul">
+<li>Overlapping communcation with computation</li>
+<li>Bucketing gradients</li>
+<li>Skipping gradient synchronization</li>
+</ul>
+
+<p>
+By proper tuning, near linear scaling upte 256 GPUs was obtained.
+</p>
+
+<p>
+But, it requires model to fit in a single GPU.
+</p>
+</div>
+</div>
+<div id="outline-container-FSDP%20%28Fully%20Sharded%20Data%20Parallel%29" class="outline-4">
+<h4 id="FSDP%20%28Fully%20Sharded%20Data%20Parallel%29"><span class="section-number-4">4.1.2.</span> FSDP (Fully Sharded Data Parallel)</h4>
+</div>
+</div>
+<div id="outline-container-Pipeline%20Parallel" class="outline-3">
+<h3 id="Pipeline%20Parallel"><span class="section-number-3">4.2.</span> Pipeline Parallel</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+[<a href="https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/features/parallelisms.html#pipeline-parallelism">NVIDIA Docs</a>]
+</p>
+
+<ul class="org-ul">
+<li>Different layers of models are stored in different devices</li>
+<li>Computation proceeds on a device and the results are passed to next device to computed next layer</li>
+<li>Micro Batching is done to hide pipeline bubble</li>
+</ul>
+
+
+<div id="figure-1" class="figure">
+<p><img src="data/evaluation_of_pre_training_llms_on_leadership_class_supercomputers/pipeline_parallelism-20241007165347.png" alt="pipeline_parallelism-20241007165347.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Pipeline Parallelism <a href="https://docs.nvidia.com/nemo-framework/user-guide/latest/_images/pp.gif">Animation</a></p>
+</div>
+
+
+
+<div id="figure-2" class="figure">
+<p><img src="data/evaluation_of_pre_training_llms_on_leadership_class_supercomputers/pipeline_bubble-20241007170918.png" alt="pipeline_bubble-20241007170918.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Pipeline Bubble [Source: <a href="https://siboehm.com/articles/22/pipeline-parallel-training">siboehm.com</a>]</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Tensor%20Parallel" class="outline-3">
+<h3 id="Tensor%20Parallel"><span class="section-number-3">4.3.</span> Tensor Parallel</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+Parallel processing of a layer by tensor decomposition.
+</p>
+
+<ul class="org-ul">
+<li>Multiplying each column with the input separately</li>
+<li>Collect the results from GPUs and concatenate together</li>
+</ul>
+
+
+<div id="figure-3" class="figure">
+<p><img src="data/evaluation_of_pre_training_llms_on_leadership_class_supercomputers/tensor_parallelism-20241001194051.png" alt="tensor_parallelism-20241001194051.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span>Tensor Parallelism</p>
+</div>
+
+
+
+<div id="figure-4" class="figure">
+<p><img src="data/evaluation_of_pre_training_llms_on_leadership_class_supercomputers/tensor_parallelism_across_layers-20241009075736.png" alt="tensor_parallelism_across_layers-20241009075736.png" />
+</p>
+<p><span class="figure-number">Figure 4: </span>Tensor Parallelism Across Layers [<a href="https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/features/parallelisms.html#tensor-parallelism">docs.nvidia.com</a>]</p>
+</div>
+</div>
+<div id="outline-container-Megatron" class="outline-4">
+<h4 id="Megatron"><span class="section-number-4">4.3.1.</span> Megatron</h4>
+<div class="outline-text-4" id="text-4-3-1">
+<p>
+<a href="https://github.com/NVIDIA/Megatron-LM">https://github.com/NVIDIA/Megatron-LM</a>
+</p>
+
+<ul class="org-ul">
+<li>A PyTorch based library by NVIDIA</li>
+<li>Providing GPU-optimized techniques for Deep Learning
+<ul class="org-ul">
+<li>Layers (attention mechanism, normalization layers)</li>
+<li>Activation recomputation, distributed checkpointing</li>
+<li>Model parallelism techniques (tensor, sequence, pipeline, context, and MoE expert parallelism)</li>
+</ul></li>
+</ul>
+
+
+<p>
+EleutherAI implemented an OpenSource version of DeepSpeed-Megatron. The authors ported it to AMD for benchmarking. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=8">Page 8</a>]
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-Experimental%20Setup%20%28%26%20Memory%2C%20Bandwidth%20Analysis%29" class="outline-2">
+<h2 id="Experimental%20Setup%20%28%26%20Memory%2C%20Bandwidth%20Analysis%29"><span class="section-number-2">5.</span> Experimental Setup (&amp; Memory, Bandwidth Analysis)</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+2 supercomputers, 2 training frameworks [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=2">pg. 2</a>]
+</p>
+
+<p>
+SuperComputers:
+</p>
+<ul class="org-ul">
+<li>Crusher Supercomputer: AMD MI250X</li>
+<li>Summit Supercomputer: NVIDIA V100</li>
+</ul>
+
+<p>
+Traning frameworks (both PyTorch based Distributed Traning Methods) [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=5">pg. 5</a>]
+</p>
+<ul class="org-ul">
+<li>Fully Sharded Data Parallel (FSDP)</li>
+<li>DeepSpeed-Megatron [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=5">pg. 5</a>]</li>
+</ul>
+</div>
+<div id="outline-container-Experimental%20Setup%20%28%26%20Memory%2C%20Bandwidth%20Analysis%29--FSDP%20%28Fully%20Sharded%20Data%20Parallel%29" class="outline-3">
+<h3 id="Experimental%20Setup%20%28%26%20Memory%2C%20Bandwidth%20Analysis%29--FSDP%20%28Fully%20Sharded%20Data%20Parallel%29"><span class="section-number-3">5.1.</span> FSDP (Fully Sharded Data Parallel)</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+[<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=6">pg. 6</a>][<a href="https://pytorch.org/blog/introducing-pytorch-fully-sharded-data-parallel-api/">PyTorch Docs</a>][<a href="https://arxiv.org/abs/2304.11277">FSDP Paper</a>]
+</p>
+
+<p>
+Used in the experiments with Crusher supercomputer.
+</p>
+
+<ul class="org-ul">
+<li>Model is not replicated across all devices</li>
+<li>Model Parameters, Optimizer States and Gradients are shared among devices</li>
+</ul>
+</div>
+<div id="outline-container-FSDP%20Algorithm" class="outline-4">
+<h4 id="FSDP%20Algorithm"><span class="section-number-4">5.1.1.</span> FSDP Algorithm</h4>
+<div class="outline-text-4" id="text-5-1-1">
+<ul class="org-ul">
+<li>Model is shared (across layers ) in units</li>
+<li>For computation
+<ul class="org-ul">
+<li>each unit is fully materialized (i.e. unshared)</li>
+<li>Computation is done</li>
+<li>then it is shared to free memory</li>
+</ul></li>
+</ul>
+
+
+
+<div id="figure-5" class="figure">
+<p><img src="data/evaluation_of_pre_training_llms_on_leadership_class_supercomputers/fsdp_algorithm-20241001192644.png" alt="fsdp_algorithm-20241001192644.png" />
+</p>
+<p><span class="figure-number">Figure 5: </span>FSDP Algorithm (Source: <a href="https://arxiv.org/abs/2304.11277">FSDP Paper</a> - Page 3)</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Memory%20requirement%20is%20thus" class="outline-4">
+<h4 id="Memory%20requirement%20is%20thus"><span class="section-number-4">5.1.2.</span> Memory requirement is thus</h4>
+<div class="outline-text-4" id="text-5-1-2">
+\begin{equation*}
+M = M_{total} / N_{devices}
+\end{equation*}
+
+\begin{equation*}
+M \sim 6 \times M_{p} / N_{devices}
+\end{equation*}
+
+<p>
+But communication is increased compared to DDP (by 1.5x [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=7">pg. 7</a>], See <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/ZeRO - Memory Optimization Toward Training Trillion Parameter Models - 1910.02054v3.pdf#page=14">ZeRO 7.2.2</a>).
+</p>
+
+\begin{equation*}
+C \sim 3 \times M_p
+\end{equation*}
+</div>
+</div>
+<div id="outline-container-FSDP%20in%20Crusher" class="outline-4">
+<h4 id="FSDP%20in%20Crusher"><span class="section-number-4">5.1.3.</span> FSDP in Crusher</h4>
+<div class="outline-text-4" id="text-5-1-3">
+
+<div id="figure-6" class="figure">
+<p><img src="data/evaluation_of_pre_training_llms_on_leadership_class_supercomputers/fsdp-20241001190654.png" alt="fsdp-20241001190654.png" />
+</p>
+<p><span class="figure-number">Figure 6: </span>FSDP</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-DeepSpeed-Megatron" class="outline-3">
+<h3 id="DeepSpeed-Megatron"><span class="section-number-3">5.2.</span> DeepSpeed-Megatron</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+[<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=7">pg. 7</a>]
+</p>
+
+<p>
+Used in the experiments with Summit supercomputer.
+</p>
+
+<p>
+Uses Data Parallelism (DP), Pipeline Parallelism (PP) and Tensor Parallelism (TP).
+</p>
+</div>
+<div id="outline-container-Details" class="outline-4">
+<h4 id="Details"><span class="section-number-4">5.2.1.</span> Details</h4>
+<div class="outline-text-4" id="text-5-2-1">
+<p>
+[<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=7">pg. 7</a>]
+</p>
+
+<ul class="org-ul">
+<li>Tensor Parallelism: is within a node</li>
+<li>Pipeline Parallelism: is in 2 stages. Each on a node with half of model layers</li>
+<li>Data Parallelism: ZeRO (stage 1, i.e. optimizer states) are sharded among the remaining level of parallelism (i.e. \(N_{devices}/(PP \times TP)\)). To avoid excessive communication.</li>
+</ul>
+
+
+<p>
+Thus memory requirement per device is:
+</p>
+
+\begin{equation*}
+M = \frac {M_p} {PP \times TP} + \frac {M_o} {DP} + \frac {M_g} {PP \times TP} + M_e
+\end{equation*}
+
+\begin{equation*}
+M = \frac { 2 \times (DP + PP +  + 1)} {N_{devices}} M_p
+\end{equation*}
+
+<p>
+And Communcation volume is [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=8">Eqn 6</a>]:
+</p>
+
+\begin{equation*}
+C \sim \big( \frac {TP} {N_{devices}} + 1 \big) \times 2 \times M_p
+\end{equation*}
+</div>
+</div>
+<div id="outline-container-Fit%20the%20model%20and%20then%20use%20Data%20Parallelism" class="outline-4">
+<h4 id="Fit%20the%20model%20and%20then%20use%20Data%20Parallelism"><span class="section-number-4">5.2.2.</span> Fit the model and then use Data Parallelism</h4>
+<div class="outline-text-4" id="text-5-2-2">
+<p>
+[<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=7">pg. 7</a>]
+</p>
+<blockquote>
+<p>
+Because the scaling efficiencies of pipeline and tensor parallelism are worse than data parallelism (that is, they require more communication), the best scaling strategy is to <b>find the minimum number of nodes that can fit the model in memory</b> with model parallelism, and to <b>apply the remaining resources to data parallelism</b>.
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-Runtime%20and%20Energy%20Analysis" class="outline-2">
+<h2 id="Runtime%20and%20Energy%20Analysis"><span class="section-number-2">6.</span> Runtime and Energy Analysis</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-Compute%20scales%20with%20square%20of%20Parameters" class="outline-3">
+<h3 id="Compute%20scales%20with%20square%20of%20Parameters"><span class="section-number-3">6.1.</span> Compute scales with square of Parameters</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Optimal Token counts = 20 x Parameters count
+</p>
+
+<p>
+Compute &sim; 6 &times; Parameter counts &times; Token counts [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=4">Eqn 1</a>]
+</p>
+
+<p>
+Compute ~ 120 &times; (Parameter counts)<sup>2</sup> [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=9">Eqn 7</a>]
+</p>
+
+<blockquote>
+<p>
+The total number of compute operations needed for the optimal training (20 tokens per parameter) [16] of LLMs is quadratically proportional to the number of model parameters (P) [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=8">pg. 8</a>]
+</p>
+</blockquote>
+</div>
+<div id="outline-container-Token%3AParameters%20%3D%2020%3A1%20is%20Optimal" class="outline-4">
+<h4 id="Token%3AParameters%20%3D%2020%3A1%20is%20Optimal"><span class="section-number-4">6.1.1.</span> Token:Parameters = 20:1 is Optimal</h4>
+<div class="outline-text-4" id="text-6-1-1">
+<p>
+The <a href="chinchilla_scaling_law.html#ID-275452F6-0C9A-4BF9-A8EC-47CF8B85935A">Chinchilla Scaling Law</a>
+</p>
+
+<p>
+It is recommended to maintain a 20 to 1 ratio of tokens vs. number of parameters to be compute optimal [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=2">pg. 2</a>]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Compute%20Time%20~%20120%20P%5E2%20%2F%20R" class="outline-3">
+<h3 id="Compute%20Time%20~%20120%20P%5E2%20%2F%20R"><span class="section-number-3">6.2.</span> Compute Time ~ 120 P<sup>2</sup> / R</h3>
+<div class="outline-text-3" id="text-6-2">
+\begin{equation*}
+t = T_{FLOPS} / R_{FLOPS}
+\end{equation*}
+\begin{equation*}
+t \sim 120 \times P^2 / R_{FLOPS}
+\end{equation*}
+
+<ul class="org-ul">
+<li>\(T_{FLOPS}\) is total FLOPS required</li>
+<li>\(R_{FLOPS}\) is the FLOPS per second the system can do</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Energy" class="outline-3">
+<h3 id="Energy"><span class="section-number-3">6.3.</span> Energy</h3>
+<div class="outline-text-3" id="text-6-3">
+\begin{equation*}
+E = t \times R_{watt}
+\end{equation*}
+
+<ul class="org-ul">
+<li>\(R_{watt}\) is the avg power usage</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-Evaluation" class="outline-2">
+<h2 id="Evaluation"><span class="section-number-2">7.</span> Evaluation</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Now do the experiments and check against theoritical models (equations)
+</p>
+</div>
+<div id="outline-container-Scaling%20Analysis" class="outline-3">
+<h3 id="Scaling%20Analysis"><span class="section-number-3">7.1.</span> Scaling Analysis</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+Before doing extensive experiments the author find the optimal hyperparameters of the System.
+</p>
+
+<p>
+Summit (DeepSpeed-Megatron)
+</p>
+<ul class="org-ul">
+<li>PP=1, TP=12, DP=N / (PP &times; TP) gave best performance [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=12">Section 4.2.2</a>]</li>
+</ul>
+
+<p>
+Crusher (FSDP)
+</p>
+<ul class="org-ul">
+<li>Prefetching didn't affect much [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=11">Fig 6</a>]</li>
+<li>Scaling Efficiency is better in Crusher (97%) [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=13">Figure 8</a>]</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Memory%20%26%20Bandwidth" class="outline-3">
+<h3 id="Memory%20%26%20Bandwidth"><span class="section-number-3">7.2.</span> Memory &amp; Bandwidth</h3>
+<div class="outline-text-3" id="text-7-2">
+<ul class="org-ul">
+<li>Measurements of memory usage and bandwidth requirement are consistent with theoritically derived formulas</li>
+</ul>
+
+<blockquote>
+<p>
+Compared to our projections (Eqs. 3 and 6), the measurements are consistent, as shown in Fig. 7. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=12">pg. 12</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Power" class="outline-3">
+<h3 id="Power"><span class="section-number-3">7.3.</span> Power</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+175B Model
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-right">Summit</th>
+<th scope="col" class="org-right">Crusher</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Avg. Power (Watt)</td>
+<td class="org-right">84</td>
+<td class="org-right">408</td>
+</tr>
+
+<tr>
+<td class="org-left">Efficiency (T<sub>flops</sub>/Watt)</td>
+<td class="org-right">0.165</td>
+<td class="org-right">0.235</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+1T Model
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-right">Summit</th>
+<th scope="col" class="org-right">Crusher</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Avg. Power (Watt)</td>
+<td class="org-right">66</td>
+<td class="org-right">151</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li>For 1T Model power consumption is low because more time was spent in communication [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=13">Page 13</a>]</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Train%20time%20and%20Energy%20Projections" class="outline-3">
+<h3 id="Train%20time%20and%20Energy%20Projections"><span class="section-number-3">7.4.</span> Train time and Energy Projections</h3>
+<div class="outline-text-3" id="text-7-4">
+<p>
+It is listed in [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=15">Table 2</a>]
+</p>
+
+<ul class="org-ul">
+<li>The values for Frontier are extrapolated from the values for Crusher.</li>
+<li>For 1T model values for 1x Data and 20x data is shown.</li>
+</ul>
+
+
+<div id="figure-7" class="figure">
+<p><img src="data/evaluation_of_pre_training_llms_on_leadership_class_supercomputers/table_2-20241002114119.png" alt="table_2-20241002114119.png" />
+</p>
+<p><span class="figure-number">Figure 7: </span>Table 2</p>
+</div>
+</div>
+<div id="outline-container-Crusher%20is%20more%20energy%20efficient" class="outline-4">
+<h4 id="Crusher%20is%20more%20energy%20efficient"><span class="section-number-4">7.4.1.</span> Crusher is more energy efficient</h4>
+<div class="outline-text-4" id="text-7-4-1">
+<blockquote>
+<p>
+In general, MI250X-based Crusher is more energy-efficient for training LLMs, and the advantage grows rapidly for model sizes beyond GPT3. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=16">pg. 16</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-LLM%20workload%20is%204x%20more%20efficient%20that%20traditional%20workloads" class="outline-4">
+<h4 id="LLM%20workload%20is%204x%20more%20efficient%20that%20traditional%20workloads"><span class="section-number-4">7.4.2.</span> LLM workload is 4x more efficient that traditional workloads</h4>
+<div class="outline-text-4" id="text-7-4-2">
+<p>
+<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=16">pg. 16</a>
+</p>
+
+<blockquote>
+<p>
+We observe that these values for training LLMs are over 4× more power efficient than executing traditional simulation workloads (∼ 52 GFLOPS/Watt).
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-Conclusions" class="outline-2">
+<h2 id="Conclusions"><span class="section-number-2">8.</span> Conclusions</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-Software%20improvements%20might%20change%20the%20projections" class="outline-3">
+<h3 id="Software%20improvements%20might%20change%20the%20projections"><span class="section-number-3">8.1.</span> Software improvements might change the projections</h3>
+<div class="outline-text-3" id="text-8-1">
+<ul class="org-ul">
+<li>Message compression</li>
+<li>Model Pruning</li>
+<li>Autotuning of parallel strategies</li>
+</ul>
+
+<blockquote>
+<p>
+It’s important to note that the field is rapidly evolving, with ongoing advancements that can further reduce communication costs. For instance, techniques such as message compression, model pruning, and autotuning of parallel strategies [38] have shown promise in significantly mitigating the network bandwidth requirements for scaling up LLM training. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=16">pg. 16</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Large%20per%20node%20memory%20and%20communication%20bandwidth%20required" class="outline-3">
+<h3 id="Large%20per%20node%20memory%20and%20communication%20bandwidth%20required"><span class="section-number-3">8.2.</span> Large per node memory and communication bandwidth required</h3>
+<div class="outline-text-3" id="text-8-2">
+<ul class="org-ul">
+<li>Crusher: 128 GB per GPU (2 die) [Source: Pg. 17]</li>
+<li>Summit : 32 GB per GPU [Source: Internet]</li>
+</ul>
+
+<blockquote>
+<p>
+Therefore, for LLM training, larger amounts of per node device memory and communication bandwidth lead to obtaining better performance, but the specific requirements depend on the model size. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=16">pg. 16</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Current%20Memory%20Bandwidth%20is%20limiting%20for%20Crusher" class="outline-3">
+<h3 id="Current%20Memory%20Bandwidth%20is%20limiting%20for%20Crusher"><span class="section-number-3">8.3.</span> Current Memory Bandwidth is limiting for Crusher</h3>
+<div class="outline-text-3" id="text-8-3">
+<ul class="org-ul">
+<li>For achieveable performance: 94 GB/s</li>
+<li>Currently available: 25 GB/s</li>
+</ul>
+
+<blockquote>
+<p>
+For theoretical peak and achievable performance, the minimum per-device communication bandwidth needed is 37 and 94 GB/s, respectively. The current 25 GB/s per-device on Crusher is not sufficient to support lin- ear scaling for training GPT 1T model [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=17">pg. 17</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Frontier%20is%20promising%20for%20GPT3%20size%20model%20training" class="outline-3">
+<h3 id="Frontier%20is%20promising%20for%20GPT3%20size%20model%20training"><span class="section-number-3">8.4.</span> Frontier is promising for GPT3 size model training</h3>
+<div class="outline-text-3" id="text-8-4">
+<p>
+Crusher is same as Frontier but with less nodes.
+</p>
+
+<blockquote>
+<p>
+Feasibility analysis and practical guide in building foundation models for sciences. Our results indicate that Frontier is a promising platform for GPT3-size model training [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=18">pg. 18</a>]
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="outline-container-Thank%20you%21" class="outline-2">
+<h2 id="Thank%20you%21"><span class="section-number-2">9.</span> Thank you!</h2>
+</div>
+<div id="outline-container-Misc" class="outline-2">
+<h2 id="Misc"><span class="section-number-2">10.</span> Misc</h2>
+<div class="outline-text-2" id="text-10">
+</div>
+<div id="outline-container-DL%20scales%20with%20model%20and%20data" class="outline-3">
+<h3 id="DL%20scales%20with%20model%20and%20data"><span class="section-number-3">10.1.</span> DL scales with model and data</h3>
+<div class="outline-text-3" id="text-10-1">
+<p>
+[<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=4">pg. 4</a>]
+Deep Learning scales with Model size and data
+</p>
+
+<p>
+Total number of FLOPs required for each training epoch is
+</p>
+
+\begin{itemize}
+T_{FLOPS} \sim 6 \times P \times D
+\end{itemize}
+</div>
+</div>
+<div id="outline-container-Nickel" class="outline-3">
+<h3 id="Nickel"><span class="section-number-3">10.2.</span> Nickel</h3>
+<div class="outline-text-3" id="text-10-2">
+<p>
+See NVIDIA Collective Communication Library (NCCL, prononunce "Nickel") <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/operations.html">documentation</a> for meaning of Allreduce, Allgather, ReduceScatter, &#x2026;
+</p>
+
+<blockquote>
+<p>
+Compared to DDP, where only an Allreduce during each backward propa- gation is required, FSDP requires an Allgather for the forward pass and both an Allgather and a ReduceScatter for the backward pass. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=6">pg. 6</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Mistakes" class="outline-3">
+<h3 id="Mistakes"><span class="section-number-3">10.3.</span> Mistakes</h3>
+<div class="outline-text-3" id="text-10-3">
+<ul class="org-ul">
+<li><a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Evaluation of Pre-training LLMs on Leadership Class Supercomputers.pdf#page=5">Page 5</a> ZeRO optimzation steps is wrongly ordered. See original ZeRO paper for correct order.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Model%20Parallel%20%20%3D%20PP%20or%20TP" class="outline-3">
+<h3 id="Model%20Parallel%20%20%3D%20PP%20or%20TP"><span class="section-number-3">10.4.</span> Model Parallel  = PP or TP</h3>
+<div class="outline-text-3" id="text-10-4">
+<p>
+Model Parallel = Pipeline parallel or Tensor Parallel i.e. splitting the model [<a href="https://huggingface.co/docs/transformers/v4.13.0/en/parallelism">https://huggingface.co/docs/transformers/v4.13.0/en/parallelism</a>]
+</p>
+</div>
+</div>
+<div id="outline-container-FSDP%20%3D%20ZeRO%20Stage%203" class="outline-3">
+<h3 id="FSDP%20%3D%20ZeRO%20Stage%203"><span class="section-number-3">10.5.</span> FSDP = ZeRO Stage 3</h3>
+<div class="outline-text-3" id="text-10-5">
+<ul class="org-ul">
+<li>FSDP and ZeRO stage 3 is the same [<a href="https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/scaling/JAX/data_parallel_fsdp.html#Parameter-Sharding">https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/scaling/JAX/data_parallel_fsdp.html#Parameter-Sharding</a>]</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Evaluation of Pre-training LLMs on Supercomputers">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>

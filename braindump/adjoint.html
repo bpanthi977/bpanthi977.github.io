@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Adjoint Operator</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-10-16 Wed&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Adjoint Operator</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#Self%20Adjoint%20Operator">1. Self Adjoint Operator</a></li>
+<li><a href="#Complex%20Conjugate%20for%20Complex%20Matrices">2. Complex Conjugate for Complex Matrices</a></li>
+</ul>
+</div>
+</div>
+<p>
+Note: The Adjoint Matrix is a different thing. Its the transpose of the Cofactor Matrix. Since 'Adjoint' is more frequently used for Ajoint Operator, it is better to call it 'Adjugate Matrix' instead of 'Adjoint Matrix'.
+</p>
+
+<p>
+Each linear operator \(A\) on an <a href="inner_product.html#ID-F430D8C2-1B03-4C7C-BE64-C2EDAA705BAD">Inner Product Space</a> defines a Hermitian adjoint operator \(A^*\) such that:
+</p>
+
+\begin{equation*}
+\langle Ax, y \rangle = \langle x, A^* y \rangle
+\end{equation*}
+
+<p>
+Where \(\langle \cdot , \cdot \rangle\) is the inner product.
+</p>
+
+<p>
+Adjoint operator is also called:
+</p>
+<ul class="org-ul">
+<li>Adjoint</li>
+<li>Hermitian Conjugate</li>
+<li>Hermitian</li>
+</ul>
+
+<p>
+For real matrices, Transpose is the adjoint.
+</p>
+
+<p>
+For complex matrices, Complex conjugate of the transpose is the adjoint.
+</p>
+<div id="outline-container-Self%20Adjoint%20Operator" class="outline-2">
+<h2 id="Self%20Adjoint%20Operator"><span class="section-number-2">1.</span> Self Adjoint Operator</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+An operator whose adjoint operator is itself. i.e.
+</p>
+
+\begin{equation*}
+\langle Ax, y \rangle = \langle x, Ay \rangle
+\end{equation*}
+
+<ul class="org-ul">
+<li><a href="symmetric_matrix.html#ID-D6407A9C-CE4D-46E0-8AA5-7BFD396ED6D7">Symmetric Matrix</a> are Self Adjoint</li>
+<li><a href="hermitian_matrix.html#ID-B682A99A-FB47-4170-959B-542B1C311C4D">Hermitian Matrix</a> are Self Adjoint</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Complex%20Conjugate%20for%20Complex%20Matrices" class="outline-2">
+<h2 id="Complex%20Conjugate%20for%20Complex%20Matrices"><span class="section-number-2">2.</span> Complex Conjugate for Complex Matrices</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<a href="https://x.com/bpanthi977/status/1846632664595312737">https://x.com/bpanthi977/status/1846632664595312737</a>
+</p>
+
+<p>
+Why do we take complex conjugate of transpose for Complex matrices in places where just transpose works for Real matrices?
+</p>
+
+<p>
+Because, inner product (dot product) for complex vectors needs to be defined as
+ &lt;x, y&gt; = ∑ xi yi*
+to satisfy &lt;x,x&gt; ≥ 0 condition on inner product
+</p>
+
+<p>
+Transpose and conjugate transpose are just different ways of finding the `Adjoint` for different kinds of matrices (real, complex).
+</p>
+
+<p>
+where Adjoint of A is such an A* that satisfies:
+</p>
+
+<p>
+&lt;Ax, y&gt; = &lt;x, A*y&gt;
+</p>
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="hermitian_matrix.html#ID-B682A99A-FB47-4170-959B-542B1C311C4D">Hermitian Matrix</a></li>
+<li><a href="symmetric_matrix.html#ID-D6407A9C-CE4D-46E0-8AA5-7BFD396ED6D7">Symmetric Matrix</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Adjoint Operator">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>

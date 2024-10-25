@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Grokfast</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-10-02 Wed&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Grokfast</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#Objective">1. Objective</a></li>
+<li><a href="#Approach">2. Approach</a>
+<ul>
+<li><a href="#Parameters%20as%20random%20signals">2.1. Parameters as random signals</a></li>
+<li><a href="#Gradient%20correlated%20with%20Parameters">2.2. Gradient correlated with Parameters</a></li>
+<li><a href="#Amplify%20the%20low%20frequency%20component%20of%20%24G%28%5Comega%29%24">2.3. Amplify the low frequency component of \(G(\omega)\)</a></li>
+</ul>
+</li>
+<li><a href="#Algorithm">3. Algorithm</a>
+<ul>
+<li><a href="#Algorithm%20-%20Diagram">3.1. Algorithm - Diagram</a></li>
+<li><a href="#Grokfast-MA%20%28Moving%20Average%29">3.2. Grokfast-MA (Moving Average)</a></li>
+<li><a href="#Grokfast%3A%20Grokfast-EMA%20%28Exponential%20Moving%20Average%29">3.3. Grokfast: Grokfast-EMA (Exponential Moving Average)</a></li>
+<li><a href="#Multiple%20Stages%20of%20Learning">3.4. Multiple Stages of Learning</a></li>
+</ul>
+</li>
+<li><a href="#Ablation">4. Ablation</a>
+<ul>
+<li><a href="#Are%20both%20slow%20and%20fast%20gradients%20necessary%3F">4.1. Are both slow and fast gradients necessary?</a></li>
+<li><a href="#Synergy%20with%20weight%20decay">4.2. Synergy with weight decay</a></li>
+</ul>
+</li>
+<li><a href="#Experiments">5. Experiments</a></li>
+<li><a href="#Visualization%20Attempt">6. Visualization Attempt</a>
+<ul>
+<li><a href="#Visualization%20Attempt--Approach">6.1. Approach</a></li>
+<li><a href="#Visuals">6.2. Visuals</a></li>
+</ul>
+</li>
+<li><a href="#Misc">7. Misc</a></li>
+</ul>
+</div>
+</div>
+<p>
+source: Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf
+[<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf">file:</a>][<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=nil">pdf:</a>][<a href="https://arxiv.org/abs/2405.20233">arXiv</a>]
+</p>
+<div id="outline-container-Objective" class="outline-2">
+<h2 id="Objective"><span class="section-number-2">1.</span> Objective</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>to accelerate generalization of a model under grokking phenomenon [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=1">pg. 1</a>]</li>
+<li>x50 improvement (in some cases)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Approach" class="outline-2">
+<h2 id="Approach"><span class="section-number-2">2.</span> Approach</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-Parameters%20as%20random%20signals" class="outline-3">
+<h3 id="Parameters%20as%20random%20signals"><span class="section-number-3">2.1.</span> Parameters as random signals</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>Regard each parameter update as an independent random signal [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=12">Page 12</a>]
+<ul class="org-ul">
+<li>discrete random singal \(u(t) = \theta(t+1) - \theta(t)\)</li>
+</ul></li>
+<li>The signal has fast varying (overfitting) and slow varying (generalization) components</li>
+<li>Represent it in Frequency domain (Fourier transform) [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=2">pg. 2</a>]</li>
+<li>Amplify the low frequency component of the signal</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Gradient%20correlated%20with%20Parameters" class="outline-3">
+<h3 id="Gradient%20correlated%20with%20Parameters"><span class="section-number-3">2.2.</span> Gradient correlated with Parameters</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>For first order optimzer gradients are linerly correlated with parameter updates [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=2">Page 2</a>]</li>
+</ul>
+
+\begin{align*}
+x(t) &= Ax(t-1) + Bg(t) \\
+u(t) &= Cx(t) + Dg(t)
+\end{align*}
+
+<p>
+e.g. Vanilla SGD
+</p>
+
+\begin{equation*}
+\theta(t+1) = \theta(t) - \eta g(t)
+\end{equation*}
+</div>
+</div>
+<div id="outline-container-Amplify%20the%20low%20frequency%20component%20of%20%24G%28%5Comega%29%24" class="outline-3">
+<h3 id="Amplify%20the%20low%20frequency%20component%20of%20%24G%28%5Comega%29%24"><span class="section-number-3">2.3.</span> Amplify the low frequency component of \(G(\omega)\)</h3>
+<div class="outline-text-3" id="text-2-3">
+<ul class="org-ul">
+<li>Our hypothesis is that amplifying this low-frequency component of \(G(\omega)\) accelerates the speed of generalization under the grokking phenomenon [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=2">pg. 2</a>].</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-Algorithm" class="outline-2">
+<h2 id="Algorithm"><span class="section-number-2">3.</span> Algorithm</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-Algorithm%20-%20Diagram" class="outline-3">
+<h3 id="Algorithm%20-%20Diagram"><span class="section-number-3">3.1.</span> Algorithm - Diagram</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+[<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=3">pg. 3</a>]
+</p>
+
+
+<div id="figure-1" class="figure">
+<p><img src="data/grokfast/algorithm_apply_low_pass_filter_on_gradients-20241002072916.png" alt="algorithm_apply_low_pass_filter_on_gradients-20241002072916.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Algorithm: Apply Low Pass Filter on gradients</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Grokfast-MA%20%28Moving%20Average%29" class="outline-3">
+<h3 id="Grokfast-MA%20%28Moving%20Average%29"><span class="section-number-3">3.2.</span> Grokfast-MA (Moving Average)</h3>
+<div class="outline-text-3" id="text-3-2">
+<ul class="org-ul">
+<li>Compute the average gradient in a sliding window (say w=100) (\(g_{avg}\))</li>
+<li>And add that to the graident \(\hat{g} = g + \lambda g_{avg}\)</li>
+</ul>
+
+<p>
+Cons:
+</p>
+<ul class="org-ul">
+<li>Takes up a lot of memory to store \(w\) copies of gradient</li>
+<li>Takes longer time to train [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=5">pg. 5</a>]</li>
+</ul>
+
+<p>
+Hyperparameter:
+</p>
+<ul class="org-ul">
+<li>w=100 &amp; \(\lambda=5\) worked best [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=4">pg. 4</a>]</li>
+</ul>
+
+<p>
+Result:
+</p>
+<ul class="org-ul">
+<li>x14 faster grokking</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Grokfast%3A%20Grokfast-EMA%20%28Exponential%20Moving%20Average%29" class="outline-3">
+<h3 id="Grokfast%3A%20Grokfast-EMA%20%28Exponential%20Moving%20Average%29"><span class="section-number-3">3.3.</span> Grokfast: Grokfast-EMA (Exponential Moving Average)</h3>
+<div class="outline-text-3" id="text-3-3">
+<ul class="org-ul">
+<li>Compute EMA of the gradient \(\mu = \alpha \mu + (1-\alpha)g\) [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=6">pg. 6</a>]</li>
+<li>Add add that to the gradient \(\hat{g} = g + \lambda \mu\)</li>
+</ul>
+
+<p>
+Hyperparameters: [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=7">pg. 7</a>]
+</p>
+<ul class="org-ul">
+<li>\(\lambda \in [0.1, 5]\)</li>
+<li>\(\alpha \in [0.8, 0.99]\)</li>
+<li>weight decay (\(w_d\)) dependens on the task</li>
+</ul>
+
+<ul class="org-ul">
+<li>Formula might look similar to momentum in optimizers but it is different. [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=8">pg. 8</a>]</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Multiple%20Stages%20of%20Learning" class="outline-3">
+<h3 id="Multiple%20Stages%20of%20Learning"><span class="section-number-3">3.4.</span> Multiple Stages of Learning</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+[<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=5">pg. 5</a>]
+</p>
+
+<p>
+The model sequentially goes through three distinct stages:
+</p>
+<ul class="org-ul">
+<li>(A) initialized, where both training and validation losses are not saturated</li>
+<li>(B) overfitted, where the training loss is fully saturated but the validation loss is not</li>
+<li>(C) generalized, where both losses are fully saturated.</li>
+</ul>
+
+<p>
+Best results found with 2 staged algorithm
+</p>
+<ul class="org-ul">
+<li>Don't apply LPF in stage A</li>
+<li>Apply LPF in stage B, C</li>
+</ul>
+
+<p>
+Result:
+</p>
+<ul class="org-ul">
+<li>Further x1.5 faster groking [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=5">pg. 5</a>]</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-Ablation" class="outline-2">
+<h2 id="Ablation"><span class="section-number-2">4.</span> Ablation</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-Are%20both%20slow%20and%20fast%20gradients%20necessary%3F" class="outline-3">
+<h3 id="Are%20both%20slow%20and%20fast%20gradients%20necessary%3F"><span class="section-number-3">4.1.</span> Are both slow and fast gradients necessary?</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>Yes</li>
+<li>Using only the slow gradients calculated from a moving average filter in Algorithm 1 is equivalent to using larger, overlapping minibatches. [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=5">pg. 5</a>]</li>
+<li>Removing original gradient lead to slower and unstable training. [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=5">pg. 5</a>]</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Synergy%20with%20weight%20decay" class="outline-3">
+<h3 id="Synergy%20with%20weight%20decay"><span class="section-number-3">4.2.</span> Synergy with weight decay</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li>When weight decay (wd=0.01) is applied Grokfast-MA got faster by x3.72 [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=5">pg. 5</a>]</li>
+<li>Applying same weight decay without Grokfast-MA makes the training unstable</li>
+</ul>
+
+<p>
+So, Total speedup is x51 (x14 times x3.7)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Experiments" class="outline-2">
+<h2 id="Experiments"><span class="section-number-2">5.</span> Experiments</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li>MNIST [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=7">pg. 7</a>]
+<ul class="org-ul">
+<li>The handwriting databaset</li>
+<li>3 layer ReLU MLP</li>
+<li>\(\alpha=0.8, \lambda=0.1, w_d = 2\)</li>
+<li>x22 faster grokking</li>
+</ul></li>
+
+<li>QM9 [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=8">pg. 8</a>][<a href="https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.datasets.QM9.html">PyTorch Geometric</a>]
+<ul class="org-ul">
+<li>A graph dataset</li>
+<li>130,000 molecules with 19 regression targets</li>
+<li>GCNN</li>
+<li>\(\alpha=0.8, \lambda=1, w_d = 0.01\)</li>
+</ul></li>
+
+<li>IMDb [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=8">pg. 8</a>]
+<ul class="org-ul">
+<li>Dataset of movie reviews</li>
+<li>Sentiment analysis</li>
+<li>2 layer LSTM</li>
+<li>\(\alpha=0.98, \lambda=2, w_d = 10\)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Visualization%20Attempt" class="outline-2">
+<h2 id="Visualization%20Attempt"><span class="section-number-2">6.</span> Visualization Attempt</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-Visualization%20Attempt--Approach" class="outline-3">
+<h3 id="Visualization%20Attempt--Approach"><span class="section-number-3">6.1.</span> Approach</h3>
+<div class="outline-text-3" id="text-6-1">
+<ul class="org-ul">
+<li>See how the parameters move in different stages of training with and without Grokfast</li>
+<li>Can't visualize all parameters, so take PCA of the parameters [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=8">pg. 8</a>]</li>
+<li>And plot the path as training progresses</li>
+</ul>
+
+<p>
+(More details in Appendix [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=17">pg. 17</a>])
+</p>
+
+<p>
+Result:
+</p>
+<ul class="org-ul">
+<li>Grokfast pushes to an optimum closer to starting point [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=9">pg. 9</a>][<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=18">pg. 18</a>]</li>
+<li>Traning is more deterministic under Grokfast [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=9">pg. 9</a>]</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Visuals" class="outline-3">
+<h3 id="Visuals"><span class="section-number-3">6.2.</span> Visuals</h3>
+<div class="outline-text-3" id="text-6-2">
+
+<div id="figure-2" class="figure">
+<p><img src="data/grokfast/path_in_parameter_space_for-20241002081853.png" alt="path_in_parameter_space_for-20241002081853.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Path in Parameter space</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-Misc" class="outline-2">
+<h2 id="Misc"><span class="section-number-2">7.</span> Misc</h2>
+<div class="outline-text-2" id="text-7">
+<ul class="org-ul">
+<li>Nanda et al. [2023] argued that grokking does not occur without proper regularization. [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=10">pg. 10</a>]</li>
+
+<li>Techniques such as weight decay, L2 norm, and dropout induce grokking, but L1 norm does not [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=10">pg. 10</a>]</li>
+
+<li>On the other hand, Thilak et al. [2022] argued that grokking can occur without explicit regularization, attributing this to the optimizer’s “visible slingshot mechanism” acting as an implicit regularizer [<a href="papers/Grokfast - Accelerated Grokking by Ampilfying Slow Gradients - 2405.20233v2.pdf#page=10">pg. 10</a>]</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Grokfast">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>

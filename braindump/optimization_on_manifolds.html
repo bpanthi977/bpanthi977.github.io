@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Optimization on Manifolds</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-09-26 Thu&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Optimization on Manifolds</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#Optimization%20in%20Manifold">1. Optimization in Manifold</a></li>
+<li><a href="#Embedding%20makes%20optimization%20difficult">2. Embedding makes optimization difficult</a></li>
+<li><a href="#Intrinsic%20Approach">3. Intrinsic Approach</a>
+<ul>
+<li><a href="#Gradient%20Descent">3.1. Gradient Descent</a></li>
+</ul>
+</li>
+<li><a href="#Unit%20Sphere">4. Unit Sphere</a>
+<ul>
+<li><a href="#Computing%20gradient">4.1. Computing gradient</a></li>
+<li><a href="#Retraction">4.2. Retraction</a>
+<ul>
+<li><a href="#Exponential%20Map">4.2.1. Exponential Map</a></li>
+<li><a href="#Projection">4.2.2. Projection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Stiefel%20Manifold">5. Stiefel Manifold</a></li>
+<li><a href="#Reyleigh%20Quotient%20Minimization">6. Reyleigh Quotient Minimization</a></li>
+<li><a href="#Different%20Variations%20of%20PCA%20as%20objective%20functions">7. Different Variations of PCA as objective functions</a></li>
+<li><a href="#Maths">8. Maths</a>
+<ul>
+<li><a href="#Differential">8.1. Differential</a></li>
+<li><a href="#Tangent%20Space">8.2. Tangent Space</a></li>
+<li><a href="#Maths--Exponential%20Map">8.3. Exponential Map</a></li>
+<li><a href="#Maths--Retraction">8.4. Retraction</a></li>
+<li><a href="#Riemannain%20Manifold">8.5. Riemannain Manifold</a></li>
+<li><a href="#Riemannian%20Gradient">8.6. Riemannian Gradient</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube.com/embed/2mnqWES2roQ" title="nil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
+</p>
+
+<p>
+MIT EECS 6838
+</p>
+<div id="outline-container-Optimization%20in%20Manifold" class="outline-2">
+<h2 id="Optimization%20in%20Manifold"><span class="section-number-2">1.</span> Optimization in Manifold</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+A common optimization problem is:
+</p>
+
+\begin{equation*}
+ \min_{x \in \mathcal{M}} f(x)
+\end{equation*}
+
+<p>
+where the manifold \(\mathcal{M}\) can be
+</p>
+<ul class="org-ul">
+<li>Euclidean Space \(\mathbb{R}^n\)</li>
+<li>Unit Sphere \(S^{n-1}\)</li>
+<li><p>
+Rotation Group \(SO(n)\)
+</p>
+
+<p>
+e.g. image of protein frozen in a solution will give sample of protein images from different rotation. And an optimization probelm in terms of Rotation Group can be used to reconstruct the full 3D structure of protein. (<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=248s">00:04:08</a> Cryo-EM)
+</p></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Embedding%20makes%20optimization%20difficult" class="outline-2">
+<h2 id="Embedding%20makes%20optimization%20difficult"><span class="section-number-2">2.</span> Embedding makes optimization difficult</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=419s">00:06:59</a> A typical approach is to embed the manifold in a larger space, and write the problem as a constrained optimization problem.
+</p>
+
+<p>
+E.g.
+</p>
+
+\begin{equation*}
+ \min_{R \in SO(3)} f(R) \to \min_{R^TR = I_3; \det(R) = 1} f(R)
+\end{equation*}
+
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=528s">00:08:48</a> But embedding it to \(\mathbb{R}^{3 \times 3}\) increases the difficulty of the problem. The constrain cut out a nonconvex, curved set in the embedding space.
+</p>
+
+
+<div id="figure-1" class="figure">
+<p><img src="data/optimization_on_manifolds/using_constraints_makes_optimization_difficult-20240926113048.png" alt="using_constraints_makes_optimization_difficult-20240926113048.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Using constraints makes optimization difficult</p>
+</div>
+
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=627s">00:10:27</a> Also optimization this way is not straightforward. The objective wants to move to one direction but the constraint wants to keep the variables in another direction.
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=657s">00:10:57</a> We could do step and project. But projecting a point in to a complex constraint is not always straightforward.
+</p>
+</div>
+</div>
+<div id="outline-container-Intrinsic%20Approach" class="outline-2">
+<h2 id="Intrinsic%20Approach"><span class="section-number-2">3.</span> Intrinsic Approach</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=724s">00:12:04</a> Optimize the problem in the intrinsic space of the Manifold.
+</p>
+</div>
+<div id="outline-container-Gradient%20Descent" class="outline-3">
+<h3 id="Gradient%20Descent"><span class="section-number-3">3.1.</span> Gradient Descent</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=934s">00:15:34</a>
+</p>
+
+\begin{equation*}
+x_{k + 1} = x_k - \alpha_k \nabla f(x_k)
+\end{equation*}
+
+<p>
+There are two main aspect to Gradient Descent:
+</p>
+<ol class="org-ol">
+<li>Gradient direction \(\nabla f(x_k)\)</li>
+<li>Walking along the domain (i.e. taking the difference)</li>
+</ol>
+
+<p>
+On a Sphere, we can take derivative (i.e. find tangent) using laplace operator. (?)
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=1045s">00:17:25</a> In a Sphere, <b>an exponential map</b> moves a point on the Sphere. It takes a point on the manifold and a tangent vector at that point. And moves it along a geodesic.
+</p>
+
+<p>
+This allows us to use gradient descent like algorithm in an intrinsic way.
+</p>
+
+\begin{equation*}
+x_{k+1} = \exp_{x_k}(-\alpha_k \nabla f(x_k))
+\end{equation*}
+
+
+<div id="figure-2" class="figure">
+<p><img src="data/optimization_on_manifolds/first_order_manifold_optimization-20240926114548.png" alt="first_order_manifold_optimization-20240926114548.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>First-Order Manifold Optimization</p>
+</div>
+
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=1140s">00:19:00</a> The benefits of this approach is:
+</p>
+<ul class="org-ul">
+<li>Better alogrithms
+<ul class="org-ul">
+<li>Automatic constraint satisfaction</li>
+<li>specialized to the space</li>
+</ul></li>
+<li>Theoritical perspective:
+<ul class="org-ul">
+<li>Generalize convexity</li>
+<li>Gradient Descent and other methods have analogues</li>
+</ul></li>
+</ul>
+
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=1185s">00:19:45</a> Books and Resources:
+</p>
+<ul class="org-ul">
+<li>Optimization Algorithms on Matrix Manifolds</li>
+<li><a href="https://manopt.org">https://manopt.org</a></li>
+<li>An introduction to Optimization on Smooth Manifolds (<a href="https://nicolasboumal.net/#book">https://nicolasboumal.net/#book</a>)</li>
+</ul>
+
+
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=1601s">00:26:41</a> Gradient descent is a first order algorithm. So instead of the difficult to compute Exponential Map, we can use a Retraction Map instead which is same as Exponential Map only upto first order.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Unit%20Sphere" class="outline-2">
+<h2 id="Unit%20Sphere"><span class="section-number-2">4.</span> Unit Sphere</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=2844s">00:47:24</a>
+</p>
+
+\begin{equation*}
+S^{n-1} = {x \in \mathbb{R}^n : ||x||_2 = 1}
+\end{equation*}
+
+<p>
+Tangent Space of Sphere at point \(p\) is the space of points that are orthogonal to point \(p\):
+</p>
+
+\begin{equation*}
+T_p S^{n-1} = { v \in \mathbb{R}^n: v \cdot p = 0}
+\end{equation*}
+
+<p>
+Our optimation problem is:
+</p>
+\begin{equation*}
+\min_x x^T A x
+\end{equation*}
+
+\begin{equation*}
+x \in S^{n-1}
+\end{equation*}
+</div>
+<div id="outline-container-Computing%20gradient" class="outline-3">
+<h3 id="Computing%20gradient"><span class="section-number-3">4.1.</span> Computing gradient</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=2933s">00:48:53</a>
+</p>
+
+<p>
+We can view the objective function on the sphere as a restriction of an objective function on all of \(\mathbb{R}^n\).
+</p>
+
+<p>
+In this case (Sphere) if we want the intrinsic gradient of the function f, we can compute the extrinsic gradient in \(\mathbb{R}^n\) and projecting it to the tangent space.
+</p>
+
+\begin{equation*}
+\nabla_{S^{n-1}} f (p) = (I_{n \times n} - pp^T) \nabla_{\mathbb{R}^n} f(p)
+\end{equation*}
+</div>
+</div>
+<div id="outline-container-Retraction" class="outline-3">
+<h3 id="Retraction"><span class="section-number-3">4.2.</span> Retraction</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=3028s">00:50:28</a>
+</p>
+
+<p>
+For gradient descent, we need a gradient in the intrinsic space and also a retraction. In this case there are two (typical) options for a retraction: Exponential Map and Projection.
+</p>
+</div>
+<div id="outline-container-Exponential%20Map" class="outline-4">
+<h4 id="Exponential%20Map"><span class="section-number-4">4.2.1.</span> Exponential Map</h4>
+<div class="outline-text-4" id="text-4-2-1">
+\begin{equation*}
+\exp_p(v) = p \cos||v||_2 + \frac {v \sin ||v||_2} {||v||_2}
+\end{equation*}
+
+<p>
+This function maps a direction to a point on the sphere that is a \(||v||\) distance from p along the geodesic on that direction.
+</p>
+</div>
+</div>
+<div id="outline-container-Projection" class="outline-4">
+<h4 id="Projection"><span class="section-number-4">4.2.2.</span> Projection</h4>
+<div class="outline-text-4" id="text-4-2-2">
+\begin{equation*}
+R_p(v) = \frac {p + v} {||p+v||_2}
+\end{equation*}
+
+<p>
+Take a gradient step off of the sphere and project it back orthogonally.
+</p>
+
+<p>
+\(R_p(v)\) and \(\exp_p(v)\) don't match when \(v\) is large, but they are same locally.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-Stiefel%20Manifold" class="outline-2">
+<h2 id="Stiefel%20Manifold"><span class="section-number-2">5.</span> Stiefel Manifold</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=3147s">00:52:27</a>
+</p>
+
+\begin{equation*}
+V_k(\mathbb{R}^n) = \{ X \in \mathbb{R}^{n \times k}: X^T X = I_{k \times k} \}
+\end{equation*}
+
+<p>
+A manifold of matrices with \(k\) orthonormal columns.
+</p>
+
+<p>
+If \(k=1\) this is same as \(S^{n-1}\).
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=3212s">00:53:32</a> For manifold optimization we need to define:
+</p>
+<ol class="org-ol">
+<li>Tangent Space</li>
+<li>Projection on the tangent space</li>
+<li>Retraction</li>
+</ol>
+
+
+
+<div id="figure-3" class="figure">
+<p><img src="data/optimization_on_manifolds/tangent_space_and_retraction_for_stiefel_manifold-20240929135414.png" alt="tangent_space_and_retraction_for_stiefel_manifold-20240929135414.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span>Tangent Space and Retraction for Stiefel Manifold</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Reyleigh%20Quotient%20Minimization" class="outline-2">
+<h2 id="Reyleigh%20Quotient%20Minimization"><span class="section-number-2">6.</span> Reyleigh Quotient Minimization</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=4333s">01:12:13</a>
+</p>
+
+\begin{equation*}
+\min_{x \in S^{n-1}} \frac 1 2 x^T A x
+\end{equation*}
+
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=4656s">01:17:36</a> This is equivalent to computing the eigenvector of the mininum eigenvalue of \(A\), as indicated below:
+</p>
+
+\begin{equation*}
+\Lambda(x; \lambda) = \frac 1 2 x^T A x + \lambda (\frac 1 2 - \frac 1 2 ||x||^2_2)
+\end{equation*}
+
+\begin{equation*}
+0 = \nabla_x \Lambda = Ax - \lambda x \implies Ax = \lambda x
+\end{equation*}
+
+<p>
+We then define then tangent space and reduction map and then iterate to find the solution.
+</p>
+
+<p>
+Also, to find the eigenvector of any other eignevalue, we can formulate another problem:
+</p>
+
+\begin{equation*}
+\widetilde{f}(x) = ||\nabla_{S^{n-1}} (\frac 1 2 x^T A x)||_2^2
+\end{equation*}
+
+<p>
+Because the gradient is zero at eigenvector location. And the l2 norm makes those zero value the minima of \(\widetilde{f}\).
+</p>
+</div>
+</div>
+<div id="outline-container-Different%20Variations%20of%20PCA%20as%20objective%20functions" class="outline-2">
+<h2 id="Different%20Variations%20of%20PCA%20as%20objective%20functions"><span class="section-number-2">7.</span> Different Variations of PCA as objective functions</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=4878s">01:21:18</a>
+Optimizing on <a href="#Stiefel%20Manifold">Stiefel Manifold</a> corresponds to computing PCA.
+</p>
+
+
+
+<div id="figure-4" class="figure">
+<p><img src="data/optimization_on_manifolds/table_of_pca_variations-20240929145820.png" alt="table_of_pca_variations-20240929145820.png" />
+</p>
+<p><span class="figure-number">Figure 4: </span>Table of PCA Variations</p>
+</div>
+
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=4933s">01:22:13</a> For each variant of PCA, we could figure out a custom optimizer. Or we could just use the generic gradient descent algorithm in the manifold of PCA with the objective functions regularized in various ways.
+</p>
+</div>
+</div>
+<div id="outline-container-Maths" class="outline-2">
+<h2 id="Maths"><span class="section-number-2">8.</span> Maths</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-Differential" class="outline-3">
+<h3 id="Differential"><span class="section-number-3">8.1.</span> Differential</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=1281s">00:21:21</a> Analogue of derivative
+</p>
+
+\begin{equation*}
+df_{x_0} (v) = \lim_{h \to 0} \frac {f(x_0 + h v) - f(x_0)} h
+\end{equation*}
+
+\begin{equation*}
+df_{x_0}(v) = Df(x_0) \cdot v
+\end{equation*}
+</div>
+</div>
+<div id="outline-container-Tangent%20Space" class="outline-3">
+<h3 id="Tangent%20Space"><span class="section-number-3">8.2.</span> Tangent Space</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=1309s">00:21:49</a> Set of tangent vectors at a point.
+</p>
+</div>
+</div>
+<div id="outline-container-Maths--Exponential%20Map" class="outline-3">
+<h3 id="Maths--Exponential%20Map"><span class="section-number-3">8.3.</span> Exponential Map</h3>
+<div class="outline-text-3" id="text-8-3">
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=1368s">00:22:48</a>
+</p>
+
+\begin{equation*}
+\exp_p(v) = \gamma_v(1)
+\end{equation*}
+
+<p>
+where \(\gamma_v\) is (unique) geodesic from \(p\) with velocity \(v\).
+</p>
+</div>
+</div>
+<div id="outline-container-Maths--Retraction" class="outline-3">
+<h3 id="Maths--Retraction"><span class="section-number-3">8.4.</span> Retraction</h3>
+<div class="outline-text-3" id="text-8-4">
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=1430s">00:23:50</a> In general the geodesics curve are difficult to compute. But we don't always need a perfect geodesic.
+</p>
+
+<p>
+We can replace the Exponential Map with a Retraction. Which is a weaker notion of exponential map. They are same only upto first order.
+</p>
+
+
+<div id="figure-5" class="figure">
+<p><img src="data/optimization_on_manifolds/retraction-20240926191302.png" alt="retraction-20240926191302.png" />
+</p>
+<p><span class="figure-number">Figure 5: </span>Retraction</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Riemannain%20Manifold" class="outline-3">
+<h3 id="Riemannain%20Manifold"><span class="section-number-3">8.5.</span> Riemannain Manifold</h3>
+<div class="outline-text-3" id="text-8-5">
+<p>
+<a href="https://www.youtube.com/watch?v=2mnqWES2roQ&t=1696s">00:28:16</a> Pair \((M,g)\) of a differentiable manifold \(M\) and a pointwise positive definite inner product per point.
+</p>
+
+<p>
+\(g_p(\cdot, \cdot): T_p M \times T_p M \to \mathbb{R}\)
+</p>
+
+<p>
+\(g_p\) is symmetric, bilinear, &amp; positive definite form.
+</p>
+</div>
+</div>
+<div id="outline-container-Riemannian%20Gradient" class="outline-3">
+<h3 id="Riemannian%20Gradient"><span class="section-number-3">8.6.</span> Riemannian Gradient</h3>
+<div class="outline-text-3" id="text-8-6">
+<ul class="org-ul">
+<li>Metric tensor \(g \in \mathbb{R}^{n \times n}\)</li>
+<li><p>
+Gradient in coordinates \(\nabla f \in \mathbb{R}^n\)
+</p>
+
+    \begin{equation*}
+\nabla_g f = g^{-1} \nabla f
+\end{equation*}</li>
+</ul>
+
+<p>
+\(\phi\) is maps a parametrization of \(M\) in \(\mathbb{R}^n\) to \(M\)
+</p>
+
+
+
+<div id="figure-6" class="figure">
+<p><img src="data/optimization_on_manifolds/gradient_in_riemannian_manifold-20240929110914.png" alt="gradient_in_riemannian_manifold-20240929110914.png" />
+</p>
+<p><span class="figure-number">Figure 6: </span>Gradient in Riemannian Manifold</p>
+</div>
+
+<hr />
+<h3>References</h3>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=2mnqWES2roQ">https://www.youtube.com/watch?v=2mnqWES2roQ</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Optimization on Manifolds">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>

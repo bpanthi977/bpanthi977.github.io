@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Neural Acceleration for Incomplete Factorization Preconditioning</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-09-18 Wed&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Neural Acceleration for Incomplete Factorization Preconditioning</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#Objective">1. Objective</a></li>
+<li><a href="#Traditional%20Methods">2. Traditional Methods</a>
+<ul>
+<li><a href="#Incomplete%20Cholesky%20are%20difficult%20to%20parallelize">2.1. Incomplete Cholesky are difficult to parallelize</a></li>
+<li><a href="#Traditional%20NN%20method%20try%20computing%20inverse">2.2. Traditional NN method try computing inverse</a></li>
+</ul>
+</li>
+<li><a href="#Our%20approach">3. Our approach</a>
+<ul>
+<li><a href="#We%20train%20a%20NN%20to%20approximate%20the%20matrix%20in%20factorized%20form">3.1. We train a NN to approximate the matrix in factorized form</a></li>
+<li><a href="#Training%20Parameters">3.2. Training Parameters</a></li>
+<li><a href="#Question%3A%20Typo%3F">3.3. Question: Typo?</a></li>
+<li><a href="#For%20%24LU%24">3.4. For \(LU\)</a></li>
+</ul>
+</li>
+<li><a href="#Results">4. Results</a>
+<ul>
+<li><a href="#Normalization%20of%20X%20doesn%27t%20do%20better">4.1. Normalization of X doesn't do better</a></li>
+<li><a href="#%24LL%5ET%24%20is%20ideal%20even%20for%20non-symmetric%20matrices">4.2. \(LL^T\) is ideal even for non-symmetric matrices</a></li>
+<li><a href="#Question%3A%20Why%20just%201%20vector%20per%20iteration%3F">4.3. Question: Why just 1 vector per iteration?</a></li>
+</ul>
+</li>
+<li><a href="#Conclusion">5. Conclusion</a>
+<ul>
+<li><a href="#Question%3A">5.1. Question:</a></li>
+</ul>
+</li>
+<li><a href="#Miscelaneous">6. Miscelaneous</a>
+<ul>
+<li><a href="#Fill%20in%20is%20affected%20by%20Ordering">6.1. Fill in is affected by Ordering</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+[<a href="papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf">file:</a>][<a href="papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=nil">pdf:</a>]
+by <a href="private/joshua_booth.html#ID-FCB111EE-2B52-4D69-873D-2C34B9815884">Joshua Booth</a>
+</p>
+<div id="outline-container-Objective" class="outline-2">
+<h2 id="Objective"><span class="section-number-2">1.</span> Objective</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Use <a href="neural_acceleration.html#ID-A9F4A884-AEDF-49F1-9FBE-1C9579FF451D">Neural Acceleration</a> for speeding up computation of Preconditioner</li>
+
+<li>Preconditioner is a starting point used in iterative solvers</li>
+
+<li>We present an NA method for incomplete cholesky factorization to be used as preconditioner</li>
+</ul>
+
+<blockquote>
+<p>
+In this work, we demonstrate that a simple artificial neural network trained either at compile time or in parallel to the running application on a GPU can provide an incomplete \(LL^T\) factorization that can be used as a preconditioner. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=1">pg. 1</a>]
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+we explore a neural acceleration method for generating an incomplete Cholesky factorization with zero fill-in that performs as good as or better than a tuned incomplete Cholesky factorization without the overhead of trying different techniques [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=2">pg. 2</a>]
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+This generated preconditioner is as good as or better than the ones found using multiple preconditioning techniques such as scaling and shifting in terms of reduction in number of iterations. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=1">pg. 1</a>]
+</p>
+</blockquote>
+
+<ul class="org-ul">
+<li>Iterative solver (like PCG) are a common method for SPD</li>
+</ul>
+
+<blockquote>
+<p>
+A common iterative method for symmetric positive definite (SPD) systems is the Preconditioned Conjugate Gradient (PCG) method as it only relies on sparse matrix-vector multiplication (SpMV) and sparse triangular solve (Stri). [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=2">pg. 2</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Traditional%20Methods" class="outline-2">
+<h2 id="Traditional%20Methods"><span class="section-number-2">2.</span> Traditional Methods</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-Incomplete%20Cholesky%20are%20difficult%20to%20parallelize" class="outline-3">
+<h3 id="Incomplete%20Cholesky%20are%20difficult%20to%20parallelize"><span class="section-number-3">2.1.</span> Incomplete Cholesky are difficult to parallelize</h3>
+<div class="outline-text-3" id="text-2-1">
+<blockquote>
+<p>
+Incomplete Cholesky, are black box methods that are typically used to generate these preconditioners. These methods normally require trying techniques such as scaling, shifting, and identifying fill-in to achieve the desired reduction in iterations. However, the algorithm of incomplete factorization tends to be difficult to parallelize due to the low computational intensity. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=2">pg. 2</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Traditional%20NN%20method%20try%20computing%20inverse" class="outline-3">
+<h3 id="Traditional%20NN%20method%20try%20computing%20inverse"><span class="section-number-3">2.2.</span> Traditional NN method try computing inverse</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Traditional NN method for solving linear system try computing inverse but that is error prone.
+</p>
+
+<blockquote>
+<p>
+Many traditional neural network-inspired approaches try to construct a precon- ditioner M such that \(M \approx A^{-1}\). In particular, the network itself becomes the output. However, constructing an inverse directly is an error-prone task. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=6">pg. 6</a>]
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="outline-container-Our%20approach" class="outline-2">
+<h2 id="Our%20approach"><span class="section-number-2">3.</span> Our approach</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-We%20train%20a%20NN%20to%20approximate%20the%20matrix%20in%20factorized%20form" class="outline-3">
+<h3 id="We%20train%20a%20NN%20to%20approximate%20the%20matrix%20in%20factorized%20form"><span class="section-number-3">3.1.</span> We train a NN to approximate the matrix in factorized form</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>Construct a NN that has a hidden layer such that it computes \(Ax\) in the form of \(LL^Tx\)</li>
+
+<li>Sample some \(x\) and \(y\) then train the parameters of NN that represent \(L\)</li>
+
+<li>The obtained \(L\) is the preconditioner</li>
+</ul>
+
+<blockquote>
+<p>
+The neural acceleration method could take in the sparse matrix A and generate samples X and Y in order to train L. In our experimental results, we √ demonstrate that the number of samples needed is relatively small (i.e., N where N = dimension(A)). For the output, the method could either output L to be used by the problem in its iterative solver package or function pointers to apply sparse triangular solve for this on the GPU where it was generated. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=7">pg. 7</a>]
+</p>
+</blockquote>
+
+<ul class="org-ul">
+<li>Preconditioner in the form of \(L\) is common technique</li>
+</ul>
+
+<blockquote>
+<p>
+Limiting the nonzero pattern of the preconditioner to that of the nonzero pattern of the input matrix is commonly done in many traditional preconditioner methods. Therefore, we do not perceive this as a major limitation as many traditional methods also use it [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=7">pg. 7</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-Training%20Parameters" class="outline-3">
+<h3 id="Training%20Parameters"><span class="section-number-3">3.2.</span> Training Parameters</h3>
+<div class="outline-text-3" id="text-3-2">
+<ul class="org-ul">
+<li>Depends on number of iterations and optimization algorithm</li>
+</ul>
+
+<blockquote>
+<p>
+The training cost would depend on both the numerical optimization method used and the number of iterations needed to construct a good approximation. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=8">pg. 8</a>]
+</p>
+</blockquote>
+
+<ul class="org-ul">
+<li>We use AdaGrad</li>
+</ul>
+<blockquote>
+<p>
+AdaGrad is commonly used for training deep learning models with sparse gradients [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=9">pg. 9</a>]
+</p>
+</blockquote>
+
+<ul class="org-ul">
+<li>We sample X from random distribution [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=9">pg. 9</a>]
+
+<ul class="org-ul">
+<li><p>
+Question 1:
+</p>
+
+<p>
+Effect of different Network Initialization and Different Sparse Matrices (with different range of entries)
+</p>
+
+<p>
+E.g. He, Uniform, &#x2026;
+</p></li>
+
+<li><p>
+Question 2:
+</p>
+
+<p>
+Effect of sampling X from different distribution?
+</p>
+
+<p>
+Normalization is tried in this paper. I don't have other suggestion. Were other distribution tried? Uniform, Normal, &#x2026;
+</p>
+
+<p>
+Probably didn't matter.
+</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Question%3A%20Typo%3F" class="outline-3">
+<h3 id="Question%3A%20Typo%3F"><span class="section-number-3">3.3.</span> Question: Typo?</h3>
+<div class="outline-text-3" id="text-3-3">
+<blockquote>
+<p>
+Even with a sparse matrix that is not full rank, the image remains difficult to see after 25 samples and the error is very high (i.e., &gt; 1). Therefore, the number of samples should be ≤ N to be a successful method. <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=9">pg. 9</a>
+</p>
+</blockquote>
+
+<p>
+Number of samples should be &lt;= N or ~ N ?
+</p>
+</div>
+</div>
+<div id="outline-container-For%20%24LU%24" class="outline-3">
+<h3 id="For%20%24LU%24"><span class="section-number-3">3.4.</span> For \(LU\)</h3>
+<div class="outline-text-3" id="text-3-4">
+<ul class="org-ul">
+<li>We construct a NN of the form \(LU\)</li>
+<li>We avoid permutation similar to other ILU code</li>
+</ul>
+
+<blockquote>
+<p>
+We avoid the permutation in a similar manner as many other ILU codes by trying to permute large values to the diagonal first and excluding matrices that fail due to stability along the way [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=9">pg. 9</a>]
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="outline-container-Results" class="outline-2">
+<h2 id="Results"><span class="section-number-2">4.</span> Results</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-Normalization%20of%20X%20doesn%27t%20do%20better" class="outline-3">
+<h3 id="Normalization%20of%20X%20doesn%27t%20do%20better"><span class="section-number-3">4.1.</span> Normalization of X doesn't do better</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>We use two variety of X:
+<ul class="org-ul">
+<li>randomly selected X, not normalized (NN) and</li>
+<li>randomly selected X, normalized (NNN) [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=12">Page 12</a>]</li>
+</ul></li>
+
+<li>Not normalized X (i.e. NN) do better</li>
+</ul>
+<blockquote>
+<p>
+one set of randomly selected X with normalized samples (denoted as NNN)
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+NN generally does better than NNN. This is a nice finding for two particular reasons. First, normal- ization does not need to be done, thus saving time in training. Second, the training of NN is much less sensitive. In particular, a simple parameter of α = 0.1 works well with AdaGrad for training, while the training of NNN is much more difficult. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=16">pg. 16</a>]
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-%24LL%5ET%24%20is%20ideal%20even%20for%20non-symmetric%20matrices" class="outline-3">
+<h3 id="%24LL%5ET%24%20is%20ideal%20even%20for%20non-symmetric%20matrices"><span class="section-number-3">4.2.</span> \(LL^T\) is ideal even for non-symmetric matrices</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li>ILU is better preconditioner but failes to converge in some cases</li>
+</ul>
+<blockquote>
+<p>
+The \(LL^T\) model tends to be a better choice than the LU model for most of the test suite, even for matrices that are non-symmetric. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=20">Page 20</a>]
+</p>
+</blockquote>
+
+<ul class="org-ul">
+<li>\(LU\) isn't good when the matrix is SPD [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=20">Page 20</a>]</li>
+
+<li>But \(LL^T\) is good in both cases</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Question%3A%20Why%20just%201%20vector%20per%20iteration%3F" class="outline-3">
+<h3 id="Question%3A%20Why%20just%201%20vector%20per%20iteration%3F"><span class="section-number-3">4.3.</span> Question: Why just 1 vector per iteration?</h3>
+<div class="outline-text-3" id="text-4-3">
+<blockquote>
+<p>
+A total of \(\sqrt N\) training vectors were generated, and the models were trained iteratively utilizing a batch of 1 vector per iteration for all LLT models. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=12">pg. 12</a>]
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="outline-container-Conclusion" class="outline-2">
+<h2 id="Conclusion"><span class="section-number-2">5.</span> Conclusion</h2>
+<div class="outline-text-2" id="text-5">
+<blockquote>
+<p>
+In this work, we developed a neural network modeling method for incomplete factorization that can be utilized for the neural acceleration of preconditioners for sparse iterative solver methods of PCG and GMRES. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=21">pg. 21</a>]
+</p>
+</blockquote>
+
+<ul class="org-ul">
+<li><p>
+It is hyperparamter free
+</p>
+
+<p>
+Contrast with ICHOL(k), ICHOL(\(\tau\)), ILU(k) which have \(k\) or \(\tau\)
+</p></li>
+
+<li>It is as good as ICHOL</li>
+
+<li>It is 69 time slower, but still within range of compile time [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=18">Page 18</a>]
+
+<ul class="org-ul">
+<li><p>
+But it is more stable
+</p>
+
+<p>
+i.e. always produces preconditioner that reduces iteration count [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=1">Abstract</a>]
+</p></li>
+
+<li>And speed might get better as support for sparse multiplication in GPU gets better (which is the trend due to focus on <a href="graph_neural_network.html#ID-D67024E3-F6C1-4263-8B35-385F1DE5CC80">Graph Neural Network</a> in the ML community)</li>
+</ul></li>
+
+<li>So can be used as a blackbox method without user intervention</li>
+</ul>
+</div>
+<div id="outline-container-Question%3A" class="outline-3">
+<h3 id="Question%3A"><span class="section-number-3">5.1.</span> Question:</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+In <a href="neural_acceleration_of_graph_based_utility_functions_for_sparse_matrices.html#ID-0FA0C8E8-8178-4F85-961E-562BF8F6B5B6">Neural Acceleration of Graph Based Utility Functions for Sparse Matrices</a> paper, the NN was computed at compile time. But here it is done in run time.
+</p>
+
+<p>
+How is <a href="neural_acceleration.html#ID-A9F4A884-AEDF-49F1-9FBE-1C9579FF451D">Neural Acceleration</a> defined? No compiler tricks or compile time computing is utilized in this case.
+</p>
+
+<p>
+So, is this neural acceleration? (only when the matrix to factorize is available at compile time can we compute the preconditioner at compile time)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Miscelaneous" class="outline-2">
+<h2 id="Miscelaneous"><span class="section-number-2">6.</span> Miscelaneous</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-Fill%20in%20is%20affected%20by%20Ordering" class="outline-3">
+<h3 id="Fill%20in%20is%20affected%20by%20Ordering"><span class="section-number-3">6.1.</span> Fill in is affected by Ordering</h3>
+<div class="outline-text-3" id="text-6-1">
+<ul class="org-ul">
+<li>Certain orderings (ND, RCM), are known to reduce fill-in.</li>
+</ul>
+
+<blockquote>
+<p>
+The amount of fill-in during factorization is a factor of the nonzero pattern. Certain orderings, e.g., nested-dissection (ND) [11] and reverse Cuthill-McKee (RCM) [12], are known to reduce fill-in. In theory, the reduction in fill-in should result in better preconditioners. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=4">pg. 4</a>]
+</p>
+</blockquote>
+
+<p>
+Typo: factor <del>or</del> the nonzero -&gt; factor of the nonzero
+</p>
+
+<ul class="org-ul">
+<li>And reduction in fill in should reduce factorization time, but not always (AMD).</li>
+</ul>
+
+<blockquote>
+<p>
+While this idea holds in general, it does not hold for all orderings. An example of this is approximate minimal degree (AMD) ordering which reduces fill-in but may not reduce iteration count to the same degree as RCM [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Neural Acceleration for Incomplete Factorization Preconditioning.pdf#page=4">pg. 4</a>]
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Neural Acceleration for Incomplete Factorization Preconditioning">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>
