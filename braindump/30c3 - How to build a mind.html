@@ -8,190 +8,6 @@
 <title>How to Build a Mind</title>
 <meta name="author" content="Bibek Panthi" />
 <meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { }
-</style>
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
 <link rel="stylesheet" type="text/css" href="../css/braindump.css" />
 <script src="../js/counters.js" type="text/javascript"></script>
@@ -254,10 +70,9 @@
 </div>
 </div>
 <p>
-Notes from <a href="How to Build a Mind - Artificial Intelligence Reloaded [30c3]-nlutwZ0rUUs.mp4">How to Build a Mind - 30c3</a> by Joscha Bach
+Notes from <a href="mpv:How%20to%20Build%20a%20Mind%20-%20Artificial%20Intelligence%20Reloaded%20%5B30c3%5D-nlutwZ0rUUs.mp4">How to Build a Mind - 30c3</a> by Joscha Bach
 0:01:08 Overview 
 </p>
-
 <div id="outline-container-Why%20should%20we%20build%20AI%3F%20-%20to%20learn%20about%20mind" class="outline-2">
 <h2 id="Why%20should%20we%20build%20AI%3F%20-%20to%20learn%20about%20mind"><span class="section-number-2">1.</span> Why should we build AI? - to learn about mind</h2>
 <div class="outline-text-2" id="text-1">
@@ -270,7 +85,6 @@ This has to be given in framework of AI.
 </p>
 </div>
 </div>
-
 <div id="outline-container-Why%20Artificial%20Intelligence%3F%20-%20Only%20computer%20science%20has%20the%20right%20toolsp" class="outline-3">
 <h3 id="Why%20Artificial%20Intelligence%3F%20-%20Only%20computer%20science%20has%20the%20right%20toolsp"><span class="section-number-3">1.2.</span> Why Artificial Intelligence? - Only computer science has the right toolsp</h3>
 <div class="outline-text-3" id="text-1-2">
@@ -288,13 +102,11 @@ expressed and simulated
 Of course, computer science alone cannot do it!
 </p>
 </div>
-
 <div id="outline-container-Phisophy%20of%20mind%20doesn%27t%20have%20tools%20to%20create%20testable%20theory" class="outline-4">
 <h4 id="Phisophy%20of%20mind%20doesn%27t%20have%20tools%20to%20create%20testable%20theory"><span class="section-number-4">1.2.1.</span> Phisophy of mind doesn't have tools to create testable theory</h4>
 <div class="outline-text-4" id="text-1-2-1">
 </div>
 </div>
-
 <div id="outline-container-Neuroscience%20looks%20at%20an%20possible%20implementation%20-%20Looking%20at%20wrong%20level" class="outline-4">
 <h4 id="Neuroscience%20looks%20at%20an%20possible%20implementation%20-%20Looking%20at%20wrong%20level"><span class="section-number-4">1.2.2.</span> Neuroscience looks at an possible implementation - Looking at wrong level</h4>
 <div class="outline-text-4" id="text-1-2-2">
@@ -316,7 +128,6 @@ We can't disprove it scientifically.
 </p>
 </div>
 </li>
-
 <li><a id="Then%20psychologists%20wanted%20it%20to%20become%20natural%20science"></a>Then psychologists wanted it to become natural science<br />
 <div class="outline-text-5" id="text-1-2-3-2">
 <p>
@@ -325,11 +136,9 @@ We can't disprove it scientifically.
 </p>
 </div>
 </li>
-
 <li><a id="Psychology%20is%20all%20about%20experiments%20%28nowadays%29"></a>Psychology is all about experiments (nowadays)<br />
 <div class="outline-text-5" id="text-1-2-3-3">
 </div>
-
 <ol class="org-ol">
 <li><a id="This%20is%20not%20how%20Physics%20works%2C%20because%20you%20need%20to%20have%20lots%20of%20theories%20to%20understand%20a%20complex%20system"></a>This is not how Physics works, because you need to have lots of theories to understand a complex system<br />
 <div class="outline-text-6" id="text-1-2-3-3-1">
@@ -340,7 +149,6 @@ We can't disprove it scientifically.
 </ol>
 </div>
 </div>
-
 <div id="outline-container-Minds%20are%20information%20processing%20systems%20-%20and%20%2ACS%2A%20is%20science%20of%20Information%20Processing" class="outline-3">
 <h3 id="Minds%20are%20information%20processing%20systems%20-%20and%20%2ACS%2A%20is%20science%20of%20Information%20Processing"><span class="section-number-3">1.3.</span> Minds are information processing systems - and <b>CS</b> is science of Information Processing</h3>
 <div class="outline-text-3" id="text-1-3">
@@ -353,7 +161,7 @@ and Computer science is the science of information
 <h4 id="Is%20AI%20Not%20Dangerous%3F"><span class="section-number-4">1.3.1.</span> Is AI Not Dangerous?</h4>
 <div class="outline-text-4" id="text-1-3-1">
 
-<div id="orga5cbedd" class="figure">
+<div id="figure-1" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshotXloFpX.png" alt="mpv-screenshotXloFpX.png" />
 </p>
 </div>
@@ -370,12 +178,10 @@ Being motivated is: and We are hardwired by evolutionary process (social, strivi
 </p>
 </div>
 </li>
-
 <li><a id="AI%20can%20have%20arbitary%20motivational%20systems"></a>AI can have arbitary motivational systems<br />
 <div class="outline-text-5" id="text-1-3-1-2">
 </div>
 </li>
-
 <li><a id="Its%20going%20to%20be%20Organizational%20AI%3A%20Universities%2C%20Governments%2C%20..."></a>Its going to be Organizational AI: Universities, Governments, &#x2026;<br />
 <div class="outline-text-5" id="text-1-3-1-3">
 </div>
@@ -383,14 +189,12 @@ Being motivated is: and We are hardwired by evolutionary process (social, strivi
 </ol>
 </div>
 </div>
-
 <div id="outline-container-AI%20gives%20perspective%20for%20understanding%20ourself%20-%20For%20Enlightenment" class="outline-3">
 <h3 id="AI%20gives%20perspective%20for%20understanding%20ourself%20-%20For%20Enlightenment"><span class="section-number-3">1.4.</span> AI gives perspective for understanding ourself - For Enlightenment</h3>
 <div class="outline-text-3" id="text-1-4">
 </div>
 </div>
 </div>
-
 <div id="outline-container-How%20can%20we%20build%20AI%3F" class="outline-2">
 <h2 id="How%20can%20we%20build%20AI%3F"><span class="section-number-2">2.</span> How can we build AI?</h2>
 <div class="outline-text-2" id="text-2">
@@ -473,7 +277,6 @@ other—and never anything by which a perception could be explained.
 </li>
 </ol>
 </div>
-
 <div id="outline-container-Turing%20Machine" class="outline-4">
 <h4 id="Turing%20Machine"><span class="section-number-4">2.1.2.</span> Turing Machine</h4>
 <div class="outline-text-4" id="text-2-1-2">
@@ -482,13 +285,12 @@ other—and never anything by which a perception could be explained.
 <li><a id="Turing%20showed%20it%20can%20perform%20arbitary%20computation.%20Are%20there%20things%20it%20cannot%20do%3F"></a>Turing showed it can perform arbitary computation. Are there things it cannot do?<br />
 <div class="outline-text-5" id="text-2-1-2-1">
 
-<div id="orga171759" class="figure">
+<div id="figure-2" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshoteh3o8Q.png" alt="mpv-screenshoteh3o8Q.png" />
 </p>
 </div>
 </div>
 </li>
-
 <li><a id="John%20R.%20Searle%20-%20Mind%20can%20only%20arise%20from%20intrinsic%20power%20of%20biological%20neurons"></a>John R. Searle - Mind can only arise from intrinsic power of biological neurons<br />
 <div class="outline-text-5" id="text-2-1-2-2">
 </div>
@@ -496,13 +298,12 @@ other—and never anything by which a perception could be explained.
 <li><a id="Cat%2C%20Mouse%20and%20Cheese%20-%20Turing%20Machine%20%3Arofl"></a>Cat, Mouse and Cheese - Turing Machine :rofl<br />
 <div class="outline-text-6" id="text-2-1-2-2-1">
 
-<div id="org4386a0a" class="figure">
+<div id="figure-3" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshotOuOLRX.png" alt="mpv-screenshotOuOLRX.png" />
 </p>
 </div>
 </div>
 </li>
-
 <li><a id="Intiution%20don%27t%20work%20much%20-%20This%20is%20where%20Searle%20is%20wrong"></a>Intiution don't work much - This is where Searle is wrong<br />
 <div class="outline-text-6" id="text-2-1-2-2-2">
 </div>
@@ -529,13 +330,12 @@ So, lambda calulus is more of a - cut and paste thingy.
 </p>
 
 
-<div id="org9c74cff" class="figure">
+<div id="figure-4" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshotL8FR2f.png" alt="mpv-screenshotL8FR2f.png" />
 </p>
 </div>
 </div>
 </div>
-
 <div id="outline-container-Church-Turing%20Thesis" class="outline-4">
 <h4 id="Church-Turing%20Thesis"><span class="section-number-4">2.1.4.</span> Church-Turing Thesis</h4>
 <div class="outline-text-4" id="text-2-1-4">
@@ -562,7 +362,6 @@ All definitions of computation have the same power
 </p>
 </div>
 </div>
-
 <div id="outline-container-Brains%20are%20turing%20computational%20too%21" class="outline-4">
 <h4 id="Brains%20are%20turing%20computational%20too%21"><span class="section-number-4">2.1.5.</span> Brains are turing computational too!</h4>
 <div class="outline-text-4" id="text-2-1-5">
@@ -621,12 +420,11 @@ Neither mind is primary nor is physical world, computation is primary.
 </ul>
 </div>
 </div>
-
 <div id="outline-container-Criticism%20of%20Computationalism" class="outline-4">
 <h4 id="Criticism%20of%20Computationalism"><span class="section-number-4">2.2.2.</span> Criticism of Computationalism</h4>
 <div class="outline-text-4" id="text-2-2-2">
 
-<div id="org7a8d7f4" class="figure">
+<div id="figure-5" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshot1qrpm3.png" alt="mpv-screenshot1qrpm3.png" />
 </p>
 </div>
@@ -694,7 +492,6 @@ answer is correct?
 </div>
 </div>
 </div>
-
 <div id="outline-container-When%20is%20Al%20going%20to%20succeed%20%28if%20ever%29%3F" class="outline-2">
 <h2 id="When%20is%20Al%20going%20to%20succeed%20%28if%20ever%29%3F"><span class="section-number-2">3.</span> When is Al going to succeed (if ever)?</h2>
 <div class="outline-text-2" id="text-3">
@@ -707,7 +504,7 @@ answer is correct?
 <h4 id="Cortical%20Column"><span class="section-number-4">3.1.1.</span> Cortical Column</h4>
 <div class="outline-text-4" id="text-3-1-1">
 
-<div id="org2c7591d" class="figure">
+<div id="figure-6" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshotq6OdhE.png" alt="mpv-screenshotq6OdhE.png" />
 </p>
 </div>
@@ -732,7 +529,6 @@ Cells in the cortex are organized into ca. 2 million complex, regular circuits (
 </blockquote>
 </div>
 </div>
-
 <div id="outline-container-Human%20genome%20fits%20in%20CD%20rom%20-%20~700MB" class="outline-4">
 <h4 id="Human%20genome%20fits%20in%20CD%20rom%20-%20~700MB"><span class="section-number-4">3.1.2.</span> Human genome fits in CD rom - ~700MB</h4>
 <div class="outline-text-4" id="text-3-1-2">
@@ -747,14 +543,12 @@ Cells in the cortex are organized into ca. 2 million complex, regular circuits (
 </p>
 </div>
 </div>
-
 <div id="outline-container-Without%20specification%20we%20don%27t%20know%20how%20hard%20the%20problem%20is%20or%20how%20long%20it%20takes" class="outline-4">
 <h4 id="Without%20specification%20we%20don%27t%20know%20how%20hard%20the%20problem%20is%20or%20how%20long%20it%20takes"><span class="section-number-4">3.1.3.</span> Without specification we don't know how hard the problem is or how long it takes</h4>
 <div class="outline-text-4" id="text-3-1-3">
 </div>
 </div>
 </div>
-
 <div id="outline-container-AI%20history" class="outline-3">
 <h3 id="AI%20history"><span class="section-number-3">3.2.</span> AI history</h3>
 <div class="outline-text-3" id="text-3-2">
@@ -774,12 +568,11 @@ The Way to Artificial Intelligence
 <li>Autonomous, situated Agents: Minsky, Brooks, .. - Self directed, goal directed system</li>
 </ul>
 </div>
-
 <div id="outline-container-Started%20with%20~1950%20Alan%20Turing%27s%20Paper%20-%20Computing%20Machinery%20and%20Intelligence%20%28READ%20THIS%20PAPER%29" class="outline-4">
 <h4 id="Started%20with%20~1950%20Alan%20Turing%27s%20Paper%20-%20Computing%20Machinery%20and%20Intelligence%20%28READ%20THIS%20PAPER%29"><span class="section-number-4">3.2.1.</span> Started with ~1950 Alan Turing's Paper - Computing Machinery and Intelligence (READ THIS PAPER)</h4>
 <div class="outline-text-4" id="text-3-2-1">
 
-<div id="org01d8c54" class="figure">
+<div id="figure-7" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshot8jpORk.png" alt="mpv-screenshot8jpORk.png" />
 </p>
 </div>
@@ -789,12 +582,11 @@ The Way to Artificial Intelligence
 </p>
 </div>
 </div>
-
 <div id="outline-container-AI%20eras" class="outline-4">
 <h4 id="AI%20eras"><span class="section-number-4">3.2.2.</span> AI eras</h4>
 <div class="outline-text-4" id="text-3-2-2">
 
-<div id="org0f79773" class="figure">
+<div id="figure-8" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshotXLwJKs.png" alt="mpv-screenshotXLwJKs.png" />
 </p>
 </div>
@@ -807,7 +599,6 @@ Marvin Minksy wrote against neural networks  - they won - so for most of the tim
 </ul>
 </div>
 </div>
-
 <div id="outline-container-Nowadays%20the%20idea%20is%20of%20Cognitive%20Systems" class="outline-4">
 <h4 id="Nowadays%20the%20idea%20is%20of%20Cognitive%20Systems"><span class="section-number-4">3.2.3.</span> Nowadays the idea is of Cognitive Systems</h4>
 </div>
@@ -840,7 +631,6 @@ Polythematic, adaptive goal identification</li>
 <li>Emotion and affect</li>
 </ul>
 </div>
-
 <div id="outline-container-Universal%20Mental%20Represenatation" class="outline-3">
 <h3 id="Universal%20Mental%20Represenatation"><span class="section-number-3">4.1.</span> Universal Mental Represenatation</h3>
 <div class="outline-text-3" id="text-4-1">
@@ -856,13 +646,13 @@ We need universal mental represenation
 </p>
 
 
-<div id="org3806ee2" class="figure">
+<div id="figure-9" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshotEw1oLa.png" alt="mpv-screenshotEw1oLa.png" />
 </p>
 </div>
 
 
-<div id="orgceed5fa" class="figure">
+<div id="figure-10" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshot0tYoHu.png" alt="mpv-screenshot0tYoHu.png" />
 </p>
 </div></li>
@@ -882,7 +672,7 @@ We need universal mental represenation
 </p>
 
 
-<div id="org1a530ad" class="figure">
+<div id="figure-11" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshot5Zq00B.png" alt="mpv-screenshot5Zq00B.png" />
 </p>
 </div>
@@ -892,7 +682,7 @@ A part of protocol memory is Self model
 </p>
 
 
-<div id="org4aa076e" class="figure">
+<div id="figure-12" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshotCb6IZt.png" alt="mpv-screenshotCb6IZt.png" />
 </p>
 </div>
@@ -903,7 +693,7 @@ A part of protocol memory is Self model
 </ul>
 
 
-<div id="orgad7fe3d" class="figure">
+<div id="figure-13" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshotkcewtc.png" alt="mpv-screenshotkcewtc.png" />
 </p>
 </div>
@@ -922,7 +712,7 @@ A part of protocol memory is Self model
 <h3 id="Action%20Selection%20and%20Executive%20Control"><span class="section-number-3">4.3.</span> Action Selection and Executive Control</h3>
 <div class="outline-text-3" id="text-4-3">
 
-<div id="org5020eac" class="figure">
+<div id="figure-14" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshot1dfPhe.png" alt="mpv-screenshot1dfPhe.png" />
 </p>
 </div>
@@ -946,7 +736,7 @@ Urges/drives (demands) -&gt; Motive Selection -&gt; Intention
 </p>
 
 
-<div id="orgf9b783b" class="figure">
+<div id="figure-15" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshotjZjz1E.png" alt="mpv-screenshotjZjz1E.png" />
 </p>
 </div>
@@ -992,7 +782,6 @@ For mathematicians they find pleasure in solving uncertanity and they find other
 </p>
 </div>
 </li>
-
 <li><a id="Aesthetic%20Demands"></a>Aesthetic Demands<br />
 <div class="outline-text-5" id="text-4-4-3-3">
 <p>
@@ -1020,7 +809,6 @@ How is it possible for a system to feel something?
 </ul>
 </div>
 </div>
-
 <div id="outline-container-Difference%20in%20perception%20is%20Feeling" class="outline-4">
 <h4 id="Difference%20in%20perception%20is%20Feeling"><span class="section-number-4">4.5.2.</span> Difference in perception is Feeling</h4>
 <div class="outline-text-4" id="text-4-5-2">
@@ -1029,7 +817,7 @@ these dimensions regulate/modulate our congnition. so we experience, understand 
 </p>
 
 
-<div id="orgd5a10f1" class="figure">
+<div id="figure-16" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshotlDEwcb.png" alt="mpv-screenshotlDEwcb.png" />
 </p>
 </div>
@@ -1058,7 +846,6 @@ Emotion in Computation Models
 </div>
 </div>
 </div>
-
 <div id="outline-container-Incremental%20Progress%20or%20Big%20Jump%3F%20-%20Incremental%20Progress" class="outline-3">
 <h3 id="Incremental%20Progress%20or%20Big%20Jump%3F%20-%20Incremental%20Progress"><span class="section-number-3">4.6.</span> Incremental Progress or Big Jump? - Incremental Progress</h3>
 <div class="outline-text-3" id="text-4-6">
@@ -1077,12 +864,11 @@ Things to do <a href="#What%20are%20the%20ingredients%20for%20AI%3F%20-%20Cognit
 </div>
 </div>
 </div>
-
 <div id="outline-container-What%20should%20you%20do%20-%20to%20get%20into%20AI" class="outline-2">
 <h2 id="What%20should%20you%20do%20-%20to%20get%20into%20AI"><span class="section-number-2">5.</span> What should you do - to get into AI</h2>
 <div class="outline-text-2" id="text-5">
 
-<div id="org072dea4" class="figure">
+<div id="figure-17" class="figure">
 <p><img src="./data/30c3 - How to build a mind/mpv-screenshotLETA7o.png" alt="mpv-screenshotLETA7o.png" />
 </p>
 </div>
@@ -1112,7 +898,6 @@ Do not stop there!
 0:50:46 <b>Study Cognitive Science</b> 
 </p>
 </div>
-
 <div id="outline-container-Open%20Problems" class="outline-3">
 <h3 id="Open%20Problems"><span class="section-number-3">5.1.</span> Open Problems</h3>
 <div class="outline-text-3" id="text-5-1">
@@ -1136,7 +921,6 @@ including temporal relations, loops, etc
 </ul>
 </div>
 </div>
-
 <div id="outline-container-Preception" class="outline-4">
 <h4 id="Preception"><span class="section-number-4">5.1.2.</span> Preception</h4>
 <div class="outline-text-4" id="text-5-1-2">
@@ -1144,11 +928,10 @@ including temporal relations, loops, etc
 <li>bottom-up - cue driven - driven by environment - what we see</li>
 <li>top-down: theory/concept driven - driven by what we expect to see</li>
 <li>works on sensory input and memory</li>
-<li>any-time characteristics =&gt; works on <a id="orgf125fcb">partial representation</a>??</li>
+<li>any-time characteristics =&gt; works on <a id="orgb57467f">partial representation</a>??</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-Categorization" class="outline-4">
 <h4 id="Categorization"><span class="section-number-4">5.1.3.</span> Categorization</h4>
 <div class="outline-text-4" id="text-5-1-3">
@@ -1175,7 +958,6 @@ organizing mental represenatation (which are probably Fuzzy distributed hypergra
 </p>
 </div>
 </div>
-
 <div id="outline-container-Sociality%20-%20Interpreting%20others" class="outline-4">
 <h4 id="Sociality%20-%20Interpreting%20others"><span class="section-number-4">5.1.6.</span> Sociality - Interpreting others</h4>
 <div class="outline-text-4" id="text-5-1-6">
@@ -1186,7 +968,6 @@ organizing mental represenatation (which are probably Fuzzy distributed hypergra
 </ul>
 </div>
 </div>
-
 <div id="outline-container-Integration" class="outline-4">
 <h4 id="Integration"><span class="section-number-4">5.1.7.</span> Integration</h4>
 <div class="outline-text-4" id="text-5-1-7">
@@ -1199,7 +980,6 @@ organizing mental represenatation (which are probably Fuzzy distributed hypergra
 </ul>
 </div>
 </div>
-
 <div id="outline-container-Benchmark%20Problems%20-%20Find%20a%20benchmark%20for%20mind%21" class="outline-4">
 <h4 id="Benchmark%20Problems%20-%20Find%20a%20benchmark%20for%20mind%21"><span class="section-number-4">5.1.8.</span> Benchmark Problems - Find a benchmark for mind!</h4>
 <div class="outline-text-4" id="text-5-1-8">

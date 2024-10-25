@@ -8,190 +8,6 @@
 <title>Linear Algebra via Exterior Products</title>
 <meta name="author" content="Bibek Panthi" />
 <meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { }
-</style>
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
 <link rel="stylesheet" type="text/css" href="../css/braindump.css" />
 <script src="../js/counters.js" type="text/javascript"></script>
@@ -360,7 +176,6 @@
 <p>
 Notes prepared by Bibek Panthi while reading `Linear Algebra via Exterior Products' by Sergei Winitzki, Ph.D.
 </p>
-
 <div id="outline-container-Homomorphism" class="outline-2">
 <h2 id="Homomorphism"><span class="section-number-2">1.</span> Homomorphism</h2>
 <div class="outline-text-2" id="text-1">
@@ -398,7 +213,6 @@ and is thus a homomorphism between these two groups.
 </p>
 </div>
 </div>
-
 <div id="outline-container-Vectors" class="outline-2">
 <h2 id="Vectors"><span class="section-number-2">2.</span> Vectors</h2>
 <div class="outline-text-2" id="text-2">
@@ -428,7 +242,6 @@ and is thus a homomorphism between these two groups.
 </div>
 </div>
 </div>
-
 <div id="outline-container-Isomorphism" class="outline-3">
 <h3 id="Isomorphism"><span class="section-number-3">2.2.</span> Isomorphism</h3>
 <div class="outline-text-3" id="text-2-2">
@@ -440,7 +253,6 @@ Two vector spaces are isomorphic if there exists a one-to-one linear map between
 <li>Vector spaces \(K^m\)  and \(K^n\)  are isomorphic only if they have equal dimension, \(m = n\) . The reason they are not isomorphic for \(m \neq n\)  is that they have different numbers of vectors in a basis, while one-to-one linear maps must preserve linear independence and map a basis to a basis.</li>
 </ul>
 </div>
-
 <div id="outline-container-Canonical%20Isomorphism" class="outline-4">
 <h4 id="Canonical%20Isomorphism"><span class="section-number-4">2.2.1.</span> Canonical Isomorphism</h4>
 <div class="outline-text-4" id="text-2-2-1">
@@ -465,7 +277,6 @@ defined or canonical if it is defined independently of a choice of bases.
 If \(V\) and \(W\) are two given vector spaces over a field \(K\), we define a new vector space \(V \oplus W\) as the space of pairs \((v,w)\) , where \(v \in V\) \(w \in W\). 
 </p>
 </div>
-
 <div id="outline-container-Canonical%20Projections%3B%20%24V%24%20and%20%24W%24%20as%20subspaces%20of%20subspaces%20of%20%24V%20%5Coplus%20W%24" class="outline-4">
 <h4 id="Canonical%20Projections%3B%20%24V%24%20and%20%24W%24%20as%20subspaces%20of%20subspaces%20of%20%24V%20%5Coplus%20W%24"><span class="section-number-4">2.3.1.</span> Canonical Projections; \(V\) and \(W\) as subspaces of subspaces of \(V \oplus W\)</h4>
 <div class="outline-text-4" id="text-2-3-1">
@@ -478,7 +289,6 @@ The isomorphism \(\hat{P}_V\) is the canonical projection defined by
 It is usually convenient o denote vectors from\(V \oplus W\) by formal linear combinations, e.g. \(v +w\) instead of the pair notation \((v, w)\) . A pair \((v, 0)\) is denoted simply by \(v \in V \oplus W\) . 
 </p>
 </div>
-
 <ol class="org-ol">
 <li><a id="Exercise"></a>Exercise<br />
 <div class="outline-text-5" id="text-2-3-1-1">
@@ -501,7 +311,6 @@ Dual vectors = co-vectors = linear forms
 Definition: A co-vector is a linear map \(V \to \mathbb K\) . The set of all co-vectors is the dual space to the vector space \(V\) . The zero covector is the linear function that maps all vectors into zero. This "space of all linear functions" is the space we denote by \(V^\ast\) . In our earlier notation, this space is the same as Hom\((V,\mathbb K)\) .
 </p>
 </div>
-
 <div id="outline-container-Example%202" class="outline-4">
 <h4 id="Example%202"><span class="section-number-4">2.4.1.</span> Example 2</h4>
 <div class="outline-text-4" id="text-2-4-1">
@@ -520,7 +329,6 @@ is a linear function. Hence, \(f^\ast\) and \(g^\ast\)  belong to \(V^\ast\) .
 </p>
 </div>
 </div>
-
 <div id="outline-container-Dual%20basis" class="outline-4">
 <h4 id="Dual%20basis"><span class="section-number-4">2.4.2.</span> Dual basis</h4>
 <div class="outline-text-4" id="text-2-4-2">
@@ -536,7 +344,6 @@ Any vector \(v \in V\) is uniquely expressed as :
 The coefficients \(v_j\) , understood as a function of the vector \(v\) is a linear function of \(v\). Therefor they are covectors, i.e. elements of \(V^\ast\) . Let us denote these covector by \(e_1^\ast, ..., e_n^\ast\) . Note that these covectors depend on the entire basis \({e_j}\)  and not only on \(e_1\) , as it might appear from the notation. The covector \(e^\ast_1\) will change if we change \(e_2\) or any other basis vector. This is so because the component \(v_1\)  of a fixed vector \(v\) depends not only on \(e_1\) but also on every other basis vector \(e_j\) . 
 </p>
 </div>
-
 <ol class="org-ol">
 <li><a id="Theorem"></a>Theorem<br />
 <div class="outline-text-5" id="text-2-4-2-1">
@@ -551,8 +358,6 @@ The set of \(n\) covectors \(e^\ast_1,..., e^\ast_n\) is a basis in \(V^\ast\) .
 </li>
 </ol>
 </div>
-
-
 <div id="outline-container-Example%20%28Important%29" class="outline-4">
 <h4 id="Example%20%28Important%29"><span class="section-number-4">2.4.3.</span> Example (Important)</h4>
 <div class="outline-text-4" id="text-2-4-3">
@@ -563,7 +368,6 @@ This formula looks like the scalar product. But it doesn't describe a scalar pro
 </div>
 </div>
 </div>
-
 <div id="outline-container-Hyperplane" class="outline-3">
 <h3 id="Hyperplane"><span class="section-number-3">2.5.</span> Hyperplane</h3>
 <div class="outline-text-3" id="text-2-5">
@@ -575,7 +379,6 @@ The hyperplane (i.e. subspace of codimension 1) annihilated by a covector \(f^\a
 The hyperplane annihilated by a nonzero covector \(\astrk f\) is a subspace of \(V\) of dimension \(N-1\) (where \(N \equiv \text{dim} V\)) 
 </p>
 </div>
-
 <div id="outline-container-Affine%20Hyperplane" class="outline-4">
 <h4 id="Affine%20Hyperplane"><span class="section-number-4">2.5.1.</span> Affine Hyperplane</h4>
 <div class="outline-text-4" id="text-2-5-1">
@@ -589,7 +392,6 @@ Remark: An affine hyperplane with \(\alpha \neq 0\) is not a subspace of \(V\).
 </div>
 </div>
 </div>
-
 <div id="outline-container-Tensor%20Product%20of%20vector%20spaces" class="outline-3">
 <h3 id="Tensor%20Product%20of%20vector%20spaces"><span class="section-number-3">2.6.</span> Tensor Product of vector spaces</h3>
 <div class="outline-text-3" id="text-2-6">
@@ -604,7 +406,7 @@ Definition: Suppose \(V\) and \(W\) are two vector spaces over a field \(\mathbb
 </p>
 
 \begin{equation} 
-\label{orga54f192}
+\label{orgb938fd3}
 v_1 \otimes w_1 + ... + v_n \otimes w_n
 \tag{1.16}
 \end{equation}
@@ -614,18 +416,18 @@ where \(v_i \in V, w_i \in W\). The plus sign behaves as usual (commutative and 
 </p>
 
 \begin{equation}
-\label{org1fd0105}
+\label{org0787361}
 \lambda ( v \otimes w) = (\lambda v) \otimes w  = v \otimes (\lambda w) \tag{1.17}
 \end{equation}
 
 \begin{equation}
-\label{orgd341b48}
+\label{org5ee96c3}
 (v_1 + v_2) \otimes w = v_1 \otimes w + v_2 \otimes w
 \tag{1.18}
 \end{equation}
 
 \begin{equation} 
-\label{org0261944}
+\label{org95465db}
 v \otimes ( w_1 =w_2) = v \otimes w_1 + v \otimes w_2
 \tag{1.19}
 \end{equation}
@@ -636,13 +438,12 @@ Once could say that the symbol \(\otimes\)  behaves as a noncommutative product 
 </p>
 
 <p>
-The representation of a tensor \(A \in V \otimes W\) in the form \eqref{orga54f192} is not unique, i.e there may be many possible choice of the vectors \(v_j\) and \(w_j\) that give the same tensor \(A\) . For example, 
+The representation of a tensor \(A \in V \otimes W\) in the form \eqref{orgb938fd3} is not unique, i.e there may be many possible choice of the vectors \(v_j\) and \(w_j\) that give the same tensor \(A\) . For example, 
 </p>
 \begin{equation}
 v_1 \otimes w_1+ v_2 \otimes w_2 = (v_1 - v_2) \otimes w_1 + v_2 \otimes (w_1 + w_2)
 \end{equation}
 </div>
-
 <div id="outline-container-Example%20%24%5Cmathbb%20R%5Em%20%5Cotimes%20%5Cmathbb%20R%5En%24" class="outline-4">
 <h4 id="Example%20%24%5Cmathbb%20R%5Em%20%5Cotimes%20%5Cmathbb%20R%5En%24"><span class="section-number-4">2.6.1.</span> Example \(\mathbb R^m \otimes \mathbb R^n\)</h4>
 <div class="outline-text-4" id="text-2-6-1">
@@ -666,7 +467,6 @@ where \(C_{jl} = \sum_{i=1}^k \lambda_{ij} \mu_{il}\) is a certain set of number
 </p>
 </div>
 </div>
-
 <div id="outline-container-Dimension%20of%20tensor%20product%20is%20the%20product%20of%20dimensions" class="outline-4">
 <h4 id="Dimension%20of%20tensor%20product%20is%20the%20product%20of%20dimensions"><span class="section-number-4">2.6.2.</span> Dimension of tensor product is the product of dimensions</h4>
 <div class="outline-text-4" id="text-2-6-2">
@@ -674,7 +474,6 @@ where \(C_{jl} = \sum_{i=1}^k \lambda_{ij} \mu_{il}\) is a certain set of number
 To prove this statement, we will explicitly construct a basis in \(V \otimes W\) out of two given bases in \(V\) and in \(W\) . We consider finite dimensional vector spaces \(V\) and \(W\) and vectors \(v_j \in V, w_j \in W\).
 </p>
 </div>
-
 <ol class="org-ol">
 <li><a id="Lemma%201%3A"></a>Lemma 1:<br />
 <div class="outline-text-5" id="text-2-6-2-1">
@@ -716,7 +515,6 @@ I will call this formula the decomposition of the tensor \(A\) in the basis \(\{
 </p>
 </div>
 </li>
-
 <li><a id="Lemma%202%3A"></a>Lemma 2:<br />
 <div class="outline-text-5" id="text-2-6-2-2">
 <p>
@@ -724,7 +522,7 @@ If \(f^\ast \in V^\ast\) is any covector, we define the map \(f^\ast : V\otimes 
 </p>
 
 \begin{equation} 
-\label{org9693c2b}
+\label{orgaacd4ff}
 f^\ast \bigg( \sum_k v_k \otimes w_k \bigg) \equiv \sum_k f^\ast (v_k) w_k
 \tag{1.21}
 \end{equation}
@@ -734,11 +532,11 @@ Then this map is a linear map \(V \otimes W \to W\)
 
 <p>
 Proof: 
-The formula \eqref{org9693c2b} define the map explicitly (and canonically!). The linearity is evident from the definition \eqref{org9693c2b}, any linear combination of tensors are mapped into the corresponding linear combinations of vectors. 
+The formula \eqref{orgaacd4ff} define the map explicitly (and canonically!). The linearity is evident from the definition \eqref{orgaacd4ff}, any linear combination of tensors are mapped into the corresponding linear combinations of vectors. 
 </p>
 
 <p>
-However, there is one potential problem: there exists many representations of an element \(A \in V\otimes W\)  as an expression of the form \(\sum_k v_k \otimes w_k\) with different choice of \(v_k, w_k\) . Thus we need to show that the map \(f^\ast\) is well-defined by \eqref{org9693c2b}. i.e. that \(f^\ast(A)\) is always the same vector regardless of the choice of the vectors \(v_k\) and \(w_k\) used to represent \(A\).  Recall that different expressions for \(A\) can be equal as a consequence of the axioms \eqref{org1fd0105}-\eqref{org0261944}. Thus it is sufficient to show that \(f^\ast\) transforms both sides of those identities into the same vector. i.e. 
+However, there is one potential problem: there exists many representations of an element \(A \in V\otimes W\)  as an expression of the form \(\sum_k v_k \otimes w_k\) with different choice of \(v_k, w_k\) . Thus we need to show that the map \(f^\ast\) is well-defined by \eqref{orgaacd4ff}. i.e. that \(f^\ast(A)\) is always the same vector regardless of the choice of the vectors \(v_k\) and \(w_k\) used to represent \(A\).  Recall that different expressions for \(A\) can be equal as a consequence of the axioms \eqref{org0787361}-\eqref{org95465db}. Thus it is sufficient to show that \(f^\ast\) transforms both sides of those identities into the same vector. i.e. 
 </p>
 
 \begin{equation} 
@@ -755,7 +553,6 @@ these simple calculations are trivial to prove.
 </p>
 </div>
 </li>
-
 <li><a id="Lemma%203%3A"></a>Lemma 3:<br />
 <div class="outline-text-5" id="text-2-6-2-3">
 <p>
@@ -775,13 +572,13 @@ We need to prove that a vanishing linear combination
 </p>
 
 \begin{equation}
-\label{orga5a61b2}
+\label{orgd647824}
 \sum_{j=1}^m \sum_{k=1}^n \lambda_{jk} v_j \otimes w_k = 0
 \tag{1.23}
 \end{equation}
 
 <p>
-is possible only if all \(\lambda_{jk} = 0\). Let us choose some fixed value \(j_1\); we will now prove that \(\lambda_{j_1k} = 0\) for all \(k\). Then there exists a covector \(\astk f \in \astk  V\) such that \(\astk f (v_j) = \delta_{j_1j}\). Then we apply the map \(\astk f : V \otimes W \to W\) to \eqref{orga5a61b2} 
+is possible only if all \(\lambda_{jk} = 0\). Let us choose some fixed value \(j_1\); we will now prove that \(\lambda_{j_1k} = 0\) for all \(k\). Then there exists a covector \(\astk f \in \astk  V\) such that \(\astk f (v_j) = \delta_{j_1j}\). Then we apply the map \(\astk f : V \otimes W \to W\) to \eqref{orgd647824} 
 </p>
 
 \begin{equation*}
@@ -796,9 +593,6 @@ Therefore \(\sum_k \lambda_{j_1k} w_k = 0\) and since the set \(\{w_k\}\) is lin
 </p>
 </div>
 </li>
-
-
-
 <li><a id="Theorem%3A"></a>Theorem:<br />
 <div class="outline-text-5" id="text-2-6-2-4">
 <p>
@@ -844,7 +638,6 @@ Definition: If we only work with one space \(V\) and if all other spaces are con
 Elements of such space are called <b>tensor of rank</b> \((m,n)\). For example, vectors \(v \in V\) have rank \((1,0)\) , covector \(f^\ast \in V^\ast\)  have rank \((0,1)\). Scalars from \(\mathbb K\) have ran \((0,0)\) 
 </p>
 </div>
-
 <div id="outline-container-Canonical%20Isomorphisms" class="outline-4">
 <h4 id="Canonical%20Isomorphisms"><span class="section-number-4">2.7.1.</span> Canonical Isomorphisms</h4>
 <div class="outline-text-4" id="text-2-7-1">
@@ -856,7 +649,6 @@ Elements of such space are called <b>tensor of rank</b> \((m,n)\). For example, 
 </div>
 </div>
 </div>
-
 <div id="outline-container-Linear%20Maps%20and%20Tensors" class="outline-3">
 <h3 id="Linear%20Maps%20and%20Tensors"><span class="section-number-3">2.8.</span> Linear Maps and Tensors</h3>
 <div class="outline-text-3" id="text-2-8">
@@ -870,7 +662,6 @@ Linear operators can be thought of as elements of the space \(V \otimes V^\ast\)
 <li>From now on, I will not use the map explicitly. Rather, I will simply not distinguish between the spaces \(\text{End}V\) and \(V \otimes V^\ast\). I will write things like \(v \otimes w^\ast \in \text{End}V\) or \(\hat{A} = x \otimes y^\ast\). The space implied in each case will be clear from the context.</li>
 </ul>
 </div>
-
 <div id="outline-container-Tensors%20as%20linear%20operators" class="outline-4">
 <h4 id="Tensors%20as%20linear%20operators"><span class="section-number-4">2.8.1.</span> Tensors as linear operators</h4>
 <div class="outline-text-4" id="text-2-8-1">
@@ -885,7 +676,7 @@ A tensor \(A \in V \otimes \astk V\) expressed as
 defines a linear operator \(\hat{A} : V \to V\) according to the formula
 </p>
 \begin{equation}
-\label{orgda1d706}
+\label{orgb1eb75c}
 \hat{A}x \equiv \sum_j \astk f_j(x) v_j
 \tag{1.24}
 \end{equation}
@@ -895,7 +686,7 @@ We need to prove two statements:
 </p>
 <ul class="org-ul">
 <li>The transformation is linear (this follows from the linearity of map \(\astk f_j\) )</li>
-<li>The operator \(\hat{A}\) does not depend on the decomposition of the tensor \(A\) using particular vectors \(v_j\) and covectors \(\astk f_j\) (this is easily proved by checking that the operator \(\hat{A}\)  remains unchanged when the axioms \eqref{org1fd0105}-\eqref{org0261944}  are used. e.g.</li>
+<li>The operator \(\hat{A}\) does not depend on the decomposition of the tensor \(A\) using particular vectors \(v_j\) and covectors \(\astk f_j\) (this is easily proved by checking that the operator \(\hat{A}\)  remains unchanged when the axioms \eqref{org0787361}-\eqref{org95465db}  are used. e.g.</li>
 </ul>
 
 <p>
@@ -913,11 +704,10 @@ Then
 \end{equation*}
 
 <p>
-The action of \(\hat{A}\) on \(x\) remains unchanged for every x, which means that the operator \(\hat{A}\)  itself is unchanged. i.e. the axiom that works for tensor \(A\) also works for \(\hat{A}\) and the operator \(\hat{A}\) is independent of the choice of decomposition of tensor \(A\) because equivalent decompositions are those which follow axioms \eqref{org1fd0105}-\eqref{org0261944} and our operator also follows those axioms. 
+The action of \(\hat{A}\) on \(x\) remains unchanged for every x, which means that the operator \(\hat{A}\)  itself is unchanged. i.e. the axiom that works for tensor \(A\) also works for \(\hat{A}\) and the operator \(\hat{A}\) is independent of the choice of decomposition of tensor \(A\) because equivalent decompositions are those which follow axioms \eqref{org0787361}-\eqref{org95465db} and our operator also follows those axioms. 
 </p>
 </div>
 </div>
-
 <div id="outline-container-Linear%20operator%20as%20Tensors" class="outline-4">
 <h4 id="Linear%20operator%20as%20Tensors"><span class="section-number-4">2.8.2.</span> Linear operator as Tensors</h4>
 <div class="outline-text-4" id="text-2-8-2">
@@ -943,7 +733,6 @@ The last equality is based on the formula
 which holds because the components of a vector \(y\) in the basis \(\{v_k\}\) are \(\astk v_k (y)\). 
 </p>
 </div>
-
 <ol class="org-ol">
 <li><a id="Linear%20operator%20as%20Tensors--Theorem"></a>Theorem<br />
 <div class="outline-text-5" id="text-2-8-2-1">
@@ -971,7 +760,6 @@ Also note that we did use a basis \(\{v_k\}\) in the construction of this isomor
 </li>
 </ol>
 </div>
-
 <div id="outline-container-Revision" class="outline-4">
 <h4 id="Revision"><span class="section-number-4">2.8.3.</span> Revision</h4>
 <div class="outline-text-4" id="text-2-8-3">
@@ -983,7 +771,6 @@ Also note that we did use a basis \(\{v_k\}\) in the construction of this isomor
 </ul>
 </div>
 </div>
-
 <div id="outline-container-Examples" class="outline-4">
 <h4 id="Examples"><span class="section-number-4">2.8.4.</span> Examples</h4>
 <div class="outline-text-4" id="text-2-8-4">
@@ -1001,7 +788,6 @@ This map applied to an operator \(\hat{A} \in V \otimes \astk V\) yields the tra
 </div>
 </div>
 </div>
-
 <div id="outline-container-Index%20Notation%20for%20Tensors" class="outline-3">
 <h3 id="Index%20Notation%20for%20Tensors"><span class="section-number-3">2.9.</span> Index Notation for Tensors</h3>
 </div>
@@ -1009,7 +795,6 @@ This map applied to an operator \(\hat{A} \in V \otimes \astk V\) yields the tra
 <h3 id="Dirac%20notation%20for%20Tensors"><span class="section-number-3">2.10.</span> Dirac notation for Tensors</h3>
 </div>
 </div>
-
 <div id="outline-container---Exterior%20Product" class="outline-2">
 <h2 id="--Exterior%20Product"><span class="section-number-2">3.</span> Exterior Product</h2>
 <div class="outline-text-2" id="text-3">
@@ -1017,7 +802,6 @@ This map applied to an operator \(\hat{A} \in V \otimes \astk V\) yields the tra
 The basic idea is that we would like to define an <i>antisymmetric</i> and bilinear product of vectors. i.e \(a \wedge b = -b \wedge a\)
 </p>
 </div>
-
 <div id="outline-container-Motivation" class="outline-3">
 <h3 id="Motivation"><span class="section-number-3">3.1.</span> Motivation</h3>
 <div class="outline-text-3" id="text-3-1">
@@ -1051,7 +835,6 @@ The <code>antisymmetric</code> property comes from the definition of \(A(a,b)\) 
 </p>
 </div>
 </div>
-
 <div id="outline-container-Computation" class="outline-3">
 <h3 id="Computation"><span class="section-number-3">3.2.</span> Computation</h3>
 <div class="outline-text-3" id="text-3-2">
@@ -1065,7 +848,6 @@ A(a,b) = A(\alpha_1 e_1 + \alpha_2 e_2, \beta_1 e_1 + \beta_2 e_2) = \alpha_1 \b
 \end{equation*}
 </div>
 </div>
-
 <div id="outline-container-Exterior%20Product" class="outline-3">
 <h3 id="Exterior%20Product"><span class="section-number-3">3.3.</span> Exterior Product</h3>
 <div class="outline-text-3" id="text-3-3">
@@ -1105,7 +887,6 @@ We will see that the unoriented area of the prallelogram is computed as teh leng
 The generalization of the Pythagoras theorem holds not only for areas but also for higher-dimensional volumes. 
 </p>
 </div>
-
 <ol class="org-ol">
 <li><a id="Analogy%20for%20higher%20dimensional%20Pythagoras%20theorem"></a>Analogy for higher dimensional Pythagoras theorem<br />
 <div class="outline-text-5" id="text-3-3-1-1">
@@ -1116,7 +897,6 @@ The analogy between ordinary vectors and vector-valued areas can be understood v
 </li>
 </ol>
 </div>
-
 <div id="outline-container-Definition" class="outline-4">
 <h4 id="Definition"><span class="section-number-4">3.3.2.</span> Definition</h4>
 <div class="outline-text-4" id="text-3-3-2">
@@ -1155,7 +935,6 @@ Tensors from the space \(\wedge^n V\) are also called $n$-vectors or antisymmetr
 </p>
 </div>
 </div>
-
 <div id="outline-container-Questions" class="outline-4">
 <h4 id="Questions"><span class="section-number-4">3.3.3.</span> Questions</h4>
 <div class="outline-text-4" id="text-3-3-3">
@@ -1176,7 +955,6 @@ so, only terms containing different vectors need to be kept and we find
 </p>
 </div>
 </li>
-
 <li><a id="question%201"></a>question 1<br />
 <div class="outline-text-5" id="text-3-3-3-2">
 <p>
@@ -1199,7 +977,6 @@ Right now we have constructed the space \(V \wedge V\) simply as the space of an
 </p>
 </div>
 </li>
-
 <li><a id="question%202"></a>question 2<br />
 <div class="outline-text-5" id="text-3-3-3-4">
 <p>
@@ -1232,7 +1009,6 @@ If we are not working in a finite number field, we are able to divide by any int
 </li>
 </ol>
 </div>
-
 <div id="outline-container-Definition%203" class="outline-4">
 <h4 id="Definition%203"><span class="section-number-4">3.3.4.</span> Definition 3</h4>
 <div class="outline-text-4" id="text-3-3-4">
@@ -1248,7 +1024,6 @@ where the summation is performed over all permutations \(\sigma\) of the ordered
 </div>
 </div>
 </div>
-
 <div id="outline-container-Symmetric%20tensor%20product" class="outline-3">
 <h3 id="Symmetric%20tensor%20product"><span class="section-number-3">3.4.</span> Symmetric tensor product</h3>
 <div class="outline-text-3" id="text-3-4">
@@ -1301,7 +1076,6 @@ This can be proved by induction.
 </p>
 </div>
 </div>
-
 <div id="outline-container-Linear%20maps%20between%20spaces%20%24%5Cwedge%5Ek%20V%24" class="outline-3">
 <h3 id="Linear%20maps%20between%20spaces%20%24%5Cwedge%5Ek%20V%24"><span class="section-number-3">3.6.</span> Linear maps between spaces \(\wedge^k V\)</h3>
 <div class="outline-text-3" id="text-3-6">
@@ -1381,7 +1155,6 @@ This map is called the <b>interior product</b> or the <b>insertion</b> mapcar. T
 </p>
 </div>
 </div>
-
 <div id="outline-container-Exterior%20product%20and%20linear%20dependence" class="outline-3">
 <h3 id="Exterior%20product%20and%20linear%20dependence"><span class="section-number-3">3.7.</span> Exterior product and linear dependence</h3>
 <div class="outline-text-3" id="text-3-7">
@@ -1389,7 +1162,6 @@ This map is called the <b>interior product</b> or the <b>insertion</b> mapcar. T
 One powerful property of the exterior product is its close realtion to linear independence of sets of vectors. E.g. if \(u = \lambda v\) then \(u \wedge v = 0\). 
 </p>
 </div>
-
 <div id="outline-container-%2ATheorem%201%2A" class="outline-4">
 <h4 id="%2ATheorem%201%2A"><span class="section-number-4">3.7.1.</span> <b>Theorem 1</b></h4>
 <div class="outline-text-4" id="text-3-7-1">
@@ -1426,7 +1198,6 @@ Also note that any tensor from the highest exterior power \(\wedge^NV\) can be r
 </p>
 </div>
 </div>
-
 <div id="outline-container-%2ALemma%201%2A" class="outline-4">
 <h4 id="%2ALemma%201%2A"><span class="section-number-4">3.7.2.</span> <b>Lemma 1</b></h4>
 <div class="outline-text-4" id="text-3-7-2">
@@ -1436,7 +1207,6 @@ For any tensor \(\omega \in \wedge^N V\) there exists vectors \(\{v_1, ... , v_N
 </p>
 </div>
 </div>
-
 <div id="outline-container-%2ALemma%202%2A" class="outline-4">
 <h4 id="%2ALemma%202%2A"><span class="section-number-4">3.7.3.</span> <b>Lemma 2</b></h4>
 <div class="outline-text-4" id="text-3-7-3">
@@ -1445,7 +1215,6 @@ If \(\{e_1, ..., e_N\}\) is a basis in \(V\) then any tensor \(A \in \wedge^m V\
 </p>
 </div>
 </div>
-
 <div id="outline-container-%2ALemma%203%2A" class="outline-4">
 <h4 id="%2ALemma%203%2A"><span class="section-number-4">3.7.4.</span> <b>Lemma 3</b></h4>
 <div class="outline-text-4" id="text-3-7-4">
@@ -1479,7 +1248,6 @@ therefore by linear independence of \(\{v_k\}\) all \(0 = l_{f^\ast} \big[ ... \
 </p>
 </div>
 </div>
-
 <div id="outline-container-%2ATheorem%202%2A" class="outline-4">
 <h4 id="%2ATheorem%202%2A"><span class="section-number-4">3.7.5.</span> <b>Theorem 2</b></h4>
 <div class="outline-text-4" id="text-3-7-5">
@@ -1502,7 +1270,6 @@ For \(m>N\), Theorem 1 would imply that only possible tensor in space \(\wedge^m
 </p>
 </div>
 </div>
-
 <div id="outline-container-Remark%3A" class="outline-4">
 <h4 id="Remark%3A"><span class="section-number-4">3.7.6.</span> Remark:</h4>
 <div class="outline-text-4" id="text-3-7-6">
@@ -1512,7 +1279,6 @@ While \(a \wedge b\) is interpreted geometrically as the oriented area of a para
 </div>
 </div>
 </div>
-
 <div id="outline-container-Computing%20the%20dual%20basis" class="outline-3">
 <h3 id="Computing%20the%20dual%20basis"><span class="section-number-3">3.8.</span> Computing the dual basis</h3>
 <div class="outline-text-3" id="text-3-8">
@@ -1551,7 +1317,6 @@ It is clear that we can define the tensors \(*(v_i)\) for \(i=1,...,N\) in this 
 </p>
 </div>
 </div>
-
 <div id="outline-container-Gaussian%20elimination" class="outline-3">
 <h3 id="Gaussian%20elimination"><span class="section-number-3">3.9.</span> Gaussian elimination</h3>
 <div class="outline-text-3" id="text-3-9">
@@ -1588,7 +1353,6 @@ If rank is less than \(n\). First assusem that all \(v_j \neq 0\) (i.e. any zero
 </p>
 </div>
 </div>
-
 <div id="outline-container-Exterior%20product%20in%20index%20notation" class="outline-3">
 <h3 id="Exterior%20product%20in%20index%20notation"><span class="section-number-3">3.11.</span> Exterior product in index notation</h3>
 <div class="outline-text-3" id="text-3-11">
@@ -1677,7 +1441,7 @@ Notice that
 Lets consider the expression 
 </p>
 \begin{equation}
-\label{orgf2ab3de}
+\label{org14bedc4}
 \tilde{E}^{i_1...i_n}_{j1...j_n} \equiv \sum_{k1,...,k_{N-n}} \epsilon^{i_1...i_nk_1...k_{N-n}} \epsilon_{j_1...j_nk_1...k_{N-n}}
 \tag{eqn:2.11}
 \end{equation}
@@ -1700,7 +1464,7 @@ E^{i_1...i_n}_{j_1...j_n} = \frac 1 {(N-n)!} \tilde{E}^{i_1...i_n}_{j_1...j_n}
 </p>
 
 <p>
-Considering the case when a permuation \(\sigma\) brings \((j_1,...,j_n)\) into \((i_1,...,i_n)\), we find that the symbols \(\epsilon\) in \eqref{orgf2ab3de} will be nonzero only if the indices \((k_1,...,k_{N-n})\) are a permuatation of the complemnt of the set \((i_1,...,i_n)\). There are \((N-n)!\) such permutations, each contributing the same value to the sum in \eqref{orgf2ab3de}. Hence we may write the sum as 
+Considering the case when a permuation \(\sigma\) brings \((j_1,...,j_n)\) into \((i_1,...,i_n)\), we find that the symbols \(\epsilon\) in \eqref{org14bedc4} will be nonzero only if the indices \((k_1,...,k_{N-n})\) are a permuatation of the complemnt of the set \((i_1,...,i_n)\). There are \((N-n)!\) such permutations, each contributing the same value to the sum in \eqref{org14bedc4}. Hence we may write the sum as 
 </p>
 
 \begin{align}
@@ -1732,7 +1496,6 @@ E^{i_1...i_N}_{j_1...j_N} = \epsilon^{i_1...i_N}\epsilon_{j_1...j_N}
 </p>
 </div>
 </div>
-
 <div id="outline-container-Exterior%20Algebra%20%28Grassmann%20Algebra%29" class="outline-3">
 <h3 id="Exterior%20Algebra%20%28Grassmann%20Algebra%29"><span class="section-number-3">3.12.</span> Exterior Algebra (Grassmann Algebra)</h3>
 <div class="outline-text-3" id="text-3-12">
@@ -1792,7 +1555,7 @@ with the multiplication defined by the map \(L\), which is exteded to the whole 
 <b>Definition D0</b>: The <i>determinant</i> of a square \(N \times N\) matrix \(A_{ij}\) is the number 
 </p>
 \begin{equation*}
-\label{org2a00dda}
+\label{orgce21b50}
 det(A_{ij}) \equiv \sum_{\sigma} (-1)^{|\sigma|} A_{\sigma(1)1} ... A_{\sigma(N)N} \tag{eqn:3.1}
 \end{equation*}
 
@@ -1812,7 +1575,6 @@ a_{11}a_{22} - a_{21}a_{12}
 Note that an \(N \times N\) matrix has \(N!\) terms in this type of formula. 
 </p>
 </div>
-
 <div id="outline-container-Question" class="outline-4">
 <h4 id="Question"><span class="section-number-4">4.1.1.</span> Question</h4>
 <div class="outline-text-4" id="text-4-1-1">
@@ -1825,12 +1587,11 @@ Answer: Yes, indeed: There exist other complicated combinations that are also us
 </p>
 </div>
 </div>
-
 <div id="outline-container-Derivation%20of%20the%20Leibniz%20Formula%20for%20Determinants" class="outline-4">
 <h4 id="Derivation%20of%20the%20Leibniz%20Formula%20for%20Determinants"><span class="section-number-4">4.1.2.</span> Derivation of the Leibniz Formula for Determinants</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
-See this video on the derivation of the derivation of the \eqref{org2a00dda} <a href="https://www.youtube.com/watch?v=Sv7VseMsOQc">https://www.youtube.com/watch?v=Sv7VseMsOQc</a>
+See this video on the derivation of the derivation of the \eqref{orgce21b50} <a href="https://www.youtube.com/watch?v=Sv7VseMsOQc">https://www.youtube.com/watch?v=Sv7VseMsOQc</a>
 </p>
 
 <p>
@@ -1848,7 +1609,6 @@ Use these property, we can breakdown the determinant of a matrix interms of sum 
 </div>
 </div>
 </div>
-
 <div id="outline-container-The%20space%20%24%5Cwedge%5EN%20V%24%20and%20oriented%20volume" class="outline-3">
 <h3 id="The%20space%20%24%5Cwedge%5EN%20V%24%20and%20oriented%20volume"><span class="section-number-3">4.2.</span> The space \(\wedge^N V\) and oriented volume</h3>
 <div class="outline-text-3" id="text-4-2">
@@ -1905,7 +1665,6 @@ A tensor such as \(v_1 \wedge ... \wedge v_n\) can be used to determine the nume
 </p>
 </div>
 </div>
-
 <div id="outline-container-Determinants%20of%20operators" class="outline-3">
 <h3 id="Determinants%20of%20operators"><span class="section-number-3">4.3.</span> Determinants of operators</h3>
 <div class="outline-text-3" id="text-4-3">
@@ -1946,7 +1705,7 @@ where \(\alpha \in \mathbb K\) is a number which is somehow associated with the 
 \end{equation*}
 
 <p>
-then the determinant of \(\hat A\) is given by the formula \eqref{org2a00dda}
+then the determinant of \(\hat A\) is given by the formula \eqref{orgce21b50}
 </p>
 
 <p>
@@ -1961,10 +1720,9 @@ then the determinant of \(\hat A\) is given by the formula \eqref{org2a00dda}
 \end{align}
 
 <p>
-In the last sum, the only nonzero terms are those in which the indices \(j_1, ... , j_N\) do not repeat; in other words, \((j_1,...,j_N)\) is a <i>permutation</i> of the set \((1,...,N)\). From the antisymmetry of the exterior product and the definition of the parity of the permutation, we can express above expression as in \eqref{org2a00dda}
+In the last sum, the only nonzero terms are those in which the indices \(j_1, ... , j_N\) do not repeat; in other words, \((j_1,...,j_N)\) is a <i>permutation</i> of the set \((1,...,N)\). From the antisymmetry of the exterior product and the definition of the parity of the permutation, we can express above expression as in \eqref{orgce21b50}
 </p>
 </div>
-
 <div id="outline-container-Leibnitz%27s%20rule" class="outline-4">
 <h4 id="Leibnitz%27s%20rule"><span class="section-number-4">4.3.1.</span> Leibnitz's rule</h4>
 </div>
@@ -1987,6 +1745,7 @@ In the last sum, the only nonzero terms are those in which the indices \(j_1, ..
 <h3>Backlinks</h3>
 
 <ul class="org-ul">
+<li><a href="Morphism.html#ID-fd3d481a-f8bc-4c8b-8a9d-0ba9e482f9e1">Morphism</a></li>
 <li><a href="geometric_algebra.html#ID-A6FFDB08-85C0-450A-950D-CDC89B763974">Geometric Algebra</a></li>
 </ul>
 </div>

@@ -8,190 +8,6 @@
 <title>Generative Adversarial Networks</title>
 <meta name="author" content="Bibek Panthi" />
 <meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { }
-</style>
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
 <link rel="stylesheet" type="text/css" href="../css/braindump.css" />
 <script src="../js/counters.js" type="text/javascript"></script>
@@ -264,7 +80,7 @@ Idea: We don't want to explicitly model density, and instead just sample to gene
 </p>
 
 
-<div id="orgd078c9b" class="figure">
+<div id="figure-1" class="figure">
 <p><img src="data/mit_6_s191_introduction_to_deep_learning/gans-20230316160043.png" alt="gans-20230316160043.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>GANs</p>
@@ -278,7 +94,6 @@ Idea: We don't want to explicitly model density, and instead just sample to gene
 <p>
 GANs avoid the problem of latent space regularization in AutoEncoders, because in some way the random noise \(z\) is itself the latent space, and it being within our control is both continuous and complete. If it wasn't complete the generator won't perform good on some input. 
 </p>
-
 <div id="outline-container-Training%20GANs" class="outline-2">
 <h2 id="Training%20GANs"><span class="section-number-2">1.</span> Training GANs</h2>
 <div class="outline-text-2" id="text-1">
@@ -309,7 +124,7 @@ So, the overall objective is:
 </p>
 
 <p>
-<a href="ilya_sutskever.html#ID-2D746147-B03D-4506-ADB0-83A27067C67C">Ilya Sutskever</a> says (<a href="https://youtu.be/13CZPWmke6A?t=636::0:10:36">Lex Fridman Podcast #94</a>), GANs don't have <a href="loss_function.html#ID-B183FBFA-4408-4FAA-BC05-47FCBB733828">cost function</a>. 
+<a href="ilya_sutskever.html#ID-2D746147-B03D-4506-ADB0-83A27067C67C">Ilya Sutskever</a> says (<a href="mpv:https://youtu.be/13CZPWmke6A?t=636::0:10:36">Lex Fridman Podcast #94</a>), GANs don't have <a href="loss_function.html#ID-B183FBFA-4408-4FAA-BC05-47FCBB733828">cost function</a>. 
 </p>
 
 <p>
@@ -318,7 +133,6 @@ So, the overall objective is:
 </p>
 </div>
 </div>
-
 <div id="outline-container-Progressive%20Growing" class="outline-2">
 <h2 id="Progressive%20Growing"><span class="section-number-2">2.</span> Progressive Growing</h2>
 <div class="outline-text-2" id="text-2">
@@ -327,7 +141,7 @@ So, the overall objective is:
 </p>
 
 
-<div id="orgc225c0c" class="figure">
+<div id="figure-2" class="figure">
 <p><img src="data/mit_6_s191_introduction_to_deep_learning/progressive_growing-20230316161414.png" alt="progressive_growing-20230316161414.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Progressive Growing</p>
@@ -342,7 +156,6 @@ Add more layers as training progresses
 </ul>
 </div>
 </div>
-
 <div id="outline-container-StyleGAN%282%29%3A%20progressive%20growing%20%2B%20style%20transfer" class="outline-2">
 <h2 id="StyleGAN%282%29%3A%20progressive%20growing%20%2B%20style%20transfer"><span class="section-number-2">3.</span> StyleGAN(2): progressive growing + style transfer</h2>
 <div class="outline-text-2" id="text-3">
@@ -351,7 +164,6 @@ Add more layers as training progresses
 </p>
 </div>
 </div>
-
 <div id="outline-container-Conditional%20GANs" class="outline-2">
 <h2 id="Conditional%20GANs"><span class="section-number-2">4.</span> Conditional GANs</h2>
 <div class="outline-text-2" id="text-4">
@@ -360,14 +172,13 @@ Add more layers as training progresses
 </p>
 
 
-<div id="org6aef9f8" class="figure">
+<div id="figure-3" class="figure">
 <p><img src="data/mit_6_s191_introduction_to_deep_learning/paired_translation-20230316161742.png" alt="paired_translation-20230316161742.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>Paired Translation an example of Conditional GANs</p>
 </div>
 </div>
 </div>
-
 <div id="outline-container-CycleGAN%3A%20domain%20transformation" class="outline-2">
 <h2 id="CycleGAN%3A%20domain%20transformation"><span class="section-number-2">5.</span> CycleGAN: domain transformation</h2>
 <div class="outline-text-2" id="text-5">
@@ -379,14 +190,13 @@ Add more layers as training progresses
 CycleGAN emphasize the idea of GANs being <a href="mit_6_s191_introduction_to_deep_learning.html#ID-777B6F6F-054F-434D-8357-7E9D2BBBEFFF">distribution transformers</a>. 
 </p>
 
-<div id="org7e89e1c" class="figure">
+<div id="figure-4" class="figure">
 <p><img src="data/mit_6_s191_introduction_to_deep_learning/cyclegan-20230316161848.png" alt="cyclegan-20230316161848.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>CycleGAN: Transformation from one distribution to another distribution.</p>
 </div>
 </div>
 </div>
-
 <div id="outline-container-Problem%20with%20GANs" class="outline-2">
 <h2 id="Problem%20with%20GANs"><span class="section-number-2">6.</span> Problem with GANs</h2>
 <div class="outline-text-2" id="text-6">
