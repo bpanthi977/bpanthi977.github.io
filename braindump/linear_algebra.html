@@ -406,7 +406,7 @@ Definition: Suppose \(V\) and \(W\) are two vector spaces over a field \(\mathbb
 </p>
 
 \begin{equation} 
-\label{orgb938fd3}
+\label{orgeda294e}
 v_1 \otimes w_1 + ... + v_n \otimes w_n
 \tag{1.16}
 \end{equation}
@@ -416,18 +416,18 @@ where \(v_i \in V, w_i \in W\). The plus sign behaves as usual (commutative and 
 </p>
 
 \begin{equation}
-\label{org0787361}
+\label{orgc2badbe}
 \lambda ( v \otimes w) = (\lambda v) \otimes w  = v \otimes (\lambda w) \tag{1.17}
 \end{equation}
 
 \begin{equation}
-\label{org5ee96c3}
+\label{org4734fb4}
 (v_1 + v_2) \otimes w = v_1 \otimes w + v_2 \otimes w
 \tag{1.18}
 \end{equation}
 
 \begin{equation} 
-\label{org95465db}
+\label{orge9a3f7b}
 v \otimes ( w_1 =w_2) = v \otimes w_1 + v \otimes w_2
 \tag{1.19}
 \end{equation}
@@ -438,7 +438,7 @@ Once could say that the symbol \(\otimes\)  behaves as a noncommutative product 
 </p>
 
 <p>
-The representation of a tensor \(A \in V \otimes W\) in the form \eqref{orgb938fd3} is not unique, i.e there may be many possible choice of the vectors \(v_j\) and \(w_j\) that give the same tensor \(A\) . For example, 
+The representation of a tensor \(A \in V \otimes W\) in the form \eqref{orgeda294e} is not unique, i.e there may be many possible choice of the vectors \(v_j\) and \(w_j\) that give the same tensor \(A\) . For example, 
 </p>
 \begin{equation}
 v_1 \otimes w_1+ v_2 \otimes w_2 = (v_1 - v_2) \otimes w_1 + v_2 \otimes (w_1 + w_2)
@@ -522,7 +522,7 @@ If \(f^\ast \in V^\ast\) is any covector, we define the map \(f^\ast : V\otimes 
 </p>
 
 \begin{equation} 
-\label{orgaacd4ff}
+\label{org3014a9a}
 f^\ast \bigg( \sum_k v_k \otimes w_k \bigg) \equiv \sum_k f^\ast (v_k) w_k
 \tag{1.21}
 \end{equation}
@@ -532,11 +532,11 @@ Then this map is a linear map \(V \otimes W \to W\)
 
 <p>
 Proof: 
-The formula \eqref{orgaacd4ff} define the map explicitly (and canonically!). The linearity is evident from the definition \eqref{orgaacd4ff}, any linear combination of tensors are mapped into the corresponding linear combinations of vectors. 
+The formula \eqref{org3014a9a} define the map explicitly (and canonically!). The linearity is evident from the definition \eqref{org3014a9a}, any linear combination of tensors are mapped into the corresponding linear combinations of vectors. 
 </p>
 
 <p>
-However, there is one potential problem: there exists many representations of an element \(A \in V\otimes W\)  as an expression of the form \(\sum_k v_k \otimes w_k\) with different choice of \(v_k, w_k\) . Thus we need to show that the map \(f^\ast\) is well-defined by \eqref{orgaacd4ff}. i.e. that \(f^\ast(A)\) is always the same vector regardless of the choice of the vectors \(v_k\) and \(w_k\) used to represent \(A\).  Recall that different expressions for \(A\) can be equal as a consequence of the axioms \eqref{org0787361}-\eqref{org95465db}. Thus it is sufficient to show that \(f^\ast\) transforms both sides of those identities into the same vector. i.e. 
+However, there is one potential problem: there exists many representations of an element \(A \in V\otimes W\)  as an expression of the form \(\sum_k v_k \otimes w_k\) with different choice of \(v_k, w_k\) . Thus we need to show that the map \(f^\ast\) is well-defined by \eqref{org3014a9a}. i.e. that \(f^\ast(A)\) is always the same vector regardless of the choice of the vectors \(v_k\) and \(w_k\) used to represent \(A\).  Recall that different expressions for \(A\) can be equal as a consequence of the axioms \eqref{orgc2badbe}-\eqref{orge9a3f7b}. Thus it is sufficient to show that \(f^\ast\) transforms both sides of those identities into the same vector. i.e. 
 </p>
 
 \begin{equation} 
@@ -572,13 +572,13 @@ We need to prove that a vanishing linear combination
 </p>
 
 \begin{equation}
-\label{orgd647824}
+\label{org75f7d71}
 \sum_{j=1}^m \sum_{k=1}^n \lambda_{jk} v_j \otimes w_k = 0
 \tag{1.23}
 \end{equation}
 
 <p>
-is possible only if all \(\lambda_{jk} = 0\). Let us choose some fixed value \(j_1\); we will now prove that \(\lambda_{j_1k} = 0\) for all \(k\). Then there exists a covector \(\astk f \in \astk  V\) such that \(\astk f (v_j) = \delta_{j_1j}\). Then we apply the map \(\astk f : V \otimes W \to W\) to \eqref{orgd647824} 
+is possible only if all \(\lambda_{jk} = 0\). Let us choose some fixed value \(j_1\); we will now prove that \(\lambda_{j_1k} = 0\) for all \(k\). Then there exists a covector \(\astk f \in \astk  V\) such that \(\astk f (v_j) = \delta_{j_1j}\). Then we apply the map \(\astk f : V \otimes W \to W\) to \eqref{org75f7d71} 
 </p>
 
 \begin{equation*}
@@ -676,7 +676,7 @@ A tensor \(A \in V \otimes \astk V\) expressed as
 defines a linear operator \(\hat{A} : V \to V\) according to the formula
 </p>
 \begin{equation}
-\label{orgb1eb75c}
+\label{org1200b7a}
 \hat{A}x \equiv \sum_j \astk f_j(x) v_j
 \tag{1.24}
 \end{equation}
@@ -686,7 +686,7 @@ We need to prove two statements:
 </p>
 <ul class="org-ul">
 <li>The transformation is linear (this follows from the linearity of map \(\astk f_j\) )</li>
-<li>The operator \(\hat{A}\) does not depend on the decomposition of the tensor \(A\) using particular vectors \(v_j\) and covectors \(\astk f_j\) (this is easily proved by checking that the operator \(\hat{A}\)  remains unchanged when the axioms \eqref{org0787361}-\eqref{org95465db}  are used. e.g.</li>
+<li>The operator \(\hat{A}\) does not depend on the decomposition of the tensor \(A\) using particular vectors \(v_j\) and covectors \(\astk f_j\) (this is easily proved by checking that the operator \(\hat{A}\)  remains unchanged when the axioms \eqref{orgc2badbe}-\eqref{orge9a3f7b}  are used. e.g.</li>
 </ul>
 
 <p>
@@ -704,7 +704,7 @@ Then
 \end{equation*}
 
 <p>
-The action of \(\hat{A}\) on \(x\) remains unchanged for every x, which means that the operator \(\hat{A}\)  itself is unchanged. i.e. the axiom that works for tensor \(A\) also works for \(\hat{A}\) and the operator \(\hat{A}\) is independent of the choice of decomposition of tensor \(A\) because equivalent decompositions are those which follow axioms \eqref{org0787361}-\eqref{org95465db} and our operator also follows those axioms. 
+The action of \(\hat{A}\) on \(x\) remains unchanged for every x, which means that the operator \(\hat{A}\)  itself is unchanged. i.e. the axiom that works for tensor \(A\) also works for \(\hat{A}\) and the operator \(\hat{A}\) is independent of the choice of decomposition of tensor \(A\) because equivalent decompositions are those which follow axioms \eqref{orgc2badbe}-\eqref{orge9a3f7b} and our operator also follows those axioms. 
 </p>
 </div>
 </div>
@@ -1441,7 +1441,7 @@ Notice that
 Lets consider the expression 
 </p>
 \begin{equation}
-\label{org14bedc4}
+\label{orgf807a33}
 \tilde{E}^{i_1...i_n}_{j1...j_n} \equiv \sum_{k1,...,k_{N-n}} \epsilon^{i_1...i_nk_1...k_{N-n}} \epsilon_{j_1...j_nk_1...k_{N-n}}
 \tag{eqn:2.11}
 \end{equation}
@@ -1464,7 +1464,7 @@ E^{i_1...i_n}_{j_1...j_n} = \frac 1 {(N-n)!} \tilde{E}^{i_1...i_n}_{j_1...j_n}
 </p>
 
 <p>
-Considering the case when a permuation \(\sigma\) brings \((j_1,...,j_n)\) into \((i_1,...,i_n)\), we find that the symbols \(\epsilon\) in \eqref{org14bedc4} will be nonzero only if the indices \((k_1,...,k_{N-n})\) are a permuatation of the complemnt of the set \((i_1,...,i_n)\). There are \((N-n)!\) such permutations, each contributing the same value to the sum in \eqref{org14bedc4}. Hence we may write the sum as 
+Considering the case when a permuation \(\sigma\) brings \((j_1,...,j_n)\) into \((i_1,...,i_n)\), we find that the symbols \(\epsilon\) in \eqref{orgf807a33} will be nonzero only if the indices \((k_1,...,k_{N-n})\) are a permuatation of the complemnt of the set \((i_1,...,i_n)\). There are \((N-n)!\) such permutations, each contributing the same value to the sum in \eqref{orgf807a33}. Hence we may write the sum as 
 </p>
 
 \begin{align}
@@ -1555,7 +1555,7 @@ with the multiplication defined by the map \(L\), which is exteded to the whole 
 <b>Definition D0</b>: The <i>determinant</i> of a square \(N \times N\) matrix \(A_{ij}\) is the number 
 </p>
 \begin{equation*}
-\label{orgce21b50}
+\label{org6b67fc1}
 det(A_{ij}) \equiv \sum_{\sigma} (-1)^{|\sigma|} A_{\sigma(1)1} ... A_{\sigma(N)N} \tag{eqn:3.1}
 \end{equation*}
 
@@ -1591,7 +1591,7 @@ Answer: Yes, indeed: There exist other complicated combinations that are also us
 <h4 id="Derivation%20of%20the%20Leibniz%20Formula%20for%20Determinants"><span class="section-number-4">4.1.2.</span> Derivation of the Leibniz Formula for Determinants</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
-See this video on the derivation of the derivation of the \eqref{orgce21b50} <a href="https://www.youtube.com/watch?v=Sv7VseMsOQc">https://www.youtube.com/watch?v=Sv7VseMsOQc</a>
+See this video on the derivation of the derivation of the \eqref{org6b67fc1} <a href="https://www.youtube.com/watch?v=Sv7VseMsOQc">https://www.youtube.com/watch?v=Sv7VseMsOQc</a>
 </p>
 
 <p>
@@ -1705,7 +1705,7 @@ where \(\alpha \in \mathbb K\) is a number which is somehow associated with the 
 \end{equation*}
 
 <p>
-then the determinant of \(\hat A\) is given by the formula \eqref{orgce21b50}
+then the determinant of \(\hat A\) is given by the formula \eqref{org6b67fc1}
 </p>
 
 <p>
@@ -1720,7 +1720,7 @@ then the determinant of \(\hat A\) is given by the formula \eqref{orgce21b50}
 \end{align}
 
 <p>
-In the last sum, the only nonzero terms are those in which the indices \(j_1, ... , j_N\) do not repeat; in other words, \((j_1,...,j_N)\) is a <i>permutation</i> of the set \((1,...,N)\). From the antisymmetry of the exterior product and the definition of the parity of the permutation, we can express above expression as in \eqref{orgce21b50}
+In the last sum, the only nonzero terms are those in which the indices \(j_1, ... , j_N\) do not repeat; in other words, \((j_1,...,j_N)\) is a <i>permutation</i> of the set \((1,...,N)\). From the antisymmetry of the exterior product and the definition of the parity of the permutation, we can express above expression as in \eqref{org6b67fc1}
 </p>
 </div>
 <div id="outline-container-Leibnitz%27s%20rule" class="outline-4">

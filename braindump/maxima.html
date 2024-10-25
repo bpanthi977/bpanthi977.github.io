@@ -139,6 +139,19 @@
 <p>
 Presentation by: Bibek Panthi
 </p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">bp/copy-source-block</span> () 
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">save-excursion</span> 
+    (org-edit-src-code)
+    (kill-ring-save (point-min) (point-max))
+    (org-edit-src-abort)))
+    
+(local-set-key (kbd <span class="org-string">"M-c"</span>) 'bp/copy-source-block)
+</pre>
+</div></details>
 <div id="outline-container-Abacus%20%2F%20History%20of%20Computers" class="outline-2">
 <h2 id="Abacus%20%2F%20History%20of%20Computers"><span class="section-number-2">1.</span> Abacus / History of Computers</h2>
 <div class="outline-text-2" id="text-1">

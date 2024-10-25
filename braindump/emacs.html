@@ -116,30 +116,30 @@ Changes
 on run argv
         set arg to item 1 of argv
         try
-          set filePath to POSIX path of arg
+      	  set filePath to POSIX path of arg
         on error
-          set filePath to ""
+      	  set filePath to ""
         end try
 
         tell application "Terminal"
-          try
-                  -- we look for &lt;= 2 because Emacs --daemon seems to always
-                  -- have an entry in visibile-frame-list even if there isn't
-                  set frameVisible to do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -e '(&lt;= 2 (length (visible-frame-list)))'"
-                  if frameVisible is not "t" then
-                          -- there is a not a visible frame, launch one
-                          do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n " &amp; filePath &amp; " --eval '(select-frame-set-input-focus (selected-frame))'" &amp; " &gt; /dev/null 2&gt;&amp;1 &amp;"
-                  else
-                          do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -n " &amp; filePath &amp; " --eval '(select-frame-set-input-focus (selected-frame))'" &amp; " &gt; /dev/null 2&gt;&amp;1 &amp;"
-                  end if
-          on error
-                  -- FIXME: instead, open an alertbox, since we intend to run Emacs
-                  -- from launchd.
-                  -- daemon is not running, start the daemon and open a frame     
-                  do shell script "/Applications/Emacs.app/Contents/MacOS/Emacs --daemon"
-                  do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n " &amp; filePath &amp; " --eval '(select-frame-set-input-focus (selected-frame))'" &amp; " &gt; /dev/null 2&gt;&amp;1 &amp;"
+      	  try
+      		  -- we look for &lt;= 2 because Emacs --daemon seems to always
+      		  -- have an entry in visibile-frame-list even if there isn't
+      		  set frameVisible to do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -e '(&lt;= 2 (length (visible-frame-list)))'"
+      		  if frameVisible is not "t" then
+      			  -- there is a not a visible frame, launch one
+      			  do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n " &amp; filePath &amp; " --eval '(select-frame-set-input-focus (selected-frame))'" &amp; " &gt; /dev/null 2&gt;&amp;1 &amp;"
+      		  else
+      			  do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -n " &amp; filePath &amp; " --eval '(select-frame-set-input-focus (selected-frame))'" &amp; " &gt; /dev/null 2&gt;&amp;1 &amp;"
+      		  end if
+      	  on error
+      		  -- FIXME: instead, open an alertbox, since we intend to run Emacs
+      		  -- from launchd.
+      		  -- daemon is not running, start the daemon and open a frame     
+      		  do shell script "/Applications/Emacs.app/Contents/MacOS/Emacs --daemon"
+      		  do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n " &amp; filePath &amp; " --eval '(select-frame-set-input-focus (selected-frame))'" &amp; " &gt; /dev/null 2&gt;&amp;1 &amp;"
 
-          end try
+      	  end try
         end tell
 
 end run
@@ -151,7 +151,7 @@ end run
 <h3 id="Change%20face%20for%20some%20mode%20only"><span class="section-number-3">2.3.</span> Change face for some mode only</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
-See example at <a href="file:///Users/bpanthi977/.emacs.d/modules/org-config.el#orgec2a38d">org-config.el</a>
+See example at <a href="file:///Users/bpanthi977/.emacs.d/modules/org-config.el#orgbab5820">org-config.el</a>
 </p>
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">

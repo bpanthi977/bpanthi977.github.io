@@ -79,26 +79,26 @@
 <h3 id="Field%20of%20stresses%20in%20a%20continuum"><span class="section-number-3">1.1.</span> Field of stresses in a continuum</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
-A continuum is characterised by a mass \(dm = \rho d\tau\) contained in an elementary volume \(d\tau\). 
+A continuum is characterised by a mass \(dm = \rho d\tau\) contained in an elementary volume \(d\tau\).
 </p>
 
 <p>
-a material continuum which was originally in equilibrium and occupied a volume \(v\) with a surface \(o\) reaches a new equilibrium state whose volume and surface are denoted by \(v\) and \(o\) respectively. the first state is reffered to as <b>initial state</b> (volume \(v\) or $v$-volume), whilst the second state is called the <b>final state</b> (volumen \(V\) or \(V\) -volume). 
+a material continuum which was originally in equilibrium and occupied a volume \(v\) with a surface \(o\) reaches a new equilibrium state whose volume and surface are denoted by \(v\) and \(o\) respectively. the first state is reffered to as <b>initial state</b> (volume \(v\) or $v$-volume), whilst the second state is called the <b>final state</b> (volumen \(V\) or \(V\) -volume).
 </p>
 
 <p>
-The <b>natural state</b> is the state when the continuum is not stressed. Unless otherwise stated, teh natural stated is not identified with an initial state. 
+The <b>natural state</b> is the state when the continuum is not stressed. Unless otherwise stated, teh natural stated is not identified with an initial state.
 </p>
 
 
 <p>
-Position vector is in initial state is given by 
+Position vector is in initial state is given by
 </p>
 \begin{equation*}
 r = a_s i_s
 \end{equation*}
 <p>
-where \(i_s\) denotes the unit base vectors of the coordinate axes. <i>The summation over a dummy index is <b>omitted</b></i>. 
+where \(i_s\) denotes the unit base vectors of the coordinate axes. <i>The summation over a dummy index is <b>omitted</b></i>.
 </p>
 
 <p>
@@ -109,61 +109,60 @@ R = x_s i_s
 \end{equation*}
 
 <p>
-The geometric difference \(R-r\) determines the displacement vector denoted by \(u\) 
+The geometric difference \(R-r\) determines the displacement vector denoted by \(u\)
 </p>
 \begin{equation}
-\label{orgd5f6b0c}
+\label{eqn:1.1.3}
 x_s = a_s + u_s
 \tag{1.1.3}
 \end{equation}
 <p>
-It is also assumed that equations \eqref{orgd5f6b0c} are uniquely resolvable for variable \(a_s\) that is 
+It is also assumed that equations \eqref{eqn:1.1.3} are uniquely resolvable for variable \(a_s\) that is
 </p>
 \begin{equation}
-\label{orge29287b}
+\label{eqn:1.1.4}
 a_s = x_s - u_s
 \tag{1.1.4}
 \end{equation}
 <p>
-The condition for unique solvability of the system of equations \eqref{orgd5f6b0c} is that the Jacobian
+The condition for unique solvability of the system of equations \eqref{eqn:1.1.3} is that the Jacobian
 </p>
 \begin{equation}
-\label{org19447a9}
+\label{eqn:1.1.5}
 J(a_1,a_2,a_3) = |\frac{\del x_s} {a_k} | = | \delta_{sk} +  \frac {\del u_s} {\del a_k} |
 \tag{1.1.5}
 \end{equation}
 <p>
-does not vanish in the closed domain \(v+o\). It is taken that \(J>0\) . THe Jacobian is know to be a ratio of the elementary volumes in the intital and final states. 
-\(d\tau = J d\tau_0\) 
+does not vanish in the closed domain \(v+o\). It is taken that \(J>0\) . THe Jacobian is know to be a ratio of the elementary volumes in the intital and final states.
+\(d\tau = J d\tau_0\)
 According to the law of mass conservation
-\(dm = \rho d\tau = \rho_0 d\tau_0\) 
-so that 
+\(dm = \rho d\tau = \rho_0 d\tau_0\)
+so that
 </p>
 \begin{equation}
-\label{org560bb07}
+\label{eqn:1.1.8}
 J = \frac {\rho_0} {\rho}
 \tag{1.1.8}
 \end{equation}
 
-
 <p>
-The Cartensian coordinates \(a_s\) of teh material particle in its initial sate can be considered as variables related to this point and are thus in the final state, where these coordinates play the role of curvilinear coordinates. 
-Due to established terminology, \(a_s\) and \(x_s\) are referred to as <b>Lagrangian</b> and <b>Eulerian</b> coordinates, respectively. Better still, \(a_s\) are material coordinates which <i>inividiualise</i> a material particel and <i>distinguish</i> it from other particles, whereas \(x_s\) denote the coordinates of the particle in volume V. 
+The Cartensian coordinates \(a_s\) of teh material particle in its initial sate can be considered as variables related to this point and are thus in the final state, where these coordinates play the role of curvilinear coordinates.
+Due to established terminology, \(a_s\) and \(x_s\) are referred to as <b>Lagrangian</b> and <b>Eulerian</b> coordinates, respectively. Better still, \(a_s\) are material coordinates which <i>inividiualise</i> a material particel and <i>distinguish</i> it from other particles, whereas \(x_s\) denote the coordinates of the particle in volume V.
 </p>
 
 <p>
 Remark: The matrial coordinates of a point are not necessarily the Cartesian coordinates \(a_s\) of the initial state. Presentation of the basics of continuous mechanics becomes more regorous if any curvilinear coordinates \(q^1,q^2,q^3\) are taken as the matrial coordinates. Then
 </p>
 \begin{equation}
-\label{org123d168}
+\label{eqn:1.1.11}
 a_s = a_s(q^1,q^2,q^3)
 \tag{1.1.11}
 \end{equation}
 <p>
-as well as 
+as well as
 </p>
 \begin{equation}
-\label{org8746e15}
+\label{eqn:1.1.12}
 x_s = x_s(q^1,q^2,q^3)
 \tag{1.1.12}
 \end{equation}
@@ -176,30 +175,30 @@ should be considered as the coordinates of the particle in volumes \(v\) and \(V
 <h3 id="External%20forces"><span class="section-number-3">1.2.</span> External forces</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
-The forces acting on the continuum are classified as external or internal force. 
+The forces acting on the continuum are classified as external or internal force.
 </p>
 
 <p>
-The force acting on each particle of the continuum is called a mass force. 
-The vector of the mass force applied to a unit mass of continuum is denoted by \(K\), then \(\rho K d\tau\) is the force acting on an elementary mass \(\rho d\tau\) conatained in volume \(d\tau\) whilst \(\rho K\) is the force acting on a unit volume and is termed as volume force. 
+The force acting on each particle of the continuum is called a mass force.
+The vector of the mass force applied to a unit mass of continuum is denoted by \(K\), then \(\rho K d\tau\) is the force acting on an elementary mass \(\rho d\tau\) conatained in volume \(d\tau\) whilst \(\rho K\) is the force acting on a unit volume and is termed as volume force.
 </p>
 
 <p>
 When equilibrium of the continuum is considered relative to amoving coordinate system the inertial force of the translational motion
 </p>
 \begin{equation}
-\label{org196be85}
+\label{eqn:1.2.3}
 K = -w_e = - [w_0 + \dot\omega \times R + \omega \times (\omega \times R) ]
 \tag{1.2.3}
 \end{equation}
 
 <p>
-Here \(w_e\) denotes the vector of translational acceleration = sum of acceleration \(w_0\) of the origin of coordinate sysem, rotational acceleration \(\dot\omega \times R\) and centripetal accelration. The Coriolis acceleration is not inlucde in the right hand side of \eqref{org196be85} because <i>the continuum does not move relative to the moving axes</i>. 
+Here \(w_e\) denotes the vector of translational acceleration = sum of acceleration \(w_0\) of the origin of coordinate sysem, rotational acceleration \(\dot\omega \times R\) and centripetal accelration. The Coriolis acceleration is not inlucde in the right hand side of \eqref{eqn:1.2.3} because <i>the continuum does not move relative to the moving axes</i>.
 </p>
 
 
 <p>
-<b>External surface forces</b> are forces distributed over surface \(O\) of volume \(V\). 
+<b>External surface forces</b> are forces distributed over surface \(O\) of volume \(V\).
 </p>
 </div>
 </div>
@@ -215,13 +214,13 @@ Here \(w_e\) denotes the vector of translational acceleration = sum of accelerat
 For any oridneted surface \(NdO\) at any location in the continuum, there exists a force \(t_NdO\) (a vector) which is teh force exerted on \(NdO\) by the part "above" this surface. By virtue of the principle of action and reaction we have
 </p>
 \begin{equation}
-\label{org60c0837}
+\label{eqn:1.3.1}
 t_{-N}dO = -t_NdO
 \tag{1.3.1}
 \end{equation}
 
 <p>
-THis interaction of the part of the continuum defiens the field forces, or in other words, the stress field in continuum. The physicla state reffered to as the stress field is determined by a quantitly which relates vector \(t_n\) to vector \(N\) . Adopting a linear relationship between these vectors means that this quantity is a tensor of second rank. (Denoted by \(\hat{T}\), and components denoted as \(t_{ik}\)) 
+THis interaction of the part of the continuum defiens the field forces, or in other words, the stress field in continuum. The physicla state reffered to as the stress field is determined by a quantitly which relates vector \(t_n\) to vector \(N\) . Adopting a linear relationship between these vectors means that this quantity is a tensor of second rank. (Denoted by \(\hat{T}\), and components denoted as \(t_{ik}\))
 </p>
 
 <p>
