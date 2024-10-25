@@ -31,7 +31,7 @@
 <ul>
 <li><a href="#Why%20it%20works%3F">1. Why it works?</a></li>
 <li><a href="#Use%20before%20activation">2. Use before activation</a></li>
-<li><a href="#BatchNorm%20affects%20Gradient%20Penalty%20in%20WGAN">3. BatchNorm affects Gradient Penalty in WGAN</a></li>
+<li><a href="#ID-1E5921A1-EF19-47B9-B1AE-66FEBE51461B">3. BatchNorm affects Gradient Penalty in WGAN</a></li>
 </ul>
 </div>
 </div>
@@ -68,7 +68,7 @@ BatchNormalization does this not for the input only but for the output of transf
 <h2 id="Use%20before%20activation"><span class="section-number-2">2.</span> Use before activation</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-From <a href="file:///Users/bpanthi977/Development/Bhoos/ml-games-ai/29points/sl/Notes.html#org8a75443">experiments during points29 bot</a>, I recommend using BatchNorm before activation function. 
+From <a href="file:///Users/bpanthi977/Development/Bhoos/ml-games-ai/29points/sl/Notes.html#org1f7c200">experiments during points29 bot</a>, I recommend using BatchNorm before activation function. 
 </p>
 
 <p>
@@ -82,8 +82,8 @@ The intuitive reason for this approach is that batch normalization will center y
 </blockquote>
 </div>
 </div>
-<div id="outline-container-BatchNorm%20affects%20Gradient%20Penalty%20in%20WGAN" class="outline-2">
-<h2 id="BatchNorm%20affects%20Gradient%20Penalty%20in%20WGAN"><span class="section-number-2">3.</span> BatchNorm affects Gradient Penalty in WGAN</h2>
+<div id="outline-container-ID-1E5921A1-EF19-47B9-B1AE-66FEBE51461B" class="outline-2">
+<h2 id="ID-1E5921A1-EF19-47B9-B1AE-66FEBE51461B"><span class="section-number-2">3.</span> BatchNorm affects Gradient Penalty in WGAN</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 <a href="batchnorm_nn.html#ID-AFD3AD13-EF16-4307-82D9-988A7E098851">Batch normalization</a> is avoided for the critic (discriminator). Batch normalization creates correlations between samples in the same batch. It impacts the effectiveness of the gradient penalty which is confirmed by experiments.

@@ -56,7 +56,7 @@ When the kernel can't find the scan code of a pressed key in the map of key code
 You can press the unrecognized keys and use dmesg to find the scan codes, you would see something similar to this but with your own scan codes:
 </p>
 
-<pre class="example" id="orgcf3aa47">
+<pre class="example" id="orga09bec3">
 atkbd.c: Unknown key pressed (translated set 2, code 0xa6 on isa0060/serio0).
 atkbd.c: Use 'setkeycodes e026 &lt;keycode&gt;' to make it known.
 atkbd.c: Unknown key released (translated set 2, code 0xa6 on isa0060/serio0).
@@ -98,7 +98,7 @@ By this method you would see the same messages appear when you press said keys, 
 This command will show you the current layout of the keyboard, in here you can both find unused key codes and well as the key codes of functionality already supported by xmodmap. If this three of the keys corresponded to the volume controls, mute, lower the volume and increase the volume, we will find that this functionality already have a key code associated to it, we will see the following lines:
 </p>
 
-<pre class="example" id="org2b598b4">
+<pre class="example" id="org7d20070">
 keycode 121 = XF86AudioMute NoSymbol XF86AudioMute
 keycode 122 = XF86AudioLowerVolume NoSymbol XF86AudioLowerVolume
 keycode 123 = XF86AudioRaiseVolume NoSymbol XF86AudioRaiseVolume

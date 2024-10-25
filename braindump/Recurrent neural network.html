@@ -65,19 +65,19 @@
 <ul>
 <li><a href="#RNN%20can%20Exhibit%20Temporal%20Dynamic%20Bheviour">1.1. RNN can Exhibit Temporal Dynamic Bheviour</a></li>
 <li><a href="#Finite%20Impulse%20and%20Infinite%20Impulse%20Networks">1.2. Finite Impulse and Infinite Impulse Networks</a></li>
-<li><a href="#RNN%20can%20have%20Memory%20Stored%20States%20%28LSTMs%2C%20GRUs%29">1.3. RNN can have Memory Stored States (LSTMs, GRUs)</a></li>
+<li><a href="#ID-995176FF-26F4-4744-A36E-EA03721CB81F">1.3. RNN can have Memory Stored States (LSTMs, GRUs)</a></li>
 </ul>
 </li>
 <li><a href="#Training%20by%20Gradient%20descent">2. Training by Gradient descent</a>
 <ul>
-<li><a href="#BackProagation%20Through%20Time%20%28BPTT%29">2.1. BackProagation Through Time (BPTT)</a></li>
-<li><a href="#Real-Time%20Recurrent%20Learning%20%28RTRL%29">2.2. Real-Time Recurrent Learning (RTRL)</a></li>
+<li><a href="#ID-6355C460-2200-4F4D-AA8A-5BE5EE4A9806">2.1. BackProagation Through Time (BPTT)</a></li>
+<li><a href="#ID-94CE1750-14ED-46D5-866D-2FD04771829B">2.2. Real-Time Recurrent Learning (RTRL)</a></li>
 <li><a href="#LSTM%20for%20Vanishing%20gradient%20problem">2.3. LSTM for Vanishing gradient problem</a></li>
-<li><a href="#Causal%20Recursive%20BackPropagation%20%28CRBP%29">2.4. Causal Recursive BackPropagation (CRBP)</a></li>
+<li><a href="#ID-B4621CB3-F6AF-4220-9CFF-9418BDC25D3D">2.4. Causal Recursive BackPropagation (CRBP)</a></li>
 </ul>
 </li>
 <li><a href="#Training%20by%20Global%20optimization%20methods">3. Training by Global optimization methods</a></li>
-<li><a href="#Limitations%20of%20RNN">4. Limitations of RNN</a></li>
+<li><a href="#ID-BCFBAB21-B79D-448A-A339-7F2228AFB121">4. Limitations of RNN</a></li>
 <li><a href="#Architectures">5. Architectures</a>
 <ul>
 <li><a href="#Fully%20recurrent">5.1. Fully recurrent</a></li>
@@ -170,8 +170,8 @@ The term “recurrent neural network” is used indiscriminately to refer to <b>
 </ul>
 </div>
 </div>
-<div id="outline-container-RNN%20can%20have%20Memory%20Stored%20States%20%28LSTMs%2C%20GRUs%29" class="outline-3">
-<h3 id="RNN%20can%20have%20Memory%20Stored%20States%20%28LSTMs%2C%20GRUs%29"><span class="section-number-3">1.3.</span> RNN can have Memory Stored States (LSTMs, GRUs)</h3>
+<div id="outline-container-ID-995176FF-26F4-4744-A36E-EA03721CB81F" class="outline-3">
+<h3 id="ID-995176FF-26F4-4744-A36E-EA03721CB81F"><span class="section-number-3">1.3.</span> RNN can have Memory Stored States (LSTMs, GRUs)</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Both finite impulse and infinite impulse <a href="Recurrent neural network.html#ID-62e97a52-1804-4948-91e4-bede2027d3d5">recurrent networks</a> <b>can have additional stored states</b>, and the storage can be under direct control by the neural network. The storage can also be replaced by another network or graph, if that incorporates time delays or has feedback loops. Such controlled states are <b>referred to as gated state or gated <a href="memory.html#ID-57AE69EE-47EC-40DD-9F28-7BA72E491659">memory</a></b>, and are part of <span class="underline">long short-term memory networks</span> (<a href="lstm.html#ID-5A05C89D-F75E-4B28-B8A7-3A68D1B6C5CA">LSTMs</a>) and <a href="gru.html#ID-8375DDEA-C07A-403F-9FF2-9CA917DA513D">gated recurrent units</a>. This is also called <a href="feedback_neural_network.html#ID-6D6949E8-13CF-4A15-BFD0-BF17CF47C050">Feedback Neural Network</a> (FNN).
@@ -186,19 +186,19 @@ Both finite impulse and infinite impulse <a href="Recurrent neural network.html#
 Gradient descent is a first-order iterative optimization algorithm for finding the minimum of a function.
 </p>
 </div>
-<div id="outline-container-BackProagation%20Through%20Time%20%28BPTT%29" class="outline-3">
-<h3 id="BackProagation%20Through%20Time%20%28BPTT%29"><span class="section-number-3">2.1.</span> BackProagation Through Time (BPTT)</h3>
+<div id="outline-container-ID-6355C460-2200-4F4D-AA8A-5BE5EE4A9806" class="outline-3">
+<h3 id="ID-6355C460-2200-4F4D-AA8A-5BE5EE4A9806"><span class="section-number-3">2.1.</span> BackProagation Through Time (BPTT)</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 The standard method is called “backpropagation through time” or BPTT, and is a generalization of back-propagation for feed-forward networks.
 </p>
 </div>
 </div>
-<div id="outline-container-Real-Time%20Recurrent%20Learning%20%28RTRL%29" class="outline-3">
-<h3 id="Real-Time%20Recurrent%20Learning%20%28RTRL%29"><span class="section-number-3">2.2.</span> Real-Time Recurrent Learning (RTRL)</h3>
+<div id="outline-container-ID-94CE1750-14ED-46D5-866D-2FD04771829B" class="outline-3">
+<h3 id="ID-94CE1750-14ED-46D5-866D-2FD04771829B"><span class="section-number-3">2.2.</span> Real-Time Recurrent Learning (RTRL)</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
-A more computationally expensive online variant is called “Real-Time Recurrent Learning” or RTRL, which is an instance of automatic differentiation in the forward accumulation mode with stacked tangent vectors. Unlike <a href="#BackProagation%20Through%20Time%20%28BPTT%29">BPTT</a>, this algorithm is local in time but not local in space.
+A more computationally expensive online variant is called “Real-Time Recurrent Learning” or RTRL, which is an instance of automatic differentiation in the forward accumulation mode with stacked tangent vectors. Unlike <a href="#ID-6355C460-2200-4F4D-AA8A-5BE5EE4A9806">BPTT</a>, this algorithm is local in time but not local in space.
 </p>
 
 <p>
@@ -210,12 +210,12 @@ In this context, local in space means that a unit's weight vector can be updated
 <h3 id="LSTM%20for%20Vanishing%20gradient%20problem"><span class="section-number-3">2.3.</span> LSTM for Vanishing gradient problem</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
-A major problem with gradient descent for standard RNN architectures is that error gradients <a href="vanishing_gradient.html#ID-2880697B-C48B-40C2-B25D-CEA991940A8A">vanish</a> exponentially quickly with the size of the time lag between important events. <a href="lstm.html#ID-5A05C89D-F75E-4B28-B8A7-3A68D1B6C5CA">LSTM</a> combined with a <a href="#BackProagation%20Through%20Time%20%28BPTT%29">BPTT</a>/<a href="#Real-Time%20Recurrent%20Learning%20%28RTRL%29">RTRL</a> hybrid learning method attempts to overcome these problems.
+A major problem with gradient descent for standard RNN architectures is that error gradients <a href="vanishing_gradient.html#ID-2880697B-C48B-40C2-B25D-CEA991940A8A">vanish</a> exponentially quickly with the size of the time lag between important events. <a href="lstm.html#ID-5A05C89D-F75E-4B28-B8A7-3A68D1B6C5CA">LSTM</a> combined with a <a href="#ID-6355C460-2200-4F4D-AA8A-5BE5EE4A9806">BPTT</a>/<a href="#ID-94CE1750-14ED-46D5-866D-2FD04771829B">RTRL</a> hybrid learning method attempts to overcome these problems.
 </p>
 </div>
 </div>
-<div id="outline-container-Causal%20Recursive%20BackPropagation%20%28CRBP%29" class="outline-3">
-<h3 id="Causal%20Recursive%20BackPropagation%20%28CRBP%29"><span class="section-number-3">2.4.</span> Causal Recursive BackPropagation (CRBP)</h3>
+<div id="outline-container-ID-B4621CB3-F6AF-4220-9CFF-9418BDC25D3D" class="outline-3">
+<h3 id="ID-B4621CB3-F6AF-4220-9CFF-9418BDC25D3D"><span class="section-number-3">2.4.</span> Causal Recursive BackPropagation (CRBP)</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 The on-line algorithm called causal recursive backpropagation (CRBP), implements and combines BPTT and RTRL paradigms for locally recurrent networks.[77] It works with the most general locally recurrent networks.
@@ -239,8 +239,8 @@ Other global (and/or evolutionary) optimization techniques may be used to seek a
 </p>
 </div>
 </div>
-<div id="outline-container-Limitations%20of%20RNN" class="outline-2">
-<h2 id="Limitations%20of%20RNN"><span class="section-number-2">4.</span> Limitations of RNN</h2>
+<div id="outline-container-ID-BCFBAB21-B79D-448A-A339-7F2228AFB121" class="outline-2">
+<h2 id="ID-BCFBAB21-B79D-448A-A339-7F2228AFB121"><span class="section-number-2">4.</span> Limitations of RNN</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 RNN as presented above have the following limitations:

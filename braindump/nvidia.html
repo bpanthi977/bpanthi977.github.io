@@ -301,7 +301,7 @@ but the good thing is, its very energy efficient. i.e. nvidia graphics card is n
 no `nvidia` or `nvidia-lts`
 no `xf86-video-intel` 
 </p>
-<pre class="example" id="orgcb66598">
+<pre class="example" id="org6d80d52">
 pacman -Qi xf86-
 xf86-input-libinput  xf86-video-nouveau
 </pre>
@@ -309,7 +309,7 @@ xf86-input-libinput  xf86-video-nouveau
 <p>
 just the modesetting intel driver and nouveau driver 
 </p>
-<pre class="example" id="org5366110">
+<pre class="example" id="org51fa662">
 xrandr --listproviders 
 
 Providers: number : 2
@@ -321,7 +321,7 @@ Provider 1: id: 0xec cap: 0x7, Source Output, Sink Output, Source Offload crtcs:
 and nothing inside the <code>/etc/X11/xorg.conf.d/</code> directory 
 and 
 </p>
-<pre class="example" id="orgef10b5f">
+<pre class="example" id="org24fb076">
 ls /usr/share/X11/xorg.conf.d 
 10-quirks.conf	40-libinput.conf
 </pre>
