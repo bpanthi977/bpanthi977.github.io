@@ -34,13 +34,13 @@ check if X can set backlight
 </pre>
 </div></details>
 <p>
-if it can, then inability to change backlight from keyboard or gui may be <a href="key_code.html#ID-931da5ed-074e-4d0c-9a27-89117db39ae7">Scan Code</a> or desktop environment problem. 
+if it can, then inability to change backlight from keyboard or gui may be <a href="key_code.html#ID-931da5ed-074e-4d0c-9a27-89117db39ae7">Scan Code</a> or desktop environment problem.
 </p>
 
 <p>
 Else creating <code>/usr/share/X11/xorg.conf.d/20-intel.conf</code> file with following content has worked.
 </p>
-<pre class="example" id="orgb59f142">
+<pre class="example" id="example-1">
 Section "Device"
         Identifier  "card0"
         Driver      "intel"

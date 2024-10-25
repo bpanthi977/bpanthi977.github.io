@@ -71,9 +71,6 @@
 </ul>
 </div>
 </div>
-<p>
-(Context : <a href="file:///Users/bpanthi977/Documents/synced/BE/Y3S6/Sanitary Engineering/Lecture Notes - Sanitary Engineering.html#orgc89fc88">Design (ASP Loading Criteria)</a>)
-</p>
 <div id="outline-container-Problem%20Setup" class="outline-2">
 <h2 id="Problem%20Setup"><span class="section-number-2">1.</span> Problem Setup</h2>
 <div class="outline-text-2" id="text-1">
@@ -90,11 +87,11 @@ Suppose you have a tank of volume \(V\) filled with sludge. An inlet provide new
 <h3 id="Discretize"><span class="section-number-3">2.1.</span> Discretize</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
-Lets reduce this problem to a simpler one so that its easier to think of a solution. 
+Lets reduce this problem to a simpler one so that its easier to think of a solution.
 </p>
 
 <p>
-Suppose there are \(N\) number of very very tiny balls in the tank. And a single ball is replaced at random at each timestep \(\Delta t\). Now you can immediately tell that if I keep track of a single specific ball, say I colour only one of the \(N\) balls with blue colour, then the chance of that blue ball being replaced in the first step is \(\frac 1 {N}\). So, on average it takes \(N\) steps for the ball to get replaced. 
+Suppose there are \(N\) number of very very tiny balls in the tank. And a single ball is replaced at random at each timestep \(\Delta t\). Now you can immediately tell that if I keep track of a single specific ball, say I colour only one of the \(N\) balls with blue colour, then the chance of that blue ball being replaced in the first step is \(\frac 1 {N}\). So, on average it takes \(N\) steps for the ball to get replaced.
 </p>
 
 <p>
@@ -106,14 +103,14 @@ To make the last statement rigorous, you'll have to use binomial distribution an
 <h3 id="For%20Continuous%20Case"><span class="section-number-3">2.2.</span> For Continuous Case</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
-So, for discrete case we know it takes on average \(N\) steps to replace an specific ball, so on average age of any given ball would be \(N\Delta t\).  Now, the continuous case is just like the discrete case but with infinite balls and infinitesimal time interval. And instead of asking age of a single ball we can ask what the age of a small volume of sludge \(\Delta V\) is?. For this imagine that the tank consists of \(N = \frac{V}{\Delta V}\) number of such small volumes. The average life of such small volume would be 
+So, for discrete case we know it takes on average \(N\) steps to replace an specific ball, so on average age of any given ball would be \(N\Delta t\).  Now, the continuous case is just like the discrete case but with infinite balls and infinitesimal time interval. And instead of asking age of a single ball we can ask what the age of a small volume of sludge \(\Delta V\) is?. For this imagine that the tank consists of \(N = \frac{V}{\Delta V}\) number of such small volumes. The average life of such small volume would be
 </p>
 \begin{align}
-N\Delta t &= \frac {V}{\Delta V} \Delta t \\ 
-&= V \frac{1} {\Delta V / \Delta t} 
+N\Delta t &= \frac {V}{\Delta V} \Delta t \\
+&= V \frac{1} {\Delta V / \Delta t}
 \end{align}
 <p>
-Now in the limit \(\Delta t \rightarrow 0\), \(\frac{\Delta V}{\Delta t} \rightarrow Q\) where \(Q\) is the rate with which the sludge is being replaced. So, the average age of sludge in the tank is 
+Now in the limit \(\Delta t \rightarrow 0\), \(\frac{\Delta V}{\Delta t} \rightarrow Q\) where \(Q\) is the rate with which the sludge is being replaced. So, the average age of sludge in the tank is
 </p>
 \begin{equation}
 \textrm{Avg. Age} = \frac {V} {Q}

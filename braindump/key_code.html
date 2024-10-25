@@ -43,7 +43,7 @@ The kernel reads this scan code and tries to find it in a table that maps `scan 
 </p>
 
 <p>
-In most cases, we can assign to this scan code the key code of the functionality that we want, as the X system already support a wide variety of keys and most desktop environments interpret this keys and give them that very same functionality within them. 
+In most cases, we can assign to this scan code the key code of the functionality that we want, as the X system already support a wide variety of keys and most desktop environments interpret this keys and give them that very same functionality within them.
 </p>
 <div id="outline-container-Obtaining%20the%20scan%20code%20of%20unrecognized%20keys" class="outline-2">
 <h2 id="Obtaining%20the%20scan%20code%20of%20unrecognized%20keys"><span class="section-number-2">1.</span> Obtaining the scan code of unrecognized keys</h2>
@@ -56,7 +56,7 @@ When the kernel can't find the scan code of a pressed key in the map of key code
 You can press the unrecognized keys and use dmesg to find the scan codes, you would see something similar to this but with your own scan codes:
 </p>
 
-<pre class="example" id="orga09bec3">
+<pre class="example" id="example-1">
 atkbd.c: Unknown key pressed (translated set 2, code 0xa6 on isa0060/serio0).
 atkbd.c: Use 'setkeycodes e026 &lt;keycode&gt;' to make it known.
 atkbd.c: Unknown key released (translated set 2, code 0xa6 on isa0060/serio0).
@@ -91,14 +91,14 @@ By this method you would see the same messages appear when you press said keys, 
 </div></details>
 
 <p>
-<b>ADD 8</b> 
+<b>ADD 8</b>
 </p>
 
 <p>
 This command will show you the current layout of the keyboard, in here you can both find unused key codes and well as the key codes of functionality already supported by xmodmap. If this three of the keys corresponded to the volume controls, mute, lower the volume and increase the volume, we will find that this functionality already have a key code associated to it, we will see the following lines:
 </p>
 
-<pre class="example" id="org7d20070">
+<pre class="example" id="example-2">
 keycode 121 = XF86AudioMute NoSymbol XF86AudioMute
 keycode 122 = XF86AudioLowerVolume NoSymbol XF86AudioLowerVolume
 keycode 123 = XF86AudioRaiseVolume NoSymbol XF86AudioRaiseVolume

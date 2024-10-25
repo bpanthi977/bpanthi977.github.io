@@ -299,18 +299,20 @@ but the good thing is, its very energy efficient. i.e. nvidia graphics card is n
 
 <p>
 no `nvidia` or `nvidia-lts`
-no `xf86-video-intel` 
+no `xf86-video-intel`
 </p>
-<pre class="example" id="org6d80d52">
+
+<pre class="example" id="example-1">
 pacman -Qi xf86-
 xf86-input-libinput  xf86-video-nouveau
 </pre>
 
 <p>
-just the modesetting intel driver and nouveau driver 
+just the modesetting intel driver and nouveau driver
 </p>
-<pre class="example" id="org51fa662">
-xrandr --listproviders 
+
+<pre class="example" id="example-2">
+xrandr --listproviders
 
 Providers: number : 2
 Provider 0: id: 0x45 cap: 0xf, Source Output, Sink Output, Source Offload, Sink Offload crtcs: 3 outputs: 3 associated providers: 1 name:modesetting
@@ -318,11 +320,12 @@ Provider 1: id: 0xec cap: 0x7, Source Output, Sink Output, Source Offload crtcs:
 </pre>
 
 <p>
-and nothing inside the <code>/etc/X11/xorg.conf.d/</code> directory 
-and 
+and nothing inside the <code>/etc/X11/xorg.conf.d/</code> directory
+and
 </p>
-<pre class="example" id="org24fb076">
-ls /usr/share/X11/xorg.conf.d 
+
+<pre class="example" id="example-3">
+ls /usr/share/X11/xorg.conf.d
 10-quirks.conf	40-libinput.conf
 </pre>
 </div>
@@ -331,7 +334,7 @@ ls /usr/share/X11/xorg.conf.d
 <h2 id="See%20also"><span class="section-number-2">3.</span> See also</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-I think I am using PRIME 
+I think I am using PRIME
 <a href="https://wiki.freedesktop.org/nouveau/Optimus/">https://wiki.freedesktop.org/nouveau/Optimus/</a>
 </p>
 
