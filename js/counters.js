@@ -90,5 +90,3 @@ function updateUi() {
             "Send me some claps if you liked the article ☝";
     }
 }
-
-pingAccess();

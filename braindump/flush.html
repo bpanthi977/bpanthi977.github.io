@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>#pragma omp flush</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-10-29 Tue&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">#pragma omp flush
+<br />
+<span class="subtitle">A simple experiment to figure out how flush works</span>
+</h1>
+<div id="outline-container-Experiment" class="outline-2">
+<h2 id="Experiment"><span class="section-number-2">1.</span> Experiment</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Lets look at the following source code. Compiled with flags <code>-O3 -fopenmp</code>
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>Program 1</label><pre class="src src-c"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdio.h&gt;</span>
+
+<span class="org-type">int</span> <span class="org-function-name">main</span>() {
+    <span class="org-type">int</span> <span class="org-variable-name">i</span> = 1;
+<span class="org-preprocessor">    #pragma</span> omp parallel
+    {
+        i++;
+<span class="org-preprocessor">        #pragma</span> omp flush
+        i*=i;
+        i--;
+        printf(<span class="org-string">"%d\n"</span>, i);
+    }
+    <span class="org-keyword">return</span> 0;
+}
+</pre>
+</div></details>
+</div>
+<div id="outline-container-Without%20flush" class="outline-3">
+<h3 id="Without%20flush"><span class="section-number-3">1.1.</span> Without flush</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+If we omit the <code>#pragma omp flush</code> directive, we see that the variable <code>i</code> is loaded from memory to the <code>eax</code> register once, then some computation are performed (<code>imul</code>, <code>sub</code>) and then the value is returned back to memory with another <code>mov</code>. [<a href="https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:___c,selection:(endColumn:1,endLineNumber:14,positionColumn:1,positionLineNumber:14,selectionStartColumn:1,selectionStartLineNumber:14,startColumn:1,startLineNumber:14),source:'%23include+%3Cstdio.h%3E%0A%0Aint+main()+%7B%0A++++int+i+%3D+1%3B%0A++++%23pragma+omp+parallel%0A++++%7B%0A++++++++i%2B%2B%3B%0A++++++++i*%3Di%3B%0A++++++++i--%3B%0A++++++++printf(%22%25d%5Cn%22,+i)%3B+%0A++++%7D%0A++++return+0%3B%0A%7D%0A'),l:'5',n:'1',o:'C+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:compiler,i:(compiler:cgsnapshot,filters:(b:'0',binary:'1',binaryObject:'1',commentOnly:'0',debugCalls:'1',demangle:'0',directives:'0',execute:'0',intel:'0',libraryCode:'0',trim:'1',verboseDemangling:'0'),flagsViewOpen:'1',fontScale:14,fontUsePx:'0',j:1,lang:___c,libs:!(),options:'-fopenmp+-O3',overrides:!(),selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:1),l:'5',n:'0',o:'+x86-64+gcc+(trunk)+(Editor+%231)',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4">godbolt.org</a>]
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>Assembly for Program 1 (without flush) in x86-64</label><pre class="src src-asm"><span class="org-function-name">.LC0</span>:
+        <span class="org-keyword">.string</span> <span class="org-string">"%d\n"</span>
+<span class="org-function-name">main</span>._omp_fn.0:
+        <span class="org-keyword">mov</span>     eax, DWORD PTR [rdi]
+        <span class="org-keyword">lea</span>     esi, [rax+1]
+        <span class="org-keyword">xor</span>     eax, eax
+        <span class="org-keyword">imul</span>    esi, esi
+        <span class="org-keyword">sub</span>     esi, 1
+        <span class="org-keyword">mov</span>     DWORD PTR [rdi], esi
+        <span class="org-keyword">mov</span>     edi, OFFSET FLAT:.LC0
+        <span class="org-keyword">jmp</span>     printf
+<span class="org-function-name">main</span>:
+        <span class="org-keyword">sub</span>     rsp, 24
+        <span class="org-keyword">xor</span>     ecx, ecx
+        <span class="org-keyword">xor</span>     edx, edx
+        <span class="org-keyword">mov</span>     edi, OFFSET FLAT:main._omp_fn.0
+        <span class="org-keyword">lea</span>     rsi, [rsp+12]
+        <span class="org-keyword">mov</span>     DWORD PTR [rsp+12], 1
+        <span class="org-keyword">call</span>    GOMP_parallel
+        <span class="org-keyword">xor</span>     eax, eax
+        <span class="org-keyword">add</span>     rsp, 24
+        <span class="org-keyword">ret</span>
+</pre>
+</div></details>
+
+<p>
+For <code>arm</code> architecture, the assembly instruction for the parallel block is as follows [<a href="https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:___c,selection:(endColumn:25,endLineNumber:5,positionColumn:25,positionLineNumber:5,selectionStartColumn:25,selectionStartLineNumber:5,startColumn:25,startLineNumber:5),source:'%23include+%3Cstdio.h%3E%0A%0Aint+main()+%7B%0A++++int+i+%3D+1%3B%0A++++%23pragma+omp+parallel%0A++++%7B%0A++++++++i%2B%2B%3B%0A++++++++i*%3Di%3B%0A++++++++i--%3B%0A++++++++printf(%22%25d%5Cn%22,+i)%3B+%0A++++%7D%0A++++return+0%3B%0A%7D%0A'),l:'5',n:'1',o:'C+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:compiler,i:(compiler:carmgtrunk,filters:(b:'0',binary:'1',binaryObject:'1',commentOnly:'0',debugCalls:'1',demangle:'0',directives:'0',execute:'0',intel:'0',libraryCode:'0',trim:'1',verboseDemangling:'0'),flagsViewOpen:'1',fontScale:14,fontUsePx:'0',j:1,lang:___c,libs:!(),options:'-fopenmp+-O3',overrides:!((name:arch,value:amdfam10)),selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:1),l:'5',n:'0',o:'+ARM+GCC+trunk+(linux)+(Editor+%231)',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4">godbolt.org</a>]:
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 3: </span>Assembly for Program 1 (without flush) in arm</label><pre class="src src-asm"><span class="org-function-name">main</span>._omp_fn.0:
+        <span class="org-keyword">mov</span>     r3, r0
+        <span class="org-keyword">movw</span>    r0, #:lower16:.LC0
+        <span class="org-keyword">movt</span>    r0, #:upper16:.LC0
+        <span class="org-keyword">ldr</span>     r1, [r3]
+        <span class="org-keyword">adds</span>    r1, r1, #1
+        <span class="org-keyword">mul</span>     r1, r1, r1
+        <span class="org-keyword">subs</span>    r1, r1, #1
+        <span class="org-keyword">str</span>     r1, [r3]
+        <span class="org-keyword">b</span>       printf
+</pre>
+</div></details>
+
+<p>
+Here too, the steps are same:
+</p>
+<ul class="org-ul">
+<li><code>ldr r1, [r3]</code> : first <code>i</code> (at <code>[r3]</code>) is loaded from memory to a register <code>r1</code></li>
+<li>then computation is performed using the registers</li>
+<li>finally, the result is stored back to memory <code>str r1, [r3]</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-With%20Flush" class="outline-3">
+<h3 id="With%20Flush"><span class="section-number-3">1.2.</span> With Flush</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+With the <code>#pragma omp flush</code> directive we see that the addition on variable <code>i</code> is directly performed in the memory (<code>add rdi 1</code>) and then an atomic <code>or</code> operation (atomic because of <code>lock</code>) is performed on <code>rsp</code>. Then as usual, the variable <code>i</code> is fetched, remaining computations are performed (<code>imul</code>, <code>sub</code>) and then value returned back to memory. [<a href="https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:15,positionColumn:1,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:15,startColumn:1,startLineNumber:15),source:'%23include+%3Cstdio.h%3E%0A%0Aint+main()+%7B%0A++++int+i+%3D+1%3B%0A++++%23pragma+omp+parallel%0A++++%7B%0A++++++++i%2B%2B%3B%0A++++++++%23pragma+omp+flush%0A++++++++i*%3Di%3B%0A++++++++i--%3B%0A++++++++printf(%22%25d%5Cn%22,+i)%3B%0A++++%7D%0A++++return+0%3B%0A%7D%0A'),l:'5',n:'1',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:compiler,i:(compiler:g142,filters:(b:'0',binary:'1',binaryObject:'1',commentOnly:'0',debugCalls:'1',demangle:'0',directives:'0',execute:'1',intel:'0',libraryCode:'0',trim:'1',verboseDemangling:'0'),flagsViewOpen:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-fopenmp+-O3',overrides:!(),selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:1),l:'5',n:'0',o:'+x86-64+gcc+14.2+(Editor+%231)',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4">godbolt.org</a>]
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 4: </span>Assembly for Program 1 in x86-64</label><pre class="src src-asm"><span class="org-function-name">main</span>._omp_fn.0:
+        <span class="org-keyword">add</span>     DWORD PTR [rdi], 1
+        <span class="org-keyword">xor</span>     eax, eax
+        <span class="org-keyword">lock</span> or QWORD PTR [rsp], 0
+        <span class="org-keyword">mov</span>     esi, DWORD PTR [rdi]
+        <span class="org-keyword">imul</span>    esi, esi
+        <span class="org-keyword">sub</span>     esi, 1
+        <span class="org-keyword">mov</span>     DWORD PTR [rdi], esi
+        <span class="org-keyword">mov</span>     edi, OFFSET FLAT:.LC0
+        <span class="org-keyword">jmp</span>     printf
+</pre>
+</div></details>
+
+<p>
+For arm architecture, the assembly does similar work [<a href="https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:___c,selection:(endColumn:18,endLineNumber:8,positionColumn:18,positionLineNumber:8,selectionStartColumn:18,selectionStartLineNumber:8,startColumn:18,startLineNumber:8),source:'%23include+%3Cstdio.h%3E%0A%0Aint+main()+%7B%0A++++int+i+%3D+1%3B%0A++++%23pragma+omp+parallel%0A++++%7B%0A++++++++i%2B%2B%3B%0A%23pragma+omp+flush%0A++++++++i*%3Di%3B%0A++++++++i--%3B%0A++++++++printf(%22%25d%5Cn%22,+i)%3B+%0A++++%7D%0A++++return+0%3B%0A%7D%0A'),l:'5',n:'1',o:'C+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:compiler,i:(compiler:carmgtrunk,filters:(b:'0',binary:'1',binaryObject:'1',commentOnly:'0',debugCalls:'1',demangle:'0',directives:'0',execute:'0',intel:'0',libraryCode:'0',trim:'1',verboseDemangling:'0'),flagsViewOpen:'1',fontScale:14,fontUsePx:'0',j:1,lang:___c,libs:!(),options:'-fopenmp+-O3',overrides:!((name:arch,value:amdfam10)),selection:(endColumn:23,endLineNumber:15,positionColumn:23,positionLineNumber:15,selectionStartColumn:1,selectionStartLineNumber:3,startColumn:1,startLineNumber:3),source:1),l:'5',n:'0',o:'+ARM+GCC+trunk+(linux)+(Editor+%231)',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4">godbolt.org</a>]:
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 5: </span>Assembly for Program 1 in arm</label><pre class="src src-asm"><span class="org-function-name">main</span>._omp_fn.0:
+        <span class="org-keyword">mov</span>     r3, r0
+        <span class="org-keyword">movw</span>    r0, #:lower16:.LC0
+        <span class="org-keyword">movt</span>    r0, #:upper16:.LC0
+        <span class="org-keyword">ldr</span>     r2, [r3]
+        <span class="org-keyword">adds</span>    r2, r2, #1
+        <span class="org-keyword">str</span>     r2, [r3]
+        <span class="org-keyword">dmb</span>     ish
+        <span class="org-keyword">ldr</span>     r1, [r3]
+        <span class="org-keyword">mul</span>     r1, r1, r1
+        <span class="org-keyword">subs</span>    r1, r1, #1
+        <span class="org-keyword">str</span>     r1, [r3]
+        <span class="org-keyword">b</span>       printf
+</pre>
+</div></details>
+
+<ul class="org-ul">
+<li><code>ldr r2, [r3]</code> : First <code>i</code> is fetched from memory to register <code>r2</code></li>
+<li><code>adds r2, r2, #1</code> : addition is performed in <code>r2</code></li>
+<li><code>str r2, [r3]</code> : result is saved back to memory</li>
+<li><code>dmb ish</code> : It is a memory barrier instruction that prevents CPU from reordering the instructions</li>
+<li><code>ldr r1, [r3]</code> : Value of <code>i</code> is again fetched from memory</li>
+<li>the remaining computation (multiplication and substraction) is performed</li>
+<li>and the result is again stored back to memory.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-Analysis" class="outline-2">
+<h2 id="Analysis"><span class="section-number-2">2.</span> Analysis</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+The above experiment shows that <code>#pragma omp flush</code> causes two changes:
+</p>
+<ul class="org-ul">
+<li>before the flush, the variables modified in registers are moved back to the memory.</li>
+<li>after the flush, the variables are loaded back from memory to the register (if the subsequent instructions require that variable)</li>
+</ul>
+
+<p>
+After the <code>mov</code> operation the cache coherence mechanisms of the CPU are responsible to make the value consistent among the different cores' cache and the memory.
+</p>
+
+
+<p>
+I am not sure why the atomic <code>or</code> operation (<code>lock or rsp 0</code>) in x86-64 architecture and the <code>dmb ish</code> instruction in arm instruction is required between the first store and second load. I guess it is to prevent out of order &amp; speculative execution (<a href="https://stackoverflow.com/questions/15491751/real-life-use-cases-of-barriers-dsb-dmb-isb-in-arm">link1</a>, <a href="https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/memory-access-ordering---an-introduction">arm docs</a>).
+</p>
+
+<p>
+Reasoning:
+</p>
+<ul class="org-ul">
+<li>due to out of order execution and speculative execution done by modern CPUs, load instruction later in the code may be performed in parallel to other instructions.</li>
+<li>this speculative execution can also cause the cache to be updated in different order than expected by looking at the code</li>
+<li>a memory barrier (e.g. <code>dmb</code> in arm, <code>lock or</code> in x86-64) prevents the CPU from doing out of order execution</li>
+</ul>
+
+<p>
+But still, when accessing the same memory location, the CPU, I assume, shouldn't reorder the store and load at that location.
+</p>
+<ul class="org-ul">
+<li>Maybe it does not wait for the load before executing further instructions because it had just written to it? I guess not.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: #pragma omp flush">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>

@@ -69,7 +69,7 @@ Adapted from <a href="https://hugocisneros.com/blog/my-org-roam-notes-workflow/"
     <span class="org-variable-name">conn</span> <span class="org-operator">=</span> sqlite3.connect(home <span class="org-operator">/</span> <span class="org-string">"org/dbs/darwin/"</span> <span class="org-operator">/</span> <span class="org-string">"org-roam.db"</span>)
 
     <span class="org-comment-delimiter"># </span><span class="org-comment">Query all nodes first</span>
-    <span class="org-variable-name">nodes</span> <span class="org-operator">=</span> conn.execute(<span class="org-string">"SELECT file, id, title FROM nodes WHERE level = 0 and  file not like '%.gpg%' and properties not like '%private%' and properties not like '%PRIVATE%' and properties not like '%personal%' and properties not like '%PERSONAL%';"</span>) 
+    <span class="org-variable-name">nodes</span> <span class="org-operator">=</span> conn.execute(<span class="org-string">"SELECT file, id, title FROM nodes WHERE level = 0 and  file not like '%.gpg%' and properties not like '%private%' and properties not like '%PRIVATE%' and properties not like '%personal%' and properties not like '%PERSONAL%';"</span>)
     <span class="org-comment-delimiter"># </span><span class="org-comment">A double JOIN to get all nodes that are connected by a link</span>
     <span class="org-variable-name">links</span> <span class="org-operator">=</span> conn.execute(<span class="org-string">"SELECT n1.id, nodes.id FROM ((nodes AS n1) "</span>
                          <span class="org-string">"JOIN links ON n1.id = links.source) "</span>
@@ -103,7 +103,7 @@ Adapted from <a href="https://hugocisneros.com/blog/my-org-roam-notes-workflow/"
 
 <span class="org-variable-name">N_COM</span> <span class="org-operator">=</span> 7  <span class="org-comment-delimiter"># </span><span class="org-comment">Desired number of communities</span>
 <span class="org-variable-name">N_MISSING</span> <span class="org-operator">=</span> 50  <span class="org-comment-delimiter"># </span><span class="org-comment">Number of predicted missing links</span>
-<span class="org-variable-name">MAX_NODES</span> <span class="org-operator">=</span> 2000  <span class="org-comment-delimiter"># </span><span class="org-comment">Number of nodes in the final graph </span>
+<span class="org-variable-name">MAX_NODES</span> <span class="org-operator">=</span> 2000  <span class="org-comment-delimiter"># </span><span class="org-comment">Number of nodes in the final graph</span>
 
 <span class="org-keyword">def</span> <span class="org-function-name">compute_centrality</span>(dot_graph: nx.DiGraph) <span class="org-operator">-&gt;</span> <span class="org-constant">None</span>:
     <span class="org-doc">"""Add a `centrality` attribute to each node with its PageRank score.</span>
@@ -136,7 +136,7 @@ Adapted from <a href="https://hugocisneros.com/blog/my-org-roam-notes-workflow/"
     <span class="org-variable-name">DOT_GRAPH</span> <span class="org-operator">=</span> build_graph()
     compute_centrality(DOT_GRAPH)
     compute_communities(DOT_GRAPH, N_COM)
-    sys.stderr.write(<span class="org-string">"Done</span><span class="org-constant">\n</span><span class="org-string">"</span>) 
+    sys.stderr.write(<span class="org-string">"Done</span><span class="org-constant">\n</span><span class="org-string">"</span>)
     <span class="org-variable-name">JS_GRAPH</span> <span class="org-operator">=</span> json_graph.node_link_data(DOT_GRAPH)
     <span class="org-comment-delimiter">#</span><span class="org-comment">sys.stdout.write(json.dumps(JS_GRAPH))</span>
     <span class="org-keyword">return</span> json.dumps(JS_GRAPH)
@@ -158,7 +158,7 @@ In addition to the code from <a href="https://hugocisneros.com/blog/my-org-roam-
 </p>
 
 <p>
-Further resources to add zoom, pan: 
+Further resources to add zoom, pan:
 </p>
 <ul class="org-ul">
 <li><a href="https://www.d3indepth.com/zoom-and-pan/">https://www.d3indepth.com/zoom-and-pan/</a></li>
@@ -167,7 +167,7 @@ Further resources to add zoom, pan:
 </ul>
 
 <p>
-Physics 
+Physics
 </p>
 <ul class="org-ul">
 <li><a href="https://github.com/org-roam/org-roam-ui">https://github.com/org-roam/org-roam-ui</a></li>

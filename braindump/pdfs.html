@@ -41,6 +41,7 @@
 <li><a href="#Firefox%20font%20kerning%20wrong%20in%20pdfs">2.1. Firefox font kerning wrong in pdfs</a></li>
 </ul>
 </li>
+<li><a href="#ID-A16A08DF-D9DD-4E47-B6E5-DE4E231FFA4D">3. Named Destinations</a></li>
 </ul>
 </div>
 </div>
@@ -52,10 +53,6 @@
 <h3 id="Extract%20Page%20range%20from%20Pdfs"><span class="section-number-3">1.1.</span> Extract Page range from Pdfs</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
-CREATED: <span class="timestamp-wrapper"><span class="timestamp">[2023-12-14 Thu 13:30]</span></span>
-</p>
-
-<p>
 qpdf input.pdf &#x2013;pages . 1-10 &#x2013; output.pdf
 </p>
 </div>
@@ -63,10 +60,6 @@ qpdf input.pdf &#x2013;pages . 1-10 &#x2013; output.pdf
 <div id="outline-container-Remove%20encryption%20from%20pdf" class="outline-3">
 <h3 id="Remove%20encryption%20from%20pdf"><span class="section-number-3">1.2.</span> Remove encryption from pdf</h3>
 <div class="outline-text-3" id="text-1-2">
-<p>
-CREATED: <span class="timestamp-wrapper"><span class="timestamp">[2023-12-01 Fri 10:14]</span></span>
-</p>
-
 <p>
 qpdf &#x2013;decrypt input.pdf output.pdf
 </p>
@@ -89,9 +82,43 @@ qpdf &#x2013;decrypt input.pdf output.pdf
 <h3 id="Firefox%20font%20kerning%20wrong%20in%20pdfs"><span class="section-number-3">2.1.</span> Firefox font kerning wrong in pdfs</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
-Goto settings and disallow sites to use their own font 
+Goto settings and disallow sites to use their own font
 </p>
 </div>
+</div>
+</div>
+<div id="outline-container-ID-A16A08DF-D9DD-4E47-B6E5-DE4E231FFA4D" class="outline-2">
+<h2 id="ID-A16A08DF-D9DD-4E47-B6E5-DE4E231FFA4D"><span class="section-number-2">3.</span> Named Destinations</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Used for referencing/linking parts of another pdf document
+</p>
+
+<p>
+To list named destinations in a pdf: <a href="https://unix.stackexchange.com/questions/246622/list-named-destinations-in-a-pdf">stackexchange.com</a>
+</p>
+
+<pre class="example">
+pdfinfo -dests ./abcd.pdf
+</pre>
+
+
+<p>
+To link to a named destination use the url: <a href="https://superuser.com/questions/1384892/how-to-create-url-link-to-the-specific-section-of-the-pdf-file">superuser.com</a>
+</p>
+
+<pre class="example">
+./abcd.pdf#named_destination
+</pre>
+
+
+<p>
+To link to a specific page, use the url:
+</p>
+
+<pre class="example">
+./abcd.pdf#page=12
+</pre>
 </div>
 </div>
 </div>

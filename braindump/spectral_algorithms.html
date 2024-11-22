@@ -1,0 +1,1001 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Spectral Algorithms</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-10-28 Mon&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Spectral Algorithms
+<br />
+<span class="subtitle">Notes and Summary</span>
+</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#Chapter%201%3A%20Best%20Fit%20Subspace%20%26%20k-variance%20problem">1. Chapter 1: Best Fit Subspace &amp; k-variance problem</a>
+<ul>
+<li><a href="#Best%20Fit%20Subspace">1.1. Best Fit Subspace</a>
+<ul>
+<li><a href="#%22Best%22">1.1.1. "Best"</a></li>
+</ul>
+</li>
+<li><a href="#k-variance%20problem">1.2. k-variance problem</a></li>
+</ul>
+</li>
+<li><a href="#Chapter%202%3A%20Mixture%20Model">2. Chapter 2: Mixture Model</a>
+<ul>
+<li><a href="#General%20Algorithm">2.1. General Algorithm</a></li>
+<li><a href="#Some%20facts%20about%20Spherical%20Gaussians">2.2. Some facts about Spherical Gaussians</a></li>
+<li><a href="#General%20Distribution">2.3. General Distribution</a></li>
+<li><a href="#SVD%20of%20Samples">2.4. SVD of Samples</a></li>
+<li><a href="#Affine%20Invariant%20Algorithm">2.5. Affine Invariant Algorithm</a></li>
+<li><a href="#Benefits">2.6. Benefits</a></li>
+</ul>
+</li>
+<li><a href="#Chapter%203%3A%20Probabilistic%20Spectral%20Clustering">3. Chapter 3: Probabilistic Spectral Clustering</a>
+<ul>
+<li><a href="#Full%20Independence">3.1. Full Independence</a>
+<ul>
+<li><a href="#Details">3.1.1. Details</a></li>
+</ul>
+</li>
+<li><a href="#Basic%20Algorithm">3.2. Basic Algorithm</a></li>
+<li><a href="#Deterministic%20Assumptions">3.3. Deterministic Assumptions</a></li>
+</ul>
+</li>
+<li><a href="#Chapter%204%3A%20Recursive%20Spectral%20Clustering">4. Chapter 4: Recursive Spectral Clustering</a>
+<ul>
+<li><a href="#Spectral%20Heuristic%20for%20approx%20min%20conductance%20cut">4.1. Spectral Heuristic for approx min conductance cut</a></li>
+<li><a href="#Recursive%20Clustering">4.2. Recursive Clustering</a></li>
+<li><a href="#Recursive%20Spectral%20Clustering">4.3. Recursive Spectral Clustering</a></li>
+</ul>
+</li>
+<li><a href="#Chapter%205%3A%20Optimization%20via%20Low-Rank%20Approximation">5. Chapter 5: Optimization via Low-Rank Approximation</a></li>
+<li><a href="#Chapter%206%3A%20Matrix%20Approximation%20by%20Random%20Sampling">6. Chapter 6: Matrix Approximation by Random Sampling</a>
+<ul>
+<li><a href="#Low%20Rank%20Approximation">6.1. Low Rank Approximation</a></li>
+<li><a href="#Matrix-Vector%20Product">6.2. Matrix-Vector Product</a></li>
+<li><a href="#Matrix-Matrix%20Product">6.3. Matrix-Matrix Product</a></li>
+<li><a href="#Fast-SVD%20Algorithm">6.4. Fast-SVD Algorithm</a></li>
+<li><a href="#Constant%20Time%20SVD%20Algorithm">6.5. Constant Time SVD Algorithm</a></li>
+<li><a href="#CUR%3A%20Interpolative%20approximation">6.6. CUR: Interpolative approximation</a></li>
+<li><a href="#Applications">6.7. Applications</a></li>
+</ul>
+</li>
+<li><a href="#Chapter%207%3A%20Adaptive%20Sampling%20Methods">7. Chapter 7: Adaptive Sampling Methods</a>
+<ul>
+<li><a href="#Iterative%20Fast%20SVD">7.1. Iterative Fast SVD</a></li>
+<li><a href="#Volume%20Sampling">7.2. Volume Sampling</a></li>
+<li><a href="#Isotropic%20Random%20Projection">7.3. Isotropic Random Projection</a></li>
+</ul>
+</li>
+<li><a href="#Chapter%208%3A%20Extensions%20of%20SVD">8. Chapter 8: Extensions of SVD</a>
+<ul>
+<li><a href="#Tensor%20decomposition">8.1. Tensor decomposition</a></li>
+<li><a href="#Isotropic%20PCA">8.2. Isotropic PCA</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+\pagebreak
+Book by Ravindran Kannan &amp; Santosh Vempala [<a href="books/Spectral Algorithms.pdf#page=nil">pdf</a>]
+</p>
+
+
+<p>
+Eigenvalues, Eigenvectors, Singular values and Singular vectors are Spectral Parameters. Any algorithm that uses spectral parameters to do something useful is called Spectral Algorithm.
+</p>
+
+<p>
+The first 5 chapters talk about application of Spectral Methods for different kinds of problems:
+</p>
+<ul class="org-ul">
+<li>Clustering (k-variance problem)</li>
+
+<li><p>
+Classifying samples from Mixture Models
+</p>
+
+<p>
+For mixture of Gaussians, SVD gives the current best gurantees
+</p></li>
+
+<li><p>
+Probabilistic Spectral Clustering
+</p>
+
+<p>
+Convert clustering problem to a graph problem.
+</p>
+
+<p>
+The graph problem is to find underlying generative random graph from a sample of that graph.
+</p></li>
+</ul>
+
+<ul class="org-ul">
+<li>Recursive Spectral Clustering (Partition a weighted graph into \(k\) clusters)</li>
+
+<li>Combinatorial Optimization (Max-rCSP problem)</li>
+</ul>
+
+<p>
+The next 2 chapters talk about randomized algorithm to find spectral properties used in previous chapters (i.e. finding top \(k\) singular vectors to find best rank \(k\) approximation)
+</p>
+
+<p>
+Finally, the last chapter talks about extension of Spectral methods from matrices to tensors
+</p>
+<div id="outline-container-Chapter%201%3A%20Best%20Fit%20Subspace%20%26%20k-variance%20problem" class="outline-2">
+<h2 id="Chapter%201%3A%20Best%20Fit%20Subspace%20%26%20k-variance%20problem"><span class="section-number-2">1.</span> Chapter 1: Best Fit Subspace &amp; k-variance problem</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-Best%20Fit%20Subspace" class="outline-3">
+<h3 id="Best%20Fit%20Subspace"><span class="section-number-3">1.1.</span> Best Fit Subspace</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Span of top-\(k\) singular vectors is the best fit \(k\) -dimensional subspace for the rows of \(A\)
+</p>
+
+<p>
+E.g. If we view rows of a matrix as point in a space, then best fit line to a give set of points would be the top-1 singular vector.
+</p>
+
+<p>
+In this way finding Best fit k-Subspace is a generalization of Linear least square problem.
+</p>
+</div>
+<div id="outline-container-%22Best%22" class="outline-4">
+<h4 id="%22Best%22"><span class="section-number-4">1.1.1.</span> "Best"</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+"Best" is interms of Frobenius norm. Or equivalently minimizing the perpendicular distance of original points to the subspace.
+</p>
+
+<p>
+<a href="books/Spectral Algorithms.pdf#page=11">Theorem 1.4</a>: Among all rank k matrices D, the matrix \(A_k = \sum_{i=1}^k \sigma_i u_i  v_i^T\)  is the one which minimizes \(||A-D||_F^2\)
+</p>
+
+<p>
+SVD finds the best subspace in polynomial time, but for other measure of "best" (e.g. sum of distance, max distance) no polynomial-time algorithms are known. [<a href="books/Spectral Algorithms.pdf#page=8">Page 8</a>]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-k-variance%20problem" class="outline-3">
+<h3 id="k-variance%20problem"><span class="section-number-3">1.2.</span> k-variance problem</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+k-variance problem: Given a set of \(m\) points in \(\mathbb{R}^n\) find \(k\) general points (which are the cluster centers) such that the sum of square distance from each point to its nearest cluster center is minimized.
+</p>
+
+
+<p>
+Relaxed Problem (Continuous Clustering Problem): Find a subspace \(V\) of \(\mathbb{R}^n\) of dimension at most \(k\) which minimizes the distance from each point to the subspace. First \(k\) vectors of SVD of \(A\) solve the relaxed problem. Let \(V_k\) be the optimal subspace.
+</p>
+
+<p>
+We can show that by first projecting the points \(A\) to \(V_k\) and solving the k-variance problem for the projected points in the lower dimensional space, we get a solution that is no more than 2 times bad than the best solution. Since \(k\) is smaller than the original dimension of the problem (but remember the number of points is the same), it is more computationally efficient to solve the problem in \(k\) dimensions.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Chapter%202%3A%20Mixture%20Model" class="outline-2">
+<h2 id="Chapter%202%3A%20Mixture%20Model"><span class="section-number-2">2.</span> Chapter 2: Mixture Model</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+The problem is to classify points sampled from a mixture model with \(k\) component distribution. For this chapter the component distributions are Gaussian.
+</p>
+
+<p>
+If the means of the component distribution are separated by small number of standard deviations, then the projection of the distribution into the subspace spanned by the means gives a <span class="underline">well separated</span> mixture and the dimension would now be at most \(k\). [<a href="books/Spectral Algorithms.pdf#page=20">Lemma 2.1</a>]
+</p>
+
+<p>
+Then classification may be done by a distance based method: Compute pair wise distance between each points and group all points together whose distance is less than some threshold. This threshold is choosen so as to form \(k\) components. [<a href="books/Spectral Algorithms.pdf#page=19">Page 19</a>]
+</p>
+</div>
+<div id="outline-container-General%20Algorithm" class="outline-3">
+<h3 id="General%20Algorithm"><span class="section-number-3">2.1.</span> General Algorithm</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+The general approach is as follows:
+</p>
+<ul class="org-ul">
+<li>Compute the SVD of the sample matrix</li>
+<li>Project the points into the best fit \(k\) subspace</li>
+<li>Perform classification in that subspace</li>
+</ul>
+
+<p>
+Since the \(k\) subspace is lower dimensional, the problem can be solved more computationally efficiently in \(k\) dimensions than compared to original problem, e.g. by distance based classification.
+</p>
+</div>
+</div>
+<div id="outline-container-Some%20facts%20about%20Spherical%20Gaussians" class="outline-3">
+<h3 id="Some%20facts%20about%20Spherical%20Gaussians"><span class="section-number-3">2.2.</span> Some facts about Spherical Gaussians</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>Best fit 1-dimensional subspace for a spherical Gaussian distribution is a vector that passes through the mean of that Gaussian.</li>
+<li>Due to symmetry, best fit subspace of dimension 2 or more is any subspace contining the mean.</li>
+<li>Best fit \(k\) subspace of a \(k\) Gaussian mixure model are those one that contains the mean of the Gaussians.</li>
+</ul>
+
+<p>
+So for mixture of Spherical Gaussians the projection into best fit \(k\) subspace is same as projection into subspace spanned by means, and thus the projection results in an well separated mixture.
+</p>
+</div>
+</div>
+<div id="outline-container-General%20Distribution" class="outline-3">
+<h3 id="General%20Distribution"><span class="section-number-3">2.3.</span> General Distribution</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+For nonspherical gaussians and in general, the best fit k-subspace doesn't pass through the mean (e.g. parallel pancakes [<a href="books/Spectral Algorithms.pdf#page=23">Section 2.5</a>] problem). This property only holds for mixture of Weakly Isotropic distributions. [<a href="books/Spectral Algorithms.pdf#page=22">Exercise 2.3</a>]. So, for general distributions, the subspace that maximizes squared projection is not the best subspace for classification.
+</p>
+
+<p>
+Still, even for mixture of general distributions the means of the distribution don't move too much after projection into SVD subspace [Theorem 2.6; Pg. 23]. Meaning the SVD subspace is "close" to the subspace spanned by component means. And the general algorithm is useful.
+</p>
+
+<p>
+However this still doesn't solve parallel pancake problem as the means may overlap after projection.
+</p>
+</div>
+</div>
+<div id="outline-container-SVD%20of%20Samples" class="outline-3">
+<h3 id="SVD%20of%20Samples"><span class="section-number-3">2.4.</span> SVD of Samples</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+SVD subspace of Gaussian mixture is useful for classification. However we don't have the distributions and but only the samples from the mixture distribution. So, SVD would be useful if:
+</p>
+<ul class="org-ul">
+<li>SVD of sample matrix is not far from SVD of the mixture distribution</li>
+</ul>
+
+<p>
+Also to use classification based on distance, we require that the pair wise distance between same component samples to be not high.
+</p>
+
+<p>
+These properties are satisfied by log-concave distributions. And since most commonly seen distributions are log-concave, this is useful.
+</p>
+</div>
+</div>
+<div id="outline-container-Affine%20Invariant%20Algorithm" class="outline-3">
+<h3 id="Affine%20Invariant%20Algorithm"><span class="section-number-3">2.5.</span> Affine Invariant Algorithm</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+For the above general algorithm, an affine transformation could change a well separated problem into one that is not well-separated. So we need an affine invariant algorithm:
+</p>
+
+<ul class="org-ul">
+<li>Use the sample to find an affine transformation that make the distribution nearly isotropic. i.e.
+<ul class="org-ul">
+<li>Shift the center the distribution to origin</li>
+<li>Scale/Rotate i.e. transform so as to make the covariance matrix identity</li>
+</ul></li>
+<li>Reweight using a spherical gaussian</li>
+<li>Find the inter-mean direction and project along that direction</li>
+<li>Classify the projected points based on distances</li>
+</ul>
+
+<p>
+This algorithm only needs the mixture to be hyperplane separable.
+</p>
+
+<p>
+I didn't understand the proof of the algorithm, and thus I am not sure how it works. But somehow,
+</p>
+<ul class="org-ul">
+<li>Making the distribution of samples isotropic makes it so that the subspace spanned by the mean of the component is same as the Fischer subspace.</li>
+<li>In Fischer subspace the overlap of the components is small in every direction.</li>
+<li>Rest of the algorithm (reweighting, finding inter-mean direction) is to find the directions close to this Fischer subspace (or the subspace spanned by the means)</li>
+<li>After finding the subspace, classification can be done based on distances.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Benefits" class="outline-3">
+<h3 id="Benefits"><span class="section-number-3">2.6.</span> Benefits</h3>
+<div class="outline-text-3" id="text-2-6">
+<ul class="org-ul">
+<li>Classic algorithms for classifying mixture models (e.g. EM or local search heuristics) can get stuck on local minima or take long time to converge.</li>
+<li>This line of algorithms provide rigorous guarantees</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-Chapter%203%3A%20Probabilistic%20Spectral%20Clustering" class="outline-2">
+<h2 id="Chapter%203%3A%20Probabilistic%20Spectral%20Clustering"><span class="section-number-2">3.</span> Chapter 3: Probabilistic Spectral Clustering</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The problem is to find the underlying partition of the vertices of a Random Graph. Where edge between vertices in two partition (\(r\) and \(s\)) of graph appears with probability \(p_{rs}\).
+</p>
+
+<p>
+We are given a realization of that random graph, as a adjacency matrix \(A\), and we need to find the generative model \(\mathbb{E} A\).
+</p>
+
+<p>
+This problem can also be viewed as a mixture model but the points from even the same component distributions are far far way compared to gaussian mixture model. And thus the nature of the problem is different. However spectral methods can still be applied [Page 31].
+</p>
+</div>
+<div id="outline-container-Full%20Independence" class="outline-3">
+<h3 id="Full%20Independence"><span class="section-number-3">3.1.</span> Full Independence</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+We assume Full Independence: Edge of the graph are mutually independent random variables.
+</p>
+
+<p>
+Then we can use Random Matrix theory to show a bound on \(||A - \mathbb{E}A||\). Finally we can argue that \(A_k\), the best rank \(k\) approximation to \(A\) is in fact close to \(\mathbb{E}A\) in spectral norm and used this to cluster "most" points correctly.
+</p>
+</div>
+<div id="outline-container-Details" class="outline-4">
+<h4 id="Details"><span class="section-number-4">3.1.1.</span> Details</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<p>
+Due to full independence, the matrix \(A - \mathbb{E} A\) has random independent entries with mean zero. And we can utilize a theorem (by Wigner, Furedi, Komlos, Theorem 3.1):
+</p>
+
+\begin{equation*}
+||A - \mathbb{E} A||_2 \leq c \nu \sqrt{n}
+\end{equation*}
+
+<p>
+where, \(\nu < 1\) is the highest standard deviation and \(A\) is symmetric random matrix
+</p>
+
+<p>
+This bound tells that the rows are not correlated. Because higher value of top eigenvalue (\(= \max_{|x|=1}||(A-\mathbb{E}A})x||\)) implies higher correlation in some direction \(x\). But the top eignevalue is only within some constant \(c\) of the norm of each row \(O(\nu\sqrt{n})\).
+</p>
+
+<p>
+Spectral norm and Frobenius norm are related by the relation: \(|| A_k - B ||_F^2 \leq 5k ||A - B ||_2^2\) when \(B\) has rank \(k\)
+</p>
+
+<p>
+So,
+</p>
+
+\begin{equation*}
+||A_k - \mathbb{E} A||_F \leq c \nu^2 n k
+\end{equation*}
+
+<p>
+We now have a bound on Frobenius norm of \(A - \mathbb{E}A\). Since there are \(n\) rows and since they are not correlated this means that with high probablity the norm of each row is also bounded as:
+</p>
+
+<p>
+\(|(A_k)_i - \mathbb{E} A_i| \le c \nu^2 k\)
+</p>
+
+<p>
+i.e. the \(A_k\) obtained by SVD of the incidence matrix \(A\) approximates the underlying generative distribution.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Basic%20Algorithm" class="outline-3">
+<h3 id="Basic%20Algorithm"><span class="section-number-3">3.2.</span> Basic Algorithm</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+If we assume a separability condition which says that the mean of the component distributions are separated by some constant \(20 c \nu k\) independent of \(n\) then we have an algorithm:
+</p>
+
+<ul class="org-ul">
+<li>Find the top \(k\) singular vectors of \(A\)</li>
+<li>Project \(A\) to the space of the best fit \(k\) -subspace</li>
+<li>Pick \(k\) random points (our cluster centers) in some way such that they are far away from each other</li>
+<li>Now assign points to the clusters if they are within some distance \(4c\nu k\).</li>
+<li><p>
+Cleanup wrongly classified vertices (this step is involved and requires some assumptions)
+</p>
+
+<p>
+It is an open problem to give a simple, optimal clean-up algorithm for probabilistic spectral clustering.
+</p></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Deterministic%20Assumptions" class="outline-3">
+<h3 id="Deterministic%20Assumptions"><span class="section-number-3">3.3.</span> Deterministic Assumptions</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Under some assumptions: [Section 3.2]
+</p>
+<ol class="org-ol">
+<li>Boundedness: The points \(A_i\) are not too far from cluster center \(\mu_r\). i.e. \(|A_i - \mu_r| < M\)</li>
+<li>Correct center closest: For each point, the correct center is the closest center.</li>
+<li>No small cluster: The size of cluster (i.e. number of vertices in each cluster \(T_r\)) is in the order of total number of vertices. \(|T_r| > m_o \in \Omega(n)\)</li>
+</ol>
+
+<p>
+Use an approximate algorithm to find cluster centers \(v_1, v_2, ..., v_r\) then, [Section 3.2.1]
+</p>
+
+\begin{equation*}
+S_r = \{i: \forall s \ |(A_k)_i - v_r| \leq | (A_k)_i - v_s| \}
+\end{equation*}
+
+<p>
+is the exact set of cluster vertices.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Chapter%204%3A%20Recursive%20Spectral%20Clustering" class="outline-2">
+<h2 id="Chapter%204%3A%20Recursive%20Spectral%20Clustering"><span class="section-number-2">4.</span> Chapter 4: Recursive Spectral Clustering</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+The problem is to partition a graph into clusters. Compared to previous section where the problem was discrete (i.e. graph was unweighted), we now have weighted graphs. Key step is to find an approximate algorithm to find a cut that gives minimum "conductance" to the partitioned subsets of the vertices.
+</p>
+
+<p>
+If a cut separates graph into two subset of vertices \(S\) and \(S' = V \textbackslash S\), Conductance of \(S\) is the ratio of two quantities:
+</p>
+<ol class="org-ol">
+<li>total weight of edges going out of the subset \(S\)</li>
+<li>min of the total weight of edges within the subset \(S\) or \(S'\)</li>
+</ol>
+
+<p>
+So a good "min conductance" cut has each subset fairly well connected and the cut passes through a small number (weighted sum) of edges as possible.
+</p>
+</div>
+<div id="outline-container-Spectral%20Heuristic%20for%20approx%20min%20conductance%20cut" class="outline-3">
+<h3 id="Spectral%20Heuristic%20for%20approx%20min%20conductance%20cut"><span class="section-number-3">4.1.</span> Spectral Heuristic for approx min conductance cut</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+The following algorithm gives an approximation to minimum conductance cut using a heuristic based on the second largest eigenvector of the adjacency matrix:
+</p>
+
+<ol class="org-ol">
+<li>Normalize adjacency matrix so that each row sum is 1</li>
+<li>Find the second largest eigenvector</li>
+<li>Order the vertices according to their components in this eigenvector</li>
+<li>Find the minimum conductance cut among the cuts given by this ordering</li>
+</ol>
+
+<p>
+[Note: this is different than using Fiedler vector which is the second <span class="underline">smallest</span> eigenvector of the Laplacian]
+</p>
+</div>
+</div>
+<div id="outline-container-Recursive%20Clustering" class="outline-3">
+<h3 id="Recursive%20Clustering"><span class="section-number-3">4.2.</span> Recursive Clustering</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Given an algorithm \(\mathcal{A}\) to find an approximate minimum conductance cut of the graph \(G\)
+</p>
+
+<ol class="org-ol">
+<li>Find a cut that approximates the minimum conductance cut in \(G\)</li>
+<li>If the conductance of the cut obtained is below a threshold, recurse on the pieces induced by the cut</li>
+</ol>
+
+<p>
+There is a theorem [Theorem 4.3] that provides gurantees on final quality of cut given an approximate algorithm. Quality of cut is measured using two parameters:
+</p>
+<ol class="org-ol">
+<li>\(\alpha\): The conductance of each cluster is at least \(\alpha\)</li>
+<li>\(\epsilon\): The total weight of inter-cluster edges is at most an \(\epsilon\) fraction of the total weight of all edges</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-Recursive%20Spectral%20Clustering" class="outline-3">
+<h3 id="Recursive%20Spectral%20Clustering"><span class="section-number-3">4.3.</span> Recursive Spectral Clustering</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+Using the Recursive clustering algorithm with Spectral heuristic as the approximate algorithm we get a spectral clustering algorithm.
+</p>
+
+<p>
+Using Theorem 4.3 along with property of spectral heuristic cut, we can find an formula for the quality of the cut that this algorithm wil find [See Corollary 4.6 for the exact formula].
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Chapter%205%3A%20Optimization%20via%20Low-Rank%20Approximation" class="outline-2">
+<h2 id="Chapter%205%3A%20Optimization%20via%20Low-Rank%20Approximation"><span class="section-number-2">5.</span> Chapter 5: Optimization via Low-Rank Approximation</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+(I, for most part, didn't understant this chapter and the corresponding chapter 8. The conditions upon which the algorithms worked were too densely presented.)
+</p>
+
+<p>
+The problem is to solve a boolean constraint satisfaction problem. With \(r\) variables per constraint. A generalization of this problem is the weighted MAX-rCSP problem. Where the objective is to maximize the weighted sum of the satisfied constraints.
+</p>
+
+<p>
+This problem can be represented as a tensor \(A\) with \(r\) dimensions each with \(2n\) components. i.e. as a \(2n \times ... \times 2n  = (2n)^r\) multi-dimensional array.
+</p>
+
+<p>
+Two ideas are important here:
+</p>
+<ol class="org-ol">
+<li>Any \(r\) -dimensional array \(A\) can be approximated as a sum of small number of rank-1 tensors.</li>
+<li>Such approximation can be found.</li>
+</ol>
+
+<p>
+There are theorems that gurantee that there exits polynomial time approximation scheme for any core-dense weighted MAX-rCSP.
+</p>
+
+<p>
+Where core-dense condition is defined in Section 5.1.
+</p>
+
+<p>
+When such conditions is satisfied, the solution algorithm takes following steps:
+</p>
+<ol class="org-ol">
+<li>Scale the tensor A: \(B = D^{-1} A D^{-1}\)</li>
+<li>Find low rank approximation to the scaled tensor \(\hat{B} \approx B\)</li>
+<li>Scale the approximation \(\hat{A} = D \hat{B} D\)</li>
+<li>Solve MAX-rCSP for \(\hat{A}\)</li>
+</ol>
+
+<p>
+But since \(\hat{A}\) is in much lower dimension, it is easier to solve the problem there.
+</p>
+</div>
+</div>
+<div id="outline-container-Chapter%206%3A%20Matrix%20Approximation%20by%20Random%20Sampling" class="outline-2">
+<h2 id="Chapter%206%3A%20Matrix%20Approximation%20by%20Random%20Sampling"><span class="section-number-2">6.</span> Chapter 6: Matrix Approximation by Random Sampling</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-Low%20Rank%20Approximation" class="outline-3">
+<h3 id="Low%20Rank%20Approximation"><span class="section-number-3">6.1.</span> Low Rank Approximation</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+[From book <a href="books/RandNLA - 2302.11474v2.pdf#page=70">RandNLA - Section 4</a> [<a href="https://arxiv.org/abs/2302.11474">arXiv</a>]]
+</p>
+
+<p>
+The task is to find a low rank matrix (\(\hat{A}\) ) that approximates the target matrix (\(A\)). Forbenius norm or spectral norm (e.g. 2-norm) or other norms may be used.
+</p>
+
+<p>
+For practical application we find the low-rank matrix \(\hat{A}\) in a suitably factored representation. We can impose structural constraints on such factored representation (e.g. orthogonal, diagonal, or submatrix of \(A\) ). Depending on that two types of factored representations can be roughly classified:
+</p>
+
+<ul class="org-ul">
+<li><p>
+Spectral Decomposition (low rank SVD or Eignedecomposition)
+</p>
+
+<p>
+\(A \approx \hat{A} = U \Sigma V\)
+</p></li>
+
+<li>Submatrix Oriented Decomposition
+<ul class="org-ul">
+<li>CUR decomposition</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Matrix-Vector%20Product" class="outline-3">
+<h3 id="Matrix-Vector%20Product"><span class="section-number-3">6.2.</span> Matrix-Vector Product</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Matrix vector product can be seen as sum of \(n\) vectors as:
+</p>
+
+\begin{equation*}
+A v = \sum_{j=1}^N v_j A^{(j)}
+\end{equation*}
+
+<p>
+Where \(A^{(j)}\) is the \(j\) -th column of \(A\). So \(Av\) is weighted sum of columns of \(A\).
+</p>
+
+<p>
+This sum can be approximated by sampling the columns of \(A\).  If \(j\) -th column is sampled with probability \(p_j\), then an unbiased estimated of \(A\) is
+</p>
+
+\begin{equation*}
+X = \frac {A^{(j)} v_j} {p_j}
+\end{equation*}
+
+<p>
+i.e. \(\mathbb{E} X = A\)
+</p>
+
+<p>
+Using length-squared distribution (\(LS_{col}(A)\)  i.e. \(p_j = ||A^{(j)}||^2 / ||A||_F^2\)) for sampling the columns, the variance of the estimate \(X\) of \(A\),  is
+</p>
+
+\begin{equation*}
+\textrm{Var}(X) \leq ||A||_F^2 ||v||^2
+\end{equation*}
+
+<p>
+Similarly sometimes we might use an approximate length-squared distribution \(LS_{col}(A, c)\) where \(p_j \geq c ||A^{(j)}||^2 / ||A||_F^2\) \(c \in (0, 1]\). This also gives similar variance
+</p>
+
+\begin{equation*}
+\textrm{Var}(X) \leq \frac 1 c ||A||_F^2 ||v||^2
+\end{equation*}
+
+<p>
+We can reduce the variance by using \(s\) independent identically distributed samples and averaging them:
+</p>
+
+\begin{equation*}
+\textrm{Var}(\frac 1 s \sum X) \leq \frac 1 {cs} ||A||_F^2 ||v||^2
+\end{equation*}
+</div>
+</div>
+<div id="outline-container-Matrix-Matrix%20Product" class="outline-3">
+<h3 id="Matrix-Matrix%20Product"><span class="section-number-3">6.3.</span> Matrix-Matrix Product</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Matrix Matrix product can also be similarly approximated by sampling.
+</p>
+
+<p>
+Let \(A\) be a \(m \times n\) matrix and \(C\) be a \(m \times s\) matrix formed by sampling \(s\) columns of \(A\) and scaling each column appropriately with the sampling distribution probabilities \(p_j\) and sample size \(s\), then
+</p>
+
+\begin{equation*}
+\mathbb{E}\ CC^T = AA^T
+\end{equation*}
+<p>
+Also, \(CC^T\) and \(AA^T\) are close to each other [Theorem 6.4]:
+</p>
+
+\begin{equation*}
+||CC^T - AA^T||_F^2 \leq \frac 1 {cs} ||A||_F^4
+\end{equation*}
+
+<p>
+This implies that the singular values are also close:
+</p>
+
+\begin{equation*}
+\sum_t (\sigma_t(CC^T) - \sigma_t(AA^T))^2  \leq ||CC^T - AA^T||_F^2
+\end{equation*}
+
+<p>
+The singular values of \(AA^T\) are just the square of singular values of \(A\).
+</p>
+
+<p>
+So, using a sample of columns of \(A\) we can estimate its singular values. We can also estimate the singular vectors. Different algorithms estimate it using different methods.
+</p>
+</div>
+</div>
+<div id="outline-container-Fast-SVD%20Algorithm" class="outline-3">
+<h3 id="Fast-SVD%20Algorithm"><span class="section-number-3">6.4.</span> Fast-SVD Algorithm</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+By sampling the columns of A and finding singular vectors of the matrix formed from sampled columns we can find rank \(k\) approximation to \(A\)
+</p>
+
+<ol class="org-ol">
+<li>Sample \(s\) columns of \(A\) from length squared distribution to form \(C\)</li>
+<li>Find top \(k\) left singular vectors of \(C\): \(u^{(1)}, u^{(2)}, ..., u^{(k)}\)</li>
+<li>Output \(\sum_i^k u^{(i)}u^{(i)^T} A\) as rank \(k\) approximation to \(A\)</li>
+</ol>
+
+<p>
+This algorithm finds a rank \(k\) approximation \(\tilde{A}\) such that:
+</p>
+
+\begin{equation*}
+\mathbb{E}\ (|| A - \tilde{A} ||_F^2) \leq || A - A_k ||_F^2 + 2 \sqrt{\frac k s} ||A||_F^2
+\end{equation*}
+</div>
+</div>
+<div id="outline-container-Constant%20Time%20SVD%20Algorithm" class="outline-3">
+<h3 id="Constant%20Time%20SVD%20Algorithm"><span class="section-number-3">6.5.</span> Constant Time SVD Algorithm</h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+By sampling the columns of A and then sampling rows of the matrix formed from sampled columns we get a square matrix of a fixed size (independent of the size of \(A\)) and then finding singular vectors of that matrix we can find rank \(k\) approximation to \(A\).
+</p>
+
+<ol class="org-ol">
+<li>Pick a sample of \(s \propto \frac {k^5} {\epsilon^4}\) columns of \(A\) according to \(LS_{col}(A)\) distribution and scale to form \(m \times s\) matrix \(C\)</li>
+
+<li>Sample a set of \(s\) rows from \(C\) to form a \(s \times s\) matrix \(W\)</li>
+
+<li>Find the SVD of \(W^TW\):</li>
+</ol>
+
+\begin{equation*}
+W^TW = \sum_t \sigma_t^2(W) v^{(t)} v^{(t)^T}
+\end{equation*}
+
+<ol class="org-ol">
+<li>Compute</li>
+</ol>
+
+\begin{equation*}
+u^{(t)} = \frac {Cv^{(t)}} {|Cv^{(t)}|}
+\end{equation*}
+
+<ol class="org-ol">
+<li>Finally, return approximation to \(A\) as:</li>
+</ol>
+
+\begin{equation*}
+\sum_{t=1}^l u^{(t)} u^{(t)^T} A
+\end{equation*}
+
+<p>
+where \(l\) is given by some contraint on \(Cv^{(l)}\)
+</p>
+
+<p>
+The approximation returned is accurate upto:
+</p>
+
+\begin{equation*}
+\mathbb{E}\ ||A - \hat{A}||_F^2 \leq \sum_{t=k+1}^n \sigma_t^2 (A) + \epsilon ||A||_F^2
+\end{equation*}
+</div>
+</div>
+<div id="outline-container-CUR%3A%20Interpolative%20approximation" class="outline-3">
+<h3 id="CUR%3A%20Interpolative%20approximation"><span class="section-number-3">6.6.</span> CUR: Interpolative approximation</h3>
+<div class="outline-text-3" id="text-6-6">
+<p>
+The approximation algorithm previously presented didn't preserve the sparsity of \(A\). But we can approximate \(A\) as \(A = CUR\) where
+</p>
+
+<ul class="org-ul">
+<li>\(C\) is a \(m \times s\) matrix formed by sampling \(s\) columns of \(A\)</li>
+<li>\(R\) is a \(s \times n\) matrix formed by sampling \(s\) rows of \(A\) and</li>
+<li>\(U\) is a \(s \times s\) matrix which can be computed based on \(C\) and \(R\) [See Theorem 6.11 for the formula]</li>
+</ul>
+
+<p>
+This representation has the benefit that
+</p>
+<ul class="org-ul">
+<li>sparsity of \(A\) is maintained</li>
+<li>computing \(CUR\) is fast and we need only two passes over \(A\)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Applications" class="outline-3">
+<h3 id="Applications"><span class="section-number-3">6.7.</span> Applications</h3>
+<div class="outline-text-3" id="text-6-7">
+<ul class="org-ul">
+<li><p>
+Streaming Model for limited memory
+</p>
+
+<p>
+Sampling the rows or columns can be done even when matrix rows/columns arrive one at a time in any order.
+</p></li>
+
+<li>When whole matrix \(A\) is unavailable (e.g. user survey data for Recommendation system), we can use the sample to represent the whole matrix \(A\).</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-Chapter%207%3A%20Adaptive%20Sampling%20Methods" class="outline-2">
+<h2 id="Chapter%207%3A%20Adaptive%20Sampling%20Methods"><span class="section-number-2">7.</span> Chapter 7: Adaptive Sampling Methods</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Fast-SVD algorithm and Constant time SVD algorithm produce rank \(k\) approximation within some additive error \(\epsilon||A||_F^2\) which is not so great because \(\epsilon||A||_F^2\) can be anything out of our control.
+</p>
+
+<p>
+However that approximation is obtained by making two pass over the data (first to compute the distribution and second to sample columns). If we can make multiple passes over the data and sample more strategically, we can obtain better error bounds which are multiplicative instead of additive. i.e. within \((1+\epsilon) ||A - A_k||_F^2\).
+</p>
+</div>
+<div id="outline-container-Iterative%20Fast%20SVD" class="outline-3">
+<h3 id="Iterative%20Fast%20SVD"><span class="section-number-3">7.1.</span> Iterative Fast SVD</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+We find rank \(k\) subspace for \(A\) iteratively, after each iteration we sample a new rows from a distribution which probability proportional to the squared distance to the previous subspace.
+</p>
+
+<p>
+Let \(\pi_{S}(A)\) be the projection of \(A\) with rows in the row span of \(S\). Then, repeat for \(t\) times:
+</p>
+
+<ol class="org-ol">
+<li>\(E = A - \pi_{S}(A)\) (where for the first iteration take \(E = A\))</li>
+<li><p>
+Sample \(s\) rows according to a distribution that assigns probabilities as:
+</p>
+
+<p>
+\begin{equation*}
+</p></li>
+</ol>
+<p>
+p<sub>j</sub> = ||E<sup>(j)</sup>||<sup>2</sup><sub>F</sub> / ||E||<sub>F</sub><sup>2</sup>
+\end{equation*}
+</p>
+
+<ol class="org-ol">
+<li>Add those \(s\) rows to the collection of sampled rows \(S\)</li>
+</ol>
+
+<p>
+Finally, returns top \(k\) right singular vector for \(\pi_S(A)\)
+</p>
+
+<p>
+This algorithm make \(2t\) passes over the data and computes an rank \(k\) approximation within and additive error of \(\epsilon^t ||A||_F^2\) which is better than the additive error of Fast SVD.
+</p>
+</div>
+</div>
+<div id="outline-container-Volume%20Sampling" class="outline-3">
+<h3 id="Volume%20Sampling"><span class="section-number-3">7.2.</span> Volume Sampling</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+Instead of using Length squared distribution if we sample set of \(k\) rows (\(S\)) in proportion to the volume of the \(k\) -simplex they form with origin (\(Vol(\Delta(S))\)), then we get an approximation within a factor of \((k+1)\).
+</p>
+
+<p>
+Let \(S\) be sample of \(k\) rows, sampled with probability:
+</p>
+
+
+\begin{equation*}
+P_S = \frac{Vol(\Delta(S))} {\sum_{T: |T|=k} (Vol(\Delta(S)))}
+\end{equation*}
+
+<p>
+i.e. the probability  the volume of set \(S\) normalized by sum of volumes of all possible set of \(k\) rows.
+</p>
+
+<p>
+Then \(\tilde{A}_k\) which is projection of \(A\) into \(S\) gives an rank \(k\) approximation within:
+</p>
+
+\begin{equation*}
+\mathbb{E}\ (|| A - \tilde{A} ||_F^2) \leq (1+k)|| A - A_k ||_F^2
+\end{equation*}
+
+<p>
+However sampling according to volume distribution is not straightforward. And it is still an open question if exact volume sampling can be done in polynomial time (in \(n\) and \(k\)) or not.
+</p>
+</div>
+</div>
+<div id="outline-container-Isotropic%20Random%20Projection" class="outline-3">
+<h3 id="Isotropic%20Random%20Projection"><span class="section-number-3">7.3.</span> Isotropic Random Projection</h3>
+<div class="outline-text-3" id="text-7-3">
+<ol class="org-ol">
+<li>Take a random matrix \(S\) of size \(l \times m\) with entries from a bernoulli distribution with mean zero.</li>
+<li>Compute projection of columns of \(A\) onto \(S\). i.e. compute  \(B = SA\)</li>
+<li>Project \(A\) to the span of rows of \(B\) to get \(\tilde{A}\)</li>
+<li>Compute \(\tilde{A}_k\) the rank \(k\) approximation to \(\tilde{A}\)</li>
+</ol>
+
+<p>
+This gives and approximation to \(A_k\) within \((1 + \epsilon)\) error:
+</p>
+
+\begin{equation*}
+\mathbb{E}\ (|| A - \tilde{A}_k ||_F^2) \leq (1+\epsilon)|| A - A_k ||_F^2
+\end{equation*}
+
+<p>
+when \(l = Ck/\epsilon\)
+</p>
+
+<p>
+[Note: The book says to take random matrix of size \(l \times n\) which doesn't make sense]
+</p>
+
+<p>
+So projecting \(A\) to a lower dimension space using a random matrix give us an "projection" of \(A\), the \(\tilde{A}\) matrix, whose rank \(k\) approximation is a good rank \(k\) approximation for \(A\).
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Chapter%208%3A%20Extensions%20of%20SVD" class="outline-2">
+<h2 id="Chapter%208%3A%20Extensions%20of%20SVD"><span class="section-number-2">8.</span> Chapter 8: Extensions of SVD</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+This chapter deals with equivalent of SVD but for tensor. i.e. representing tensors as a sum of small number of rank \(k\) tensors.
+</p>
+</div>
+<div id="outline-container-Tensor%20decomposition" class="outline-3">
+<h3 id="Tensor%20decomposition"><span class="section-number-3">8.1.</span> Tensor decomposition</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+For any tensor \(A\) there exists \(k\) rank-1 tensors (\(B_1, B_2, ..., B_k\))such that
+</p>
+
+\begin{equation*}
+||A - (B_1 + B_2 + ... + B_k)||_2 \leq \epsilon ||A||_F
+\end{equation*}
+
+<p>
+for some properly defined \(\epsilon\) depending upon \(k\)
+</p>
+
+<p>
+The idea for finding the approximation is roughly (I did't understand this much)
+</p>
+<ol class="org-ol">
+<li>to sample along some lines in the tensor \(A\) in with some probability distribution in proportion to the square of entries along those lines</li>
+<li>Use that sample to reduce the dimension of tensor, and apply the algorithm recursively</li>
+<li>Then output the set of vectors sampled</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-Isotropic%20PCA" class="outline-3">
+<h3 id="Isotropic%20PCA"><span class="section-number-3">8.2.</span> Isotropic PCA</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+This section describes some way to do an equivalent of PCA on tensor.
+</p>
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="singular_value_decomposition.html#ID-00F5D0F8-ADA4-4F96-9DFC-2A87FD6E37C5">Singular Value Decomposition (SVD)</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Spectral Algorithms">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>

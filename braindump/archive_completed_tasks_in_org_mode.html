@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Archive completed tasks in Org mode</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-11-13 Wed&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Archive completed tasks in Org mode</h1>
+<p>
+You might have a tasks.org file where all your todos and timekeeping is placed. After a while the file gets really big and thus you need to archive the old entries that are either completed or cancelled. Here are the commands (which I found from <a href="https://stackoverflow.com/questions/6997387/how-to-archive-all-the-done-tasks-using-a-single-command">stackoverflow.com</a>) to clean up your tasks file:
+</p>
+
+<p>
+For achiving only one heading
+</p>
+
+<ol class="org-ol">
+<li>C-c C-x A</li>
+</ol>
+
+<p>
+For archiving headings in bulk
+</p>
+<ol class="org-ol">
+<li>M-m o a t r (Open agenda view for the buffer)
+<ul class="org-ul">
+<li>M-m o a (Opens Agenda)</li>
+<li>&lt; (Narrows down to this buffer)</li>
+<li>t (Shows TODO entries)</li>
+</ul></li>
+<li>2 r (Show all DONE entries)</li>
+<li>m (Mark for bulk action)</li>
+<li>B A (Bulk Archive)
+<ul class="org-ul">
+<li>B (Bulk action on marked entries)</li>
+<li>A (Archive the entries)</li>
+</ul></li>
+</ol>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Archive completed tasks in Org mode">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>What if Neural Networks had SVDs?</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-11-13 Wed&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">What if Neural Networks had SVDs?</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#Weights%20in%20SVD%20Representation">1. Weights in SVD Representation</a></li>
+<li><a href="#U%20and%20V%20in%20Householder%20Representation">2. U and V in Householder Representation</a></li>
+<li><a href="#Parallelizing%20Householder%20products">3. Parallelizing Householder products</a></li>
+</ul>
+</div>
+</div>
+<p>
+[Summar of <a href="papers/What If Neural Networks had SVDs.pdf#page=nil">paper</a>: What if Neural Networks had SVDs? by Alexander Mathiasen, et. al.]
+</p>
+<div id="outline-container-Weights%20in%20SVD%20Representation" class="outline-2">
+<h2 id="Weights%20in%20SVD%20Representation"><span class="section-number-2">1.</span> Weights in SVD Representation</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Sometimes we might need SVD of weights of the Neural Network layers. Few cases are:
+</p>
+<ul class="org-ul">
+<li>to reduce the rank of the weight matrix <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> which is then useful for model compression,</li>
+<li>or to stablize training of RNNs <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>,</li>
+<li>or maybe we want to do other matrix operations (e.g. inverse) to the weight matrix.</li>
+</ul>
+
+<p>
+To achieve this we could train the network normally and then compute the SVD later. But computing SVD is costly and this may not make sense for our use case.
+</p>
+
+<p>
+Another approach is to represent the weight matrix of a layer (\(W  \in \mathbb{R}^{d \times d}\)) in decomposed form.
+</p>
+
+<p>
+Let \(W = U \Sigma V^T\) be the weight matrix and \(U, V \in \mathbb{R}^{d \times m}, \Sigma \in \mathbb{R}^{m \times m}\) be the SVD parameters. The goal is to then perform gradient descent to \(W\) while preserving SVD. Consider the update:
+</p>
+
+\begin{equation*}
+U' = U - \eta \nabla_{U}, \Sigma' = \Sigma - \eta \nabla_{\Sigma}, V' = V - \eta \nabla_{V}
+\end{equation*}
+
+<p>
+The updates preserve the diagonal property of \(\Sigma\), but the orthogonality of \(U\) and \(V\) is not preserved.
+</p>
+
+<p>
+One approach for training would then be to use regularization <sup><a id="fnr.1.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> to ensure orthogonality of the \(U\) and \(V\) matrices. But this is approximate. The approach adopted in this paper, called <code>FastH</code> is exact and fast.
+</p>
+</div>
+</div>
+<div id="outline-container-U%20and%20V%20in%20Householder%20Representation" class="outline-2">
+<h2 id="U%20and%20V%20in%20Householder%20Representation"><span class="section-number-2">2.</span> U and V in Householder Representation</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+If we represent the orthogonal matrices \(U\) and \(V\) as product of Householder matrices  as:
+</p>
+
+\begin{equation*}
+U = \Pi_{i=1}^{d} H_i \ ; H_i = I - 2 \frac {v_i v_i^T} {||v_i||_2^2}
+\end{equation*}
+
+<p>
+Then updates \(v_i \leftarrow v_i - \eta \nabla_{v_i}\) preserves the orthogonality of \(U\).
+</p>
+
+<p>
+Now however, we have a different problem. The time to compute the forward pass (say with input \(X\)) has increased because previously we needed only to compute a single matrix product \(UX\) but now we need to compute product with of \(d\) Householder matrices \((\Pi_i H_i) X\) sequentially.
+</p>
+
+<p>
+Note that the computational complexity remains same because a single product with householder matrix (\(H_iX\)) can be done in \(O(dm)\) time and thus \(\Pi_i H_i X\) takes \(O(d^2m)\) time which is same as for \(UX\). But the run time in GPUs is increased because of the sequential nature of the products.
+</p>
+</div>
+</div>
+<div id="outline-container-Parallelizing%20Householder%20products" class="outline-2">
+<h2 id="Parallelizing%20Householder%20products"><span class="section-number-2">3.</span> Parallelizing Householder products</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<code>FastH</code> algorithms solves this problem with the same \(O(d^2m)\) complexity but with \(O(d/m + m)\) sequential matrix-matrix operations instead of \(O(d)\) sequential vector-vector operation.
+</p>
+
+<p>
+The approach is to divide the \(d\) householder matrices into \(m\) groups (assume that \(m\) divides \(d\) evenly), then
+</p>
+<ol class="org-ol">
+<li><p>
+for each group compute the product of the householder matrices in that group. There are \(q=d/m\) matrices in each group, so:
+</p>
+
+<p>
+\(P_k = \Pi_{i=kq}^{(k+1)q} H_i\)
+</p>
+
+<p>
+Each \(P_k\) can be computed in total \(O(dm^2)\) time with \(O(d/m)\) sequential steps. So for \(d/m\) matrices it takes \(O(d^2m)\) steps in total with \(O(d/m)\) sequential steps.
+</p></li>
+
+<li>Sequentially multiply the \(P_k\) matrix with \(X\). Each step takes \(O(d m^2)\) and thus \(O(d^2 m)\) in total. But since there are only \(m\) number of  \(P_k\) matrices, there are only \(O(m)\) sequential steps.</li>
+</ol>
+
+<p>
+Thus although the total complexity is \(O(d^2m)\) the number of sequential steps is \(O(d/m + m)\).
+</p>
+
+<p>
+Similarly, the backward pass can also be computed in same complexity.
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<i>Learning Low-rank Deep Neural Networks via Singular Vector Orthogonality Regularization and Singular Value Sparsification, <a href="https://www2.cs.uh.edu/~fyan/Paper/Feng-CVPRW20.pdf">CVPR Workshop</a></i>.
+</p>
+
+<p class="footpara">
+This paper uses SVD representation of Weights to train a CNN and get a low rank NNs.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<i>Stabilizing Gradients for Deep Neural Networks via Efficient SVD Parameterization, <a href="https://arxiv.org/abs/1803.09327">arXiv</a></i>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: What if Neural Networks had SVDs?">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>

@@ -102,16 +102,36 @@ Proof: Since \(v\) is eigenvector of \(A^TA\) which is a real symmetric matrix, 
 
 <ul class="org-ul">
 <li>Span of top-\(k\) singular vectors is the best fit \(k\) -dimensional subspace for the rows of \(A\)</li>
+
 <li>The partial decomposition obtained by using only the top \(k\) singular vectors is the best rank-\(k\) approximation to \(A\)</li>
 </ul>
 
-\begin{equation*}
-v_1 = argmax_{||v|| = 1} ||Av||
-\end{equation*}
+\begin{equation}
+\label{eqn:v1}
+v_1 = \underset{||v||=1}{\mathrm{argmax}} ||Av||
+\tag{eqn:v1}
+\end{equation}
 
 \begin{equation*}
-v_2 = argmax_{||v|| = 1, v \cdot v1 = 0} ||Av||
+v_2 = \underset{||v|| = 1, v \cdot v1 = 0}{\mathrm{argmax}} ||Av||
 \end{equation*}
+
+<p>
+The first statement \eqref{eqn:v1} can proved by folowing rough reasoning: [<a href="books/Spectral Algorithms.pdf#page=10">Page 10</a>]
+</p>
+<ul class="org-ul">
+<li>singular values of \(A\) are the square root of the eigenvalues of \(A^TA\)</li>
+<li>eigenvectors for \(A^TA\) are orthogonal</li>
+<li>so, any unit vector can be represented as the weighted sum of the orthonormal basis corresponding to the eigenvalues</li>
+<li>\(||Av||\) is maximized by orthonormal unit vector corresponding to the highest eigenvalue</li>
+</ul>
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="singular_value_decomposition.html#ID-00F5D0F8-ADA4-4F96-9DFC-2A87FD6E37C5">Singular Value Decomposition (SVD)</a></li>
+</ul>
 </div>
 <div id="postamble" class="status">
 <hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Singular Vector">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
