@@ -1,0 +1,942 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Backpropagation Algorithm in Lisp</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: 2020-11-16</p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Backpropagation Algorithm in Lisp</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#Forward%20Propagate">1. Forward Propagate</a>
+<ul>
+<li><a href="#Neuron%20Activation">1.1. Neuron Activation</a></li>
+<li><a href="#Neuron%20Transfer%20-%20Activation%20function">1.2. Neuron Transfer - Activation function</a></li>
+<li><a href="#Network">1.3. Network</a>
+<ul>
+<li><a href="#Weights">1.3.1. Weights</a></li>
+<li><a href="#Output%20and%20Errors">1.3.2. Output and Errors</a></li>
+</ul>
+</li>
+<li><a href="#Forward%20Propagation">1.4. Forward Propagation</a></li>
+<li><a href="#Testing%20Forward%20Propagation">1.5. Testing Forward Propagation</a></li>
+</ul>
+</li>
+<li><a href="#Back%20Propagation%20Error">2. Back Propagation Error</a>
+<ul>
+<li><a href="#Derivative%20of%20transfer%20function">2.1. Derivative of transfer function</a></li>
+<li><a href="#Backpropagation">2.2. Backpropagation</a>
+<ul>
+<li><a href="#Theory">2.2.1. Theory</a></li>
+<li><a href="#Code">2.2.2. Code</a></li>
+</ul>
+</li>
+<li><a href="#Test%20Backprop">2.3. Test Backprop</a></li>
+</ul>
+</li>
+<li><a href="#Training%20the%20Network">3. Training the Network</a>
+<ul>
+<li><a href="#updaing%20weights">3.1. updaing weights</a></li>
+<li><a href="#training">3.2. training</a></li>
+<li><a href="#Testing%20training">3.3. Testing training</a></li>
+</ul>
+</li>
+<li><a href="#Predict">4. Predict</a>
+<ul>
+<li><a href="#Testing%20on%20previous%20data">4.1. Testing on previous data</a></li>
+</ul>
+</li>
+<li><a href="#Lets%20apply%20to%20real%20world%20database%20-%20Wheat%20Seeds%20Database">5. Lets apply to real world database - Wheat Seeds Database</a>
+<ul>
+<li><a href="#Download%20the%20dataset%20and%20normalize%20it">5.1. Download the dataset and normalize it</a></li>
+<li><a href="#Train%20with%20all%20data">5.2. Train with all data</a></li>
+<li><a href="#Split%20Database%20for%20k-fold%20cross%20validation%3B%20k%20%3D%205">5.3. Split Database for k-fold cross validation; k = 5</a></li>
+<li><a href="#Evaluate%20Algorithm">5.4. Evaluate Algorithm</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+This <a href="https://machinelearningmastery.com/implement-backpropagation-algorithm-scratch-python/">tutorial</a> was used as reference to implement Backpropagation algorithm.
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defpackage</span> <span class="org-type">:backprop</span>
+  (<span class="org-builtin">:use</span> <span class="org-builtin">:cl</span>))
+
+(<span class="org-keyword">in-package</span> <span class="org-builtin">:backprop</span>)
+</pre>
+</div></details>
+<div id="outline-container-Forward%20Propagate" class="outline-2">
+<h2 id="Forward%20Propagate"><span class="section-number-2">1.</span> Forward Propagate</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-Neuron%20Activation" class="outline-3">
+<h3 id="Neuron%20Activation"><span class="section-number-3">1.1.</span> Neuron Activation</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+activation = sum (weights * inputs) + bias
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">activation</span> (weights inputs)
+  (<span class="org-warning">assert</span> (= (length inputs) (1- (length weights))))
+  (<span class="org-keyword">loop</span> with activation = (elt weights 0)
+        for x across inputs
+        for i from 1
+        do (incf activation (* (aref weights i) x))
+        finally (<span class="org-keyword">return</span> activation)))
+</pre>
+</div></details>
+
+<pre class="example">
+ACTIVATION
+</pre>
+</div>
+</div>
+<div id="outline-container-Neuron%20Transfer%20-%20Activation%20function" class="outline-3">
+<h3 id="Neuron%20Transfer%20-%20Activation%20function"><span class="section-number-3">1.2.</span> Neuron Transfer - Activation function</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+For now we use sigmod activation function.
+\(\textrm{output} = \frac 1 {1+ \exp(-\textrm{activation})}\)
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">transfer</span> (activation)
+  (/ (1+ (exp (- activation)))))
+</pre>
+</div></details>
+</div>
+</div>
+<div id="outline-container-Network" class="outline-3">
+<h3 id="Network"><span class="section-number-3">1.3.</span> Network</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Before we implement forward propagation we need a data structure to store the weights and outputs of the network
+</p>
+</div>
+<div id="outline-container-Weights" class="outline-4">
+<h4 id="Weights"><span class="section-number-4">1.3.1.</span> Weights</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp" id="network-weights-initializer">(<span class="org-keyword">defstruct</span> <span class="org-type">network</span>
+  weights
+  outputs
+  errors)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">random-vector</span> (size)
+  <span class="org-doc">"Create a random vector of given `</span><span class="org-doc"><span class="org-constant">size</span></span><span class="org-doc">'"</span>
+  (<span class="org-keyword">let</span> ((weights (make-array size <span class="org-builtin">:element-type</span> 'double-float)))
+    (<span class="org-keyword">loop</span> for i from 0
+          repeat size do
+            (setf (aref weights i)  (/ (random 100) 100d0)))
+    weights))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">initialize-network-weights</span> (num-neurons)
+  <span class="org-doc">"Create a randomly initialized fully connected network</span>
+<span class="org-doc">      with number of neurons in each layers given by `</span><span class="org-doc"><span class="org-constant">num-neurons</span></span><span class="org-doc">'</span>
+<span class="org-doc">      first element of `</span><span class="org-doc"><span class="org-constant">num-neurons</span></span><span class="org-doc">' = no of inputs</span>
+<span class="org-doc">      last element of `</span><span class="org-doc"><span class="org-constant">num-neurons</span></span><span class="org-doc">' = no of outputs'"</span>
+  (<span class="org-keyword">let</span> ((network (make-array (1- (length num-neurons)))))
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">loop over the layers</span>
+    (<span class="org-keyword">loop</span> for n in num-neurons
+          for m in (rest num-neurons)
+          for i from 0
+          for weights-matrix = (make-array m) do
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">loop over the neurons in the layer</span>
+            (<span class="org-keyword">loop</span> for weights = (random-vector (1+ n))
+                  for i from 0 below m do
+                    (setf (aref weights-matrix i) weights))
+            (setf (aref network i) weights-matrix))
+    network))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">weight-vector</span> (network i j)
+  <span class="org-doc">"Return the weight vector of `</span><span class="org-doc"><span class="org-constant">j</span></span><span class="org-doc">' the neuron of `</span><span class="org-doc"><span class="org-constant">i</span></span><span class="org-doc">' the layer</span>
+<span class="org-doc">(first hidden layer is 0-th layer)"</span>
+  (aref (aref (network-weights network) i) j))
+</pre>
+</div></details>
+</div>
+</div>
+<div id="outline-container-Output%20and%20Errors" class="outline-4">
+<h4 id="Output%20and%20Errors"><span class="section-number-4">1.3.2.</span> Output and Errors</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">initialize-network</span> (num-neurons)
+  (<span class="org-keyword">let</span> ((weights (initialize-network-weights num-neurons)))
+    (make-network <span class="org-builtin">:weights</span> weights
+                  <span class="org-builtin">:outputs</span> (make-array (1- (length num-neurons))
+                                       <span class="org-builtin">:initial-contents</span>
+                                       (<span class="org-keyword">loop</span> for n in (rest num-neurons)
+                                             collect (make-array n <span class="org-builtin">:element-type</span> 'double-float)))
+                  <span class="org-builtin">:errors</span> (make-array (1- (length num-neurons))
+                                      <span class="org-builtin">:initial-contents</span>
+                                      (<span class="org-keyword">loop</span> for n in (rest num-neurons)
+                                            collect (make-array n <span class="org-builtin">:element-type</span> 'double-float))))))
+(<span class="org-keyword">defun</span> <span class="org-function-name">output</span> (network)
+  <span class="org-doc">"Output of the last layer of the network"</span>
+  (<span class="org-keyword">let</span> ((outputs (network-outputs network)))
+    (aref outputs (- (length outputs) 1))))
+</pre>
+</div></details>
+</div>
+</div>
+</div>
+<div id="outline-container-Forward%20Propagation" class="outline-3">
+<h3 id="Forward%20Propagation"><span class="section-number-3">1.4.</span> Forward Propagation</h3>
+<div class="outline-text-3" id="text-1-4">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">forward-propagate</span> (network input)
+  (<span class="org-keyword">loop</span> for layer-weights across (network-weights network)
+        for layer-outputs across (network-outputs network) do
+          (map-into layer-outputs
+                    (<span class="org-keyword">lambda</span> (weights)
+                      (transfer (activation weights input)))
+                    layer-weights)
+          (setf input layer-outputs)
+        finally (<span class="org-keyword">return</span> layer-outputs)))
+
+</pre>
+</div></details>
+</div>
+</div>
+<div id="outline-container-Testing%20Forward%20Propagation" class="outline-3">
+<h3 id="Testing%20Forward%20Propagation"><span class="section-number-3">1.5.</span> Testing Forward Propagation</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+We create a neural network with 4 inputs a single hidden layer with 2 neurons and an output layer with 2 neurons.
+Its initialized with random weights and biases and the an input is feed-forwarded
+finally we get two output values
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">let</span> ((network (initialize-network (list 4 2 2))))
+  (forward-propagate network (vector 1 3 4 8)))
+</pre>
+</div></details>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">0.792232215073208d0</td>
+<td class="org-right">0.7556908891941516d0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-Back%20Propagation%20Error" class="outline-2">
+<h2 id="Back%20Propagation%20Error"><span class="section-number-2">2.</span> Back Propagation Error</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-Derivative%20of%20transfer%20function" class="outline-3">
+<h3 id="Derivative%20of%20transfer%20function"><span class="section-number-3">2.1.</span> Derivative of transfer function</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+We were using sigmod activation function whose derivative is very cheaply calcuated from the output of transfer functions \(o\) as \(o (1 - o)\).
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">transfer-derivative</span> (output)
+  (* output (- 1 output)))
+</pre>
+</div></details>
+</div>
+</div>
+<div id="outline-container-Backpropagation" class="outline-3">
+<h3 id="Backpropagation"><span class="section-number-3">2.2.</span> Backpropagation</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<div id="outline-container-Theory" class="outline-4">
+<h4 id="Theory"><span class="section-number-4">2.2.1.</span> Theory</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+Loss function is defined as
+\(L = \frac 1 2 || \vec{o} - \textrm{expected} ||^2\)
+where \(o\) is output vector i.e. outputs from the output layer
+</p>
+
+<p>
+So, for the output layer the derivative of the loss function wrt the activation value at the output layer is
+</p>
+
+<p>
+error = (output - expected) * transfer<sub>derivative</sub>(output)
+</p>
+
+\begin{equation*}
+\frac {\partial L} {\partial a_i} =  (o_i - \textrm{expected}) \frac {d f(a_i)} {d a_i}
+\end{equation*}
+
+<p>
+and the contribution of kth neuron of a hidden layer in the error of the output layer is given by
+</p>
+
+<p>
+error = (weight<sub>kj</sub> * error<sub>j</sub>) * transfer<sub>derivative</sub>(output<sub>j</sub>)
+</p>
+
+<p>
+this is because of the linear nature of the connection and application of chain rule.
+</p>
+<ul class="org-ul">
+<li>weight<sub>kj</sub> is the weight connecting kth neuron of hidden layer to jth neuron of output layer (or next hidden layer)</li>
+<li>error<sub>j</sub> is the error from jth output neuron (or the neuron of next hidden layer)</li>
+</ul>
+<p>
+The functional dependence of loss function on the activation of the kth neuron of the hidden layer is
+</p>
+<ul class="org-ul">
+<li>\(L = L(\vec{o})\)</li>
+<li>\(o_j = f(a_j)\)</li>
+<li>\(a_j = \vec{w} . \vec{o}_{\textrm{previous layer}}\)</li>
+<li>\(o_{\textrm{previous layer}, k} = f(a_k)\)</li>
+</ul>
+
+<p>
+and hence by chain rule
+</p>
+
+\begin{equation*}
+\frac {\partial L} {\partial a_k} = \frac {df(a_k)}{da_k} \sum_j \frac{\partial a_j} {\partial (f(a_k) = o_k)} * \frac{\partial L}{\partial a_j}
+\end{equation*}
+
+\begin{equation*}
+\textrm{error}_k = \frac {\partial L} {\partial a_k} = \frac {df(a_k)}{da_k} * \sum_j w_{jk}  * \textrm{error}_j
+\end{equation*}
+</div>
+</div>
+<div id="outline-container-Code" class="outline-4">
+<h4 id="Code"><span class="section-number-4">2.2.2.</span> Code</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">backpropagate-error</span> (network expected)
+  (<span class="org-keyword">with-slots</span> (weights outputs errors) network
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">errors at output neurons</span>
+    (<span class="org-keyword">let</span> ((err (aref errors (1- (length errors)))))
+      (map-into err
+                (<span class="org-keyword">lambda</span> (o e)
+                  (* (- o e)
+                     (transfer-derivative o)))
+                (aref outputs (1- (length outputs)))
+                expected))
+
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">error at neurons in hidden layers</span>
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">loop thorugh layers</span>
+    (<span class="org-keyword">loop</span> for i from (- (length errors) 2) downto 0
+          for err_i+1 = (aref errors (1+ i))
+          for err_i = (aref errors i)
+          for output_i = (aref outputs i)
+          for weights_i+1 = (aref weights (1+ i)) do
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">loop thorugh each neuron in the layer</span>
+            (<span class="org-keyword">loop</span> for o across output_i
+                  for j from 0 do
+                    <span class="org-comment-delimiter">;; </span><span class="org-comment">set error</span>
+                    (setf (aref err_i j)
+                          (* (transfer-derivative o)
+                             (<span class="org-keyword">loop</span> for err across err_i+1
+                                   for k from 0
+                                   summing (* (aref (aref weights_i+1 k) j)
+                                              err))))))))
+</pre>
+</div></details>
+</div>
+</div>
+</div>
+<div id="outline-container-Test%20Backprop" class="outline-3">
+<h3 id="Test%20Backprop"><span class="section-number-3">2.3.</span> Test Backprop</h3>
+<div class="outline-text-3" id="text-2-3">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">let</span> ((network (initialize-network (list 4 2 2))))
+  (forward-propagate network (vector 1 3 4 8))
+  (backpropagate-error network (vector 1 1))
+  network)
+</pre>
+</div></details>
+
+<pre class="example">
+#S(NETWORK
+   :WEIGHTS #(#(#(0.57d0 0.02d0 0.76d0 0.21d0 0.56d0)
+                #(0.6d0 0.93d0 0.96d0 0.51d0 0.62d0))
+              #(#(0.38d0 0.54d0 0.96d0) #(0.97d0 0.9d0 0.47d0)))
+   :OUTPUTS #(#(0.9995096986821933d0 0.9999798038829305d0)
+              #(0.8175320922581244d0 0.7973073162040141d0))
+   :ERRORS #(#(-1.7235016475997057d-5 -6.262334168591013d-7)
+             #(-0.02721935278516976d0 -0.03275683215785833d0)))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-Training%20the%20Network" class="outline-2">
+<h2 id="Training%20the%20Network"><span class="section-number-2">3.</span> Training the Network</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+the network is trained using stochastic gradient descent.
+</p>
+
+<p>
+this involves multiple iterations of exposing a training dataset to the network and for each row of data forward propagating the inputs, backpropagating the error and updating the network weights.
+</p>
+
+<p>
+this part is broken down into two sections:
+</p>
+
+<ul class="org-ul">
+<li>update weights.</li>
+<li>train network.</li>
+</ul>
+</div>
+<div id="outline-container-updaing%20weights" class="outline-3">
+<h3 id="updaing%20weights"><span class="section-number-3">3.1.</span> updaing weights</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+we have calculated the derivative of loss function with respect to activation of each neuron and stored in the errors array.
+</p>
+
+<p>
+to update the weights note that
+\(a_j = (w_{j1}, w_{j2}, ...) . (1, \textrm{input}_1, ...)\)
+So,
+</p>
+\begin{equation*}
+\frac {\partial L} {\partial w_{jk}} = \frac {\partial L} {\partial a_j} * input_k
+\end{equation*}
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">update-weights</span> (network input learning-rate)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">loop across layer</span>
+  (<span class="org-keyword">loop</span> for weights across (network-weights network)
+        for output across (network-outputs network)
+        for err across (network-errors network) do
+          <span class="org-comment-delimiter">;; </span><span class="org-comment">loop across neurons</span>
+          (<span class="org-keyword">loop</span> for e across err
+                for i from 0
+                for neuron-weights across weights do
+                  (<span class="org-keyword">loop</span> for w across neuron-weights
+                        for k from 0 do
+                          (setf (aref neuron-weights k)
+                                (- w (* e learning-rate
+                                        (<span class="org-keyword">if</span> (= k 0) 1 (aref input (1- k))))))))
+
+          <span class="org-comment-delimiter">;; </span><span class="org-comment">input for next layer is output of current layer</span>
+          (setf input output)))
+</pre>
+</div></details>
+
+<pre class="example">
+UPDATE-WEIGHTS
+</pre>
+</div>
+</div>
+<div id="outline-container-training" class="outline-3">
+<h3 id="training"><span class="section-number-3">3.2.</span> training</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+As mentioned, the network is updated using stochastic gradient descent.
+</p>
+
+<p>
+This involves first looping for a fixed number of epochs and within each epoch updating the network for each row in the training dataset.
+</p>
+
+<p>
+Because updates are made for each training pattern, this type of learning is called online learning. If errors were accumulated across an epoch before updating the weights, this is called batch learning or batch gradient descent.
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">train-network</span> (network data learning-rate epochs)
+  (<span class="org-keyword">loop</span> for epoch from 1 to epochs
+        for total-error = 0d0 do
+          (<span class="org-keyword">loop</span> for (input expected-output) in data do
+            (forward-propagate network input)
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">calculate error</span>
+            (incf total-error
+                  (<span class="org-keyword">loop</span> for output across (output network)
+                        for expected across expected-output
+                        summing (* 1/2 (expt (- output expected) 2))))
+            (backpropagate-error network expected-output)
+            (update-weights network input learning-rate))
+          (format t <span class="org-string">"~&amp;epoch=~d, ~tlearning-rate=~,3f ~terror=~,3f"</span>
+                  epoch learning-rate total-error)))
+
+</pre>
+</div></details>
+
+<pre class="example">
+TRAIN-NETWORK
+</pre>
+</div>
+</div>
+<div id="outline-container-Testing%20training" class="outline-3">
+<h3 id="Testing%20training"><span class="section-number-3">3.3.</span> Testing training</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Input:
+</p>
+<table id="data" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">x1</th>
+<th scope="col" class="org-right">x2</th>
+<th scope="col" class="org-right">class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">2.7810836</td>
+<td class="org-right">2.550537003</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-right">1.465489372</td>
+<td class="org-right">2.362125076</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-right">3.396561688</td>
+<td class="org-right">4.400293529</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-right">1.38807019</td>
+<td class="org-right">1.850220317</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-right">3.06407232</td>
+<td class="org-right">3.005305973</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-right">7.627531214</td>
+<td class="org-right">2.759262235</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">5.332441248</td>
+<td class="org-right">2.088626775</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">6.922596716</td>
+<td class="org-right">1.77106367</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">8.675418651</td>
+<td class="org-right">-0.242068655</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">7.673756466</td>
+<td class="org-right">3.508563011</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*network*</span> nil)
+(<span class="org-keyword">let</span> ((network (initialize-network (list 2 2 2)))
+      (data (<span class="org-keyword">loop</span> for (x1 x2 o) in data
+                  collect (list (vector x1 x2)
+                                (vector (<span class="org-keyword">if</span> (= o 0) 1 0)
+                                        (<span class="org-keyword">if</span> (= o 0) 0 1))))))
+  (train-network network data .5 20)
+  (setf *network* network))
+</pre>
+</div></details>
+
+<pre class="example" id="orge32de74">
+epoch=1,  learning-rate=0.500  error=2.905
+epoch=2,  learning-rate=0.500  error=2.780
+epoch=3,  learning-rate=0.500  error=2.668
+epoch=4,  learning-rate=0.500  error=2.561
+epoch=5,  learning-rate=0.500  error=2.447
+epoch=6,  learning-rate=0.500  error=2.316
+epoch=7,  learning-rate=0.500  error=2.165
+epoch=8,  learning-rate=0.500  error=1.994
+epoch=9,  learning-rate=0.500  error=1.809
+epoch=10,  learning-rate=0.500  error=1.618
+epoch=11,  learning-rate=0.500  error=1.432
+epoch=12,  learning-rate=0.500  error=1.260
+epoch=13,  learning-rate=0.500  error=1.106
+epoch=14,  learning-rate=0.500  error=0.972
+epoch=15,  learning-rate=0.500  error=0.856
+epoch=16,  learning-rate=0.500  error=0.758
+epoch=17,  learning-rate=0.500  error=0.674
+epoch=18,  learning-rate=0.500  error=0.602
+epoch=19,  learning-rate=0.500  error=0.541
+epoch=20,  learning-rate=0.500  error=0.489
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-Predict" class="outline-2">
+<h2 id="Predict"><span class="section-number-2">4.</span> Predict</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Making predictions with a trained neural network is easy enough.
+</p>
+
+<p>
+We can do this by selecting the class value with the larger probability. This is also called the arg max function.
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">argmax</span> (vector)
+  (<span class="org-keyword">loop</span> with h = (aref vector 0)
+        with hi = 0
+        for i from 1 below (length vector)
+        for v = (aref vector i) do
+          (<span class="org-keyword">when</span> (&gt; v h)
+            (setf h v
+                  hi i))
+        finally (<span class="org-keyword">return</span> hi)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">predict</span> (network input)
+  (forward-propagate network input)
+  (argmax (output network)))
+</pre>
+</div></details>
+</div>
+<div id="outline-container-Testing%20on%20previous%20data" class="outline-3">
+<h3 id="Testing%20on%20previous%20data"><span class="section-number-3">4.1.</span> Testing on previous data</h3>
+<div class="outline-text-3" id="text-4-1">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">loop</span> for (x1 x2 e) in data do
+  (format t <span class="org-string">"~&amp;Expected: ~d ~tGot: ~d"</span> e (predict *network* (vector x1 x2))))
+</pre>
+</div></details>
+
+<pre class="example" id="org3f2f162">
+Expected: 0  Got: 0
+Expected: 0  Got: 0
+Expected: 0  Got: 0
+Expected: 0  Got: 0
+Expected: 0  Got: 0
+Expected: 1  Got: 1
+Expected: 1  Got: 1
+Expected: 1  Got: 1
+Expected: 1  Got: 1
+Expected: 1  Got: 1
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-Lets%20apply%20to%20real%20world%20database%20-%20Wheat%20Seeds%20Database" class="outline-2">
+<h2 id="Lets%20apply%20to%20real%20world%20database%20-%20Wheat%20Seeds%20Database"><span class="section-number-2">5.</span> Lets apply to real world database - Wheat Seeds Database</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-Download%20the%20dataset%20and%20normalize%20it" class="outline-3">
+<h3 id="Download%20the%20dataset%20and%20normalize%20it"><span class="section-number-3">5.1.</span> Download the dataset and normalize it</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Info about the data is here: <a href="http://archive.ics.uci.edu/ml/datasets/seeds">http://archive.ics.uci.edu/ml/datasets/seeds</a>
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-sh">curl http://archive.ics.uci.edu/ml/machine-learning-databases/00236/seeds_dataset.txt <span class="org-sh-escaped-newline">\</span>
+     &gt; /tmp/dataset.txt
+</pre>
+</div></details>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*data*</span> nil)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">read data</span>
+(<span class="org-keyword">with-open-file</span> (stream #p<span class="org-string">"/tmp/dataset.txt"</span>)
+  (setf *data*
+        (<span class="org-keyword">loop</span> for input = (map 'vector
+                               (<span class="org-keyword">lambda</span> (col)
+                                 (<span class="org-keyword">declare</span> (ignore col))
+                                 (read stream nil nil))
+                               #(1 2 3 4 5 6 7))
+              for class = (read stream nil 0)
+              for output = (<span class="org-keyword">cond</span>
+                             ((= class 1) (vector 1 0 0))
+                             ((= class 2) (vector 0 1 0))
+                             ((= class 3) (vector 0 0 1)))
+              until (not (aref input 0))
+              collect (list input output))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">normalize data</span>
+(<span class="org-keyword">loop</span> for col from 0 to 6
+      for min = (reduce #'min *data* <span class="org-builtin">:key</span> (<span class="org-keyword">lambda</span> (r)
+                                            (aref (first r) col)))
+      for max = (reduce #'max *data* <span class="org-builtin">:key</span> (<span class="org-keyword">lambda</span> (r)
+                                            (aref (first r) col)))
+      do
+         (<span class="org-keyword">loop</span> for r in *data* do
+           (setf (aref (first r) col) (/ (- (aref (first r) col) min)
+                                         (- max min)))))
+</pre>
+</div></details>
+
+<pre class="example">
+NIL
+</pre>
+</div>
+</div>
+<div id="outline-container-Train%20with%20all%20data" class="outline-3">
+<h3 id="Train%20with%20all%20data"><span class="section-number-3">5.2.</span> Train with all data</h3>
+<div class="outline-text-3" id="text-5-2">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">accuracy</span> (data network)
+  <span class="org-doc">"Evaluate accuracy of `</span><span class="org-doc"><span class="org-constant">network</span></span><span class="org-doc">''s prediction on the `</span><span class="org-doc"><span class="org-constant">data</span></span><span class="org-doc">'"</span>
+  (truncate (/ (count-if (<span class="org-keyword">lambda</span> (datum)
+                           (<span class="org-keyword">destructuring-bind</span> (input output) datum
+                             (= (predict network input)
+                                (position 1 output))))
+                         data)
+               (length data))
+            0.01))
+
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*network*</span>
+  (initialize-network (list 7 5 3)))
+
+(train-network *network* *data* 0.3 500)
+
+(accuracy *data* *network*)
+</pre>
+</div></details>
+
+<pre class="example">
+94
+</pre>
+
+
+<p>
+94% accuracy
+</p>
+</div>
+</div>
+<div id="outline-container-Split%20Database%20for%20k-fold%20cross%20validation%3B%20k%20%3D%205" class="outline-3">
+<h3 id="Split%20Database%20for%20k-fold%20cross%20validation%3B%20k%20%3D%205"><span class="section-number-3">5.3.</span> Split Database for k-fold cross validation; k = 5</h3>
+<div class="outline-text-3" id="text-5-3">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">rand</span> (start upper-limit)
+  <span class="org-doc">"returns a random integer i such that start &lt;= i &lt; upper-limit"</span>
+  (+ start (random (- upper-limit start))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">shuffle</span> (seq)
+  <span class="org-doc">"Permutes the elements of array in place"</span>
+  (<span class="org-keyword">let</span> ((n (length seq)))
+    (<span class="org-keyword">loop</span> for i from 0 below n do
+      (rotatef (elt seq  i) (elt seq (rand i n))))
+    seq))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">split</span> (data i j)
+  <span class="org-doc">"Returns test (between `</span><span class="org-doc"><span class="org-constant">i</span></span><span class="org-doc">' and `</span><span class="org-doc"><span class="org-constant">j</span></span><span class="org-doc">' index)and train data"</span>
+  (list
+   (<span class="org-keyword">loop</span> for d in data
+         for k from 0
+         when (&lt;= i k j)
+           collect d)
+   (<span class="org-keyword">loop</span> for d in data
+         for k from 0
+         unless (&lt;= i k j)
+           collect d)))
+</pre>
+</div></details>
+
+<pre class="example">
+RANDOM-POINTS
+</pre>
+</div>
+</div>
+<div id="outline-container-Evaluate%20Algorithm" class="outline-3">
+<h3 id="Evaluate%20Algorithm"><span class="section-number-3">5.4.</span> Evaluate Algorithm</h3>
+<div class="outline-text-3" id="text-5-4">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">evaluate</span> (data network-neurons number-folds learning-rate epochs)
+  (shuffle data)
+  (<span class="org-keyword">let</span> ((n (truncate (length data) number-folds)))
+    (print n)
+    (<span class="org-keyword">loop</span> repeat number-folds
+          for i from 0 by n
+          for (test train) = (split data i (+ i n -1))
+          for network = (initialize-network network-neurons) do
+            (print (list (length test) (length train)))
+            (train-network network
+                           train
+                           learning-rate
+                           epochs)
+          collect (accuracy test network))))
+</pre>
+</div></details>
+
+<pre class="example">
+EVALUATE
+</pre>
+
+
+<p>
+Lets evaluate a single hidden layer neural network with 5 neurons in the hidden layer; taking learning-rate = 0.2 and 500 epochs. And spliting the data 5 times
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(evaluate *data* (list 7 5 3) 5 0.3 500)
+</pre>
+</div></details>
+
+<table id="evaluation-results" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">95</td>
+<td class="org-right">92</td>
+<td class="org-right">97</td>
+<td class="org-right">85</td>
+<td class="org-right">92</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+i.e. on average
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(truncate (reduce #'+ (first r))
+          (length (first r)))
+</pre>
+</div></details>
+
+<pre class="example">
+92
+</pre>
+
+
+<p>
+92% accuracy
+</p>
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="blog_sitemap.html#ID-4359C952-480D-4351-BD52-FA68FF8568C2">All Posts</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Backpropagation Algorithm in Lisp">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>

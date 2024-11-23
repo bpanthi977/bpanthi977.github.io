@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Recurrent Neural Network - Backpropagation Through Time</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: 2020-11-17</p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Recurrent Neural Network - Backpropagation Through Time</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#Download%20tokenized%20text%20from%20Brown%20Corpus%20and%20Import%20to%20CL">1. Download tokenized text from Brown Corpus and Import to CL</a></li>
+<li><a href="#Create%20training%20data">2. Create training data</a>
+<ul>
+<li><a href="#Assign%20index%20to%20each%20word">2.1. Assign index to each word</a></li>
+<li><a href="#Create%20traning%20data%20by%20converting%20sentences%20to%20vector%20-%20also%20replace%20infrequent%20words%20with%20unknown-word">2.2. Create traning data by converting sentences to vector - also replace infrequent words with unknown-word</a></li>
+</ul>
+</li>
+<li><a href="#RNN%20Structure">3. RNN Structure</a></li>
+<li><a href="#Initialization">4. Initialization</a></li>
+<li><a href="#Forward%20Propagation">5. Forward Propagation</a></li>
+<li><a href="#Loss%20Function">6. Loss Function</a>
+<ul>
+<li><a href="#Testing%20forward-propagation%20and%20loss%20calculation">6.1. Testing forward-propagation and loss calculation</a></li>
+</ul>
+</li>
+<li><a href="#Training%20the%20RNN%20with%20SGD%20and%20Backpropagation%20Throught%20Time%20%28BPTT%29">7. Training the RNN with SGD and Backpropagation Throught Time (BPTT)</a>
+<ul>
+<li><a href="#Derivative%20of%20loss%20function%20wrt%20output">7.1. Derivative of loss function wrt output</a></li>
+<li><a href="#Diagramatic%20representation">7.2. Diagramatic representation</a></li>
+<li><a href="#Code">7.3. Code</a></li>
+<li><a href="#Test%20of%20BPTT">7.4. Test of BPTT</a></li>
+<li><a href="#Stochastic%20Gradient%20Descent">7.5. Stochastic Gradient Descent</a></li>
+</ul>
+</li>
+<li><a href="#Train%21%21">8. Train!!</a></li>
+<li><a href="#Lets%20check%20predictions">9. Lets check predictions</a></li>
+</ul>
+</div>
+</div>
+<p>
+Adopted from <a href="http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-2-implementing-a-language-model-rnn-with-python-numpy-and-theano/">tutorial</a>.
+</p>
+<div id="outline-container-Download%20tokenized%20text%20from%20Brown%20Corpus%20and%20Import%20to%20CL" class="outline-2">
+<h2 id="Download%20tokenized%20text%20from%20Brown%20Corpus%20and%20Import%20to%20CL"><span class="section-number-2">1.</span> Download tokenized text from Brown Corpus and Import to CL</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Download the corpus using nltk (Python Library)
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> nltk
+<span class="org-keyword">from</span> nltk.corpus <span class="org-keyword">import</span> brown
+
+nltk.download(<span class="org-string">"brown"</span>)
+<span class="org-variable-name">data</span> <span class="org-operator">=</span> brown.sents(categories<span class="org-operator">=</span>[<span class="org-string">"science_fiction"</span>])
+
+<span class="org-keyword">with</span> <span class="org-builtin">open</span>(<span class="org-string">"/tmp/sentences"</span>, mode<span class="org-operator">=</span><span class="org-string">'w'</span>) <span class="org-keyword">as</span> <span class="org-builtin">file</span>:
+    <span class="org-builtin">file</span>.write(<span class="org-string">"( "</span>)
+    <span class="org-keyword">for</span> sentence <span class="org-keyword">in</span> data:
+        <span class="org-builtin">file</span>.write(<span class="org-string">"( "</span>)
+        <span class="org-keyword">for</span> word <span class="org-keyword">in</span> sentence:
+            <span class="org-builtin">file</span>.write(<span class="org-string">"\""</span><span class="org-operator">+</span> word<span class="org-operator">+</span><span class="org-string">"\" "</span>)
+        <span class="org-builtin">file</span>.write(<span class="org-string">")</span><span class="org-constant">\n</span><span class="org-string">"</span>)
+    <span class="org-builtin">file</span>.write(<span class="org-string">" )"</span>)
+</pre>
+</div></details>
+
+<pre class="example">
+None
+</pre>
+
+
+<p>
+Load it into Common Lisp
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*sentences*</span> (uiop:read-file-form #p<span class="org-string">"/tmp/sentences"</span>))
+</pre>
+</div></details>
+</div>
+</div>
+<div id="outline-container-Create%20training%20data" class="outline-2">
+<h2 id="Create%20training%20data"><span class="section-number-2">2.</span> Create training data</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+The input to our Recurrent Neural Networks are vectors, not strings. So we create a mapping between words and indices, index-to-word, and word-to-index. For example,  the word “friendly” may be at index 2001. A training example x may look like [0, 179, 341, 416], where 0 corresponds to SENTENCE-START. The corresponding label y would be [179, 341, 416, 1]. Remember that our goal is to predict the next word, so y is just the x vector shifted by one position with the last element being the SENTENCE-END token. In other words, the correct prediction for word 179 above would be 341, the actual next word.
+</p>
+</div>
+<div id="outline-container-Assign%20index%20to%20each%20word" class="outline-3">
+<h3 id="Assign%20index%20to%20each%20word"><span class="section-number-3">2.1.</span> Assign index to each word</h3>
+<div class="outline-text-3" id="text-2-1">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">index-to-word &amp; word-to-index</span>
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*word-count*</span> (make-hash-table <span class="org-builtin">:test</span> #'equal))
+
+(<span class="org-keyword">loop</span> for s in *sentences* do
+  (<span class="org-keyword">loop</span> for w in s
+        for word = (string-downcase w)
+        for count = (gethash word *word-count* 0) do
+          (setf (gethash word *word-count*) (1+ count))))
+</pre>
+</div></details>
+
+<p>
+There are
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(hash-table-count *word-count*)
+</pre>
+</div></details>
+
+<pre class="example">
+3032
+</pre>
+
+
+<p>
+unique words.
+</p>
+</div>
+</div>
+<div id="outline-container-Create%20traning%20data%20by%20converting%20sentences%20to%20vector%20-%20also%20replace%20infrequent%20words%20with%20unknown-word" class="outline-3">
+<h3 id="Create%20traning%20data%20by%20converting%20sentences%20to%20vector%20-%20also%20replace%20infrequent%20words%20with%20unknown-word"><span class="section-number-3">2.2.</span> Create traning data by converting sentences to vector - also replace infrequent words with unknown-word</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+We remove less frequent words and take only 1000 words in our vocabulary. This limit is mainly because of the one-hot encoding we use for the words. So, the input vector size is 1000. The words that don't fall in our vocabulary are replaced by UKNONWN-WORD.
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">hashtable-keys</span> (hashtable)
+  (<span class="org-keyword">let</span> ((keys (make-array (hash-table-count hashtable) <span class="org-builtin">:fill-pointer</span> 0)))
+    (maphash (<span class="org-keyword">lambda</span> (key value)
+               (<span class="org-keyword">declare</span> (ignore value))
+               (vector-push key keys))
+             hashtable)
+    keys))
+
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*sorted-words*</span> (sort (hashtable-keys *word-count*)
+                                   #'&gt; <span class="org-builtin">:key</span> (<span class="org-keyword">lambda</span> (word)
+                                              (gethash word *word-count* 0))))
+
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*vocabulary_size*</span> 1000)
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*index-to-word*</span> (make-array *vocabulary_size*
+                                          <span class="org-builtin">:element-type</span> 'string
+                                          <span class="org-builtin">:initial-element</span> <span class="org-string">""</span>
+                                          <span class="org-builtin">:adjustable</span> t
+                                          <span class="org-builtin">:fill-pointer</span> 3))
+
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*word-to-index*</span> (make-hash-table <span class="org-builtin">:test</span> #'equal <span class="org-builtin">:size</span> *vocabulary_size*))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">start with index 3.</span>
+(<span class="org-keyword">defconstant</span> <span class="org-variable-name">+SENTENCE-START+</span> 0)
+(<span class="org-keyword">defconstant</span> <span class="org-variable-name">+SENTENCE-END+</span> 1)
+(<span class="org-keyword">defconstant</span> <span class="org-variable-name">+UNKNOWN-WORD+</span> 2)
+
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*data*</span> (make-array (length *sentences*)
+                                 <span class="org-builtin">:fill-pointer</span> 0))
+
+(<span class="org-keyword">let</span> ((top-words (make-hash-table <span class="org-builtin">:test</span> #'equal))
+      (index-counter 2))
+  (<span class="org-keyword">loop</span> for w across *sorted-words*
+        repeat (- *vocabulary_size* 3) do
+          (setf (gethash w top-words) t))
+
+  (<span class="org-keyword">loop</span> for s in *sentences*
+        for x = (make-array (+ (length s) 2) <span class="org-builtin">:fill-pointer</span> 0) do
+          (vector-push +sentence-start+ x)
+          (<span class="org-keyword">loop</span> for w in s
+                for word = (string-downcase w)
+                for index = (gethash word *word-to-index*) do
+
+                  (<span class="org-keyword">if</span> (gethash word top-words)
+                      (<span class="org-keyword">progn</span>
+                        (<span class="org-keyword">unless</span> index
+                          (setf index (incf index-counter))
+                          (setf (gethash word *word-to-index*) index)
+                          (vector-push word *index-to-word*))
+                        (vector-push index x))
+                      (vector-push +unknown-word+ x)))
+          (vector-push +sentence-end+ x)
+          (setf (fill-pointer x) (+ (length s) 1))
+
+          (vector-push-extend
+           (list x
+                 (make-array (+ (length s) 1)
+                             <span class="org-builtin">:displaced-to</span> x
+                             <span class="org-builtin">:displaced-index-offset</span> 1))
+            *data*)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">index-word</span> (index)
+  <span class="org-doc">"Get word from index"</span>
+  (aref *index-to-word* index))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">word-index</span> (word)
+  <span class="org-doc">"Get index from word"</span>
+  (gethash word *word-to-index*))
+</pre>
+</div></details>
+
+<pre class="example">
+WORD-INDEX
+</pre>
+
+
+<p>
+Here’s an actual training example from the text (with corresponding index of the words):
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(print (first *sentences*))
+(print (aref *data* 0))
+</pre>
+</div></details>
+
+<pre class="example">
+
+("Now" "that" "he" "knew" "himself" "to" "be" "self" "he" "was" "free" "to"
+ "grok" "ever" "closer" "to" "his" "brothers" "," "merge" "without" "let" ".")
+(#(0 3 4 5 6 7 8 9 10 5 11 12 8 13 14 15 8 16 17 18 2 19 20 21)
+ #(3 4 5 6 7 8 9 10 5 11 12 8 13 14 15 8 16 17 18 2 19 20 21 1))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-RNN%20Structure" class="outline-2">
+<h2 id="RNN%20Structure"><span class="section-number-2">3.</span> RNN Structure</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Let’s get concrete and see what the RNN for our language model looks like. The input x will be a sequence of words (just like the example printed above) and each x<sub>t</sub> is a single word. But there’s one more thing: Because of how matrix multiplication works we can’t simply use a word index (like 36) as an input. Instead, we represent each word as a one-hot vector of size vocabulary-size. For example, the word with index 36 would be the vector of all 0’s and a 1 at position 36. So, each x<sub>t</sub> will become a vector, and x will be a matrix, with each row representing a word. We’ll perform this transformation in our Neural Network code instead of doing it in the pre-processing. The output/predictions of our network p has a similar format. Each p<sub>t</sub> is a vector of vocabulary-size elements, and each element represents the probability of that word being the next word in the sentence.
+</p>
+
+
+<div id="figure-1" class="figure">
+<p><img src="data/rnn_in_lisp/rnn.png" alt="rnn.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>RNN (copied from the tutorial; (In this document o<sub>t</sub> is replaced with p<sub>t</sub>))</p>
+</div>
+
+
+<p>
+\(s_t = \tanh (Ux_t + Ws_{t-1})\)
+\(p_t = \textrm{softmax}(Vs_t)\)
+</p>
+
+<p>
+Let our vocabulary size be \(C\), and hidden layer size (i.e. number of neurons in the hidden layer be \(H\)) then
+</p>
+<ul class="org-ul">
+<li>\(x_t \in R^{C}\)</li>
+<li>\(p_t \in R^C\)</li>
+<li>\(s_t \in R^H\)</li>
+<li>\(U \in R^{H \times C}\)</li>
+<li>\(V \in R^{C \times H}\)</li>
+<li>\(W \in R^{H \times H}\)</li>
+</ul>
+
+<p>
+This is valuable information. Remember that U,V and W are the parameters of our network we want to learn from data. Thus, we need to learn a total of 2HC + H<sup>2</sup> parameters. In the case of C=1000 and H=100 that’s 210,000. The dimensions also tell us the bottleneck of our model. Note that because x<sub>t</sub> is a one-hot vector, multiplying it with U is essentially the same as selecting a column of U, so we don’t need to perform the full multiplication. Then, the biggest matrix multiplication in our network is Vs<sub>t</sub>. That’s why we want to keep our vocabulary size small if possible.
+</p>
+</div>
+</div>
+<div id="outline-container-Initialization" class="outline-2">
+<h2 id="Initialization"><span class="section-number-2">4.</span> Initialization</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+We start by declaring a RNN network class and initializing our parameters.Initializing the parameters U,V and W is a bit tricky. We can’t just initialize them to 0’s because that would result in symmetric calculations in all our layers. We must initialize them randomly. Because proper initialization seems to have an impact on training results there has been lot of research in this area. It turns out that the best initialization depends on the activation function (\(\tanh\) in our case) and one recommended approach is to initialize the weights randomly in the interval from \(\left[-\frac{1}{\sqrt{n}}, \frac{1}{\sqrt{n}}\right]\) where n is the number of incoming connections from the previous layer. This may sound overly complicated, but don’t worry too much it. As long as you initialize your parameters to small random values it typically works out fine.
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">make-random-matrix</span> (m n)
+  (<span class="org-keyword">let</span> ((matrix (make-array (list m n) <span class="org-builtin">:element-type</span> 'double-float
+                            <span class="org-builtin">:initial-element</span> 0d0))
+        (1/sqrtn (coerce (/ (sqrt n)) 'double-float)))
+    (<span class="org-keyword">loop</span> for i from 0 below m do
+      (<span class="org-keyword">loop</span> for j from 0 below n
+            for random = (random (* 2 1/sqrtn)) do
+            (setf (aref matrix i j)
+                  (- random 1/sqrtn))))
+    matrix))
+
+(<span class="org-keyword">defclass</span> <span class="org-type">network</span> ()
+  ((H <span class="org-builtin">:accessor</span> H <span class="org-builtin">:initarg</span> <span class="org-builtin">:H</span>)
+   (C <span class="org-builtin">:accessor</span> C <span class="org-builtin">:initarg</span> <span class="org-builtin">:C</span>)
+   (U <span class="org-builtin">:accessor</span> U )
+   (V <span class="org-builtin">:accessor</span> V )
+   (W <span class="org-builtin">:accessor</span> W )))
+
+(<span class="org-keyword">defmethod</span> <span class="org-function-name">initialize-instance</span> <span class="org-builtin">:after</span> ((n network) <span class="org-type">&amp;key</span>)
+  (<span class="org-keyword">with-slots</span> (H C) n
+    (setf (slot-value n 'U) (make-random-matrix H C))
+    (setf (slot-value n 'V) (make-random-matrix C H))
+    (setf (slot-value n 'W) (make-random-matrix H H))))
+</pre>
+</div></details>
+</div>
+</div>
+<div id="outline-container-Forward%20Propagation" class="outline-2">
+<h2 id="Forward%20Propagation"><span class="section-number-2">5.</span> Forward Propagation</h2>
+<div class="outline-text-2" id="text-5">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">matrix-dot-vector</span> (matrix vector)
+  <span class="org-doc">"pointwise operate f on matrix . vector"</span>
+  (<span class="org-keyword">let*</span> ((m (array-dimension matrix 0))
+         (n (array-dimension matrix 1))
+         (result (make-array m <span class="org-builtin">:element-type</span> 'double-float <span class="org-builtin">:initial-element</span> 0d0
+                               <span class="org-builtin">:fill-pointer</span> 0)))
+    (<span class="org-keyword">loop</span> for i from 0 below m do
+      (vector-push (<span class="org-keyword">loop</span> for j from 0 below n
+                         summing (* (aref matrix i j)
+                                    (aref vector j)))
+                   result))
+    result))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">matrix-dot-index</span> (matrix index)
+  <span class="org-doc">"matrix . vector; where vector is one shot representation of index"</span>
+  (<span class="org-keyword">let*</span> ((m (array-dimension matrix 0))
+         (n (array-dimension matrix 1))
+         (result (make-array m <span class="org-builtin">:element-type</span> 'double-float <span class="org-builtin">:initial-element</span> 0d0
+                               <span class="org-builtin">:fill-pointer</span> 0)))
+    (<span class="org-keyword">loop</span> for i from 0 below m do
+      (vector-push (aref matrix i index)
+                   result))
+    result))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">softmax%</span> (vector)
+  <span class="org-doc">"Destructively calculates softmax"</span>
+  (map-into vector (<span class="org-keyword">lambda</span> (x) (exp x)) vector)
+  (<span class="org-keyword">let</span> ((sum (reduce #'+ vector)))
+    (map-into vector (<span class="org-keyword">lambda</span> (x) (/ x sum)) vector)
+    vector))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">map-into2</span> (function <span class="org-type">&amp;rest</span> sequences)
+  <span class="org-doc">"map `</span><span class="org-doc"><span class="org-constant">function</span></span><span class="org-doc">' into the first of the `</span><span class="org-doc"><span class="org-constant">sequences</span></span><span class="org-doc">'"</span>
+  (apply #'map-into (first sequences) function sequences))
+
+(<span class="org-keyword">defmethod</span> <span class="org-function-name">forward-propagate</span> ((n network) x)
+  (<span class="org-keyword">with-slots</span> (U V W) n
+    (<span class="org-keyword">let</span> ((s (make-array (length x))) <span class="org-comment-delimiter">;; </span><span class="org-comment">hidden state at each timestep</span>
+          (p (make-array (length x)))) <span class="org-comment-delimiter">;; </span><span class="org-comment">output at each timestep</span>
+      (<span class="org-keyword">loop</span> for time from 0 below (length x)
+            for xt = (aref x time) do
+        (setf (aref s time)
+              (<span class="org-keyword">if</span> (= time 0)
+                  (matrix-dot-index U xt)
+                  (map-into2 (<span class="org-keyword">lambda</span> (x y)
+                               (tanh (+ x y)))
+                             (matrix-dot-index U xt)
+                             (matrix-dot-vector W (aref s (1- time))))))
+        (setf (aref p time)
+              (softmax% (matrix-dot-vector V (aref s time)))))
+      (values p s))))
+</pre>
+</div></details>
+</div>
+</div>
+<div id="outline-container-Loss%20Function" class="outline-2">
+<h2 id="Loss%20Function"><span class="section-number-2">6.</span> Loss Function</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+To train our network we need a way to measure the errors it makes. We call this the loss function L, and our goal is find the parameters U,V and W that minimize the loss function for our training data. A common choice for the loss function is the cross-entropy loss. If we have N training examples (words in our text) and C classes (the size of our vocabulary) then the loss with respect to our predictions p and the true labels y is given by:
+</p>
+
+\begin{equation}
+L(y,p) = -\frac 1 N \sum_{n\in N} \log(\vec{y}_n . \vec{p}_n)
+\end{equation}
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">loss</span> (output y-indices)
+  <span class="org-doc">"Loss for a single sentence;</span>
+<span class="org-doc">output `</span><span class="org-doc"><span class="org-constant">output</span></span><span class="org-doc">' from the network, the actual target `</span><span class="org-doc"><span class="org-constant">y</span></span><span class="org-doc">' "</span>
+  (/ (<span class="org-keyword">loop</span> for p_t across output
+           for y across y-indices
+           summing (log (aref p_t y)))
+     -1))
+
+(<span class="org-keyword">defmethod</span> <span class="org-function-name">calculate-total-loss</span> ((n network) inputs targets)
+  <span class="org-doc">"Loss for all sentences `</span><span class="org-doc"><span class="org-constant">inputs</span></span><span class="org-doc">' and `</span><span class="org-doc"><span class="org-constant">outputs</span></span><span class="org-doc">'"</span>
+  (/ (<span class="org-keyword">loop</span> for input in inputs
+           for target in targets
+           summing (loss (forward-propagate n input) target))
+     (<span class="org-keyword">loop</span> for i in inputs summing (length i))))
+</pre>
+</div></details>
+</div>
+<div id="outline-container-Testing%20forward-propagation%20and%20loss%20calculation" class="outline-3">
+<h3 id="Testing%20forward-propagation%20and%20loss%20calculation"><span class="section-number-3">6.1.</span> Testing forward-propagation and loss calculation</h3>
+<div class="outline-text-3" id="text-6-1">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">let</span> ((network (make-instance 'network <span class="org-builtin">:c</span> 1000 <span class="org-builtin">:h</span> 100))
+      (*data* (make-array 100 <span class="org-builtin">:displaced-to</span> *data*)))
+  (calculate-total-loss network
+                        (map 'list #'first *data*)
+                        (map 'list #'second *data*)))
+</pre>
+</div></details>
+
+<pre class="example">
+6\.907459817685422d0
+</pre>
+
+
+<p>
+We have C words in our vocabulary, so each word should be (on average) predicted with probability 1/C, which would yield a loss of logC = log1000 = 6.9077554.
+</p>
+
+<p>
+Our value is also quite close, so we are in the right track.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Training%20the%20RNN%20with%20SGD%20and%20Backpropagation%20Throught%20Time%20%28BPTT%29" class="outline-2">
+<h2 id="Training%20the%20RNN%20with%20SGD%20and%20Backpropagation%20Throught%20Time%20%28BPTT%29"><span class="section-number-2">7.</span> Training the RNN with SGD and Backpropagation Throught Time (BPTT)</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-Derivative%20of%20loss%20function%20wrt%20output" class="outline-3">
+<h3 id="Derivative%20of%20loss%20function%20wrt%20output"><span class="section-number-3">7.1.</span> Derivative of loss function wrt output</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+\(\vec{o}\)  is the output \(V . \vec{s}\)  and the softmax function turns that into probabilities \(\vec{p}\)
+</p>
+
+\begin{equation*}
+p_j = \frac{e^{o_j}}{\sum_k e^{o_k}}
+\end{equation*}
+
+<p>
+and the loss for this output is
+</p>
+
+\begin{equation*}
+L = - \sum_j y_j \log p_j
+\end{equation*}
+<p>
+where \(\vec{y}\) is one-shot representation of desired output implying \(\sum_j y_j = 1\)
+</p>
+
+<p>
+Thus, following the derivation <a href="https://math.stackexchange.com/questions/945871/derivative-of-softmax-loss-function">here</a> you get the derivative to be:
+</p>
+
+\begin{equation*}
+\frac{\partial L}{\partial o_i} = p_i - y_i
+\end{equation*}
+</div>
+</div>
+<div id="outline-container-Diagramatic%20representation" class="outline-3">
+<h3 id="Diagramatic%20representation"><span class="section-number-3">7.2.</span> Diagramatic representation</h3>
+<div class="outline-text-3" id="text-7-2">
+
+<div id="figure-2" class="figure">
+<p><img src="data/rnn_in_lisp/directions.png" alt="directions.png" />
+</p>
+</div>
+
+
+
+<div id="figure-3" class="figure">
+<p><img src="data/rnn_in_lisp/derivatives.png" alt="derivatives.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Code" class="outline-3">
+<h3 id="Code"><span class="section-number-3">7.3.</span> Code</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+Lets implement Backpropagation through time
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">incf-outer-product</span> (place vec-a vec-b)
+  <span class="org-doc">"Add the outer product of `</span><span class="org-doc"><span class="org-constant">vec-a</span></span><span class="org-doc">' and `</span><span class="org-doc"><span class="org-constant">vec-b</span></span><span class="org-doc">' into `</span><span class="org-doc"><span class="org-constant">place</span></span><span class="org-doc">'"</span>
+  (<span class="org-keyword">let</span> ((n (array-dimension place 0))
+        (m (array-dimension place 1)))
+    (<span class="org-warning">assert</span> (= n (length vec-a)))
+    (<span class="org-warning">assert</span> (= m (length vec-b)))
+    (<span class="org-keyword">loop</span> for i from 0 below n do
+      (<span class="org-keyword">loop</span> for j from 0 below m do
+        (incf (aref place i j)
+              (* (aref vec-a i)
+                 (aref vec-b j)))))
+    place))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">incf-outer-product-with-index</span> (place vec-a vec-b-index)
+  (<span class="org-keyword">let</span> ((n (array-dimension place 0))
+        (m (array-dimension place 1)))
+    (<span class="org-warning">assert</span> (= n (length vec-a)))
+    (<span class="org-warning">assert</span> (&lt; vec-b-index m))
+    (<span class="org-keyword">loop</span> for i from 0 below n do
+      (incf (aref place i vec-b-index)
+            (aref vec-a i)))
+    place))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">matrix-T-dot-vector</span> (matrix vector)
+  <span class="org-doc">"Multiply transpose of `</span><span class="org-doc"><span class="org-constant">matrix</span></span><span class="org-doc">' with `</span><span class="org-doc"><span class="org-constant">vector</span></span><span class="org-doc">'"</span>
+  (<span class="org-keyword">destructuring-bind</span> (m n) (array-dimensions matrix)
+    (<span class="org-warning">assert</span> (= m (length vector)))
+    (<span class="org-keyword">let</span> ((result (make-array n)))
+      (<span class="org-keyword">loop</span> for j from 0 below n do
+        (setf (aref result j)
+              (<span class="org-keyword">loop</span> for i from 0 below m
+                    summing (* (aref matrix i j)
+                               (aref vector i)))))
+      result)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">bptt</span> (n x y <span class="org-type">&amp;key</span> (bptt-truncate 4))
+  (<span class="org-keyword">declare</span> (optimize (debug 3)))
+  (<span class="org-warning">check-type</span> n network)
+  (<span class="org-keyword">with-slots</span> (U V W) n
+    (<span class="org-keyword">multiple-value-bind</span> (p s) (forward-propagate n x)
+      <span class="org-comment-delimiter">;; </span><span class="org-comment">p[t] = softmax(o[t] = V s[t]), s[t] = tanh(Ux + W s[t-1])</span>
+      (<span class="org-keyword">let</span> ((dL/dU (make-array (array-dimensions (U n))))
+            (dL/dV (make-array (array-dimensions (V n))))
+            (dL/dW (make-array (array-dimensions (W n))))
+            dL/do
+            (di (make-array (array-dimension W 0))))
+
+        <span class="org-comment-delimiter">;; </span><span class="org-comment">replace p with dL/do = p - y</span>
+        (<span class="org-keyword">loop</span> for i from 0 below (length p)
+              for index across y do
+                (decf (aref (aref p i) index) 1))
+        (setf dL/do p)
+
+        <span class="org-comment-delimiter">;; </span><span class="org-comment">for each output backwards</span>
+        (<span class="org-keyword">loop</span> for time from (1- (length y)) downto 0 do
+          <span class="org-comment-delimiter">;; </span><span class="org-comment">dL/dV += L_i s[t]^j</span>
+          (incf-outer-product dL/dV
+                              (aref dL/do time) (aref s time))
+
+          <span class="org-comment-delimiter">;; </span><span class="org-comment">di = L_k V^k_i [ 1 - (s^i)^2]</span>
+          (<span class="org-keyword">loop</span> for i from 0 below (length di) do
+            (setf (aref di i)
+                  (* (- 1 (expt (aref (aref s time) i) 2))
+                     (<span class="org-keyword">loop</span> for k from 0 below (array-dimension V 1)
+                           summing (* (aref (aref dL/do time) k)
+                                      (aref V k i))))))
+
+          <span class="org-comment-delimiter">;; </span><span class="org-comment">accumulate error for bptt-truncate steps back in time</span>
+          (<span class="org-keyword">loop</span> for time2 from time downto (max 0 (- time bptt-truncate)) do
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">dL/dW += d_i s^j_,-1 + d_i,-1 s^j_,-2 + ...</span>
+            (<span class="org-keyword">unless</span> (= 0 time2)
+              (incf-outer-product dL/dW
+                                  di (aref s (- time2 1))))
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">dL/dU += d_i x^j + d_i,-1 x^j_,-1 + ...</span>
+            (incf-outer-product-with-index dL/dU
+                                           di (aref x time))
+
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">d_i,-n = d_m,-n+1 W^m_i [ (1 - (s^i_, -n)^2)]</span>
+            (<span class="org-keyword">unless</span> (= 0 time2)
+              (map-into di
+                        (<span class="org-keyword">lambda</span> (dW_i s^i)
+                          (* dW_i (- 1 (expt s^i 2))))
+                        (matrix-t-dot-vector W di)
+                        (aref s time2)))))
+        (values dL/dU dL/dV dL/dW)))))
+
+
+</pre>
+</div></details>
+</div>
+</div>
+<div id="outline-container-Test%20of%20BPTT" class="outline-3">
+<h3 id="Test%20of%20BPTT"><span class="section-number-3">7.4.</span> Test of BPTT</h3>
+<div class="outline-text-3" id="text-7-4">
+<p>
+We can always check backpropagation with an acutal gradient computed using
+</p>
+
+\begin{equation*}
+\frac{\partial f(x;\theta)} {\partial \theta} = \lim_{h \to 0} \frac {f(x; \theta +h ) - f(x; \theta)} {h}
+\end{equation*}
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">gradient-check</span> (n x y)
+  (<span class="org-keyword">declare</span> (optimize (debug 3)))
+  (<span class="org-keyword">with-slots</span> (U V W) n
+    (<span class="org-keyword">multiple-value-bind</span> (dL/dU dL/dV dL/dW) (bptt n x y <span class="org-builtin">:bptt-truncate</span> 40)
+      <span class="org-comment-delimiter">;; </span><span class="org-comment">for each variable take a random parameters and check it</span>
+      (<span class="org-keyword">let</span>  ((loss (loss (forward-propagate n x) y))
+             (new-loss nil)
+             (diff 0.0001)
+             (actual-derivative nil))
+        (<span class="org-keyword">loop</span> repeat 5 do
+          (<span class="org-keyword">loop</span> for derivative-var in (list dL/dU dL/dV dL/dW)
+                for var in (list U V W)
+                for name in '(U V W)
+                for i = (random (array-dimension var 0))
+                for j = (random (array-dimension var 1))
+                for original-value = (aref var i j) do
+                  (format t <span class="org-string">"~&amp; Checking at ~d,~d of ~s"</span> i j name)
+                  (incf (aref var i j) diff)
+                  (setf new-loss (loss (forward-propagate n x) y))
+                  (setf (aref var i j) original-value
+                        actual-derivative (/ (- new-loss loss) diff))
+                  (format t <span class="org-string">"~&amp;   Actual Derivative: ~f"</span> actual-derivative)
+                  (format t <span class="org-string">"~&amp;   Computed Derivative: ~f"</span> (aref derivative-var i j))
+                  (<span class="org-keyword">unless</span> (= actual-derivative 0.0d0)
+                    (<span class="org-keyword">when</span> (&lt; (abs (/ (aref derivative-var i j) actual-derivative)) .9)
+                      (format t <span class="org-string">"~&amp;[WARNING] Relative Error &gt; 90% !!!"</span>)))))))))
+
+
+(<span class="org-keyword">let</span> ((n (make-instance 'network <span class="org-builtin">:c</span> 1000 <span class="org-builtin">:h</span> 10)))
+  (<span class="org-keyword">destructuring-bind</span> (x y) (aref *data* 0)
+    (gradient-check n x y)))
+</pre>
+</div></details>
+
+<pre class="example" id="org5175833">
+ Checking at 1,933 of U
+   Actual Derivative: 0.0
+   Computed Derivative: 0.0
+ Checking at 866,6 of V
+   Actual Derivative: -0.000019541062595428733
+   Computed Derivative: -0.000019541967203488295
+ Checking at 0,9 of W
+   Actual Derivative: -0.013063465519599794
+   Computed Derivative: 0.02276368401665077
+ Checking at 2,122 of U
+   Actual Derivative: 0.0
+   Computed Derivative: 0.0
+ Checking at 839,1 of V
+   Actual Derivative: 0.0001507862672844925
+   Computed Derivative: 0.00015078568191896963
+ Checking at 1,0 of W
+   Actual Derivative: 0.0007341455629026561
+   Computed Derivative: -0.015454469780238055
+ Checking at 0,159 of U
+   Actual Derivative: 0.0
+   Computed Derivative: 0.0
+ Checking at 330,9 of V
+   Actual Derivative: -0.00010548660878157174
+   Computed Derivative: -0.0001054866726425041
+ Checking at 7,1 of W
+   Actual Derivative: -0.011276178498253225
+   Computed Derivative: -0.0033533307913708663
+[WARNING] Relative Error &gt; 90% !!!
+ Checking at 2,118 of U
+   Actual Derivative: 0.0
+   Computed Derivative: 0.0
+ Checking at 558,3 of V
+   Actual Derivative: -0.00008898126904709327
+   Computed Derivative: -0.00008898159965005954
+ Checking at 6,5 of W
+   Actual Derivative: 0.0005569091995027611
+   Computed Derivative: -0.015009585574136189
+ Checking at 3,381 of U
+   Actual Derivative: 0.0
+   Computed Derivative: 0.0
+ Checking at 922,4 of V
+   Actual Derivative: 0.000035769006438858855
+   Computed Derivative: 0.00003576841434122246
+ Checking at 4,3 of W
+   Actual Derivative: 0.014327403128352624
+   Computed Derivative: 0.029498057807640476
+</pre>
+
+<p>
+This shows that our BPTT algorithm has higher probability of being correct. only few check are giving warning. and that can be because of numerical errors/rounding.
+</p>
+</div>
+</div>
+<div id="outline-container-Stochastic%20Gradient%20Descent" class="outline-3">
+<h3 id="Stochastic%20Gradient%20Descent"><span class="section-number-3">7.5.</span> Stochastic Gradient Descent</h3>
+<div class="outline-text-3" id="text-7-5">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">update-matrix</span> (M diff rate)
+  (<span class="org-keyword">loop</span> for i from 0 below (array-dimension M 0) do
+    (<span class="org-keyword">loop</span> for j from 0 below (array-dimension M 1) do
+          (setf (aref M i j)
+                (- (aref M i j)
+                   (* rate (aref diff i j)))))))
+
+(<span class="org-keyword">defmethod</span> <span class="org-function-name">sgd-step</span> ((n network) x y learning-rate)
+  (<span class="org-keyword">multiple-value-bind</span> (dL/dU dL/dV dL/dW) (bptt n x y)
+    (<span class="org-keyword">with-slots</span> (U V W) n
+      (update-matrix U dL/dU learning-rate)
+      (update-matrix V dL/dV learning-rate)
+      (update-matrix W dL/dW learning-rate))))
+
+(<span class="org-keyword">defmethod</span> <span class="org-function-name">train-with-sgd</span> ((n network) xs ys
+                           <span class="org-type">&amp;key</span> (learning-rate 0.005) (epoch 100)
+                             (evaluate-loss-after 5))
+  (<span class="org-keyword">loop</span> for i from 0 below epoch
+        with losses = nil
+        for clock-time = (get-internal-real-time) do
+    (<span class="org-keyword">when</span> (and (not (= i 0))
+               (= 0 (mod i evaluate-loss-after)))
+      (push (calculate-total-loss n xs ys) losses)
+      (format t <span class="org-string">"~&amp; Loss = ~f"</span> (first losses))
+      (<span class="org-keyword">when</span> (and (&gt; (length losses) 1)
+                 (&gt; (first losses) (second losses)))
+        <span class="org-comment-delimiter">;; </span><span class="org-comment">when loss increased</span>
+        (setf learning-rate (* 0.5 learning-rate))
+        (format t <span class="org-string">"~&amp;Loss increased; so learning-rate is decreased to ~f"</span> learning-rate)))
+
+    (<span class="org-keyword">loop</span> for y in ys
+          for x in xs
+          for i from 0 do
+          (sgd-step n x y learning-rate)
+          (<span class="org-keyword">when</span> (= 0 (mod i 50))
+            (format t <span class="org-string">"~&amp;     ~d examples learned"</span> i)))
+
+    (format t <span class="org-string">"~&amp; Epoch ~d done in ~f seconds."</span> i
+            (/ (- (get-internal-real-time) clock-time)
+               internal-time-units-per-second))))
+</pre>
+</div></details>
+</div>
+</div>
+</div>
+<div id="outline-container-Train%21%21" class="outline-2">
+<h2 id="Train%21%21"><span class="section-number-2">8.</span> Train!!</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Lets initialize a RNN with a single hidden layer. The input and output layers have 1000 neurons and the hidden layer has 100 neurons.
+</p>
+
+<div id="figure-4" class="figure">
+<p><img src="data/rnn_in_lisp/neurons.png" alt="neurons.png" />
+</p>
+</div>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*network*</span> (make-instance 'network
+                                       <span class="org-builtin">:c</span> *vocabulary_size*
+                                       <span class="org-builtin">:h</span> 100))
+(train-with-sgd *network*
+                (subseq (map 'list #'first *data*) 100)
+                (subseq (map 'list #'second *data*) 100))
+</pre>
+</div></details>
+
+<pre class="example" id="org5175833">
+    0 examples learned
+    50 examples learned
+Epoch 0 done in 17.47 seconds.
+    0 examples learned
+    50 examples learned
+Epoch 1 done in 17.55 seconds.
+    0 examples learned
+    50 examples learned
+Epoch 2 done in 17.46 seconds.
+    0 examples learned
+    50 examples learned
+Epoch 3 done in 17.480001 seconds.
+    0 examples learned
+    50 examples learned
+Epoch 4 done in 17.58 seconds.
+Loss = 4.710042288388026
+    0 examples learned
+    50 examples learned
+Epoch 5 done in 22.71 seconds.
+    0 examples learned
+    50 examples learned
+Epoch 6 done in 17.32 seconds.
+    0 examples learned
+    50 examples learned
+Epoch 7 done in 17.47 seconds.
+    0 examples learned
+    50 examples learned
+Epoch 8 done in 17.68 seconds.
+    0 examples learned
+    50 examples learned
+Epoch 9 done in 17.53 seconds.
+Loss = 4.497564963056905
+    0 examples learned
+    50 examples learned
+</pre>
+
+<p>
+We can see that the loss is decreasing. However the time taken for each epoch (just 100 sentences)  is ~ 17 seconds.
+</p>
+</div>
+</div>
+<div id="outline-container-Lets%20check%20predictions" class="outline-2">
+<h2 id="Lets%20check%20predictions"><span class="section-number-2">9.</span> Lets check predictions</h2>
+<div class="outline-text-2" id="text-9">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">argmax</span> (vector)
+    (<span class="org-keyword">loop</span> with h = (aref vector 0)
+          with hi = 0
+          for i from 1 below (length vector)
+          for v = (aref vector i) do
+            (<span class="org-keyword">when</span> (&gt; v h)
+              (setf h v
+                    hi i))
+          finally (<span class="org-keyword">return</span> hi)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">prediction</span> (n x)
+  (<span class="org-keyword">let</span> ((p (forward-propagate n x)))
+    (<span class="org-keyword">loop</span> for pword across p
+          for i from 0
+          with aword = nil do
+            (<span class="org-keyword">if</span> (&lt; i (length x))
+                (setf aword (aref x i))
+                (setf aword nil))
+            (format t <span class="org-string">"~&amp; ~s ~t~t~t ~s"</span> (index-word aword)
+                    (index-word (argmax pword))))))
+
+(prediction *network* (first (aref *data* 0)))
+</pre>
+</div></details>
+
+<pre class="example" id="org5175833">
+""     "``"
+"now"     ""
+"that"     ""
+"he"     "."
+"knew"     "."
+"himself"     "."
+"to"     "."
+"be"     "."
+"self"     "."
+"he"     "."
+"was"     "."
+"free"     "."
+"to"     "."
+"grok"     "."
+"ever"     "."
+"closer"     "."
+"to"     "."
+"his"     "."
+"brothers"     "."
+","     "."
+""     "."
+"without"     "."
+"let"     "."
+"."     ""
+</pre>
+
+<p>
+Unfortunately with just 9 epochs of learning, the RNN hasn't learnt anything yet.
+</p>
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="blog_sitemap.html#ID-4359C952-480D-4351-BD52-FA68FF8568C2">All Posts</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Recurrent Neural Network - Backpropagation Through Time">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>

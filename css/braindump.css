@@ -13,7 +13,6 @@ body.body-multipage > #grid-container {
 
 #grid-container {
     flex:1;
-    overflow-x: visible;
     white-space:nowrap;
     flex-grow:1;
 }

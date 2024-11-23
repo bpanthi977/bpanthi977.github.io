@@ -32,6 +32,9 @@ function clThread(obj, ...funcs) {
 /// STACK
 
 function stackNote(href, level) {
+    if (href && URI(href).path() == 'index.html') {
+      window.location = 'index.html';
+    }
     level = Number(level) || pages.length;
     if (href) {
         href = URI(href);
@@ -123,7 +126,7 @@ function fetchNote(href, level) {
                 function (element, level) {
                     element.dataset.level = level + 1;
                     initializePage(element, level + 1);
-                    element.scrollIntoView();
+                    element.scrollIntoView({inline: 'center', behavior: 'smooth'});
                     if (window.MathJax) {
                         window.MathJax.typeset();
                     }

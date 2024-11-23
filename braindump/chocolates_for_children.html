@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Distributing chocolates to children</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="description" content="Exploring a frequently arising problem in combinatorics and probability" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2018-09-25 Tue]</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Distributing chocolates to children</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#in-how-many-ways-can-you-distribute-n-chocolates-to-m-children">1. In how many ways can you distribute <code>n</code> chocolates to <code>m</code> children?</a>
+<ul>
+<li><a href="#simplifying-the-condition">1.1. Simplifying the condition</a></li>
+<li><a href="#but">1.2. But</a></li>
+<li><a href="#stars-and-sticks">1.3. Stars and Sticks</a></li>
+<li><a href="#general-result">1.4. General Result</a></li>
+</ul>
+</li>
+<li><a href="#other-applications">2. Other applications</a>
+<ul>
+<li>
+<ul>
+<li><a href="#particles-in-boxes">2.0.1. Particles in boxes</a></li>
+<li><a href="#in-how-many-ways-can-you-express-a-number-as-a-sum-of-n-non-negative-numbers-considering-order">2.0.2. In how many ways can you express a number as a sum of <code>n</code> non-negative numbers (considering order)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#oh-and-remember">3. Oh, and remember</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-in-how-many-ways-can-you-distribute-n-chocolates-to-m-children" class="outline-2">
+<h2 id="in-how-many-ways-can-you-distribute-n-chocolates-to-m-children"><span class="section-number-2">1.</span> In how many ways can you distribute <code>n</code> chocolates to <code>m</code> children?</h2>
+<div class="outline-text-2" id="text-in-how-many-ways-can-you-distribute-n-chocolates-to-m-children">
+</div>
+<div id="outline-container-simplifying-the-condition" class="outline-3">
+<h3 id="simplifying-the-condition"><span class="section-number-3">1.1.</span> Simplifying the condition</h3>
+<div class="outline-text-3" id="text-simplifying-the-condition">
+<p>
+   If we consider all chocolates to be different/unique, then the first chocolate can go to any
+one of the <code>m</code> children and the next one too can go to any one of the
+<code>m</code> children and so on. This gives \(m * m * m *m...(n\ times) = m^n\)
+possibilities.
+</p>
+</div>
+</div>
+<div id="outline-container-but" class="outline-3">
+<h3 id="but"><span class="section-number-3">1.2.</span> But</h3>
+<div class="outline-text-3" id="text-but">
+<p>
+here the chocolates aren't different from each other. So the first
+chocolate going to first child and second going to second one is the
+same as first chocolate going to second child and the second one going
+to the first one. These cases must be counted only once. So we are
+concerned only with how many chocolates each child gets in the end. This
+means the possible distributions are less than \(m^n\) . But exactly how
+much is it? is an interesting mathematical problem that I ask you to try
+yourself for a while :unamused: .
+</p>
+</div>
+</div>
+<div id="outline-container-stars-and-sticks" class="outline-3">
+<h3 id="stars-and-sticks"><span class="section-number-3">1.3.</span> Stars and Sticks</h3>
+<div class="outline-text-3" id="text-stars-and-sticks">
+<p>
+This problem becomes trivial, when it is converted to a permutation
+problem concerned with arranging children and chocolates. Let's consider
+a case of 4 children and 7 chocolates. Denoting children by <code>|</code> and
+chocolates by <code>*</code> a possible arrangement is:
+</p>
+
+<p class="verse">
+*|**||****|<br />
+</p>
+
+<p>
+If each child gets chocolates to the left of it then here the first
+child gets one chocolate, second one gets 2, third one gets nothing
+while the fourth one gets four. The single
+stick at the rightmost end is compulsory because all chocolates have to
+be distributed. Since a fixed stick doesn't change the number of
+combinations/arrangements, we can remove the rightmost stick and say
+that the remaining stars are given to the last child. i.e. the
+equivalent arrangement is:
+</p>
+
+<p class="verse">
+<b>|**||***</b><br />
+</p>
+
+<p>
+Since, each distribution can be represented in this pattern of stars &amp;
+sticks, and each stars-sticks pattern represents a possible
+distribution, the number of possible distributions is equal to number of
+possible star-sticks patterns. So, now the problem is just this : In how
+many ways can we arrange <code>n</code> stars and <code>m-1</code> sticks ?
+</p>
+
+<p>
+There are (4-1)+7 = 10 places/position. So the sticks can be placed in
+=\({{10}\choose {3}} = \frac {10!} {(10-3)! * 3!} = 120\) ways. After
+placing the sticks we can just fill in the position with chocolates in
+only one way. So this is the total number of way to distribute 7
+chocolates to 4 children. Now of course, we could have filled in
+chocolates first and then the sticks. It gives the same result as
+\({{10}\choose {7}} = \frac {10!} {(10-7)! * 7!} = 120\)
+</p>
+</div>
+</div>
+<div id="outline-container-general-result" class="outline-3">
+<h3 id="general-result"><span class="section-number-3">1.4.</span> General Result</h3>
+<div class="outline-text-3" id="text-general-result">
+<p>
+So for the case of <code>n</code> chocolates and <code>m</code> children, the result is :
+=\({{n+m-1}\choose{n}} = \frac {n+m-1} {(m-1)! n!} = {{n+m-1}\choose{m-1}}\)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-other-applications" class="outline-2">
+<h2 id="other-applications"><span class="section-number-2">2.</span> Other applications</h2>
+<div class="outline-text-2" id="text-other-applications">
+<p>
+Now this technique is useful for various problems, other than amusing
+children with chocolates. Lets try another problem:
+</p>
+</div>
+<div id="outline-container-particles-in-boxes" class="outline-4">
+<h4 id="particles-in-boxes"><span class="section-number-4">2.0.1.</span> Particles in boxes</h4>
+<div class="outline-text-4" id="text-particles-in-boxes">
+<p>
+If we are to put <code>n</code> identical particles in <code>m</code> non-identical boxes.
+Then the number of ways we can do this is same as the number of ways we
+can distribute n chocolates to m children.
+\({{n+m-1}\choose{n}} = \frac {n+m-1} {(m-1)! n!}\)
+</p>
+</div>
+</div>
+<div id="outline-container-in-how-many-ways-can-you-express-a-number-as-a-sum-of-n-non-negative-numbers-considering-order" class="outline-4">
+<h4 id="in-how-many-ways-can-you-express-a-number-as-a-sum-of-n-non-negative-numbers-considering-order"><span class="section-number-4">2.0.2.</span> In how many ways can you express a number as a sum of <code>n</code> non-negative numbers (considering order)</h4>
+<div class="outline-text-4" id="text-in-how-many-ways-can-you-express-a-number-as-a-sum-of-n-non-negative-numbers-considering-order">
+<p>
+For example, the number 4 can be expressed as sum of 3 numbers in
+following four ways: * 0+0+4, 0+4+0, 4+0+0, * 0+1+3, 0+3+1, 1+0+3,
+1+3+0, 3+0+1, 3+1+0 * 0+2+2, 2+0+2, 2+2+0, * 1+1+2, 1+2+1, 2+1+1
+</p>
+
+<p>
+This is similar to distributing 4 chocolates to 3 children and equals
+\({{6}\choose{4}} = 15\). But if we are to disregard order then there
+are just 4 possible ways. Generalizing to number N with n partitions is
+not this <a href="https://en.m.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind">simple</a>.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-oh-and-remember" class="outline-2">
+<h2 id="oh-and-remember"><span class="section-number-2">3.</span> Oh, and remember</h2>
+<div class="outline-text-2" id="text-oh-and-remember">
+<p>
+making children sad isn't nice. So, if we want each
+child to get at least one chocolate then we have to add some constraints
+to our <a href="https://en.m.wikipedia.org/wiki/Stars_and_bars_(combinatorics)">stars and bars</a> technique: There must be at least one stars on either side of
+each bar.
+</p>
+
+<pre class="example">
+|***|*
+*|****|
+*|**|**
+</pre>
+
+
+<p>
+In the first case, the first child gets nothing, in second on the last
+one gets nothing and only in the third one do all children get at least
+one chocolate. So, now the sticks can only be placed in between the
+stars. Imagine having one seat between each stars, then we have to place
+2 bars in any two seats among 4 seats. This can be done in
+\({{4}\choose{2}} = 6\) ways. So in general if we need to distribute n chocolates to m children such that each child gets at least one chocolate then there are
+\({{n-1}\choose{m-1}} = \frac {n-1} {(m-1)!(n-m)!}\) ways to do
+that.
+</p>
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="blog_sitemap.html#ID-4359C952-480D-4351-BD52-FA68FF8568C2">All Posts</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Distributing chocolates to children">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>
