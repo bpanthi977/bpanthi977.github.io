@@ -14,10 +14,10 @@
   <link>https://bpanthi.com.np/braindump/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Fri, 22 Nov 2024 15:14:04 -0600</pubDate>
-  <lastBuildDate>Fri, 22 Nov 2024 15:14:04 -0600</lastBuildDate>
+  <pubDate>Sun, 01 Dec 2024 01:10:54 -0600</pubDate>
+  <lastBuildDate>Sun, 01 Dec 2024 01:10:54 -0600</lastBuildDate>
   <generator>Emacs 29.4 Org-mode 9.7.11</generator>
-  <webMaster>bpanthi977@gmail.com (Bibek Panthi)</webMaster>
+  <webMaster>Bibek Panthi</webMaster>
   <image>
     <url>https://bpanthi977.github.io/braindump/data/rss.png</url>
     <title>Bibek's Digital Garden</title>
@@ -25,93 +25,221 @@
   </image>
 
   <item>
-    <title>Debugging C with DAP in Emacs</title>
-    <link>https://bpanthi.com.np/braindump/debugging_c_with_dap_in_emacs.html</link>
-    <author>bpanthi977@gmail.com (Bibek Panthi)</author>
-    <guid isPermaLink="false">https://bpanthi.com.np/braindump/debugging_c_with_dap_in_emacs.html</guid>
-    <pubDate>Thu, 14 Nov 2024 22:30:00 -0600</pubDate>
+    <title>Cloud Storage</title>
+    <link>https://bpanthi.com.np/braindump/cloud_storage.html</link>
+    <author>Bibek Panthi</author>
+    <guid isPermaLink="false">https://bpanthi.com.np/braindump/cloud_storage.html</guid>
+    <pubDate>Sat, 30 Nov 2024 22:43:00 -0600</pubDate>
 
-    <description><![CDATA[<p>
-    Debug Adapter Protocol (DAP) is a protocol in the spirit of LSP, for unifing debugger features and interfaces.
-    </p>
+    <description><![CDATA[<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+    <caption class="t-above"><span class="table-number">Table 1:</span> Comparision of Cloud Storage Providers (only providers supported by rclone are listed).</caption>
+
+    <colgroup>
+    <col  class="org-left" />
+
+    <col  class="org-right" />
+
+    <col  class="org-right" />
+
+    <col  class="org-left" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th scope="col" class="org-left">Provider</th>
+    <th scope="col" class="org-right">Yearly Price ($)</th>
+    <th scope="col" class="org-right">Storage (TB)</th>
+    <th scope="col" class="org-left">Transfer per Month (TB)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="org-left">OneDrive Family</td>
+    <td class="org-right">100</td>
+    <td class="org-right">6 <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></td>
+    <td class="org-left">&#xa0;</td>
+    </tr>
+
+    <tr>
+    <td class="org-left"><a href="https://one.google.com/plans">Google Drive</a></td>
+    <td class="org-right">100</td>
+    <td class="org-right">2</td>
+    <td class="org-left">&#xa0;</td>
+    </tr>
+
+    <tr>
+    <td class="org-left"><a href="https://jottacloud.com/en/pricing?category=jottacloud-personal">Jottacloud</a></td>
+    <td class="org-right">70</td>
+    <td class="org-right">1</td>
+    <td class="org-left">&infin;</td>
+    </tr>
+
+    <tr>
+    <td class="org-left">OneDrive</td>
+    <td class="org-right">60</td>
+    <td class="org-right">1</td>
+    <td class="org-left">&#xa0;</td>
+    </tr>
+
+    <tr>
+    <td class="org-left">OneDrive</td>
+    <td class="org-right">70</td>
+    <td class="org-right">1</td>
+    <td class="org-left">&#xa0;</td>
+    </tr>
+
+    <tr>
+    <td class="org-left">pCloud</td>
+    <td class="org-right">120, 100<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></td>
+    <td class="org-right">2</td>
+    <td class="org-left">&#xa0;</td>
+    </tr>
+
+    <tr>
+    <td class="org-left">pCloud (Lifetime)</td>
+    <td class="org-right">599, 399<sup><a id="fnr.2.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></td>
+    <td class="org-right">2</td>
+    <td class="org-left">&#xa0;</td>
+    </tr>
+
+    <tr>
+    <td class="org-left">OpenDrive</td>
+    <td class="org-right">100</td>
+    <td class="org-right">&infin;</td>
+    <td class="org-left">Throttled</td>
+    </tr>
+
+    <tr>
+    <td class="org-left">Mega</td>
+    <td class="org-right">106</td>
+    <td class="org-right">2</td>
+    <td class="org-left">24</td>
+    </tr>
+
+    <tr>
+    <td class="org-left">Jottacloud</td>
+    <td class="org-right">120</td>
+    <td class="org-right">&infin;</td>
+    <td class="org-left">5</td>
+    </tr>
+
+    <tr>
+    <td class="org-left"><a href="https://mypikpak.com/drive/payment">PikPak</a></td>
+    <td class="org-right">86, 40<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup></td>
+    <td class="org-right">10</td>
+    <td class="org-left">4</td>
+    </tr>
+
+    <tr>
+    <td class="org-left">Yandex</td>
+    <td class="org-right">44, 20<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></td>
+    <td class="org-right">1</td>
+    <td class="org-left">&#xa0;</td>
+    </tr>
+    </tbody>
+    </table>
+
+    <ul class="org-ul">
+    <li>A review of backup technologies and how to choose among them (for businesses and personal use): <a href="https://www.starwindsoftware.com/blog/where-to-keep-your-backups-storage-types-explained/">starwindsoftware.com</a>
+    <ul class="org-ul">
+    <li>Tape storage is still the best for high volume of backup data requirements</li>
+    <li>NAS are good</li>
+    <li>Public cloud storage providers are also cost effective and reliable for lower data requirements</li>
+    </ul></li>
+    </ul>
 
     <p>
-    <code>dap-mode</code> in Emacs provides the necessary ui for Emacs to connect with debuggers. And for any laguage it can connect to the language specific debugger if we configure it properly.
+    In conclusion, if you have any one else to share with, the OneDrive Family is the best offer in terms of cost, reliability and transfer speed. Apart from that Google Drive and Jottacloud are also good. I don't know much about Jottacloud's reliability. Though the people on internet find it good.
     </p>
-
-    <p>
-    Many such configuration (called <code>debug-provider</code>) are bundled with <code>dap-mode</code>. For C &amp; C++, I use <code>dap-codelldb</code>. A <code>debug-provider</code> has a name and provides a function that populates the <code>dap</code> startup parameters. Usually the provider populates the debugger program location, server port and other similar stuff.  For example the dap-codelldb registers a debug-provider named "lldb".
-    </p>
-
-    <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
-    <div class="org-src-container">
-    <pre class="src src-elisp">(dap-register-debug-provider
-    <span class="org-string">"lldb"</span>
-    (<span class="org-keyword">lambda</span> (conf)
-    (<span class="org-keyword">let</span> ((debug-port (dap--find-available-port)))
-    (plist-put conf <span class="org-builtin">:program-to-start</span> (format <span class="org-string">"%s --port %s"</span> dap-codelldb-debug-program debug-port))
-    (plist-put conf <span class="org-builtin">:debugServer</span> debug-port))
-    (plist-put conf <span class="org-builtin">:host</span> <span class="org-string">"localhost"</span>)
-    (plist-put conf <span class="org-builtin">:type</span> <span class="org-string">"lldb"</span>)
-    (plist-put conf <span class="org-builtin">:cargo</span> <span class="org-string">""</span>)
-    conf))
-    </pre>
-    </div></details>
-
-    <p>
-    For any project we might need to debug muliple program, it is the purpose of <code>debug-template</code> to specify other parameters such as <code>:program</code>, <code>:cwd</code> (working direction) and program arguments. Instead of defining debug-template in elisp, dap also supports <code>.vscode/launch.json</code> format used by VSCode. A sample launch.json is as follows [See <a href="https://code.visualstudio.com/docs/editor/debugging#_launchjson-attributes">this</a> for launch.json format and <a href="https://code.visualstudio.com/docs/editor/variables-reference">this</a> for variables supported in launch.json]:
-    </p>
-
-    <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
-    <div class="org-src-container">
-    <pre class="src src-json">{
-    <span class="org-keyword">"version"</span>: <span class="org-string">"0.2.0"</span>,
-    <span class="org-keyword">"configurations"</span>: [
-    {
-    <span class="org-keyword">"name"</span>: <span class="org-string">"Debug main program"</span>,
-    <span class="org-keyword">"type"</span>: <span class="org-string">"lldb"</span>,
-    <span class="org-keyword">"request"</span>: <span class="org-string">"launch"</span>,
-    <span class="org-keyword">"program"</span>: <span class="org-string">"${workspaceFolder}/out/main"</span>,
-    <span class="org-keyword">"args"</span>: [],
-    <span class="org-keyword">"stopAtEntry"</span>: <span class="org-constant">false</span>,
-    <span class="org-keyword">"cwd"</span>: <span class="org-string">"${workspaceFolder}"</span>,
-    <span class="org-keyword">"environment"</span>: [],
-    <span class="org-keyword">"externalConsole"</span>: <span class="org-constant">false</span>
-    }
-    ]
-    }
-    </pre>
-    </div></details>
-
-    <p>
-    Or you can specify the same template in elisp. Note that the dap-variables (like "workspaceFolder", "fileDirname", "env:" etc. See <a href="https://code.visualstudio.com/docs/editor/variables-reference">code.visualstudio.com</a>) are exapanded properly by dap (see <code>dap-variables-expand</code> for implementation)
-    </p>
-
-    <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
-    <div class="org-src-container">
-    <pre class="src src-elisp">(dap-register-debug-template <span class="org-string">"Debug main"</span>
-    (list <span class="org-builtin">:type</span> <span class="org-string">"lldb"</span>
-    <span class="org-builtin">:program</span> <span class="org-string">"${workspaceFolder}/out/main"</span>
-    <span class="org-builtin">:cwd</span> <span class="org-string">"${workspaceFolder}"</span>
-    <span class="org-builtin">:request</span> <span class="org-string">"launch"</span>))
-    </pre>
-    </div></details>
-    <div id="outline-container-ID-63D0012C-CA2F-413F-9876-A638C9A9FDE8" class="outline-3">
-    <h3 id="ID-63D0012C-CA2F-413F-9876-A638C9A9FDE8">Installation</h3>
-    <div class="outline-text-3" id="text-Installation">
-    <ol class="org-ol">
-    <li><code>M-x package-install dap-mode</code> : Install dap-mode</li>
-    <li><code>(require 'dap-codelldb)</code> : Load the <code>dap-codelldb</code> provider (it is bundled with dap-mode)</li>
-    <li><code>M-x dap-codelldb-setup</code> : Install the debug server program</li>
-    </ol>
-    </div>
-    </div>
     ]]></description>
+</item>
+<item>
+  <title>Debugging C with DAP in Emacs</title>
+  <link>https://bpanthi.com.np/braindump/debugging_c_with_dap_in_emacs.html</link>
+  <author>Bibek Panthi</author>
+  <guid isPermaLink="false">https://bpanthi.com.np/braindump/debugging_c_with_dap_in_emacs.html</guid>
+  <pubDate>Thu, 14 Nov 2024 22:30:00 -0600</pubDate>
+
+  <description><![CDATA[<p>
+  Debug Adapter Protocol (DAP) is a protocol in the spirit of LSP, for unifing debugger features and interfaces.
+  </p>
+
+  <p>
+  <code>dap-mode</code> in Emacs provides the necessary ui for Emacs to connect with debuggers. And for any laguage it can connect to the language specific debugger if we configure it properly.
+  </p>
+
+  <p>
+  Many such configuration (called <code>debug-provider</code>) are bundled with <code>dap-mode</code>. For C &amp; C++, I use <code>dap-codelldb</code>. A <code>debug-provider</code> has a name and provides a function that populates the <code>dap</code> startup parameters. Usually the provider populates the debugger program location, server port and other similar stuff.  For example the dap-codelldb registers a debug-provider named "lldb".
+  </p>
+
+  <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+  <div class="org-src-container">
+  <pre class="src src-elisp">(dap-register-debug-provider
+  <span class="org-string">"lldb"</span>
+  (<span class="org-keyword">lambda</span> (conf)
+  (<span class="org-keyword">let</span> ((debug-port (dap--find-available-port)))
+  (plist-put conf <span class="org-builtin">:program-to-start</span> (format <span class="org-string">"%s --port %s"</span> dap-codelldb-debug-program debug-port))
+  (plist-put conf <span class="org-builtin">:debugServer</span> debug-port))
+  (plist-put conf <span class="org-builtin">:host</span> <span class="org-string">"localhost"</span>)
+  (plist-put conf <span class="org-builtin">:type</span> <span class="org-string">"lldb"</span>)
+  (plist-put conf <span class="org-builtin">:cargo</span> <span class="org-string">""</span>)
+  conf))
+  </pre>
+  </div></details>
+
+  <p>
+  For any project we might need to debug muliple program, it is the purpose of <code>debug-template</code> to specify other parameters such as <code>:program</code>, <code>:cwd</code> (working direction) and program arguments. Instead of defining debug-template in elisp, dap also supports <code>.vscode/launch.json</code> format used by VSCode. A sample launch.json is as follows [See <a href="https://code.visualstudio.com/docs/editor/debugging#_launchjson-attributes">this</a> for launch.json format and <a href="https://code.visualstudio.com/docs/editor/variables-reference">this</a> for variables supported in launch.json]:
+  </p>
+
+  <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+  <div class="org-src-container">
+  <pre class="src src-json">{
+  <span class="org-keyword">"version"</span>: <span class="org-string">"0.2.0"</span>,
+  <span class="org-keyword">"configurations"</span>: [
+  {
+  <span class="org-keyword">"name"</span>: <span class="org-string">"Debug main program"</span>,
+  <span class="org-keyword">"type"</span>: <span class="org-string">"lldb"</span>,
+  <span class="org-keyword">"request"</span>: <span class="org-string">"launch"</span>,
+  <span class="org-keyword">"program"</span>: <span class="org-string">"${workspaceFolder}/out/main"</span>,
+  <span class="org-keyword">"args"</span>: [],
+  <span class="org-keyword">"stopAtEntry"</span>: <span class="org-constant">false</span>,
+  <span class="org-keyword">"cwd"</span>: <span class="org-string">"${workspaceFolder}"</span>,
+  <span class="org-keyword">"environment"</span>: [],
+  <span class="org-keyword">"externalConsole"</span>: <span class="org-constant">false</span>
+  }
+  ]
+  }
+  </pre>
+  </div></details>
+
+  <p>
+  Or you can specify the same template in elisp. Note that the dap-variables (like "workspaceFolder", "fileDirname", "env:" etc. See <a href="https://code.visualstudio.com/docs/editor/variables-reference">code.visualstudio.com</a>) are exapanded properly by dap (see <code>dap-variables-expand</code> for implementation)
+  </p>
+
+  <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+  <div class="org-src-container">
+  <pre class="src src-elisp">(dap-register-debug-template <span class="org-string">"Debug main"</span>
+  (list <span class="org-builtin">:type</span> <span class="org-string">"lldb"</span>
+  <span class="org-builtin">:program</span> <span class="org-string">"${workspaceFolder}/out/main"</span>
+  <span class="org-builtin">:cwd</span> <span class="org-string">"${workspaceFolder}"</span>
+  <span class="org-builtin">:request</span> <span class="org-string">"launch"</span>))
+  </pre>
+  </div></details>
+  <div id="outline-container-ID-AF18FA38-F87B-4724-B716-F9C8818DC3A7" class="outline-3">
+  <h3 id="ID-AF18FA38-F87B-4724-B716-F9C8818DC3A7">Installation</h3>
+  <div class="outline-text-3" id="text-Installation">
+  <ol class="org-ol">
+  <li><code>M-x package-install dap-mode</code> : Install dap-mode</li>
+  <li><code>(require 'dap-codelldb)</code> : Load the <code>dap-codelldb</code> provider (it is bundled with dap-mode)</li>
+  <li><code>M-x dap-codelldb-setup</code> : Install the debug server program</li>
+  </ol>
+  </div>
+  </div>
+  ]]></description>
 </item>
 <item>
   <title>N:M implementation of POSIX Threads API</title>
   <link>https://bpanthi.com.np/braindump/n_m_implementation_of_posix_threads_api.html</link>
-  <author>bpanthi977@gmail.com (Bibek Panthi)</author>
+  <author>Bibek Panthi</author>
   <guid isPermaLink="false">https://bpanthi.com.np/braindump/n_m_implementation_of_posix_threads_api.html</guid>
   <pubDate>Wed, 13 Nov 2024 13:57:00 -0600</pubDate>
 
@@ -175,7 +303,7 @@
 <item>
   <title>Archive completed tasks in Org mode</title>
   <link>https://bpanthi.com.np/braindump/archive_completed_tasks_in_org_mode.html</link>
-  <author>bpanthi977@gmail.com (Bibek Panthi)</author>
+  <author>Bibek Panthi</author>
   <guid isPermaLink="false">https://bpanthi.com.np/braindump/archive_completed_tasks_in_org_mode.html</guid>
   <pubDate>Wed, 13 Nov 2024 13:59:00 -0600</pubDate>
 
@@ -214,12 +342,12 @@
 <item>
   <title>Named Destinations</title>
   <link>https://bpanthi.com.np/braindump/pdfs.html</link>
-  <author>bpanthi977@gmail.com (Bibek Panthi)</author>
+  <author>Bibek Panthi</author>
   <guid isPermaLink="false">https://bpanthi.com.np/braindump/pdfs.html</guid>
   <pubDate>Fri, 22 Nov 2024 15:12:00 -0600</pubDate>
 
-  <description><![CDATA[<div id="outline-container-ID-B254904F-7860-48BB-894F-E487D97DD31B" class="outline-3">
-  <h3 id="ID-B254904F-7860-48BB-894F-E487D97DD31B">Named Destinations</h3>
+  <description><![CDATA[<div id="outline-container-ID-5486B692-F580-4436-851A-382A02D26E6C" class="outline-3">
+  <h3 id="ID-5486B692-F580-4436-851A-382A02D26E6C">Named Destinations</h3>
   <div class="outline-text-3" id="text-Named-Destinations">
   <p>
   Used for referencing/linking parts of another pdf document
@@ -256,5 +384,27 @@
   </div>
   ]]></description>
 </item>
-</channel>
+<div id="footnotes">
+  <h2 class="footnotes">Footnotes: </h2>
+  <div id="text-footnotes">
+
+    <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+    1 TB per person. Upto 6 family members.
+    </p></div></div>
+
+    <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+    On Black Friday Offer
+    </p></div></div>
+
+    <div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+    For the first year only
+    </p></div></div>
+
+    <div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+    For 1.5 years, on Black Friday Offer
+    </p></div></div>
+
+
+  </div>
+</div></channel>
 </rss>
