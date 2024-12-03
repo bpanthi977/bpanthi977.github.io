@@ -22,6 +22,11 @@ body.body-multipage > #grid-container {
     flex-grow:1;
 }
 
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+}
+
 .toolbar-close-button:hover {
     background: gainsboro
 }

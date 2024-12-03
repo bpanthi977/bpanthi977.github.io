@@ -21,6 +21,12 @@ function elementWithClass(tag, clazz) {
     return el;
 }
 
+function elementFromHtml(htmlString) {
+  const el = document.createElement('div');
+  el.innerHTML = htmlString;
+  return el.firstChild;
+}
+
 function clThread(obj, ...funcs) {
     let res = obj;
     for(const f of funcs) {
@@ -81,12 +87,23 @@ function updateLinkStatuses() {
     });
 }
 
-function wrapContent(content, level) {
+function wrapContent(content, level, href) {
     const el = wrap(content, elementWithClass('div', 'page'));
     if (level > 1) {
         const toolbar = elementWithClass('div', 'toolbar');
-        toolbar.innerHTML = `<span onClick='unstackNotes(${level - 1}); stackNote(false)'><img class='toolbar-close-button' src="/img/close.svg" width=20 height=20 /></span>`;
-        el.insertBefore(toolbar, content);
+        if (href) {
+          const url = new URL(href, window.location);
+          url.hash = "";
+          url.search = "";
+          const link = document.createElement('a');
+          link.href = url.toString();
+          link.innerHTML = url.pathname;
+          toolbar.appendChild(link)
+        }
+        const close = elementFromHtml(`<span onClick='unstackNotes(${level - 1}); stackNote(false)'><img class='toolbar-close-button' src="/img/close.svg" width=20 height=20 /></span>`);
+        toolbar.appendChild(close);
+
+          el.insertBefore(toolbar, content);
     }
     return el;
 }
@@ -119,7 +136,7 @@ function fetchNote(href, level) {
             fragment.innerHTML = text;
             let element = getPageContent(fragment.content);
             console.log(element);
-            container.appendChild(wrapContent(element, level + 1));
+            container.appendChild(wrapContent(element, level + 1, href));
             stackNote(href, level);
 
             setTimeout(
