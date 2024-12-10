@@ -36,6 +36,18 @@ function clThread(obj, ...funcs) {
 }
 
 /// STACK
+function updateTitle() {
+    let container = document.querySelector("#grid");
+    let children = container.children;
+    let lastPage = children[children.length - 1];
+    if (lastPage) {
+        let title = lastPage.getElementsByClassName("title")[0];
+        title = title && title.innerHTML;
+        if (title) {
+            document.title = title;
+        }
+    }
+}
 
 function stackNote(href, level) {
     if (href && URI(href).path() == 'index.html') {
@@ -58,6 +70,7 @@ function stackNote(href, level) {
     if (level >= 1) {
         document.querySelector("body").classList.add('body-multipage');
     }
+    updateTitle();
 }
 
 function unstackNotes(level) {
@@ -71,9 +84,11 @@ function unstackNotes(level) {
 
     toRemove.forEach(el => container.removeChild(el));
     pages = pages.slice(0, level);
+
     if (level <= 1) {
         document.querySelector("body").classList.remove('body-multipage')
     }
+    updateTitle();
 }
 
 function updateLinkStatuses() {
@@ -270,3 +285,7 @@ window.MathJax = {
         displayOverflow: 'overflow'
     }
 };
+
+// Local Variables:
+// js-indent-level: 4
+// End:
