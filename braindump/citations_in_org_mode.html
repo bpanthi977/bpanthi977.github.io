@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Citations in Org Mode</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-12-09 Mon&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Citations in Org Mode</h1>
+<p>
+If you are writing a document in org mode and want to cite some papers or articles as in a research paper you can use the built in <a href="https://orgmode.org/manual/Citation-handling.html">citation handling</a> features of <a href="org_mode.html#ID-83feb6b0-a900-46a4-9e3d-2ccb8d00e8d6">org-mode</a>.
+</p>
+
+<p>
+Imagine you have a <code>references.bib</code> file with some BiBTeX entries as follows:
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-bib">@article{photon,
+  title={Photon mapping on programmable graphics hardware},
+  author={Purcell, Timothy J and Donner, Craig and Cammarano, Mike and Jensen, Henrik Wann and Hanrahan, Pat},
+  booktitle={ACM SIGGRAPH 2005 Courses},
+  pages={258--es},
+  year={2005}
+}
+</pre>
+</div></details>
+
+<p>
+Then you cand add a org mode keyword/directive called `#+bibliography` near the head of the document to point to the bib file.
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-meta-line">#+bibliography: references.bib</span>
+</pre>
+</div></details>
+
+<p>
+After this is done you can add reference the paper in your org document:
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-org">Grid construction can be done by using parallel sorting algorithm <span class="org-org-cite">[</span><span class="org-org-ref-cite"><span class="org-org-cite"><a href="cite:@photon">cite:</a></span></span><span class="org-org-ref-cite"><span class="org-org-cite"><span class="org-error"><a href="cite:@photon">@photo</a><a href="cite:@photon">n</a></span></span></span><span class="org-org-cite">]</span>, or by using ... .
+</pre>
+</div></details>
+
+<p>
+Finally at the place where you want you bibliography write:
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-meta-line">#+print_bibliography:</span>
+</pre>
+</div></details>
+
+<p>
+Now when you export the document, the citations and bibliography will be generated as per you formatting config.
+</p>
+
+<p>
+I prefer the following config. The first one for LaTeX export and second one for html export. (So use only one of these at a time):
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-meta-line">#+cite_export: biblatex numeric,backend=bibtex</span>
+<span class="org-org-meta-line">#+cite_export: basic numeric numeric</span>
+</pre>
+</div></details>
+
+<p>
+Or you can add a file local variable as such:
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-comment"># Local Variables&#58;</span>
+<span class="org-comment"># org-cite-export-processors: ((latex biblatex "numeric,backend=bibtex") (html basic "numeric" "numeric"))</span>
+<span class="org-comment"># End:</span>
+</pre>
+</div></details>
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="org_mode.html#ID-83feb6b0-a900-46a4-9e3d-2ccb8d00e8d6">Org Mode</a></li>
+</ul>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Citations in Org Mode">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>

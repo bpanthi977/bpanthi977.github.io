@@ -14,8 +14,8 @@
   <link>https://bpanthi.com.np/braindump/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Sun, 01 Dec 2024 01:10:54 -0600</pubDate>
-  <lastBuildDate>Sun, 01 Dec 2024 01:10:54 -0600</lastBuildDate>
+  <pubDate>Mon, 09 Dec 2024 19:56:02 -0600</pubDate>
+  <lastBuildDate>Mon, 09 Dec 2024 19:56:02 -0600</lastBuildDate>
   <generator>Emacs 29.4 Org-mode 9.7.11</generator>
   <webMaster>Bibek Panthi</webMaster>
   <image>
@@ -24,6 +24,86 @@
     <link>https://bpanthi.com.np/braindump/</link>
   </image>
 
+  <item>
+    <title>Citations in Org Mode</title>
+    <link>https://bpanthi.com.np/braindump/citations_in_org_mode.html</link>
+    <author>Bibek Panthi</author>
+    <guid isPermaLink="false">https://bpanthi.com.np/braindump/citations_in_org_mode.html</guid>
+    <pubDate>Mon, 09 Dec 2024 19:50:00 -0600</pubDate>
+
+    <description><![CDATA[<p>
+    If you are writing a document in org mode and want to cite some papers or articles as in a research paper you can use the built in <a href="https://orgmode.org/manual/Citation-handling.html">citation handling</a> features of <a href="org_mode.html#ID-83feb6b0-a900-46a4-9e3d-2ccb8d00e8d6">org-mode</a>.
+    </p>
+
+    <p>
+    Imagine you have a <code>references.bib</code> file with some BiBTeX entries as follows:
+    </p>
+    <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+    <div class="org-src-container">
+    <pre class="src src-bib">@article{photon,
+    title={Photon mapping on programmable graphics hardware},
+    author={Purcell, Timothy J and Donner, Craig and Cammarano, Mike and Jensen, Henrik Wann and Hanrahan, Pat},
+    booktitle={ACM SIGGRAPH 2005 Courses},
+    pages={258--es},
+    year={2005}
+    }
+    </pre>
+    </div></details>
+
+    <p>
+    Then you cand add a org mode keyword/directive called `#+bibliography` near the head of the document to point to the bib file.
+    </p>
+    <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+    <div class="org-src-container">
+    <pre class="src src-org"><span class="org-org-meta-line">#+bibliography: references.bib</span>
+    </pre>
+    </div></details>
+
+    <p>
+    After this is done you can add reference the paper in your org document:
+    </p>
+
+    <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+    <div class="org-src-container">
+    <pre class="src src-org">Grid construction can be done by using parallel sorting algorithm <span class="org-org-cite">[</span><span class="org-org-ref-cite"><span class="org-org-cite"><a href="cite:@photon">cite:</a></span></span><span class="org-org-ref-cite"><span class="org-org-cite"><span class="org-error"><a href="cite:@photon">@photo</a><a href="cite:@photon">n</a></span></span></span><span class="org-org-cite">]</span>, or by using ... .
+    </pre>
+    </div></details>
+
+    <p>
+    Finally at the place where you want you bibliography write:
+    </p>
+    <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+    <div class="org-src-container">
+    <pre class="src src-org"><span class="org-org-meta-line">#+print_bibliography:</span>
+    </pre>
+    </div></details>
+
+    <p>
+    Now when you export the document, the citations and bibliography will be generated as per you formatting config.
+    </p>
+
+    <p>
+    I prefer the following config. The first one for LaTeX export and second one for html export. (So use only one of these at a time):
+    </p>
+    <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+    <div class="org-src-container">
+    <pre class="src src-org"><span class="org-org-meta-line">#+cite_export: biblatex numeric,backend=bibtex</span>
+    <span class="org-org-meta-line">#+cite_export: basic numeric numeric</span>
+    </pre>
+    </div></details>
+
+    <p>
+    Or you can add a file local variable as such:
+    </p>
+    <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+    <div class="org-src-container">
+    <pre class="src src-org"><span class="org-comment"># Local Variables&#58;</span>
+    <span class="org-comment"># org-cite-export-processors: ((latex biblatex "numeric,backend=bibtex") (html basic "numeric" "numeric"))</span>
+    <span class="org-comment"># End:</span>
+    </pre>
+    </div></details>
+    ]]></description>
+  </item>
   <item>
     <title>Cloud Storage</title>
     <link>https://bpanthi.com.np/braindump/cloud_storage.html</link>
@@ -164,7 +244,7 @@
   </p>
 
   <p>
-  <code>dap-mode</code> in Emacs provides the necessary ui for Emacs to connect with debuggers. And for any laguage it can connect to the language specific debugger if we configure it properly.
+  <code>dap-mode</code> in Emacs provides the necessary ui for Emacs to connect with debuggers. And for any language it can connect to the language specific debugger if we configure it properly.
   </p>
 
   <p>
@@ -185,6 +265,37 @@
   conf))
   </pre>
   </div></details>
+
+  <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+  <colgroup>
+  <col  class="org-left" />
+
+  <col  class="org-left" />
+
+  <col  class="org-left" />
+
+  <col  class="org-left" />
+
+  <col  class="org-left" />
+
+  <col  class="org-left" />
+
+  <col  class="org-left" />
+  </colgroup>
+  <tbody>
+  <tr>
+  <td class="org-left">lambda</td>
+  <td class="org-left">(conf)</td>
+  <td class="org-left">(let ((debug-port (dap--find-available-port))) (plist-put conf :program-to-start (format %s --port %s dap-codelldb-debug-program debug-port)) (plist-put conf :debugServer debug-port))</td>
+  <td class="org-left">(plist-put conf :host localhost)</td>
+  <td class="org-left">(plist-put conf :type lldb)</td>
+  <td class="org-left">(plist-put conf :cargo )</td>
+  <td class="org-left">conf</td>
+  </tr>
+  </tbody>
+  </table>
 
   <p>
   For any project we might need to debug muliple program, it is the purpose of <code>debug-template</code> to specify other parameters such as <code>:program</code>, <code>:cwd</code> (working direction) and program arguments. Instead of defining debug-template in elisp, dap also supports <code>.vscode/launch.json</code> format used by VSCode. A sample launch.json is as follows [See <a href="https://code.visualstudio.com/docs/editor/debugging#_launchjson-attributes">this</a> for launch.json format and <a href="https://code.visualstudio.com/docs/editor/variables-reference">this</a> for variables supported in launch.json]:
@@ -224,8 +335,8 @@
   <span class="org-builtin">:request</span> <span class="org-string">"launch"</span>))
   </pre>
   </div></details>
-  <div id="outline-container-ID-AF18FA38-F87B-4724-B716-F9C8818DC3A7" class="outline-3">
-  <h3 id="ID-AF18FA38-F87B-4724-B716-F9C8818DC3A7">Installation</h3>
+  <div id="outline-container-ID-B7FF9612-662F-4F81-8612-843AF02E1DB8" class="outline-3">
+  <h3 id="ID-B7FF9612-662F-4F81-8612-843AF02E1DB8">Installation</h3>
   <div class="outline-text-3" id="text-Installation">
   <ol class="org-ol">
   <li><code>M-x package-install dap-mode</code> : Install dap-mode</li>
@@ -346,8 +457,8 @@
   <guid isPermaLink="false">https://bpanthi.com.np/braindump/pdfs.html</guid>
   <pubDate>Fri, 22 Nov 2024 15:12:00 -0600</pubDate>
 
-  <description><![CDATA[<div id="outline-container-ID-5486B692-F580-4436-851A-382A02D26E6C" class="outline-3">
-  <h3 id="ID-5486B692-F580-4436-851A-382A02D26E6C">Named Destinations</h3>
+  <description><![CDATA[<div id="outline-container-ID-413EC9D9-FC6D-44D7-871C-E96224B4A20C" class="outline-3">
+  <h3 id="ID-413EC9D9-FC6D-44D7-871C-E96224B4A20C">Named Destinations</h3>
   <div class="outline-text-3" id="text-Named-Destinations">
   <p>
   Used for referencing/linking parts of another pdf document

@@ -29,27 +29,44 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#Notes">1. Notes</a></li>
-<li><a href="#Tips">2. Tips</a>
+<li><a href="#How%20to%20learn">1. How to learn</a></li>
+<li><a href="#Notes">2. Notes</a></li>
+<li><a href="#Tips">3. Tips</a>
 <ul>
-<li><a href="#Counsel%20Ripgrep">2.1. Counsel Ripgrep</a></li>
-<li><a href="#EmacsClient%20for%20MacOS">2.2. EmacsClient for MacOS</a></li>
-<li><a href="#Change%20face%20for%20some%20mode%20only">2.3. Change face for some mode only</a></li>
+<li><a href="#Counsel%20Ripgrep">3.1. Counsel Ripgrep</a></li>
+<li><a href="#EmacsClient%20for%20MacOS">3.2. EmacsClient for MacOS</a></li>
+<li><a href="#Change%20face%20for%20some%20mode%20only">3.3. Change face for some mode only</a></li>
 </ul>
 </li>
-<li><a href="#Get%20image%20height%2Fwidth%20in%20emacs">3. Get image height/width in emacs</a></li>
-<li><a href="#Bad%20Emacs%20Defaults">4. Bad Emacs Defaults</a>
+<li><a href="#Get%20image%20height%2Fwidth%20in%20emacs">4. Get image height/width in emacs</a></li>
+<li><a href="#Bad%20Emacs%20Defaults">5. Bad Emacs Defaults</a>
 <ul>
-<li><a href="#backup-by-copying">4.1. backup-by-copying</a></li>
-<li><a href="#sentence-end-double-space">4.2. sentence-end-double-space</a></li>
+<li><a href="#backup-by-copying">5.1. backup-by-copying</a></li>
+<li><a href="#sentence-end-double-space">5.2. sentence-end-double-space</a></li>
 </ul>
 </li>
+</ul>
+</div>
+</div>
+<ul class="org-ul">
+<li><a href="org_mode.html#ID-83feb6b0-a900-46a4-9e3d-2ccb8d00e8d6">Org Mode</a></li>
+</ul>
+<div id="outline-container-How%20to%20learn" class="outline-2">
+<h2 id="How%20to%20learn"><span class="section-number-2">1.</span> How to learn</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<p style="text-align:center; width:100%"><iframe width="560" height="315" src="https://www.youtube.com/embed/48JlgiBpw_I" title="nil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=48JlgiBpw_I&t=25s">00:00:25</a> by System Crafters</li>
+<li><a href="https://www.youtube.com/watch?v=48JlgiBpw_I&t=95s">00:01:35</a> How to install</li>
 </ul>
 </div>
 </div>
 <div id="outline-container-Notes" class="outline-2">
-<h2 id="Notes"><span class="section-number-2">1.</span> Notes</h2>
-<div class="outline-text-2" id="text-1">
+<h2 id="Notes"><span class="section-number-2">2.</span> Notes</h2>
+<div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li><b>leuven</b>  theme is nice for light mode (especially org-mode)</li>
 <li><p>
@@ -66,12 +83,12 @@
 </div>
 </div>
 <div id="outline-container-Tips" class="outline-2">
-<h2 id="Tips"><span class="section-number-2">2.</span> Tips</h2>
-<div class="outline-text-2" id="text-2">
+<h2 id="Tips"><span class="section-number-2">3.</span> Tips</h2>
+<div class="outline-text-2" id="text-3">
 </div>
 <div id="outline-container-Counsel%20Ripgrep" class="outline-3">
-<h3 id="Counsel%20Ripgrep"><span class="section-number-3">2.1.</span> Counsel Ripgrep</h3>
-<div class="outline-text-3" id="text-2-1">
+<h3 id="Counsel%20Ripgrep"><span class="section-number-3">3.1.</span> Counsel Ripgrep</h3>
+<div class="outline-text-3" id="text-3-1">
 <p>
 <a href="https://emacsbliss.com/">https://emacsbliss.com/</a>
 </p>
@@ -89,14 +106,14 @@ select which directory you want to run rg on.
 </div>
 </div>
 <div id="outline-container-EmacsClient%20for%20MacOS" class="outline-3">
-<h3 id="EmacsClient%20for%20MacOS"><span class="section-number-3">2.2.</span> EmacsClient for MacOS</h3>
-<div class="outline-text-3" id="text-2-2">
+<h3 id="EmacsClient%20for%20MacOS"><span class="section-number-3">3.2.</span> EmacsClient for MacOS</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
-Create an application applescript with the following code: 
+Create an application applescript with the following code:
 </p>
 
 <p>
-Based on: 
+Based on:
 <a href="https://github.com/ferlatte/emacs-daemon-osx/blob/master/emacs-client.applescript">https://github.com/ferlatte/emacs-daemon-osx/blob/master/emacs-client.applescript</a>
 </p>
 
@@ -116,30 +133,30 @@ Changes
 on run argv
         set arg to item 1 of argv
         try
-      	  set filePath to POSIX path of arg
+                set filePath to POSIX path of arg
         on error
-      	  set filePath to ""
+                set filePath to ""
         end try
 
         tell application "Terminal"
-      	  try
-      		  -- we look for &lt;= 2 because Emacs --daemon seems to always
-      		  -- have an entry in visibile-frame-list even if there isn't
-      		  set frameVisible to do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -e '(&lt;= 2 (length (visible-frame-list)))'"
-      		  if frameVisible is not "t" then
-      			  -- there is a not a visible frame, launch one
-      			  do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n " &amp; filePath &amp; " --eval '(select-frame-set-input-focus (selected-frame))'" &amp; " &gt; /dev/null 2&gt;&amp;1 &amp;"
-      		  else
-      			  do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -n " &amp; filePath &amp; " --eval '(select-frame-set-input-focus (selected-frame))'" &amp; " &gt; /dev/null 2&gt;&amp;1 &amp;"
-      		  end if
-      	  on error
-      		  -- FIXME: instead, open an alertbox, since we intend to run Emacs
-      		  -- from launchd.
-      		  -- daemon is not running, start the daemon and open a frame     
-      		  do shell script "/Applications/Emacs.app/Contents/MacOS/Emacs --daemon"
-      		  do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n " &amp; filePath &amp; " --eval '(select-frame-set-input-focus (selected-frame))'" &amp; " &gt; /dev/null 2&gt;&amp;1 &amp;"
+                try
+                        -- we look for &lt;= 2 because Emacs --daemon seems to always
+                        -- have an entry in visibile-frame-list even if there isn't
+                        set frameVisible to do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -e '(&lt;= 2 (length (visible-frame-list)))'"
+                        if frameVisible is not "t" then
+                                -- there is a not a visible frame, launch one
+                                do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n " &amp; filePath &amp; " --eval '(select-frame-set-input-focus (selected-frame))'" &amp; " &gt; /dev/null 2&gt;&amp;1 &amp;"
+                        else
+                                do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -n " &amp; filePath &amp; " --eval '(select-frame-set-input-focus (selected-frame))'" &amp; " &gt; /dev/null 2&gt;&amp;1 &amp;"
+                        end if
+                on error
+                        -- FIXME: instead, open an alertbox, since we intend to run Emacs
+                        -- from launchd.
+                        -- daemon is not running, start the daemon and open a frame
+                        do shell script "/Applications/Emacs.app/Contents/MacOS/Emacs --daemon"
+                        do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n " &amp; filePath &amp; " --eval '(select-frame-set-input-focus (selected-frame))'" &amp; " &gt; /dev/null 2&gt;&amp;1 &amp;"
 
-      	  end try
+                end try
         end tell
 
 end run
@@ -148,8 +165,8 @@ end run
 </div>
 </div>
 <div id="outline-container-Change%20face%20for%20some%20mode%20only" class="outline-3">
-<h3 id="Change%20face%20for%20some%20mode%20only"><span class="section-number-3">2.3.</span> Change face for some mode only</h3>
-<div class="outline-text-3" id="text-2-3">
+<h3 id="Change%20face%20for%20some%20mode%20only"><span class="section-number-3">3.3.</span> Change face for some mode only</h3>
+<div class="outline-text-3" id="text-3-3">
 <p>
 See example at org-config.el
 </p>
@@ -163,8 +180,8 @@ See example at org-config.el
 </div>
 </div>
 <div id="outline-container-Get%20image%20height%2Fwidth%20in%20emacs" class="outline-2">
-<h2 id="Get%20image%20height%2Fwidth%20in%20emacs"><span class="section-number-2">3.</span> Get image height/width in emacs</h2>
-<div class="outline-text-2" id="text-3">
+<h2 id="Get%20image%20height%2Fwidth%20in%20emacs"><span class="section-number-2">4.</span> Get image height/width in emacs</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">[2023-09-19 Tue 21:38]</span></span>
 </p>
@@ -177,8 +194,8 @@ then run shell command <code>M-! exiftool</code> &lt;file-name&gt;
 </div>
 </div>
 <div id="outline-container-Bad%20Emacs%20Defaults" class="outline-2">
-<h2 id="Bad%20Emacs%20Defaults"><span class="section-number-2">4.</span> Bad Emacs Defaults</h2>
-<div class="outline-text-2" id="text-4">
+<h2 id="Bad%20Emacs%20Defaults"><span class="section-number-2">5.</span> Bad Emacs Defaults</h2>
+<div class="outline-text-2" id="text-5">
 <ul class="org-ul">
 <li><a href="https://news.ycombinator.com/item?id=37843908">https://news.ycombinator.com/item?id=37843908</a></li>
 <li><a href="https://idiomdrottning.org/bad-emacs-defaults">https://idiomdrottning.org/bad-emacs-defaults</a></li>
@@ -194,8 +211,8 @@ then run shell command <code>M-! exiftool</code> &lt;file-name&gt;
 </div></details>
 </div>
 <div id="outline-container-backup-by-copying" class="outline-3">
-<h3 id="backup-by-copying"><span class="section-number-3">4.1.</span> backup-by-copying</h3>
-<div class="outline-text-3" id="text-4-1">
+<h3 id="backup-by-copying"><span class="section-number-3">5.1.</span> backup-by-copying</h3>
+<div class="outline-text-3" id="text-5-1">
 <p>
 <a href="https://news.ycombinator.com/item?id=37845995">https://news.ycombinator.com/item?id=37845995</a>
 </p>
@@ -219,8 +236,8 @@ file ends up half written.
 </div>
 </div>
 <div id="outline-container-sentence-end-double-space" class="outline-3">
-<h3 id="sentence-end-double-space"><span class="section-number-3">4.2.</span> sentence-end-double-space</h3>
-<div class="outline-text-3" id="text-4-2">
+<h3 id="sentence-end-double-space"><span class="section-number-3">5.2.</span> sentence-end-double-space</h3>
+<div class="outline-text-3" id="text-5-2">
 <p>
 This allows the editor to reliably differentiate between those periods (.) that are used in abbreviations and those that end sentences.
 </p>
@@ -229,11 +246,11 @@ This allows the editor to reliably differentiate between those periods (.) that 
 <h3>Backlinks</h3>
 
 <ul class="org-ul">
-<li><a href="org_mode.html#ID-83feb6b0-a900-46a4-9e3d-2ccb8d00e8d6">Org Mode</a></li>
 <li><a href="paredit.html#ID-83e56d5d-c48b-4e2d-9834-4dafd315334a">Paredit</a></li>
 <li><a href="lifestyle_software.html#ID-5859FF4B-3320-4A36-B330-D81526275944">Lifestyle Software</a></li>
 <li><a href="tools.html#ID-6dc5435d-8a2f-49f2-8365-7ea00a855145">Tools</a></li>
 <li><a href="notes.html#ID-15b81538-4cf6-41a7-b54e-e62e8f1c2dbf">Org Export settings and #+Option 's</a></li>
+<li><a href="org_mode.html#ID-83feb6b0-a900-46a4-9e3d-2ccb8d00e8d6">Org Mode</a></li>
 </ul>
 </div>
 </div>
