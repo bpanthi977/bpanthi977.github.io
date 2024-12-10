@@ -127,7 +127,7 @@ function fetchNote(href, level) {
     level = Number(level) || pages.length;
 
     const request = new Request(href);
-    fetch(request)
+    return fetch(request)
         .then((response) => response.text())
         .then((text) => {
             unstackNotes(level);
@@ -159,7 +159,7 @@ function initializePage(page, level) {
 
     links = Array.prototype.slice.call(page.querySelectorAll("a"));
     const doPrefetch = (links.length <= 10) ? true : false;
-    links.forEach(async function (element) {
+    links.forEach(function (element) {
         var rawHref = element.getAttribute("href");
         element.dataset.level = level;
 
@@ -225,9 +225,12 @@ function setupPages() {
         if (!Array.isArray(stacks)) {
             stacks = [stacks];
         }
-        for (let i = 0; i < stacks.length; i++) {
-            fetchNote(stacks[i], i + 1);
+        function rec(i) {
+          if (i < stacks.length) {
+              fetchNote(stacks[i], i + 1).then(() => rec(i + 1))
+          }
         }
+        rec(0);
     }
 };
 

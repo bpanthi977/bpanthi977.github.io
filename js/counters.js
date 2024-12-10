@@ -90,3 +90,20 @@ function updateUi() {
             "Send me some claps if you liked the article ☝";
     }
 }
+
+
+//// GA
+
+function setupGA() {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PPT2M4RPSQ');
+
+  var script = document.createElement('script');
+  script.src = "https://www.googletagmanager.com/gtag/js?id=G-PPT2M4RPSQ";
+  script.async = true; // Set to false if you need to guarantee execution order
+  document.head.appendChild(script);
+}
+
+setupGA();
