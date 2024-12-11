@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Email Notification for PBS Queue</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="./index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-12-11 Wed&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Email Notification for PBS Queue</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#Approach%201%20-%20PBS%20system">1. Approach 1 - PBS system</a></li>
+<li><a href="#Approach%202%20-%20Cronjob">2. Approach 2 - Cronjob</a></li>
+</ul>
+</div>
+</div>
+<p>
+I had to run some simulation code in a cluster which uses <a href="https://www.openpbs.org/">PBS system</a> for queuing jobs. Since the jobs take a long time to finish, I wanted an email notification when all the jobs are completed. Here are two approaches to do that.
+</p>
+<div id="outline-container-Approach%201%20-%20PBS%20system" class="outline-2">
+<h2 id="Approach%201%20-%20PBS%20system"><span class="section-number-2">1.</span> Approach 1 - PBS system</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+If you can add flags to the PBS command for submitting jobs (<code>qsub</code>) you can add <code>-m ae -M email@address.com</code> to send email notification when the job is aborted or completed. [Source: <a href="https://www.rcac.purdue.edu/knowledge/hammer/faq/jobs/questions/pbsemailalerts">purdue.edu</a>]
+</p>
+
+<p>
+The argument to <code>-m</code> are:
+</p>
+<ul class="org-ul">
+<li>a : mail is sent when the job is aborted by the batch system.</li>
+<li>b : mail is sent when the job begins execution.</li>
+<li>e : mail is sent when the job terminates.</li>
+</ul>
+
+<p>
+This approach is useful when you have only on job to track of. If you have scheduled multiple jobs and want to be notified when all of them complete, next approach would be more useful.
+</p>
+</div>
+</div>
+<div id="outline-container-Approach%202%20-%20Cronjob" class="outline-2">
+<h2 id="Approach%202%20-%20Cronjob"><span class="section-number-2">2.</span> Approach 2 - Cronjob</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+If you can edit cronjobs (cronjob is a system to schedule scripts to be run periodically), then you can add a cronjob to check the PBS queue and notify when the queue is empty.
+</p>
+
+<p>
+To add a cronjob run <code>crontab -e</code> in the shell and add the following line:
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-text">* * * * * /home/username/check_queue.sh
+</pre>
+</div></details>
+
+<p>
+This asks cronjob to run the script <code>check_queue.sh</code> every minute. And in that script, we can check the queue using <code>qstat</code> command and if it is empty, we send a mail. But if we do just that, then an email would be sent ever minute after the queue is empty. So, the script creates a file <code>nocheck</code> after the first email is sent. And the script is written in such a way that it checks for the file <code>nocheck</code> when the script starts and if it is found the script aborts. In this way we get only one email.
+</p>
+
+<p>
+And next time when you want notification, just delete the nocheck file (<code>rm nocheck</code>).
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>check_queue.sh</label><pre class="src src-shell"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">sh</span>
+
+<span class="org-keyword">if</span> [ -f /home/username/nocheck ]; <span class="org-keyword">then</span>
+    <span class="org-keyword">exit</span> 1
+<span class="org-keyword">fi</span>
+
+<span class="org-keyword">if</span> [ $(/opt/pbs/bin/qstat | wc -l ) -le 2 ] ; <span class="org-keyword">then</span>
+    mail -s <span class="org-string">"Queue complete"</span> email@address.edu &lt; /dev/null
+    touch /home/username/nocheck
+    <span class="org-keyword">exit</span> 0
+<span class="org-keyword">fi</span>
+</pre>
+</div></details>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Email Notification for PBS Queue">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
+</div>
+</body>
+</html>
