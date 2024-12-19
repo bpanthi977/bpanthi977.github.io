@@ -71,6 +71,7 @@
 <li><a href="#Hallucination%20due%20to%20non-reference%20formulation">6.1. Hallucination due to non-reference formulation</a></li>
 </ul>
 </li>
+<li><a href="#Resources">7. Resources</a></li>
 </ul>
 </div>
 </div>
@@ -92,7 +93,7 @@ Idea: We don't want to explicitly model density, and instead just sample to gene
 </ul>
 
 <p>
-GANs avoid the problem of latent space regularization in AutoEncoders, because in some way the random noise \(z\) is itself the latent space, and it being within our control is both continuous and complete. If it wasn't complete the generator won't perform good on some input. 
+GANs avoid the problem of latent space regularization in AutoEncoders, because in some way the random noise \(z\) is itself the latent space, and it being within our control is both continuous and complete. If it wasn't complete the generator won't perform good on some input.
 </p>
 <div id="outline-container-Training%20GANs" class="outline-2">
 <h2 id="Training%20GANs"><span class="section-number-2">1.</span> Training GANs</h2>
@@ -111,12 +112,12 @@ Discriminator (\(D\)) tries to maximize how well it can discriminate between fak
 \(\arg\max_D E_{z,x}[\log D(G(z)) + \log(1-D(x))]\)
 </p></li>
 
-<li>Generator (\(G\)) tries to fool the discriminator \(D\): 
+<li>Generator (\(G\)) tries to fool the discriminator \(D\):
 \(\arg \min_G E_{z,x} [\log D(G(z))]\)</li>
 </ul>
 
 <p>
-So, the overall objective is: 
+So, the overall objective is:
 </p>
 
 <p>
@@ -124,11 +125,11 @@ So, the overall objective is:
 </p>
 
 <p>
-<a href="ilya_sutskever.html#ID-2D746147-B03D-4506-ADB0-83A27067C67C">Ilya Sutskever</a> says (<a href="mpv:https://youtu.be/13CZPWmke6A?t=636::0:10:36">Lex Fridman Podcast #94</a>), GANs don't have <a href="loss_function.html#ID-B183FBFA-4408-4FAA-BC05-47FCBB733828">cost function</a>. 
+<a href="ilya_sutskever.html#ID-2D746147-B03D-4506-ADB0-83A27067C67C">Ilya Sutskever</a> says (<a href="mpv:https://youtu.be/13CZPWmke6A?t=636::0:10:36">Lex Fridman Podcast #94</a>), GANs don't have <a href="loss_function.html#ID-B183FBFA-4408-4FAA-BC05-47FCBB733828">cost function</a>.
 </p>
 
 <p>
-<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=6&t=2586s">0:43:06</a> GANs are distribution transformers. The generator maps data from gaussain noise to a target distribution. 
+<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=6&t=2586s">0:43:06</a> GANs are distribution transformers. The generator maps data from gaussain noise to a target distribution.
 <a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=6&t=2607s">0:43:27</a> We can interpolate in noise distribution to interpolate in target distribution.
 </p>
 </div>
@@ -148,7 +149,7 @@ So, the overall objective is:
 </div>
 
 <p>
-Add more layers as training progresses 
+Add more layers as training progresses
 </p>
 <ul class="org-ul">
 <li>Speeds up training</li>
@@ -183,11 +184,11 @@ Add more layers as training progresses
 <h2 id="ID-CBDD2357-5CAA-4ED2-A3B7-E76F1943E2FF"><span class="section-number-2">5.</span> CycleGAN: domain transformation</h2>
 <div class="outline-text-2" id="text-5">
 <p>
-<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=6&t=3021s">0:50:21</a> 
+<a href="https://www.youtube.com/watch?v=QcLlc9lj2hk&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=6&t=3021s">0:50:21</a>
 </p>
 
 <p>
-CycleGAN emphasize the idea of GANs being <a href="mit_6_s191_introduction_to_deep_learning.html#ID-777B6F6F-054F-434D-8357-7E9D2BBBEFFF">distribution transformers</a>. 
+CycleGAN emphasize the idea of GANs being <a href="mit_6_s191_introduction_to_deep_learning.html#ID-777B6F6F-054F-434D-8357-7E9D2BBBEFFF">distribution transformers</a>.
 </p>
 
 <div id="figure-4" class="figure">
@@ -205,7 +206,7 @@ CycleGAN emphasize the idea of GANs being <a href="mit_6_s191_introduction_to_de
 <h3 id="Hallucination%20due%20to%20non-reference%20formulation"><span class="section-number-3">6.1.</span> Hallucination due to non-reference formulation</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
-from <a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Inversion by Direct Iteration - An Alternative to Denoising Diffusion for Image Restoration - TMLR - 2303.11435.pdf#page=3">InDI pg. 3</a>
+from <a href="papers/Inversion by Direct Iteration - An Alternative to Denoising Diffusion for Image Restoration - TMLR - 2303.11435.pdf#page=3">InDI pg. 3</a>
 </p>
 
 <p>
@@ -214,12 +215,30 @@ GANs
 <ul class="org-ul">
 <li>suffer from unstable training,</li>
 <li>are prone to introduce significant image hallucinations
-This is a direct consequence of a non-reference formulation that directly tries to minimize the distance of the range of the generator to the <a href="deep_learning_with_python_francois_chollet.html#ID-5A16F125-41C0-4513-9277-DBCEF0DC6529">manifold</a> of natural images.</li>
+This is a direct consequence of a non-reference formulation<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> that directly tries to minimize the distance of the range of the generator to the <a href="deep_learning_with_python_francois_chollet.html#ID-5A16F125-41C0-4513-9277-DBCEF0DC6529">manifold</a> of natural images.</li>
 </ul>
 </div>
 </div>
 </div>
+<div id="outline-container-Resources" class="outline-2">
+<h2 id="Resources"><span class="section-number-2">7.</span> Resources</h2>
+<div class="outline-text-2" id="text-7">
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?app=desktop&amp;v=HGYYEUSm-0Q">Ian Goodfellow: Generative Adversarial Networks (NIPS 2016 tutorial)</a></li>
+</ul>
 </div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+Non reference formulation means that the comparision is done with implicit representation of image instead of direct comparision with pixels. This is in contrast to how <a href="diffusion_model.html#ID-44E30394-8DAA-4BDF-9D43-6C9DE5A7D174">Diffusion Models</a> are trained. The implicit representation is the representation created by discriminator (i.e. the manifold created in discriminator of the natural images)
+</p></div></div>
+
+
+</div>
+</div></div>
 <div id="postamble" class="status">
 <hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Generative Adversarial Networks">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/braindump/data/rss.xml"><img src="https://bpanthi977.github.io/braindump/data/rss.png" /></a>
 </div>

@@ -67,6 +67,7 @@ https://bpanthi977.github.io/braindump/coupled_pendulum.html
 https://bpanthi977.github.io/braindump/morison_equation.html
 https://bpanthi977.github.io/braindump/32c3 - Computational Metapsychology.html
 https://bpanthi977.github.io/braindump/matplotlib_seaborn.html
+https://bpanthi977.github.io/braindump/the_surprising_effectiveness_of_ppo_in_cooperative_multi_agent_games.html
 https://bpanthi977.github.io/braindump/juice_game_design.html
 https://bpanthi977.github.io/braindump/lstm.html
 https://bpanthi977.github.io/braindump/uncertainty_in_structual_engineering.html
@@ -281,6 +282,7 @@ https://bpanthi977.github.io/braindump/bottleneck_decongestion_using_avs.html
 https://bpanthi977.github.io/braindump/time.html
 https://bpanthi977.github.io/braindump/progressive_summarization.html
 https://bpanthi977.github.io/braindump/probabilistic_logic_programming.html
+https://bpanthi977.github.io/braindump/imagemagick.html
 https://bpanthi977.github.io/braindump/cess_programs.html
 https://bpanthi977.github.io/braindump/design_of_steel_structures.html
 https://bpanthi977.github.io/braindump/twitter_bookmarks.html
@@ -374,6 +376,7 @@ https://bpanthi977.github.io/braindump/tmlr.html
 https://bpanthi977.github.io/braindump/Headphone - mic workaround.html
 https://bpanthi977.github.io/braindump/free_speech.html
 https://bpanthi977.github.io/braindump/object_oriented_programming.html
+https://bpanthi977.github.io/braindump/proximal_policy_optimization.html
 https://bpanthi977.github.io/braindump/quantum_computer.html
 https://bpanthi977.github.io/braindump/generalized_policy_iteration.html
 https://bpanthi977.github.io/braindump/mpv.html
@@ -400,6 +403,7 @@ https://bpanthi977.github.io/braindump/avoiding_microservice_megadisasters.html
 https://bpanthi977.github.io/braindump/max_pooling.html
 https://bpanthi977.github.io/braindump/sigma_algebra.html
 https://bpanthi977.github.io/braindump/theory.html
+https://bpanthi977.github.io/braindump/software_tips_for_ml_researchers.html
 https://bpanthi977.github.io/braindump/student_outsmarts_the_teacher.html
 https://bpanthi977.github.io/braindump/communication.html
 https://bpanthi977.github.io/braindump/spectral_algorithms.html
@@ -538,6 +542,7 @@ https://bpanthi977.github.io/braindump/great_green_wall.html
 https://bpanthi977.github.io/braindump/nested_dissection.html
 https://bpanthi977.github.io/braindump/adjoint.html
 https://bpanthi977.github.io/braindump/startup.html
+https://bpanthi977.github.io/braindump/email_notification_for_pbs_queue.html
 https://bpanthi977.github.io/braindump/batchnorm_nn.html
 https://bpanthi977.github.io/braindump/mcclim.html
 https://bpanthi977.github.io/braindump/pulseaudio-obs.html
@@ -563,6 +568,7 @@ https://bpanthi977.github.io/braindump/sparql.html
 https://bpanthi977.github.io/braindump/smoothed_particle_hydrodynamics.html
 https://bpanthi977.github.io/braindump/neural_network.html
 https://bpanthi977.github.io/braindump/postel_s_law.html
+https://bpanthi977.github.io/braindump/gauss_lucas_theorem.html
 https://bpanthi977.github.io/braindump/adversarial_attack.html
 https://bpanthi977.github.io/braindump/nuremberg.html
 https://bpanthi977.github.io/braindump/sergey_levine.html
@@ -624,6 +630,7 @@ https://bpanthi977.github.io/braindump/pell_s_equation.html
 https://bpanthi977.github.io/braindump/reinforcement_learning_problem_is_the_ai_problem.html
 https://bpanthi977.github.io/braindump/archive_completed_tasks_in_org_mode.html
 https://bpanthi977.github.io/braindump/tilottama_podcast.html
+https://bpanthi977.github.io/braindump/generalized_advantage_estimation.html
 https://bpanthi977.github.io/braindump/willpower_depletion.html
 https://bpanthi977.github.io/braindump/trust.html
 https://bpanthi977.github.io/braindump/critical_brain_hypothesis.html
