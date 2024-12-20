@@ -29,7 +29,7 @@
 The roots of the derivative of a polynomial (real or complex) always lie within the convex hull of the original polynomial's roots.
 </p>
 
-<p height="400px" align="center">
+<p height="400px" align="center" loop="true" autoplay="true">
 
 <video controls id="video--654058169021891344">
   <source src="data/gauss_lucas_theorem/samuel_vaiter_convex_hull.mp4">
@@ -37,16 +37,31 @@ The roots of the derivative of a polynomial (real or complex) always lie within 
 </video>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+{
+  const func = () => {
     const video = document.getElementById('video--654058169021891344');
     video.currentTime = 0;
     if (video.parentElement?.tagName == "P") {
       video.setAttribute("width", video.parentElement.getAttribute("width"));
       video.setAttribute("height", video.parentElement.getAttribute("height"));
+      if (video.parentElement.getAttribute("loop"))
+           video.setAttribute("loop", true);
+      if (video.parentElement.getAttribute("autoplay"))
+           video.setAttribute("autoplay", true);
     }
-  });
+  }
+
+  if (document.getElementById('video--654058169021891344'))
+    func();
+  else
+    document.addEventListener('DOMContentLoaded', func);
+}
 </script>
 
+</p>
+
+<p>
+(Animation from <a href="https://x.com/vaiter/status/1868537541990777282">https://x.com/vaiter/status/1868537541990777282</a>)
 </p>
 
 <hr />

@@ -136,6 +136,23 @@ function getPageContent(page) {
     return element;
 }
 
+function runEmbededScripts(element) {
+    // Copied from https://stackoverflow.com/a/47614491
+    Array.from(element.querySelectorAll("script"))
+        .forEach( oldScriptEl => {
+            const newScriptEl = document.createElement("script");
+
+            Array.from(oldScriptEl.attributes).forEach( attr => {
+                newScriptEl.setAttribute(attr.name, attr.value)
+            });
+
+            const scriptText = document.createTextNode(oldScriptEl.innerHTML);
+            newScriptEl.appendChild(scriptText);
+
+            oldScriptEl.parentNode.replaceChild(newScriptEl, oldScriptEl);
+        });
+}
+
 // Fetches note at href, and then removes all notes up to level, and inserts the new note
 function fetchNote(href, level) {
     if (pages.indexOf(href) > -1) return;
@@ -152,6 +169,7 @@ function fetchNote(href, level) {
             let element = getPageContent(fragment.content);
             console.log(element);
             container.appendChild(wrapContent(element, level + 1, href));
+            runEmbededScripts(element);
             stackNote(href, level);
 
             setTimeout(
