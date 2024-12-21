@@ -14,8 +14,8 @@
   <link>https://bpanthi.com.np/braindump/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Wed, 18 Dec 2024 23:20:20 -0600</pubDate>
-  <lastBuildDate>Wed, 18 Dec 2024 23:20:20 -0600</lastBuildDate>
+  <pubDate>Fri, 20 Dec 2024 20:08:10 -0600</pubDate>
+  <lastBuildDate>Fri, 20 Dec 2024 20:08:10 -0600</lastBuildDate>
   <generator>Emacs 29.4 Org-mode 9.7.17</generator>
   <webMaster>Bibek Panthi</webMaster>
   <image>
@@ -24,6 +24,26 @@
     <link>https://bpanthi.com.np/braindump/</link>
   </image>
 
+  <item>
+    <title>My Poems</title>
+    <link>https://bpanthi.com.np/braindump/my_poems.html</link>
+    <author>Bibek Panthi</author>
+    <guid isPermaLink="false">https://bpanthi.com.np/braindump/my_poems.html</guid>
+    <pubDate>Fri, 20 Dec 2024 19:56:00 -0600</pubDate>
+
+    <description><![CDATA[<ol class="org-ol">
+    <li>2024-11-15 <a href="to_moon.html#ID-E09BF8BD-1EDA-4E39-BF4A-2F6D929F3C5C">जुनलाई</a></li>
+    <li>2024-09-16 <a href="i_forget_poem.html#ID-AC9B2D73-7C55-444A-8643-F1B5F6216C8A">म भुल्छु</a></li>
+    <li>2024-09-11 <a href="never_poem.html#ID-91E83684-C1D3-42DA-BB6D-9CB6BBB50595">नाइँ!</a></li>
+    <li>2023-11-24 <a href="gaze_poem.html#ID-0527F444-2A64-43D3-BC48-4D21A7D1FE18">नजर</a></li>
+    <li>2023-04-13 <a href="where_does_my_heart_meet_poem.html#ID-9F63A6F1-61EF-489C-B415-7B916CE9F045">तिमीसँग भेट</a></li>
+    <li>2023-04-13 <a href="how_poem.html#ID-676E8A8A-4F7A-43B1-9006-A9519E099560">कसरी?</a></li>
+    <li>2022-04-16 <a href="makes_you_a_poet_poem.html#ID-B21E75DB-719C-4E55-9597-0BF405F7977A">शायर बनाउँछ</a></li>
+    <li>2021-03-18 <a href="killed_me_poem.html#ID-F6719D13-B2DC-47D6-BA8A-D01F76006DE4">लौ मार्यो</a></li>
+    <li>2020-08-15 <a href="awesome_poem.html#ID-A954D9A5-F1D4-4FCD-8329-3D72814F407A">बबाल</a></li>
+    </ol>
+    ]]></description>
+  </item>
   <item>
     <title>Software Tips for ML Researchers</title>
     <link>https://bpanthi.com.np/braindump/software_tips_for_ml_researchers.html</link>
@@ -55,8 +75,8 @@
     <description><![CDATA[<p>
     I had to run some simulation code in a cluster which uses <a href="https://www.openpbs.org/">PBS system</a> for queuing jobs. Since the jobs take a long time to finish, I wanted an email notification when all the jobs are completed. Here are two approaches to do that.
     </p>
-    <div id="outline-container-ID-7541CF06-F5F2-4C1D-ADCC-A6ACD25DF7D7" class="outline-3">
-    <h3 id="ID-7541CF06-F5F2-4C1D-ADCC-A6ACD25DF7D7">Approach 1 - PBS system</h3>
+    <div id="outline-container-ID-08D77ABC-5F0E-40B7-B8AD-9C79F0F0FA2E" class="outline-3">
+    <h3 id="ID-08D77ABC-5F0E-40B7-B8AD-9C79F0F0FA2E">Approach 1 - PBS system</h3>
     <div class="outline-text-3" id="text-Approach-1---PBS-system">
     <p>
     If you can add flags to the PBS command for submitting jobs (<code>qsub</code>) you can add <code>-m ae -M email@address.com</code> to send email notification when the job is aborted or completed. [Source: <a href="https://www.rcac.purdue.edu/knowledge/hammer/faq/jobs/questions/pbsemailalerts">purdue.edu</a>]
@@ -76,8 +96,8 @@
     </p>
     </div>
     </div>
-    <div id="outline-container-ID-008CFD5F-9B97-49E5-B272-51C72252D05C" class="outline-3">
-    <h3 id="ID-008CFD5F-9B97-49E5-B272-51C72252D05C">Approach 2 - Cronjob</h3>
+    <div id="outline-container-ID-F7302A29-E5AB-4FBD-BCA2-0692E771F3F8" class="outline-3">
+    <h3 id="ID-F7302A29-E5AB-4FBD-BCA2-0692E771F3F8">Approach 2 - Cronjob</h3>
     <div class="outline-text-3" id="text-Approach-2---Cronjob">
     <p>
     If you can edit cronjobs (cronjob is a system to schedule scripts to be run periodically), then you can add a cronjob to check the PBS queue and notify when the queue is empty.
@@ -389,8 +409,8 @@
   <span class="org-builtin">:request</span> <span class="org-string">"launch"</span>))
   </pre>
   </div>
-  <div id="outline-container-ID-779CEC49-7304-45F6-8543-D2ADE9D36C63" class="outline-3">
-  <h3 id="ID-779CEC49-7304-45F6-8543-D2ADE9D36C63">Installation</h3>
+  <div id="outline-container-ID-DE86C712-2716-411A-925D-813890DD9721" class="outline-3">
+  <h3 id="ID-DE86C712-2716-411A-925D-813890DD9721">Installation</h3>
   <div class="outline-text-3" id="text-Installation">
   <ol class="org-ol">
   <li><code>M-x package-install dap-mode</code> : Install dap-mode</li>
@@ -511,8 +531,8 @@
   <guid isPermaLink="false">https://bpanthi.com.np/braindump/pdfs.html</guid>
   <pubDate>Fri, 22 Nov 2024 15:12:00 -0600</pubDate>
 
-  <description><![CDATA[<div id="outline-container-ID-76A90B26-FBEE-4DFD-A542-2B189E880CD5" class="outline-3">
-  <h3 id="ID-76A90B26-FBEE-4DFD-A542-2B189E880CD5">Named Destinations</h3>
+  <description><![CDATA[<div id="outline-container-ID-65C34BB7-1BAF-4FC1-9111-977B7A1F2434" class="outline-3">
+  <h3 id="ID-65C34BB7-1BAF-4FC1-9111-977B7A1F2434">Named Destinations</h3>
   <div class="outline-text-3" id="text-Named-Destinations">
   <p>
   Used for referencing/linking parts of another pdf document
