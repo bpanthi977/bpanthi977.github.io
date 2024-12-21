@@ -31,9 +31,107 @@
 <li><a href="latex_python_tricks_in_org.html#ID-9F2EE6DF-86A2-49FB-B5A2-E6D03B01112D">Latex &amp; Python Tricks in Org</a></li>
 <li><a href="emacs.html#ID-5d7a5064-6bd7-497b-99a7-2ce8c6576459">Emacs</a></li>
 </ul>
-<div id="outline-container-Agenda" class="outline-2">
-<h2 id="Agenda"><span class="section-number-2">1.</span> Agenda</h2>
+<div id="outline-container-Source%20block%20without%20babel%20backend" class="outline-2">
+<h2 id="Source%20block%20without%20babel%20backend"><span class="section-number-2">1.</span> Source block without babel backend</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+When using source blocks that don't have a babel backend add the parameter <code>:exports code</code>
+to prevent org-mode from complaining about the backend being not found. Because even though the <code>:eval no-export</code> is present, org babel still tries to parse the params and do some stuff with the source block.
+</p>
+
+<p>
+So instead of
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-block-begin-line">#+begin_src json</span>
+<span class="org-org-block">  {</span>
+<span class="org-org-block">    </span><span class="org-org-block"><span class="org-keyword">"name"</span></span><span class="org-org-block"> : </span><span class="org-org-block"><span class="org-string">"Bibek Panthi"</span></span><span class="org-org-block">,</span>
+<span class="org-org-block">    </span><span class="org-org-block"><span class="org-keyword">"species"</span></span><span class="org-org-block"> : </span><span class="org-org-block"><span class="org-string">"Homo sapiens"</span></span>
+<span class="org-org-block">  }</span>
+<span class="org-org-block-end-line">#+end_src</span>
+</pre>
+</div></details>
+
+<p>
+do
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-block-begin-line">#+begin_src json :exports code</span>
+<span class="org-org-block">  {</span>
+<span class="org-org-block">    </span><span class="org-org-block"><span class="org-keyword">"name"</span></span><span class="org-org-block"> : </span><span class="org-org-block"><span class="org-string">"Bibek Panthi"</span></span><span class="org-org-block">,</span>
+<span class="org-org-block">    </span><span class="org-org-block"><span class="org-keyword">"species"</span></span><span class="org-org-block"> : </span><span class="org-org-block"><span class="org-string">"Homo sapiens"</span></span>
+<span class="org-org-block">  }</span>
+<span class="org-org-block-end-line">#+end_src</span>
+</pre>
+</div></details>
+</div>
+</div>
+<div id="outline-container-Literate%20DevOps" class="outline-2">
+<h2 id="Literate%20DevOps"><span class="section-number-2">2.</span> Literate DevOps</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<a href="https://howardism.org/Technical/Emacs/literate-devops.html">https://howardism.org/Technical/Emacs/literate-devops.html</a>
+</p>
+
+<p>
+You can run org babel  <code>sh</code> source blocks on remote systems using <code>:dir</code> parameter.
+</p>
+
+<p>
+Consider the following:
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-block-begin-line">#+begin_src sh :dir /etc :results raw :wrap verbatim</span>
+<span class="org-org-block">head passwd</span>
+<span class="org-org-block-end-line">#+end_src</span>
+</pre>
+</div></details>
+
+<p>
+This is same as:
+</p>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-block-begin-line">#+begin_src sh :results raw :wrap verbatim</span>
+<span class="org-org-block">head /etc/passwd</span>
+<span class="org-org-block-end-line">#+end_src</span>
+</pre>
+</div></details>
+
+<p>
+The <code>:dir</code> parameter accepts anything that emacs accepts for opening files, including paths opened by tramp. For example, if you have a server <code>server.com</code> and you open some file by <code>M-x find-file</code> <code>/ssh:server.com:/home/bpanthi977/test.org</code>. Then in similar way, you can specify <code>:dir</code> parameter to work on a remote directory:
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-block-begin-line">#+begin_src sh :dir /ssh:server.com:/etc :wrap verbatim :results raw</span>
+<span class="org-org-block">head passwd</span>
+<span class="org-org-block-end-line">#+end_src</span>
+
+<span class="org-org-meta-line">#+RESULTS:</span>
+<span class="org-org-block-begin-line">#+begin_verbatim</span>
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+<span class="org-org-block-end-line">#+end_verbatim</span>
+</pre>
+</div></details>
+</div>
+</div>
+<div id="outline-container-Agenda" class="outline-2">
+<h2 id="Agenda"><span class="section-number-2">3.</span> Agenda</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 <a href="https://cachestocaches.com/2016/9/my-workflow-org-agenda/">https://cachestocaches.com/2016/9/my-workflow-org-agenda/</a>
 </p>
