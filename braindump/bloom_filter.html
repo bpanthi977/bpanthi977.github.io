@@ -27,6 +27,29 @@
 Bloom Filter are memory efficient data strucutre that return "Firm NO" if data doesn't exist or a "may-be yes" if it may exist.
 </p>
 
+<p>
+To create a bloom filter,
+</p>
+<ul class="org-ul">
+<li>create a bit array</li>
+<li>loop over the data
+<ul class="org-ul">
+<li>hash the data to get an index</li>
+<li>set the bit to 1 at that index</li>
+</ul></li>
+</ul>
+
+<p>
+Now if we want to check if a certain data exists or not hash the data to get a index and check the bit at that index. This may return a false positive, but never a false negative.
+</p>
+
+<p>
+See also:
+</p>
+<ul class="org-ul">
+<li>How bloom filters made SQLite 10x faster: <a href="https://news.ycombinator.com/item?id=42486610">news.ycombinator</a>, <a href="https://avi.im/blag/2024/sqlite-past-present-future/">avi.im</a></li>
+</ul>
+
 <hr />
 <h3>Backlinks</h3>
 
