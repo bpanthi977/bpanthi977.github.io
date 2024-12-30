@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Different Conceptions of Learning</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="H" href="./index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-12-27 Fri&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Different Conceptions of Learning
+<br />
+<span class="subtitle">Function Approximation vs. Self-Organization</span>
+</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#ID-E15920A6-84DC-4239-9C55-88F635B6CED9">1. NARS - Non Axiomatic Reasoning System</a></li>
+</ul>
+</div>
+</div>
+<p>
+A paper by <a href="pei_wang.html#ID-B38DF962-8FC3-4FF6-95FC-055230355920">Pei Wang</a>. [<a href="papers/Different Conceptions of Learning.pdf#page=1">pdf:</a>] [<a href="https://cis.temple.edu/~pwang/Publication/conceptions-of-learning.pdf">Paper: cis.temple.edu</a>] [<a href="https://cis.temple.edu/~pwang/Talks/AGI16-Learning.pdf">Presentation Slides: csi.temple.edu</a>]
+</p>
+
+<p>
+Learning can be of two types (there might be other types):
+</p>
+<ul class="org-ul">
+<li>Algorithmic Learning
+<ul class="org-ul">
+<li>Learning follows an algorithm</li>
+<li>Takes training data as input and then outputs a model</li>
+<li>The model is an algorithm that carries out domain task</li>
+</ul></li>
+
+<li>Inferential Learning
+<ul class="org-ul">
+<li>System's knowledge bases is represented in a set of beliefs</li>
+<li>Learning is updating the topological structures as well as weights of those beliefs</li>
+<li>Updates is done through inference rules</li>
+<li>The system can be queried for answers.</li>
+</ul></li>
+</ul>
+
+<p>
+Inferential Learning appeared in the early days of <a href="machine_learning.html#ID-5b3ac5b3-f28b-4f5f-bdea-c25b5002c622">ML</a> but now lost favor to Deep Learning.
+However AGI research still has many challenges and the authors think that compared to deep neural networks, inferential learning may provide better alternative as learning paradigm of AGI [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Different Conceptions of Learning.pdf#page=9">Page 9 / Conclusions</a>].
+</p>
+
+<p>
+Differences:
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Aspect</th>
+<th scope="col" class="org-left">Algorithm Learning (NN)</th>
+<th scope="col" class="org-left">Inferential Learning (NARS)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Representation</td>
+<td class="org-left">Vectors</td>
+<td class="org-left">Sentences of formal language</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Distributed</td>
+<td class="org-left">In-between local and distributed (<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Different Conceptions of Learning.pdf#page=7">Page 7</a>)</td>
+</tr>
+
+<tr>
+<td class="org-left">Network</td>
+<td class="org-left">Layered network</td>
+<td class="org-left">Graph Network</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Fixed topology</td>
+<td class="org-left">Dynamic topology</td>
+</tr>
+
+<tr>
+<td class="org-left">Task</td>
+<td class="org-left">Input/Output Mapping</td>
+<td class="org-left">Any question can be asked</td>
+</tr>
+
+<tr>
+<td class="org-left">Learning</td>
+<td class="org-left">Training phase</td>
+<td class="org-left">Life long learning</td>
+</tr>
+
+<tr>
+<td class="org-left">Learning  Algorithm</td>
+<td class="org-left">Backprop, Gradient Descent</td>
+<td class="org-left">Inference Rules of Logic</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Algorithmic learning is "using an algorithm to learn an algorithm". While in inferential learning there is a dynamic interaction between multiple algorithms which is more general but less predictible than the input-output mapping using a single algorithm paradigm of Algorithmic learning.
+</p>
+<div id="outline-container-ID-E15920A6-84DC-4239-9C55-88F635B6CED9" class="outline-2">
+<h2 id="ID-E15920A6-84DC-4239-9C55-88F635B6CED9"><span class="section-number-2">1.</span> NARS - Non Axiomatic Reasoning System</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+NARS is an example of a system that does inferential learning. It is based on the following definition of intelligence:
+</p>
+
+<blockquote id="intelligence_definition">
+<p>
+“Intelligence” is the ability for a system to adapt given insufficient knowledge and resources. That is, the system must depend on finite resources to make real-time response while being open to unanticipated problems and events.
+</p>
+
+<p>
+Consequently, the system’s solutions are usually not absolutely optimal, but the best the system can find at the time, and the system could always do better if it had more knowledge and resources. [<a href="papers/Different Conceptions of Learning.pdf#page=3">Different Conceptions of Learning.pdf: Page 3</a>]
+</p>
+</blockquote>
+
+<p>
+NARS consists of a knowledge base, a collection of inference rules and a control mechanism that applies the rules and updates, queries the knowledge base.
+</p>
+
+<ul class="org-ul">
+<li>Its knowledge base is represented as a graph of
+<ul class="org-ul">
+<li>Nodes = Representing terms</li>
+<li>Link  = Statement about those terms (with weight = truth value)</li>
+<li>Along with priority values of the nodes and links that affect how the terms and statements are choosen for inference.</li>
+</ul></li>
+
+<li>As input comes
+<ul class="org-ul">
+<li>new nodes, links are formed,</li>
+<li>the weights of old links are updated,</li>
+<li>and priority of statements are updated</li>
+</ul></li>
+
+<li>The statements of NARS have a truth value of belief assigned to them. Which is a pair of two numbers: Frequency, Confidence
+<ul class="org-ul">
+<li>Frequency = ratio of positive evidence among total evidence</li>
+<li>Confidence = ratio of current evidence to future evidence that can arrive</li>
+</ul></li>
+</ul>
+
+
+<p>
+Thus NARS is not just do purely deductive inference and but also other type of logical inference. It can also compose terms (using operation similar to set operations: union, intersection, difference) to create new terms, and do inteference on statments about them [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Different Conceptions of Learning.pdf#page=5">Page 5</a>].
+</p>
+
+<p>
+An example of how generalization works in NARS is: Say the system gets an observatoin "Tweety flies". (Tweety is a cartoon character, a bird) Then the system can do following generalization:
+</p>
+<ol class="org-ol">
+<li>"Canaries fly" using the informmation that "Tweety is a canary".</li>
+<li>"Birds fly" using the information that "Tweety is a bird"</li>
+<li>"Animals fly" using the information that "Tweety is an animal".</li>
+</ol>
+
+<p>
+The last is an over-generalization which will loose priority due to low frequency of evidence (or through negative evidence), the first is an under-generalization which will loose priority through low confidence (from less total evidence). The second "Birds fly" which is a proper generalization will get high priority due to higher frequency of positive evidence compared to other two.
+</p>
+
+<p>
+Other properties of NARS are:
+</p>
+
+<ul class="org-ul">
+<li><p>
+Statements are of Subject-copula-predicate format (copula <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> means connecting word). Statement can be of different form, denoting inheritance, equivalence, implication.
+</p>
+
+<p>
+E.g. Some statements are of the form: \(S \rightarrow P \langle t \rangle\) which means `S` is a generalization of `P`. Here \(t\) is truth-value of belief, and \(\rightarrow\) is inheritance copula <sup><a id="fnr.1.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
+</p></li>
+
+<li>Statements are themselves terms too. So there can be higher order statements and inferences.</li>
+
+<li>Since resources are not infinite, any real time system that is open to new information needs to <a href="forgetting.html#ID-3074C8FF-8E5B-4871-B356-28ABD9C3F5B4">forget</a>. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Different Conceptions of Learning.pdf#page=4">Page 4</a>]
+<ul class="org-ul">
+<li><a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Different Conceptions of Learning.pdf#page=4">Absolute Forgetting</a>: Some concepts are totally deleted</li>
+<li><a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Different Conceptions of Learning.pdf#page=4">Relative Forgetting</a>: As some concepts are use infrequently, their priority value start decreasing and thus they are chosen less in inference process.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+Copula means a connecting word, in particular a form of the verb <code>be</code> connecting a subject and complement.
+</p>
+
+<hr />
+<h3>Backlinks</h3>
+
+<ul class="org-ul">
+<li><a href="artificial_intelligence.html#ID-2674491f-a645-4499-996e-af04db2be74d">Artificial Intelligence</a></li>
+<li><a href="pei_wang.html#ID-B38DF962-8FC3-4FF6-95FC-055230355920">Pei Wang</a></li>
+<li><a href="machine_learning.html#ID-5b3ac5b3-f28b-4f5f-bdea-c25b5002c622">Machine Learning</a></li>
+</ul></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Different Conceptions of Learning">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

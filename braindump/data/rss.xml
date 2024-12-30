@@ -14,8 +14,8 @@
   <link>https://bpanthi.com.np/braindump/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Mon, 23 Dec 2024 15:27:24 -0600</pubDate>
-  <lastBuildDate>Mon, 23 Dec 2024 15:27:24 -0600</lastBuildDate>
+  <pubDate>Mon, 30 Dec 2024 17:16:45 -0600</pubDate>
+  <lastBuildDate>Mon, 30 Dec 2024 17:16:45 -0600</lastBuildDate>
   <generator>Emacs 29.4 Org-mode 9.7.17</generator>
   <webMaster>Bibek Panthi</webMaster>
   <image>
@@ -25,319 +25,509 @@
   </image>
 
   <item>
-    <title>My Poems</title>
-    <link>https://bpanthi.com.np/braindump/my_poems.html</link>
+    <title>Different Conceptions of Learning</title>
+    <link>https://bpanthi.com.np/braindump/different_conceptions_of_learning.html</link>
     <author>Bibek Panthi</author>
-    <guid isPermaLink="false">https://bpanthi.com.np/braindump/my_poems.html</guid>
-    <pubDate>Fri, 20 Dec 2024 19:56:00 -0600</pubDate>
-
-    <description><![CDATA[<ol class="org-ol">
-    <li>2024-11-15 <a href="to_moon.html#ID-E09BF8BD-1EDA-4E39-BF4A-2F6D929F3C5C">जुनलाई</a></li>
-    <li>2024-09-16 <a href="ma_bhulxu.html#ID-AC9B2D73-7C55-444A-8643-F1B5F6216C8A">म भुल्छु</a></li>
-    <li>2024-09-11 <a href="nai.html#ID-91E83684-C1D3-42DA-BB6D-9CB6BBB50595">नाइँ!</a></li>
-    <li>2023-11-24 <a href="gaze_poem.html#ID-0527F444-2A64-43D3-BC48-4D21A7D1FE18">नजर</a></li>
-    <li>2023-04-13 <a href="where_does_my_heart_meet_poem.html#ID-9F63A6F1-61EF-489C-B415-7B916CE9F045">तिमीसँग भेट</a></li>
-    <li>2023-04-13 <a href="how_poem.html#ID-676E8A8A-4F7A-43B1-9006-A9519E099560">कसरी?</a></li>
-    <li>2022-04-16 <a href="saayar_banaauxa.html#ID-B21E75DB-719C-4E55-9597-0BF405F7977A">शायर बनाउँछ</a></li>
-    <li>2020-08-15 <a href="awesome_poem.html#ID-A954D9A5-F1D4-4FCD-8329-3D72814F407A">बबाल</a></li>
-    </ol>
-    ]]></description>
-  </item>
-  <item>
-    <title>Software Tips for ML Researchers</title>
-    <link>https://bpanthi.com.np/braindump/software_tips_for_ml_researchers.html</link>
-    <author>Bibek Panthi</author>
-    <guid isPermaLink="false">https://bpanthi.com.np/braindump/software_tips_for_ml_researchers.html</guid>
-    <pubDate>Wed, 18 Dec 2024 22:20:00 -0600</pubDate>
+    <guid isPermaLink="false">https://bpanthi.com.np/braindump/different_conceptions_of_learning.html</guid>
+    <pubDate>Mon, 30 Dec 2024 16:58:00 -0600</pubDate>
 
     <description><![CDATA[<p>
-    <a href="https://www.eugenevinitsky.com/posts/quick-software-tips/">https://www.eugenevinitsky.com/posts/quick-software-tips/</a>
-    </p>
-
-    <ul class="org-ul">
-    <li>Use Hydra (or Pyrallis) for configs. Don't just write the hyperparameters/config parameters in code files.</li>
-    <li>Use package manager to manage python version and packages.
-    E.g. Conda, uv-pip, Poetry, pixi</li>
-    <li>Use git, don't use jupyter notebooks (because they don't play nice with git)</li>
-    <li>Don't tune hyperparameters by hand. Use Optuna, Ray Tune or custom tuner.</li>
-    <li>Run experiments in cluster not in desktop (quick experiments = quicker progress)</li>
-    </ul>
-    ]]></description>
-  </item>
-  <item>
-    <title>Email Notification for PBS Queue</title>
-    <link>https://bpanthi.com.np/braindump/email_notification_for_pbs_queue.html</link>
-    <author>Bibek Panthi</author>
-    <guid isPermaLink="false">https://bpanthi.com.np/braindump/email_notification_for_pbs_queue.html</guid>
-    <pubDate>Wed, 11 Dec 2024 01:37:00 -0600</pubDate>
-
-    <description><![CDATA[<p>
-    I had to run some simulation code in a cluster which uses <a href="https://www.openpbs.org/">PBS system</a> for queuing jobs. Since the jobs take a long time to finish, I wanted an email notification when all the jobs are completed. Here are two approaches to do that.
-    </p>
-    <div id="outline-container-ID-42509D22-B449-46FF-97F3-E145895174B1" class="outline-3">
-    <h3 id="ID-42509D22-B449-46FF-97F3-E145895174B1">Approach 1 - PBS system</h3>
-    <div class="outline-text-3" id="text-Approach-1---PBS-system">
-    <p>
-    If you can add flags to the PBS command for submitting jobs (<code>qsub</code>) you can add <code>-m ae -M email@address.com</code> to send email notification when the job is aborted or completed. [Source: <a href="https://www.rcac.purdue.edu/knowledge/hammer/faq/jobs/questions/pbsemailalerts">purdue.edu</a>]
+    A paper by <a href="pei_wang.html#ID-B38DF962-8FC3-4FF6-95FC-055230355920">Pei Wang</a>. [<a href="papers/Different Conceptions of Learning.pdf#page=1">pdf:</a>] [<a href="https://cis.temple.edu/~pwang/Publication/conceptions-of-learning.pdf">Paper: cis.temple.edu</a>] [<a href="https://cis.temple.edu/~pwang/Talks/AGI16-Learning.pdf">Presentation Slides: csi.temple.edu</a>]
     </p>
 
     <p>
-    The argument to <code>-m</code> are:
+    Learning can be of two types (there might be other types):
     </p>
     <ul class="org-ul">
-    <li>a : mail is sent when the job is aborted by the batch system.</li>
-    <li>b : mail is sent when the job begins execution.</li>
-    <li>e : mail is sent when the job terminates.</li>
+    <li>Algorithmic Learning
+    <ul class="org-ul">
+    <li>Learning follows an algorithm</li>
+    <li>Takes training data as input and then outputs a model</li>
+    <li>The model is an algorithm that carries out domain task</li>
+    </ul></li>
+
+    <li>Inferential Learning
+    <ul class="org-ul">
+    <li>System's knowledge bases is represented in a set of beliefs</li>
+    <li>Learning is updating the topological structures as well as weights of those beliefs</li>
+    <li>Updates is done through inference rules</li>
+    <li>The system can be queried for answers.</li>
+    </ul></li>
     </ul>
 
     <p>
-    This approach is useful when you have only on job to track of. If you have scheduled multiple jobs and want to be notified when all of them complete, next approach would be more useful.
-    </p>
-    </div>
-    </div>
-    <div id="outline-container-ID-244F60D6-3F88-4E61-9726-18B57B460DA6" class="outline-3">
-    <h3 id="ID-244F60D6-3F88-4E61-9726-18B57B460DA6">Approach 2 - Cronjob</h3>
-    <div class="outline-text-3" id="text-Approach-2---Cronjob">
-    <p>
-    If you can edit cronjobs (cronjob is a system to schedule scripts to be run periodically), then you can add a cronjob to check the PBS queue and notify when the queue is empty.
+    Inferential Learning appeared in the early days of <a href="machine_learning.html#ID-5b3ac5b3-f28b-4f5f-bdea-c25b5002c622">ML</a> but now lost favor to Deep Learning.
+    However AGI research still has many challenges and the authors think that compared to deep neural networks, inferential learning may provide better alternative as learning paradigm of AGI [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Different Conceptions of Learning.pdf#page=9">Page 9 / Conclusions</a>].
     </p>
 
     <p>
-    To add a cronjob run <code>crontab -e</code> in the shell and add the following line:
+    Differences:
     </p>
+    <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
-    <div class="org-src-container">
-    <pre class="src src-text">* * * * * /home/username/check_queue.sh
-    </pre>
-    </div>
-
-    <p>
-    This asks cronjob to run the script <code>check_queue.sh</code> every minute. And in that script, we can check the queue using <code>qstat</code> command and if it is empty, we send a mail. But if we do just that, then an email would be sent ever minute after the queue is empty. So, the script creates a file <code>nocheck</code> after the first email is sent. And the script is written in such a way that it checks for the file <code>nocheck</code> when the script starts and if it is found the script aborts. In this way we get only one email.
-    </p>
-
-    <p>
-    And next time when you want notification, just delete the nocheck file (<code>rm nocheck</code>).
-    </p>
-
-    <div class="org-src-container">
-    <label class="org-src-name"><span class="listing-number">Listing 1: </span>check_queue.sh</label><pre class="src src-shell"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">sh</span>
-
-    <span class="org-keyword">if</span> [ -f /home/username/nocheck ]; <span class="org-keyword">then</span>
-    <span class="org-keyword">exit</span> 1
-    <span class="org-keyword">fi</span>
-
-    <span class="org-keyword">if</span> [ $(/opt/pbs/bin/qstat | wc -l ) -le 2 ] ; <span class="org-keyword">then</span>
-    mail -s <span class="org-string">"Queue complete"</span> email@address.edu &lt; /dev/null
-    touch /home/username/nocheck
-    <span class="org-keyword">exit</span> 0
-    <span class="org-keyword">fi</span>
-    </pre>
-    </div>
-    </div>
-    </div>
-    ]]></description>
-  </item>
-  <item>
-    <title>Citations in Org Mode</title>
-    <link>https://bpanthi.com.np/braindump/citations_in_org_mode.html</link>
-    <author>Bibek Panthi</author>
-    <guid isPermaLink="false">https://bpanthi.com.np/braindump/citations_in_org_mode.html</guid>
-    <pubDate>Mon, 09 Dec 2024 19:50:00 -0600</pubDate>
-
-    <description><![CDATA[<p>
-    If you are writing a document in org mode and want to cite some papers or articles as in a research paper you can use the built in <a href="https://orgmode.org/manual/Citation-handling.html">citation handling</a> features of <a href="org_mode.html#ID-83feb6b0-a900-46a4-9e3d-2ccb8d00e8d6">org-mode</a>.
-    </p>
-
-    <p>
-    Imagine you have a <code>references.bib</code> file with some BiBTeX entries as follows:
-    </p>
-    <div class="org-src-container">
-    <pre class="src src-bibtex"><span class="org-function-name">@article</span>{<span class="org-constant">photon</span>,
-    <span class="org-variable-name">title</span>={Photon mapping on programmable graphics hardware},
-    <span class="org-variable-name">author</span>={Purcell, Timothy J and Donner, Craig and Cammarano, Mike and Jensen, Henrik Wann and Hanrahan, Pat},
-    <span class="org-variable-name">booktitle</span>={ACM SIGGRAPH 2005 Courses},
-    <span class="org-variable-name">pages</span>={258--es},
-    <span class="org-variable-name">year</span>={2005}
-    }
-    </pre>
-    </div>
-
-    <p>
-    Then you cand add a org mode keyword/directive called `#+bibliography` near the head of the document to point to the bib file.
-    </p>
-    <div class="org-src-container">
-    <pre class="src src-org"><span class="org-org-meta-line">#+bibliography: references.bib</span>
-    </pre>
-    </div>
-
-    <p>
-    After this is done you can add reference the paper in your org document:
-    </p>
-
-    <div class="org-src-container">
-    <pre class="src src-org">Grid construction can be done by using parallel sorting algorithm <span class="org-org-cite">[</span><span class="org-org-ref-cite"><span class="org-org-cite"><a href="cite:@photon">cite:</a></span></span><span class="org-org-ref-cite"><span class="org-org-cite"><span class="org-error"><a href="cite:@photon">@photo</a><a href="cite:@photon">n</a></span></span></span><span class="org-org-cite">]</span>, or by using ... .
-    </pre>
-    </div>
-
-    <p>
-    Finally at the place where you want you bibliography write:
-    </p>
-    <div class="org-src-container">
-    <pre class="src src-org"><span class="org-org-meta-line">#+print_bibliography:</span>
-    </pre>
-    </div>
-
-    <p>
-    Now when you export the document, the citations and bibliography will be generated as per you formatting config.
-    </p>
-
-    <p>
-    I prefer the following config. The first one for LaTeX export and second one for html export. (So use only one of these at a time):
-    </p>
-    <div class="org-src-container">
-    <pre class="src src-org"><span class="org-org-meta-line">#+cite_export: biblatex numeric,backend=bibtex</span>
-    <span class="org-org-meta-line">#+cite_export: basic numeric numeric</span>
-    </pre>
-    </div>
-
-    <p>
-    Or you can add a file local variable as such:
-    </p>
-    <div class="org-src-container">
-    <pre class="src src-org"><span class="org-comment"># Local Variables&#58;</span>
-    <span class="org-comment"># org-cite-export-processors: ((latex biblatex "numeric,backend=bibtex") (html basic "numeric" "numeric"))</span>
-    <span class="org-comment"># End:</span>
-    </pre>
-    </div>
-    ]]></description>
-  </item>
-  <item>
-    <title>Cloud Storage</title>
-    <link>https://bpanthi.com.np/braindump/cloud_storage.html</link>
-    <author>Bibek Panthi</author>
-    <guid isPermaLink="false">https://bpanthi.com.np/braindump/cloud_storage.html</guid>
-    <pubDate>Sat, 30 Nov 2024 22:43:00 -0600</pubDate>
-
-    <description><![CDATA[<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-    <caption class="t-above"><span class="table-number">Table 1:</span> Comparision of Cloud Storage Providers (only providers supported by rclone are listed).</caption>
 
     <colgroup>
     <col  class="org-left" />
 
-    <col  class="org-right" />
-
-    <col  class="org-right" />
+    <col  class="org-left" />
 
     <col  class="org-left" />
     </colgroup>
     <thead>
     <tr>
-    <th scope="col" class="org-left">Provider</th>
-    <th scope="col" class="org-right">Yearly Price ($)</th>
-    <th scope="col" class="org-right">Storage (TB)</th>
-    <th scope="col" class="org-left">Transfer per Month (TB)</th>
+    <th scope="col" class="org-left">Aspect</th>
+    <th scope="col" class="org-left">Algorithm Learning (NN)</th>
+    <th scope="col" class="org-left">Inferential Learning (NARS)</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <td class="org-left">OneDrive Family</td>
-    <td class="org-right">100</td>
-    <td class="org-right">6 <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></td>
+    <td class="org-left">Representation</td>
+    <td class="org-left">Vectors</td>
+    <td class="org-left">Sentences of formal language</td>
+    </tr>
+
+    <tr>
     <td class="org-left">&#xa0;</td>
+    <td class="org-left">Distributed</td>
+    <td class="org-left">In-between local and distributed (<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Different Conceptions of Learning.pdf#page=7">Page 7</a>)</td>
     </tr>
 
     <tr>
-    <td class="org-left"><a href="https://one.google.com/plans">Google Drive</a></td>
-    <td class="org-right">100</td>
-    <td class="org-right">2</td>
+    <td class="org-left">Network</td>
+    <td class="org-left">Layered network</td>
+    <td class="org-left">Graph Network</td>
+    </tr>
+
+    <tr>
     <td class="org-left">&#xa0;</td>
+    <td class="org-left">Fixed topology</td>
+    <td class="org-left">Dynamic topology</td>
     </tr>
 
     <tr>
-    <td class="org-left"><a href="https://jottacloud.com/en/pricing?category=jottacloud-personal">Jottacloud</a></td>
-    <td class="org-right">70</td>
-    <td class="org-right">1</td>
-    <td class="org-left">&infin;</td>
+    <td class="org-left">Task</td>
+    <td class="org-left">Input/Output Mapping</td>
+    <td class="org-left">Any question can be asked</td>
     </tr>
 
     <tr>
-    <td class="org-left">OneDrive</td>
-    <td class="org-right">60</td>
-    <td class="org-right">1</td>
-    <td class="org-left">&#xa0;</td>
+    <td class="org-left">Learning</td>
+    <td class="org-left">Training phase</td>
+    <td class="org-left">Life long learning</td>
     </tr>
 
     <tr>
-    <td class="org-left">OneDrive</td>
-    <td class="org-right">70</td>
-    <td class="org-right">1</td>
-    <td class="org-left">&#xa0;</td>
-    </tr>
-
-    <tr>
-    <td class="org-left">pCloud</td>
-    <td class="org-right">120, 100<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></td>
-    <td class="org-right">2</td>
-    <td class="org-left">&#xa0;</td>
-    </tr>
-
-    <tr>
-    <td class="org-left">pCloud (Lifetime)</td>
-    <td class="org-right">599, 399<sup><a id="fnr.2.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></td>
-    <td class="org-right">2</td>
-    <td class="org-left">&#xa0;</td>
-    </tr>
-
-    <tr>
-    <td class="org-left">OpenDrive</td>
-    <td class="org-right">100</td>
-    <td class="org-right">&infin;</td>
-    <td class="org-left">Throttled</td>
-    </tr>
-
-    <tr>
-    <td class="org-left">Mega</td>
-    <td class="org-right">106</td>
-    <td class="org-right">2</td>
-    <td class="org-left">24</td>
-    </tr>
-
-    <tr>
-    <td class="org-left">Jottacloud</td>
-    <td class="org-right">120</td>
-    <td class="org-right">&infin;</td>
-    <td class="org-left">5</td>
-    </tr>
-
-    <tr>
-    <td class="org-left"><a href="https://mypikpak.com/drive/payment">PikPak</a></td>
-    <td class="org-right">86, 40<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup></td>
-    <td class="org-right">10</td>
-    <td class="org-left">4</td>
-    </tr>
-
-    <tr>
-    <td class="org-left">Yandex</td>
-    <td class="org-right">44, 20<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></td>
-    <td class="org-right">1</td>
-    <td class="org-left">&#xa0;</td>
+    <td class="org-left">Learning  Algorithm</td>
+    <td class="org-left">Backprop, Gradient Descent</td>
+    <td class="org-left">Inference Rules of Logic</td>
     </tr>
     </tbody>
     </table>
 
+    <p>
+    Algorithmic learning is "using an algorithm to learn an algorithm". While in inferential learning there is a dynamic interaction between multiple algorithms which is more general but less predictible than the input-output mapping using a single algorithm paradigm of Algorithmic learning.
+    </p>
+    <div id="outline-container-ID-9213453F-21CA-4A81-AB75-25B3091A34CD" class="outline-3">
+    <h3 id="ID-9213453F-21CA-4A81-AB75-25B3091A34CD">NARS - Non Axiomatic Reasoning System</h3>
+    <div class="outline-text-3" id="text-NARS---Non-Axiomatic-Reasoning-System">
+    <p>
+    NARS is an example of a system that does inferential learning. It is based on the following definition of intelligence:
+    </p>
+
+    <blockquote id="intelligence_definition">
+    <p>
+    “Intelligence” is the ability for a system to adapt given insufficient knowledge and resources. That is, the system must depend on finite resources to make real-time response while being open to unanticipated problems and events.
+    </p>
+
+    <p>
+    Consequently, the system’s solutions are usually not absolutely optimal, but the best the system can find at the time, and the system could always do better if it had more knowledge and resources. [<a href="papers/Different Conceptions of Learning.pdf#page=3">Different Conceptions of Learning.pdf: Page 3</a>]
+    </p>
+    </blockquote>
+
+    <p>
+    NARS consists of a knowledge base, a collection of inference rules and a control mechanism that applies the rules and updates, queries the knowledge base.
+    </p>
+
     <ul class="org-ul">
-    <li>A review of backup technologies and how to choose among them (for businesses and personal use): <a href="https://www.starwindsoftware.com/blog/where-to-keep-your-backups-storage-types-explained/">starwindsoftware.com</a>
+    <li>Its knowledge base is represented as a graph of
     <ul class="org-ul">
-    <li>Tape storage is still the best for high volume of backup data requirements</li>
-    <li>NAS are good</li>
-    <li>Public cloud storage providers are also cost effective and reliable for lower data requirements</li>
+    <li>Nodes = Representing terms</li>
+    <li>Link  = Statement about those terms (with weight = truth value)</li>
+    <li>Along with priority values of the nodes and links that affect how the terms and statements are choosen for inference.</li>
+    </ul></li>
+
+    <li>As input comes
+    <ul class="org-ul">
+    <li>new nodes, links are formed,</li>
+    <li>the weights of old links are updated,</li>
+    <li>and priority of statements are updated</li>
+    </ul></li>
+
+    <li>The statements of NARS have a truth value of belief assigned to them. Which is a pair of two numbers: Frequency, Confidence
+    <ul class="org-ul">
+    <li>Frequency = ratio of positive evidence among total evidence</li>
+    <li>Confidence = ratio of current evidence to future evidence that can arrive</li>
     </ul></li>
     </ul>
 
+
     <p>
-    In conclusion, if you have any one else to share with, the OneDrive Family is the best offer in terms of cost, reliability and transfer speed. Apart from that Google Drive and Jottacloud are also good. I don't know much about Jottacloud's reliability. Though the people on internet find it good.
+    Thus NARS is not just do purely deductive inference and but also other type of logical inference. It can also compose terms (using operation similar to set operations: union, intersection, difference) to create new terms, and do inteference on statments about them [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Different Conceptions of Learning.pdf#page=5">Page 5</a>].
     </p>
+
+    <p>
+    An example of how generalization works in NARS is: Say the system gets an observatoin "Tweety flies". (Tweety is a cartoon character, a bird) Then the system can do following generalization:
+    </p>
+    <ol class="org-ol">
+    <li>"Canaries fly" using the informmation that "Tweety is a canary".</li>
+    <li>"Birds fly" using the information that "Tweety is a bird"</li>
+    <li>"Animals fly" using the information that "Tweety is an animal".</li>
+    </ol>
+
+    <p>
+    The last is an over-generalization which will loose priority due to low frequency of evidence (or through negative evidence), the first is an under-generalization which will loose priority through low confidence (from less total evidence). The second "Birds fly" which is a proper generalization will get high priority due to higher frequency of positive evidence compared to other two.
+    </p>
+
+    <p>
+    Other properties of NARS are:
+    </p>
+
+    <ul class="org-ul">
+    <li><p>
+    Statements are of Subject-copula-predicate format (copula <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> means connecting word). Statement can be of different form, denoting inheritance, equivalence, implication.
+    </p>
+
+    <p>
+    E.g. Some statements are of the form: \(S \rightarrow P \langle t \rangle\) which means `S` is a generalization of `P`. Here \(t\) is truth-value of belief, and \(\rightarrow\) is inheritance copula <sup><a id="fnr.1.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
+    </p></li>
+
+    <li>Statements are themselves terms too. So there can be higher order statements and inferences.</li>
+
+    <li>Since resources are not infinite, any real time system that is open to new information needs to <a href="forgetting.html#ID-3074C8FF-8E5B-4871-B356-28ABD9C3F5B4">forget</a>. [<a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Different Conceptions of Learning.pdf#page=4">Page 4</a>]
+    <ul class="org-ul">
+    <li><a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Different Conceptions of Learning.pdf#page=4">Absolute Forgetting</a>: Some concepts are totally deleted</li>
+    <li><a href="file:///Users/bpanthi977/Documents/synced/Notes/papers/Different Conceptions of Learning.pdf#page=4">Relative Forgetting</a>: As some concepts are use infrequently, their priority value start decreasing and thus they are chosen less in inference process.</li>
+    </ul></li>
+    </ul>
+    </div>
+    </div>
     ]]></description>
+</item>
+<item>
+  <title>My Poems</title>
+  <link>https://bpanthi.com.np/braindump/my_poems.html</link>
+  <author>Bibek Panthi</author>
+  <guid isPermaLink="false">https://bpanthi.com.np/braindump/my_poems.html</guid>
+  <pubDate>Fri, 20 Dec 2024 19:56:00 -0600</pubDate>
+
+  <description><![CDATA[<ol class="org-ol">
+  <li>2024-11-15 <a href="to_moon.html#ID-E09BF8BD-1EDA-4E39-BF4A-2F6D929F3C5C">जुनलाई</a></li>
+  <li>2024-09-16 <a href="ma_bhulxu.html#ID-AC9B2D73-7C55-444A-8643-F1B5F6216C8A">म भुल्छु</a></li>
+  <li>2024-09-11 <a href="nai.html#ID-91E83684-C1D3-42DA-BB6D-9CB6BBB50595">नाइँ!</a></li>
+  <li>2023-11-24 <a href="gaze_poem.html#ID-0527F444-2A64-43D3-BC48-4D21A7D1FE18">नजर</a></li>
+  <li>2023-04-13 <a href="where_does_my_heart_meet_poem.html#ID-9F63A6F1-61EF-489C-B415-7B916CE9F045">तिमीसँग भेट</a></li>
+  <li>2023-04-13 <a href="how_poem.html#ID-676E8A8A-4F7A-43B1-9006-A9519E099560">कसरी?</a></li>
+  <li>2022-04-16 <a href="saayar_banaauxa.html#ID-B21E75DB-719C-4E55-9597-0BF405F7977A">शायर बनाउँछ</a></li>
+  <li>2020-08-15 <a href="awesome_poem.html#ID-A954D9A5-F1D4-4FCD-8329-3D72814F407A">बबाल</a></li>
+  </ol>
+  ]]></description>
+</item>
+<item>
+  <title>Software Tips for ML Researchers</title>
+  <link>https://bpanthi.com.np/braindump/software_tips_for_ml_researchers.html</link>
+  <author>Bibek Panthi</author>
+  <guid isPermaLink="false">https://bpanthi.com.np/braindump/software_tips_for_ml_researchers.html</guid>
+  <pubDate>Wed, 18 Dec 2024 22:20:00 -0600</pubDate>
+
+  <description><![CDATA[<p>
+  <a href="https://www.eugenevinitsky.com/posts/quick-software-tips/">https://www.eugenevinitsky.com/posts/quick-software-tips/</a>
+  </p>
+
+  <ul class="org-ul">
+  <li>Use Hydra (or Pyrallis) for configs. Don't just write the hyperparameters/config parameters in code files.</li>
+  <li>Use package manager to manage python version and packages.
+  E.g. Conda, uv-pip, Poetry, pixi</li>
+  <li>Use git, don't use jupyter notebooks (because they don't play nice with git)</li>
+  <li>Don't tune hyperparameters by hand. Use Optuna, Ray Tune or custom tuner.</li>
+  <li>Run experiments in cluster not in desktop (quick experiments = quicker progress)</li>
+  </ul>
+  ]]></description>
+</item>
+<item>
+  <title>Email Notification for PBS Queue</title>
+  <link>https://bpanthi.com.np/braindump/email_notification_for_pbs_queue.html</link>
+  <author>Bibek Panthi</author>
+  <guid isPermaLink="false">https://bpanthi.com.np/braindump/email_notification_for_pbs_queue.html</guid>
+  <pubDate>Wed, 11 Dec 2024 01:37:00 -0600</pubDate>
+
+  <description><![CDATA[<p>
+  I had to run some simulation code in a cluster which uses <a href="https://www.openpbs.org/">PBS system</a> for queuing jobs. Since the jobs take a long time to finish, I wanted an email notification when all the jobs are completed. Here are two approaches to do that.
+  </p>
+  <div id="outline-container-ID-FC8A61B8-7C81-4ECC-B667-4C61025EDB92" class="outline-3">
+  <h3 id="ID-FC8A61B8-7C81-4ECC-B667-4C61025EDB92">Approach 1 - PBS system</h3>
+  <div class="outline-text-3" id="text-Approach-1---PBS-system">
+  <p>
+  If you can add flags to the PBS command for submitting jobs (<code>qsub</code>) you can add <code>-m ae -M email@address.com</code> to send email notification when the job is aborted or completed. [Source: <a href="https://www.rcac.purdue.edu/knowledge/hammer/faq/jobs/questions/pbsemailalerts">purdue.edu</a>]
+  </p>
+
+  <p>
+  The argument to <code>-m</code> are:
+  </p>
+  <ul class="org-ul">
+  <li>a : mail is sent when the job is aborted by the batch system.</li>
+  <li>b : mail is sent when the job begins execution.</li>
+  <li>e : mail is sent when the job terminates.</li>
+  </ul>
+
+  <p>
+  This approach is useful when you have only on job to track of. If you have scheduled multiple jobs and want to be notified when all of them complete, next approach would be more useful.
+  </p>
+  </div>
+  </div>
+  <div id="outline-container-ID-FF81639C-D5D1-4A25-9255-9A39BC23027B" class="outline-3">
+  <h3 id="ID-FF81639C-D5D1-4A25-9255-9A39BC23027B">Approach 2 - Cronjob</h3>
+  <div class="outline-text-3" id="text-Approach-2---Cronjob">
+  <p>
+  If you can edit cronjobs (cronjob is a system to schedule scripts to be run periodically), then you can add a cronjob to check the PBS queue and notify when the queue is empty.
+  </p>
+
+  <p>
+  To add a cronjob run <code>crontab -e</code> in the shell and add the following line:
+  </p>
+
+  <div class="org-src-container">
+  <pre class="src src-text">* * * * * /home/username/check_queue.sh
+  </pre>
+  </div>
+
+  <p>
+  This asks cronjob to run the script <code>check_queue.sh</code> every minute. And in that script, we can check the queue using <code>qstat</code> command and if it is empty, we send a mail. But if we do just that, then an email would be sent ever minute after the queue is empty. So, the script creates a file <code>nocheck</code> after the first email is sent. And the script is written in such a way that it checks for the file <code>nocheck</code> when the script starts and if it is found the script aborts. In this way we get only one email.
+  </p>
+
+  <p>
+  And next time when you want notification, just delete the nocheck file (<code>rm nocheck</code>).
+  </p>
+
+  <div class="org-src-container">
+  <label class="org-src-name"><span class="listing-number">Listing 1: </span>check_queue.sh</label><pre class="src src-shell"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">sh</span>
+
+  <span class="org-keyword">if</span> [ -f /home/username/nocheck ]; <span class="org-keyword">then</span>
+  <span class="org-keyword">exit</span> 1
+  <span class="org-keyword">fi</span>
+
+  <span class="org-keyword">if</span> [ $(/opt/pbs/bin/qstat | wc -l ) -le 2 ] ; <span class="org-keyword">then</span>
+  mail -s <span class="org-string">"Queue complete"</span> email@address.edu &lt; /dev/null
+  touch /home/username/nocheck
+  <span class="org-keyword">exit</span> 0
+  <span class="org-keyword">fi</span>
+  </pre>
+  </div>
+  </div>
+  </div>
+  ]]></description>
+</item>
+<item>
+  <title>Citations in Org Mode</title>
+  <link>https://bpanthi.com.np/braindump/citations_in_org_mode.html</link>
+  <author>Bibek Panthi</author>
+  <guid isPermaLink="false">https://bpanthi.com.np/braindump/citations_in_org_mode.html</guid>
+  <pubDate>Mon, 09 Dec 2024 19:50:00 -0600</pubDate>
+
+  <description><![CDATA[<p>
+  If you are writing a document in org mode and want to cite some papers or articles as in a research paper you can use the built in <a href="https://orgmode.org/manual/Citation-handling.html">citation handling</a> features of <a href="org_mode.html#ID-83feb6b0-a900-46a4-9e3d-2ccb8d00e8d6">org-mode</a>.
+  </p>
+
+  <p>
+  Imagine you have a <code>references.bib</code> file with some BiBTeX entries as follows:
+  </p>
+  <div class="org-src-container">
+  <pre class="src src-bibtex"><span class="org-function-name">@article</span>{<span class="org-constant">photon</span>,
+  <span class="org-variable-name">title</span>={Photon mapping on programmable graphics hardware},
+  <span class="org-variable-name">author</span>={Purcell, Timothy J and Donner, Craig and Cammarano, Mike and Jensen, Henrik Wann and Hanrahan, Pat},
+  <span class="org-variable-name">booktitle</span>={ACM SIGGRAPH 2005 Courses},
+  <span class="org-variable-name">pages</span>={258--es},
+  <span class="org-variable-name">year</span>={2005}
+  }
+  </pre>
+  </div>
+
+  <p>
+  Then you cand add a org mode keyword/directive called `#+bibliography` near the head of the document to point to the bib file.
+  </p>
+  <div class="org-src-container">
+  <pre class="src src-org"><span class="org-org-meta-line">#+bibliography: references.bib</span>
+  </pre>
+  </div>
+
+  <p>
+  After this is done you can add reference the paper in your org document:
+  </p>
+
+  <div class="org-src-container">
+  <pre class="src src-org">Grid construction can be done by using parallel sorting algorithm <span class="org-org-cite">[</span><span class="org-org-ref-cite"><span class="org-org-cite"><a href="cite:@photon">cite:</a></span></span><span class="org-org-ref-cite"><span class="org-org-cite"><span class="org-error"><a href="cite:@photon">@photo</a><a href="cite:@photon">n</a></span></span></span><span class="org-org-cite">]</span>, or by using ... .
+  </pre>
+  </div>
+
+  <p>
+  Finally at the place where you want you bibliography write:
+  </p>
+  <div class="org-src-container">
+  <pre class="src src-org"><span class="org-org-meta-line">#+print_bibliography:</span>
+  </pre>
+  </div>
+
+  <p>
+  Now when you export the document, the citations and bibliography will be generated as per you formatting config.
+  </p>
+
+  <p>
+  I prefer the following config. The first one for LaTeX export and second one for html export. (So use only one of these at a time):
+  </p>
+  <div class="org-src-container">
+  <pre class="src src-org"><span class="org-org-meta-line">#+cite_export: biblatex numeric,backend=bibtex</span>
+  <span class="org-org-meta-line">#+cite_export: basic numeric numeric</span>
+  </pre>
+  </div>
+
+  <p>
+  Or you can add a file local variable as such:
+  </p>
+  <div class="org-src-container">
+  <pre class="src src-org"><span class="org-comment"># Local Variables&#58;</span>
+  <span class="org-comment"># org-cite-export-processors: ((latex biblatex "numeric,backend=bibtex") (html basic "numeric" "numeric"))</span>
+  <span class="org-comment"># End:</span>
+  </pre>
+  </div>
+  ]]></description>
+</item>
+<item>
+  <title>Cloud Storage</title>
+  <link>https://bpanthi.com.np/braindump/cloud_storage.html</link>
+  <author>Bibek Panthi</author>
+  <guid isPermaLink="false">https://bpanthi.com.np/braindump/cloud_storage.html</guid>
+  <pubDate>Sat, 30 Nov 2024 22:43:00 -0600</pubDate>
+
+  <description><![CDATA[<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+  <caption class="t-above"><span class="table-number">Table 1:</span> Comparision of Cloud Storage Providers (only providers supported by rclone are listed).</caption>
+
+  <colgroup>
+  <col  class="org-left" />
+
+  <col  class="org-right" />
+
+  <col  class="org-right" />
+
+  <col  class="org-left" />
+  </colgroup>
+  <thead>
+  <tr>
+  <th scope="col" class="org-left">Provider</th>
+  <th scope="col" class="org-right">Yearly Price ($)</th>
+  <th scope="col" class="org-right">Storage (TB)</th>
+  <th scope="col" class="org-left">Transfer per Month (TB)</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td class="org-left">OneDrive Family</td>
+  <td class="org-right">100</td>
+  <td class="org-right">6 <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></td>
+  <td class="org-left">&#xa0;</td>
+  </tr>
+
+  <tr>
+  <td class="org-left"><a href="https://one.google.com/plans">Google Drive</a></td>
+  <td class="org-right">100</td>
+  <td class="org-right">2</td>
+  <td class="org-left">&#xa0;</td>
+  </tr>
+
+  <tr>
+  <td class="org-left"><a href="https://jottacloud.com/en/pricing?category=jottacloud-personal">Jottacloud</a></td>
+  <td class="org-right">70</td>
+  <td class="org-right">1</td>
+  <td class="org-left">&infin;</td>
+  </tr>
+
+  <tr>
+  <td class="org-left">OneDrive</td>
+  <td class="org-right">60</td>
+  <td class="org-right">1</td>
+  <td class="org-left">&#xa0;</td>
+  </tr>
+
+  <tr>
+  <td class="org-left">OneDrive</td>
+  <td class="org-right">70</td>
+  <td class="org-right">1</td>
+  <td class="org-left">&#xa0;</td>
+  </tr>
+
+  <tr>
+  <td class="org-left">pCloud</td>
+  <td class="org-right">120, 100<sup><a id="fnr.1.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></td>
+  <td class="org-right">2</td>
+  <td class="org-left">&#xa0;</td>
+  </tr>
+
+  <tr>
+  <td class="org-left">pCloud (Lifetime)</td>
+  <td class="org-right">599, 399<sup><a id="fnr.1.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></td>
+  <td class="org-right">2</td>
+  <td class="org-left">&#xa0;</td>
+  </tr>
+
+  <tr>
+  <td class="org-left">OpenDrive</td>
+  <td class="org-right">100</td>
+  <td class="org-right">&infin;</td>
+  <td class="org-left">Throttled</td>
+  </tr>
+
+  <tr>
+  <td class="org-left">Mega</td>
+  <td class="org-right">106</td>
+  <td class="org-right">2</td>
+  <td class="org-left">24</td>
+  </tr>
+
+  <tr>
+  <td class="org-left">Jottacloud</td>
+  <td class="org-right">120</td>
+  <td class="org-right">&infin;</td>
+  <td class="org-left">5</td>
+  </tr>
+
+  <tr>
+  <td class="org-left"><a href="https://mypikpak.com/drive/payment">PikPak</a></td>
+  <td class="org-right">86, 40<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup></td>
+  <td class="org-right">10</td>
+  <td class="org-left">4</td>
+  </tr>
+
+  <tr>
+  <td class="org-left">Yandex</td>
+  <td class="org-right">44, 20<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></td>
+  <td class="org-right">1</td>
+  <td class="org-left">&#xa0;</td>
+  </tr>
+  </tbody>
+  </table>
+
+  <ul class="org-ul">
+  <li>A review of backup technologies and how to choose among them (for businesses and personal use): <a href="https://www.starwindsoftware.com/blog/where-to-keep-your-backups-storage-types-explained/">starwindsoftware.com</a>
+  <ul class="org-ul">
+  <li>Tape storage is still the best for high volume of backup data requirements</li>
+  <li>NAS are good</li>
+  <li>Public cloud storage providers are also cost effective and reliable for lower data requirements</li>
+  </ul></li>
+  </ul>
+
+  <p>
+  In conclusion, if you have any one else to share with, the OneDrive Family is the best offer in terms of cost, reliability and transfer speed. Apart from that Google Drive and Jottacloud are also good. I don't know much about Jottacloud's reliability. Though the people on internet find it good.
+  </p>
+  ]]></description>
 </item>
 <item>
   <title>Debugging C with DAP in Emacs</title>
@@ -408,8 +598,8 @@
   <span class="org-builtin">:request</span> <span class="org-string">"launch"</span>))
   </pre>
   </div>
-  <div id="outline-container-ID-005B4B0C-9B00-4C12-906D-447B3E9616A6" class="outline-3">
-  <h3 id="ID-005B4B0C-9B00-4C12-906D-447B3E9616A6">Installation</h3>
+  <div id="outline-container-ID-04743677-3A22-4BAE-9ADD-20C64B6DF4C2" class="outline-3">
+  <h3 id="ID-04743677-3A22-4BAE-9ADD-20C64B6DF4C2">Installation</h3>
   <div class="outline-text-3" id="text-Installation">
   <ol class="org-ol">
   <li><code>M-x package-install dap-mode</code> : Install dap-mode</li>
@@ -530,8 +720,8 @@
   <guid isPermaLink="false">https://bpanthi.com.np/braindump/pdfs.html</guid>
   <pubDate>Fri, 22 Nov 2024 15:12:00 -0600</pubDate>
 
-  <description><![CDATA[<div id="outline-container-ID-9693DCAB-3FD6-481E-AB83-49FCA700C097" class="outline-3">
-  <h3 id="ID-9693DCAB-3FD6-481E-AB83-49FCA700C097">Named Destinations</h3>
+  <description><![CDATA[<div id="outline-container-ID-FD52E885-84E8-4CAD-BFF9-9F03A27CDA9D" class="outline-3">
+  <h3 id="ID-FD52E885-84E8-4CAD-BFF9-9F03A27CDA9D">Named Destinations</h3>
   <div class="outline-text-3" id="text-Named-Destinations">
   <p>
   Used for referencing/linking parts of another pdf document
@@ -573,11 +763,11 @@
   <div id="text-footnotes">
 
     <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-    1 TB per person. Upto 6 family members.
+    On Black Friday Offer
     </p></div></div>
 
     <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-    On Black Friday Offer
+    1 TB per person. Upto 6 family members.
     </p></div></div>
 
     <div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">

@@ -59,7 +59,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#ID-06FDB4BD-C6C2-42F2-9D1A-4A7D540AA93C">1. Hilbert Space</a></li>
+<li><a href="#ID-06FDB4BD-C6C2-42F2-9D1A-4A7D540AA93C">1. Hilbert Space</a>
+<ul>
+<li><a href="#Parallelogram%20Law%20in%20Hilbert%20Space">1.1. Parallelogram Law in Hilbert Space</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -78,7 +82,11 @@ i.e. Banach space is a complete normed <a href="vector_space.html#ID-D502AC51-4E
 <h2 id="ID-06FDB4BD-C6C2-42F2-9D1A-4A7D540AA93C"><span class="section-number-2">1.</span> Hilbert Space</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-A hilbert space is a banach space where the metric/norm comes from an inner product. (i.e. the metric has to satisfy parallelogram law)
+A hilbert space is a banach space where the metric/norm comes from an inner product. (i.e. the metric has to satisfy parallelogram law).
+</p>
+
+<p>
+A Hilbert space is a real or complex <span class="underline">inner product space</span> that is also a <span class="underline">complete metric space</span> with respect to the distance function induced by the inner product.
 </p>
 
 <p>
@@ -94,6 +102,25 @@ Hilbert Space generalize the familiar notions of \(\mathbb{R}^n\)  to infinite d
 <li>angle</li>
 <li>eignenvectors and eigenvalues</li>
 </ul>
+</div>
+<div id="outline-container-Parallelogram%20Law%20in%20Hilbert%20Space" class="outline-3">
+<h3 id="Parallelogram%20Law%20in%20Hilbert%20Space"><span class="section-number-3">1.1.</span> Parallelogram Law in Hilbert Space</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+In Hilbert space following identity holds:
+</p>
+
+\begin{equation*}
+|| u + v ||^2 + || u - v ||^2 =  2 ( ||u||^2 + ||v||^2)
+\end{equation*}
+
+<p>
+And every banach space where this identity holds is a Hilbert Space. The inner product can be defined as (known as Polarization Identity):
+</p>
+
+\begin{equation*}
+\langle u, v \rangle = \frac 1 4 ( ||u + v||^2 - ||u - v||^2)
+\end{equation*}
 
 <hr />
 <h3>Backlinks</h3>
@@ -101,7 +128,9 @@ Hilbert Space generalize the familiar notions of \(\mathbb{R}^n\)  to infinite d
 <ul class="org-ul">
 <li><a href="inner_product.html#ID-F430D8C2-1B03-4C7C-BE64-C2EDAA705BAD">Inner Product</a></li>
 <li><a href="spectral_theory.html#ID-84B0B7DE-412B-4E2C-8D58-F259B4491833">Spectral Theory</a></li>
+<li><a href="maths.html#ID-761094A4-41A7-4F8E-9C3D-3783BC66D5A2">Maths</a></li>
 </ul>
+</div>
 </div>
 </div>
 </div>
