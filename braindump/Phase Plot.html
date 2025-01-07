@@ -50,7 +50,10 @@
 <body>
 <div id="org-div-home-and-up">
  <a accesskey="H" href="./index.html"> HOME </a>
-</div><div id="content" class="content">
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2023-08-20 Sun]</span></span></p>
+</div>
+<div id="content" class="content">
 <h1 class="title">Phase Plot</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
@@ -63,7 +66,7 @@
 </div>
 </div>
 <p>
-Phase plot is a vector plot that has phase space (? state space) quantities on the axes and vectors represent their derivatives. Paths connecting the vectors represent the path taken by a system starting or on any point/state of the path. 
+Phase plot is a vector plot that has phase space (? state space) quantities on the axes and vectors represent their derivatives. Paths connecting the vectors represent the path taken by a system starting or on any point/state of the path.
 </p>
 
 <p>
@@ -73,7 +76,7 @@ It is very useful for visualizing Differential Equations (ODE upto 2nd order)
 <h2 id="Simple%20Harmonic%20Oscillator"><span class="section-number-2">1.</span> Simple Harmonic Oscillator</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-equation: 
+equation:
 </p>
 
 <p>
@@ -81,16 +84,16 @@ equation:
 </p>
 
 <p>
-convert this to set of two first order DE: 
+convert this to set of two first order DE:
 </p>
 
 <p>
-\(u' = v\) 
+\(u' = v\)
 \(v' = -\frac k m u\)
 </p>
 
 <p>
-Here the state space is  \((u, v)\) and the derivative of this is \((u', v')\) 
+Here the state space is  \((u, v)\) and the derivative of this is \((u', v')\)
 </p>
 
 <p>
@@ -101,7 +104,7 @@ Here the state space is  \((u, v)\) and the derivative of this is \((u', v')\)
 <li>state variable or state vector</li>
 </ul>
 <p>
-and other optional parameters: 
+and other optional parameters:
 </p>
 <ul class="org-ul">
 <li>[parameters, "u=u0, v=v0"] Starting condition</li>
