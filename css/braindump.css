@@ -6,6 +6,11 @@ html, body, #grid-container{
     margin-right: 20px;
 }
 
+.example {
+  font-size: 80%;
+  overflow-x: auto;
+}
+
 body.body-multipage > #grid-container {
     overflow-x:auto!important;
     display:flex;
