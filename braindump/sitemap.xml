@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://bpanthi977.github.io/index.html</loc>
-  </url>
-  <url>
     <loc>https://bpanthi977.github.io/braindump/os_dev.html</loc>
   </url>
   <url>
@@ -2045,98 +2042,5 @@
   </url>
   <url>
     <loc>https://bpanthi977.github.io/braindump/the_carrot_problem.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/googlec707bca53d3bd4e0.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/notes/index.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/notes/mit_6S191_convolutional_netural_network.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/notes/mit_6S191_deep_learning_new_frontiers.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/notes/mit_6S191_deep_reinforcement_learning.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/notes/mit_6S191_RNN_and_Transformers.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/notes/mit_6S191_Introduction_to_deep_learning.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/notes/mit_6S191_deep_generative_modeling.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/programming/einstein.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/programming/rnn.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/programming/index.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/programming/hashcode.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/programming/output/wordle.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/programming/fem.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/programming/backprop.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/programming/mandelbrot.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/maths/index.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/maths/wordle.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/maths/chocolates-for-children.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/election/index.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/election/public.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/election/README.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/election/committee.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/physics/index.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/physics/em-waves.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/physics/diffraction-pattern.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/errors/403.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/errors/404.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/errors/503.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/errors/401.html</loc>
-  </url>
-  <url>
-    <loc>https://bpanthi977.github.io/errors/400.html</loc>
   </url>
 </urlset>
