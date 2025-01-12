@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Email Security</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="H" href="./index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2025-01-11 Sat&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">Email Security</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#ID-CA8546AF-5874-4182-99CF-1D6F075AF737">1. SPF (Sender Policy Framework)</a></li>
+<li><a href="#ID-70BD55FF-EE00-422F-846A-931A19D8DF07">2. DKIM (DomainKeys Identified Mail)</a></li>
+<li><a href="#ID-8AC3832C-A268-44C8-B7ED-02C263A38279">3. DMARC (Domain-based Message Authentication Reporting and Conformance)</a></li>
+<li><a href="#Exploit%20Attempt">4. Exploit Attempt</a></li>
+<li><a href="#Is%20this%20scary%3F%20What%20can%20you%20do%3F">5. Is this scary? What can you do?</a></li>
+<li><a href="#Conclusion">6. Conclusion</a></li>
+</ul>
+</div>
+</div>
+<p>
+Today, I was exploring the mail feature inside Emacs and while trying stuff out I sent an email from one of my email addresses to another. Surprisingly it worked. Surprising because I hadn't given Emacs any of my passwords or credentials! So how did it work? I also tried the same using the <code>sendmail</code> program from my local machine and also from a server. In both cases, the email was again received. And in all cases, I hadn't provided the password!!!
+</p>
+
+<p>
+We use email everyday for personal communication, website logins, OTPs and also to reset passwords for all kinds of websites and services. But are emails in themselves secure? Can I send you an email pretending to be someone else? Would you notice? Probably yes, but maybe not.
+</p>
+
+<p>
+Email are sent using SMTP (Simple Mail Transfer Protocol). SMTP transfers email messages using a plain text format which has some headers at the beginning and an text encoded email body after the headers.
+</p>
+
+<p>
+SMTP doesn't specify any method to authenticate the sender of the email. So if your are using plain old SMTP, then I (or anyone) can send you an email with a `From: ceo@google.com` header field and you wouldn't know if it is really from google or not. This is bad. So, obviously there have been some measures devised to authenticate the sender of the email. Two main methods are <code>SPF</code> (Sender Policy Framework) and <code>DKIM</code> (DomainKeys Identified Mail). These methods make email secure. Kind of.
+</p>
+<div id="outline-container-ID-CA8546AF-5874-4182-99CF-1D6F075AF737" class="outline-2">
+<h2 id="ID-CA8546AF-5874-4182-99CF-1D6F075AF737"><span class="section-number-2">1.</span> SPF (Sender Policy Framework)</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+As per Sender Policy Framework, the recipient checks the IP address of sender with a set of allowed IP addresses for the sender's domain. i.e. If the server receives an email from <code>1.2.3.4</code> with <code>From: abcd@gmail.com</code> then, it will check whether or not the IP <code>1.2.3.4</code> is an allowed IP address for the domain <code>gmail.com</code>. The list of such allowed IPs is provided using TXT records of DNS <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
+</p>
+
+<p>
+If we check the <code>TXT</code> record of <code>gmail.com</code> then it has a record with <code>v=spf1</code> that redirects to <code>_spf.google.com</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">dig +short -t txt gmail.com
+</pre>
+</div>
+
+<pre class="example">
+"v=spf1 redirect=_spf.google.com"
+</pre>
+
+
+<p>
+The TXT record for SPF in <code>_spf.google.com</code> further asks to include the records from <code>_netblocks.google.com</code> which finally lists some IP subnet that are whitelisted for use by <code>gmail.com</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">dig +short -t txt _spf.google.com
+</pre>
+</div>
+
+<pre class="example">
+"v=spf1 include:_netblocks.google.com include:_netblocks2.google.com include:_netblocks3.google.com ~all"
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-shell">dig +short -t txt _netblocks.google.com
+</pre>
+</div>
+
+<pre class="example">
+"v=spf1 ip4:35.190.247.0/24 ip4:64.233.160.0/19 ip4:216.239.32.0/19 ~all"
+</pre>
+
+
+<p>
+The <code>~all</code> indicates that the mail can be accepted from anyone but should be marked as unsafe or spam. Alternatively, <code>-all</code> indicates that recipient mail-server should accept mail from <code>abcd@xyz.com</code> only when it is coming from IP <code>1.2.3.4</code>. And <code>+all</code> would state that mail-server can accept mail from any server.
+</p>
+
+<p>
+Why does <code>gmail.com</code> use <code>~all</code> instead of <code>-all</code>? I don't know.
+</p>
+
+<p>
+Anyways, SPF is one method how emails are verified. Next is DKIM.
+</p>
+</div>
+</div>
+<div id="outline-container-ID-70BD55FF-EE00-422F-846A-931A19D8DF07" class="outline-2">
+<h2 id="ID-70BD55FF-EE00-422F-846A-931A19D8DF07"><span class="section-number-2">2.</span> DKIM (DomainKeys Identified Mail)</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+In DKIM system, emails are validated using Digital Signatures (i.e. Public key and Private key). The sender computes digital signature of the email using its private key and sends the signature along with the email inside the headers. The recipient can check that signature using the public key and can be sure that the email hasn't been tampered with. To find the public key of the sender, <code>DKIM</code> uses same techniques as <code>SPF</code> for IP addresses: using DNS records <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>. Let's take an example. gmail.com might send an email with the following header <sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>:
+</p>
+
+<p class="verse">
+DKIM-Signature: v=1;<br />
+&#xa0;&#xa0;&#xa0;&#xa0;a=rsa-sha256;<br />
+&#xa0;&#xa0;&#xa0;&#xa0;c=relaxed/relaxed;<br />
+&#xa0;&#xa0;&#xa0;&#xa0;d=gmail.com;<br />
+&#xa0;&#xa0;&#xa0;&#xa0;s=20230601;<br />
+&#xa0;&#xa0;&#xa0;&#xa0;h=content-transfer-encoding:subject:from:to:date:cc:reply-to;<br />
+&#xa0;&#xa0;&#xa0;&#xa0;bh=nDb91RUuDSdLXRVz6gTMVWYOt/Q8OiaPfAUgvs5A9lQ=;<br />
+&#xa0;&#xa0;&#xa0;&#xa0;b=CiFCAne44lKRb+ &#x2026; fBjknriXDtfzvMSqIhb55SgamIxM7oXhG/Q==<br />
+</p>
+
+<p>
+This header has information on how to check the digital signature in the <code>h</code>, <code>bh</code> and <code>b</code> fields. I'll about these shortly. But first lets find the public key of the domain <code>gmail.com</code>. The public key is in the TXT record of <code>&lt;selector&gt;._domainkey.&lt;domain&gt;</code>. The <code>selector</code> value is sent along with the email as the <code>s</code> field. Here the selector is given by <code>s=20230601</code>. So querying the DNS record, we get the public key:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">dig +short -t txt 20230601._domainkey.gmail.com
+</pre>
+</div>
+
+<pre class="example">
+"v=DKIM1; k=rsa; p=MIIBIjANBgkqhk ... niwXwIDAQAB"
+</pre>
+
+
+<p>
+The <code>p</code> field is the public key for domain of <code>gmail.com</code>. Now that we have the public key, let's see how the digital signature is created and checked.
+</p>
+
+<p>
+The basic idea of Digital Signature is this: Digital signature of a string is just the hash of the string encrypted with the private key. And since public key only decrypts the data encrypted with its corresponding private key. The client can compute the hash of the string and compare that hash with the decrypted hash. This way the client knows for sure that the sender has the private key.
+</p>
+
+
+<p>
+First of all the sender computes the hash of the email body and includes that hash value in the <code>bh</code> field. Now it concatenates that hash value with some other fields of the email (like subject, from, to &#x2026; specified in the <code>h</code> field) and computes the digital signature of that string. This digital signature is sent in the <code>b</code> field. Now the recipient can compute the hash itself and check that against the digital signature. If this checks out, then recipient can be certain that the fields of the email and the body of email haven't been modified.
+</p>
+
+<p>
+So, using <code>SPF</code> and <code>DKIM</code> now we can know that the sender is valid and the data inside the email hasn't been tampered by anyone. Now, a final piece of this system is DMARC.
+</p>
+</div>
+</div>
+<div id="outline-container-ID-8AC3832C-A268-44C8-B7ED-02C263A38279" class="outline-2">
+<h2 id="ID-8AC3832C-A268-44C8-B7ED-02C263A38279"><span class="section-number-2">3.</span> DMARC (Domain-based Message Authentication Reporting and Conformance)</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+DMARC tells the recipient what to do after checking the SPF and DKIM records. DMARC is specified using a TXT record in <code>_dmarc.domain</code>. For example:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">dig +short -t txt _dmarc.gmail.com
+</pre>
+</div>
+
+<pre class="example">
+v=DMARC1; p=none; sp=quarantine; rua=mailto:mailauth-reports@google.com
+</pre>
+
+
+<p>
+The DMARC record for <code>gmail.com</code> says that the recipient doesn't need to quarantine or reject the emails that fail DKIM, and SPF checks but they should report those errors back to <code>mailauth-reports@google.com</code>.
+</p>
+
+<ul class="org-ul">
+<li><code>p=none</code> [Domain Policy = none] means no special treatment for emails from domain.</li>
+<li><code>sp=quarantine</code> [Subdomain Policy = quarantine] means mark email as suspicious if the DKIM and SPF don't check out when receiving email from subdomains of gmail.com.</li>
+</ul>
+
+<p>
+Why does gmail.com have such relaxed policy instead of having <code>p=quarantine</code> or <code>p=reject</code>? I don't know. But let's check if we can exploit this to send an email as someone else.
+</p>
+</div>
+</div>
+<div id="outline-container-Exploit%20Attempt" class="outline-2">
+<h2 id="Exploit%20Attempt"><span class="section-number-2">4.</span> Exploit Attempt</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+If you have the <code>sendmail</code> program installed, you can create a file (say <code>email.txt</code>) as follows:
+</p>
+
+<p class="verse">
+To: your.friend@domain.com<br />
+From: his.boss@gmail.com<br />
+Subject: Salary hike!<br />
+<br />
+Hey! &lt;Your Friend Name&gt;<br />
+<br />
+In appreciation of your great work, I have decided to double your salary.<br />
+<br />
+With regards,<br />
+&lt;Boss Name&gt;<br />
+</p>
+
+<p>
+And try a prank with your friend:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">sendmail your.friend@domain.com &lt; email.txt
+</pre>
+</div>
+
+<p>
+<code>sendmail</code> program talks to mail server at <code>domain.com</code> using SMTP. And sends the email as coming from <code>his.boss@gmail.com</code>. The receiving mail server would now check the IP address using <code>SPF</code>, which will obviously fail. And as for <code>DKIM</code>, we didn't ask sendmail to include digital signatures, so that will fail too.
+</p>
+
+<p>
+But the email might just go in the inbox of your friend. For the first few time I tried sending email from one of my accounts to my other accounts, it went. After a few emails, it started going to spam folder and now such emails don't go. This might be due to some extra tricks gmail does.
+</p>
+</div>
+</div>
+<div id="outline-container-Is%20this%20scary%3F%20What%20can%20you%20do%3F" class="outline-2">
+<h2 id="Is%20this%20scary%3F%20What%20can%20you%20do%3F"><span class="section-number-2">5.</span> Is this scary? What can you do?</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+What if you receive such email? Is <code>gmail.com</code> reckless in using DMARC policy of <code>p=none</code>? <code>outlook.com</code> also has the  same policy. There must be some reason for these behaviors, which I don't know yet.
+</p>
+
+<p>
+In any case, don't worry much <sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup>, although Gmail allows such emails, it shows them as probable spam in its web interface.
+</p>
+
+
+<div id="figure-1" class="figure">
+<p><img src="data/email_security/email_marked_spam-20250111213022.png" alt="email_marked_spam-20250111213022.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Email marked spam</p>
+</div>
+
+<p>
+But when I was tried this, I had used Thunderbird to view the email. And it provided no indication that the email was unverified.
+</p>
+
+<p>
+It is the job of recipient mail server to check SPF and DKIM. And after it does that, it adds an 'Authentication-Results' header to the email headers specifying if the checks were successful or not. It would be better if Thunderbird showed those results by default. Right now, I have installed an add-on called <a href="https://addons.thunderbird.net/en-US/thunderbird/addon/dkim-verifier/">DKIM Verifier</a> and turned on the 'Read Authentication-Results header' option in its settings. Now it shows unverified emails in red color. I am not an expert in these matters, but if you use Thunderbird, you should do so too.
+</p>
+</div>
+</div>
+<div id="outline-container-Conclusion" class="outline-2">
+<h2 id="Conclusion"><span class="section-number-2">6.</span> Conclusion</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+When you see something interesting, dig deeper and write a blog about it.
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+For more details see <a href="https://www.cloudflare.com/learning/dns/dns-records/dns-spf-record/">https://www.cloudflare.com/learning/dns/dns-records/dns-spf-record/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+For more details see <a href="https://www.cloudflare.com/learning/dns/dns-records/dns-dkim-record/">https://www.cloudflare.com/learning/dns/dns-records/dns-dkim-record/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+I have used ellipsis (&#x2026;) throughout this document to avoid long random looking texts.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+As with most technology, time and again people keep on finding new attack techniques. SPF and DKIM can't protect you from buggy code: <a href="https://media.ccc.de/v/37c3-11782-smtp_smuggling_spoofing_e-mails_worldwide">https://media.ccc.de/v/37c3-11782-smtp_smuggling_spoofing_e-mails_worldwide</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Email Security">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

@@ -35,6 +35,7 @@
 </li>
 <li><a href="#What%20I%20had%20done">2. What I had done</a></li>
 <li><a href="#See%20also">3. See also</a></li>
+<li><a href="#Docker">4. Docker</a></li>
 </ul>
 </div>
 </div>
@@ -335,6 +336,48 @@ ls /usr/share/X11/xorg.conf.d
 I think I am using PRIME
 <a href="https://wiki.freedesktop.org/nouveau/Optimus/">https://wiki.freedesktop.org/nouveau/Optimus/</a>
 </p>
+</div>
+</div>
+<div id="outline-container-Docker" class="outline-2">
+<h2 id="Docker"><span class="section-number-2">4.</span> Docker</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+To use nvidia gpus inside docker, install nvidia-container-toolkit, and then configure docker
+</p>
+
+<ol class="org-ol">
+<li>Installing nvidia-container-toolkit:</li>
+</ol>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-shell">curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg <span class="org-sh-escaped-newline">\</span>
+  &amp;&amp; curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | <span class="org-sh-escaped-newline">\</span>
+    sed <span class="org-string">'s#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g'</span> | <span class="org-sh-escaped-newline">\</span>
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+sudo apt-get update
+sudo apt-get install -y nvidia-container-toolkit
+</pre>
+</div></details>
+
+<ol class="org-ol">
+<li>Configuring docker</li>
+</ol>
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-shell">sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+</pre>
+</div></details>
+
+<p>
+If the following command runs successfully, then the installation is good:
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-shell">docker run --rm --gpus all nvidia/cuda:11.6.1-base-ubuntu20.04 nvidia-smi
+</pre>
+</div></details>
 
 <hr />
 <h3>Backlinks</h3>

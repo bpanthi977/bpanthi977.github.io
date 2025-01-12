@@ -80,7 +80,7 @@ Cons:
 </p>
 <ul class="org-ul">
 <li>Agents doesn't know state of other</li>
-<li>Environment is Non stationary  
+<li>Environment is Non stationary
 And many RL algorithms can't reach global optimum with a non-stationary environment</li>
 <li>Solution may not converge because agents are updating at once and chasing each other's changes</li>
 <li>For identical agents, agents waste the experience collected by other agents</li>
@@ -110,7 +110,7 @@ Pros:
 <h3 id="ID-8AD0BD0F-27E9-46D2-9266-54307C7DFF8E"><span class="section-number-3">1.3.</span> Self-Play</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
-You need to train against equally matched opponents because 
+You need to train against equally matched opponents because
 </p>
 <ul class="org-ul">
 <li>if the opponent is too strong, you rarely win and don't learn much</li>
@@ -118,11 +118,11 @@ You need to train against equally matched opponents because
 </ul>
 
 <p>
-Self-play uses former copies of itself as opponent. 
+Self-play uses former copies of itself as opponent.
 </p>
 
 <p>
-Training against a set of slowly changing or unchanging adversaries with <span class="underline">low diversity results in more _stable training. But a risk to overfit</span> if the change is too slow. Hyperparmeters in Self-Play training: 
+Training against a set of slowly changing or unchanging adversaries with <span class="underline">low diversity results in more _stable training. But a risk to overfit</span> if the change is too slow. Hyperparmeters in Self-Play training:
 </p>
 <ul class="org-ul">
 <li>how often we change opponents</li>
@@ -139,7 +139,7 @@ In adversarial games tracking cumulative reward is not always meaningful, becaus
 <h3 id="IACC%20-%20Independent%20Actor%20Centralized%20Critic"><span class="section-number-3">1.4.</span> IACC - Independent Actor Centralized Critic</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
-From: <a href="papers/On the Use and Misuse of Absorbing State in Multi-Agent Reinforcement Learning - 2111.05992.pdf">MA-POCA: sec. Centralized Training, Decentralized Execution</a> 
+From: <a href="papers/On the Use and Misuse of Absorbing State in Multi-Agent Reinforcement Learning - 2111.05992.pdf">MA-POCA: sec. Centralized Training, Decentralized Execution</a>
 </p>
 
 <ul class="org-ul">
@@ -147,7 +147,7 @@ From: <a href="papers/On the Use and Misuse of Absorbing State in Multi-Agent Re
 
 <li>IAC - Independent Actor Critic (or the Decentralized Approach) doesn't perform well in tasks that require significant coordinateion because of partial observability</li>
 
-<li>JAC - Joint Actor Critic (or Centralized Approach) is 
+<li>JAC - Joint Actor Critic (or Centralized Approach) is
 <ul class="org-ul">
 <li>not practical in real world scenarios as a joint policy needs access to all agent obsercation at once which presumes perfect communication between agents and policy node.</li>
 <li><p>
@@ -159,7 +159,7 @@ Maybe the attention layer can be used to partly solve this problem because of pe
 </p>
 
 <p>
-`We hypothesize that the permutation invariance of attention gives MA-POCA an advantage as COMA’s value network needs to learn that any permutation of a joint observation has the same value` 
+`We hypothesize that the permutation invariance of attention gives MA-POCA an advantage as COMA’s value network needs to learn that any permutation of a joint observation has the same value`
 </p></li>
 </ul></li>
 </ul>
@@ -213,6 +213,8 @@ they come and go</li>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>Eugene Vinitsky's Course: <a href="https://emerge-lab.github.io/multi-agent-learning/">https://emerge-lab.github.io/multi-agent-learning/</a></li>
+<li>MARL Books: <a href="https://www.marl-book.com/">https://www.marl-book.com/</a>, <a href="https://github.com/marl-book/codebase">codebase</a> (from <a href="https://x.com/LukasSchaefer96/status/1866188304519221424">@LukasSchaefer96</a>)</li>
+<li>A First Introduction to Cooperative Multi-Agent Reinforcement Learning [<a href="https://arxiv.org/abs/2405.06161">arXiv</a>] (from <a href="https://x.com/SoloGen/status/1876694867348234620">@SoloGen</a>)</li>
 </ul>
 
 <hr />
