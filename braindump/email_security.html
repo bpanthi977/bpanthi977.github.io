@@ -92,12 +92,12 @@ The TXT record for SPF in <code>_spf.google.com</code> further asks to include t
 </div>
 
 <pre class="example">
-"v=spf1 ip4:35.190.247.0/24 ip4:64.233.160.0/19 ip4:216.239.32.0/19 ~all"
+"v=spf1 ip4:35.190.247.0/24 ip4:64.233.160.0/19 ... ip4:216.239.32.0/19 ~all"
 </pre>
 
 
 <p>
-The <code>~all</code> indicates that the mail can be accepted from anyone but should be marked as unsafe or spam. Alternatively, <code>-all</code> indicates that recipient mail-server should accept mail from <code>abcd@xyz.com</code> only when it is coming from IP <code>1.2.3.4</code>. And <code>+all</code> would state that mail-server can accept mail from any server.
+The <code>~all</code> indicates that the mail can be accepted from anyone (any IP) but it should be marked as unsafe or spam if the IP doesn't fall within the subnets specified. Alternatively, <code>-all</code> indicates that recipient mail-server should accept mail from <code>abcd@xyz.com</code> only when the IP matches. And <code>+all</code> would state that mail-server can accept mail from any server.
 </p>
 
 <p>
@@ -113,7 +113,7 @@ Anyways, SPF is one method how emails are verified. Next is DKIM.
 <h2 id="ID-70BD55FF-EE00-422F-846A-931A19D8DF07"><span class="section-number-2">2.</span> DKIM (DomainKeys Identified Mail)</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-In DKIM system, emails are validated using Digital Signatures (i.e. Public key and Private key). The sender computes digital signature of the email using its private key and sends the signature along with the email inside the headers. The recipient can check that signature using the public key and can be sure that the email hasn't been tampered with. To find the public key of the sender, <code>DKIM</code> uses same techniques as <code>SPF</code> for IP addresses: using DNS records <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>. Let's take an example. gmail.com might send an email with the following header <sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>:
+In DKIM system, emails are validated using Digital Signatures (i.e. Public key and Private key). The sender computes digital signature of the email using its private key and sends the signature along with the email inside the headers. The recipient can check that signature using the public key and can be sure that the email hasn't been tampered with. To find the public key of the sender, <code>DKIM</code> uses same techniques as <code>SPF</code> for IP addresses: DNS records <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>. Let's take an example. gmail.com might send an email with a following header <sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>:
 </p>
 
 <p class="verse">
@@ -146,7 +146,7 @@ The <code>p</code> field is the public key for domain of <code>gmail.com</code>.
 </p>
 
 <p>
-The basic idea of Digital Signature is this: Digital signature of a string is just the hash of the string encrypted with the private key. And since public key only decrypts the data encrypted with its corresponding private key. The client can compute the hash of the string and compare that hash with the decrypted hash. This way the client knows for sure that the sender has the private key.
+The basic idea of Digital Signature is this: Sender has private key and recipient has corresponding public key. Digital signature of a string is just the hash of the string encrypted with the private key. And public key only correctly decrypts the string encrypted with its corresponding private key. So, the client can itself compute the hash of the string and compare that hash with the decrypted hash. This way the client knows for sure that the sender has the private key.
 </p>
 
 
@@ -177,7 +177,7 @@ v=DMARC1; p=none; sp=quarantine; rua=mailto:mailauth-reports@google.com
 
 
 <p>
-The DMARC record for <code>gmail.com</code> says that the recipient doesn't need to quarantine or reject the emails that fail DKIM, and SPF checks but they should report those errors back to <code>mailauth-reports@google.com</code>.
+The DMARC record for <code>gmail.com</code> says that the recipient doesn't need to quarantine or reject the emails that fail DKIM and SPF checks but they should report those errors back to <code>mailauth-reports@google.com</code>.
 </p>
 
 <ul class="org-ul">
@@ -235,7 +235,7 @@ What if you receive such email? Is <code>gmail.com</code> reckless in using DMAR
 </p>
 
 <p>
-In any case, don't worry much <sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup>, although Gmail allows such emails, it shows them as probable spam in its web interface.
+In any case, don't worry much <sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup>, although Gmail allows such emails, it shows them as probable spam in its web interface. So, if you use the web interface (i.e. gmail.com website) for your emails, you'll notice such unverified emails right away.
 </p>
 
 
@@ -246,7 +246,7 @@ In any case, don't worry much <sup><a id="fnr.4" class="footref" href="#fn.4" ro
 </div>
 
 <p>
-But when I was tried this, I had used Thunderbird to view the email. And it provided no indication that the email was unverified.
+But when I was tried this, I had used Thunderbird to view the email. And it provided no indication that the email was unverified. Here Thunderbird could have done something better.
 </p>
 
 <p>
@@ -275,7 +275,7 @@ For more details see <a href="https://www.cloudflare.com/learning/dns/dns-record
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-I have used ellipsis (&#x2026;) throughout this document to avoid long random looking texts.
+I have used ellipsis (&#x2026;) in output of commands and other places in the document to avoid long random looking texts.
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
