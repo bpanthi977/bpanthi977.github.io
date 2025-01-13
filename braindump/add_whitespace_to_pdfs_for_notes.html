@@ -23,11 +23,46 @@
 </div>
 <div id="content" class="content">
 <h1 class="title">Add Whitespace to PDFs for Notes</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#pdfcrop">1. pdfcrop</a></li>
+<li><a href="#pdfjam">2. pdfjam</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-pdfcrop" class="outline-2">
+<h2 id="pdfcrop"><span class="section-number-2">1.</span> pdfcrop</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Available through LaTeX distribution.
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-shell">pdfcrop --margins <span class="org-string">"0 0 150 0"</span> in.pdf out.pdf
+</pre>
+</div></details>
+
+<ul class="org-ul">
+<li>&#x2013;margins "&lt;left&gt; &lt;top&gt; &lt;right&gt; &lt;bottom&gt;"</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-pdfjam" class="outline-2">
+<h2 id="pdfjam"><span class="section-number-2">2.</span> pdfjam</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Available through LaTeX distribution.
+</p>
+
 <ul class="org-ul">
 <li>Get the original papersize</li>
 <li>set a greater new papersize</li>
 <li>the page is centered, so to leave space on only one size set the offset parameter</li>
 </ul>
+
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
 <pre class="src src-shell">pdfjam -o out.pdf --papersize <span class="org-string">'{30cm, 27.94cm}'</span> --offset <span class="org-string">'-4cm 0cm'</span> in.pdf -
@@ -46,9 +81,11 @@
 <h3>Backlinks</h3>
 
 <ul class="org-ul">
-<li><a href="pdfs.html#ID-2F44E3A3-8FAE-4000-809B-FD717B27CD7B">PDFs</a></li>
 <li><a href="note_taking.html#ID-10a214f1-9081-4264-ae88-ad7c02ccfdc8">Note Taking</a></li>
+<li><a href="pdfs.html#ID-2F44E3A3-8FAE-4000-809B-FD717B27CD7B">PDFs</a></li>
 </ul>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Add Whitespace to PDFs for Notes">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
