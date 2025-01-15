@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>HPAC-ML</title>
+<title>HPAC &amp; HPAC-ML - Presentation</title>
 <meta name="author" content="Bibek Panthi" />
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
@@ -14,6 +14,38 @@
 <script src="../js/URI.js" type="text/javascript"></script>
 <script src="../js/pages.js" type="text/javascript"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="org-div-home-and-up">
@@ -22,18 +54,304 @@
 <p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-12-25 Wed&gt;</span></span></p>
 </div>
 <div id="content" class="content">
-<h1 class="title">HPAC-ML
+<h1 class="title">HPAC &amp; HPAC-ML - Presentation
 <br />
-<span class="subtitle">A Programming Model for Embedding ML Surrogates in Scientific Applications</span>
+<span class="subtitle">High Performance Approximate Computing</span>
 </h1>
+<div id="outline-container-ID-0691E5B0-55EB-4F7F-A68B-A61853A67F39" class="outline-2">
+<h2 id="ID-0691E5B0-55EB-4F7F-A68B-A61853A67F39"><span class="section-number-2">1.</span> HPAC</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-Intro" class="outline-3">
+<h3 id="Intro"><span class="section-number-3">1.1.</span> Intro</h3>
+<div class="outline-text-3" id="text-1-1">
 <p>
-[<a href="papers/HPAC-ML - 2407.18352v2.pdf#page=1">pdf:</a>]
+HPAC <a href="papers/HPAC - 3458817.3476216.pdf#page=nil">paper</a> explores Aprpoximate Computing Techniques for use in HPC applications using #pragmas. Techniques:
+</p>
+<ul class="org-ul">
+<li>Loop perforation</li>
+<li>Input Memoization</li>
+<li>Temporal Approximate Function Memoization</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Loop%20Perforation" class="outline-3">
+<h3 id="Loop%20Perforation"><span class="section-number-3">1.2.</span> Loop Perforation</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Skipping some loop iterations
 </p>
 
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-c"><span class="org-preprocessor">#pragma</span> approx perfo(small:5)
+<span class="org-keyword">for</span> (i=0; i&lt;N; i++)
+  z += f(x[i], y[i])
+</pre>
+</div></details>
+
+<ul class="org-ul">
+<li>small: skip 1 iteration every N iterations</li>
+<li>large: do 1 iteration every N iteration</li>
+<li>rand: randomly skip every with probability p [gives less error]</li>
+<li>ini : skip first n% of iterations [gives better performance]</li>
+<li>fini: skip last n% of iterations [gives better performance]</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Input%20Memoization" class="outline-3">
+<h3 id="Input%20Memoization"><span class="section-number-3">1.3.</span> Input Memoization</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+If the input are similar, return same output
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-C"><span class="org-preprocessor">#pragma</span> approx memo(iact; 10; 0.5f) in(x[1:N], y[1:N]) out(z)
+<span class="org-keyword">for</span> (i=0; i&lt;N; i++)
+  z += f(x[i], y[i])
+</pre>
+</div></details>
+
+
+<p>
+<code>memo(iact; tSize; threshold)</code>
+</p>
 <dl class="org-dl">
-<dt>Loop perforation</dt><dd>Skipping some loop iterations</dd>
-<dt>(no term)</dt><dd>Parsl for model search automation and Adaptive Environments for <a href="bayesian_inference.html#ID-734D6D9F-7103-425E-97C9-94F8EA8AF1A1">Bayesian Search</a></dd>
+<dt>tSize</dt><dd>size of memoization table</dd>
+<dt>threshold</dt><dd>euclidean distance threshold for activation of memoization</dd>
 </dl>
+</div>
+</div>
+<div id="outline-container-Temporal%20Approximation%20Function%20Memoization%20%28TAF%29" class="outline-3">
+<h3 id="Temporal%20Approximation%20Function%20Memoization%20%28TAF%29"><span class="section-number-3">1.4.</span> Temporal Approximation Function Memoization (TAF)</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+If consecutive output to a function are similar, then approximate with the last computed value for some iterations
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-C"><span class="org-keyword">for</span> (t=0; t&lt;N; t++)
+<span class="org-preprocessor">#pragma</span> approx memo(taf; 10; 0.5f; 5) out(o)
+  o = f(x[t], y[t])
+  z += o
+</pre>
+</div></details>
+
+
+<p>
+<code>memo(taf, hSize, threshold, pSize)</code>
+</p>
+<dl class="org-dl">
+<dt>hSize</dt><dd>history buffer size</dd>
+<dt>threshold</dt><dd>Threshold on Relative Standard Deviation (\(\sigma/\mu\)) to activate approximation</dd>
+<dt>pSize</dt><dd>prediction size i.e. number of iterations to use approximation, after which fall back to accurate computation</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-Automated%20Tooling" class="outline-3">
+<h3 id="Automated%20Tooling"><span class="section-number-3">1.5.</span> Automated Tooling</h3>
+<div class="outline-text-3" id="text-1-5">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-C"><span class="org-preprocessor">#pragma</span> approx in(x, y) out(z) memo perfo
+<span class="org-keyword">for</span> (i=0; i&lt;N; i++)
+  z += f(x[i], y[i])
+</pre>
+</div></details>
+
+<ul class="org-ul">
+<li>Generates appropriate code</li>
+<li>Runs many variations (as per an spec file defining parameters ranges)</li>
+<li>Provides a pandas file with errors estimates for approximation method and parameter values</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Results" class="outline-3">
+<h3 id="Results"><span class="section-number-3">1.6.</span> Results</h3>
+<div class="outline-text-3" id="text-1-6">
+
+<div id="figure-1" class="figure">
+<p><img src="data/hpac_ml/cfd-20250115070856.png" alt="cfd-20250115070856.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-ID-7199041D-6B9A-4615-B032-2011D37C84DF" class="outline-3">
+<h3 id="ID-7199041D-6B9A-4615-B032-2011D37C84DF"><span class="section-number-3">1.7.</span> Interesting Case</h3>
+<div class="outline-text-3" id="text-1-7">
+
+<div id="figure-2" class="figure">
+<p><img src="data/hpac_ml/lulesh-20250115084112.png" alt="lulesh-20250115084112.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Speedup vs Threads for LULESH</p>
+</div>
+
+<ul class="org-ul">
+<li>obtained further speedup by increasing number of OpenMP threads</li>
+<li>speedup = ratio of time for accurate and approx run, for same number of threads</li>
+<li>due to reduction in memory access due to approximation</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Summary" class="outline-3">
+<h3 id="Summary"><span class="section-number-3">1.8.</span> Summary</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+HPAC <a href="papers/HPAC - 3458817.3476216.pdf#page=nil">paper</a> studies Approximate Computing on HPC OpenMP applications
+</p>
+<ul class="org-ul">
+<li>creates Clang/LLVM compiler extension</li>
+<li>provides HPAC Tooling</li>
+<li>analyzes effectivness of approximate computing</li>
+</ul>
+
+<p>
+Techniques:
+</p>
+<ul class="org-ul">
+<li>Loop perforation</li>
+<li>Input Memoization</li>
+<li>Temporal Approximate Function Memoization</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-ID-D0B134DE-806C-4C0A-9BF0-0AFE6B470A32" class="outline-2">
+<h2 id="ID-D0B134DE-806C-4C0A-9BF0-0AFE6B470A32"><span class="section-number-2">2.</span> HPAC-ML</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-Seperation%20of%20Concerns" class="outline-3">
+<h3 id="Seperation%20of%20Concerns"><span class="section-number-3">2.1.</span> Seperation of Concerns</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+<a href="papers/HPAC-ML - 2407.18352v2.pdf#page=1">HPAC-ML</a> paper builds upon <a href="#ID-0691E5B0-55EB-4F7F-A68B-A61853A67F39">HPAC</a> to provide features to
+</p>
+
+<ul class="org-ul">
+<li>Annotate code with #pragma</li>
+<li>Run the binary to collect data</li>
+<li>Train ML model on collected data</li>
+<li>Use the model for inference</li>
+<li>All with the same annotated code</li>
+</ul>
+
+<p>
+So, application developer doesn't need to know much about ML model and ML developer doesn't need to concern themselves about application code.
+</p>
+
+<p>
+They stay in their own languages and tools.
+</p>
+</div>
+</div>
+<div id="outline-container-Same%20code%2C%20different%20execution%20path" class="outline-3">
+<h3 id="Same%20code%2C%20different%20execution%20path"><span class="section-number-3">2.2.</span> Same code, different execution path</h3>
+<div class="outline-text-3" id="text-2-2">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-C"><span class="org-preprocessor">#pragma</span> approx ml(predicated:ml_mode) \
+        in(g) out(g_new) \
+        db(<span class="org-string">"/path/data.h5"</span>) model(<span class="org-string">"/path/model.pt"</span>) \
+        <span class="org-keyword">if</span>(<span class="org-constant">true</span>)
+<span class="org-function-name">do_timestep</span>(g, g_new)
+</pre>
+</div></details>
+
+<dl class="org-dl">
+<dt>ml(predicated: ml_mode)</dt><dd>define <code>bool ml_mode</code> to control inference or data collection. Alternatively
+
+<dl class="org-dl">
+<dt>ml(infer)</dt><dd>always run ML model</dd>
+<dt>ml(collect)</dt><dd>collect data by running accurate model</dd>
+</dl></dd>
+
+<dt>in(g)</dt><dd>input data (g)</dd>
+<dt>output(g_new)</dt><dd>output data (g_new)</dd>
+<dt>db(file)</dt><dd>path where data collected from accurate runs are stored</dd>
+<dt>model(file)</dt><dd>path of the ML model which has both params and Network structure (in TorchScript)</dd>
+<dt>if(condition)</dt><dd>run inference only if condition is true (useful when the decision depends on input)</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-Data%20mapping" class="outline-3">
+<h3 id="Data%20mapping"><span class="section-number-3">2.3.</span> Data mapping</h3>
+<div class="outline-text-3" id="text-2-3">
+<ul class="org-ul">
+<li>g and g_new is a N x M matrix (think of a grid)</li>
+</ul>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-C"><span class="org-preprocessor">#pragma</span> approx tensor map(to: i_fun(g[1:N-1, 1:M-1]))
+<span class="org-preprocessor">#pragma</span> approx tensor map(out: o_fun(g_new[1:N-1, 1:M-1]))
+
+<span class="org-preprocessor">#pragma</span> approx ml(predicated:ml_mode) in(g) out(g_new)      \
+  db(<span class="org-string">"/path/data.h5"</span>) model(<span class="org-string">"/path/model.pt"</span>)
+<span class="org-function-name">do_timestep</span>(g, g_new)
+</pre>
+</div></details>
+</div>
+</div>
+<div id="outline-container-Mapping%20function" class="outline-3">
+<h3 id="Mapping%20function"><span class="section-number-3">2.4.</span> Mapping function</h3>
+<div class="outline-text-3" id="text-2-4">
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-C"><span class="org-preprocessor">#pragma</span> approx tensor functor( i_fun: [i, j, 0:5] \
+  = ([i-1, j], [i+1, j], [i, j-1:j+2]))
+
+<span class="org-preprocessor">#pragma</span> approx tensor functor(o_fun : \
+  [i,j, 0:1] = ([i, j]) )
+</pre>
+</div></details>
+
+<dl class="org-dl">
+<dt>i_fun</dt><dd>defines a map that creates a N x M x 5 tensor from N x M tensor (for NN input)</dd>
+<dt>o_fun</dt><dd>defines an identity map</dd>
+</dl>
+
+<p>
+Mapping are specified in terms of tensor slices
+</p>
+</div>
+</div>
+<div id="outline-container-ID-D61A01B7-2A50-40C7-869E-274CB5D7F3EF" class="outline-3">
+<h3 id="ID-D61A01B7-2A50-40C7-869E-274CB5D7F3EF"><span class="section-number-3">2.5.</span> Overview</h3>
+<div class="outline-text-3" id="text-2-5">
+
+<div id="figure-3" class="figure">
+<p><img src="data/hpac_ml/hpac_overview-20250115080941.png" alt="hpac_overview-20250115080941.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span>HPAC-ML Overview</p>
+</div>
+</div>
+</div>
+<div id="outline-container-Automated%20Model%20Search" class="outline-3">
+<h3 id="Automated%20Model%20Search"><span class="section-number-3">2.6.</span> Automated Model Search</h3>
+<div class="outline-text-3" id="text-2-6">
+<ul class="org-ul">
+<li>Specify model structure (Feed forward, Convloution, hidden layers, kernel sizes)</li>
+<li>Parsl for model search automation and Adaptive Environments for <a href="bayesian_inference.html#ID-734D6D9F-7103-425E-97C9-94F8EA8AF1A1">Bayesian Search</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-ID-30480001-0F4D-4E8C-B0DB-089E6226FF20" class="outline-3">
+<h3 id="ID-30480001-0F4D-4E8C-B0DB-089E6226FF20"><span class="section-number-3">2.7.</span> Results</h3>
+<div class="outline-text-3" id="text-2-7">
+<ul class="org-ul">
+<li>Benchmark on 5 problems</li>
+<li>Good speedups obtained within error tolerance</li>
+</ul>
+
+
+<div id="figure-4" class="figure">
+<p><img src="data/hpac_ml/speedup_and_error_for_hpac_ml-20250115081434.png" alt="speedup_and_error_for_hpac_ml-20250115081434.png" />
+</p>
+<p><span class="figure-number">Figure 4: </span>Speedup and Error for HPAC-ML</p>
+</div>
 
 <hr />
 <h3>Backlinks</h3>
@@ -42,8 +360,11 @@
 <li><a href="high_performance_computing.html#ID-FFCC4E1F-9077-4548-8736-A3E4B6F0FCCB">High Performance Computing</a></li>
 </ul>
 </div>
+</div>
+</div>
+</div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: HPAC-ML">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: HPAC & HPAC-ML - Presentation">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
 </div>
 </body>
 </html>

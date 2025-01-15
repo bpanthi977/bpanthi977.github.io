@@ -55,7 +55,7 @@ SMTP doesn't specify any method to authenticate the sender of the email. So if y
 <h2 id="ID-CA8546AF-5874-4182-99CF-1D6F075AF737"><span class="section-number-2">1.</span> SPF (Sender Policy Framework)</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-As per Sender Policy Framework, the recipient checks the IP address of sender with a set of allowed IP addresses for the sender's domain. i.e. If the server receives an email from <code>1.2.3.4</code> with <code>From: abcd@gmail.com</code> then, it will check whether or not the IP <code>1.2.3.4</code> is an allowed IP address for the domain <code>gmail.com</code>. The list of such allowed IPs is provided using TXT records of DNS <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
+As per Sender Policy Framework, the recipient checks the IP address of sender with a set of allowed IP addresses for the sender's domain. i.e. If the server receives an email from <code>1.2.3.4</code> from abcd@gmail.com<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> then, it will check whether or not the IP <code>1.2.3.4</code> is an allowed IP address for the domain <code>gmail.com</code>. The list of such allowed IPs is provided using TXT records of DNS <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>.
 </p>
 
 <p>
@@ -113,7 +113,7 @@ Anyways, SPF is one method how emails are verified. Next is DKIM.
 <h2 id="ID-70BD55FF-EE00-422F-846A-931A19D8DF07"><span class="section-number-2">2.</span> DKIM (DomainKeys Identified Mail)</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-In DKIM system, emails are validated using Digital Signatures (i.e. Public key and Private key). The sender computes digital signature of the email using its private key and sends the signature along with the email inside the headers. The recipient can check that signature using the public key and can be sure that the email hasn't been tampered with. To find the public key of the sender, <code>DKIM</code> uses same techniques as <code>SPF</code> for IP addresses: DNS records <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>. Let's take an example. gmail.com might send an email with a following header <sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>:
+In DKIM system, emails are validated using Digital Signatures (i.e. Public key and Private key). The sender computes digital signature of the email using its private key and sends the signature along with the email inside the headers. The recipient can check that signature using the public key and can be sure that the email hasn't been tampered with. To find the public key of the sender, <code>DKIM</code> uses same techniques as <code>SPF</code> for IP addresses: DNS records <sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>. Let's take an example. gmail.com might send an email with a following header <sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup>:
 </p>
 
 <p class="verse">
@@ -235,7 +235,7 @@ What if you receive such email? Is <code>gmail.com</code> reckless in using DMAR
 </p>
 
 <p>
-In any case, don't worry much <sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup>, although Gmail allows such emails, it shows them as probable spam in its web interface. So, if you use the web interface (i.e. gmail.com website) for your emails, you'll notice such unverified emails right away.
+In any case, don't worry much <sup><a id="fnr.5" class="footref" href="#fn.5" role="doc-backlink">5</a></sup>, although Gmail allows such emails, it shows them as probable spam in its web interface. So, if you use the web interface (i.e. gmail.com website) for your emails, you'll notice such unverified emails right away.
 </p>
 
 
@@ -267,18 +267,22 @@ When you see something interesting, dig deeper and write a blog about it.
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-For more details see <a href="https://www.cloudflare.com/learning/dns/dns-records/dns-spf-record/">https://www.cloudflare.com/learning/dns/dns-records/dns-spf-record/</a>
+Actually SPF is checked for the domain in the 'Return-Path' header not the 'From' header. And if the domain in Return-Path and From are different then the email fails a   DMARC test called <a href="https://mxtoolbox.com/dmarc/details/dmarc-tags/aspf">SPF Alignment</a>.
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-For more details see <a href="https://www.cloudflare.com/learning/dns/dns-records/dns-dkim-record/">https://www.cloudflare.com/learning/dns/dns-records/dns-dkim-record/</a>
+For more details see <a href="https://www.cloudflare.com/learning/dns/dns-records/dns-spf-record/">https://www.cloudflare.com/learning/dns/dns-records/dns-spf-record/</a>
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-I have used ellipsis (&#x2026;) in output of commands and other places in the document to avoid long random looking texts.
+For more details see <a href="https://www.cloudflare.com/learning/dns/dns-records/dns-dkim-record/">https://www.cloudflare.com/learning/dns/dns-records/dns-dkim-record/</a>
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+I have used ellipsis (&#x2026;) in output of commands and other places in the document to avoid long random looking texts.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5" role="doc-backlink">5</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
 As with most technology, time and again people keep on finding new attack techniques. SPF and DKIM can't protect you from buggy code: <a href="https://media.ccc.de/v/37c3-11782-smtp_smuggling_spoofing_e-mails_worldwide">https://media.ccc.de/v/37c3-11782-smtp_smuggling_spoofing_e-mails_worldwide</a>
 </p></div></div>
 
