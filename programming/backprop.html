@@ -337,7 +337,7 @@ ACTIVATION
 <h3 id="Neuron%20Transfer%20-%20Activation%20function"><span class="section-number-3">1.2.</span> Neuron Transfer - Activation function</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
-For now we use sigmod activation function. 
+For now we use sigmod activation function.
 \(\textrm{output} = \frac 1 {1+ \exp(-\textrm{activation})}\)
 </p>
 
@@ -361,16 +361,16 @@ Before we implement forward propagation we need a data structure to store the we
 <div class="outline-text-4" id="text-1-3-1">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgce0c464">(<span class="org-keyword">defstruct</span> <span class="org-type">network</span> 
-  weights 
-  outputs 
+<pre class="src src-lisp" id="orgce0c464">(<span class="org-keyword">defstruct</span> <span class="org-type">network</span>
+  weights
+  outputs
   errors)
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">random-vector</span> (size)
   <span class="org-doc">"Create a random vector of given `</span><span class="org-doc"><span class="org-constant">size</span></span><span class="org-doc">'"</span>
   (<span class="org-keyword">let</span> ((weights (make-array size <span class="org-builtin">:element-type</span> 'double-float)))
-    (<span class="org-keyword">loop</span> for i from 0 
-          repeat size do 
+    (<span class="org-keyword">loop</span> for i from 0
+          repeat size do
             (setf (aref weights i)  (/ (random 100) 100d0)))
     weights))
 
@@ -381,13 +381,13 @@ Before we implement forward propagation we need a data structure to store the we
 <span class="org-doc">      last element of `</span><span class="org-doc"><span class="org-constant">num-neurons</span></span><span class="org-doc">' = no of outputs'"</span>
   (<span class="org-keyword">let</span> ((network (make-array (1- (length num-neurons)))))
     <span class="org-comment-delimiter">;; </span><span class="org-comment">loop over the layers</span>
-    (<span class="org-keyword">loop</span> for n in num-neurons  
-          for m in (rest num-neurons) 
+    (<span class="org-keyword">loop</span> for n in num-neurons
+          for m in (rest num-neurons)
           for i from 0
-          for weights-matrix = (make-array m) do 
+          for weights-matrix = (make-array m) do
             <span class="org-comment-delimiter">;; </span><span class="org-comment">loop over the neurons in the layer </span>
             (<span class="org-keyword">loop</span> for weights = (random-vector (1+ n))
-                  for i from 0 below m do 
+                  for i from 0 below m do
                     (setf (aref weights-matrix i) weights))
             (setf (aref network i) weights-matrix))
     network))
@@ -407,14 +407,14 @@ Before we implement forward propagation we need a data structure to store the we
 <div class="org-src-container">
 <pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">initialize-network</span> (num-neurons)
   (<span class="org-keyword">let</span> ((weights (initialize-network-weights num-neurons)))
-    (make-network <span class="org-builtin">:weights</span> weights 
+    (make-network <span class="org-builtin">:weights</span> weights
                   <span class="org-builtin">:outputs</span> (make-array (1- (length num-neurons))
-                                       <span class="org-builtin">:initial-contents</span> 
-                                       (<span class="org-keyword">loop</span> for n in (rest num-neurons) 
+                                       <span class="org-builtin">:initial-contents</span>
+                                       (<span class="org-keyword">loop</span> for n in (rest num-neurons)
                                              collect (make-array n <span class="org-builtin">:element-type</span> 'double-float)))
                   <span class="org-builtin">:errors</span> (make-array (1- (length num-neurons))
-                                      <span class="org-builtin">:initial-contents</span> 
-                                      (<span class="org-keyword">loop</span> for n in (rest num-neurons) 
+                                      <span class="org-builtin">:initial-contents</span>
+                                      (<span class="org-keyword">loop</span> for n in (rest num-neurons)
                                             collect (make-array n <span class="org-builtin">:element-type</span> 'double-float))))))
 (<span class="org-keyword">defun</span> <span class="org-function-name">output</span> (network)
   <span class="org-doc">"Output of the last layer of the network"</span>
@@ -432,9 +432,9 @@ Before we implement forward propagation we need a data structure to store the we
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">forward-propagate</span> (network input)
-  (<span class="org-keyword">loop</span> for layer-weights across (network-weights network) 
-        for layer-outputs across (network-outputs network) do 
-          (map-into layer-outputs 
+  (<span class="org-keyword">loop</span> for layer-weights across (network-weights network)
+        for layer-outputs across (network-outputs network) do
+          (map-into layer-outputs
                     (<span class="org-keyword">lambda</span> (weights)
                       (transfer (activation weights input)))
                     layer-weights)
@@ -449,9 +449,9 @@ Before we implement forward propagation we need a data structure to store the we
 <h3 id="Testing%20Forward%20Propagation"><span class="section-number-3">1.5.</span> Testing Forward Propagation</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
-We create a neural network with 4 inputs a single hidden layer with 2 neurons and an output layer with 2 neurons. 
-Its initialized with random weights and biases and the an input is feed-forwarded 
-finally we get two output values 
+We create a neural network with 4 inputs a single hidden layer with 2 neurons and an output layer with 2 neurons.
+Its initialized with random weights and biases and the an input is feed-forwarded
+finally we get two output values
 </p>
 
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
@@ -511,7 +511,7 @@ where \(o\) is output vector i.e. outputs from the output layer
 </p>
 
 <p>
-So, for the output layer the derivative of the loss function wrt the activation value at the output layer is 
+So, for the output layer the derivative of the loss function wrt the activation value at the output layer is
 </p>
 
 <p>
@@ -519,11 +519,11 @@ error = (output - expected) * transfer<sub>derivative</sub>(output)
 </p>
 
 \begin{equation*}
-\frac {\partial L} {\partial a_i} =  (o_i - \textrm{expected}) \frac {d f(a_i)} {d a_i} 
+\frac {\partial L} {\partial a_i} =  (o_i - \textrm{expected}) \frac {d f(a_i)} {d a_i}
 \end{equation*}
 
 <p>
-and the contribution of kth neuron of a hidden layer in the error of the output layer is given by 
+and the contribution of kth neuron of a hidden layer in the error of the output layer is given by
 </p>
 
 <p>
@@ -531,14 +531,14 @@ error = (weight<sub>kj</sub> * error<sub>j</sub>) * transfer<sub>derivative</sub
 </p>
 
 <p>
-this is because of the linear nature of the connection and application of chain rule. 
+this is because of the linear nature of the connection and application of chain rule.
 </p>
 <ul class="org-ul">
 <li>weight<sub>kj</sub> is the weight connecting kth neuron of hidden layer to jth neuron of output layer (or next hidden layer)</li>
 <li>error<sub>j</sub> is the error from jth output neuron (or the neuron of next hidden layer)</li>
 </ul>
 <p>
-The functional dependence of loss function on the activation of the kth neuron of the hidden layer is 
+The functional dependence of loss function on the activation of the kth neuron of the hidden layer is
 </p>
 <ul class="org-ul">
 <li>\(L = L(\vec{o})\)</li>
@@ -548,7 +548,7 @@ The functional dependence of loss function on the activation of the kth neuron o
 </ul>
 
 <p>
-and hence by chain rule 
+and hence by chain rule
 </p>
 
 \begin{equation*}
@@ -566,31 +566,31 @@ and hence by chain rule
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">backpropagate-error</span> (network expected)
-  (<span class="org-keyword">with-slots</span> (weights outputs errors) network 
+  (<span class="org-keyword">with-slots</span> (weights outputs errors) network
     <span class="org-comment-delimiter">;; </span><span class="org-comment">errors at output neurons </span>
     (<span class="org-keyword">let</span> ((err (aref errors (1- (length errors)))))
-      (map-into err 
+      (map-into err
                 (<span class="org-keyword">lambda</span> (o e)
-                  (* (- o e) 
+                  (* (- o e)
                      (transfer-derivative o)))
                 (aref outputs (1- (length outputs)))
                 expected))
 
     <span class="org-comment-delimiter">;; </span><span class="org-comment">error at neurons in hidden layers </span>
     <span class="org-comment-delimiter">;; </span><span class="org-comment">loop thorugh layers </span>
-    (<span class="org-keyword">loop</span> for i from (- (length errors) 2) downto 0 
+    (<span class="org-keyword">loop</span> for i from (- (length errors) 2) downto 0
           for err_i+1 = (aref errors (1+ i))
           for err_i = (aref errors i)
-          for output_i = (aref outputs i) 
-          for weights_i+1 = (aref weights (1+ i)) do 
+          for output_i = (aref outputs i)
+          for weights_i+1 = (aref weights (1+ i)) do
             <span class="org-comment-delimiter">;; </span><span class="org-comment">loop thorugh each neuron in the layer</span>
-            (<span class="org-keyword">loop</span> for o across output_i 
-                  for j from 0 do 
+            (<span class="org-keyword">loop</span> for o across output_i
+                  for j from 0 do
                     <span class="org-comment-delimiter">;; </span><span class="org-comment">set error </span>
                     (setf (aref err_i j)
                           (* (transfer-derivative o)
-                             (<span class="org-keyword">loop</span> for err across err_i+1 
-                                   for k from 0 
+                             (<span class="org-keyword">loop</span> for err across err_i+1
+                                   for k from 0
                                    summing (* (aref (aref weights_i+1 k) j)
                                               err))))))))
 </pre>
@@ -648,13 +648,13 @@ this part is broken down into two sections:
 <h3 id="updaing%20weights"><span class="section-number-3">3.1.</span> updaing weights</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
-we have calculated the derivative of loss function with respect to activation of each neuron and stored in the errors array. 
+we have calculated the derivative of loss function with respect to activation of each neuron and stored in the errors array.
 </p>
 
 <p>
-to update the weights note that 
+to update the weights note that
 \(a_j = (w_{j1}, w_{j2}, ...) . (1, \textrm{input}_1, ...)\)
-So, 
+So,
 </p>
 \begin{equation*}
 \frac {\partial L} {\partial w_{jk}} = \frac {\partial L} {\partial a_j} * input_k
@@ -664,17 +664,17 @@ So,
 <div class="org-src-container">
 <pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">update-weights</span> (network input learning-rate)
   <span class="org-comment-delimiter">;; </span><span class="org-comment">loop across layer</span>
-  (<span class="org-keyword">loop</span> for weights across (network-weights network) 
+  (<span class="org-keyword">loop</span> for weights across (network-weights network)
         for output across (network-outputs network)
-        for err across (network-errors network) do 
+        for err across (network-errors network) do
           <span class="org-comment-delimiter">;; </span><span class="org-comment">loop across neurons</span>
-          (<span class="org-keyword">loop</span> for e across err 
-                for i from 0 
-                for neuron-weights across weights do 
-                  (<span class="org-keyword">loop</span> for w across neuron-weights 
-                        for k from 0 do 
-                          (setf (aref neuron-weights k) 
-                                (- w (* e learning-rate 
+          (<span class="org-keyword">loop</span> for e across err
+                for i from 0
+                for neuron-weights across weights do
+                  (<span class="org-keyword">loop</span> for w across neuron-weights
+                        for k from 0 do
+                          (setf (aref neuron-weights k)
+                                (- w (* e learning-rate
                                         (<span class="org-keyword">if</span> (= k 0) 1 (aref input (1- k))))))))
 
           <span class="org-comment-delimiter">;; </span><span class="org-comment">input for next layer is output of current layer </span>
@@ -707,13 +707,13 @@ Because updates are made for each training pattern, this type of learning is cal
 <div class="org-src-container">
 <pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">train-network</span> (network data learning-rate epochs)
   (<span class="org-keyword">loop</span> for epoch from 1 to epochs
-        for total-error = 0d0 do 
-          (<span class="org-keyword">loop</span> for (input expected-output) in data do 
+        for total-error = 0d0 do
+          (<span class="org-keyword">loop</span> for (input expected-output) in data do
             (forward-propagate network input)
             <span class="org-comment-delimiter">;; </span><span class="org-comment">calculate error </span>
-            (incf total-error 
+            (incf total-error
                   (<span class="org-keyword">loop</span> for output across (output network)
-                        for expected across expected-output 
+                        for expected across expected-output
                         summing (* 1/2 (expt (- output expected) 2))))
             (backpropagate-error network expected-output)
             (update-weights network input learning-rate))
@@ -819,8 +819,8 @@ Input:
 <div class="org-src-container">
 <pre class="src src-lisp">(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*network*</span> nil)
 (<span class="org-keyword">let</span> ((network (initialize-network (list 2 2 2)))
-      (data (<span class="org-keyword">loop</span> for (x1 x2 o) in data 
-                  collect (list (vector x1 x2) 
+      (data (<span class="org-keyword">loop</span> for (x1 x2 o) in data
+                  collect (list (vector x1 x2)
                                 (vector (<span class="org-keyword">if</span> (= o 0) 1 0)
                                         (<span class="org-keyword">if</span> (= o 0) 0 1))))))
   (train-network network data .5 20)
@@ -868,10 +868,10 @@ We can do this by selecting the class value with the larger probability. This is
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">argmax</span> (vector)
-  (<span class="org-keyword">loop</span> with h = (aref vector 0) 
-        with hi = 0 
+  (<span class="org-keyword">loop</span> with h = (aref vector 0)
+        with hi = 0
         for i from 1 below (length vector)
-        for v = (aref vector i) do 
+        for v = (aref vector i) do
           (<span class="org-keyword">when</span> (&gt; v h)
             (setf h v
                   hi i))
@@ -889,7 +889,7 @@ We can do this by selecting the class value with the larger probability. This is
 <div class="outline-text-3" id="text-4-1">
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
-<pre class="src src-lisp">(<span class="org-keyword">loop</span> for (x1 x2 e) in data do 
+<pre class="src src-lisp">(<span class="org-keyword">loop</span> for (x1 x2 e) in data do
   (format t <span class="org-string">"~&amp;Expected: ~d ~tGot: ~d"</span> e (predict *network* (vector x1 x2))))
 </pre>
 </div></details>
@@ -933,14 +933,14 @@ Info about the data is here: <a href="http://archive.ics.uci.edu/ml/datasets/see
 <pre class="src src-lisp">(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*data*</span> nil)
 <span class="org-comment-delimiter">;; </span><span class="org-comment">read data </span>
 (<span class="org-keyword">with-open-file</span> (stream #p<span class="org-string">"/tmp/dataset.txt"</span>)
-  (setf *data* 
-        (<span class="org-keyword">loop</span> for input = (map 'vector 
+  (setf *data*
+        (<span class="org-keyword">loop</span> for input = (map 'vector
                                (<span class="org-keyword">lambda</span> (col)
                                  (<span class="org-keyword">declare</span> (ignore col))
                                  (read stream nil nil))
                                #(1 2 3 4 5 6 7))
               for class = (read stream nil 0)
-              for output = (<span class="org-keyword">cond</span> 
+              for output = (<span class="org-keyword">cond</span>
                              ((= class 1) (vector 1 0 0))
                              ((= class 2) (vector 0 1 0))
                              ((= class 3) (vector 0 0 1)))
@@ -948,13 +948,13 @@ Info about the data is here: <a href="http://archive.ics.uci.edu/ml/datasets/see
               collect (list input output))))
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">normalize data </span>
-(<span class="org-keyword">loop</span> for col from 0 to 6 
+(<span class="org-keyword">loop</span> for col from 0 to 6
       for min = (reduce #'min *data* <span class="org-builtin">:key</span> (<span class="org-keyword">lambda</span> (r)
                                             (aref (first r) col)))
       for max = (reduce #'max *data* <span class="org-builtin">:key</span> (<span class="org-keyword">lambda</span> (r)
                                             (aref (first r) col)))
       do
-         (<span class="org-keyword">loop</span> for r in *data* do 
+         (<span class="org-keyword">loop</span> for r in *data* do
            (setf (aref (first r) col) (/ (- (aref (first r) col) min)
                                          (- max min)))))
 </pre>
@@ -973,14 +973,14 @@ NIL
 <pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">accuracy</span> (data network)
   <span class="org-doc">"Evaluate accuracy of `</span><span class="org-doc"><span class="org-constant">network</span></span><span class="org-doc">''s prediction on the `</span><span class="org-doc"><span class="org-constant">data</span></span><span class="org-doc">'"</span>
   (truncate (/ (count-if (<span class="org-keyword">lambda</span> (datum)
-                           (<span class="org-keyword">destructuring-bind</span> (input output) datum 
+                           (<span class="org-keyword">destructuring-bind</span> (input output) datum
                              (= (predict network input)
                                 (position 1 output))))
                          data)
                (length data))
             0.01))
 
-(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*network*</span> 
+(<span class="org-keyword">defparameter</span> <span class="org-variable-name">*network*</span>
   (initialize-network (list 7 5 3)))
 
 (train-network *network* *data* 0.3 500)
@@ -995,7 +995,7 @@ NIL
 
 
 <p>
-94% accuracy 
+94% accuracy
 </p>
 </div>
 </div>
@@ -1011,19 +1011,19 @@ NIL
 (<span class="org-keyword">defun</span> <span class="org-function-name">shuffle</span> (seq)
   <span class="org-doc">"Permutes the elements of array in place"</span>
   (<span class="org-keyword">let</span> ((n (length seq)))
-    (<span class="org-keyword">loop</span> for i from 0 below n do 
+    (<span class="org-keyword">loop</span> for i from 0 below n do
       (rotatef (elt seq  i) (elt seq (rand i n))))
     seq))
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">split</span> (data i j)
   <span class="org-doc">"Returns test (between `</span><span class="org-doc"><span class="org-constant">i</span></span><span class="org-doc">' and `</span><span class="org-doc"><span class="org-constant">j</span></span><span class="org-doc">' index)and train data"</span>
-  (list 
-   (<span class="org-keyword">loop</span> for d in data 
-         for k from 0 
+  (list
+   (<span class="org-keyword">loop</span> for d in data
+         for k from 0
          when (&lt;= i k j)
            collect d)
    (<span class="org-keyword">loop</span> for d in data
-         for k from 0 
+         for k from 0
          unless (&lt;= i k j)
            collect d)))
 </pre>
@@ -1044,12 +1044,12 @@ RANDOM-POINTS
   (shuffle data)
   (<span class="org-keyword">let</span> ((n (truncate (length data) number-folds)))
     (print n)
-    (<span class="org-keyword">loop</span> repeat number-folds 
+    (<span class="org-keyword">loop</span> repeat number-folds
           for i from 0 by n
           for (test train) = (split data i (+ i n -1))
-          for network = (initialize-network network-neurons) do 
+          for network = (initialize-network network-neurons) do
             (print (list (length test) (length train)))
-            (train-network network 
+            (train-network network
                            train
                            learning-rate
                            epochs)
@@ -1098,7 +1098,7 @@ Lets evaluate a single hidden layer neural network with 5 neurons in the hidden 
 </table>
 
 <p>
-i.e. on average 
+i.e. on average
 </p>
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -1120,7 +1120,7 @@ i.e. on average
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Backpropagation Algorithm in Lisp">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/rss.xml"><img src="https://bpanthi977.github.io/img/rss.png" /></a>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Backpropagation Algorithm in Lisp">here</a>
 </div>
 </body>
 </html>

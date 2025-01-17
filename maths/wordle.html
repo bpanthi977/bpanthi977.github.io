@@ -263,7 +263,7 @@
 <h2 id="Introduction"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-3Blue1Brown's fantastic video <a href="https://www.youtube.com/watch?v=v68zYyaEmEA">Solving Wordle using Information Theory</a> introduced me to the game of <a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a>. In this article, I am going to explain what I learnt and implement a program to play this game. 
+3Blue1Brown's fantastic video <a href="https://www.youtube.com/watch?v=v68zYyaEmEA">Solving Wordle using Information Theory</a> introduced me to the game of <a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a>. In this article, I am going to explain what I learnt and implement a program to play this game.
 </p>
 
 <p>
@@ -276,7 +276,7 @@ Wordle is a word guessing game. You get 6 chances to guess a 5 letter word. For 
 </ul>
 
 <p>
-Using the revealed information, you narrow the possibilites and try to guess the correct word. As humans, we can intuitively think weather one guess might be better than other or not. "What exactly is a good guess?" is the main question. Or, put different, "What strategy for selecting guess words is the best?". Only when we answer this, we can implement that strategy in code and see the result. To answer this, observe that we tend to think of following strategies while playing the game ourselves: 
+Using the revealed information, you narrow the possibilites and try to guess the correct word. As humans, we can intuitively think weather one guess might be better than other or not. "What exactly is a good guess?" is the main question. Or, put different, "What strategy for selecting guess words is the best?". Only when we answer this, we can implement that strategy in code and see the result. To answer this, observe that we tend to think of following strategies while playing the game ourselves:
 </p>
 <ul class="org-ul">
 <li>we would like to use words that have different letters than previous guesses,</li>
@@ -285,7 +285,7 @@ Using the revealed information, you narrow the possibilites and try to guess the
 </ul>
 
 <p>
-There is one central theme to these thoughts: <i>Increase the amount of information we can extract from each guess</i>. If we use letters previously used, we get less information; If we test uncommon letters in the guess, on average we narrow down the possible words by much less than if we had tested common letters. Now, we need to quantify these notions. 
+There is one central theme to these thoughts: <i>Increase the amount of information we can extract from each guess</i>. If we use letters previously used, we get less information; If we test uncommon letters in the guess, on average we narrow down the possible words by much less than if we had tested common letters. Now, we need to quantify these notions.
 </p>
 </div>
 </div>
@@ -305,7 +305,7 @@ Now, lets look at this in another way. A number between 0 and 255 can be represe
 I = - \log_2(P)
 \end{equation*}
 <p>
-\(- \log_2(1/2) = 1\) bit, and \(-\log_2(1/4) = 2\) bits. 
+\(- \log_2(1/2) = 1\) bit, and \(-\log_2(1/4) = 2\) bits.
 Here, \(P\) is the probability of event = the amount by which the possibilites are reduced (because in this case each number is equally likely).
 </p>
 
@@ -317,7 +317,7 @@ Now, we can answer the previous questions:
 <li>If I say that the number is divisible by 2, then it would be \(-\log_2(1/2) = 1\) bit of information.</li>
 </ul>
 <p>
-And as we had intuitively said previously, we can now say numerically too that the former reveals higher information than the latter.   
+And as we had intuitively said previously, we can now say numerically too that the former reveals higher information than the latter.
 </p>
 
 <p>
@@ -336,7 +336,7 @@ In a wordle game instance where <code>sweet</code> is the right answer, using th
 </div>
 
 <p>
-And if we check every possible answer words, there are 127 words that would give the above color. 
+And if we check every possible answer words, there are 127 words that would give the above color.
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -582,7 +582,7 @@ and reduce possibilites to <code>4</code> word (9.18  bits of information). So, 
 <h2 id="Entropy"><span class="section-number-2">3.</span> Entropy</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-Equipped with what we learned about information, we are now able to quantify what information is and how it relates to the reduction in the number of possibilites. Also, we saw that the amount of information each guess would reveal depends on what the right answer is. But we don't know what the right answer is beforehand. So, for each guess, we can't say how much information that word reveals but still we can compute the average (i.e. expected) value of the information we could get. In the above example, when we don't know what the right answer is, both <code>sweet</code> and <code>rebar</code> are equally likely and so are all other 2315 words. So, on average <code>crane</code> would reveal 
+Equipped with what we learned about information, we are now able to quantify what information is and how it relates to the reduction in the number of possibilites. Also, we saw that the amount of information each guess would reveal depends on what the right answer is. But we don't know what the right answer is beforehand. So, for each guess, we can't say how much information that word reveals but still we can compute the average (i.e. expected) value of the information we could get. In the above example, when we don't know what the right answer is, both <code>sweet</code> and <code>rebar</code> are equally likely and so are all other 2315 words. So, on average <code>crane</code> would reveal
 </p>
 
 \begin{equation*}
@@ -594,11 +594,11 @@ bits of information. \(E[I(w)]\) is the expected (average) value of information 
 </p>
 
 <p>
-If you look up <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">Wikipedia</a>, entropy is defined as: 
+If you look up <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">Wikipedia</a>, entropy is defined as:
 </p>
 <blockquote>
 <p>
-Given a discrete random variable \(X\) with possible outcomes \(x_1\), &#x2026;, \(x_n\) with probability \(P(x_1)\), &#x2026;, \(P(x_n)\), the entropy is defined as 
+Given a discrete random variable \(X\) with possible outcomes \(x_1\), &#x2026;, \(x_n\) with probability \(P(x_1)\), &#x2026;, \(P(x_n)\), the entropy is defined as
 </p>
 
 \begin{equation}
@@ -608,7 +608,7 @@ H(X) = - \sum_{i=1}^{n} P(x_i) log(P(x_i))
 
 
 <p>
-Here our discrete random variable \(X\) is the result we get for a guess word (say <code>crane</code>), with possible outcomes <code>⬛⬛⬛⬛🟨</code>, <code>⬛🟨🟨⬛🟨</code>, &#x2026; with probability of occurrences \(127/2315 = 5.5\%\), \(50/2315 = 2.2\%\), and the entropy of guess <code>crane</code> would be \(H(X) = 5.74\) bits. 
+Here our discrete random variable \(X\) is the result we get for a guess word (say <code>crane</code>), with possible outcomes <code>⬛⬛⬛⬛🟨</code>, <code>⬛🟨🟨⬛🟨</code>, &#x2026; with probability of occurrences \(127/2315 = 5.5\%\), \(50/2315 = 2.2\%\), and the entropy of guess <code>crane</code> would be \(H(X) = 5.74\) bits.
 </p>
 
 <p>
@@ -622,7 +622,7 @@ Finally!!! We can answer the question <i>`How to increase the amount of informat
 <h2 id="Lets%20play%20a%20game"><span class="section-number-2">4.</span> Lets play a game</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-The right answer for this game is <code>focus</code> but we don't know this yet. So, our first guess would be the word that has the highest entropy over all possible answer words. 
+The right answer for this game is <code>focus</code> but we don't know this yet. So, our first guess would be the word that has the highest entropy over all possible answer words.
 </p>
 
 <ul class="org-ul">
@@ -633,7 +633,7 @@ The right answer for this game is <code>focus</code> but we don't know this yet.
 </p>
 
 <p>
-So, our first guess is soare. 
+So, our first guess is soare.
 </p></li>
 </ul>
 
@@ -644,7 +644,7 @@ So, our first guess is soare.
 </div>
 
 <p>
-Now, from this color pattern we can figure out, by going through all words in the dictionary, that there are <code>15</code> possible words: 
+Now, from this color pattern we can figure out, by going through all words in the dictionary, that there are <code>15</code> possible words:
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -705,11 +705,11 @@ Now, you might think we may be better off guessing one of the words from this li
 </p>
 
 <p>
-Assuming that each of the words above is equally likely to be the right answer, the average information that <code>bonus</code> would reveal is <code>2.2892463</code> bits. Where as the word <code>thumb</code> would reveal the highest amount of information on average of <code>3.4565654</code> bits. 
+Assuming that each of the words above is equally likely to be the right answer, the average information that <code>bonus</code> would reveal is <code>2.2892463</code> bits. Where as the word <code>thumb</code> would reveal the highest amount of information on average of <code>3.4565654</code> bits.
 </p>
 
 <p>
-With the next guess <code>thumb</code> resulting in the following color: 
+With the next guess <code>thumb</code> resulting in the following color:
 </p>
 
 <div class="org-center">
@@ -839,7 +839,7 @@ For that we first need to download the word-list for Wordle. In the original wor
 <h3 id="Code--Entropy"><span class="section-number-3">5.3.</span> Entropy</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
-Now we can calculate the entropy (i.e. expected information) of a guess word for some given possible answer words. At first the possible answer words is the whole answer word list (of 2315 word) and later on as we guess and colors are revealed, this list is reduced (which we can generate by <code>valid-guesses</code> function). 
+Now we can calculate the entropy (i.e. expected information) of a guess word for some given possible answer words. At first the possible answer words is the whole answer word list (of 2315 word) and later on as we guess and colors are revealed, this list is reduced (which we can generate by <code>valid-guesses</code> function).
 </p>
 
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
@@ -875,7 +875,7 @@ Now, to play the game we find the guess word which has the highest entropy.
         (<span class="org-keyword">loop</span> for word across *words*
               for entropy = (entropy word guesses)
               with max = -1
-              with w = nil 
+              with w = nil
               do (<span class="org-keyword">when</span> (&gt; entropy max)
                    (setf max entropy
                          w word))
@@ -884,7 +884,7 @@ Now, to play the game we find the guess word which has the highest entropy.
 </div></details>
 
 <p>
-This is it. In just about 75 lines of code we have a program that solves wordle games. 
+This is it. In just about 75 lines of code we have a program that solves wordle games.
 </p>
 </div>
 </div>
@@ -917,7 +917,7 @@ Our first guess would always be <code>soare</code> and then the guess would be t
 </div></details>
 
 <p>
-Simulating a game of <code>sweet</code>, it takes our program 4 steps to solve it. 
+Simulating a game of <code>sweet</code>, it takes our program 4 steps to solve it.
 </p>
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -948,7 +948,7 @@ Simulating a game of <code>sweet</code>, it takes our program 4 steps to solve i
 </table>
 
 <p>
-For, <code>focus</code> it takes just 3 steps. 
+For, <code>focus</code> it takes just 3 steps.
 </p>
 <details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
 <div class="org-src-container">
@@ -1013,7 +1013,7 @@ So, it solves almost all games in 3 or 4 steps, and only takes 5 guesses for abo
 </p>
 
 <p>
-We can slightly increase the performance of the program if we select the guess word by computing entropy for two or more steps of game. And then the best first guess word would change from <code>soare</code> to something else. As elaborated in <a href="https://www.youtube.com/watch?v=fRed0Xmc2Wg">3Blue1Brown</a>'s another video, <code>trace</code> performs slightly better. 
+We can slightly increase the performance of the program if we select the guess word by computing entropy for two or more steps of game. And then the best first guess word would change from <code>soare</code> to something else. As elaborated in <a href="https://www.youtube.com/watch?v=fRed0Xmc2Wg">3Blue1Brown</a>'s another video, <code>trace</code> performs slightly better.
 </p>
 
 <p class="verse">
@@ -1027,7 +1027,7 @@ We can slightly increase the performance of the program if we select the guess w
 </p>
 
 <p>
-With <code>trace</code> as the first guess word and no change in entropy function, the program solves 48.6% of wordle games in 3 steps and 46.3% of the games in 4 steps. 
+With <code>trace</code> as the first guess word and no change in entropy function, the program solves 48.6% of wordle games in 3 steps and 46.3% of the games in 4 steps.
 </p>
 </div>
 </div>
@@ -1048,13 +1048,13 @@ Running above benchmark takes a few minutes without optimization. Upon optimizat
 </ul>
 
 <p>
-Here's the <a href="https://github.com/bpanthi977/random-code-collection/blob/main/puzzles/wordle.lisp">optimized code</a>. 
+Here's the <a href="https://github.com/bpanthi977/random-code-collection/blob/main/puzzles/wordle.lisp">optimized code</a>.
 </p>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Solving Wordle">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div><a href="https://bpanthi977.github.io/rss.xml"><img src="https://bpanthi977.github.io/img/rss.png" /></a>
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Solving Wordle">here</a>
 </div>
 </body>
 </html>

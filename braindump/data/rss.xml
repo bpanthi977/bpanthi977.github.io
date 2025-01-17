@@ -10,23 +10,23 @@
      xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
      xmlns:media="http://search.yahoo.com/mrss/"><channel>
   <title>Bibek's Digital Garden</title>
-  <atom:link href="https://bpanthi977.github.io/braindump/data/rss.xml" rel="self" type="application/rss+xml" />
-  <link>https://bpanthi977.github.io/braindump/</link>
+  <atom:link href="https://bpanthi977.com/braindump/data/rss.xml" rel="self" type="application/rss+xml" />
+  <link>https://bpanthi977.com/braindump/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Sun, 12 Jan 2025 23:09:50 -0600</pubDate>
-  <lastBuildDate>Sun, 12 Jan 2025 23:09:50 -0600</lastBuildDate>
+  <pubDate>Fri, 17 Jan 2025 13:05:52 -0600</pubDate>
+  <lastBuildDate>Fri, 17 Jan 2025 13:05:52 -0600</lastBuildDate>
   <generator>Emacs 29.4 Org-mode 9.7.17</generator>
   <webMaster>Bibek Panthi</webMaster>
   <image>
-    <url>https://bpanthi977.github.io/braindump/data/rss.png</url>
+    <url>https://bpanthi977.com/braindump/data/rss.png</url>
     <title>Bibek's Digital Garden</title>
-    <link>https://bpanthi977.github.io/braindump/</link>
+    <link>https://bpanthi977.com/braindump/</link>
   </image>
 
   <item>
     <title>Email Security</title>
-    <link>https://bpanthi977.github.io/braindump/email_security.html</link>
+    <link>https://bpanthi977.com/braindump/email_security.html</link>
     <author>Bibek Panthi</author>
     <guid isPermaLink="false">21BD292C-B737-44FB-AA55-914D9593E9CF</guid>
     <pubDate>Sun, 12 Jan 2025 17:12:00 -0600</pubDate>
@@ -46,11 +46,11 @@
     <p>
     SMTP doesn't specify any method to authenticate the sender of the email. So if your are using plain old SMTP, then I (or anyone) can send you an email with a `From: ceo@google.com` header field and you wouldn't know if it is really from google or not. This is bad. So, obviously there have been some measures devised to authenticate the sender of the email. Two main methods are <code>SPF</code> (Sender Policy Framework) and <code>DKIM</code> (DomainKeys Identified Mail). These methods make email secure. Kind of.
     </p>
-    <div id="outline-container-ID-B1B59DF9-D1AD-4E0A-8840-96941B9AC389" class="outline-3">
-    <h3 id="ID-B1B59DF9-D1AD-4E0A-8840-96941B9AC389">SPF (Sender Policy Framework)</h3>
+    <div id="outline-container-ID-800440B7-D897-42A4-9A5B-A6C095E85B9C" class="outline-3">
+    <h3 id="ID-800440B7-D897-42A4-9A5B-A6C095E85B9C">SPF (Sender Policy Framework)</h3>
     <div class="outline-text-3" id="text-SPF-(Sender-Policy-Framework)">
     <p>
-    As per Sender Policy Framework, the recipient checks the IP address of sender with a set of allowed IP addresses for the sender's domain. i.e. If the server receives an email from <code>1.2.3.4</code> with <code>From: abcd@gmail.com</code> then, it will check whether or not the IP <code>1.2.3.4</code> is an allowed IP address for the domain <code>gmail.com</code>. The list of such allowed IPs is provided using TXT records of DNS <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
+    As per Sender Policy Framework, the recipient checks the IP address of sender with a set of allowed IP addresses for the sender's domain. i.e. If the server receives an email from <code>1.2.3.4</code> from abcd@gmail.com<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> then, it will check whether or not the IP <code>1.2.3.4</code> is an allowed IP address for the domain <code>gmail.com</code>. The list of such allowed IPs is provided using TXT records of DNS <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>.
     </p>
 
     <p>
@@ -107,11 +107,11 @@
     </p>
     </div>
     </div>
-    <div id="outline-container-ID-D4FE4A79-A6C0-4538-AEA2-8B4D06FC96A6" class="outline-3">
-    <h3 id="ID-D4FE4A79-A6C0-4538-AEA2-8B4D06FC96A6">DKIM (DomainKeys Identified Mail)</h3>
+    <div id="outline-container-ID-F8B93452-7295-423D-8610-B113C884C521" class="outline-3">
+    <h3 id="ID-F8B93452-7295-423D-8610-B113C884C521">DKIM (DomainKeys Identified Mail)</h3>
     <div class="outline-text-3" id="text-DKIM-(DomainKeys-Identified-Mail)">
     <p>
-    In DKIM system, emails are validated using Digital Signatures (i.e. Public key and Private key). The sender computes digital signature of the email using its private key and sends the signature along with the email inside the headers. The recipient can check that signature using the public key and can be sure that the email hasn't been tampered with. To find the public key of the sender, <code>DKIM</code> uses same techniques as <code>SPF</code> for IP addresses: DNS records <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>. Let's take an example. gmail.com might send an email with a following header <sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>:
+    In DKIM system, emails are validated using Digital Signatures (i.e. Public key and Private key). The sender computes digital signature of the email using its private key and sends the signature along with the email inside the headers. The recipient can check that signature using the public key and can be sure that the email hasn't been tampered with. To find the public key of the sender, <code>DKIM</code> uses same techniques as <code>SPF</code> for IP addresses: DNS records <sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>. Let's take an example. gmail.com might send an email with a following header <sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup>:
     </p>
 
     <p class="verse">
@@ -158,8 +158,8 @@
     </p>
     </div>
     </div>
-    <div id="outline-container-ID-40F16C9B-6024-4A6F-9F2E-301642BAE849" class="outline-3">
-    <h3 id="ID-40F16C9B-6024-4A6F-9F2E-301642BAE849">DMARC (Domain-based Message Authentication Reporting and Conformance)</h3>
+    <div id="outline-container-ID-AB546643-CC39-4CF8-9EFE-47AB4320C52A" class="outline-3">
+    <h3 id="ID-AB546643-CC39-4CF8-9EFE-47AB4320C52A">DMARC (Domain-based Message Authentication Reporting and Conformance)</h3>
     <div class="outline-text-3" id="text-DMARC-(Domain-based-Message-Authentication-Reporting-and-Conformance)">
     <p>
     DMARC tells the recipient what to do after checking the SPF and DKIM records. DMARC is specified using a TXT record in <code>_dmarc.domain</code>. For example:
@@ -190,8 +190,8 @@
     </p>
     </div>
     </div>
-    <div id="outline-container-ID-9325533C-39E2-4726-8C5A-E6B07C34FA0E" class="outline-3">
-    <h3 id="ID-9325533C-39E2-4726-8C5A-E6B07C34FA0E">Exploit Attempt</h3>
+    <div id="outline-container-ID-62022493-8CA7-4847-84D8-8650E9C35C09" class="outline-3">
+    <h3 id="ID-62022493-8CA7-4847-84D8-8650E9C35C09">Exploit Attempt</h3>
     <div class="outline-text-3" id="text-Exploit-Attempt">
     <p>
     If you have the <code>sendmail</code> program installed, you can create a file (say <code>email.txt</code>) as follows:
@@ -227,15 +227,15 @@
     </p>
     </div>
     </div>
-    <div id="outline-container-ID-45B291B9-7597-4748-A1AB-4562E1016F33" class="outline-3">
-    <h3 id="ID-45B291B9-7597-4748-A1AB-4562E1016F33">Is this scary? What can you do?</h3>
+    <div id="outline-container-ID-0E4C669C-CE30-460D-9B46-C337532CB9E9" class="outline-3">
+    <h3 id="ID-0E4C669C-CE30-460D-9B46-C337532CB9E9">Is this scary? What can you do?</h3>
     <div class="outline-text-3" id="text-Is-this-scary?-What-can-you-do?">
     <p>
     What if you receive such email? Is <code>gmail.com</code> reckless in using DMARC policy of <code>p=none</code>? <code>outlook.com</code> also has the  same policy. There must be some reason for these behaviors, which I don't know yet.
     </p>
 
     <p>
-    In any case, don't worry much <sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup>, although Gmail allows such emails, it shows them as probable spam in its web interface. So, if you use the web interface (i.e. gmail.com website) for your emails, you'll notice such unverified emails right away.
+    In any case, don't worry much <sup><a id="fnr.5" class="footref" href="#fn.5" role="doc-backlink">5</a></sup>, although Gmail allows such emails, it shows them as probable spam in its web interface. So, if you use the web interface (i.e. gmail.com website) for your emails, you'll notice such unverified emails right away.
     </p>
 
 
@@ -254,8 +254,8 @@
     </p>
     </div>
     </div>
-    <div id="outline-container-ID-3096C76D-FF2C-4394-84E6-19CF25EA524C" class="outline-3">
-    <h3 id="ID-3096C76D-FF2C-4394-84E6-19CF25EA524C">Conclusion</h3>
+    <div id="outline-container-ID-C9192379-8A08-47A2-B8E2-245723A77E4A" class="outline-3">
+    <h3 id="ID-C9192379-8A08-47A2-B8E2-245723A77E4A">Conclusion</h3>
     <div class="outline-text-3" id="text-Conclusion">
     <p>
     When you see something interesting, dig deeper and write a blog about it.
@@ -266,7 +266,7 @@
 </item>
 <item>
   <title>Bloom Filter</title>
-  <link>https://bpanthi977.github.io/braindump/bloom_filter.html</link>
+  <link>https://bpanthi977.com/braindump/bloom_filter.html</link>
   <author>Bibek Panthi</author>
   <guid isPermaLink="false">A13B347A-4210-406F-817E-5FC95345369E</guid>
   <pubDate>Mon, 23 Dec 2024 11:02:00 -0600</pubDate>
@@ -301,7 +301,7 @@
 </item>
 <item>
   <title>Different Conceptions of Learning</title>
-  <link>https://bpanthi977.github.io/braindump/different_conceptions_of_learning.html</link>
+  <link>https://bpanthi977.com/braindump/different_conceptions_of_learning.html</link>
   <author>Bibek Panthi</author>
   <guid isPermaLink="false">E7FBC44C-D2DC-4CB4-8241-4C4EB00B8119</guid>
   <pubDate>Mon, 30 Dec 2024 16:58:00 -0600</pubDate>
@@ -403,8 +403,8 @@
   <p>
   Algorithmic learning is "using an algorithm to learn an algorithm". While in inferential learning there is a dynamic interaction between multiple algorithms which is more general but less predictible than the input-output mapping using a single algorithm paradigm of Algorithmic learning.
   </p>
-  <div id="outline-container-ID-261B7A74-05C2-4552-997C-034C66777C56" class="outline-3">
-  <h3 id="ID-261B7A74-05C2-4552-997C-034C66777C56">NARS - Non Axiomatic Reasoning System</h3>
+  <div id="outline-container-ID-105DC352-DD9A-4AED-A3FA-746DD2CEC752" class="outline-3">
+  <h3 id="ID-105DC352-DD9A-4AED-A3FA-746DD2CEC752">NARS - Non Axiomatic Reasoning System</h3>
   <div class="outline-text-3" id="text-NARS---Non-Axiomatic-Reasoning-System">
   <p>
   NARS is an example of a system that does inferential learning. It is based on the following definition of intelligence:
@@ -470,11 +470,11 @@
 
   <ul class="org-ul">
   <li><p>
-  Statements are of Subject-copula-predicate format (copula <sup><a id="fnr.1.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> means connecting word). Statement can be of different form, denoting inheritance, equivalence, implication.
+  Statements are of Subject-copula-predicate format (copula <sup><a id="fnr.2.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> means connecting word). Statement can be of different form, denoting inheritance, equivalence, implication.
   </p>
 
   <p>
-  E.g. Some statements are of the form: \(S \rightarrow P \langle t \rangle\) which means `S` is a generalization of `P`. Here \(t\) is truth-value of belief, and \(\rightarrow\) is inheritance copula <sup><a id="fnr.1.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
+  E.g. Some statements are of the form: \(S \rightarrow P \langle t \rangle\) which means `S` is a generalization of `P`. Here \(t\) is truth-value of belief, and \(\rightarrow\) is inheritance copula <sup><a id="fnr.2.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>.
   </p></li>
 
   <li>Statements are themselves terms too. So there can be higher order statements and inferences.</li>
@@ -491,7 +491,7 @@
 </item>
 <item>
   <title>My Poems</title>
-  <link>https://bpanthi977.github.io/braindump/my_poems.html</link>
+  <link>https://bpanthi977.com/braindump/my_poems.html</link>
   <author>Bibek Panthi</author>
   <guid isPermaLink="false">A4961442-F35D-4C9B-8290-15F0E772508C</guid>
   <pubDate>Fri, 20 Dec 2024 19:56:00 -0600</pubDate>
@@ -510,7 +510,7 @@
 </item>
 <item>
   <title>Software Tips for ML Researchers</title>
-  <link>https://bpanthi977.github.io/braindump/software_tips_for_ml_researchers.html</link>
+  <link>https://bpanthi977.com/braindump/software_tips_for_ml_researchers.html</link>
   <author>Bibek Panthi</author>
   <guid isPermaLink="false">D112309B-BA5B-4018-9A20-7E19AB1913E8</guid>
   <pubDate>Wed, 18 Dec 2024 22:20:00 -0600</pubDate>
@@ -531,7 +531,7 @@
 </item>
 <item>
   <title>Email Notification for PBS Queue</title>
-  <link>https://bpanthi977.github.io/braindump/email_notification_for_pbs_queue.html</link>
+  <link>https://bpanthi977.com/braindump/email_notification_for_pbs_queue.html</link>
   <author>Bibek Panthi</author>
   <guid isPermaLink="false">BCE3846F-A171-445A-96ED-C22EC6507028</guid>
   <pubDate>Wed, 11 Dec 2024 01:37:00 -0600</pubDate>
@@ -539,8 +539,8 @@
   <description><![CDATA[<p>
   I had to run some simulation code in a cluster which uses <a href="https://www.openpbs.org/">PBS system</a> for queuing jobs. Since the jobs take a long time to finish, I wanted an email notification when all the jobs are completed. Here are two approaches to do that.
   </p>
-  <div id="outline-container-ID-EDB21CF4-7B7D-4B88-90B1-E23719FA2AB4" class="outline-3">
-  <h3 id="ID-EDB21CF4-7B7D-4B88-90B1-E23719FA2AB4">Approach 1 - PBS system</h3>
+  <div id="outline-container-ID-1B01336C-763A-47D7-A085-1DC3B440A428" class="outline-3">
+  <h3 id="ID-1B01336C-763A-47D7-A085-1DC3B440A428">Approach 1 - PBS system</h3>
   <div class="outline-text-3" id="text-Approach-1---PBS-system">
   <p>
   If you can add flags to the PBS command for submitting jobs (<code>qsub</code>) you can add <code>-m ae -M email@address.com</code> to send email notification when the job is aborted or completed. [Source: <a href="https://www.rcac.purdue.edu/knowledge/hammer/faq/jobs/questions/pbsemailalerts">purdue.edu</a>]
@@ -560,8 +560,8 @@
   </p>
   </div>
   </div>
-  <div id="outline-container-ID-5AB16D05-52E8-4908-B5BC-7FF090353488" class="outline-3">
-  <h3 id="ID-5AB16D05-52E8-4908-B5BC-7FF090353488">Approach 2 - Cronjob</h3>
+  <div id="outline-container-ID-CA023F8F-11A8-4912-A9BE-F83C032AA04B" class="outline-3">
+  <h3 id="ID-CA023F8F-11A8-4912-A9BE-F83C032AA04B">Approach 2 - Cronjob</h3>
   <div class="outline-text-3" id="text-Approach-2---Cronjob">
   <p>
   If you can edit cronjobs (cronjob is a system to schedule scripts to be run periodically), then you can add a cronjob to check the PBS queue and notify when the queue is empty.
@@ -604,7 +604,7 @@
 </item>
 <item>
   <title>Citations in Org Mode</title>
-  <link>https://bpanthi977.github.io/braindump/citations_in_org_mode.html</link>
+  <link>https://bpanthi977.com/braindump/citations_in_org_mode.html</link>
   <author>Bibek Panthi</author>
   <guid isPermaLink="false">4FECF1E4-C5EB-4723-9852-71DA612CB308</guid>
   <pubDate>Mon, 09 Dec 2024 19:50:00 -0600</pubDate>
@@ -678,7 +678,7 @@
 </item>
 <item>
   <title>Cloud Storage</title>
-  <link>https://bpanthi977.github.io/braindump/cloud_storage.html</link>
+  <link>https://bpanthi977.com/braindump/cloud_storage.html</link>
   <author>Bibek Panthi</author>
   <guid isPermaLink="false">6B72DE71-C418-49A3-A48F-928DE10A1C7A</guid>
   <pubDate>Sat, 30 Nov 2024 22:43:00 -0600</pubDate>
@@ -707,7 +707,7 @@
   <tr>
   <td class="org-left">OneDrive Family</td>
   <td class="org-right">100</td>
-  <td class="org-right">6 <sup><a id="fnr.4.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></td>
+  <td class="org-right">6 <sup><a id="fnr.5.5" class="footref" href="#fn.5" role="doc-backlink">5</a></sup></td>
   <td class="org-left">&#xa0;</td>
   </tr>
 
@@ -741,14 +741,14 @@
 
   <tr>
   <td class="org-left">pCloud</td>
-  <td class="org-right">120, 100<sup><a id="fnr.1.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></td>
+  <td class="org-right">120, 100<sup><a id="fnr.2.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></td>
   <td class="org-right">2</td>
   <td class="org-left">&#xa0;</td>
   </tr>
 
   <tr>
   <td class="org-left">pCloud (Lifetime)</td>
-  <td class="org-right">599, 399<sup><a id="fnr.1.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></td>
+  <td class="org-right">599, 399<sup><a id="fnr.2.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></td>
   <td class="org-right">2</td>
   <td class="org-left">&#xa0;</td>
   </tr>
@@ -776,14 +776,14 @@
 
   <tr>
   <td class="org-left"><a href="https://mypikpak.com/drive/payment">PikPak</a></td>
-  <td class="org-right">86, 40<sup><a id="fnr.2.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></td>
+  <td class="org-right">86, 40<sup><a id="fnr.3.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup></td>
   <td class="org-right">10</td>
   <td class="org-left">4</td>
   </tr>
 
   <tr>
   <td class="org-left">Yandex</td>
-  <td class="org-right">44, 20<sup><a id="fnr.3.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup></td>
+  <td class="org-right">44, 20<sup><a id="fnr.4.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></td>
   <td class="org-right">1</td>
   <td class="org-left">&#xa0;</td>
   </tr>
@@ -806,7 +806,7 @@
 </item>
 <item>
   <title>Debugging C with DAP in Emacs</title>
-  <link>https://bpanthi977.github.io/braindump/debugging_c_with_dap_in_emacs.html</link>
+  <link>https://bpanthi977.com/braindump/debugging_c_with_dap_in_emacs.html</link>
   <author>Bibek Panthi</author>
   <guid isPermaLink="false">4310D4DF-6E5E-464A-B74A-56F3A6084EA9</guid>
   <pubDate>Thu, 14 Nov 2024 22:30:00 -0600</pubDate>
@@ -873,8 +873,8 @@
   <span class="org-builtin">:request</span> <span class="org-string">"launch"</span>))
   </pre>
   </div>
-  <div id="outline-container-ID-05A702A3-9527-4C61-AF97-E798FD5A8FEF" class="outline-3">
-  <h3 id="ID-05A702A3-9527-4C61-AF97-E798FD5A8FEF">Installation</h3>
+  <div id="outline-container-ID-0AC6B3BC-0222-4B7C-9514-F4BC84F8510E" class="outline-3">
+  <h3 id="ID-0AC6B3BC-0222-4B7C-9514-F4BC84F8510E">Installation</h3>
   <div class="outline-text-3" id="text-Installation">
   <ol class="org-ol">
   <li><code>M-x package-install dap-mode</code> : Install dap-mode</li>
@@ -887,7 +887,7 @@
 </item>
 <item>
   <title>N:M implementation of POSIX Threads API</title>
-  <link>https://bpanthi977.github.io/braindump/n_m_implementation_of_posix_threads_api.html</link>
+  <link>https://bpanthi977.com/braindump/n_m_implementation_of_posix_threads_api.html</link>
   <author>Bibek Panthi</author>
   <guid isPermaLink="false">C9AB3255-1148-4C84-A207-71393F8DAFB7</guid>
   <pubDate>Wed, 13 Nov 2024 13:57:00 -0600</pubDate>
@@ -951,7 +951,7 @@
 </item>
 <item>
   <title>Archive completed tasks in Org mode</title>
-  <link>https://bpanthi977.github.io/braindump/archive_completed_tasks_in_org_mode.html</link>
+  <link>https://bpanthi977.com/braindump/archive_completed_tasks_in_org_mode.html</link>
   <author>Bibek Panthi</author>
   <guid isPermaLink="false">9CD519C1-0320-419F-9131-7B696E9B7A39</guid>
   <pubDate>Wed, 13 Nov 2024 13:59:00 -0600</pubDate>
@@ -990,13 +990,13 @@
 </item>
 <item>
   <title>Named Destinations</title>
-  <link>https://bpanthi977.github.io/braindump/pdfs.html</link>
+  <link>https://bpanthi977.com/braindump/pdfs.html</link>
   <author>Bibek Panthi</author>
   <guid isPermaLink="false">ADFD5184-AA0D-4C61-8246-89B80AFAACB4</guid>
   <pubDate>Fri, 22 Nov 2024 15:12:00 -0600</pubDate>
 
-  <description><![CDATA[<div id="outline-container-ID-8060E471-0926-4960-B7A0-1E54A5F669D2" class="outline-3">
-  <h3 id="ID-8060E471-0926-4960-B7A0-1E54A5F669D2">Named Destinations</h3>
+  <description><![CDATA[<div id="outline-container-ID-A32DF2C6-390C-4353-9F8A-9559CD96BFC9" class="outline-3">
+  <h3 id="ID-A32DF2C6-390C-4353-9F8A-9559CD96BFC9">Named Destinations</h3>
   <div class="outline-text-3" id="text-Named-Destinations">
   <p>
   Used for referencing/linking parts of another pdf document
@@ -1038,18 +1038,22 @@
   <div id="text-footnotes">
 
     <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-    On Black Friday Offer
+    Actually SPF is checked for the domain in the 'Return-Path' header not the 'From' header. And if the domain in Return-Path and From are different then the email fails a   DMARC test called <a href="https://mxtoolbox.com/dmarc/details/dmarc-tags/aspf">SPF Alignment</a>.
     </p></div></div>
 
     <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-    For the first year only
+    On Black Friday Offer
     </p></div></div>
 
     <div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-    For 1.5 years, on Black Friday Offer
+    For the first year only
     </p></div></div>
 
     <div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+    For 1.5 years, on Black Friday Offer
+    </p></div></div>
+
+    <div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5" role="doc-backlink">5</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
     1 TB per person. Upto 6 family members.
     </p></div></div>
 
