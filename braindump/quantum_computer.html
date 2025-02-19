@@ -27,54 +27,73 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#QUBIT">1. QUBIT</a></li>
-<li><a href="#Superconduction%20Charged%20Qubits">2. Superconduction Charged Qubits</a>
+<li><a href="#Resources">1. Resources</a></li>
+<li><a href="#QUBIT">2. QUBIT</a></li>
+<li><a href="#Superconduction%20Charged%20Qubits">3. Superconduction Charged Qubits</a>
 <ul>
-<li><a href="#Measuring%20a%20QUBIT">2.1. Measuring a QUBIT</a>
+<li><a href="#Measuring%20a%20QUBIT">3.1. Measuring a QUBIT</a>
 <ul>
-<li><a href="#Measure%20Instruction">2.1.1. Measure Instruction</a></li>
+<li><a href="#Measure%20Instruction">3.1.1. Measure Instruction</a></li>
 </ul>
 </li>
-<li><a href="#Gate%20Applications%20change%20Probabilities">2.2. Gate Applications change Probabilities</a>
+<li><a href="#Gate%20Applications%20change%20Probabilities">3.2. Gate Applications change Probabilities</a>
 <ul>
-<li><a href="#H">2.2.1. H</a></li>
-<li><a href="#Phase">2.2.2. Phase</a></li>
-<li><a href="#T">2.2.3. T</a></li>
-<li><a href="#CNOT">2.2.4. CNOT</a></li>
+<li><a href="#H">3.2.1. H</a></li>
+<li><a href="#Phase">3.2.2. Phase</a></li>
+<li><a href="#T">3.2.3. T</a></li>
+<li><a href="#CNOT">3.2.4. CNOT</a></li>
 </ul>
 </li>
-<li><a href="#Examples">2.3. Examples</a>
+<li><a href="#Examples">3.3. Examples</a>
 <ul>
-<li><a href="#A%20coin%20flipping%20program">2.3.1. A coin flipping program</a></li>
+<li><a href="#A%20coin%20flipping%20program">3.3.1. A coin flipping program</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#n-QUBIT%20abstract%20machine">3. n-QUBIT abstract machine</a></li>
+<li><a href="#n-QUBIT%20abstract%20machine">4. n-QUBIT abstract machine</a></li>
 </ul>
 </div>
 </div>
 <p>
 (<a href="https://www.youtube.com/watch?v=4fDAswMwU28">Source</a>)
 </p>
-<div id="outline-container-QUBIT" class="outline-2">
-<h2 id="QUBIT"><span class="section-number-2">1.</span> QUBIT</h2>
+<div id="outline-container-Resources" class="outline-2">
+<h2 id="Resources"><span class="section-number-2">1.</span> Resources</h2>
 <div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>IBM lecture series available in Youtube: <a href="https://www.youtube.com/playlist?app=desktop&amp;list=PLOFEBzvs-VvqoeIypXYLLf0PY-WOQMLR3">https://www.youtube.com/playlist?app=desktop&amp;list=PLOFEBzvs-VvqoeIypXYLLf0PY-WOQMLR3</a></li>
+<li><a href="https://learning.quantum.ibm.com">https://learning.quantum.ibm.com</a></li>
+</ul>
+
+<p>
+Books:
+</p>
+<ul class="org-ul">
+<li>Eric Johnston, Nic Harrigan, Mercedes Gimeno-Segovia, Programming Quantum Computers: Essential Algorithms and Code Samples, 1st edition, O'Reilly, 2019</li>
+<li>Jack D. Hidary, Quantum Computing: An Applied Approach, 2nd edition, Springer, 2019.</li>
+<li>Michael A. Nielson, Isaac L. Chuang, Quantum Computation and Quantum Information, Cambridge University Press, 2010 (10th anniversary edition). [Recommended]</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-QUBIT" class="outline-2">
+<h2 id="QUBIT"><span class="section-number-2">2.</span> QUBIT</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 is sth that can be in one state or other, or possibly in a state.
 </p>
 </div>
 </div>
 <div id="outline-container-Superconduction%20Charged%20Qubits" class="outline-2">
-<h2 id="Superconduction%20Charged%20Qubits"><span class="section-number-2">2.</span> Superconduction Charged Qubits</h2>
-<div class="outline-text-2" id="text-2">
+<h2 id="Superconduction%20Charged%20Qubits"><span class="section-number-2">3.</span> Superconduction Charged Qubits</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 A silicon circuit that either has charge or not
 </p>
 </div>
 <div id="outline-container-Measuring%20a%20QUBIT" class="outline-3">
-<h3 id="Measuring%20a%20QUBIT"><span class="section-number-3">2.1.</span> Measuring a QUBIT</h3>
-<div class="outline-text-3" id="text-2-1">
+<h3 id="Measuring%20a%20QUBIT"><span class="section-number-3">3.1.</span> Measuring a QUBIT</h3>
+<div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Send a microwave pulse tuned for the qubit being measured.</li>
 <li>listen to hear a reflection
@@ -85,8 +104,8 @@ A silicon circuit that either has charge or not
 </ul>
 </div>
 <div id="outline-container-Measure%20Instruction" class="outline-4">
-<h4 id="Measure%20Instruction"><span class="section-number-4">2.1.1.</span> Measure Instruction</h4>
-<div class="outline-text-4" id="text-2-1-1">
+<h4 id="Measure%20Instruction"><span class="section-number-4">3.1.1.</span> Measure Instruction</h4>
+<div class="outline-text-4" id="text-3-1-1">
 <p>
 MEASURE q c
 </p>
@@ -98,8 +117,8 @@ Measure qubit <b>q</b> and store into register numbered <b>c</b>
 </div>
 </div>
 <div id="outline-container-Gate%20Applications%20change%20Probabilities" class="outline-3">
-<h3 id="Gate%20Applications%20change%20Probabilities"><span class="section-number-3">2.2.</span> Gate Applications change Probabilities</h3>
-<div class="outline-text-3" id="text-2-2">
+<h3 id="Gate%20Applications%20change%20Probabilities"><span class="section-number-3">3.2.</span> Gate Applications change Probabilities</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
 Operation on quantum computer are called gates.
 </p>
@@ -108,13 +127,13 @@ Operation on quantum computer are called gates.
 There are Four gates that can encode any quantum computation:
 </p>
 <ul class="org-ul">
-<li>H, Phase and T are one quit gates</li>
+<li>H, Phase and T are one qubit gates</li>
 <li>CNOT : two qubit gate</li>
 </ul>
 </div>
 <div id="outline-container-H" class="outline-4">
-<h4 id="H"><span class="section-number-4">2.2.1.</span> H</h4>
-<div class="outline-text-4" id="text-2-2-1">
+<h4 id="H"><span class="section-number-4">3.2.1.</span> H</h4>
+<div class="outline-text-4" id="text-3-2-1">
 <p>
 Hadamard gate
 </p>
@@ -125,24 +144,24 @@ Changes probability to 50%
 </div>
 </div>
 <div id="outline-container-Phase" class="outline-4">
-<h4 id="Phase"><span class="section-number-4">2.2.2.</span> Phase</h4>
+<h4 id="Phase"><span class="section-number-4">3.2.2.</span> Phase</h4>
 </div>
 
 <div id="outline-container-T" class="outline-4">
-<h4 id="T"><span class="section-number-4">2.2.3.</span> T</h4>
+<h4 id="T"><span class="section-number-4">3.2.3.</span> T</h4>
 </div>
 
 <div id="outline-container-CNOT" class="outline-4">
-<h4 id="CNOT"><span class="section-number-4">2.2.4.</span> CNOT</h4>
+<h4 id="CNOT"><span class="section-number-4">3.2.4.</span> CNOT</h4>
 </div>
 </div>
 <div id="outline-container-Examples" class="outline-3">
-<h3 id="Examples"><span class="section-number-3">2.3.</span> Examples</h3>
-<div class="outline-text-3" id="text-2-3">
+<h3 id="Examples"><span class="section-number-3">3.3.</span> Examples</h3>
+<div class="outline-text-3" id="text-3-3">
 </div>
 <div id="outline-container-A%20coin%20flipping%20program" class="outline-4">
-<h4 id="A%20coin%20flipping%20program"><span class="section-number-4">2.3.1.</span> A coin flipping program</h4>
-<div class="outline-text-4" id="text-2-3-1">
+<h4 id="A%20coin%20flipping%20program"><span class="section-number-4">3.3.1.</span> A coin flipping program</h4>
+<div class="outline-text-4" id="text-3-3-1">
 <p>
 H 4
 MEASURE 4 [13]
@@ -162,8 +181,8 @@ DEFCIRCUIT FLIP-COIN q c:
 </div>
 </div>
 <div id="outline-container-n-QUBIT%20abstract%20machine" class="outline-2">
-<h2 id="n-QUBIT%20abstract%20machine"><span class="section-number-2">3.</span> n-QUBIT abstract machine</h2>
-<div class="outline-text-2" id="text-3">
+<h2 id="n-QUBIT%20abstract%20machine"><span class="section-number-2">4.</span> n-QUBIT abstract machine</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 State:
 </p>
@@ -181,6 +200,13 @@ Instructions:
 <li>PHASE q</li>
 <li>T q</li>
 <li>CNOT p q</li>
+</ul>
+
+<hr />
+<h3>References</h3>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=4fDAswMwU28">https://www.youtube.com/watch?v=4fDAswMwU28</a> (<a href="quantum_computer.html#ID-1acb04bc-1e37-43b5-b1f0-5ba22fc949a2">Quantum Computer</a>)</li>
 </ul>
 </div>
 </div>

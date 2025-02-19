@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SDL3</title>
+<meta name="author" content="Bibek Panthi" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="../css/braindump.css" />
+<script src="../js/counters.js" type="text/javascript"></script>
+<script src="../js/URI.js" type="text/javascript"></script>
+<script src="../js/pages.js" type="text/javascript"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="H" href="./index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2025-02-07 Fri&gt;</span></span></p>
+</div>
+<div id="content" class="content">
+<h1 class="title">SDL3</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#Setup%2FInstallation">1. Setup/Installation</a>
+<ul>
+<li><a href="#From%20Source">1.1. From Source</a>
+<ul>
+<li><a href="#SDL3">1.1.1. SDL3</a></li>
+<li><a href="#SDL3%20Image">1.1.2. SDL3 Image</a></li>
+<li><a href="#SDL3%20TTF">1.1.3. SDL3 TTF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Setup%2FInstallation" class="outline-2">
+<h2 id="Setup%2FInstallation"><span class="section-number-2">1.</span> Setup/Installation</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-From%20Source" class="outline-3">
+<h3 id="From%20Source"><span class="section-number-3">1.1.</span> From Source</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-SDL3" class="outline-4">
+<h4 id="SDL3"><span class="section-number-4">1.1.1.</span> SDL3</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+Get SDL3 <a href="https://github.com/libsdl-org/SDL/releases">https://github.com/libsdl-org/SDL/releases</a>
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-sh">wget <span class="org-string">"https://github.com/libsdl-org/SDL/releases/download/release-3.2.4/SDL3-3.2.4.tar.gz"</span>
+tar -xf SDL3-3.2.4.tar.gz
+<span class="org-builtin">cd</span> SDL3-3.2.4
+mkdir build
+<span class="org-builtin">cd</span> build
+cmake ../
+make
+sudo make install
+</pre>
+</div></details>
+</div>
+</div>
+<div id="outline-container-SDL3%20Image" class="outline-4">
+<h4 id="SDL3%20Image"><span class="section-number-4">1.1.2.</span> SDL3 Image</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+Get SDL3_Image from <a href="https://github.com/libsdl-org/SDL_image/releases">https://github.com/libsdl-org/SDL_image/releases</a>
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-sh">wget <span class="org-string">"https://github.com/libsdl-org/SDL_image/releases/download/release-3.2.0/SDL3_image-3.2.0.tar.gz"</span>
+tar -xf SDL3_image-3.2.0.tar.gz
+<span class="org-builtin">cd</span> SDL3_image-3.2.0
+mkdir build
+<span class="org-builtin">cd</span> build
+cmake ../
+make
+sudo make install
+</pre>
+</div></details>
+</div>
+</div>
+<div id="outline-container-SDL3%20TTF" class="outline-4">
+<h4 id="SDL3%20TTF"><span class="section-number-4">1.1.3.</span> SDL3 TTF</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<p>
+Get SLD3_ttf from <a href="https://github.com/libsdl-org/SDL_ttf/releases">https://github.com/libsdl-org/SDL_ttf/releases</a>
+</p>
+
+<details open><summary><span class='org-details-collapse'>&lt; Collapse code block</span><span class='org-details-expand'>&gt; Expand code block</span></summary>
+<div class="org-src-container">
+<pre class="src src-sh">wget <span class="org-string">"https://github.com/libsdl-org/SDL_ttf/releases/download/preview-3.1.0/SDL3_ttf-3.1.0.tar.gz"</span>
+tar -xf SDL3_ttf-3.1.0.tar.gz
+<span class="org-builtin">cd</span> SDL3_ttf-3.1.0
+mkdir build
+<span class="org-builtin">cd</span> build
+cmake ../
+make
+sudo make install
+</pre>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: SDL3">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>
+</div>
+</body>
+</html>

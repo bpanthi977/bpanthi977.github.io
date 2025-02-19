@@ -27,49 +27,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#Don%27t%20update%20drivers">1. Don't update drivers</a></li>
+<li><a href="#Cuda%20Toolkit%20and%20Nvidia%20Driver">1. Cuda Toolkit and Nvidia Driver</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-Don%27t%20update%20drivers" class="outline-2">
-<h2 id="Don%27t%20update%20drivers"><span class="section-number-2">1.</span> Don't update drivers</h2>
+<div id="outline-container-Cuda%20Toolkit%20and%20Nvidia%20Driver" class="outline-2">
+<h2 id="Cuda%20Toolkit%20and%20Nvidia%20Driver"><span class="section-number-2">1.</span> Cuda Toolkit and Nvidia Driver</h2>
 <div class="outline-text-2" id="text-1">
-<p>
-(<a href="https://www.nvidia.com/en-us/geforce/forums/geforce-graphics-cards/5/294697/how-to-test-gpu-for-hardware-problems/">Source</a>)
-</p>
 
-<p>
-First; you'll need to revert any/all changes in drivers or OS which veered away from the OEM specifications.
-If the issue continues at this point; then there is a "high" likelihood the is a hardware issue. You cannot test the hardware properly using a non-certified driver and/or OS. See <a href="https://www.dell.com/support/home/us/en/04">https://www.dell.com/support/home/us/en/04</a> and enter your specific model# or SNID for more information.
+<div id="figure-1" class="figure">
+<p><img src="data/nvidia_drivers/nvidia_cuda_apis-20250123185134.png" alt="nvidia_cuda_apis-20250123185134.png" />
 </p>
-
-<p>
-You have a laptop; you should not attempt to "update" the driver or OS unless it is specifically listed on the manufacturer's website under your exact model#. If not, then issues such as yours (or much worse) will arise. (Especially with Asus, Acer, MSI, HP/CQ, Toshiba, Sony, Lenovo, most Dell, and older Gigabyte Optimus enabled units)
-</p>
-
-<p>
-This is because the OEM manufacturer is the manufacturer of the graphics device (card); not Nvidia, which only produces the physical "chip" to these manufacturers. Vram, PCB, VRM, trace, and cooling are all designed by the OEM manufacturer; thus is considered as "proprietary" hardware. In which; has it's own thermal and power limits that can be effected with use of 3rd party (vanilla) drivers and can damage or lower the performance of the hardware. (Not to mention interfere with the unit's Optimus switching ability). The laptop model# must also be added to the supported driver ID list by Nvidia prior to the unit being supported via 3rd party vanilla drivers.
-</p>
-
-<p>
-Run DDU to uninstall the "updated" Vanilla driver pack and install the driver via the laptop manufacturer's website under your exact model#. Mobile units are not like their desktop cousins; thus cannot be treated as such. When using mobile platforms you want to ALWAYS use manufacturer approved drivers as they are often modified for use with your proprietary hardware; as well as, fit within your machines power and thermal limits. Do Not allow GFE or Windows to install your drivers for you. As stated within the Nvidia driver patch notes since R304:
-</p>
-
-<p>
-"This is a reference driver that can be installed on supported NVIDIA notebook GPUs. However, please note that your notebook original equipment manufacturer (OEM) provides certified drivers for your specific notebook on their website. NVIDIA recommends that you check with your notebook OEM about recommended software updates for your notebook. OEMs may not provide technical support for issues that arise from the use of this driver."
-</p>
-
-<p>
-"IF" your laptop model does not list Windows 10 drivers/Bios available for ALL hardware under your exact model# on the "manufacturer's website" then revert back to the OEM OS!! (Also stated within #8 of the Forum Sticky) <b>In order</b> -Download both the Nvidia driver "AND" the Intel driver found on Manufacturer's site (not here, not via GFE) under your "specific" model# laptop and save them to desktop. -Download/install DDU -Disable Automatic updates (or switch off your wifi) if on Win10 -Link -Run DDU completely removing BOTH the Intel and Nvidia drivers (in safe mode) -Reboot when asked -Keeping wifi disabled (again; "IF" on Win10) install the Intel Driver pack (required) as the Intel drivers must be fully functional "prior" to installing the Nvidia graphics drivers. -Reboot when complete -Then install the Nvidia driver pack -Reboot -Re-enable WiFi / Disable Automatic updates and alerts from GFE (only install drivers located on the manufacturer's website) 
-</p>
-
-<p>
-Installing driver software not listed by the manufacturer is "at your own risk"; as the hardware associated with said driver is operating outside of the manufacturer's specification. Thus; you are on your own with your issue.
-</p>
-
-<p>
-Nvidia negates any/all liability and does NOT guaranty full functionality in these situations, as noted in the  disclaimer noted above (added to all driver release notes since R304).
-</p>
+<p><span class="figure-number">Figure 1: </span>Nvidia CUDA APIs [<a href="https://stackoverflow.com/a/76972265">https://stackoverflow.com/a/76972265</a>]</p>
+</div>
 </div>
 </div>
 </div>

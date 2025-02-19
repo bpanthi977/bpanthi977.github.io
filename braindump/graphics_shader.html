@@ -23,10 +23,135 @@
 </div>
 <div id="content" class="content">
 <h1 class="title">Graphics Shader</h1>
-<ul class="org-ul">
-<li>Session on shaders by Anmol Poudel: <a href="https://docs.google.com/document/d/1s3rEm9Kp7EILItIgZ20buB3s8keukxOwncupdiLZnOk/edit">https://docs.google.com/document/d/1s3rEm9Kp7EILItIgZ20buB3s8keukxOwncupdiLZnOk/edit</a></li>
+<p>
+(Edited on Jan 26, 2025)
+</p>
 
-<li>Resource: 
+<ul class="org-ul">
+<li><p>
+Shader are programs that run in GPU
+</p>
+
+<p>
+For CPU there are two main ISA: x86_64 and ARM that most machines use. Thus you can compile your code to these two ISA, and run the program.
+</p>
+
+<p>
+But for GPUs, each manufacturer has its own ISA and even more each of them have multiple generations of ISA being concurrently supported. E.g. NVIDIA has Lovelace, Ampere, Turning, etc, and same with AMD (RDNA3, RDNA2, etc.).
+</p>
+
+<p>
+This means you have to compile your same program multiple times if you want it to run on all platforms. So, one approach is to use a shader language that the graphics driver compiles to machine code. But compiling GPU programs on runtime is not ideal. This is slow, is prone to bugs and demands the device driver to ship with compiler.
+</p>
+
+<p>
+Another better approach is to use intermediate representation (e.g. SPIR-V, DXIL/DXBC, AIR). So, you compile your shader program to an intermediate representation (i.e. bytecode) which the device driver just-in-time compiles to to machine code and executes. But not all gpu drivers support the same bytecode. This depends on the GPU API that they implement.
+</p></li>
+
+<li><p>
+Graphics API are specifications
+</p>
+
+<p>
+OpenGL, Metal, Vulkan, DirectX11, DirectX12 are some of the well known APIs. It is the job/choice of the graphics driver to implement one or multiple of those APIs.  In addition to these apis the gpu device usually has it own apis too.
+</p>
+
+<p>
+Take the case of a Nvidia GPU. Their driver provides NVAPI that exposes all the capabilities of the GPU. In addition to that Nvidia drivers also provide the Vulkan, OpenGL and DirectX APIs. Since GPU do more than graphics, the driver may also provide other APIs such as CUDA or OpenCL for compute, Vulkan Video or NVDEC for video decoding.
+</p>
+
+<p>
+Incontrast Apple only supports the Metal API. It used to support OpenGL but it is now deprecated.
+</p></li>
+
+<li><p>
+There are many Shader IR
+</p>
+
+<p>
+Now, in regards to the shader intermediate representation format. Different graphics api have their own intermediate representation (IR/Bytecode) format. Vulkan and OpenGL have SPIR-V which aims to be OS and device independent. Microsoft's DirectX API has DXIL, DXBC. Apple's Metal API has AIR. And to produce the bytecode, each API specifies a (slightly) different programming languages: Metal has MSL, OpenGL has GLSL, DirectX has HLSL. Vulkan doesn't introduce new high level langauge or support other high level shader language. Vulkan only understands SPIR-V so you can use any language (GLSL or HLSL) as long as you have a compiler that compiles your shader code to SPIR-V.
+</p></li>
+</ul>
+
+
+<ul class="org-ul">
+<li>Note about GPU ISAs and Compilers:
+<ul class="org-ul">
+<li>Apple doesn't provide compiler for their ISA. You can only compile shaders written in MSL using Metal api. Their ISA is not open.</li>
+
+<li><p>
+Nvidia's <code>nvcc</code> compiles cuda code to bytecode called PTX. Then the PTX code is JIT compiled by GPU driver and executed in the GPU. PTX is a low level virtual machine and ISA independent of gpu architecture within nvidia's gpus. Alternatively, you can compile cuda code to <a href="https://modal.com/gpu-glossary/device-software/streaming-assembler">SASS</a> which is even more lower level and tied to specific gpu architecture of nvidia. At the end SASS is converted by GPU driver to machine code that the GPU executes.
+</p>
+
+<p>
+See <a href="https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/#gpu-compilation">https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/#gpu-compilation</a> for more details.
+</p>
+
+<blockquote>
+<p>
+In the CUDA naming scheme, GPUs are named sm_xy, where x denotes the GPU generation number, and y the version in that generation. Additionally, to facilitate comparing GPU capabilities, CUDA attempts to choose its GPU names such that if x1y1 &lt;= x2y2 then all non-ISA related capabilities of sm_x1y1 are included in those of sm_x2y2.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Code (sm_)</th>
+<th scope="col" class="org-left">Architecture Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">50, 52, 53</td>
+<td class="org-left">Maxwell</td>
+</tr>
+
+<tr>
+<td class="org-left">60, 61, 62</td>
+<td class="org-left">Pascal</td>
+</tr>
+
+<tr>
+<td class="org-left">70, 72</td>
+<td class="org-left">Volta</td>
+</tr>
+
+<tr>
+<td class="org-left">75</td>
+<td class="org-left">Turing</td>
+</tr>
+
+<tr>
+<td class="org-left">80, 86, 87</td>
+<td class="org-left">Ampere</td>
+</tr>
+
+<tr>
+<td class="org-left">89</td>
+<td class="org-left">Ada</td>
+</tr>
+
+<tr>
+<td class="org-left">90, 90a</td>
+<td class="org-left">Hopper</td>
+</tr>
+
+<tr>
+<td class="org-left">100, 100a, 101, 101a, 120, 120a</td>
+<td class="org-left">Blackwell</td>
+</tr>
+</tbody>
+</table>
+</blockquote></li>
+</ul></li>
+
+<li>Resource:
 <ul class="org-ul">
 <li><a href="https://thebookofshaders.com">https://thebookofshaders.com</a></li>
 <li><a href="https://www.shadertoy.com/">https://www.shadertoy.com/</a></li>
@@ -35,8 +160,10 @@
 <li><a href="https://blog.johnnovak.net/2016/09/21/what-every-coder-should-know-about-gamma/">https://blog.johnnovak.net/2016/09/21/what-every-coder-should-know-about-gamma/</a></li>
 </ul></li>
 
-<li>Bare minmum example:</li>
-</ul>
+<li><p>
+Bare minmum example:
+</p>
+
 <pre class="example">
 yarn add @shopify/react-native-skia
 </pre>
@@ -66,7 +193,17 @@ yarn add @shopify/react-native-skia
 
 <span class="org-keyword">export</span> <span class="org-keyword">default</span> App;
 </pre>
-</div></details>
+</div></details></li>
+</ul>
+
+<hr />
+<h3>References</h3>
+
+<ul class="org-ul">
+<li><a href="https://modal.com/gpu-glossary/device-software/streaming-assembler">https://modal.com/gpu-glossary/device-software/streaming-assembler</a> (<a href="graphics_shader.html#ID-9BD8C6D9-66D7-4205-AFC7-FCEB16EBF120">Graphics Shader</a>)</li>
+<li><a href="https://moonside.games/posts/layers-all-the-way-down/">https://moonside.games/posts/layers-all-the-way-down/</a></li>
+<li><a href="https://stackoverflow.com/a/10926533">https://stackoverflow.com/a/10926533</a></li>
+</ul>
 </div>
 <div id="postamble" class="status">
 <hr/>You can send your feedback, queries <a href="mailto:bpanthi977@gmail.com?subject=Feedback: Graphics Shader">here</a><span id="visits"></span><span id="claps"></span><div id="claps-message"></div>

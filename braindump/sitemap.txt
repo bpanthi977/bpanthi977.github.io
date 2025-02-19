@@ -50,6 +50,7 @@ https://bpanthi977.com/braindump/interactive_proofs.html
 https://bpanthi977.com/braindump/symmetric_matrix.html
 https://bpanthi977.com/braindump/calculus_of_variation.html
 https://bpanthi977.com/braindump/nea.html
+https://bpanthi977.com/braindump/sdl3.html
 https://bpanthi977.com/braindump/motivation.html
 https://bpanthi977.com/braindump/Breathless - Shankar Mahadevan - Lyrics.html
 https://bpanthi977.com/braindump/loss_function.html
@@ -160,6 +161,7 @@ https://bpanthi977.com/braindump/debugging_c_with_dap_in_emacs.html
 https://bpanthi977.com/braindump/assumptions_of_decision_making_models_in_agi.html
 https://bpanthi977.com/braindump/life.html
 https://bpanthi977.com/braindump/human_condition.html
+https://bpanthi977.com/braindump/republic_and_democracy.html
 https://bpanthi977.com/braindump/Matrix Games.html
 https://bpanthi977.com/braindump/magma.html
 https://bpanthi977.com/braindump/abstraction.html
@@ -276,6 +278,7 @@ https://bpanthi977.com/braindump/anaxamander.html
 https://bpanthi977.com/braindump/global_optimization.html
 https://bpanthi977.com/braindump/testing_programming.html
 https://bpanthi977.com/braindump/structure_learning.html
+https://bpanthi977.com/braindump/chromaprint.html
 https://bpanthi977.com/braindump/support_vector_machines.html
 https://bpanthi977.com/braindump/algebraic_structure.html
 https://bpanthi977.com/braindump/openspiel.html
@@ -307,7 +310,6 @@ https://bpanthi977.com/braindump/poisson_s_ratio.html
 https://bpanthi977.com/braindump/fundamental_attribution_error.html
 https://bpanthi977.com/braindump/theory_of_elasticity.html
 https://bpanthi977.com/braindump/machine_learning.html
-https://bpanthi977.com/braindump/Jokes.html
 https://bpanthi977.com/braindump/blog_sitemap.html
 https://bpanthi977.com/braindump/contract_checker.html
 https://bpanthi977.com/braindump/different_conceptions_of_learning.html
@@ -333,6 +335,7 @@ https://bpanthi977.com/braindump/semi_group.html
 https://bpanthi977.com/braindump/second_brain.html
 https://bpanthi977.com/braindump/generalized_minimal_residual_method.html
 https://bpanthi977.com/braindump/compression.html
+https://bpanthi977.com/braindump/gui_graphical_user_interface.html
 https://bpanthi977.com/braindump/flush.html
 https://bpanthi977.com/braindump/get_transcript_from_youtube_video.html
 https://bpanthi977.com/braindump/plymouth.html
@@ -355,7 +358,6 @@ https://bpanthi977.com/braindump/breath_first_search.html
 https://bpanthi977.com/braindump/soft_max.html
 https://bpanthi977.com/braindump/logit.html
 https://bpanthi977.com/braindump/work.html
-https://bpanthi977.com/braindump/cs_517.html
 https://bpanthi977.com/braindump/economic_growth_is_no_longer_coupled_with_carbon_emission.html
 https://bpanthi977.com/braindump/non_decidable_problems.html
 https://bpanthi977.com/braindump/udp_hole_punching.html
@@ -546,6 +548,7 @@ https://bpanthi977.com/braindump/property_based_testing.html
 https://bpanthi977.com/braindump/to_moon.html
 https://bpanthi977.com/braindump/Quantum Computers Won't Work.html
 https://bpanthi977.com/braindump/l2_regularization.html
+https://bpanthi977.com/braindump/go_programming_language.html
 https://bpanthi977.com/braindump/mamba.html
 https://bpanthi977.com/braindump/data_centric.html
 https://bpanthi977.com/braindump/content-writing-cess.html

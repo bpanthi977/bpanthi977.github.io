@@ -29,6 +29,7 @@
 <ul>
 <li><a href="#Conferences">1. Conferences</a></li>
 <li><a href="#Style">2. Style</a></li>
+<li><a href="#Event%20Based%20Programming">3. Event Based Programming</a></li>
 </ul>
 </div>
 </div>
@@ -74,6 +75,48 @@
 <li>Pair the asserts (<a href="contract_checker.html#ID-8DBB0FF2-79E0-4E97-AC3A-B256E10A282B">Contract Checker</a>)</li>
 <li>Fail Fast</li>
 </ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-Event%20Based%20Programming" class="outline-2">
+<h2 id="Event%20Based%20Programming"><span class="section-number-2">3.</span> Event Based Programming</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Can be thought as a programming paradigm. Useful for Distributed systems.
+</p>
+
+<p>
+Procedural paradigm is the most familiar and simple paradigm for programmming. However, it doesn't work for distributed system, because function calls
+</p>
+<ul class="org-ul">
+<li>aren't movable accross resource: they happen in the system it was started</li>
+<li>are tied to lifetime of resource</li>
+</ul>
+
+<p>
+However, event handler based system is fit for distributed systems. They provide the necessary semantics.
+</p>
+
+<p>
+But have the cons:
+</p>
+<ul class="org-ul">
+<li>stack ripping / callback hell</li>
+</ul>
+
+<p>
+Can we have procedure based programming model with an event based execution model? An event loop provides this model.
+</p>
+
+<p>
+For concurrent applications, event loop (async/await) provide the abstraction of procedurs based programming and event based execution.
+</p>
+
+<p>
+Similarly, we can use distributed event loop [<a href="https://www.youtube.com/watch?v=hofEKFZtBj8">https://www.youtube.com/watch?v=hofEKFZtBj8</a>] to translate the same effect to distributed systems.
+</p>
+<ul class="org-ul">
+<li>We can have recovery if the component async commands can be restarted and give idempotent results.</li>
 </ul>
 
 <hr />
