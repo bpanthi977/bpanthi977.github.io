@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       33afd618-2355-4537-8524-00766b6ebd12
+:END:
+#+title: Turing Completeness of Neural Networks
+Under some assumptions Neural Network are Turing Compelete
+https://www.youtube.com/watch?v=0QczhVg5HaI
+

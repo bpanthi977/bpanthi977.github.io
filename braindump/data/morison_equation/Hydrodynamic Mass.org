@@ -1,0 +1,61 @@
+* Hydrodynamic Mass
+  :PROPERTIES:
+  :NOTER_DOCUMENT: ../Documents/synced/BE/Y2S4/Hydraulics/Hydrodynamic Mass.pdf
+  :ID:       58ade4e9-8b0d-412a-b60b-33631d1eaa8f
+  :END:
+
+** Ideally, the hydrodynamic force should be calculated based on the three- dimensional Navier-Stokes equations. Obviously, this is difficult, even in simple cases. In many practical situations, the effects of fluid viscosity and compressibility on the hydrodynamic mass can be neglected. In these cases, incompressible potential flow theory can be used to calculate the hydrodynamic mass.
+   :PROPERTIES:
+   :NOTER_PAGE: (5 . 0.41753653444676403)
+   :END:
+
+** D'Alembert's paradox
+   :PROPERTIES:
+   :NOTER_PAGE: (6 . 0.20981661272923408)
+
+   :END:
+A structural component moving at a constant velocity in an infinite ideal fluid encounters no resistance.  This is known as D'Alembert's paradox.
+
+** Body moving at a variable velocity, even in a condition of potential flow, experiences a resistanc
+   :PROPERTIES:
+   :NOTER_PAGE: (6 . 0.21197411003236244)
+   :END:
+
+the body behaves as though an added mass of fluid were rigidly attached to and moving with it.  When the body is subjected to an excitation, not only must the mass of the body be accelerated, but also that of the added fluid mass. This extra mass is call the  *hydrodynamic mass* (or added mass).
+
+** hydrodynamic mass is proportional to the fluid density p and the body volume V
+   :PROPERTIES:
+   :NOTER_PAGE: (6 . 0.8193096008629989)
+   :ID:       967ec07d-9396-448d-b995-9ea2f0490dd5
+   :END:
+$m = \rho V c_m$ 
+
+$c_m$ is hydrodynamic mass coefficient. 
+
+
+** Tensor: six-by-six matrix
+   :PROPERTIES:
+   :NOTER_PAGE: (7 . 0.16042481833426495)
+   :END:
+
+For a body having three degrees of freedom both in translation and rotation, a complete descriptioa of the hydrodynamic mass requires a six-by-six matrix.  
+
+** A Single Cylinder in an Infinite Fluid
+   :PROPERTIES:
+   :NOTER_PAGE: (13 . 0.2529365700861394)
+   :END:
+$c_m = Re(H)$ 
+$S = \frac{\omega R^2} {\nu}$
+
+c_v is associated with viscosity. [[id:967ec07d-9396-448d-b995-9ea2f0490dd5][(Equation)]]
+
+Curves of this are given in [[* Fig 2][Fig 2]].
+
+** Fig 2
+   :PROPERTIES:
+   :NOTER_PAGE: (28 . 0.5730337078651685)
+   :END:
+   
+
+
+[[id:74f97e2a-1c97-480a-8882-539ea8a183fe][Footnotes in org mode]]
